@@ -1,0 +1,285 @@
+# Sample gitconfig
+#
+[user]
+        name = Jeremy Friesen
+        email = jeremy.n.friesen@gmail.com
+[credential]
+  	helper = osxkeychain
+[github]
+        user = jeremyf
+[url "git@github.com:jeremyf/"]
+        insteadOf = "git://github.com/jeremyf/"
+[hub]
+        protocol = https
+[gc]
+        reflogExpireUnreachable = 3 days
+[alias]
+        amend = commit --amend
+        amend-no-change = "!sh -c 'git commit --amend -C `git sha-head`'"
+	# http://ndlib.github.io/practices/make-git-forget-things/
+        prebase = "!sh -c 'git fetch; git rebase --rebase-merges; git pull --tags'"
+        tag-dates = log --tags --simplify-by-decoration --pretty='format:%ai %d'
+        please = push -u --force-with-lease
+        current-tag = describe --abbrev=0 --tags
+        expunge = "!sh -c 'git reflog expire --expire-unreachable=now --all && git gc --prune=now'"
+        latest-tag = describe --abbrev=0 --tags
+        sha-head = log --pretty=format:'%H' -1
+        author-count = "! sh -c 'git shortlog -se | sort -r'"
+        branch-list = "!sh -c 'git-branch-list.sh'"
+        prune-branches = "! sh -c 'git checkout master && git remote prune origin && git branch --merged | grep -v \"\\*\" | grep -v \"master\" | grep -v \"develop\" | xargs -n 1 git branch -d'"
+        ci = commit -v -a
+        st = status
+        reset-hard = reset --hard HEAD
+        undo = reset --soft HEAD
+        ba = branch -avv
+        co = checkout
+        branch-current = rev-parse --symbolic-full-name --abbrev-ref HEAD
+        number-of-commits-since-master = "! sh -c 'git log master..`git branch-current` --oneline | wc -l | tr -d \" \"'"
+        # pull-request-message = log  --reverse --pretty="format:## %s%n%n%b"
+        squash = "! sh -c 'git rebase --interactive HEAD~`git number-of-commits-since-master`'"
+        plog = log --pretty=format:'%h\t%Cblue%cr%Creset\t%cn\t%Cgreen%s%Creset'
+        unmerged-edit = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; atom `f` --wait --one"
+        edit = "! sh -c 'git status --porcelain | sed \"s/^...//\" | xargs atom --wait --one'"
+        unmerged-add = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; git add `f`"
+        unstage = reset HEAD --
+        lg = log --graph --pretty=format:'%C(red)%h%Creset — %Creset%s %C(blue)%an, %C(green)(%ar)%Creset'
+
+        ######################################################################
+        # Clean up whitespace.
+        #
+        # See
+        # http://stackoverflow.com/questions/591923/make-git-automatically-remove-trailing-whitespace-before-committing/15398512#15398512
+        ######################################################################
+
+        # Fix whitespace in the index while preserving a dirty tree, if
+        # any.
+        #
+        # Assuming your index is empty, some useful variations are:
+        #
+        # - fix whitespace in all changes in all versioned files:
+        #
+        #     git add -u :/ && git fixws && git reset
+        #
+        # - fix whitespace in all unversioned files and in all changes in
+        #   all versioned files:
+        #
+        #     git add --all :/ && git fixws && git reset
+        #
+        # Logic:
+        #
+        # The 'git stash save' fails if the tree is clean (instead of
+        # creating an empty stash :P). So, we only 'stash' and 'pop' if
+        # the tree is dirty.
+        #
+        # The 'git rebase --whitespace=fix HEAD~' throws away the commit
+        # if it's empty, and adding '--keep-empty' prevents the whitespace
+        # from being fixed. So, we first check that the index is dirty.
+        #
+        # Also:
+        # - '(! git diff-index --quiet --cached HEAD)' is true (zero) if
+        #   the index is dirty
+        # - 'git diff-files --quiet `git rev-parse --show-toplevel`' is
+        #   non-zero if the tree is dirty
+        #
+        # The 'rebase --whitespace=fix' trick is from here:
+        # http://stackoverflow.com/a/19156679/470844
+        fixws = !"\
+        if (! git diff-index --quiet --cached HEAD); then \
+        \
+        git diff-files --quiet . ; \
+        export NEED_TO_STASH=$? ; \
+        \
+        git commit -m FIXWS_SAVE_INDEX && \
+        if [ 1 = $NEED_TO_STASH ] ; then git stash save FIXWS_SAVE_TREE; fi && \
+        git rebase --whitespace=fix HEAD~ && \
+        git reset --soft HEAD~ && \
+        if [ 1 = $NEED_TO_STASH ] ; then git stash pop; fi ; \
+        fi"
+
+        # Fix whitespace in the index and the tree.
+        #
+        # Precede with 'git add -N <files>' to also fix whitespace in
+        # unversioned files <files>.
+        #
+        # The different cases are:
+        # - dirty tree and dirty index
+        # - dirty tree and clean index
+        # - clean tree and dirty index
+        #
+        # We have to consider separate cases because the 'git rebase
+        # --whitespace=fix' is not compatible with empty commits (adding
+        # '--keep-empty' makes Git not fix the whitespace :P).
+        fixws-global-tree-and-index = !"\
+        if (! git diff-files --quiet .) && \
+        (! git diff-index --quiet --cached HEAD) ; then \
+        git commit -m FIXWS_SAVE_INDEX && \
+        git add -u :/ && \
+        git commit -m FIXWS_SAVE_TREE && \
+        git rebase --whitespace=fix HEAD~2 && \
+        git reset HEAD~ && \
+        git reset --soft HEAD~ ; \
+        elif (! git diff-files --quiet .) ; then \
+        git add -u :/ && \
+        git commit -m FIXWS_SAVE_TREE && \
+        git rebase --whitespace=fix HEAD~ && \
+        git reset HEAD~ ; \
+        elif (! git diff-index --quiet --cached HEAD) ; then \
+        git commit -m FIXWS_SAVE_INDEX && \
+        git rebase --whitespace=fix HEAD~ && \
+        git reset --soft HEAD~ ; \
+        fi"
+
+        # Fix whitespace in the index and the tree.
+        #
+        # BROKEN: Does not work because the 'git rebase --whitespace=fix'
+        # is not compatible with empty commits (adding '--keep-empty'
+        # makes Git not fix the whitespace :P).
+        #
+        # fixws-global-tree-and-index =!\
+        #   git commit --allow-empty -m FIXWS_SAVE_INDEX && \
+        #   git add -u :/ && \
+        #   git commit --allow-empty -m FIXWS_SAVE_TREE && \
+        #   git rebase --whitespace=fix --keep-empty HEAD~2 && \
+        #   git reset HEAD~ && \
+        #   git reset --soft HEAD~
+
+        # Fix whitespace in local-tree files (sub-tree rooted at current
+        # dir). Fail gracefully if the index is dirty.
+        #
+        # The if-statements:
+        # - if index is clean
+        #   - if tree is dirty
+        fixws-local-tree =!"\
+        cd \"$GIT_PREFIX\" && \
+        if git diff-index --quiet --cached HEAD ; then \
+        if ! git diff-files --quiet . ; then \
+        export GIT_EDITOR=: && \
+        git -c apply.whitespace=fix add -ue . && \
+        git checkout . && \
+        git reset ; \
+        fi ; \
+        else \
+        echo 'Your index is dirty! Bailing ...' >&2 && exit 1 ; \
+        fi"
+
+        # Fix whitespace in indexed files. Fail gracefully if the tree is
+        # dirty.
+        #
+        # We 'cd' to the top-level so that commands are relative the whole
+        # tree.
+        #
+        # The if-statements:
+        # - if tree is clean
+        #   - if index is dirty
+        fixws-index =!"\
+        cd `git rev-parse --show-toplevel` && \
+        if git diff-files --quiet . ; then \
+        if ! git diff-index --quiet --cached HEAD ; then \
+        export GIT_EDITOR=: && \
+        git reset && \
+        git -c apply.whitespace=fix add -ue . && \
+        git checkout . ; \
+        fi ; \
+        else \
+        echo 'Your tree is dirty! Bailing ...' >&2 && exit 1 ; \
+        fi"
+
+        # Fix whitespace in the index and the local tree (sub-tree rooted
+        # at current dir).
+        #
+        # The complicated sequencing in the first branch: hide the index
+        # while fixing the tree, and then hide the tree while fixing the
+        # index.  The 'git stash' is necessary if there are any
+        # non-indexed changes (not just in the current sub-tree, hence the
+        # `git rev-parse --show-toplevel`), but fails to create a stash if
+        # there are no non-indexed changes.
+        #
+        # Can't use 'git stash --keep-index' to save the tree first and
+        # avoid the 'git commit', since 'git stash' still stashes the
+        # indexed changes in this case, and so fixing whitespace errors in
+        # the index causes a conflict on 'git stash pop'.
+        fixws-local-tree-and-index =!"\
+        cd \"$GIT_PREFIX\" && \
+        if (! git diff-files --quiet `git rev-parse --show-toplevel`) && \
+        (! git diff-index --quiet --cached HEAD) ; then \
+        git commit --allow-empty -m FIXWS_SAVE_INDEX && \
+        git fixws-local-tree && \
+        git stash save FIXWS_SAVE_TREE && \
+        git reset --soft 'HEAD^' && \
+        git fixws-index && \
+        git stash pop ; \
+        elif (! git diff-files --quiet .) ; then \
+        git fixws-local-tree ; \
+        elif (! git diff-index --quiet --cached HEAD) ; then \
+        git fixws-index ; \
+        fi"
+	recent = for-each-ref --count=5 --sort=-committerdate --format='%(refname:short)' refs/heads/
+	oldest-ancestor = !zsh -c 'diff --old-line-format= --new-line-format= <(git rev-list --first-parent \"${1:-master}\") <(git rev-list --first-parent \"${2:-HEAD}\") | head -1' -
+	branchlog = !sh -c \"git log `git oldest-ancestor`..\"
+
+        # This simpler version does not work because 'git stash save'
+        # does not create a stash when the tree is clean. In that case,
+        # the final 'git stash pop' does not do the right thing!
+        #
+        # git commit --allow-empty -m FIXWS_SAVE_INDEX && \
+        # git fixws-tree && \
+        # git stash save FIXWS_SAVE_TREE && \
+        # git reset --soft 'HEAD^' && \
+        # git fixws-index && \
+        # git stash pop
+
+        ######################################################################
+[merge]
+        summary = true
+[push]
+        default = current
+[log]
+        date = local
+[color]
+        branch = auto
+        diff = auto
+        status = auto
+        interactive = auto
+[color "branch"]
+        current = red reverse
+        local = red bold
+        remote = yellow
+[color "diff"]
+        meta = yellow bold
+        frag = magenta bold
+        old = red bold
+        new = green bold
+[color "interactive"]
+        meta = yellow bold
+        frag = magenta bold
+        old = red bold
+        new = green bold
+[color "status"]
+        added = yellow
+        changed = green
+        untracked = magenta
+[apply]
+        whitespace = fix
+[branch]
+        autosetupmerge = true
+[grep]
+        extendedRegexp = true
+[core]
+        excludesfile = ~/.gitignore
+	editor = atom --wait -n --clear-window-state
+  pager = `brew --prefix git`/share/git-core/contrib/diff-highlight/diff-highlight | less
+#[commit]
+#        template = ~/.gitmessage
+# [init]
+# 	templatedir = /Users/jfriesen/Repositories/git_template/template
+[rebase]
+	stat = true
+[filter "media"]
+	required = true
+	clean = git media clean %f
+	smudge = git media smudge %f
+[gui]
+	pruneduringfetch = true
+	diffcontext = 7
+[interactive]
+	diffFilter = `brew --prefix git`/share/git-core/contrib/diff-highlight/diff-highlight

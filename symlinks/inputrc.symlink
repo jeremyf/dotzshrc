@@ -1,0 +1,29 @@
+# http://www.cs.colostate.edu/helpdocs/emacs.html
+set editing-mode emacs
+set completion-ignore-case on
+
+# Allow the command prompt to wrap to the next line
+set horizontal-scroll-mode Off
+
+# Allow Unicode
+set meta-flag on
+set input-meta on
+set output-meta on
+set convert-meta off
+set visible-stats on
+
+"\e[5~": beginning-of-history # Page Up
+"\e[6~": end-of-history       # Page Down
+
+# Mappings for <Ctrl>+<Left Arrow> and <Ctrl>+<Right Arrow> word navigation.
+"\e[1;5C": forward-word
+"\e[1;5D": backward-word
+"\e[5C": forward-word
+"\e[5D": backward-word
+"\e\e[C": forward-word
+"\e\e[D": backward-word
+
+# These allow you to start typing a command and use the up/down arrow to auto
+# complete from commands in your history.
+"\e[B": history-search-forward
+"\e[A": history-search-backward
