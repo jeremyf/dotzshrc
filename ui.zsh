@@ -2,7 +2,7 @@ POWERLEVEL9K_PROMPT_ON_NEWLINE=true
 POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
 POWERLEVEL9K_COLOR_SCHEME='light'
 
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(aws dir vcs rbenv)
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(aws dir newline vcs rbenv)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status command_execution_time date time)
 
 POWERLEVEL9K_RBENV_PROMPT_ALWAYS_SHOW=true
@@ -14,5 +14,5 @@ POWERLEVEL9K_SHOW_CHANGESET=true # Show the VCS SHA in the vcs segment
 POWERLEVEL9K_CHANGESET_HASH_LENGTH=8
 POWERLEVEL9K_VCS_GIT_HOOKS=(vcs-detect-changes git-untracked git-aheadbehind git-remotebranch git-tagname)
 
-# POWERLEVEL9K_MODE='nerdfont-complete'
+POWERLEVEL9K_MODE='nerdfont-complete'
 ZSH_THEME='powerlevel9k/powerlevel9k'

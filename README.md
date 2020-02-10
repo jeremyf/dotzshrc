@@ -1,4 +1,4 @@
-# Runbook
+A git repository for managing my .zshrc configuration
 
-* Symlink `./.zshrc` to `~/.zshrc`
-* Create symlinks to all files in the symlink directory
+You can run `ruby install.rb` to create the symlinks into the current
+$HOME file
