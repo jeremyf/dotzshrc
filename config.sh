@@ -48,12 +48,20 @@ COMPLETION_WAITING_DOTS="true"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-# Which plugins would you like to load?
-# Standard plugins can be found in ~/.oh-my-zsh/plugins/*
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(git rbenv aws rake ruby)
+plugins=(
+  alias-finder
+  common-aliases
+  copybuffer
+  git
+  history
+  osx
+  rake
+  rbenv
+  thor
+  web-search
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+)
 
 export VISUAL='atom --wait -n --clear-window-state'
 export EDITOR=$VISUAL
