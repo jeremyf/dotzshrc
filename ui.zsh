@@ -14,5 +14,6 @@ POWERLEVEL9K_SHOW_CHANGESET=true # Show the VCS SHA in the vcs segment
 POWERLEVEL9K_CHANGESET_HASH_LENGTH=8
 POWERLEVEL9K_VCS_GIT_HOOKS=(vcs-detect-changes git-untracked git-aheadbehind git-remotebranch git-tagname)
 
+# Assumes that you have Hack Nerd Font installed (https://github.com/Powerlevel9k/powerlevel9k/wiki/Install-Instructions#option-4-install-nerd-fonts)
 POWERLEVEL9K_MODE='nerdfont-complete'
 ZSH_THEME='powerlevel9k/powerlevel9k'
