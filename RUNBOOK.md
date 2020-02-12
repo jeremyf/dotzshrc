@@ -27,3 +27,6 @@ Ensure that I have up to date SSH keys
 
 ## For background notifications
 brew install terminal-notifier
+
+## For Hyrax development
+brew install postgresql
