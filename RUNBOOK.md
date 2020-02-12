@@ -15,6 +15,8 @@ brew install gsl
 brew tap homebrew/cask-fonts
 brew cask install font-hack-nerd-font
 
+# Set the terminal font to Hack Regular Nerd Font
+
 # Jumpcut for large paste buffer
 brew tap homebrew/cask
 brew cask install jumpcut
@@ -24,6 +26,7 @@ Ensure that I have up to date SSH keys
 
 # Install Atom.io
 # Ensure that I have the correct plugins https://github.com/jeremyf/dotatom
+Download JetBrains Mono for text editor
 
 ## For background notifications
 brew install terminal-notifier
