@@ -24,3 +24,6 @@ Ensure that I have up to date SSH keys
 
 # Install Atom.io
 # Ensure that I have the correct plugins https://github.com/jeremyf/dotatom
+
+## For background notifications
+brew install terminal-notifier
