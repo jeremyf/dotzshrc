@@ -1,4 +1,4 @@
-alias file-count="find . -type f -print |wc -l"
+alias file-count="find . -type f -print | wc -l"
 alias bx="bundle exec"
 alias a="atom $1"
 alias gl='git lg'
