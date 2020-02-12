@@ -267,7 +267,7 @@
 [core]
         excludesfile = ~/.gitignore
         editor = atom --wait -n --clear-window-state
-        pager = `brew --prefix git`/share/git-core/contrib/diff-highlight/diff-highlight | less
+        pager = `brew --prefix git`/share/git-core/contrib/diff-highlight/diff-highlight | less -F -X
 [rebase]
         stat = true
 [filter "media"]
@@ -279,5 +279,3 @@
         diffcontext = 7
 [interactive]
         diffFilter = `brew --prefix git`/share/git-core/contrib/diff-highlight/diff-highlight
-[pager]
-        diff = false
