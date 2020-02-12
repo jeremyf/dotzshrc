@@ -50,6 +50,7 @@ COMPLETION_WAITING_DOTS="true"
 
 plugins=(
   alias-finder
+  bgnotify
   common-aliases
   copybuffer
   git
@@ -61,7 +62,29 @@ plugins=(
   web-search
   zsh-autosuggestions
   zsh-syntax-highlighting
+  history-substring-search
 )
+
+###############################################################################
+##
+## BEGIN history-substring-search
+##
+###############################################################################
+# bind UP and DOWN arrow keys
+zmodload zsh/terminfo
+bindkey "$terminfo[kcuu1]" history-substring-search-up
+bindkey "$terminfo[kcud1]" history-substring-search-down
+
+# bind UP and DOWN arrow keys (compatibility fallback
+# for Ubuntu 12.04, Fedora 21, and MacOSX 10.9 users)
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+###############################################################################
+##
+## END history-substring-search
+##
+###############################################################################
+
 
 export VISUAL='atom --wait -n --clear-window-state'
 export EDITOR=$VISUAL
