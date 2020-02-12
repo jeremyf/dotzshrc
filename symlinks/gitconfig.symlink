@@ -266,20 +266,18 @@
         extendedRegexp = true
 [core]
         excludesfile = ~/.gitignore
-	editor = atom --wait -n --clear-window-state
-  pager = `brew --prefix git`/share/git-core/contrib/diff-highlight/diff-highlight | less
-#[commit]
-#        template = ~/.gitmessage
-# [init]
-# 	templatedir = /Users/jfriesen/Repositories/git_template/template
+        editor = atom --wait -n --clear-window-state
+        pager = `brew --prefix git`/share/git-core/contrib/diff-highlight/diff-highlight | less
 [rebase]
-	stat = true
+        stat = true
 [filter "media"]
-	required = true
-	clean = git media clean %f
-	smudge = git media smudge %f
+        required = true
+        clean = git media clean %f
+        smudge = git media smudge %f
 [gui]
-	pruneduringfetch = true
-	diffcontext = 7
+        pruneduringfetch = true
+        diffcontext = 7
 [interactive]
-	diffFilter = `brew --prefix git`/share/git-core/contrib/diff-highlight/diff-highlight
+        diffFilter = `brew --prefix git`/share/git-core/contrib/diff-highlight/diff-highlight
+[pager]
+        diff = false
