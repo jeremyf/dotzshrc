@@ -54,6 +54,7 @@ plugins=(
   common-aliases
   copybuffer
   git
+  github
   history
   osx
   rake
