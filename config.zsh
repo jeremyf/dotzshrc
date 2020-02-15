@@ -55,7 +55,6 @@ plugins=(
   copybuffer
   git
   github
-  history
   osx
   rake
   rbenv
