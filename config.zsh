@@ -53,6 +53,7 @@ plugins=(
   bgnotify
   common-aliases
   copybuffer
+  git-extras
   gitfast
   osx
   rake
@@ -79,6 +80,10 @@ bindkey "$terminfo[kcud1]" history-substring-search-down
 ##
 ###############################################################################
 
+
+if [ -f /usr/local/opt/git-extras/share/git-extras/git-extras-completion.zsh ]; then
+  source /usr/local/opt/git-extras/share/git-extras/git-extras-completion.zsh
+fi
 
 export VISUAL='atom --wait -n --clear-window-state'
 export EDITOR=$VISUAL

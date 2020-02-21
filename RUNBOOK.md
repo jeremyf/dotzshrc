@@ -33,3 +33,5 @@ brew install terminal-notifier
 
 ## For Hyrax development
 brew install postgresql
+
+brew install git-extras
