@@ -53,8 +53,7 @@ plugins=(
   bgnotify
   common-aliases
   copybuffer
-  git
-  github
+  gitfast
   osx
   rake
   rbenv
