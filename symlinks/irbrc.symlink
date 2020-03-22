@@ -1,5 +1,10 @@
 #!/usr/bin/ruby
 require 'rubygems'
-require 'pry'
-Pry.start
-exit
+begin
+  require 'pry'
+  Pry.config.history.file = "~/.irb_history"
+  Pry.start
+  exit
+rescue LoadError
+  $stderr.puts "pry not loaded, failling back to irb"
+end
