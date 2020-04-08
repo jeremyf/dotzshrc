@@ -3,23 +3,23 @@ Install homebrew - https://brew.sh
 Install OhMyZsh - https://github.com/ohmyzsh/ohmyzsh
 
 # All things start with Ruby
-brew install rbenv
+`brew install rbenv`
 
 # Have an up to date version of Git
-brew install git
+`brew install git`
 
 # Necessary for some takeonrules dependencies
-brew install gsl
+`brew install gsl`
 
 # Get a real ZSH set of fonts
-brew tap homebrew/cask-fonts
-brew cask install font-hack-nerd-font
+`brew tap homebrew/cask-fonts`
+`brew cask install font-hack-nerd-font`
 
 # Set the terminal font to Hack Regular Nerd Font
 
 # Jumpcut for large paste buffer
-brew tap homebrew/cask
-brew cask install jumpcut
+`brew tap homebrew/cask`
+`brew cask install jumpcut`
 
 # SSH Keys
 Ensure that I have up to date SSH keys
@@ -29,9 +29,12 @@ Ensure that I have up to date SSH keys
 Download JetBrains Mono for text editor
 
 ## For background notifications
-brew install terminal-notifier
+`brew install terminal-notifier`
 
 ## For Hyrax development
-brew install postgresql
+`brew install postgresql`
 
-brew install git-extras
+`brew install git-extras`
+
+## For RSS
+`brew install newsboat` (see https://newsboat.org)

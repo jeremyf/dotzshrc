@@ -13,6 +13,7 @@ alias gd='git diff'
 alias gwc='git whatchanged -p --abbrev-commit --pretty=medium'
 alias hb="hub browse"
 alias psx="ps ax | ag $1"
+alias rss="newsboat -C ~/.newsboatrc"
 
 # Hyrax aliases
 alias hyrax-devup='fcrepo_wrapper & solr_wrapper & redis-server &'
