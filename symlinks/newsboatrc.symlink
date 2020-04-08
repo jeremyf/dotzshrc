@@ -47,3 +47,8 @@ save-path "~/git/takeonrules.github.io/rss/articles"
 #
 # html-renderer "lynx -stdin -dump -underline_links"
 # html-renderer "w3m -dump -T text/html"
+
+# The `save` prompt is a bit too easy to trigger without a modifier
+# key. Instead of `s` for save it's now `ctrl+s`
+unbind-key s
+bind-key ^s save
