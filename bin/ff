@@ -1,2 +1,5 @@
 #/bin/sh
+# This shell script, intended for use with Newsboat, uses Firefox
+# to open the given parameter (assumed to be a URL)
+
 /Applications/Firefox.app/Contents/MacOS/firefox "$@" &
