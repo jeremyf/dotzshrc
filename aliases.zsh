@@ -25,7 +25,7 @@ alias sqlite-browser="/Applications/DB\ Browser\ for\ SQLite.app/Contents/MacOS/
 # SSH Tunnel:
 # ssh libvirt6.library.nd.edu -L 8080:localhost:8080
 
-alias dns-flush="dscacheutil -flushcache"
+alias dns-flush="sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder"
 alias net_traffic="lsof -r -i"
 
 # `awsassumerole testlibnd-superAdmin` (see ~/.aws/config for profile)
