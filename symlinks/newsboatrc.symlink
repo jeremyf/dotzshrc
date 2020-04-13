@@ -58,3 +58,14 @@ highlight all "osr" red
 
 # Because vanity on a quick scan
 highlight article "Take ?on ?Rules" red
+
+# I've configured the bookmark to write to a TSV, no sense stepping through a dialogue
+bookmark-autopilot yes
+
+
+# Auto-purge articles that are older than 60 days. I'm a bit of a dragon sitting
+# on pile of feeds and articles
+keep-articles-days 60
+
+# Add additional concurrency to downloading new feed content
+reload-threads 11
