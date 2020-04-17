@@ -10,6 +10,12 @@ if [ -d /usr/local/opt/libxml2/bin ]; then
   # export CPPFLAGS="-I/usr/local/opt/libxml2/include"
 fi
 
+# Ensuring homebrew install of python is selected over OSX's
+# ancient python
+if [ -d "/usr/local/opt/python/libexec/bin" ]; then
+  export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+fi
+
 if [ -d /usr/local/opt/openssl@1.1/bin ]; then
   export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
 fi
