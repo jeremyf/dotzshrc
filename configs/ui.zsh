@@ -17,3 +17,7 @@ POWERLEVEL9K_VCS_GIT_HOOKS=(vcs-detect-changes git-untracked git-aheadbehind git
 # Assumes that you have Hack Nerd Font installed (https://github.com/Powerlevel9k/powerlevel9k/wiki/Install-Instructions#option-4-install-nerd-fonts)
 POWERLEVEL9K_MODE='nerdfont-complete'
 ZSH_THEME='powerlevel9k/powerlevel9k'
+
+if [ -f $HOME/.config/base16-shell/base16-shell.plugin.zsh ]; then
+  source $HOME/.config/base16-shell/base16-shell.plugin.zsh
+fi

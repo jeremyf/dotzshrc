@@ -1,7 +1,7 @@
-source $HOME/git/dotzshrc/config.zsh
-source $HOME/git/dotzshrc/ui.zsh
+source $HOME/git/dotzshrc/configs/config.zsh
+source $HOME/git/dotzshrc/configs/ui.zsh
+source $HOME/git/dotzshrc/configs/paths.zsh
 source $ZSH/oh-my-zsh.sh
-source $HOME/git/dotzshrc/defaults.zsh
-source $HOME/git/dotzshrc/aliases.zsh
-source $HOME/git/dotzshrc/paths.zsh
+source $HOME/git/dotzshrc/configs/defaults.zsh
+source $HOME/git/dotzshrc/configs/aliases.zsh
 eval "$(rbenv init -)"

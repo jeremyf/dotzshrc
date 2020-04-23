@@ -36,4 +36,5 @@ Thumbs.db
 
 .byebug_history
 /jetty
+*.swp
 fcrepo4-test-data
