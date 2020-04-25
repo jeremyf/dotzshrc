@@ -1,6 +1,6 @@
 POWERLEVEL9K_PROMPT_ON_NEWLINE=true
 POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
-POWERLEVEL9K_COLOR_SCHEME='light'
+POWERLEVEL9K_COLOR_SCHEME='dark'
 
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(aws dir newline vcs rbenv)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status command_execution_time date time)
@@ -18,6 +18,7 @@ POWERLEVEL9K_VCS_GIT_HOOKS=(vcs-detect-changes git-untracked git-aheadbehind git
 POWERLEVEL9K_MODE='nerdfont-complete'
 ZSH_THEME='powerlevel9k/powerlevel9k'
 
+# Some great color options
 if [ -f $HOME/.config/base16-shell/base16-shell.plugin.zsh ]; then
   source $HOME/.config/base16-shell/base16-shell.plugin.zsh
 fi

@@ -39,8 +39,9 @@
         squash = "! sh -c 'git rebase --interactive HEAD~`git number-of-commits-since-master`'"
         plog = log --pretty=format:'%h\t%Cblue%cr%Creset\t%cn\t%Cgreen%s%Creset'
         unmerged-edit = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; atom `f` --wait --one"
-        edit = "! sh -c 'git status --porcelain | sed \"s/^...//\" | xargs atom --wait --one'"
+        edit = "!f() { git status --porcelain | awk '{ print $2 }' | sort -u; }; atom `f` --wait --one"
         unmerged-add = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; git add `f`"
+        vim = "!f() { git status --porcelain | awk '{ print $2 }' | sort -u ; }; vim -p `f`"
         unstage = reset HEAD --
         lg = log --graph --pretty=format:'%C(red)%h%Creset — %Creset%s %C(blue)%an, %C(green)(%ar)%Creset'
 

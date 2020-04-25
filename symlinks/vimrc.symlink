@@ -1,8 +1,25 @@
 execute pathogen#infect()
 
+" Add numbers in the gutter
 set number
+syntax on
 
+" Open files in new tab
+let g:netrw_browse_split = 3
+
+" Disable markdown folding by default
+let g:vim_markdown_folding_disabled = 1
+
+let g:vim_markdown_fenced_languages = ['ruby=ruby', 'bash=sh']
+
+" YAML front matter highlighting
+let g:vim_markdown_frontmatter = 1
+
+" Use the terminal colors
 if filereadable(expand("~/.vimrc_background"))
   let base16colorspace=256
   source ~/.vimrc_background
 endif
+
+" Align airline them with vim background
+let g:airline_theme='base16_atelierdune'
