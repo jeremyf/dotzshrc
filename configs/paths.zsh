@@ -16,6 +16,10 @@ if [ -d "/usr/local/opt/python/libexec/bin" ]; then
   export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 fi
 
+if [ -d "/usr/local/Cellar/graphviz/2.42.3/bin" ]; then
+  export PATH="/usr/local/Cellar/graphviz/2.42.3/bin:$PATH"
+fi
+
 if [ -d /usr/local/opt/openssl@1.1/bin ]; then
   export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
 fi
