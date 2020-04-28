@@ -58,6 +58,7 @@ highlight all "osr" red
 
 # Because vanity on a quick scan
 highlight article "Take ?on ?Rules" red
+highlight all "soft ?horizon" red
 
 # I've configured the bookmark to write to a TSV, no sense stepping through a dialogue
 bookmark-autopilot yes
