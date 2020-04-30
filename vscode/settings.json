@@ -89,5 +89,6 @@
         ],
         "editor.wordWrap": "off"
     },
-    "git.allowForcePush": true
+    "git.allowForcePush": true,
+    "editor.renderControlCharacters": true
 }
