@@ -84,7 +84,8 @@
     "[git-commit]": {
         "editor.rulers": [
             72,
-            50
+            50,
+            120
         ],
         "editor.wordWrap": "off"
     },
