@@ -7,7 +7,11 @@
       "label": "write-git-commit-message",
       "type": "shell",
       "command": "git commit",
-      "problemMatcher": []
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "focus": true
+      }
     }
   ]
 }
