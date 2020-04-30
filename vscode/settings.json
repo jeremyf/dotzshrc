@@ -87,5 +87,6 @@
             50
         ],
         "editor.wordWrap": "off"
-    }
+    },
+    "git.allowForcePush": true
 }
