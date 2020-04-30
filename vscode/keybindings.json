@@ -18,5 +18,14 @@
   {
     "key": "shift+cmd+d",
     "command": "-workbench.view.debug"
+  },
+  {
+    "key": "shift+cmd+d",
+    "command": "lafe.duplicateCode"
+  },
+  {
+    "key": "ctrl+k d",
+    "command": "-lafe.duplicateCode"
   }
+  
 ]
