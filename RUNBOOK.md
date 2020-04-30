@@ -25,6 +25,9 @@ Install OhMyZsh - https://github.com/ohmyzsh/ohmyzsh
 Ensure that I have up to date SSH keys
 
 # Install Atom.io
+
+# Install VS Code
+
 # Ensure that I have the correct plugins https://github.com/jeremyf/dotatom
 Download JetBrains Mono for text editor
 

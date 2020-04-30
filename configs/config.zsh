@@ -85,6 +85,5 @@ if [ -f /usr/local/opt/git-extras/share/git-extras/git-extras-completion.zsh ]; 
   source /usr/local/opt/git-extras/share/git-extras/git-extras-completion.zsh
 fi
 
-export VISUAL='atom --wait -n --clear-window-state'
-export GIT_EDITOR="vim"
+export VISUAL='code --wait'
 export EDITOR=$VISUAL
