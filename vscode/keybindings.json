@@ -1,13 +1,22 @@
 // Place your key bindings in this file to override the defaultsauto[]
 [
   {
-    "key": "cmd+/",
-    "command": "editor.action.addCommentLine",
-    "when": "editorTextFocus && !editorReadonly"
-  },
-  {
     "key": "cmd+k cmd+c",
     "command": "workbench.action.tasks.runTask",
     "args": "write-git-commit-message"
+  },
+  {
+    "key": "cmd+/",
+    "command": "editor.action.commentLine",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "shift+cmd+7",
+    "command": "-editor.action.commentLine",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "shift+cmd+d",
+    "command": "-workbench.view.debug"
   }
 ]

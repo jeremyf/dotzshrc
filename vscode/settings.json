@@ -90,5 +90,6 @@
         "editor.wordWrap": "off"
     },
     "git.allowForcePush": true,
-    "editor.renderControlCharacters": true
+    "editor.renderControlCharacters": true,
+    "workbench.settings.openDefaultKeybindings": true
 }
