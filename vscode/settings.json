@@ -80,7 +80,6 @@
         "*.pdf": true
     },
     "ruby.useBundler": true,
-    "solargraph.useBundler": true,
     "git.inputValidation": "always",
     "[git-commit]": {
         "editor.rulers": [
