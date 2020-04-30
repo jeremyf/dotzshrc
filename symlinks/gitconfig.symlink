@@ -267,7 +267,6 @@
         extendedRegexp = true
 [core]
         excludesfile = ~/.gitignore
-	editor = code --wait
         pager = `brew --prefix git`/share/git-core/contrib/diff-highlight/diff-highlight | less -F -X
 [rebase]
         stat = true
