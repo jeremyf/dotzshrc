@@ -16,13 +16,27 @@ if [ -d "/usr/local/opt/python/libexec/bin" ]; then
   export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 fi
 
+if [ -d "/usr/local/opt/icu4c/bin" ]; then
+  export PATH="/usr/local/opt/icu4c/bin:$PATH"
+fi
+
+if [ -d "/usr/local/opt/icu4c/sbin" ]; then
+  export PATH="/usr/local/opt/icu4c/sbin:$PATH"
+fi
+
 if [ -d "/usr/local/Cellar/graphviz/2.42.3/bin" ]; then
   export PATH="/usr/local/Cellar/graphviz/2.42.3/bin:$PATH"
 fi
 
+# This helps in building out Ruby using openssl
+# It may require PATH-ing /usr/local/Cellar/openssl@1.1/bin (see below)
+export RUBY_CONFIGURE_OPTS=--with-openssl-dir=/usr/local/Cellar/openssl@1.1/1.1.1g/
+
+# I'm not certain if this is a good idea or not
 if [ -d /usr/local/opt/openssl@1.1/bin ]; then
   export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
 fi
+
 if [ -d $HOME/bin ]; then
   export PATH="$HOME/bin:$PATH"
 fi
