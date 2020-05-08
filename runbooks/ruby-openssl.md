@@ -17,7 +17,7 @@ I don't know if PATH should always be set to that.
 
 ## More Notes
 
-I'm not quite certain what's going on. But I'm trying to document some things.
+I'm not quite certain what's going on. But I'm trying to document some things. My suspicion is that one version was used to encrypt and another to negotiate any SSL handshake. But this is beyond my area of knowledge.
 
 My understanding is that Mac OSX's OpenSSL implementation (LibreSSL 2.8.3) does not provide all of the functionality needed in Ruby and other Open Source projects.
 
