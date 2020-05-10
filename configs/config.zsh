@@ -60,7 +60,6 @@ plugins=(
   rbenv
   thor
   web-search
-  zsh-autosuggestions
   zsh-syntax-highlighting
   history-substring-search
 )
