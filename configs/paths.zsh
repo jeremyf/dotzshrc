@@ -24,8 +24,8 @@ if [ -d "/usr/local/opt/icu4c/sbin" ]; then
   export PATH="/usr/local/opt/icu4c/sbin:$PATH"
 fi
 
-if [ -d "/usr/local/Cellar/graphviz/2.42.3/bin" ]; then
-  export PATH="/usr/local/Cellar/graphviz/2.42.3/bin:$PATH"
+if [ -d "/usr/local/Cellar/graphviz/2.44.0/bin" ]; then
+  export PATH="/usr/local/Cellar/graphviz/2.44.0/bin:$PATH"
 fi
 
 # This helps in building out Ruby using openssl
