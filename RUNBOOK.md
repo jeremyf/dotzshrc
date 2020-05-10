@@ -2,6 +2,8 @@ Install homebrew - https://brew.sh
 
 Install OhMyZsh - https://github.com/ohmyzsh/ohmyzsh
 
+`brew install gmp`
+
 # All things start with Ruby
 `brew install rbenv`
 
