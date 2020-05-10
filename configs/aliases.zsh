@@ -1,7 +1,6 @@
 alias file-count="find . -type f -print | wc -l"
 alias bx="bundle exec"
-# For `a /path` open 'atom /path'; for `a` open `atom .`
-alias a="var=\"$1\"; if [ -n \"$var\" ]; then atom \$var ;else atom .; fi;"
+alias t="todo.sh"
 alias gl='git lg'
 alias gst='git st'
 alias gsp='git sp'

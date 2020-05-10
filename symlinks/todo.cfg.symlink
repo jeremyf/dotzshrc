@@ -1,8 +1,7 @@
 # === EDIT FILE LOCATIONS BELOW ===
 
 # Your todo.txt directory (this should be an absolute path)
-#export TODO_DIR="/Users/jfriesen/git/todo"
-export TODO_DIR=$(dirname "$0")
+export TODO_DIR="$HOME/git/todo"
 
 # Your todo/done/report.txt locations
 export TODO_FILE="$TODO_DIR/todo.txt"

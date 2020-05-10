@@ -2,6 +2,7 @@ Install homebrew - https://brew.sh
 
 Install OhMyZsh - https://github.com/ohmyzsh/ohmyzsh
 
+`brew install openssl` You're going to want this for rbenv
 `brew install gmp`
 
 # All things start with Ruby
@@ -22,6 +23,12 @@ Install OhMyZsh - https://github.com/ohmyzsh/ohmyzsh
 # Jumpcut for large paste buffer
 `brew tap homebrew/cask`
 `brew cask install jumpcut`
+
+# Silver Searcher
+`brew install ag`
+
+# Todo Application
+`brew install todo-txt`
 
 # SSH Keys
 Ensure that I have up to date SSH keys
