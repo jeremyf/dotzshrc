@@ -13,3 +13,6 @@ source $HOME/git/dotzshrc/configs/defaults.zsh
 source $HOME/git/dotzshrc/configs/aliases.zsh
 source $HOME/git/dotzshrc/configs/p10k.zsh
 eval "$(rbenv init -)"
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+

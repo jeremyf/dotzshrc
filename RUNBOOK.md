@@ -2,51 +2,30 @@ Install homebrew - https://brew.sh
 
 Install OhMyZsh - https://github.com/ohmyzsh/ohmyzsh
 
-`brew install openssl` You're going to want this for rbenv
-`brew install gmp`
-
-# All things start with Ruby
-`brew install rbenv`
-
-# Have an up to date version of Git
-`brew install git`
+*   `brew install openssl` You're going to want this for rbenv, though look at ./runbooks/ruby-openssl
+*   `brew install rbenv`
+*   `brew install git`
+*   `brew tap homebrew/cask-fonts`
+*   `brew cask install font-hack-nerd-font`
+*   `brew tap homebrew/cask`
+*   `brew cask install jumpcut` Multi-paste buffer
+*   `brew install ag` A solid replacement for grep
+*   `brew install todo-txt` A text based todo
+*   `brew install terminal-notifier`
+*   `brew install postgresql`
+*   `brew install git-extras`
+*   `brew install newsboat` (see https://newsboat.org)
 
 # Necessary for some takeonrules dependencies
-`brew install gsl`
 
-# Get a real ZSH set of fonts
-`brew tap homebrew/cask-fonts`
-`brew cask install font-hack-nerd-font`
-
-# Set the terminal font to Hack Regular Nerd Font
-
-# Jumpcut for large paste buffer
-`brew tap homebrew/cask`
-`brew cask install jumpcut`
-
-# Silver Searcher
-`brew install ag`
-
-# Todo Application
-`brew install todo-txt`
+*   `brew install gmp`
+*   `brew install gsl`
+*   `brew cask install atom`
 
 # SSH Keys
 Ensure that I have up to date SSH keys
-
-# Install Atom.io
 
 # Install VS Code
 
 # Ensure that I have the correct plugins https://github.com/jeremyf/dotatom
 Download JetBrains Mono for text editor
-
-## For background notifications
-`brew install terminal-notifier`
-
-## For Hyrax development
-`brew install postgresql`
-
-`brew install git-extras`
-
-## For RSS
-`brew install newsboat` (see https://newsboat.org)

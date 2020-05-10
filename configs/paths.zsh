@@ -34,7 +34,7 @@ export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
 
 # I'm not certain if this is a good idea or not
 if [ -d /usr/local/opt/openssl@1.1/bin ]; then
-  export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
+  export PATH="$(brew --prefix openssl@1.1)/bin:$PATH"
 fi
 
 if [ -d $HOME/bin ]; then
