@@ -79,7 +79,6 @@
     "files.exclude": {
         "*.pdf": true
     },
-    "ruby.useBundler": true,
     "git.inputValidation": "always",
     "[git-commit]": {
         "editor.rulers": [
@@ -91,5 +90,7 @@
     },
     "git.allowForcePush": true,
     "editor.renderControlCharacters": true,
-    "workbench.settings.openDefaultKeybindings": true
+    "workbench.settings.openDefaultKeybindings": true,
+    "ruby.intellisense": "rubyLocate",
+    "terminal.integrated.automationShell.osx": "/usr/local/bin/zsh"
 }
