@@ -62,7 +62,7 @@
     "go.formatTool": "goimports",
     "go.useLanguageServer": true,
     "atomKeymap.promptV3Features": true,
-    "editor.multiCursorModifier": "ctrlCmd",
+    "editor.multiCursorModifier": "alt",
     "editor.formatOnPaste": true,
     "window.zoomLevel": 1,
     "editor.minimap.enabled": false,
