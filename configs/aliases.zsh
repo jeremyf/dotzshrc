@@ -1,6 +1,6 @@
 alias file-count="find . -type f -print | wc -l"
 alias bx="bundle exec"
-alias t="todo.sh"
+alias to="todo.sh"
 alias gl='git lg'
 alias gst='git st'
 alias gsp='git sp'

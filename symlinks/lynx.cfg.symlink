@@ -1,0 +1,16 @@
+# From `brew --prefix lynx`/etc/lynx.cfg
+
+ASSUME_CHARSET:utf-8
+BOLD_HEADERS:TRUE
+CHARACTER_SET:utf-8
+DEFAULT_BOOKMARK_FILE:~/git/takeonrules.github.io/lynx/lynx_bookmarks.html
+DEFAULT_EDITOR:atom --wait -n --clear-window-state
+HTML5_CHARSETS:TRUE
+LOCALE_CHARSET:TRUE
+PREFERRED_CHARSET:utf-8
+SAVE_SPACE:~/git/takeonrules.github.io/lynx
+SET_COOKIES:FALSE
+SHOW_CURSOR:TRUE
+TAGSOUP:TRUE
+TRIM_BLANK_LINES:FALSE
+USE_MOUSE:TRUE
