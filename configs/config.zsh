@@ -49,16 +49,12 @@ COMPLETION_WAITING_DOTS="true"
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
 plugins=(
-  alias-finder
   bgnotify
-  common-aliases
   copybuffer
   git-extras
   gitfast
   osx
   rake
-  rbenv
-  thor
   web-search
   zsh-syntax-highlighting
   history-substring-search

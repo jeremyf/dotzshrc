@@ -1,3 +1,5 @@
+# Prompt for confirmation
+alias rm='rm -i'
 alias file-count="find . -type f -print | wc -l"
 alias bx="bundle exec"
 alias to="todo.sh"
