@@ -27,7 +27,6 @@
         sha-head = log --pretty=format:'%H' -1
         author-count = "! sh -c 'git shortlog -se | sort -r'"
         branch-list = "!sh -c 'git-branch-list.sh'"
-        prune-branches = "! sh -c 'git checkout master && git remote prune origin && git branch --merged | grep -v \"\\*\" | grep -v \"master\" | grep -v \"develop\" | xargs -n 1 git branch -d'"
         ci = commit -v -a
         st = status
         reset-hard = reset --hard HEAD

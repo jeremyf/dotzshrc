@@ -49,7 +49,6 @@ COMPLETION_WAITING_DOTS="true"
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
 plugins=(
-  bgnotify
   copybuffer
   git-extras
   gitfast
