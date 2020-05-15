@@ -1,0 +1,32 @@
+#!/bin/sh
+
+# Rebase the current branch using the given branch as a reference to determine
+# the number of commits for which we'll rebase.
+#
+# This script helps you shuffle (using `git rebase -i`) the commits on the
+# current branch.
+#
+# `git rebase master -i` plays interactive rebase of the current branch against
+# the current state of master. Whereas `git squash master` plays the interactive
+# rebase of the current branch in a more isolated process.
+#
+# In other words, to run `git squash`, you don't need to deal with merging your
+# current branch with the given branch.
+#
+# NOTE: No considerations were made if the current branch is not a branch of
+#       the given branch
+
+# Unlike rebase against a branch, this command allows you to rebase only the commits
+# that are not in the named branch.
+
+branch=$1
+
+if [ ! -z "$1" ]
+then
+  current_branch=`git rev-parse --symbolic-full-name --abbrev-ref HEAD`
+  number_of_commits_since_master=`git log master..$current_branch --oneline | wc -l | tr -d " "`
+  git rebase --interactive HEAD~$number_of_commits_since_master
+else
+  echo "You must specify a branch name for which to squash"
+  exit 1
+fi
