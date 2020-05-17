@@ -36,7 +36,6 @@
         branch-current = rev-parse --symbolic-full-name --abbrev-ref HEAD
         number-of-commits-since-master = "! sh -c 'git log master..`git branch-current` --oneline | wc -l | tr -d \" \"'"
         # pull-request-message = log  --reverse --pretty="format:## %s%n%n%b"
-        squash = "! sh -c 'git rebase --interactive HEAD~`git number-of-commits-since-master`'"
         plog = log --pretty=format:'%h\t%Cblue%cr%Creset\t%cn\t%Cgreen%s%Creset'
         unmerged-edit = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; atom `f` --wait --one"
         edit = "!f() { git status --porcelain | awk '{ print $2 }' | sort -u; }; atom `f` --wait --one"
