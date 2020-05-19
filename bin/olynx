@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby -wU
 
+# This command quite simply strips the query portion of a URL and then opens
+# the lynx browser at the given URL.
 require 'uri'
 url = ARGV[0]
 if url

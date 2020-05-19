@@ -1,0 +1,8 @@
+#!/bin/sh
+#
+# A terse git log, one line per commit. This uses the commit's title (e.g., the
+# first line of a commit message). And it demonstrates why a concise and terse
+# commit title holds tremendous value in that it aids in the scannability of
+# logs
+
+git log --graph --pretty=format:'%C(red)%h%Creset — %Creset%s %C(blue)%an, %C(green)(%ar)%Creset'

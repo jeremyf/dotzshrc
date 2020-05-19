@@ -42,7 +42,6 @@
         unmerged-add = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; git add `f`"
         vim = "!f() { git status --porcelain | awk '{ print $2 }' | sort -u ; }; vim -p `f`"
         unstage = reset HEAD --
-        lg = log --graph --pretty=format:'%C(red)%h%Creset — %Creset%s %C(blue)%an, %C(green)(%ar)%Creset'
 
         ######################################################################
         # Clean up whitespace.
