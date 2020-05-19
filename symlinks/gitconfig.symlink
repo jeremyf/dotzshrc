@@ -234,29 +234,6 @@
         default = current
 [log]
         date = local
-[color]
-        branch = auto
-        diff = auto
-        status = auto
-        interactive = auto
-[color "branch"]
-        current = red reverse
-        local = red bold
-        remote = yellow
-[color "diff"]
-        meta = yellow bold
-        frag = magenta bold
-        old = red bold
-        new = green bold
-[color "interactive"]
-        meta = yellow bold
-        frag = magenta bold
-        old = red bold
-        new = green bold
-[color "status"]
-        added = yellow
-        changed = green
-        untracked = magenta
 [apply]
         whitespace = fix
 [branch]
