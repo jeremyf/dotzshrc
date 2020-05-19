@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby -wU
+
+require 'uri'
+url = ARGV[0]
+if url
+  url = URI.parse(url)
+  url.query = nil
+  system("lynx #{url}")
+else
+  $stderr.puts "You must pass an argument to #{File.basename(__FILE__)}"
+  exit!(1)
+end
