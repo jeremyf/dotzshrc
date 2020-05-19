@@ -17,7 +17,6 @@
         wipit = !git add --all && git commit -m"WIP"
         amend = commit --amend
         amend-no-change = "!sh -c 'git commit --amend -C `git sha-head`'"
-	# http://ndlib.github.io/practices/make-git-forget-things/
         prebase = "!sh -c 'git fetch; git rebase --rebase-merges; git pull --tags'"
         tag-dates = log --tags --simplify-by-decoration --pretty='format:%ai %d'
         please = push -u --force-with-lease
