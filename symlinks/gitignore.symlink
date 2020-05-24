@@ -20,6 +20,10 @@
 *.sql
 *.sqlite
 
+# EMacs Generated Files #
+#########################
+\#*\#
+
 # OS generated files #
 ######################
 .DS_Store
