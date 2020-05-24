@@ -1,4 +1,7 @@
 # Prompt for confirmation
+hash -d t=$HOME/git/takeonrules.github.io
+hash -d z=$HOME/git/dotzshrc
+
 alias rm='rm -i'
 alias file-count="find . -type f -print | wc -l"
 alias bx="bundle exec"
