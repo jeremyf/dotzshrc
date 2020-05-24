@@ -4,6 +4,7 @@ execute pathogen#infect()
 set number
 syntax on
 
+nnoremap <F5> :!rake <Enter>
 
 " Disable markdown folding by default
 let g:vim_markdown_folding_disabled = 1
