@@ -37,9 +37,14 @@ if [ -d /usr/local/opt/openssl@1.1/bin ]; then
   export PATH="$(brew --prefix openssl@1.1)/bin:$PATH"
 fi
 
+if [ -d $HOME/.emacs.d/bin ]; then
+  export PATH="$HOME/.emacs.d/bin:$PATH"
+fi
+
 if [ -d $HOME/bin ]; then
   export PATH="$HOME/bin:$PATH"
 fi
+
 if [ -d /usr/local/sbin ]; then
   echo "$PATH" | grep -q "/usr/local/sbin:" || export PATH="/usr/local/sbin:$PATH"
 fi

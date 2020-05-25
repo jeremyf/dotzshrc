@@ -18,7 +18,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (markdown-mode elfeed rspec-mode yard-mode robe magit base16-theme))))
+    (markdown-mode robe magit base16-theme))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -29,16 +29,16 @@
 ;; It appears the t means trusted. Without that parameter, emacs prompted me
 ;; to accept that a theme could run code AND that I could trust that code
 ;; from here on out
-(load-theme 'base16-google-light t)
+;; (load-theme 'base16-google-light t)
 
 ;; https://melpa.org/#/robe
-(global-robe-mode)
+;; (global-robe-mode)
 
 ;; https://melpa.org/#/yard-mode
-(add-hook 'ruby-mode-hook 'yard-mode)
+;; (add-hook 'ruby-mode-hook 'yard-mode)
 
 ;; https://melpa.org/#/rspec-mode
-(add-hook 'dired-mode-hook 'rspec-dired-mode)
+;; (add-hook 'dired-mode-hook 'rspec-dired-mode)
 
 ;; From https://stackoverflow.com/questions/88399/how-do-i-duplicate-a-whole-line-in-emacs
 (defun duplicate-line (arg)
@@ -84,5 +84,7 @@
 (setq column-number-mode t)
 
 ;; https://melpa.org/#/elfeed
-(global-set-key (kbd "C-x r") 'elfeed)
+;; (global-set-key (kbd "C-x r") 'elfeed)
 
+;; TODO - Write macro to force wrap commit messages to 70 characters
+;; (‹C-u f 20 M-q› for changing a paragraph to 20 character width)
