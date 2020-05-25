@@ -27,10 +27,11 @@
  ;; If there is more than one, they won't work right.
  )
 
-;; It appears the t means trusted. Without that parameter, emacs prompted me
-;; to accept that a theme could run code AND that I could trust that code
-;; from here on out
-;; (load-theme 'base16-google-light t)
+;; https://github.com/ianpan870102/tron-legacy-emacs-theme
+;; (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+;; (load-theme 'tron-legacy t)
+;; (setq tron-legacy-dark-fg-bright-comments t)
+;; (setq tron-legacy-vivid-cursor t)
 
 ;; https://melpa.org/#/robe
 ;; (global-robe-mode)
@@ -77,10 +78,20 @@
   ;; put the point in the lowest line and return
   (next-line arg)
 )
-(global-set-key (kbd "C-d") 'duplicate-line)
+
+;; https://stackoverflow.com/questions/151945/how-do-i-control-how-emacs-makes-backup-files
+(setq backup-directory-alist `(("." . "~/.saves")))
+
+;; I want the duplicate line feature. In other editors, I had CMD+d.
+;; CMD appears off limits in emacs. So we'll go with CTRL+SHIFT+d
+(global-set-key (kbd "C-D") 'duplicate-line)
+(global-set-key (kbd "C-x w") 'browse-url-at-point)
 
 ;; https://melpa.org/#/elfeed
 ;; (global-set-key (kbd "C-x r") 'elfeed)
 
 ;; TODO - Write macro to force wrap commit messages to 70 characters
 ;; (‹C-u f 20 M-q› for changing a paragraph to 20 character width)
+
+;; TODO - Review pages I want to launch directly
+;; https://github.com/dakrone/eos/blob/master/eos-web.org

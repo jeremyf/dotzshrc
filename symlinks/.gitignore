@@ -24,6 +24,7 @@
 #########################
 \#*\#
 symlinks/.emacs.d.symlink/*
+*~
 
 # OS generated files #
 ######################
