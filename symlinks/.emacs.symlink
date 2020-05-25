@@ -11,7 +11,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages (quote (magit base16-theme))))
+ '(package-selected-packages (quote (rspec-mode yard-mode robe magit base16-theme))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -20,6 +20,15 @@
  )
 
 (load-theme 'base16-google-light t)
+
+;; https://melpa.org/#/robe
+(global-robe-mode)
+
+;; https://melpa.org/#/yard-mode
+(add-hook 'ruby-mode-hook 'yard-mode)
+
+;; https://melpa.org/#/rspec-mode
+(add-hook 'dired-mode-hook 'rspec-dired-mode)
 
 ;; From https://stackoverflow.com/questions/88399/how-do-i-duplicate-a-whole-line-in-emacs
 (defun duplicate-line (arg)
