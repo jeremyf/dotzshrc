@@ -75,6 +75,9 @@
 )
 (global-set-key (kbd "C-d") 'duplicate-line)
 
+(when (version<= "26.0.50" emacs-version )
+  (global-display-line-numbers-mode))
+
 ;; https://melpa.org/#/elfeed
 (global-set-key (kbd "C-x r") 'elfeed)
 
