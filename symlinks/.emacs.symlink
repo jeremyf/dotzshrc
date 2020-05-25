@@ -2,16 +2,23 @@
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
+(require 'package)
+
+(add-to-list 'package-archives
+             '("gnu" . "https://elpa.gnu.org/packages"))
+(add-to-list 'package-archives
+             '("melpa" . "https://melpa.org/packages/"))
+
 (package-initialize)
 
-(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
-                         ("melpa" . "https://melpa.org/packages/")))
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages (quote (rspec-mode yard-mode robe magit base16-theme))))
+ '(package-selected-packages
+   (quote
+    (markdown-mode elfeed rspec-mode yard-mode robe magit base16-theme))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -67,3 +74,7 @@
   (next-line arg)
 )
 (global-set-key (kbd "C-d") 'duplicate-line)
+
+;; https://melpa.org/#/elfeed
+(global-set-key (kbd "C-x r") 'elfeed)
+
