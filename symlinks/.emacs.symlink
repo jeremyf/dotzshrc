@@ -26,6 +26,9 @@
  ;; If there is more than one, they won't work right.
  )
 
+;; It appears the t means trusted. Without that parameter, emacs prompted me
+;; to accept that a theme could run code AND that I could trust that code
+;; from here on out
 (load-theme 'base16-google-light t)
 
 ;; https://melpa.org/#/robe
