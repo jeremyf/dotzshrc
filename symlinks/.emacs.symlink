@@ -78,6 +78,8 @@
 (when (version<= "26.0.50" emacs-version )
   (global-display-line-numbers-mode))
 
+(setq column-number-mode t)
+
 ;; https://melpa.org/#/elfeed
 (global-set-key (kbd "C-x r") 'elfeed)
 
