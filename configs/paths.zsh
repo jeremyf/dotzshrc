@@ -49,6 +49,11 @@ if [ -d /usr/local/sbin ]; then
   echo "$PATH" | grep -q "/usr/local/sbin:" || export PATH="/usr/local/sbin:$PATH"
 fi
 
+if [ -d /usr/local/opt/coreutils/libexec/gnubin ]; then
+  export PATH="/usr/local/opt/coreutils/libexec/gnubin:${PATH}"
+  export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:${MANPATH}"
+fi
+
 export GOROOT=/usr/local/opt/go/libexec/
 export GOPATH=$HOME/code_of_the_go
 if [ -d $GOPATH ]; then
