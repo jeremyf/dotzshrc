@@ -23,6 +23,14 @@
 (package-initialize)
 (straight-use-package 'use-package)
 
+;; https://docs.projectile.mx/en/latest/
+(straight-use-package 'projectile)
+(use-package projectile
+  :ensure t
+  :config
+  (define-key projectile-mode-map (kbd "C-t") 'projectile-command-map)
+  (projectile-mode +1))
+  (setq projectile-project-search-path '("~/git/"))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
