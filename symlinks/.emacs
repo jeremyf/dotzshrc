@@ -40,13 +40,13 @@
 ;;        (t . ivy--regex-plus)))
 
 ;; https://docs.projectile.mx/en/latest/
-(straight-use-package 'projectile)
-(use-package projectile
-  :ensure t
-  :config
-  (define-key projectile-mode-map (kbd "C-t") 'projectile-command-map)
-  (projectile-mode +1))
-  (setq projectile-project-search-path '("~/git/"))
+;;(straight-use-package 'projectile)
+;; (use-package projectile
+;;   :ensure t
+;;   :config
+;;   (define-key projectile-mode-map (kbd "C-t") 'projectile-command-map)
+;;   (projectile-mode +1))
+;;   (setq projectile-project-search-path '("~/git/"))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -55,7 +55,7 @@
  ;; If there is more than one, they won't work right.
  '(column-number-mode t)
  '(global-display-line-numbers-mode t)
- '(package-selected-packages (quote (treemacs markdown-mode robe magit base16-theme)))
+ '(package-selected-packages (quote (treemacs markdown-mode robe magit)))
  '(show-paren-mode t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -64,7 +64,14 @@
  ;; If there is more than one, they won't work right.
  )
 
-(load-theme 'base16-google-light t)
+(setq base16-theme-256-color-source 'base16-shell)
+(setq base16-highlight-mode-line 'contrast)
+(straight-use-package 'base16-theme)
+
+(use-package base16-theme
+  :ensure t
+  :config
+  (load-theme 'base16-default-dark t))
 
 (when (string= system-type "darwin")
   (setq dired-use-ls-dired nil))
