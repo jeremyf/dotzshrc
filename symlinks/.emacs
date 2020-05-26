@@ -64,14 +64,15 @@
  ;; If there is more than one, they won't work right.
  )
 
-(setq base16-theme-256-color-source 'base16-shell)
-(setq base16-highlight-mode-line 'contrast)
+;; With the base16-shell installed, I have found
+;; that I need the "colors" setting.
+(setq base16-theme-256-color-source "colors")
+(setq base16-highlight-mode-line "contrast")
 (straight-use-package 'base16-theme)
-
 (use-package base16-theme
-  :ensure t
-  :config
-  (load-theme 'base16-default-dark t))
+   :ensure t
+   :config
+   (load-theme 'base16-google-light t))
 
 (when (string= system-type "darwin")
   (setq dired-use-ls-dired nil))
