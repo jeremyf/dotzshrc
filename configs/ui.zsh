@@ -19,6 +19,6 @@
 ZSH_THEME='powerlevel10k/powerlevel10k'
 
 # Some great color options
-if [ -f $HOME/.config/base16-shell/base16-shell.plugin.zsh ]; then
-  source $HOME/.config/base16-shell/base16-shell.plugin.zsh
-fi
+# if [ -f $HOME/.config/base16-shell/base16-shell.plugin.zsh ]; then
+#   source $HOME/.config/base16-shell/base16-shell.plugin.zsh
+# fi
