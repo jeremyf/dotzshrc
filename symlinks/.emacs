@@ -55,7 +55,7 @@
  ;; If there is more than one, they won't work right.
  '(column-number-mode t)
  '(global-display-line-numbers-mode t)
- '(package-selected-packages (quote (treemacs markdown-mode robe magit)))
+ '(package-selected-packages (quote (treemacs robe magit)))
  '(show-paren-mode t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -64,15 +64,24 @@
  ;; If there is more than one, they won't work right.
  )
 
+;; https://github.com/jrblevin/markdown-mode/
+(use-package markdown-mode
+  :straight t
+  :ensure t
+  :mode (("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
+  :init (setq markdown-command "multimarkdown"))
+
 ;; With the base16-shell installed, I have found
 ;; that I need the "colors" setting.
-(setq base16-theme-256-color-source "colors")
-(setq base16-highlight-mode-line "contrast")
-(straight-use-package 'base16-theme)
 (use-package base16-theme
-   :ensure t
+  :straight t
+  :ensure t
    :config
-   (load-theme 'base16-google-light t))
+   (load-theme 'base16-google-light t)
+   :init (setq base16-theme-256-color-source "colors"
+	        base16-highlight-mode-line "contrast"))
 
 (when (string= system-type "darwin")
   (setq dired-use-ls-dired nil))
