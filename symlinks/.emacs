@@ -29,6 +29,16 @@
 (setq ivy-use-virtual-buffers t)
 (setq ivy-count-format "(%d/%d) ")
 
+;; https://oremacs.com/swiper/#completion-styles
+;; Set all searches to regex fuzzy
+(setq ivy-re-builders-alist
+      '((t . ivy--regex-fuzzy)))
+
+;; Only the filename search is fuzzy
+;;(setq ivy-re-builders-alist
+;;      '((read-file-name-internal . ivy--regex-fuzzy)
+;;        (t . ivy--regex-plus)))
+
 ;; https://docs.projectile.mx/en/latest/
 (straight-use-package 'projectile)
 (use-package projectile
@@ -54,7 +64,7 @@
  ;; If there is more than one, they won't work right.
  )
 
-(load-theme 'base16-default-light t)
+(load-theme 'base16-google-light t)
 
 (when (string= system-type "darwin")
   (setq dired-use-ls-dired nil))
