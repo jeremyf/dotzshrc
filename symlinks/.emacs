@@ -229,15 +229,14 @@
   (next-line arg)
 )
 
-;; https://stackoverflow.com/questions/151945/how-do-i-control-how-emacs-makes-backup-files
-(setq
-   backup-by-copying t      ; don't clobber symlinks
-   backup-directory-alist
-    '(("." . "~/.saves/"))    ; don't litter my fs tree
-   delete-old-versions t
-   kept-new-versions 6
-   kept-old-versions 2
-   version-control t)       ; use versioned backups
+;; Put autosave files (ie #foo#) and backup files (ie foo~) in ~/.emacs.d/.
+;; See https://snarfed.org/gnu_emacs_backup_files
+(custom-set-variables
+  '(auto-save-file-name-transforms '((".*" "~/.emacs.d/autosaves/\\1" t)))
+  '(backup-directory-alist '((".*" . "~/.emacs.d/backups/"))))
+
+;; create the autosave dir if necessary, since emacs won't.
+(make-directory "~/.emacs.d/autosaves/" t)
 
 ;; I want the duplicate line feature. In other editors, I had CMD+SHIFT+d.
 ;; Emacs exposes Super (s-), Hyper (H-). And while my keyboard doesn't have
