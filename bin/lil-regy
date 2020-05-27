@@ -1,11 +1,5 @@
 #!/usr/bin/env ruby -wU
 
-# Todo:
-#
-#   - [X] Allow passthrough of options to `ripgrep` <ins>This can be
-#         accomplished by adding `--` after the lil-regy args.
-#         For example `lil-regy -- -h` would pass `-h` to `rg`</ins>
-#
 # Background:
 #
 #   This script is for organizing my thoughts around regular expression
@@ -43,6 +37,16 @@ optparse = OptionParser.new do |options|
   # This banner is the first line of your help documentation.
   options.set_banner "Usage: #{command_name} [options]\n" \
     "Lil' Regy - A command line tool for finding and replacing.\n\n"  \
+    "Example:\n\n" \
+    "$ lil-regy -f \"(\d{4})-(\d{2})-(\d{2})\" -r \"\2-\3-\1\" -p \"./content\"\n\n" \
+    "Commentary:\n\n" \
+    "\tThe above command will find all 2020-04-15 instances in ./content and output the\n" \
+    "\tmatches and what they will change to (e.g., 04-15-2020, but why would you do that?\n\n" \
+    "\tIf you add the -d option (aka Do It!), then lil-regy will update the files.\n\n" \
+    "Note:\n\n" \
+    "\tYou can pass additional options to ripgrep by adding -- and the ripgrep options.\n\n" \
+    "\tLil' Regy relies on my color configuration (e.g. red for what's found by ripgrep).\n" \
+    "\tSo your mileage may vary.\n\n" \ 
     "Options:\n"
 
 
