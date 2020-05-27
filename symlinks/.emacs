@@ -14,18 +14,9 @@
       (goto-char (point-max))
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
-(require 'package)
 
-;; Added by Package.el.  This must come before configurations of
-;; installed packages.  Don't delete this line.  If you don't want it,
-;; just comment it out by adding a semicolon to the start of the line.
-;; You may delete these explanatory comments.
-(add-to-list 'package-archives
-'("gnu" . "https://elpa.gnu.org/packages"))
-(add-to-list 'package-archives
-'("melpa" . "https://melpa.org/packages/"))
-
-(package-initialize)
+;; I saw that straight loaded use-package to take advantage of the
+;; use-package syntax which is often how things are documented.
 (straight-use-package 'use-package)
 
 ;; https://oremacs.com/swiper/
@@ -78,8 +69,6 @@
 (straight-use-package '(string-inflection :type git :host github :repo "akicho8/string-inflection"))
 (global-set-key (kbd "H-u") 'string-inflection-all-cycle)
 
-;; wonkyChe
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -105,6 +94,11 @@
          ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "/usr/local/bin/pandoc"))
 
+(use-package robe
+  :straight t
+  :ensure t
+  :defer 1)
+
 ;; With the base16-shell installed, I have found
 ;; that I need the "colors" setting.
 (use-package base16-theme
@@ -118,10 +112,7 @@
   :straight t
   :ensure t
   :defer 1)
-(global-set-key (kbd "H-g") 'magit-dispatch)
-(global-set-key (kbd "H-s") 'magit-status)
-;;(when (string= system-type "darwin")
-;;  (setq dired-use-ls-dired nil))
+(global-set-key (kbd "H-g") 'magit-status)
 
   ;; (use-package treemacs
   ;;   :ensure t
@@ -345,9 +336,6 @@
 
 ;; https://melpa.org/#/elfeed
 ;; (global-set-key (kbd "C-x r") 'elfeed)
-
-;; TODO - Write macro to force wrap commit messages to 70 characters
-;; (‹C-u f 20 M-q› for changing a paragraph to 20 character width)
 
 ;; TODO - Review pages I want to launch directly
 ;; https://github.com/dakrone/eos/blob/master/eos-web.org
