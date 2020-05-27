@@ -66,20 +66,6 @@
 (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
 (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
 
-;; (straight-use-package 'helm)
-;; (use-package helm
-;;   :straight t
-;;   :defer 1
-;;   :ensure t)
-;; (global-set-key (kbd "M-x") 'helm-M-x)
-;; (helm-mode 1)
-
-;; (straight-use-package 'helm-ag)
-;; (use-package helm-ag
-;;   :straight t
-;;   :defer 1
-;;   :ensure t)
-
 ;; https://docs.projectile.mx/en/latest/
 ;;(straight-use-package 'projectile)
 ;; (use-package projectile
@@ -89,6 +75,11 @@
 ;;   (projectile-mode +1))
 ;;   (setq projectile-project-search-path '("~/git/"))
 
+(straight-use-package '(string-inflection :type git :host github :repo "akicho8/string-inflection"))
+(global-set-key (kbd "H-u") 'string-inflection-all-cycle)
+
+;; wonkyChe
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -96,7 +87,6 @@
  ;; If there is more than one, they won't work right.
  '(column-number-mode t)
  '(global-display-line-numbers-mode t)
- '(package-selected-packages (quote (treemacs robe magit)))
  '(show-paren-mode t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -286,7 +276,7 @@
 ;; According to emacs help, (comment-line) is bound to "C-x C-;".
 ;; However, when I invoked those keys, it ran comment-column. As
 ;; that is undesired behavior, I mapped (comment_line) to "H-c"
-(global-set-key (kbd "H-c") 'comment-line)
+(global-set-key (kbd "H-/") 'comment-line)
 (global-set-key (kbd "H-l") 'goto-line)
 
 ;; Invoke `s-a` with CTRL+OPT+CMD+a
@@ -347,6 +337,9 @@
      (define-key map "\e[1;P58" (kbd "H-x"))
      (define-key map "\e[1;P59" (kbd "H-y"))
      (define-key map "\e[1;P60" (kbd "H-z"))
+     (define-key map "\e[1;P70" (kbd "H-/"))
+     (define-key map "\e[1;P71" (kbd "H-."))
+     (define-key map "\e[1;P72" (kbd "H-,"))
      ))
 
 
