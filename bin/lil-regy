@@ -35,7 +35,7 @@
 #   ripgrep
 #   ruby
 require 'optparse'
-config = { path: -".", do_it: false }
+config = { path: ".", do_it: false }
 
 command_name = File.basename(__FILE__)
 
