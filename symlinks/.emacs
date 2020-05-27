@@ -30,7 +30,6 @@
 
 ;; https://oremacs.com/swiper/
 ;; Note: I've set all searches to use fuzzy regex
-(straight-use-package 'ivy)
 (use-package ivy
   :straight t
   :defer 1
@@ -41,7 +40,6 @@
 	      ivy-re-builders-alist   '((t . ivy--regex-fuzzy))))
 (ivy-mode 1)
 
-(straight-use-package 'counsel)
 (use-package counsel
   :straight t
   :defer 1
