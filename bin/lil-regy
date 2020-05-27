@@ -1,0 +1,132 @@
+#!/usr/bin/env ruby -wU
+
+# This script is for organizing my thoughts around regular expression
+# replacement. When using Atom, I have often used the find and replace with
+# regular expressions. For the process, I would often preview the regular
+# expression to see what matched. Then I would run the updated. I'm assuming
+# that I can do something similar in the search buffer of emacs. However that
+# seems to be a bit off in my exploration.
+#
+# The search:
+#
+#   *  was always limited to the project/directory
+#   *  used PERL regular expression
+#   *  could narrow to a list of file extensions
+#   *  did a dry run
+#
+# The options:
+#
+#   -h help
+#   -p path (default to ".")
+#   -f find
+#   -r replace
+#   -d do-it
+#
+# Dependencies:
+#
+#   ripgrep
+require 'optparse'
+config = { path: -".", do_it: false }
+
+command_name = File.basename(__FILE__)
+
+optparse = OptionParser.new do |options|
+  # This banner is the first line of your help documentation.
+  options.set_banner "Usage: #{command_name} [options]\n" \
+    "Lil' Regy - A command line tool for finding and replacing.\n\n"  \
+    "Options:\n"
+
+
+  options.on_head("-f PATTERN", "--find", String, "The pattern to use in finding text.") do |pattern|
+    config[:find] = pattern
+  end
+
+  options.on("-r PATTERN", "--replace", String, "The pattern to use in replacing text. Use \\1, \\2, etc for capture group replacement") do |pattern|
+    config[:replace] = pattern
+  end
+
+  options.on("-p PATH", "--path", String, "The path to limit your find and replace. (Default: \"#{config.fetch(:path)}\")") do |path|
+    config[:path] = path
+  end
+
+  options.on("-d", "Do it! You will not be asked for confirmation") do |do_it|
+    config[:do_it] = true
+  end
+
+  options.separator("")
+
+  options.on_tail("-h", "--help", "You're looking at it!") do
+    $stderr.puts options
+    exit 1
+  end
+end
+
+begin
+  optparse.parse!
+  mandatory = [:find, :path]
+  missing = mandatory.select{ |param| config[param].nil? }
+  if config[:do_it]
+    missing << :replace if config[:replace].nil?
+  end
+  unless missing.empty?
+    raise OptionParser::MissingArgument.new(missing.join(', '))
+  end
+rescue OptionParser::InvalidOption, OptionParser::MissingArgument
+  $stderr.puts "\e[0m\e[1m\e[31m#{$!}\e[0m\n"
+  $stderr.puts optparse
+  exit
+end
+
+find_pattern = config.fetch(:find)
+find_regexp = Regexp.new(find_pattern)
+try_replace = config.key?(:replace) || config.fetch(:do_it, false)
+replace_pattern = config.fetch(:replace) if try_replace
+
+path = File.expand_path(config.fetch(:path))
+require 'open3'
+
+if config.fetch(:do_it, false)
+  # This section is for the making the updates
+  Open3.pipeline_r(["rg", "--files-with-matches", "--pcre2", find_pattern, path]) do |o|
+    while filename = o.gets
+      filename = filename.chomp
+      $stdout.puts "Updating #{filename}"
+      content = []
+      File.open(filename, 'r') do |file|
+        file.readlines.each do |line|
+          content << line.gsub(find_regexp, replace_pattern)
+        end
+      end
+      File.open(filename, "w+") do |f|
+        content.each do |l|
+          f.puts l
+        end
+      end
+    end
+  end
+else
+  # This section is for the dry run
+  Open3.pipeline_r(["rg", "--pretty", "--pcre2", find_pattern, path]) do |o|
+    while text = o.gets
+      # This is the filename
+      if text.strip.empty?
+        $stdout.print text
+      elsif text.start_with?("\e[0m\e[35m")
+        $stdout.print text
+      else
+        if try_replace
+          $stdout.print "\e[0m\e[1m\e[31m- \e[0m"
+          $stdout.print text
+          replaced_text = text.gsub(find_regexp, replace_pattern)
+          if text != replaced_text
+            replaced_text = replaced_text.gsub("\e[0m\e[1m\e[31m", "\e[0m\e[1m\e[32m")
+            $stdout.print "\e[0m\e[1m\e[32m+ \e[0m"
+            $stdout.print replaced_text
+          end
+        else
+          $stdout.print text
+        end
+      end
+    end
+  end
+end
