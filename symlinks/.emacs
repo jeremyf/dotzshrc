@@ -250,6 +250,12 @@
 (global-set-key (kbd "H-d") 'duplicate-line)
 (global-set-key (kbd "C-x w") 'browse-url-at-point)
 
+;; According to emacs help, (comment-line) is bound to "C-x C-;".
+;; However, when I invoked those keys, it ran comment-column. As
+;; that is undesired behavior, I mapped (comment_line) to "H-c"
+(global-set-key (kbd "H-c") 'comment-line)
+
+
 ;; Invoke `s-a` with CTRL+OPT+CMD+a
 ;; Invoke `H-a` with CTRL+OPT+a
 (progn
