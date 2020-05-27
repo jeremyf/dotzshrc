@@ -24,6 +24,7 @@
 (straight-use-package 'use-package)
 
 ;; https://oremacs.com/swiper/
+;; Note: I've set all searches to use fuzzy regex
 (straight-use-package 'ivy)
 (use-package ivy
   :straight t
@@ -32,11 +33,6 @@
 	      ivy-re-builders-alist   '((t . ivy--regex-fuzzy))))
 (ivy-mode 1)
 
-
-;; Only the filename search is fuzzy
-;;(setq ivy-re-builders-alist
-;;      '((read-file-name-internal . ivy--regex-fuzzy)
-;;        (t . ivy--regex-plus)))
 
 ;; https://docs.projectile.mx/en/latest/
 ;;(straight-use-package 'projectile)
@@ -77,11 +73,14 @@
 (use-package base16-theme
   :straight t
   :ensure t
-   :config
-   (load-theme 'base16-google-light t)
-   :init (setq base16-theme-256-color-source "colors"
+  :config (load-theme 'base16-google-light t)
+  :init (setq base16-theme-256-color-source "colors"
 	        base16-highlight-mode-line "contrast"))
 
+(use-package magit
+  :straight t)
+(global-set-key (kbd "H-g") 'magit-dispatch)
+(global-set-key (kbd "H-s") 'magit-status)
 ;;(when (string= system-type "darwin")
 ;;  (setq dired-use-ls-dired nil))
 
