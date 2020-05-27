@@ -339,3 +339,17 @@
 
 ;; TODO - Review pages I want to launch directly
 ;; https://github.com/dakrone/eos/blob/master/eos-web.org
+
+;; Copied from https://github.com/magit/magit/blob/9423edc0b311117ab5fe87457c3e01c7db22a3c7/lisp/git-commit.el
+;; And set to 50 instead of 68
+(defcustom git-commit-summary-max-length 50
+  "Column beyond which characters in the summary lines are highlighted.
+The highlighting indicates that the summary is getting too long
+by some standards.  It does in no way imply that going over the
+limit a few characters or in some cases even many characters is
+anything that deserves shaming.  It's just a friendly reminder
+that if you can make the summary shorter, then you might want
+to consider doing so."
+  :group 'git-commit
+  :safe 'numberp
+  :type 'number)
