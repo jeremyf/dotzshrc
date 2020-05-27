@@ -25,27 +25,31 @@
 
 ;; https://oremacs.com/swiper/
 ;; Note: I've set all searches to use fuzzy regex
-;; (straight-use-package 'ivy)
-;; (use-package ivy
+(straight-use-package 'ivy)
+(use-package ivy
+  :straight t
+  :defer 1
+  :ensure t
+  :init (setq ivy-use-virtual-buffers t
+	      ivy-count-format        "(%d/%d) "
+	      ivy-re-builders-alist   '((t . ivy--regex-fuzzy))))
+(ivy-mode 1)
+(global-set-key (kbd "C-s") 'swiper-isearch)
+(global-set-key (kbd "M-x") 'counsel-M-x)
+
+;; (straight-use-package 'helm)
+;; (use-package helm
 ;;   :straight t
-;;   :init (setq ivy-use-virtual-buffers t
-;; 	      ivy-count-format        "(%d/%d) "
-;; 	      ivy-re-builders-alist   '((t . ivy--regex-fuzzy))))
-;; (ivy-mode 1)
+;;   :defer 1
+;;   :ensure t)
+;; (global-set-key (kbd "M-x") 'helm-M-x)
+;; (helm-mode 1)
 
-(straight-use-package 'helm)
-(use-package helm
-  :straight t
-  :defer 1
-  :ensure t)
-(global-set-key (kbd "M-x") 'helm-M-x)
-(helm-mode 1)
-
-(straight-use-package 'helm-ag)
-(use-package helm-ag
-  :straight t
-  :defer 1
-  :ensure t)
+;; (straight-use-package 'helm-ag)
+;; (use-package helm-ag
+;;   :straight t
+;;   :defer 1
+;;   :ensure t)
 
 ;; https://docs.projectile.mx/en/latest/
 ;;(straight-use-package 'projectile)
