@@ -108,10 +108,13 @@
   :init (setq base16-theme-256-color-source "colors"
 	        base16-highlight-mode-line "contrast"))
 
+;; Adding format to git-commit-fill-column of 72 as best
+;; practice.
 (use-package magit
   :straight t
   :ensure t
-  :defer 1)
+  :defer 1
+  :init (setq git-commit-fill-column 72))
 (global-set-key (kbd "H-g") 'magit-status)
 
 ;; Copied from https://github.com/magit/magit/blob/9423edc0b311117ab5fe87457c3e01c7db22a3c7/lisp/git-commit.el
