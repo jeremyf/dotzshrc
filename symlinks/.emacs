@@ -36,6 +36,7 @@
 (straight-use-package 'helm)
 (use-package helm
   :straight t
+  :defer 1
   :ensure t)
 (global-set-key (kbd "M-x") 'helm-M-x)
 (helm-mode 1)
@@ -43,6 +44,7 @@
 (straight-use-package 'helm-ag)
 (use-package helm-ag
   :straight t
+  :defer 1
   :ensure t)
 
 ;; https://docs.projectile.mx/en/latest/
@@ -74,6 +76,7 @@
 (use-package markdown-mode
   :straight t
   :ensure t
+  :defer 1
   :mode (("README\\.md\\'" . gfm-mode)
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
@@ -89,7 +92,9 @@
 	        base16-highlight-mode-line "contrast"))
 
 (use-package magit
-  :straight t)
+  :straight t
+  :ensure t
+  :defer 1)
 (global-set-key (kbd "H-g") 'magit-dispatch)
 (global-set-key (kbd "H-s") 'magit-status)
 ;;(when (string= system-type "darwin")
