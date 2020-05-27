@@ -280,7 +280,8 @@ to consider doing so."
 ;; those keys, I can use ITerm to mimic the behavior.
 ;; See https://www.emacswiki.org/emacs/iTerm2#toc11
 (global-set-key (kbd "H-d") 'duplicate-line)
-(global-set-key (kbd "C-x w") 'browse-url-at-point)
+(global-set-key (kbd "H-b") 'browse-url-at-point)
+(setq browse-url-browser-function 'eww-browse-url)
 
 ;; According to emacs help, (comment-line) is bound to "C-x C-;".
 ;; However, when I invoked those keys, it ran comment-column. As
