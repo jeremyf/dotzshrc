@@ -26,7 +26,14 @@ Install OhMyZsh - https://github.com/ohmyzsh/ohmyzsh
 # SSH Keys
 Ensure that I have up to date SSH keys
 
-# Install VS Code
-
 # Ensure that I have the correct plugins https://github.com/jeremyf/dotatom
 Download JetBrains Mono for text editor
+
+# Install Karabiner
+
+https://karabiner-elements.pqrs.org/
+
+Then set:
+
+  *  Right option key to send ESC
+  *  Caps lock to send CTRL
