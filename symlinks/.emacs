@@ -1,3 +1,8 @@
+;; This preamble is part of straight-use-package My understanding, in
+;; reading straight documentation is that it has better load
+;; times. However, the configuration options I often see leverage
+;; "use-package" which is why most of my package declarations look as
+;; they do.
 (let ((bootstrap-file
        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
       (bootstrap-version 5))
