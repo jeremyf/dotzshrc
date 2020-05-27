@@ -35,10 +35,10 @@
   :defer 1
   :ensure t
   :init (setq ivy-use-virtual-buffers t
-	      enable-recursive-minibuffers t
-	      ivy-count-format        "(%d/%d) "
-              ivy-re-builders-alist   '((read-file-name-internal . ivy--regex-fuzzy)
-					(t . ivy--regex-plus))))
+        enable-recursive-minibuffers t
+        ivy-count-format        "(%d/%d) "
+        ivy-re-builders-alist   '((read-file-name-internal . ivy--regex-fuzzy)
+				  (t . ivy--regex-plus))))
 (ivy-mode 1)
 
 (use-package counsel
