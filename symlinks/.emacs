@@ -37,7 +37,8 @@
   :init (setq ivy-use-virtual-buffers t
 	      enable-recursive-minibuffers t
 	      ivy-count-format        "(%d/%d) "
-	      ivy-re-builders-alist   '((t . ivy--regex-fuzzy))))
+              ivy-re-builders-alist   '((read-file-name-internal . ivy--regex-fuzzy)
+					(t . ivy--regex-plus))))
 (ivy-mode 1)
 
 (use-package counsel
@@ -112,7 +113,7 @@
   :mode (("README\\.md\\'" . gfm-mode)
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
-  :init (setq markdown-command "multimarkdown"))
+  :init (setq markdown-command "/usr/local/bin/pandoc"))
 
 ;; With the base16-shell installed, I have found
 ;; that I need the "colors" setting.
