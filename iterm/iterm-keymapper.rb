@@ -1,8 +1,6 @@
-# Starting with CTRL+CMD+a
-# From '61' to '7a'
-
-#   And a to z
-entries = []
+CTRL_OPT_CMD = "0x1c0000"
+CTRL_OPT = "0xc0000"
+keymap_entries = []
 [
   ["61", "a"],
   ["62", "b"],
@@ -30,9 +28,13 @@ entries = []
   ["79", "y"],
   ["7a", "z"]
 ].each_with_index do |(hex, key), index|
-  entries << %(  "0x#{hex}-0x1c0000":{"Text":"[1;P#{index+9}", "Action": 10 })
-  entries << %(  "0x#{hex}-0xc0000":{"Text":"[1;P#{index+35}", "Action": 10 })
+  keymap_entries << %(  "0x#{hex}-#{CTRL_OPT_CMD}":{"Text":"[1;P#{index+9}", "Action": 10 })
+  keymap_entries << %(  "0x#{hex}-#{CTRL_OPT}":{"Text":"[1;P#{index+35}", "Action": 10 })
+#  keymap_entries << %(  "0x#{hex}-#{CTRL_SHIFT}":{"Text":"[1;P#{index+61}", "Action": 10 })
 end
-puts %({"Key Mappings": {)
-puts entries.sort.join(",\n")
-puts "}}"
+
+File.open(File.join(ENV["HOME"], "git/dotzshrc/emacs.itermkeymap"), "w+") do |file|
+  file.puts %({"Key Mappings": {)
+  file.puts keymap_entries.sort.join(",\n")
+  file.puts "}}"
+end

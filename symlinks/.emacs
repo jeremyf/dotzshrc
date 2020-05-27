@@ -226,7 +226,6 @@
 ;; Emacs exposes Super (s-), Hyper (H-). And while my keyboard doesn't have
 ;; those keys, I can use ITerm to mimic the behavior.
 ;; See https://www.emacswiki.org/emacs/iTerm2#toc11
-(global-set-key (kbd "s-d") 'duplicate-line)
 (global-set-key (kbd "H-d") 'duplicate-line)
 (global-set-key (kbd "C-x w") 'browse-url-at-point)
 
