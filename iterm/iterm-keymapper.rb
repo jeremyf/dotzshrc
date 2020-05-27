@@ -33,6 +33,13 @@ keymap_entries = []
   keymap_entries << %(  "0x#{hex}-#{CTRL_OPT}":{"Text":"[1;P#{index+35}", "Action": 10 })
 end
 
+# CTRL+OPT+/
+keymap_entries << %(  "0x2f-#{CTRL_OPT}":{"Text":"[1;P70", "Action": 10})
+# CTRL+OPT+.
+keymap_entries << %(  "0x2e-#{CTRL_OPT}":{"Text":"[1;P71", "Action": 10})
+# CTRL+OPT+,
+keymap_entries << %(  "0x2c-#{CTRL_OPT}":{"Text":"[1;P72", "Action": 10})
+
 File.open(File.join(ENV["HOME"], "git/dotzshrc/emacs.itermkeymap"), "w+") do |file|
   file.puts %({"Key Mappings": {)
   file.puts keymap_entries.sort.join(",\n")
