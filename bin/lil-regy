@@ -1,11 +1,19 @@
 #!/usr/bin/env ruby -wU
 
-# This script is for organizing my thoughts around regular expression
-# replacement. When using Atom, I have often used the find and replace with
-# regular expressions. For the process, I would often preview the regular
-# expression to see what matched. Then I would run the updated. I'm assuming
-# that I can do something similar in the search buffer of emacs. However that
-# seems to be a bit off in my exploration.
+# Todo:
+#
+#   - [X] Allow passthrough of options to `ripgrep` <ins>This can be
+#         accomplished by adding `--` after the lil-regy args.
+#         For example `lil-regy -- -h` would pass `-h` to `rg`</ins>
+#
+# Background:
+#
+#   This script is for organizing my thoughts around regular expression
+#   replacement. When using Atom, I have often used the find and replace with
+#   regular expressions. For the process, I would often preview the regular
+#   expression to see what matched. Then I would run the updated. I'm assuming
+#   that I can do something similar in the search buffer of emacs. However that
+#   seems to be a bit off in my exploration.
 #
 # The search:
 #
@@ -25,6 +33,7 @@
 # Dependencies:
 #
 #   ripgrep
+#   ruby
 require 'optparse'
 config = { path: -".", do_it: false }
 
@@ -85,9 +94,27 @@ replace_pattern = config.fetch(:replace) if try_replace
 path = File.expand_path(config.fetch(:path))
 require 'open3'
 
+class RipGrep
+  def initialize(argv:, path:, find_pattern:)
+    @argv = argv.clone
+    @path = path
+    @find_pattern = find_pattern
+  end
+  attr_reader :argv, :path, :find_pattern
+
+  def do_it_args
+    ["rg", "--files-with-matches", "--pcre2"] + argv + [find_pattern, path]
+  end
+
+  def preview_args
+    ["rg", "--pretty", "--pcre2"] + argv + [find_pattern, path]
+  end
+end
+rg = RipGrep.new(argv: ARGV, path: path, find_pattern: find_pattern)
+
 if config.fetch(:do_it, false)
   # This section is for the making the updates
-  Open3.pipeline_r(["rg", "--files-with-matches", "--pcre2", find_pattern, path]) do |o|
+  Open3.pipeline_r(rg.do_it_args) do |o|
     while filename = o.gets
       filename = filename.chomp
       $stdout.puts "Updating #{filename}"
@@ -106,7 +133,7 @@ if config.fetch(:do_it, false)
   end
 else
   # This section is for the dry run
-  Open3.pipeline_r(["rg", "--pretty", "--pcre2", find_pattern, path]) do |o|
+  Open3.pipeline_r(rg.preview_args) do |o|
     while text = o.gets
       # This is the filename
       if text.strip.empty?
