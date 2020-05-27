@@ -38,7 +38,7 @@
         enable-recursive-minibuffers t
         ivy-count-format        "(%d/%d) "
         ivy-re-builders-alist   '((read-file-name-internal . ivy--regex-fuzzy)
-				  (t . ivy--regex-plus))))
+				  (t . ivy--regex-ignore-order))))
 (ivy-mode 1)
 
 (use-package counsel
