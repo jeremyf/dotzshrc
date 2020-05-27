@@ -10,6 +10,7 @@ Install OhMyZsh - https://github.com/ohmyzsh/ohmyzsh
 *   `brew tap homebrew/cask`
 *   `brew cask install jumpcut` Multi-paste buffer
 *   `brew install ag` A solid replacement for grep
+*   `brew install ripgrep` Another solid replacement for grep that allows PERL Regexp
 *   `brew install todo-txt` A text based todo
 *   `brew install terminal-notifier`
 *   `brew install postgresql`
