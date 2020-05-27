@@ -288,7 +288,7 @@
 ;; However, when I invoked those keys, it ran comment-column. As
 ;; that is undesired behavior, I mapped (comment_line) to "H-c"
 (global-set-key (kbd "H-c") 'comment-line)
-
+(global-set-key (kbd "H-l") 'goto-line)
 
 ;; Invoke `s-a` with CTRL+OPT+CMD+a
 ;; Invoke `H-a` with CTRL+OPT+a
