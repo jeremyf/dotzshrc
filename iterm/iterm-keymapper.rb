@@ -1,3 +1,7 @@
+# This script creates an iTerm keymap, which allows me to map the
+# Hyper(H) and Super(s) keys. Thus freeing up a massive number of
+# keys.
+#
 CTRL_OPT_CMD = "0x1c0000"
 CTRL_OPT = "0xc0000"
 keymap_entries = []
@@ -40,7 +44,9 @@ keymap_entries << %(  "0x2e-#{CTRL_OPT}":{"Text":"[1;P71", "Action": 10})
 # CTRL+OPT+,
 keymap_entries << %(  "0x2c-#{CTRL_OPT}":{"Text":"[1;P72", "Action": 10})
 
-File.open(File.join(ENV["HOME"], "git/dotzshrc/emacs.itermkeymap"), "w+") do |file|
+filename = File.expand_path('../emacs.itermkeymap', __FILE__)
+
+File.open(filename, "w+") do |file|
   file.puts %({"Key Mappings": {)
   file.puts keymap_entries.sort.join(",\n")
   file.puts "}}"

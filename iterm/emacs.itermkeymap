@@ -1,7 +1,7 @@
 {"Key Mappings": {
-  "0x2c-0xc0000":{"Text":"[;P72", "Action": 10},
-  "0x2e-0xc0000":{"Text":"[;P71", "Action": 10},
-  "0x2f-0xc0000":{"Text":"[;P70", "Action": 10},
+  "0x2c-0xc0000":{"Text":"[1;P72", "Action": 10},
+  "0x2e-0xc0000":{"Text":"[1;P71", "Action": 10},
+  "0x2f-0xc0000":{"Text":"[1;P70", "Action": 10},
   "0x61-0x1c0000":{"Text":"[1;P9", "Action": 10 },
   "0x61-0xc0000":{"Text":"[1;P35", "Action": 10 },
   "0x62-0x1c0000":{"Text":"[1;P10", "Action": 10 },
