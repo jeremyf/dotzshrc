@@ -1,4 +1,5 @@
 # Prompt for confirmation
+alias lr='lil-regy'
 alias rm='rm -i'
 alias file-count="find . -type f -print | wc -l"
 alias bx="bundle exec"
