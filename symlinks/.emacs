@@ -84,6 +84,7 @@
 ;;   (projectile-mode +1))
 ;;   (setq projectile-project-search-path '("~/git/"))
 
+;; Company provides a moduler completion framework
 (straight-use-package 'company)
 (use-package company
   :straight t
@@ -93,6 +94,12 @@
 
 (straight-use-package '(string-inflection :type git :host github :repo "akicho8/string-inflection"))
 (global-set-key (kbd "H-u") 'string-inflection-all-cycle)
+
+;;
+(use-package multiple-cursors
+  :straight t
+  :ensure   t
+  :defer    1)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
