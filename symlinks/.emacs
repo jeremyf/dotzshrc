@@ -339,6 +339,7 @@ to consider doing so."
 ;; that is undesired behavior, I mapped (comment_line) to "H-c"
 (global-set-key (kbd "H-/") 'comment-line)
 (global-set-key (kbd "H-l") 'goto-line)
+(global-set-key (kbd "H-SPC") 'set-rectangular-region-anchor)
 
 ;; Invoke `s-a` with CTRL+OPT+CMD+a
 ;; Invoke `H-a` with CTRL+OPT+a
@@ -401,6 +402,7 @@ to consider doing so."
      (define-key map "\e[1;P70" (kbd "H-/"))
      (define-key map "\e[1;P71" (kbd "H-."))
      (define-key map "\e[1;P72" (kbd "H-,"))
+     (define-key map "\e[1;P74" (kbd "H-SPC"))
      ))
 
 

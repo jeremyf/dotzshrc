@@ -43,6 +43,8 @@ keymap_entries << %(  "0x2f-#{CTRL_OPT}":{"Text":"[1;P70", "Action": 10})
 keymap_entries << %(  "0x2e-#{CTRL_OPT}":{"Text":"[1;P71", "Action": 10})
 # CTRL+OPT+,
 keymap_entries << %(  "0x2c-#{CTRL_OPT}":{"Text":"[1;P72", "Action": 10})
+# CTRL+OPT+SPC
+keymap_entries << %(  "0x20-#{CTRL_OPT}": {"Text":"[1;P74", "Action": 10})
 
 filename = File.expand_path('../emacs.itermkeymap', __FILE__)
 
