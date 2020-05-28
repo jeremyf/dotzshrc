@@ -84,6 +84,13 @@
 ;;   (projectile-mode +1))
 ;;   (setq projectile-project-search-path '("~/git/"))
 
+(straight-use-package 'company)
+(use-package company
+  :straight t
+  :ensure   t
+  :defer    1)
+(add-hook 'after-init-hook 'global-company-mode)
+
 (straight-use-package '(string-inflection :type git :host github :repo "akicho8/string-inflection"))
 (global-set-key (kbd "H-u") 'string-inflection-all-cycle)
 
@@ -117,6 +124,9 @@
   :ensure t
   :defer 1)
 (add-hook 'ruby-mode-hook 'robe-mode)
+(eval-after-load 'company
+  '(push 'company-robe company-backends))
+(add-hook 'robe-mode-hook 'ac-robe-setup)
 
 (use-package yard-mode
   :straight t
