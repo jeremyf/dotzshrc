@@ -1,5 +1,4 @@
-
-;; This preamble is part of straight-use-package My understanding, in
+;; this preamble is part of straight-use-package My understanding, in
 ;; reading straight documentation is that it has better load
 ;; times. However, the configuration options I often see leverage
 ;; "use-package" which is why most of my package declarations look as
@@ -60,6 +59,21 @@
 (global-set-key (kbd "C-x l") 'counsel-locate)
 (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
 (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
+
+(straight-use-package 'helpful)
+(use-package helpful
+  :straight t
+  :ensure t
+  :bind (("C-c C-d" . helpful-at-point)))
+
+(global-set-key (kbd "C-h f") #'helpful-callable)
+(global-set-key (kbd "C-h v") #'helpful-variable)
+(global-set-key (kbd "C-h k") #'helpful-key)
+(global-set-key (kbd "C-h f") #'helpful-function)
+(global-set-key (kbd "C-h c") #'helpful-command)
+
+(setq counsel-describe-function-function #'helpful-callable)
+(setq counsel-describe-variable-function #'helpful-variable)
 
 ;; https://docs.projectile.mx/en/latest/
 ;;(straight-use-package 'projectile)
