@@ -1,3 +1,4 @@
+
 ;; This preamble is part of straight-use-package My understanding, in
 ;; reading straight documentation is that it has better load
 ;; times. However, the configuration options I often see leverage
@@ -19,6 +20,9 @@
 ;; use-package syntax which is often how things are documented.
 (straight-use-package 'use-package)
 
+;; Ensure tabs are expanded, not inserted
+(setq-default indent-tabs-mode nil)
+
 ;; https://oremacs.com/swiper/
 ;; Note: I've set all searches to use fuzzy regex
 (use-package ivy
@@ -29,7 +33,7 @@
         enable-recursive-minibuffers t
         ivy-count-format        "(%d/%d) "
         ivy-re-builders-alist   '((read-file-name-internal . ivy--regex-fuzzy)
-				  (t . ivy--regex-ignore-order))))
+                                  (t . ivy--regex-ignore-order))))
 (ivy-mode 1)
 
 (use-package counsel
@@ -358,4 +362,3 @@ to consider doing so."
 
 ;; TODO - Review pages I want to launch directly
 ;; https://github.com/dakrone/eos/blob/master/eos-web.org
-
