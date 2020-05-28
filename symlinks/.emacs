@@ -109,6 +109,15 @@
  ;; If there is more than one, they won't work right.
  )
 
+;; Whitespace   hygene  package.   The   author's  documentation   and
+;; commentary echoes my sentiments
+(use-package ethan-wspace
+  :straight t
+  :ensure t
+  :defer 1)
+(setq-default mode-require-final-newline nil) ;; Prefer the following ethan-wspac-mode
+(global-ethan-wspace-mode 1)
+
 ;; https://github.com/jrblevin/markdown-mode/
 (use-package markdown-mode
   :straight t
