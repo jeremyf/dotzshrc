@@ -116,6 +116,13 @@
   :straight t
   :ensure t
   :defer 1)
+(add-hook 'ruby-mode-hook 'robe-mode)
+
+(use-package yard-mode
+  :straight t
+  :ensure t
+  :defer 1)
+(add-hook 'ruby-mode-hook 'yard-mode)
 
 ;; With the base16-shell installed, I have found
 ;; that I need the "colors" setting.
