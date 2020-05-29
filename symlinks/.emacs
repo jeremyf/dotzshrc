@@ -38,7 +38,8 @@
 (use-package counsel
   :straight t
   :defer 1
-  :ensure t)
+  :ensure t
+  :init (setq ivy-use-selectable-prompt t))
 (counsel-mode 1)
 
 (setq search-default-mode #'char-fold-to-regexp)
@@ -170,7 +171,7 @@
   :ensure t
   :config (load-theme 'base16-google-light t)
   :init (setq base16-theme-256-color-source "colors"
-	        base16-highlight-mode-line "contrast"))
+              base16-highlight-mode-line "contrast"))
 
 ;; Adding format to git-commit-fill-column of 72 as best
 ;; practice.
