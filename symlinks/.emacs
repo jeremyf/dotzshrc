@@ -18,6 +18,19 @@
 ;; When you open Emacs, grab all the space on the screen
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
 
+;; With the base16-shell installed, I have found
+;; that I need the "colors" setting.
+;; (use-package base16-theme
+;;   :straight t
+;;   :ensure t
+;;   :config (load-theme 'Base16-google-light t)
+;;   :init (setq base16-theme-256-color-source "colors"
+;;               base16-highlight-mode-line "contrast"))
+
+;; Remove reliance on Base16 themes; I find that I prefer the
+;; coloration of tsdh-(light|dark)
+(load-theme 'tsdh-dark t)
+
 ;; When you open a new frame in an already running Emacs session
 ;; set it to the full height but don't worry about the width
 (add-to-list 'default-frame-alist '(fullscreen . fullheight))
@@ -187,28 +200,16 @@
 ;;   :defer 1)
 ;; (add-hook 'ruby-mode-hook 'yard-mode)
 
-;; With the base16-shell installed, I have found
-;; that I need the "colors" setting.
-;; (use-package base16-theme
-;;   :straight t
-;;   :ensure t
-;;   :config (load-theme 'Base16-google-light t)
-;;   :init (setq base16-theme-256-color-source "colors"
-;;               base16-highlight-mode-line "contrast"))
-
-;; Remove reliance on Base16 themes; I find that I prefer the
-;; coloration of tsdh-(light|dark)
-(load-theme 'tsdh-dark t)
-
 ;; Adding format to git-commit-fill-column of 72 as best
 ;; practice.
 (use-package magit
   :straight t
   :ensure t
   :defer 1
-  :init (setq git-commit-fill-column 72))
-(global-set-key (kbd "H-g") 'magit-status)
-(global-set-key (kbd "C-M-g") 'magit-status)
+  :init (setq git-commit-fill-column 72)
+  (global-set-key (kbd "H-g") 'magit-status)
+  (global-set-key (kbd "C-M-g") 'magit-status)
+)
 
 ;; Copied from https://github.com/magit/magit/blob/9423edc0b311117ab5fe87457c3e01c7db22a3c7/lisp/git-commit.el
 ;; And set to 50 instead of 68
