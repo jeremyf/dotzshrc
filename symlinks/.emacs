@@ -198,7 +198,7 @@
 
 ;; Remove reliance on Base16 themes; I find that I prefer the
 ;; coloration of tsdh-(light|dark)
-(load-theme 'tsdh-light t)
+(load-theme 'tsdh-dark t)
 
 ;; Adding format to git-commit-fill-column of 72 as best
 ;; practice.
