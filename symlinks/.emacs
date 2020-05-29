@@ -83,20 +83,21 @@
   :straight t
   :config (define-key projectile-mode-map (kbd "C-M-p") 'projectile-command-map)
   (projectile-mode +1)
-  (projectile-enable-caching t)
   (setq projectile-completion-system 'ivy)
   (setq projectile-project-search-path '("~/git/")))
 
-(use-package counsel-projectile
-  :ensure t
-  :straight t)
-
+(global-set-key (kbd "s-t") 'projectile-find-file)
+;; Enable
+;; (use-package counsel-projectile
+;; :ensure t
+;; :straight t)
+;;
 ;; In Emacs plus, CMD+t sends 's-t' Also, based on current
 ;; configuration, when I type 's-t' and search for a file I can type
 ;; 'C-M-o' and choose a different action for the named file. There is
 ;; bug when I choose anything other than the default; The mini-buffer
 ;; remains open.
-(global-set-key (kbd "s-t") 'counsel-projectile-find-file)
+;; (global-set-key (kbd "s-t") 'counsel-projectile-find-file)
 
 ;; Company provides a moduler completion framework
 (use-package company
@@ -376,6 +377,7 @@ to consider doing so."
 ;; that is undesired behavior, I mapped (comment_line) to "H-c"
 (global-set-key (kbd "H-/") 'comment-line)
 (global-set-key (kbd "C-M-/") 'comment-line)
+(global-set-key (kbd "s-/") 'comment-line)
 (global-set-key (kbd "H-l") 'goto-line)
 (global-set-key (kbd "C-M-l") 'goto-line)
 (global-set-key (kbd "C-w") 'backward-kill-word)
