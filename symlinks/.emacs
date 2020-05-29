@@ -15,16 +15,19 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
+;; When you open Emacs, grab all the space on the screen
+(add-to-list 'initial-frame-alist '(fullscreen . maximized))
+
+;; When you open a new frame in an already running Emacs session
+;; set it to the full height but don't worry about the width
+(add-to-list 'default-frame-alist '(fullscreen . fullheight))
+(set-frame-font "MesloLGS NF 14" nil t)
+(setq-default indent-tabs-mode nil) ;; Ensure tabs are expanded, not inserted
+(setq inhibit-startup-screen t) ;; Don't include the  emacs "start" window
+
 ;; I saw that straight loaded use-package to take advantage of the
 ;; use-package syntax which is often how things are documented.
 (straight-use-package 'use-package)
-
-;; Ensure tabs are expanded, not inserted
-(setq-default indent-tabs-mode nil)
-
-;; Don't include the  emacs "start" window
-(setq inhibit-startup-screen t)
-
 ;; https://oremacs.com/swiper/
 ;; Note: I've set all searches to use fuzzy regex
 (use-package ivy
@@ -117,15 +120,6 @@
   :defer    1)
 (global-set-key (kbd "H-SPC") 'set-rectangular-region-anchor)
 (global-set-key (kbd "C-M-SPC") 'set-rectangular-region-anchor)
-
-
-;; When you open Emacs, grab all the space on the screen
-(add-to-list 'initial-frame-alist '(fullscreen . maximized))
-;; When you open a new frame in an already running Emacs session
-;; set it to the full height but don't worry about the width
-(add-to-list 'default-frame-alist '(fullscreen . fullheight))
-
-(set-frame-font "MesloLGS NF 14" nil t)
 
 ;; This package ensures that the active window gets the majority of the space, while leaving room for other windows.
 (use-package golden-ratio
