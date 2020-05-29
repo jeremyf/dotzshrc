@@ -38,6 +38,11 @@
 (setq-default indent-tabs-mode nil) ;; Ensure tabs are expanded, not inserted
 (setq inhibit-startup-screen t) ;; Don't include the  emacs "start" window
 
+;; Put autosave files (ie #foo#) and backup files (ie foo~) in ~/.emacs.d/.
+;; See https://snarfed.org/gnu_emacs_backup_files
+;; create the autosave dir if necessary, since emacs won't.
+(make-directory "~/.emacs.d/autosaves/" t)
+
 ;; I saw that straight loaded use-package to take advantage of the
 ;; use-package syntax which is often how things are documented.
 (straight-use-package 'use-package)
@@ -171,9 +176,10 @@
 (use-package ethan-wspace
   :straight t
   :ensure t
-  :defer 1)
-(setq-default mode-require-final-newline nil) ;; Prefer the following ethan-wspac-mode
-(global-ethan-wspace-mode 1)
+  :defer 1
+  :init (setq-default mode-require-final-newline nil)
+        (global-ethan-wspace-mode 1)
+) ;; Prefer the following ethan-wspac-mode
 
 ;; https://github.com/jrblevin/markdown-mode/
 (use-package markdown-mode
@@ -359,13 +365,6 @@ to consider doing so."
   ;; put the point in the lowest line and return
   (next-line arg)
 )
-
-;; Put autosave files (ie #foo#) and backup files (ie foo~) in ~/.emacs.d/.
-;; See https://snarfed.org/gnu_emacs_backup_files
-
-
-;; create the autosave dir if necessary, since emacs won't.
-(make-directory "~/.emacs.d/autosaves/" t)
 
 ;; I want the duplicate line feature. In other editors, I had CMD+SHIFT+d.
 ;; Emacs exposes Super (s-), Hyper (H-). And while my keyboard doesn't have
