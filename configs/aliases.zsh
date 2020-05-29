@@ -1,4 +1,5 @@
 # Prompt for confirmation
+alias e=$EDITOR
 alias gdh='git diff HEAD'
 alias lr='lil-regy'
 alias rm='rm -i'

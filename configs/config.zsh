@@ -79,6 +79,11 @@ if [ -f /usr/local/opt/git-extras/share/git-extras/git-extras-completion.zsh ]; 
   source /usr/local/opt/git-extras/share/git-extras/git-extras-completion.zsh
 fi
 
-export VISUAL='emacs'
-export GIT_EDITOR='emacs'
-export EDITOR=$VISUAL
+# For Spacemacs
+# export VISUAL='emacsclient -c'
+# export GIT_EDITOR=$VISUAL
+# export EDITOR=$VISUAL
+
+# For bare-metal emacs
+export EDITOR='emacs'
+export GIT_EDITOR=$EDITOR
