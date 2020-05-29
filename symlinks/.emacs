@@ -38,17 +38,19 @@
         enable-recursive-minibuffers t
         ivy-count-format        "(%d/%d) "
         ivy-re-builders-alist   '((read-file-name-internal . ivy--regex-fuzzy)
-                                  (t . ivy--regex-ignore-order))))
-(ivy-mode 1)
+                                  (t . ivy--regex-ignore-order)))
+  (ivy-mode 1))
+
 
 (use-package counsel
   :straight t
   :defer 1
   :ensure t
-  :init (setq ivy-use-selectable-prompt t))
-(counsel-mode 1)
+  :init (setq ivy-use-selectable-prompt t)
+  (counsel-mode 1)
+  (setq search-default-mode #'char-fold-to-regexp))
 
-(setq search-default-mode #'char-fold-to-regexp)
+
 (global-set-key "\C-s" 'swiper)
 (global-set-key (kbd "C-c C-r") 'ivy-resume)
 (global-set-key (kbd "<f6>") 'ivy-resume)
