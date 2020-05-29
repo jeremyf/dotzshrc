@@ -364,6 +364,8 @@ to consider doing so."
 (global-set-key (kbd "C-M-/") 'comment-line)
 (global-set-key (kbd "H-l") 'goto-line)
 (global-set-key (kbd "C-M-l") 'goto-line)
+(global-set-key (kbd "C-w") 'backward-kill-word)
+(global-set-key (kbd "M-DEL") 'backward-kill-paragraph)
 
 ;; Invoke `s-a` with CTRL+OPT+CMD+a
 ;; Invoke `H-a` with CTRL+OPT+a
