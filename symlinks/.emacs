@@ -189,12 +189,16 @@
 
 ;; With the base16-shell installed, I have found
 ;; that I need the "colors" setting.
-(use-package base16-theme
-  :straight t
-  :ensure t
-  :config (load-theme 'base16-google-light t)
-  :init (setq base16-theme-256-color-source "colors"
-              base16-highlight-mode-line "contrast"))
+;; (use-package base16-theme
+;;   :straight t
+;;   :ensure t
+;;   :config (load-theme 'Base16-google-light t)
+;;   :init (setq base16-theme-256-color-source "colors"
+;;               base16-highlight-mode-line "contrast"))
+
+;; Remove reliance on Base16 themes; I find that I prefer the
+;; coloration of tsdh-(light|dark)
+(load-theme 'tsdh-light t)
 
 ;; Adding format to git-commit-fill-column of 72 as best
 ;; practice.
@@ -275,8 +279,8 @@ to consider doing so."
 
   ;;     (treemacs-follow-mode t)
   ;;     (treemacs-filewatch-mode t)
-  ;;     (treemacs-fringe-indicator-mode t)
-  ;;     (pcase (cons (not (null (executable-find "git")))
+  ;;     (treemacs-fringe-indicator-mode pcase)
+  ;;     ( (cons (not (null (executable-find "git")))
   ;;                  (not (null treemacs-python-executable)))
   ;;       (`(t . t)
   ;;        (treemacs-git-mode 'deferred))
