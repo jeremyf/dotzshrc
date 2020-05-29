@@ -82,11 +82,21 @@
   :ensure t
   :straight t
   :config (define-key projectile-mode-map (kbd "C-M-p") 'projectile-command-map)
-          (projectile-mode +1)
-          (setq projectile-project-search-path '("~/git/")))
+  (projectile-mode +1)
+  (projectile-enable-caching t)
+  (setq projectile-completion-system 'ivy)
+  (setq projectile-project-search-path '("~/git/")))
 
-;; In Emacs plus, CMD+t sends 's-t'
-(global-set-key (kbd "s-t") 'project-find-file)
+(use-package counsel-projectile
+  :ensure t
+  :straight t)
+
+;; In Emacs plus, CMD+t sends 's-t' Also, based on current
+;; configuration, when I type 's-t' and search for a file I can type
+;; 'C-M-o' and choose a different action for the named file. There is
+;; bug when I choose anything other than the default; The mini-buffer
+;; remains open.
+(global-set-key (kbd "s-t") 'counsel-projectile-find-file)
 
 ;; Company provides a moduler completion framework
 (use-package company
