@@ -103,6 +103,14 @@
 (global-set-key (kbd "H-SPC") 'set-rectangular-region-anchor)
 (global-set-key (kbd "C-M-SPC") 'set-rectangular-region-anchor)
 
+
+;; When you open Emacs, grab all the space on the screen
+(add-to-list 'initial-frame-alist '(fullscreen . maximized))
+;; When you open a new frame in an already running Emacs session
+;; set it to the full height but don't worry about the width
+(add-to-list 'default-frame-alist '(fullscreen . fullheight))
+
+;; This package ensures that the active window gets the majority of the space, while leaving room for other windows.
 (use-package golden-ratio
   :straight t
   :ensure t)
