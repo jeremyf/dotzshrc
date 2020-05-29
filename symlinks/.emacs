@@ -127,8 +127,9 @@
 ;; This package ensures that the active window gets the majority of the space, while leaving room for other windows.
 (use-package golden-ratio
   :straight t
-  :ensure t)
-(golden-ratio-mode 1)
+  :ensure t
+  :init (golden-ratio-mode 1)
+)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -171,20 +172,20 @@
          ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "/usr/local/bin/pandoc"))
 
-(use-package robe
-  :straight t
-  :ensure t
-  :defer 1)
-(add-hook 'ruby-mode-hook 'robe-mode)
-(eval-after-load 'company
-  '(push 'company-robe company-backends))
-(add-hook 'robe-mode-hook 'ac-robe-setup)
-
-(use-package yard-mode
-  :straight t
-  :ensure t
-  :defer 1)
-(add-hook 'ruby-mode-hook 'yard-mode)
+;; (use-package robe
+;;   :straight t
+;;   :ensure t
+;;   :defer 1)
+;; (add-hook 'ruby-mode-hook 'robe-mode)
+;; (eval-after-load 'company
+;;   '(push 'company-robe company-backends))
+;; (add-hook 'robe-mode-hook 'ac-robe-setup)
+;;
+;; (use-package yard-mode
+;;   :straight t
+;;   :ensure t
+;;   :defer 1)
+;; (add-hook 'ruby-mode-hook 'yard-mode)
 
 ;; With the base16-shell installed, I have found
 ;; that I need the "colors" setting.
