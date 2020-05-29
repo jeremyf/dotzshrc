@@ -60,7 +60,6 @@
 (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
 (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
 
-(straight-use-package 'helpful)
 (use-package helpful
   :straight t
   :ensure t
@@ -85,7 +84,6 @@
 ;;   (setq projectile-project-search-path '("~/git/"))
 
 ;; Company provides a moduler completion framework
-(straight-use-package 'company)
 (use-package company
   :straight t
   :ensure   t
@@ -107,7 +105,14 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ansi-color-names-vector
+   ["#fdf0ed" "#e95678" "#29d398" "#fadad1" "#26bbd9" "#ee64ac" "#26bbd9" "#403c3d"])
+ '(auto-save-file-name-transforms (quote ((".*" "~/.emacs.d/autosaves/\\1" t))))
+ '(backup-directory-alist (quote ((".*" . "~/.emacs.d/backups/"))))
  '(column-number-mode t)
+ '(custom-safe-themes
+   (quote
+    ("250268d5c0b4877cc2b7c439687f8145a2c85a48981f7070a72c7f47a2d2dc13" "23ba4b4ba4d1c989784475fed58919225db8d9a9751b32aa8df835134fe7ba6f" default)))
  '(global-display-line-numbers-mode t)
  '(show-paren-mode t))
 (custom-set-faces
@@ -320,9 +325,7 @@ to consider doing so."
 
 ;; Put autosave files (ie #foo#) and backup files (ie foo~) in ~/.emacs.d/.
 ;; See https://snarfed.org/gnu_emacs_backup_files
-(custom-set-variables
-  '(auto-save-file-name-transforms '((".*" "~/.emacs.d/autosaves/\\1" t)))
-  '(backup-directory-alist '((".*" . "~/.emacs.d/backups/"))))
+
 
 ;; create the autosave dir if necessary, since emacs won't.
 (make-directory "~/.emacs.d/autosaves/" t)
