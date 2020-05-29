@@ -125,6 +125,8 @@
 ;; set it to the full height but don't worry about the width
 (add-to-list 'default-frame-alist '(fullscreen . fullheight))
 
+(set-frame-font "MesloLGS NF 14" nil t)
+
 ;; This package ensures that the active window gets the majority of the space, while leaving room for other windows.
 (use-package golden-ratio
   :straight t
