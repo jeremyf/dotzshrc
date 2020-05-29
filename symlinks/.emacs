@@ -102,6 +102,10 @@
 (global-set-key (kbd "H-SPC") 'set-rectangular-region-anchor)
 (global-set-key (kbd "C-M-SPC") 'set-rectangular-region-anchor)
 
+(use-package golden-ratio
+  :straight t
+  :ensure t)
+(golden-ratio-mode 1)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
