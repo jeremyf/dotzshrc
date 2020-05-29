@@ -1,4 +1,4 @@
-;; this preamble is part of straight-use-package My understanding, in
+;; This preamble is part of straight-use-package My understanding, in
 ;; reading straight documentation is that it has better load
 ;; times. However, the configuration options I often see leverage
 ;; "use-package" which is why most of my package declarations look as
@@ -92,6 +92,7 @@
 
 (straight-use-package '(string-inflection :type git :host github :repo "akicho8/string-inflection"))
 (global-set-key (kbd "H-u") 'string-inflection-all-cycle)
+(global-set-key (kbd "C-M-u") 'string-inflection-all-cycle)
 
 ;; Allow to work with multipe cursors
 (use-package multiple-cursors
@@ -99,6 +100,8 @@
   :ensure   t
   :defer    1)
 (global-set-key (kbd "H-SPC") 'set-rectangular-region-anchor)
+(global-set-key (kbd "C-M-SPC") 'set-rectangular-region-anchor)
+
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -173,6 +176,7 @@
   :defer 1
   :init (setq git-commit-fill-column 72))
 (global-set-key (kbd "H-g") 'magit-status)
+(global-set-key (kbd "C-M-g") 'magit-status)
 
 ;; Copied from https://github.com/magit/magit/blob/9423edc0b311117ab5fe87457c3e01c7db22a3c7/lisp/git-commit.el
 ;; And set to 50 instead of 68
@@ -335,14 +339,18 @@ to consider doing so."
 ;; those keys, I can use ITerm to mimic the behavior.
 ;; See https://www.emacswiki.org/emacs/iTerm2#toc11
 (global-set-key (kbd "H-d") 'duplicate-line)
+(global-set-key (kbd "C-M-d") 'duplicate-line)
 (global-set-key (kbd "H-b") 'browse-url-at-point)
+(global-set-key (kbd "C-M-b") 'browse-url-at-point)
 (setq browse-url-browser-function 'eww-browse-url)
 
 ;; According to emacs help, (comment-line) is bound to "C-x C-;".
 ;; However, when I invoked those keys, it ran comment-column. As
 ;; that is undesired behavior, I mapped (comment_line) to "H-c"
 (global-set-key (kbd "H-/") 'comment-line)
+(global-set-key (kbd "C-M-/") 'comment-line)
 (global-set-key (kbd "H-l") 'goto-line)
+(global-set-key (kbd "C-M-l") 'goto-line)
 
 ;; Invoke `s-a` with CTRL+OPT+CMD+a
 ;; Invoke `H-a` with CTRL+OPT+a
