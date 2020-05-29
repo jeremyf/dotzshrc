@@ -22,6 +22,9 @@
 ;; Ensure tabs are expanded, not inserted
 (setq-default indent-tabs-mode nil)
 
+;; Don't include the  emacs "start" window
+(setq inhibit-startup-screen t)
+
 ;; https://oremacs.com/swiper/
 ;; Note: I've set all searches to use fuzzy regex
 (use-package ivy
@@ -65,7 +68,6 @@
   :straight t
   :ensure t
   :bind (("C-c C-d" . helpful-at-point)))
-
 (global-set-key (kbd "C-h f") #'helpful-callable)
 (global-set-key (kbd "C-h v") #'helpful-variable)
 (global-set-key (kbd "C-h k") #'helpful-key)
@@ -76,13 +78,15 @@
 (setq counsel-describe-variable-function #'helpful-variable)
 
 ;; https://docs.projectile.mx/en/latest/
-;;(straight-use-package 'projectile)
-;; (use-package projectile
-;;   :ensure t
-;;   :config
-;;   (define-key projectile-mode-map (kbd "C-t") 'projectile-command-map)
-;;   (projectile-mode +1))
-;;   (setq projectile-project-search-path '("~/git/"))
+(use-package projectile
+  :ensure t
+  :straight t
+  :config (define-key projectile-mode-map (kbd "C-M-p") 'projectile-command-map)
+          (projectile-mode +1)
+          (setq projectile-project-search-path '("~/git/")))
+
+;; In Emacs plus, CMD+t sends 's-t'
+(global-set-key (kbd "s-t") 'project-find-file)
 
 ;; Company provides a moduler completion framework
 (use-package company
