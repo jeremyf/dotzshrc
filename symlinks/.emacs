@@ -88,9 +88,9 @@
   :config (define-key projectile-mode-map (kbd "C-M-p") 'projectile-command-map)
   (projectile-mode +1)
   (setq projectile-completion-system 'ivy)
-  (setq projectile-project-search-path '("~/git/")))
-
-(global-set-key (kbd "s-t") 'projectile-find-file)
+  (setq projectile-project-search-path '("~/git/"))
+  :init (global-set-key (kbd "s-t") 'projectile-find-file)
+)
 ;; Enable
 ;; (use-package counsel-projectile
 ;; :ensure t
@@ -107,8 +107,9 @@
 (use-package company
   :straight t
   :ensure   t
-  :defer    1)
-(add-hook 'after-init-hook 'global-company-mode)
+  :defer    1
+  :init (add-hook 'after-init-hook 'global-company-mode)
+)
 
 (straight-use-package '(string-inflection :type git :host github :repo "akicho8/string-inflection"))
 (global-set-key (kbd "H-u") 'string-inflection-all-cycle)
@@ -118,9 +119,10 @@
 (use-package multiple-cursors
   :straight t
   :ensure   t
-  :defer    1)
-(global-set-key (kbd "H-SPC") 'set-rectangular-region-anchor)
-(global-set-key (kbd "C-M-SPC") 'set-rectangular-region-anchor)
+  :defer    1
+  :init (global-set-key (kbd "H-SPC") 'set-rectangular-region-anchor)
+  (global-set-key (kbd "C-M-SPC") 'set-rectangular-region-anchor)
+)
 
 ;; This package ensures that the active window gets the majority of the space, while leaving room for other windows.
 (use-package golden-ratio
