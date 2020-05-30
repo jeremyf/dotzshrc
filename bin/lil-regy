@@ -46,7 +46,7 @@ optparse = OptionParser.new do |options|
     "Note:\n\n" \
     "\tYou can pass additional options to ripgrep by adding -- and the ripgrep options.\n\n" \
     "\tLil' Regy relies on my color configuration (e.g. red for what's found by ripgrep).\n" \
-    "\tSo your mileage may vary.\n\n" \ 
+    "\tSo your mileage may vary.\n\n" \
     "Options:\n"
 
 
