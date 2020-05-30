@@ -35,17 +35,18 @@ command_name = File.basename(__FILE__)
 
 optparse = OptionParser.new do |options|
   # This banner is the first line of your help documentation.
-  options.set_banner "Usage: #{command_name} [options]\n" \
+  options.set_banner "Usage: #{command_name} [options]\n\n" \
     "Lil' Regy - A command line tool for finding and replacing.\n\n"  \
     "Example:\n\n" \
-    "$ lil-regy -f \"(\d{4})-(\d{2})-(\d{2})\" -r \"\2-\3-\1\" -p \"./content\"\n\n" \
+    "$ lil-regy -f \"(\\d{4})-(\\d{2})-(\\d{2})\" -r \"\\2-\\3-\\1\" -p \"./content\"\n\n" \
     "Commentary:\n\n" \
-    "\tThe above command will find all 2020-04-15 instances in ./content and output the\n" \
-    "\tmatches and what they will change to (e.g., 04-15-2020, but why would you do that?\n\n" \
-    "\tIf you add the -d option (aka Do It!), then lil-regy will update the files.\n\n" \
+    "\tThe above command will find all 2020-04-15 instances in ./content and \n" \
+    "\toutput the matches and what they will change to (e.g., 04-15-2020, but\n" \
+    "\twhy would you do that?\n\n" \
+    "\tIf you add the -d option (aka Do It!), then lil-regy will update the\n\tfiles.\n\n" \
     "Note:\n\n" \
-    "\tYou can pass additional options to ripgrep by adding -- and the ripgrep options.\n\n" \
-    "\tLil' Regy relies on my color configuration (e.g. red for what's found by ripgrep).\n" \
+    "\tYou can pass additional options to ripgrep by adding -- and the ripgrep\n\toptions.\n\n" \
+    "\tLil' Regy relies on my color configuration (e.g. red for what's found by\n\tripgrep).\n" \
     "\tSo your mileage may vary.\n\n" \
     "Options:\n"
 
@@ -54,15 +55,15 @@ optparse = OptionParser.new do |options|
     config[:find] = pattern
   end
 
-  options.on("-r PATTERN", "--replace", String, "The pattern to use in replacing text. Use \\1, \\2, etc for capture group replacement") do |pattern|
+  options.on("-r PATTERN", "--replace", String, "The pattern to use in replacing text.") do |pattern|
     config[:replace] = pattern
   end
 
-  options.on("-p PATH", "--path", String, "The path to limit your find and replace. (Default: \"#{config.fetch(:path)}\")") do |path|
+  options.on("-p PATH", "--path", String, "The path to limit your find and replace.\n#{' '*39}(Default: \"#{config.fetch(:path)}\")") do |path|
     config[:path] = path
   end
 
-  options.on("-d", "Do it! You will not be asked for confirmation") do |do_it|
+  options.on("-d", "Do it! Replace without confirmation.") do |do_it|
     config[:do_it] = true
   end
 
