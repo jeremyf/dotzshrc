@@ -1,3 +1,8 @@
+;; Make startup faster by reducing the frequency of garbage
+;; collection.  The default is 800 kilobytes.  Measured in bytes.
+;; From https://blog.d46.us/advanced-emacs-startup/
+(setq gc-cons-threshold (* 50 1000 1000))
+
 ;; This preamble is part of straight-use-package My understanding, in
 ;; reading straight documentation is that it has better load
 ;; times. However, the configuration options I often see leverage
@@ -14,6 +19,19 @@
       (goto-char (point-max))
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
+
+;; Run the following to print the load times:
+;;
+;; `emacs . --eval='(message "%s" (emacs-init-time))'`
+;;
+;; Use a hook so the message doesn't get clobbered by other messages.
+(add-hook 'emacs-startup-hook
+          (lambda ()
+            (message "Emacs ready in %s with %d garbage collections."
+                     (format "%.2f seconds"
+                             (float-time
+                              (time-subtract after-init-time before-init-time)))
+                     gcs-done)))
 
 ;; When you open Emacs, grab all the space on the screen
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
@@ -90,6 +108,7 @@
 (use-package helpful
   :straight t
   :ensure t
+  :defer 2
   :bind (("C-c C-d" . helpful-at-point))
   :init (global-set-key (kbd "C-h f") #'helpful-callable)
         (global-set-key (kbd "C-h v") #'helpful-variable)
@@ -151,6 +170,7 @@
 (use-package powerline
   :ensure t
   :straight t
+  :defer 3
   :init (powerline-center-theme)
 )
 
@@ -223,7 +243,7 @@
 (use-package magit
   :straight t
   :ensure t
-  :defer 1
+  :defer 2
   :init (setq git-commit-fill-column 72)
   (global-set-key (kbd "H-g") 'magit-status)
   (global-set-key (kbd "C-M-g") 'magit-status)
@@ -465,3 +485,6 @@ to consider doing so."
 
 ;; https://melpa.org/#/elfeed
 ;; (global-set-key (kbd "C-x r") 'elfeed)
+
+; Make gc pauses faster by decreasing the threshold.
+(setq gc-cons-threshold (* 2 1000 1000))
