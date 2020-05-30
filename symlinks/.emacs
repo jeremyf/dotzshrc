@@ -135,12 +135,23 @@
 (global-set-key (kbd "C-M-u") 'string-inflection-all-cycle)
 
 ;; Allow to work with multipe cursors
+;; https://melpa.org/#/multiple-cursors Aside from the
+;; set-rectangular-region-anchor, there are several additional
+;; features to practice
 (use-package multiple-cursors
   :straight t
   :ensure   t
   :defer    1
   :init (global-set-key (kbd "H-SPC") 'set-rectangular-region-anchor)
   (global-set-key (kbd "C-M-SPC") 'set-rectangular-region-anchor)
+)
+
+;; Adds some nice chrome to the status line
+;; https://github.com/milkypostman/powerline
+(use-package powerline
+  :ensure t
+  :straight t
+  :init (powerline-center-theme)
 )
 
 ;; This package ensures that the active window gets the majority of the space, while leaving room for other windows.
@@ -451,7 +462,6 @@ to consider doing so."
      (define-key map "\e[1;P72" (kbd "H-,"))
      (define-key map "\e[1;P74" (kbd "H-SPC"))
      ))
-
 
 ;; https://melpa.org/#/elfeed
 ;; (global-set-key (kbd "C-x r") 'elfeed)
