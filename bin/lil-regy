@@ -38,16 +38,16 @@ optparse = OptionParser.new do |options|
   options.set_banner "Usage: #{command_name} [options]\n\n" \
     "Lil' Regy - A command line tool for finding and replacing.\n\n"  \
     "Example:\n\n" \
-    "$ lil-regy -f \"(\\d{4})-(\\d{2})-(\\d{2})\" -r \"\\2-\\3-\\1\" -p \"./content\"\n\n" \
+    "\t$ lil-regy -f \"(\\d{4})-(\\d{2})-(\\d{2})\" -r \"\\2-\\3-\\1\" -p \"./content\"\n\n" \
     "Commentary:\n\n" \
     "\tThe above command will find all 2020-04-15 instances in ./content and \n" \
     "\toutput the matches and what they will change to (e.g., 04-15-2020, but\n" \
-    "\twhy would you do that?\n\n" \
+    "\twhy would you do that?)\n\n" \
     "\tIf you add the -d option (aka Do It!), then lil-regy will update the\n\tfiles.\n\n" \
     "Note:\n\n" \
-    "\tYou can pass additional options to ripgrep by adding -- and the ripgrep\n\toptions.\n\n" \
-    "\tLil' Regy relies on my color configuration (e.g. red for what's found by\n\tripgrep).\n" \
-    "\tSo your mileage may vary.\n\n" \
+    "\tYou can pass additional options to ripgrep by adding -- and the desired\n\tripgrep options.\n\n" \
+    "\tLil' Regy relies on my color configuration (e.g. red for what's found by\n" \
+    "\tripgrep). So your mileage may vary.\n\n" \
     "Options:\n"
 
 
