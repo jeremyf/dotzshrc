@@ -76,8 +76,8 @@
         ivy-count-format        "(%d/%d) "
         ivy-re-builders-alist   '((read-file-name-internal . ivy--regex-fuzzy)
                                   (t . ivy--regex-ignore-order)))
-  (ivy-mode 1)
-)
+  )
+(ivy-mode 1)
 
 
 (use-package counsel
@@ -85,8 +85,8 @@
   :defer 1
   :ensure t
   :init (setq ivy-use-selectable-prompt t)
-    (counsel-mode 1)
     (setq search-default-mode #'char-fold-to-regexp)
+  :config
     (global-set-key "\C-s" 'swiper)
     (global-set-key (kbd "C-c C-r") 'ivy-resume)
     (global-set-key (kbd "<f6>") 'ivy-resume)
@@ -103,20 +103,21 @@
     (global-set-key (kbd "C-c k") 'counsel-ag)
     (global-set-key (kbd "C-x l") 'counsel-locate)
     (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
-)
+    )
+(counsel-mode 1)
 
 (use-package helpful
   :straight t
   :ensure t
   :defer 2
   :bind (("C-c C-d" . helpful-at-point))
-  :init (global-set-key (kbd "C-h f") #'helpful-callable)
+  :init (setq counsel-describe-function-function #'helpful-callable)
+        (setq counsel-describe-variable-function #'helpful-variable)
+  :config (global-set-key (kbd "C-h f") #'helpful-callable)
         (global-set-key (kbd "C-h v") #'helpful-variable)
         (global-set-key (kbd "C-h k") #'helpful-key)
         (global-set-key (kbd "C-h f") #'helpful-function)
         (global-set-key (kbd "C-h c") #'helpful-command)
-        (setq counsel-describe-function-function #'helpful-callable)
-        (setq counsel-describe-variable-function #'helpful-variable)
 )
 
 ;; https://docs.projectile.mx/en/latest/
@@ -208,7 +209,7 @@
 (use-package ethan-wspace
   :straight t
   :ensure t
-  :defer 1
+  :defer 2
   :init (setq-default mode-require-final-newline nil)
         (global-ethan-wspace-mode 1)
 ) ;; Prefer the following ethan-wspac-mode
@@ -217,7 +218,7 @@
 (use-package markdown-mode
   :straight t
   :ensure t
-  :defer 1
+  :defer 3
   :mode (("README\\.md\\'" . gfm-mode)
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
@@ -245,8 +246,8 @@
   :ensure t
   :defer 2
   :init (setq git-commit-fill-column 72)
-  (global-set-key (kbd "H-g") 'magit-status)
-  (global-set-key (kbd "C-M-g") 'magit-status)
+  :config (global-set-key (kbd "H-g") 'magit-status)
+          (global-set-key (kbd "C-M-g") 'magit-status)
 )
 
 ;; Copied from https://github.com/magit/magit/blob/9423edc0b311117ab5fe87457c3e01c7db22a3c7/lisp/git-commit.el
