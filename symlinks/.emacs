@@ -46,6 +46,7 @@
 ;; I saw that straight loaded use-package to take advantage of the
 ;; use-package syntax which is often how things are documented.
 (straight-use-package 'use-package)
+
 ;; https://oremacs.com/swiper/
 ;; Note: I've set all searches to use fuzzy regex
 (use-package ivy
@@ -454,6 +455,3 @@ to consider doing so."
 
 ;; https://melpa.org/#/elfeed
 ;; (global-set-key (kbd "C-x r") 'elfeed)
-
-;; TODO - Review pages I want to launch directly
-;; https://github.com/dakrone/eos/blob/master/eos-web.org
