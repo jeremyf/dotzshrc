@@ -129,7 +129,14 @@
   (setq projectile-completion-system 'ivy)
   (setq projectile-project-search-path '("~/git/"))
   :init (global-set-key (kbd "s-t") 'projectile-find-file)
-)
+  )
+
+(use-package projectile-ripgrep
+  :ensure t
+  :straight t
+  :defer 1
+  :init (global-set-key (kbd "M-s-ƒ") 'projectile-ripgrep) ;; CMD+OPT+f
+ )
 ;; Enable
 ;; (use-package counsel-projectile
 ;; :ensure t
