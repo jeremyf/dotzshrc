@@ -309,11 +309,14 @@ to consider doing so."
   (next-line arg)
   )
 
-;; Adding C-s-r as ruby-mode trampled on C-M-d; I need to learn how to unmap that.
-(global-set-key (kbd "C-s-r") 'duplicate-line) ;; CTRL+CMD+r - repeat line
 (global-set-key (kbd "C-M-d") 'duplicate-line) ;; CTRL+OPT+d - duplicate line
-(global-set-key (kbd "C-M-b") 'browse-url-at-point)
+(global-set-key (kbd "C-M-b") 'browse-url-at-point) ;; CTRL+OPT+b
 (setq browse-url-browser-function 'eww-browse-url)
+
+;; Because smie-down-list grabbed C-M-d, I need to set it
+(defun jnf-add-duplicate-line-kbd()
+  (local-set-key (kbd "C-M-d") 'duplicate-line))
+(add-hook 'ruby-mode-hook 'jnf-add-duplicate-line-kbd)
 
 (global-set-key (kbd "s-/") 'comment-line)
 (global-set-key (kbd "s-l") 'goto-line)
