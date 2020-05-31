@@ -36,18 +36,10 @@
 ;; When you open Emacs, grab all the space on the screen
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
 
-;; With the base16-shell installed, I have found
-;; that I need the "colors" setting.
-;; (use-package base16-theme
-;;   :straight t
-;;   :ensure t
-;;   :config (load-theme 'Base16-google-light t)
-;;   :init (setq base16-theme-256-color-source "colors"
-;;               base16-highlight-mode-line "contrast"))
-
 ;; Remove reliance on Base16 themes; I find that I prefer the
 ;; coloration of tsdh-(light|dark)
-(load-theme 'tsdh-dark t)
+;; (load-theme 'tsdh-dark t) ;; For inside work
+(load-theme 'adwaita t) ;; For bright days
 
 ;; When you open a new frame in an already running Emacs session
 ;; set it to the full height but don't worry about the width
@@ -327,6 +319,28 @@ to consider doing so."
 
 ;; https://melpa.org/#/elfeed
 ;; (global-set-key (kbd "C-x r") 'elfeed)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; BEGIN ORG mode configuration and concerns
+(global-set-key (kbd "C-c l") 'org-store-link)
+(global-set-key (kbd "C-c a") 'org-agenda)
+(global-set-key (kbd "C-c c") 'org-capture)
+
+(setq org-directory "~/git/org")
+(setq org-default-notes-file (concat org-directory "/captured-notes.org"))
+
+;; I'm working through what templates I might want. This is a place holder.
+(setq org-capture-templates
+      '(
+        ("t" "Todo" entry (file+headline "~/git/org/todo.org" "Tasks")
+         "* TODO %?\n  %i\n  %a")
+        ("j" "Journal" entry (file+datetree "~/git/org/journal.org")
+         "* %?\nEntered on %U\n  %i\n  %a")))
+
+;; END ORG mode configuration and concerns
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 
 ;; Make gc pauses faster by decreasing the threshold.
 (setq gc-cons-threshold (* 2 1000 1000))
