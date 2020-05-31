@@ -16,6 +16,7 @@ Install OhMyZsh - https://github.com/ohmyzsh/ohmyzsh
 *   `brew install postgresql`
 *   `brew install git-extras`
 *   `brew install newsboat` (see https://newsboat.org)
+*   `brew install git-secrets`
 
 # Necessary for some takeonrules dependencies
 
