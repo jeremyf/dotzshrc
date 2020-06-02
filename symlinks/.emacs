@@ -338,6 +338,16 @@ to consider doing so."
         ("j" "Journal" entry (file+datetree "~/git/org/journal.org")
          "* %?\nEntered on %U\n  %i\n  %a")))
 
+(use-package sr-speedbar
+  :ensure t
+  :straight t)
+(setq speedbar-use-images nil)
+(setq speedbar-show-unknown-files t)
+(sr-speedbar-open)
+(with-current-buffer sr-speedbar-buffer-name
+  (setq window-size-fixed 'width))
+
+
 ;; END ORG mode configuration and concerns
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
