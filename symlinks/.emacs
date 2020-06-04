@@ -134,12 +134,6 @@
   (global-set-key (kbd "M-s-f") 'projectile-ripgrep) ;; CMD+OPT+f
  )
 
-(use-package counsel-projectile
-  :ensure t
-  :straight t
-  :defer 1
-  :init (add-hook 'after-init-hook 'counsel-projectile-mode))
-
 ;; In Emacs plus, CMD+t sends 's-t' Also, based on current
 ;; configuration, when I type 's-t' and search for a file I can type
 ;; 'C-M-o' and choose a different action for the named file. There is
