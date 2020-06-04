@@ -21,3 +21,4 @@ else
   $stderr.puts "You must install lynx or links"
   exit!(2)
 end
+$stdout.puts "Thank you for browsing:\n#{url}"
