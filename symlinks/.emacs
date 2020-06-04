@@ -1,7 +1,7 @@
 ;; Make startup faster by reducing the frequency of garbage
 ;; collection.  The default is 800 kilobytes.  Measured in bytes.
 ;; From https://blog.d46.us/advanced-emacs-startup/
-(setq gc-cons-threshold (* 50 1000 1000))
+(setq gc-cons-threshold (* 250 1000 1000))
 
 ;; This preamble is part of straight-use-package My understanding, in
 ;; reading straight documentation is that it has better load
@@ -63,14 +63,17 @@
   :straight t
   :defer 1
   :ensure t
-  :init (setq ivy-use-virtual-buffers t
-        enable-recursive-minibuffers t
-        ivy-count-format        "(%d/%d) "
-        ivy-re-builders-alist   '((read-file-name-internal . ivy--regex-fuzzy)
-                                  (t . ivy--regex-ignore-order)))
-  )
-(ivy-mode 1)
-
+  :diminish (ivy-mode . "")
+  :bind (:map ivy-mode-map
+              ("C-'" . ivy-avy))
+  :config (ivy-mode 1)
+  (setq ivy-use-virtual-buffers t)
+  (setq ivy-height 10)
+  (setq ivy-count-format "(%d/%d) ")
+  (setq ivy-initial-inputs-alist nil)
+  (setq ivy-re-builders-alist
+        '((read-file-name-internal . ivy--regex-fuzzy)
+          (t . ivy--regex-ignore-order))))
 
 (use-package counsel
   :straight t
@@ -92,7 +95,7 @@
     (global-set-key (kbd "<f2> u") 'counsel-unicode-char)
     (global-set-key (kbd "C-c g") 'counsel-git)
     (global-set-key (kbd "C-c j") 'counsel-git-grep)
-    (global-set-key (kbd "C-c k") 'counsel-ag)
+    (global-set-key (kbd "C-c r") 'counsel-rg)
     (global-set-key (kbd "C-x l") 'counsel-locate)
     (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
     )
@@ -130,11 +133,13 @@
   :init (global-set-key (kbd "M-s-ƒ") 'projectile-ripgrep) ;; CMD+OPT+f
   (global-set-key (kbd "M-s-f") 'projectile-ripgrep) ;; CMD+OPT+f
  )
-;; Enable
-;; (use-package counsel-projectile
-;; :ensure t
-;; :straight t)
-;;
+
+(use-package counsel-projectile
+  :ensure t
+  :straight t
+  :defer 1
+  :init (add-hook 'after-init-hook 'counsel-projectile-mode))
+
 ;; In Emacs plus, CMD+t sends 's-t' Also, based on current
 ;; configuration, when I type 's-t' and search for a file I can type
 ;; 'C-M-o' and choose a different action for the named file. There is
