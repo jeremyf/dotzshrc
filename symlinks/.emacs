@@ -304,6 +304,7 @@ to consider doing so."
 
 (global-set-key (kbd "C-M-d") 'duplicate-line) ;; CTRL+OPT+d - duplicate line
 (global-set-key (kbd "C-M-b") 'browse-url-at-point) ;; CTRL+OPT+b
+(global-set-key (kbd "s-b") 'browse-web) ;; CMD+b
 (setq browse-url-browser-function 'eww-browse-url)
 
 ;; Because smie-down-list grabbed C-M-d, I need to set it
