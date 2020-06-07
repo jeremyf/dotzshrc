@@ -174,7 +174,8 @@
   :init (powerline-center-theme)
 )
 
-;; This package ensures that the active window gets the majority of the space, while leaving room for other windows.
+;; This package ensures that the active window gets the majority of
+;; the space, while leaving room for other windows.
 (use-package golden-ratio
   :straight t
   :ensure t
