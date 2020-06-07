@@ -265,6 +265,14 @@ to consider doing so."
   :safe 'numberp
   :type 'number)
 
+;; Adding ability to move lines up and down
+(use-package move-text
+  :straight t
+  :ensure t
+  :defer 1
+  :init (global-set-key [C-s-down] 'move-text-down)
+        (global-set-key [C-s-up] 'move-text-up))
+
 ;; From https://stackoverflow.com/questions/88399/how-do-i-duplicate-a-whole-line-in-emacs
 (defun duplicate-line (arg)
   "Duplicate current line, leaving point in lower line."
