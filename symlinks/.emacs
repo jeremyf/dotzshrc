@@ -235,6 +235,19 @@
   '(push 'company-robe company-backends))
 (add-hook 'robe-mode-hook 'ac-robe-setup)
 
+(use-package yafolding
+  :straight t
+  :ensure t
+  :defer 1)
+
+(add-hook 'prog-mode-hook
+          (lambda () (yafolding-mode)))
+
+(use-package rspec-mode
+  :straight t
+  :ensure t
+  :defer 1)
+
 (use-package yard-mode
   :straight t
   :ensure t
