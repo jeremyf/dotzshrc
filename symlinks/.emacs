@@ -182,6 +182,13 @@
   :init (golden-ratio-mode 1)
 )
 
+;; Adding smartparens options
+(use-package smartparens
+  :straight t
+  :ensure t
+  :init (smartparens-strict-mode 1)
+        (smartparens-global-mode 1))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
