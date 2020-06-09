@@ -1,0 +1,5 @@
+#!/bin/sh
+#
+# A terse git log that generates a quick history text
+
+git log --no-merges --pretty=format:'%C(auto)%cs - %s [%an] (%h)%Creset' $@
