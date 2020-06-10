@@ -38,8 +38,8 @@
 
 ;; Remove reliance on Base16 themes; I find that I prefer the
 ;; coloration of tsdh-(light|dark)
-;; (load-theme 'tsdh-dark t) ;; For inside work
-(load-theme 'adwaita t) ;; For bright days
+(load-theme 'tsdh-dark t) ;; For inside work
+;; (load-theme 'adwaita t) ;; For bright days
 
 ;; When you open a new frame in an already running Emacs session
 ;; set it to the full height but don't worry about the width
@@ -213,6 +213,14 @@
  ;; If there is more than one, they won't work right.
  )
 
+
+;; Favor neotree over sr-speedbar
+(use-package neotree
+  :straight t
+  :ensure t
+  :init (setq neo-theme (if (display-graphic-p) 'icons 'arrow)))
+(global-set-key [f8] 'neotree-toggle)
+
 ;; Whitespace   hygene  package.   The   author's  documentation   and
 ;; commentary echoes my sentiments
 (use-package ethan-wspace
@@ -366,16 +374,6 @@ to consider doing so."
          "* TODO %?\n  %i\n  %a")
         ("j" "Journal" entry (file+datetree "~/git/org/journal.org")
          "* %?\nEntered on %U\n  %i\n  %a")))
-
-(use-package sr-speedbar
-  :ensure t
-  :straight t)
-(setq speedbar-use-images nil)
-(setq speedbar-show-unknown-files t)
-(sr-speedbar-open)
-(with-current-buffer sr-speedbar-buffer-name
-  (setq window-size-fixed 'width))
-
 
 ;; END ORG mode configuration and concerns
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
