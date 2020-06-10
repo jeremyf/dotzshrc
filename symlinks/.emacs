@@ -339,6 +339,15 @@ to consider doing so."
   (next-line arg)
   )
 
+
+;; And yes "nab" is not idiomatic, but since I'm mapping it to OPT+n, I believe it will help me remembe
+(defun nab-name-of-file ()
+    "Copy into the kill ring the full path of the current buffer."
+    (interactive)
+    (kill-new (buffer-file-name (window-buffer (minibuffer-selected-window)))))
+
+
+(global-set-key (kbd "M-n") 'nab-name-of-file) ;; OPT+n
 (global-set-key (kbd "C-M-d") 'duplicate-line) ;; CTRL+OPT+d - duplicate line
 (global-set-key (kbd "C-M-b") 'browse-url-at-point) ;; CTRL+OPT+b
 (global-set-key (kbd "s-b") 'browse-web) ;; CMD+b
