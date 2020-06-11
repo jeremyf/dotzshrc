@@ -126,6 +126,7 @@
   :init (global-set-key (kbd "s-t") 'projectile-find-file)
   )
 
+;; I'm liking ripgrep as a tool
 (use-package projectile-ripgrep
   :ensure t
   :straight t
@@ -213,6 +214,10 @@
  ;; If there is more than one, they won't work right.
  )
 
+
+(use-package all-the-icons
+  :straight t
+  :ensure t)
 
 ;; Favor neotree over sr-speedbar
 (use-package neotree
