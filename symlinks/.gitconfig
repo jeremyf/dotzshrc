@@ -249,3 +249,5 @@
         diffcontext = 7
 [interactive]
         diffFilter = `brew --prefix git`/share/git-core/contrib/diff-highlight/diff-highlight
+[pull]
+	rebase = true
