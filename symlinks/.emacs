@@ -171,8 +171,8 @@
 (use-package powerline
   :ensure t
   :straight t
-  :defer 3
-  :init (powerline-center-theme)
+  :defer 2
+  :config (powerline-center-theme)
 )
 
 ;; This package ensures that the active window gets the majority of
