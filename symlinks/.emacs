@@ -44,7 +44,7 @@
 ;; When you open a new frame in an already running Emacs session
 ;; set it to the full height but don't worry about the width
 (add-to-list 'default-frame-alist '(fullscreen . fullheight))
-(set-frame-font "MesloLGS NF 14" nil t)
+(set-frame-font "MesloLGS NF 13" nil t)
 (setq-default indent-tabs-mode nil) ;; Ensure tabs are expanded, not inserted
 (setq inhibit-startup-screen t) ;; Don't include the  emacs "start" window
 
