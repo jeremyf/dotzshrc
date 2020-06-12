@@ -187,7 +187,7 @@
 (use-package smartparens
   :straight t
   :ensure t
-  :init (smartparens-strict-mode 1)
+  :config (smartparens-strict-mode 1)
         (smartparens-global-mode 1))
 
 (custom-set-variables
