@@ -98,8 +98,8 @@
     (global-set-key (kbd "C-c r") 'counsel-rg)
     (global-set-key (kbd "C-x l") 'counsel-locate)
     (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
-    )
-(counsel-mode 1)
+    (counsel-mode 1))
+
 
 (use-package helpful
   :straight t
