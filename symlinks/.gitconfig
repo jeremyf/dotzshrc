@@ -210,6 +210,7 @@
 	recent = for-each-ref --count=5 --sort=-committerdate --format='%(refname:short)' refs/heads/
 	oldest-ancestor = !zsh -c 'diff --old-line-format= --new-line-format= <(git rev-list --first-parent \"${1:-master}\") <(git rev-list --first-parent \"${2:-HEAD}\") | head -1' -
 	branchlog = !sh -c \"git log `git oldest-ancestor`..\"
+	new = !git init && git symbolic-ref HEAD refs/heads/trunk
 
         # This simpler version does not work because 'git stash save'
         # does not create a stash when the tree is clean. In that case,
