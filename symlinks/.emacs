@@ -223,8 +223,9 @@
 (use-package neotree
   :straight t
   :ensure t
-  :init (setq neo-theme (if (display-graphic-p) 'icons 'arrow)))
-(global-set-key [f8] 'neotree-toggle)
+  :defer 1
+  :init (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+  :config (global-set-key [f8] 'neotree-toggle))
 
 ;; Whitespace   hygene  package.   The   author's  documentation   and
 ;; commentary echoes my sentiments
@@ -233,7 +234,7 @@
   :ensure t
   :defer 2
   :init (setq-default mode-require-final-newline nil)
-        (global-ethan-wspace-mode 1)
+  :config (global-ethan-wspace-mode 1)
 ) ;; Prefer the following ethan-wspac-mode
 
 ;; https://github.com/jrblevin/markdown-mode/
