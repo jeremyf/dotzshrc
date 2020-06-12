@@ -162,7 +162,7 @@
   :straight t
   :ensure   t
   :defer    1
-  :init (global-set-key (kbd "H-SPC") 'set-rectangular-region-anchor)
+  :config (global-set-key (kbd "H-SPC") 'set-rectangular-region-anchor)
   (global-set-key (kbd "C-M-SPC") 'set-rectangular-region-anchor)
 )
 
@@ -180,7 +180,7 @@
 (use-package golden-ratio
   :straight t
   :ensure t
-  :init (golden-ratio-mode 1)
+  :config (golden-ratio-mode 1)
 )
 
 ;; Adding smartparens options
