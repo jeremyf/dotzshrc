@@ -279,6 +279,17 @@
   :defer 1)
 (add-hook 'ruby-mode-hook 'yard-mode)
 
+
+;; `dumb-jump-go` C-M-g Jump to definition under point
+;; `dumb-jump-back` C-M-p Jump to previous place
+(use-package dumb-jump
+  :straight t
+  :ensure t
+  :defer 1
+  :init (setq dumb-jump-selector 'ivy)
+        (setq dumb-jump-force-searcher 'rg)
+  :config (dumb-jump-mode))
+
 ;; Adding format to git-commit-fill-column of 72 as best
 ;; practice.
 (use-package magit
