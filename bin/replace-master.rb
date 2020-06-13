@@ -13,6 +13,8 @@
 # This script handles how I've setup git, but may be useful as either
 # a point of reference or to run yourself.
 #
+# You'll need to get your own OAUTH_TOKEN (see https://developer.github.com/apps/building-oauth-apps/authorizing-oauth-apps/)
+#
 # Example:
 #
 #   GITHUB_OWNER=jeremyf OAUTH_TOKEN=40-char-token ruby /path/to/replace-master.rb
