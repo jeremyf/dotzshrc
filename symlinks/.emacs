@@ -189,6 +189,11 @@
   :config (smartparens-strict-mode 1)
         (smartparens-global-mode 1))
 
+(use-package github-browse-file
+  :straight t
+  :ensure t
+  :defer 2)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -266,6 +271,7 @@
   :straight t
   :ensure t
   :defer 1)
+(add-hook 'ruby-mode-hook 'rspec-mode)
 
 (use-package json-reformat
   :straight t
