@@ -213,11 +213,6 @@
  ;; If there is more than one, they won't work right.
  )
 
-(use-package esup
-  :straight t
-  :ensure t
-  :defer 1)
-
 (use-package all-the-icons
   :straight t
   :ensure t)
