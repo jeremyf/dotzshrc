@@ -123,7 +123,7 @@
   (projectile-mode +1)
   (setq projectile-completion-system 'ivy)
   (setq projectile-project-search-path '("~/git/"))
-  :init (global-set-key (kbd "s-t") 'projectile-find-file)
+  ;; :init (global-set-key (kbd "s-t") 'projectile-find-file)
   )
 
 ;; I'm liking ripgrep as a tool
@@ -135,12 +135,11 @@
   (global-set-key (kbd "M-s-f") 'projectile-ripgrep) ;; CMD+OPT+f
  )
 
-;; In Emacs plus, CMD+t sends 's-t' Also, based on current
-;; configuration, when I type 's-t' and search for a file I can type
-;; 'C-M-o' and choose a different action for the named file. There is
-;; bug when I choose anything other than the default; The mini-buffer
-;; remains open.
-;; (global-set-key (kbd "s-t") 'counsel-projectile-find-file)
+(use-package counsel-projectile
+  :straight t
+  :ensure t
+  :init (global-set-key (kbd "s-t") 'counsel-projectile-find-file))
+(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 
 ;; Company provides a moduler completion framework
 (use-package company
