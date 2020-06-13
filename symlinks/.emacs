@@ -279,6 +279,11 @@
   :defer 1
   :init (setq json-reformat:indent-width 2))
 
+(use-package json-mode
+  :straight t
+  :ensure t
+  :defer 1)
+
 (use-package yard-mode
   :straight t
   :ensure t
