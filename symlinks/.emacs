@@ -370,9 +370,10 @@ to consider doing so."
 
 (global-set-key (kbd "M-n") 'nab-name-of-file) ;; OPT+n
 (global-set-key (kbd "C-M-d") 'duplicate-line) ;; CTRL+OPT+d - duplicate line
-(global-set-key (kbd "C-M-b") 'browse-url-at-point) ;; CTRL+OPT+b
+(global-set-key (kbd "C-s-w") 'browse-url-at-point) ;; CTRL+CMD+w
 (global-set-key (kbd "s-w") 'browse-web) ;; CMD+w
 (global-set-key (kbd "s-b") 'switch-to-buffer) ;; CMD+b
+(global-set-key (kbd "C-s-b") 'switch-to-buffer-other-window) ;; CTRL+CMD+b
 (setq browse-url-browser-function 'eww-browse-url)
 
 ;; Because smie-down-list grabbed C-M-d, I need to set it
