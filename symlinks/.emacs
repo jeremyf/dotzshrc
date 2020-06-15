@@ -259,6 +259,14 @@
   '(push 'company-robe company-backends))
 (add-hook 'robe-mode-hook 'ac-robe-setup)
 
+;; Type C-; and a letter. That letter is the beginning of a
+;; word. Narrow results from there.
+(use-package avy
+  :straight t
+  :ensure t
+  :defer 1)
+(global-set-key (kbd "C-;") 'avy-goto-word-1)
+
 (use-package yafolding
   :straight t
   :ensure t
