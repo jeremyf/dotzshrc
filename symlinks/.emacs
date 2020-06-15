@@ -38,7 +38,7 @@
 
 ;; Remove reliance on Base16 themes; I find that I prefer the
 ;; coloration of tsdh-(light|dark)
-(load-theme 'tsdh-dark t) ;; For inside work
+(load-theme 'deeper-blue t) ;; For inside work
 ;; (load-theme 'adwaita t) ;; For bright days
 
 ;; When you open a new frame in an already running Emacs session
