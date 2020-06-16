@@ -119,10 +119,11 @@
 (use-package projectile
   :ensure t
   :straight t
-  :config (define-key projectile-mode-map (kbd "C-M-p") 'projectile-command-map)
+  :config (define-key projectile-mode-map (kbd "M-p") 'projectile-command-map)
   (projectile-mode +1)
   (setq projectile-completion-system 'ivy)
   (setq projectile-project-search-path '("~/git/"))
+  ;; Commented out for counsel-projectile
   ;; :init (global-set-key (kbd "s-t") 'projectile-find-file)
   )
 
@@ -139,7 +140,6 @@
   :straight t
   :ensure t
   :init (global-set-key (kbd "s-t") 'counsel-projectile-find-file))
-(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 
 ;; Company provides a moduler completion framework
 (use-package company
