@@ -417,10 +417,15 @@ to consider doing so."
 ;; I'm working through what templates I might want. This is a place holder.
 (setq org-capture-templates
       '(
-        ("t" "Todo" entry (file+headline "~/git/org/todo.org" "Tasks")
+        ("j" "Journal" entry (file+datetree "~/git/org/2020/journal.org")
+         "* %?\nEntered on %U\n  %i\n  %a")
+        ("l" "TIL:" entry (file+headline "~/git/org/2020/today-i-learned.org" "Today I Learned")
+         "* %U: %?")
+        ("m" "Meeting" entry (file+headline "~/git/org/2020/meetings.org" "Meetings")
+         "* Meeting: %u %^{SUMMARY}\n  %^{ATTENDEES}p\n  %?\n")
+        ("t" "Todo" entry (file+headline "~/git/org/2020/todo.org" "Tasks")
          "* TODO %?\n  %i\n  %a")
-        ("j" "Journal" entry (file+datetree "~/git/org/journal.org")
-         "* %?\nEntered on %U\n  %i\n  %a")))
+        ))
 
 ;; END ORG mode configuration and concerns
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
