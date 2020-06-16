@@ -141,55 +141,41 @@
   :ensure t
   :init (global-set-key (kbd "s-t") 'counsel-projectile-find-file))
 
-(use-package enh-ruby-mode
-  :straight t
-  :ensure t)
-(autoload 'enh-ruby-mode "enh-ruby-mode" "Major mode for ruby files" t)
-(add-to-list 'auto-mode-alist
-             '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'" . enh-ruby-mode))
-(add-to-list 'interpreter-mode-alist '("ruby" . enh-ruby-mode))
-
 (use-package robe
   :straight t
   :ensure t)
-(add-hook 'enh-ruby-mode-hook 'robe-mode)
+(add-hook 'ruby-mode-hook 'robe-mode)
+(add-hook 'robe-mode-hook 'ac-robe-setup)
 
 (use-package rspec-mode
   :straight t
   :ensure t)
-(add-hook 'enh-ruby-mode-hook 'rspec-mode)
+(add-hook 'ruby-mode-hook 'rspec-mode)
 
 (use-package yard-mode
   :straight t
   :ensure t)
-(add-hook 'enh-ruby-mode-hook 'yard-mode)
+(add-hook 'ruby-mode-hook 'yard-mode)
 
 (use-package auto-complete
   :straight t
   :ensure t
-  :defer 1
   :config (ac-config-default)
   :init (setq ac-auto-show-menu t))
 
-;; (use-package inf-ruby
-;;   :straight t
-;;   :ensure t
-;;   :defer 1)
-;; (autoload 'inf-ruby "inf-ruby" "Run an inferior Ruby process" t)
-;; (add-hook 'enh-ruby-mode-hook 'inf-ruby-minor-mode)
-;; (add-hook 'compilation-filter-hook 'inf-ruby-auto-enter)
+(use-package inf-ruby
+  :straight t
+  :ensure t)
+(autoload 'inf-ruby-minor-mode "inf-ruby" "Run an inferior Ruby process" t)
+(add-hook 'ruby-mode-hook 'inf-ruby-minor-mode)
+(add-hook 'compilation-filter-hook 'inf-ruby-auto-enter)
 
-;; (use-package ac-inf-ruby
-;;   :straight t
-;;   :ensure t
-;;   :defer 1)
-;; (eval-after-load 'auto-complete
-;;       '(add-to-list 'ac-modes 'inf-ruby-mode))
-;;     (add-hook 'inf-ruby-mode-hook 'ac-inf-ruby-enable)
-
-;; (eval-after-load 'inf-ruby '
-;;   '(define-key inf-ruby-mode-map (kbd "TAB") 'auto-complete))
-
+(use-package ac-inf-ruby
+  :straight t
+  :ensure t)
+(eval-after-load 'auto-complete
+      '(add-to-list 'ac-modes 'inf-ruby-minor-mode))
+    (add-hook 'ruby-mode-hook 'ac-inf-ruby-enable)
 
 (straight-use-package '(string-inflection :type git :host github :repo "akicho8/string-inflection"))
 (global-set-key (kbd "H-u") 'string-inflection-all-cycle)
