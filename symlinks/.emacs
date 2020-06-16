@@ -166,6 +166,34 @@
   :defer 1)
 (add-hook 'enh-ruby-mode-hook 'yard-mode)
 
+;; (use-package auto-complete
+;;   :straight t
+;;   :ensure t
+;;   :defer 1
+;;   :config (ac-config-default))
+;; (setq ac-menu-height 20)
+;; (setq ac-auto-show-menu t)
+
+;; (use-package inf-ruby
+;;   :straight t
+;;   :ensure t
+;;   :defer 1)
+;; (autoload 'inf-ruby "inf-ruby" "Run an inferior Ruby process" t)
+;; (add-hook 'enh-ruby-mode-hook 'inf-ruby-minor-mode)
+;; (add-hook 'compilation-filter-hook 'inf-ruby-auto-enter)
+
+;; (use-package ac-inf-ruby
+;;   :straight t
+;;   :ensure t
+;;   :defer 1)
+;; (eval-after-load 'auto-complete
+;;       '(add-to-list 'ac-modes 'inf-ruby-mode))
+;;     (add-hook 'inf-ruby-mode-hook 'ac-inf-ruby-enable)
+
+;; (eval-after-load 'inf-ruby '
+;;   '(define-key inf-ruby-mode-map (kbd "TAB") 'auto-complete))
+
+
 (straight-use-package '(string-inflection :type git :host github :repo "akicho8/string-inflection"))
 (global-set-key (kbd "H-u") 'string-inflection-all-cycle)
 (global-set-key (kbd "C-M-u") 'string-inflection-all-cycle)
