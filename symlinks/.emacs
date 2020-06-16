@@ -143,36 +143,31 @@
 
 (use-package enh-ruby-mode
   :straight t
-  :ensure t
-  :defer 1)
+  :ensure t)
 (add-to-list 'auto-mode-alist '("\\.rb$" . enh-ruby-mode))
 (add-to-list 'interpreter-mode-alist '("ruby" . enh-ruby-mode))
 
 (use-package robe
   :straight t
-  :ensure t
-  :defer 1)
+  :ensure t)
 (add-hook 'enh-ruby-mode-hook 'robe-mode)
 
 (use-package rspec-mode
   :straight t
-  :ensure t
-  :defer 1)
+  :ensure t)
 (add-hook 'enh-ruby-mode-hook 'rspec-mode)
 
 (use-package yard-mode
   :straight t
-  :ensure t
-  :defer 1)
+  :ensure t)
 (add-hook 'enh-ruby-mode-hook 'yard-mode)
 
-;; (use-package auto-complete
-;;   :straight t
-;;   :ensure t
-;;   :defer 1
-;;   :config (ac-config-default))
-;; (setq ac-menu-height 20)
-;; (setq ac-auto-show-menu t)
+(use-package auto-complete
+  :straight t
+  :ensure t
+  :defer 1
+  :config (ac-config-default)
+  :init (setq ac-auto-show-menu t))
 
 ;; (use-package inf-ruby
 ;;   :straight t
