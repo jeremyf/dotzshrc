@@ -141,13 +141,30 @@
   :ensure t
   :init (global-set-key (kbd "s-t") 'counsel-projectile-find-file))
 
-;; Company provides a moduler completion framework
-(use-package company
+(use-package enh-ruby-mode
   :straight t
-  :ensure   t
-  :defer    1
-  :init (add-hook 'after-init-hook 'global-company-mode)
-)
+  :ensure t
+  :defer 1)
+(add-to-list 'auto-mode-alist '("\\.rb$" . enh-ruby-mode))
+(add-to-list 'interpreter-mode-alist '("ruby" . enh-ruby-mode))
+
+(use-package robe
+  :straight t
+  :ensure t
+  :defer 1)
+(add-hook 'enh-ruby-mode-hook 'robe-mode)
+
+(use-package rspec-mode
+  :straight t
+  :ensure t
+  :defer 1)
+(add-hook 'enh-ruby-mode-hook 'rspec-mode)
+
+(use-package yard-mode
+  :straight t
+  :ensure t
+  :defer 1)
+(add-hook 'enh-ruby-mode-hook 'yard-mode)
 
 (straight-use-package '(string-inflection :type git :host github :repo "akicho8/string-inflection"))
 (global-set-key (kbd "H-u") 'string-inflection-all-cycle)
@@ -250,15 +267,6 @@
          ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "/usr/local/bin/pandoc"))
 
-(use-package robe
-  :straight t
-  :ensure t
-  :defer 1)
-(add-hook 'ruby-mode-hook 'robe-mode)
-(eval-after-load 'company
-  '(push 'company-robe company-backends))
-(add-hook 'robe-mode-hook 'ac-robe-setup)
-
 ;; Type C-; and a letter. That letter is the beginning of a
 ;; word. Narrow results from there.
 (use-package avy
@@ -275,12 +283,6 @@
 (add-hook 'prog-mode-hook
           (lambda () (yafolding-mode)))
 
-(use-package rspec-mode
-  :straight t
-  :ensure t
-  :defer 1)
-(add-hook 'ruby-mode-hook 'rspec-mode)
-
 (use-package json-reformat
   :straight t
   :ensure t
@@ -291,12 +293,6 @@
   :straight t
   :ensure t
   :defer 1)
-
-(use-package yard-mode
-  :straight t
-  :ensure t
-  :defer 1)
-(add-hook 'ruby-mode-hook 'yard-mode)
 
 ;; Adding format to git-commit-fill-column of 72 as best
 ;; practice.
