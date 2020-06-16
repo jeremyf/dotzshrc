@@ -404,7 +404,6 @@ to consider doing so."
 ;; https://melpa.org/#/elfeed
 ;; (global-set-key (kbd "C-x r") 'elfeed)
 
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; BEGIN ORG mode configuration and concerns
 (global-set-key (kbd "C-c l") 'org-store-link)
@@ -418,13 +417,15 @@ to consider doing so."
 (setq org-capture-templates
       '(
         ("j" "Journal" entry (file+datetree "~/git/org/2020/journal.org")
-         "* %?\nEntered on %U\n  %i\n  %a")
+           "* %?\nEntered on %U\n  %i\n  %a")
         ("l" "TIL:" entry (file+headline "~/git/org/2020/today-i-learned.org" "Today I Learned")
-         "* %U: %?")
+           "* %U: %?")
         ("m" "Meeting" entry (file+headline "~/git/org/2020/meetings.org" "Meetings")
-         "* Meeting: %u %^{SUMMARY}\n  %^{ATTENDEES}p\n  %?\n")
+           "* Meeting: %u %^{SUMMARY}\n  %^{ATTENDEES}p\n  %?\n")
+        ("s" "Session" entry (file+headline "~/git/org/2020/sessions.org" "Sessions")
+           "* Session: %u %^{SUMMARY}\n  %^{ATTENDEES}p\n  %^{SYSTEM}p\n  %?\n")
         ("t" "Todo" entry (file+headline "~/git/org/2020/todo.org" "Tasks")
-         "* TODO %?\n  %i\n  %a")
+           "* TODO %?\n  %i\n  %a")
         ))
 
 ;; END ORG mode configuration and concerns
