@@ -1,3 +1,13 @@
+;;; package --- Summary:
+;;
+;;  Emacs configuration for Jeremy Friesen
+;;
+;;; Commentary:
+;;
+;;  This is my journey into Emacs.  Let's see where we go!
+;;
+;;; CODE:
+
 ;; Make startup faster by reducing the frequency of garbage
 ;; collection.  The default is 800 kilobytes.  Measured in bytes.
 ;; From https://blog.d46.us/advanced-emacs-startup/
@@ -170,6 +180,7 @@
 (autoload 'inf-ruby-minor-mode "inf-ruby" "Run an inferior Ruby process" t)
 (add-hook 'ruby-mode-hook 'inf-ruby-minor-mode)
 (add-hook 'compilation-filter-hook 'inf-ruby-auto-enter)
+(setq ruby-insert-encoding-magic-comment nil)
 
 (use-package ac-inf-ruby
   :straight t
@@ -220,6 +231,26 @@
   :ensure t
   :config (smartparens-strict-mode 1)
         (smartparens-global-mode 1))
+
+(use-package flycheck
+  :ensure t
+  :straight t
+  :defer t
+  :init
+  (global-flycheck-mode t))
+
+(use-package flyspell-correct
+  :straight t
+  :ensure t
+  :after flyspell
+  :defer t)
+
+(use-package flyspell-correct-ivy
+  :straight t
+  :ensure t
+  :after flyspell-correct)
+(global-set-key (kbd "C-,") 'flyspell-buffer)
+
 
 (use-package github-browse-file
   :straight t
