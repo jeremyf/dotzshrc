@@ -261,7 +261,7 @@
   (yas-global-mode 1)
   )
 
-(global-set-key (kbd "C-c RET") 'yas-expand)
+(global-set-key (kbd "C-t") 'yas-expand)
 
 (use-package github-browse-file
   :straight t
