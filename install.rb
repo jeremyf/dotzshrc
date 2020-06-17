@@ -4,7 +4,7 @@
 require 'fileutils'
 $stdout.puts 'Installing zshrc aliases…'
 home_dirname = ENV.fetch('HOME')
-symlink_sources = File.expand_path('../symlinks/.*', __dir__)
+symlink_sources = File.expand_path('symlinks/.*', __dir__)
 Dir.glob(symlink_sources).each do |source_filename|
   basename = File.basename(source_filename)
   next if basename == '.'
@@ -19,7 +19,7 @@ end
 $stdout.puts 'Finished installing zshrc aliases…'
 
 $stdout.puts 'Installing bin aliases…'
-bin_sources = File.expand_path('../bin/*', __dir__)
+bin_sources = File.expand_path('bin/*', __dir__)
 FileUtils.mkdir_p(File.join(home_dirname, 'bin'))
 Dir.glob(bin_sources).each do |source_filename|
   # Create a symlink in HOME directory to source_filename
