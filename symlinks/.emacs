@@ -168,6 +168,8 @@
   :ensure t)
 (add-hook 'ruby-mode-hook 'yard-mode)
 
+(setq ruby-insert-encoding-magic-comment nil)
+
 (use-package auto-complete
   :straight t
   :ensure t
@@ -180,7 +182,6 @@
 (autoload 'inf-ruby-minor-mode "inf-ruby" "Run an inferior Ruby process" t)
 (add-hook 'ruby-mode-hook 'inf-ruby-minor-mode)
 (add-hook 'compilation-filter-hook 'inf-ruby-auto-enter)
-(setq ruby-insert-encoding-magic-comment nil)
 
 (use-package ac-inf-ruby
   :straight t
@@ -256,11 +257,12 @@
   :straight (yasnippets :type git :host github :repo "joaotavora/yasnippet")
   :ensure t
   :defer t
-  :config (yas-global-mode 1))
+  :init (setq yas-snippet-dirs '("~/git/dotzshrc/emacs/snippets"))
+  (yas-global-mode 1)
+  )
 
-(setq yas-snippet-dirs
-      '("~/git/dotzshrc/emacs/snippets"                 ;; personal snippets
-        ))
+(global-set-key (kbd "C-c RET") 'yas-expand)
+
 (use-package github-browse-file
   :straight t
   :ensure t
