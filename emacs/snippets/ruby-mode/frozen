@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: frozen string literal
+# group: general
+# key: frozen
+# contributor: Jeremy Friesen
+# --
+frozen_string_literal: true

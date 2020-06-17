@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
 
 outfilename = '/Users/jfriesen/.safe/wallet-database.csv'
 encrypted_filename = '/Users/jfriesen/.safe/wallet-database.csv.encrypted'
@@ -12,7 +13,7 @@ elsif ARGV[0] == '--close'
     `rm #{outfilename}`
     exit(0)
   else
-    $stderr.puts "Missing #{outfilename}"
+    warn "Missing #{outfilename}"
     exit(-1)
   end
 elsif ARGV[0]
@@ -21,6 +22,6 @@ elsif ARGV[0]
   `rm #{outfilename}`
   exit(0)
 else
-  $stderr.puts "Include a term that you are searching for:\n\n\t`#{File.basename(__FILE__)} <term>`"
+  warn "Include a term that you are searching for:\n\n\t`#{File.basename(__FILE__)} <term>`"
   exit(-1)
 end

@@ -252,10 +252,19 @@
 (global-set-key (kbd "C-,") 'flyspell-buffer)
 
 
+(use-package yasnippets
+  :straight (yasnippets :type git :host github :repo "joaotavora/yasnippet")
+  :ensure t
+  :defer t
+  :config (yas-global-mode 1))
+
+(setq yas-snippet-dirs
+      '("~/git/dotzshrc/emacs/snippets"                 ;; personal snippets
+        ))
 (use-package github-browse-file
   :straight t
   :ensure t
-  :defer 2)
+  :defer t)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

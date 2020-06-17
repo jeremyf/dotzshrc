@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby -wU
+# frozen_string_literal: true
 
 # Script that writes content to a Bookmarks repository. This script implements
 # the expected API for the `newsboat`'s `bookmark-cmd`
@@ -9,12 +10,12 @@ title = ARGV[1]
 description = ARGV[2]
 feed_title = ARGV[3]
 
-bookmarked_on = Time.now.strftime("%Y-%m-%d")
+bookmarked_on = Time.now.strftime('%Y-%m-%d')
 bookmark_filename = File.join(
   ENV['HOME'],
-  "git/takeonrules.github.io/rss/bookmarks/rss-bookmarks.tsv"
+  'git/takeonrules.github.io/rss/bookmarks/rss-bookmarks.tsv'
 )
 
-File.open(bookmark_filename, "a") do |file|
+File.open(bookmark_filename, 'a') do |file|
   file.puts "#{bookmarked_on}\t#{title}\t#{description}\t#{url}\t#{feed_title}"
 end

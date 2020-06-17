@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby -wU
+# frozen_string_literal: true
 
 # A script to rename a single repository's branch FROM the given
 # branch name TO the given branch name.
@@ -19,15 +20,16 @@
 #
 #   GITHUB_OWNER=jeremyf OAUTH_TOKEN=40-char-token ruby /path/to/replace-master.rb
 #
-FROM_BRANCH = ENV.fetch("FROM", "master")
-TO_BRANCH = ENV.fetch("TO", "trunk")
-GITHUB_OWNER = ENV.fetch("GITHUB_OWNER")
-OAUTH_TOKEN = ENV.fetch("OAUTH_TOKEN")
+FROM_BRANCH = ENV.fetch('FROM', 'master')
+TO_BRANCH = ENV.fetch('TO', 'trunk')
+GITHUB_OWNER = ENV.fetch('GITHUB_OWNER')
+OAUTH_TOKEN = ENV.fetch('OAUTH_TOKEN')
 
 pwd = Dir.pwd
 
 def shell_command(cmd)
   return if system(cmd)
+
   exit!(2)
 end
 
@@ -37,20 +39,19 @@ if check_master.empty?
   exit(0)
 end
 
-$stdout.puts "Working on local clone"
+$stdout.puts 'Working on local clone'
 unless `git status --porcelain`.strip.empty?
-  $stderr.puts "ABORT: '#{pwd}' has uncommitted changes"
+  warn "ABORT: '#{pwd}' has uncommitted changes"
   exit!(3)
 end
 
 shell_command("git checkout #{FROM_BRANCH}")
 shell_command("git branch -m #{TO_BRANCH}")
 
-
-$stdout.puts "Working on possible remote"
+$stdout.puts 'Working on possible remote'
 remote_name = `git remote -v | grep "#{GITHUB_OWNER}/" | grep "(push)" | awk '{print $1}'`.strip
 repository_url = `git remote -v | grep "#{GITHUB_OWNER}/" | grep "(push)" | awk '{print $2}'`
-owner, repo = Array(repository_url.sub(/^.*github\.com./,'').split("/")[-2..-1]).map(&:strip)
+owner, repo = Array(repository_url.sub(/^.*github\.com./, '').split('/')[-2..-1]).map(&:strip)
 
 if !repo || !owner
   $stdout.puts "No known remote for '#{pwd}' for username #{GITHUB_OWNER}. Done"

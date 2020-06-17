@@ -9,16 +9,16 @@ url = ARGV[0]
 url = URI.parse(url)
 url.query = nil
 url.fragment = nil
-useragent = "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Mobile Safari/537.36"
+useragent = 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Mobile Safari/537.36'
 if !url
-  $stderr.puts "You must pass an argument to #{File.basename(__FILE__)}"
+  warn "You must pass an argument to #{File.basename(__FILE__)}"
   exit!(1)
 elsif !`which links`.empty?
-  system("links", url.to_s, "-http.fake-user-agent", useragent, "-http.referer", "0", "-html-numbered-links", "1", "-no-g")
+  system('links', url.to_s, '-http.fake-user-agent', useragent, '-http.referer', '0', '-html-numbered-links', '1', '-no-g')
 elsif !`which lynx`.empty?
-  system("lynx", url.to_s, "-tagsoup", "-vikeys", "-useragent=#{useragent}", "-cfg=#{File.join(ENV['HOME'], '.lynx.cfg')}")
+  system('lynx', url.to_s, '-tagsoup', '-vikeys', "-useragent=#{useragent}", "-cfg=#{File.join(ENV['HOME'], '.lynx.cfg')}")
 else
-  $stderr.puts "You must install lynx or links"
+  warn 'You must install lynx or links'
   exit!(2)
 end
 $stdout.puts "Thank you for browsing:\n#{url}"

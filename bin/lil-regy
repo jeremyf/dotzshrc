@@ -29,7 +29,7 @@
 #   ripgrep
 #   ruby
 require 'optparse'
-config = { path: ".", do_it: false }
+config = { path: '.', do_it: false }
 
 command_name = File.basename(__FILE__)
 
@@ -50,44 +50,41 @@ optparse = OptionParser.new do |options|
     "\tripgrep). So your mileage may vary.\n\n" \
     "Options:\n"
 
-
-  options.on_head("-f PATTERN", "--find", String, "The pattern to use in finding text.") do |pattern|
+  options.on_head('-f PATTERN', '--find', String, 'The pattern to use in finding text.') do |pattern|
     config[:find] = pattern
   end
 
-  options.on("-r PATTERN", "--replace", String, "The pattern to use in replacing text.") do |pattern|
+  options.on('-r PATTERN', '--replace', String, 'The pattern to use in replacing text.') do |pattern|
     config[:replace] = pattern
   end
 
-  options.on("-p PATH", "--path", String, "The path to limit your find and replace.\n#{' '*39}(Default: \"#{config.fetch(:path)}\")") do |path|
+  options.on('-p PATH', '--path', String, "The path to limit your find and replace.\n#{' ' * 39}(Default: \"#{config.fetch(:path)}\")") do |path|
     config[:path] = path
   end
 
-  options.on("-d", "Do it! Replace without confirmation.") do |do_it|
+  options.on('-d', 'Do it! Replace without confirmation.') do |_do_it|
     config[:do_it] = true
   end
 
-  options.separator("")
+  options.separator('')
 
-  options.on_tail("-h", "--help", "You're looking at it!") do
-    $stderr.puts options
+  options.on_tail('-h', '--help', "You're looking at it!") do
+    warn options
     exit 1
   end
 end
 
 begin
   optparse.parse!
-  mandatory = [:find, :path]
-  missing = mandatory.select{ |param| config[param].nil? }
+  mandatory = %i[find path]
+  missing = mandatory.select { |param| config[param].nil? }
   if config[:do_it]
     missing << :replace if config[:replace].nil?
   end
-  unless missing.empty?
-    raise OptionParser::MissingArgument.new(missing.join(', '))
-  end
+  raise OptionParser::MissingArgument, missing.join(', ') unless missing.empty?
 rescue OptionParser::InvalidOption, OptionParser::MissingArgument
-  $stderr.puts "\e[0m\e[1m\e[31m#{$!}\e[0m\n"
-  $stderr.puts optparse
+  warn "\e[0m\e[1m\e[31m#{$!}\e[0m\n"
+  warn optparse
   exit
 end
 
@@ -108,11 +105,11 @@ class RipGrep
   attr_reader :argv, :path, :find_pattern
 
   def do_it_args
-    ["rg", "--files-with-matches", "--pcre2"] + argv + [find_pattern, path]
+    ['rg', '--files-with-matches', '--pcre2'] + argv + [find_pattern, path]
   end
 
   def preview_args
-    ["rg", "--pretty", "--pcre2"] + argv + [find_pattern, path]
+    ['rg', '--pretty', '--pcre2'] + argv + [find_pattern, path]
   end
 end
 rg = RipGrep.new(argv: ARGV, path: path, find_pattern: find_pattern)
@@ -129,7 +126,7 @@ if config.fetch(:do_it, false)
           content << line.gsub(find_regexp, replace_pattern)
         end
       end
-      File.open(filename, "w+") do |f|
+      File.open(filename, 'w+') do |f|
         content.each do |l|
           f.puts l
         end

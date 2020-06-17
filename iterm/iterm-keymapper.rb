@@ -2,39 +2,39 @@
 # Hyper(H) and Super(s) keys. Thus freeing up a massive number of
 # keys.
 #
-CTRL_OPT_CMD = "0x1c0000"
-CTRL_OPT = "0xc0000"
+CTRL_OPT_CMD = '0x1c0000'.freeze
+CTRL_OPT = '0xc0000'.freeze
 keymap_entries = []
 [
-  ["61", "a"],
-  ["62", "b"],
-  ["63", "c"],
-  ["64", "d"],
-  ["65", "e"],
-  ["66", "f"],
-  ["67", "g"],
-  ["68", "h"],
-  ["69", "i"],
-  ["6a", "j"],
-  ["6b", "k"],
-  ["6c", "l"],
-  ["6d", "m"],
-  ["6e", "n"],
-  ["6f", "o"],
-  ["70", "p"],
-  ["71", "q"],
-  ["72", "r"],
-  ["73", "s"],
-  ["74", "t"],
-  ["75", "u"],
-  ["76", "v"],
-  ["77", "w"],
-  ["78", "x"],
-  ["79", "y"],
-  ["7a", "z"]
-].each_with_index do |(hex, key), index|
-  keymap_entries << %(  "0x#{hex}-#{CTRL_OPT_CMD}":{"Text":"[1;P#{index+9}", "Action": 10 })
-  keymap_entries << %(  "0x#{hex}-#{CTRL_OPT}":{"Text":"[1;P#{index+35}", "Action": 10 })
+  %w[61 a],
+  %w[62 b],
+  %w[63 c],
+  %w[64 d],
+  %w[65 e],
+  %w[66 f],
+  %w[67 g],
+  %w[68 h],
+  %w[69 i],
+  %w[6a j],
+  %w[6b k],
+  %w[6c l],
+  %w[6d m],
+  %w[6e n],
+  %w[6f o],
+  %w[70 p],
+  %w[71 q],
+  %w[72 r],
+  %w[73 s],
+  %w[74 t],
+  %w[75 u],
+  %w[76 v],
+  %w[77 w],
+  %w[78 x],
+  %w[79 y],
+  %w[7a z]
+].each_with_index do |(hex, _key), index|
+  keymap_entries << %(  "0x#{hex}-#{CTRL_OPT_CMD}":{"Text":"[1;P#{index + 9}", "Action": 10 })
+  keymap_entries << %(  "0x#{hex}-#{CTRL_OPT}":{"Text":"[1;P#{index + 35}", "Action": 10 })
 end
 
 # CTRL+OPT+/
@@ -46,10 +46,10 @@ keymap_entries << %(  "0x2c-#{CTRL_OPT}":{"Text":"[1;P72", "Action": 10})
 # CTRL+OPT+SPC
 keymap_entries << %(  "0x20-#{CTRL_OPT}": {"Text":"[1;P74", "Action": 10})
 
-filename = File.expand_path('../emacs.itermkeymap', __FILE__)
+filename = File.expand_path('emacs.itermkeymap', __dir__)
 
-File.open(filename, "w+") do |file|
+File.open(filename, 'w+') do |file|
   file.puts %({"Key Mappings": {)
   file.puts keymap_entries.sort.join(",\n")
-  file.puts "}}"
+  file.puts '}}'
 end
