@@ -27,7 +27,8 @@
 ;; Use a hook so the message doesn't get clobbered by other messages.
 (add-hook 'emacs-startup-hook
           (lambda ()
-            (message "Emacs ready in %s with %d garbage collections."
+            (message "Emacs on \"%s\" ready in %s with %d garbage collections."
+                     system-type
                      (format "%.2f seconds"
                              (float-time
                               (time-subtract after-init-time before-init-time)))
@@ -177,7 +178,10 @@
       '(add-to-list 'ac-modes 'inf-ruby-minor-mode))
     (add-hook 'ruby-mode-hook 'ac-inf-ruby-enable)
 
-(straight-use-package '(string-inflection :type git :host github :repo "akicho8/string-inflection"))
+(use-package string-inflection
+  :defer t
+  :ensure t
+  :straight (string-inflection :type git :host github :repo "akicho8/string-inflection"))
 (global-set-key (kbd "H-u") 'string-inflection-all-cycle)
 (global-set-key (kbd "C-M-u") 'string-inflection-all-cycle)
 
@@ -404,24 +408,21 @@ to consider doing so."
 ;; https://melpa.org/#/elfeed
 ;; (global-set-key (kbd "C-x r") 'elfeed)
 
-;; (straight-use-package '(string-inflection :type git :host github :repo "bzg/org-mode"))
-;; (use-package org-mac-link
-;;   :ensure t
-;;   :straight t)
-;; (add-hook 'org-mode-hook (lambda ()
-;;   (define-key org-mode-map (kbd "C-c g") 'org-mac-grab-link)))
-
+;; Adds the ability to grab a link from various OS X applications
+;; Note, the sibling org-mac-link. That package works within ORG mode
+;; with an extended menu option, and assumes ORG styling
 (use-package grab-mac-link
   :ensure t
   :straight t
   :defer 1)
 (global-set-key (kbd "C-c C-g") 'grab-mac-link)
 
-(push (expand-file-name "~/git/dotzshrc/emacs") load-path)
-;; TODO - Add a delay on the require; It is not specifically needed
-(require 'org-mac-link)
+(use-package org-mac-link
+  :ensure t
+  :straight (org-mac-link :type git :host github :repo "jeremyf/org-mac-link")
+  :defer t)
 (add-hook 'org-mode-hook (lambda ()
-  (define-key org-mode-map (kbd "C-c C-g") 'org-mac-grab-link)))
+                           (define-key org-mode-map (kbd "C-c C-g") 'org-mac-grab-link)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; BEGIN ORG mode configuration and concerns
