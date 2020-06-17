@@ -437,17 +437,19 @@ to consider doing so."
 (setq org-capture-templates
       '(
         ("g" "Game Idea" entry (file+headline "~/git/org/2020/game-ideas.org" "Game Idea")
-           "* %?\nEntered on %U\n  %i")
+         "* %?\nEntered on %U\n  %i")
         ("j" "Journal" entry (file+datetree "~/git/org/2020/journal.org")
-           "* %?\nEntered on %U\n  %i\n  %a")
-        ("l" "TIL:" entry (file+headline "~/git/org/2020/today-i-learned.org" "Today I Learned")
-           "* %U: %?")
+         "* %?\nEntered on %U\n  %i\n  %a")
+        ("l" "Today I Learned" entry (file+headline "~/git/org/2020/today-i-learned.org" "Today I Learned")
+         "* %U: %?")
         ("m" "Meeting" entry (file+headline "~/git/org/2020/meetings.org" "Meetings")
-           "* Meeting: %u %^{SUMMARY}\n  %^{ATTENDEES}p\n  %?\n")
+         "* Meeting: %u %^{SUMMARY}\n  %^{ATTENDEES}p\n  %?\n")
+        ("r" "Reading" entry (file+headline "~/git/org/2020/sessions.org" "Readings")
+         "* %^{SUBJECT} %u\n %?\n")
         ("s" "Session" entry (file+headline "~/git/org/2020/sessions.org" "Sessions")
-           "* Session: %u %^{SUMMARY}\n  %^{ATTENDEES}p\n  %^{SYSTEM}p\n  %?\n")
+         "* Session: %u %^{SUMMARY}\n  %^{ATTENDEES}p\n  %^{SYSTEM}p\n  %?\n")
         ("t" "Todo" entry (file+headline "~/git/org/2020/todo.org" "Tasks")
-           "* TODO %?\n  %i\n  %a")
+         "* TODO %?\n  %i\n  %a")
         ))
 
 ;; END ORG mode configuration and concerns
