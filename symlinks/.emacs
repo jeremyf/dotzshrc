@@ -404,6 +404,25 @@ to consider doing so."
 ;; https://melpa.org/#/elfeed
 ;; (global-set-key (kbd "C-x r") 'elfeed)
 
+;; (straight-use-package '(string-inflection :type git :host github :repo "bzg/org-mode"))
+;; (use-package org-mac-link
+;;   :ensure t
+;;   :straight t)
+;; (add-hook 'org-mode-hook (lambda ()
+;;   (define-key org-mode-map (kbd "C-c g") 'org-mac-grab-link)))
+
+(use-package grab-mac-link
+  :ensure t
+  :straight t
+  :defer 1)
+(global-set-key (kbd "C-c C-g") 'grab-mac-link)
+
+(push (expand-file-name "~/git/dotzshrc/emacs") load-path)
+;; TODO - Add a delay on the require; It is not specifically needed
+(require 'org-mac-link)
+(add-hook 'org-mode-hook (lambda ()
+  (define-key org-mode-map (kbd "C-c C-g") 'org-mac-grab-link)))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; BEGIN ORG mode configuration and concerns
 (global-set-key (kbd "C-c l") 'org-store-link)
@@ -416,6 +435,8 @@ to consider doing so."
 ;; I'm working through what templates I might want. This is a place holder.
 (setq org-capture-templates
       '(
+        ("g" "Game Idea" entry (file+headline "~/git/org/2020/game-ideas.org" "Game Idea")
+           "* %?\nEntered on %U\n  %i")
         ("j" "Journal" entry (file+datetree "~/git/org/2020/journal.org")
            "* %?\nEntered on %U\n  %i\n  %a")
         ("l" "TIL:" entry (file+headline "~/git/org/2020/today-i-learned.org" "Today I Learned")
