@@ -126,7 +126,7 @@
   (setq projectile-project-search-path '("~/git/"))
   ;; Commented out for counsel-projectile
   ;; :init (global-set-key (kbd "s-t") 'projectile-find-file)
-  )
+  :config (global-set-key (kbd "s-.") 'projectile-toggle-between-implementation-and-test))
 
 ;; I'm liking ripgrep as a tool
 (use-package projectile-ripgrep
