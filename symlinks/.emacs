@@ -178,6 +178,7 @@
 
 (use-package inf-ruby
   :straight t
+  :after auto-complete
   :ensure t)
 (autoload 'inf-ruby-minor-mode "inf-ruby" "Run an inferior Ruby process" t)
 (add-hook 'ruby-mode-hook 'inf-ruby-minor-mode)
@@ -185,6 +186,7 @@
 
 (use-package ac-inf-ruby
   :straight t
+  :after inf-ruby
   :ensure t)
 (eval-after-load 'auto-complete
       '(add-to-list 'ac-modes 'inf-ruby-minor-mode))
