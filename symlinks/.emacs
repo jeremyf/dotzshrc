@@ -237,9 +237,9 @@
 (use-package powerline
   :ensure t
   :straight t
-  :defer t
+  :defer 1
   :config (powerline-center-theme)
-)
+  )
 
 (use-package hungry-delete
   :straight t
