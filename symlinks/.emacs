@@ -323,16 +323,23 @@
 (use-package ethan-wspace
   :straight t
   :ensure t
-  :defer 2
+  :defer t
   :init (setq-default mode-require-final-newline nil)
   :config (global-ethan-wspace-mode 1)
-) ;; Prefer the following ethan-wspac-mode
+  ) ;; Prefer the following ethan-wspac-mode
+
+(use-package column-enforce-mode
+  :straight t
+  :ensure t
+  :defer t
+  :init (setq column-enforce-column 80))
+(global-column-enforce-mode t)
 
 ;; https://github.com/jrblevin/markdown-mode/
 (use-package markdown-mode
   :straight t
   :ensure t
-  :defer 3
+  :defer t
   :mode (("README\\.md\\'" . gfm-mode)
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
