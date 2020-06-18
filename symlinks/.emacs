@@ -118,6 +118,7 @@
 (use-package helpful
   :straight t
   :ensure t
+  :after counsel
   :defer 2
   :bind (("C-c C-d" . helpful-at-point))
   :init (setq counsel-describe-function-function #'helpful-callable)
@@ -145,6 +146,7 @@
 (use-package projectile-ripgrep
   :ensure t
   :straight t
+  :after projectile
   :defer 1
   :init (global-set-key (kbd "M-s-ƒ") 'projectile-ripgrep) ;; CMD+OPT+f
   (global-set-key (kbd "M-s-f") 'projectile-ripgrep) ;; CMD+OPT+f
@@ -226,7 +228,7 @@
 (use-package powerline
   :ensure t
   :straight t
-  :defer 2
+  :defer t
   :config (powerline-center-theme)
 )
 
