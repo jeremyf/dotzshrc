@@ -383,11 +383,16 @@
 (use-package magit
   :straight t
   :ensure t
-  :defer 2
+  :defer t
   :init (setq git-commit-fill-column 72)
   :config (global-set-key (kbd "H-g") 'magit-status)
           (global-set-key (kbd "C-M-g") 'magit-status)
-)
+          )
+
+(use-package git-timemachine
+  :straight t
+  :ensure t
+  :defer t)
 
 ;; Copied from https://github.com/magit/magit/blob/9423edc0b311117ab5fe87457c3e01c7db22a3c7/lisp/git-commit.el
 ;; And set to 50 instead of 68
