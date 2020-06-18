@@ -548,7 +548,7 @@ to consider doing so."
          "* %U: %?")
         ("m" "Meeting" entry (file+headline "~/git/org/2020/meetings.org" "Meetings")
          "* Meeting: %u %^{SUMMARY}\n  %^{ATTENDEES}p\n  %?\n")
-        ("r" "Reading" entry (file+headline "~/git/org/2020/sessions.org" "Readings")
+        ("r" "Reading" entry (file+headline "~/git/org/2020/readings.org" "Readings")
          "* %^{SUBJECT} %u\n %?\n")
         ("s" "Session" entry (file+headline "~/git/org/2020/sessions.org" "Sessions")
          "* Session: %u %^{SUMMARY}\n  %^{ATTENDEES}p\n  %^{SYSTEM}p\n  %?\n")
