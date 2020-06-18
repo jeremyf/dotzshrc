@@ -89,31 +89,34 @@
         '((read-file-name-internal . ivy--regex-fuzzy)
           (t . ivy--regex-ignore-order))))
 
+;; Part of the ivy/counsel/swiper trio
 (use-package counsel
   :straight t
   :defer t
   :ensure t
   :init (setq ivy-use-selectable-prompt t)
-    (setq search-default-mode #'char-fold-to-regexp)
+  (setq search-default-mode #'char-fold-to-regexp)
   :config
-    (global-set-key "\C-s" 'swiper)
-    (global-set-key (kbd "C-c C-r") 'ivy-resume)
-    (global-set-key (kbd "<f6>") 'ivy-resume)
-    (global-set-key (kbd "M-x") 'counsel-M-x)
-    (global-set-key (kbd "C-x C-f") 'counsel-find-file)
-    (global-set-key (kbd "<f1> f") 'counsel-describe-function)
-    (global-set-key (kbd "<f1> v") 'counsel-describe-variable)
-    (global-set-key (kbd "<f1> o") 'counsel-describe-symbol)
-    (global-set-key (kbd "<f1> l") 'counsel-find-library)
-    (global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
-    (global-set-key (kbd "<f2> u") 'counsel-unicode-char)
-    (global-set-key (kbd "C-c g") 'counsel-git)
-    (global-set-key (kbd "C-c j") 'counsel-git-grep)
-    (global-set-key (kbd "C-c r") 'counsel-rg)
-    (global-set-key (kbd "C-x l") 'counsel-locate)
-    (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
-    (counsel-mode 1))
+  (global-set-key "\C-s" 'swiper)
+  (global-set-key (kbd "C-c C-r") 'ivy-resume)
+  (global-set-key (kbd "<f6>") 'ivy-resume)
+  (global-set-key (kbd "M-x") 'counsel-M-x)
+  (global-set-key (kbd "C-x C-f") 'counsel-find-file)
+  (global-set-key (kbd "<f1> f") 'counsel-describe-function)
+  (global-set-key (kbd "<f1> v") 'counsel-describe-variable)
+  (global-set-key (kbd "<f1> o") 'counsel-describe-symbol)
+  (global-set-key (kbd "<f1> l") 'counsel-find-library)
+  (global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
+  (global-set-key (kbd "<f2> u") 'counsel-unicode-char)
+  (global-set-key (kbd "C-c g") 'counsel-git)
+  (global-set-key (kbd "C-c j") 'counsel-git-grep)
+  (global-set-key (kbd "C-c r") 'counsel-rg)
+  (global-set-key (kbd "C-x l") 'counsel-locate)
+  (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
+  (counsel-mode 1))
 
+;; The silver searcher; I found ripgrep a bit nicer, but wait until
+;; you try wgrep-ag
 (use-package ag
   :straight t
   :ensure t)
@@ -124,9 +127,9 @@
 (use-package wgrep-ag
   :ensure t
   :straight t
+  :after ag
   :defer t)
 (add-hook 'ag-mode-hook 'wgrep-ag-setup)
-
 
 ;; I have found this package quite "helpful"; When I want to know the
 ;; name of a function or key or variable, I can use the helpful
@@ -138,15 +141,17 @@
   :defer 2
   :bind (("C-c C-d" . helpful-at-point))
   :init (setq counsel-describe-function-function #'helpful-callable)
-        (setq counsel-describe-variable-function #'helpful-variable)
+  (setq counsel-describe-variable-function #'helpful-variable)
   :config (global-set-key (kbd "C-h f") #'helpful-callable)
-        (global-set-key (kbd "C-h v") #'helpful-variable)
-        (global-set-key (kbd "C-h k") #'helpful-key)
-        (global-set-key (kbd "C-h f") #'helpful-function)
-        (global-set-key (kbd "C-h c") #'helpful-command)
-)
+  (global-set-key (kbd "C-h v") #'helpful-variable)
+  (global-set-key (kbd "C-h k") #'helpful-key)
+  (global-set-key (kbd "C-h f") #'helpful-function)
+  (global-set-key (kbd "C-h c") #'helpful-command)
+  )
 
 ;; https://docs.projectile.mx/en/latest/
+;;
+;; Helpful for understanding the likely bounds of directory structure
 (use-package projectile
   :ensure t
   :straight t
@@ -165,6 +170,7 @@
   :straight t
   :ensure t
   :defer t
+  :after projectile
   :init (global-set-key (kbd "s-t") 'counsel-projectile-find-file))
 
 (use-package robe
@@ -210,13 +216,14 @@
   :defer t
   :ensure t)
 (eval-after-load 'auto-complete
-      '(add-to-list 'ac-modes 'inf-ruby-minor-mode))
-    (add-hook 'ruby-mode-hook 'ac-inf-ruby-enable)
+  '(add-to-list 'ac-modes 'inf-ruby-minor-mode))
+(add-hook 'ruby-mode-hook 'ac-inf-ruby-enable)
 
 (use-package string-inflection
   :defer t
   :ensure t
   :straight (string-inflection :type git :host github :repo "akicho8/string-inflection"))
+
 (global-set-key (kbd "H-u") 'string-inflection-all-cycle)
 (global-set-key (kbd "C-M-u") 'string-inflection-all-cycle)
 
