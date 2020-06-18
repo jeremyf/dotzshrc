@@ -72,7 +72,7 @@
 ;; Note: I've set all searches to use fuzzy regex
 (use-package ivy
   :straight t
-  :defer 1
+  :defer t
   :ensure t
   :diminish (ivy-mode . "")
   :bind (:map ivy-mode-map
@@ -88,7 +88,7 @@
 
 (use-package counsel
   :straight t
-  :defer 1
+  :defer t
   :ensure t
   :init (setq ivy-use-selectable-prompt t)
     (setq search-default-mode #'char-fold-to-regexp)
@@ -154,18 +154,21 @@
 
 (use-package robe
   :straight t
-  :ensure t)
+  :ensure t
+  :defer t)
 (add-hook 'ruby-mode-hook 'robe-mode)
 (add-hook 'robe-mode-hook 'ac-robe-setup)
 
 (use-package rspec-mode
   :straight t
-  :ensure t)
+  :ensure t
+  :defer t)
 (add-hook 'ruby-mode-hook 'rspec-mode)
 
 (use-package yard-mode
   :straight t
-  :ensure t)
+  :ensure t
+  :defer t)
 (add-hook 'ruby-mode-hook 'yard-mode)
 
 (setq ruby-insert-encoding-magic-comment nil)
