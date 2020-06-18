@@ -150,6 +150,7 @@
 (use-package counsel-projectile
   :straight t
   :ensure t
+  :defer t
   :init (global-set-key (kbd "s-t") 'counsel-projectile-find-file))
 
 (use-package robe
@@ -176,12 +177,14 @@
 (use-package auto-complete
   :straight t
   :ensure t
+  :defer t
   :config (ac-config-default)
   :init (setq ac-auto-show-menu t))
 
 (use-package inf-ruby
   :straight t
   :after auto-complete
+  :defer t
   :ensure t)
 (autoload 'inf-ruby-minor-mode "inf-ruby" "Run an inferior Ruby process" t)
 (add-hook 'ruby-mode-hook 'inf-ruby-minor-mode)
@@ -190,6 +193,7 @@
 (use-package ac-inf-ruby
   :straight t
   :after inf-ruby
+  :defer t
   :ensure t)
 (eval-after-load 'auto-complete
       '(add-to-list 'ac-modes 'inf-ruby-minor-mode))
@@ -254,6 +258,7 @@
 (use-package flyspell-correct-ivy
   :straight t
   :ensure t
+  :defer t
   :after flyspell-correct)
 (global-set-key (kbd "C-,") 'flyspell-buffer)
 
