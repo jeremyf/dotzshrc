@@ -334,6 +334,12 @@
   :config (global-ethan-wspace-mode 1)
   ) ;; Prefer the following ethan-wspac-mode
 
+(use-package aggressive-indent
+  :straight t
+  :ensure t
+  :defer t)
+(add-hook 'ruby-mode-hook #'aggressive-indent-mode)
+
 (use-package column-enforce-mode
   :straight t
   :ensure t
