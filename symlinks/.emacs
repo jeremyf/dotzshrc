@@ -114,6 +114,20 @@
     (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
     (counsel-mode 1))
 
+(use-package ag
+  :straight t
+  :ensure t)
+
+;; This package is amazing!!!  Render search results to a buffer, edit
+;; the buffer and write back to the file hits.  There is not a ripgrep
+;; option
+(use-package wgrep-ag
+  :ensure t
+  :straight t
+  :defer t)
+(add-hook 'ag-mode-hook 'wgrep-ag-setup)
+
+
 ;; I have found this package quite "helpful"; When I want to know the
 ;; name of a function or key or variable, I can use the helpful
 ;; package.
@@ -142,17 +156,10 @@
   (setq projectile-project-search-path '("~/git/"))
   ;; Commented out for counsel-projectile
   ;; :init (global-set-key (kbd "s-t") 'projectile-find-file)
-  :config (global-set-key (kbd "s-.") 'projectile-toggle-between-implementation-and-test))
-
-;; I'm liking ripgrep as a tool
-(use-package projectile-ripgrep
-  :ensure t
-  :straight t
-  :after projectile
-  :defer 1
-  :init (global-set-key (kbd "M-s-ƒ") 'projectile-ripgrep) ;; CMD+OPT+f
-  (global-set-key (kbd "M-s-f") 'projectile-ripgrep) ;; CMD+OPT+f
- )
+  :config (global-set-key (kbd "s-.") 'projectile-toggle-between-implementation-and-test)
+  (global-set-key (kbd "M-s-ƒ") 'projectile-ag) ;; CMD+OPT+f
+  (global-set-key (kbd "M-s-f") 'projectile-ag) ;; CMD+OPT+f
+  )
 
 (use-package counsel-projectile
   :straight t
