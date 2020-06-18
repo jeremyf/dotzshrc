@@ -1,5 +1,5 @@
 # Prompt for confirmation
-alias e=$EDITOR
+alias e='emacs -Q'
 alias gdh='git diff HEAD'
 alias lr='lil-regy'
 alias rm='rm -i'
