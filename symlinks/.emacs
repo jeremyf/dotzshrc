@@ -114,7 +114,9 @@
     (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
     (counsel-mode 1))
 
-
+;; I have found this package quite "helpful"; When I want to know the
+;; name of a function or key or variable, I can use the helpful
+;; package.
 (use-package helpful
   :straight t
   :ensure t
@@ -284,6 +286,9 @@
 
 (global-set-key (kbd "C-t") 'yas-expand)
 
+;; Browse remote git repositories; A prior package I used limited the
+;; behavior to Github. This one is bitbucket, github, sourcehut,
+;; gitlab, etc.
 (use-package browse-at-remote
   :straight t
   :ensure t
@@ -296,13 +301,16 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(ansi-color-names-vector
-   ["#fdf0ed" "#e95678" "#29d398" "#fadad1" "#26bbd9" "#ee64ac" "#26bbd9" "#403c3d"])
+   ["#fdf0ed" "#e95678" "#29d398" "#fadad1"
+    "#26bbd9" "#ee64ac" "#26bbd9" "#403c3d"])
  '(auto-save-file-name-transforms (quote ((".*" "~/.emacs.d/autosaves/\\1" t))))
  '(backup-directory-alist (quote ((".*" . "~/.emacs.d/backups/"))))
  '(column-number-mode t)
  '(custom-safe-themes
    (quote
-    ("250268d5c0b4877cc2b7c439687f8145a2c85a48981f7070a72c7f47a2d2dc13" "23ba4b4ba4d1c989784475fed58919225db8d9a9751b32aa8df835134fe7ba6f" default)))
+    ("250268d5c0b4877cc2b7c439687f8145a2c85a48981f7070a72c7f47a2d2dc13"
+     "23ba4b4ba4d1c989784475fed58919225db8d9a9751b32aa8df835134fe7ba6f"
+     default)))
  '(dired-listing-switches "-laGhpX")
  '(dired-use-ls-dired t)
  '(global-display-line-numbers-mode t)
@@ -314,6 +322,7 @@
  ;; If there is more than one, they won't work right.
  )
 
+;; Nice for neotree
 (use-package all-the-icons
   :straight t
   :ensure t)
@@ -336,11 +345,13 @@
   :config (global-ethan-wspace-mode 1)
   ) ;; Prefer the following ethan-wspac-mode
 
+;; While typing, this command uses SEXP to continually auto-indent
 (use-package aggressive-indent
   :straight t
   :ensure t
   :defer t)
-(add-hook 'ruby-mode-hook #'aggressive-indent-mode)
+;; Note: I may want to disable HTML
+(add-hook 'prog-mode-hook #'aggressive-indent-mode)
 
 (use-package column-enforce-mode
   :straight t
@@ -367,6 +378,9 @@
   :defer 1)
 (global-set-key (kbd "C-;") 'avy-goto-word-1)
 
+;; I don't use a lot of folding, this allows me to type C-RET and fold
+;; the current block.  There's more it can do but for now that's
+;; enough
 (use-package yafolding
   :straight t
   :ensure t
@@ -397,6 +411,7 @@
           (global-set-key (kbd "C-M-g") 'magit-status)
           )
 
+;; With the time machine, travel back and forth through a files history
 (use-package git-timemachine
   :straight t
   :ensure t
