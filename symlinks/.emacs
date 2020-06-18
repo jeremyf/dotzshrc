@@ -230,7 +230,10 @@
   :defer    1
   :config (global-set-key (kbd "H-SPC") 'set-rectangular-region-anchor)
   (global-set-key (kbd "C-M-SPC") 'set-rectangular-region-anchor)
-)
+  (global-set-key (kbd "C->") 'mc/mark-next-like-this)
+  (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+  (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+  )
 
 ;; Adds some nice chrome to the status line
 ;; https://github.com/milkypostman/powerline
