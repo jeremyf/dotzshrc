@@ -273,10 +273,11 @@
 
 (global-set-key (kbd "C-t") 'yas-expand)
 
-(use-package github-browse-file
+(use-package browse-at-remote
   :straight t
   :ensure t
   :defer t)
+(global-set-key (kbd "C-c g g") 'browse-at-remote)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
