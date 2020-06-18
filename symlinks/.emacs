@@ -230,6 +230,12 @@
   :config (powerline-center-theme)
 )
 
+(use-package hungry-delete
+  :straight t
+  :ensure t
+  :defer t)
+  (global-hungry-delete-mode)
+
 ;; This package ensures that the active window gets the majority of
 ;; the space, while leaving room for other windows.
 (use-package golden-ratio
