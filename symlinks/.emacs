@@ -391,7 +391,7 @@
 (use-package magit
   :straight t
   :ensure t
-  :defer t
+  :defer 1 ;; This needs to be an integer. Key bindings fail when set to "t"
   :init (setq git-commit-fill-column 72)
   :config (global-set-key (kbd "H-g") 'magit-status)
           (global-set-key (kbd "C-M-g") 'magit-status)
