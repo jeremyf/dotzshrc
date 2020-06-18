@@ -47,6 +47,9 @@
 ;; When you open Emacs, grab all the space on the screen
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
 
+;; Hide the icons of the Emacs toolbar
+(tool-bar-mode -1)
+
 ;; Remove reliance on Base16 themes; I find that I prefer the
 ;; coloration of tsdh-(light|dark)
 (load-theme 'misterioso t) ;; For inside work
