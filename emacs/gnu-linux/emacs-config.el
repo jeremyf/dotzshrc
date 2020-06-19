@@ -6,8 +6,7 @@
 ;;  "use-package" and "straight-use-package" are loaded.
 ;;
 ;;; Code:
-
-(set-frame-font "Hack 14" nil t)
+(set-frame-font "MesloLGS NF 13" nil t)
 
 (provide 'emacs-config.el)
 ;;; emacs-config.el ends here
