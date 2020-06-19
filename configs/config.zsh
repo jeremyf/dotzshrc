@@ -74,15 +74,10 @@ bindkey "$terminfo[kcud1]" history-substring-search-down
 ##
 ###############################################################################
 
-
+# darwin
 if [ -f /usr/local/opt/git-extras/share/git-extras/git-extras-completion.zsh ]; then
-  source /usr/local/opt/git-extras/share/git-extras/git-extras-completion.zsh
+    source /usr/local/opt/git-extras/share/git-extras/git-extras-completion.zsh
 fi
-
-# For Spacemacs
-# export VISUAL='emacsclient -c'
-# export GIT_EDITOR=$VISUAL
-# export EDITOR=$VISUAL
 
 # For bare-metal emacs
 export EDITOR='emacs'
