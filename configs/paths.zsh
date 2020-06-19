@@ -1,10 +1,3 @@
-if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    # Check if I have homebrew installed; If so, add this to the path
-    if [ -d "/home/linuxbrew/.linuxbrew/bin" ]; then
-        export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
-    fi
-fi
-    
 if [ -d /usr/local/opt/mysql@5.7/bin ]; then
     export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
     # Needed for building mysql gem
