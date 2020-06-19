@@ -30,7 +30,7 @@ fi
 
 # This helps in building out Ruby using openssl
 # It may require PATH-ing /usr/local/Cellar/openssl@1.1/bin (see below)
-export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
+# export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
 
 # I'm not certain if this is a good idea or not
 if [ -d /usr/local/opt/openssl@1.1/bin ]; then

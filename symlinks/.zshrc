@@ -1,3 +1,6 @@
+if [ -f $HOME/.zprofile ]; then
+    source $HOME/.zprofile
+fi
 if [ -f $ZSH/oh-my-zsh.sh ]; then
     source $ZSH/oh-my-zsh.sh
 fi
