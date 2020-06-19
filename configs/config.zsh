@@ -49,14 +49,14 @@ COMPLETION_WAITING_DOTS="true"
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
 plugins=(
-  copybuffer
-  git-extras
-  gitfast
-  osx
-  rake
-  web-search
-  zsh-syntax-highlighting
-  history-substring-search
+    copybuffer
+    git-extras
+    gitfast
+    osx
+    rake
+    web-search
+    # zsh-syntax-highlighting
+    history-substring-search
 )
 
 ###############################################################################
