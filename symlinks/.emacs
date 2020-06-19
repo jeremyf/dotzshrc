@@ -524,7 +524,8 @@ to consider doing so."
 ;; https://melpa.org/#/elfeed
 ;; (global-set-key (kbd "C-x r") 'elfeed)
 
-(add-to-list 'load-path "~/git/dotzshrc/emacs/darwin")
+(if (eq system-type 'darwin)
+    (add-to-list 'load-path "~/git/dotzshrc/emacs/darwin"))
 (require 'emacs-config.el)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
