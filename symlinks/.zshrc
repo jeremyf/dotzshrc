@@ -1,4 +1,4 @@
-if [ -f $ZSH/oh-my-zsh]; then
+if [ -f $ZSH/oh-my-zsh.sh ]; then
     source $ZSH/oh-my-zsh.sh
 fi
 
@@ -8,7 +8,7 @@ fi
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
     source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
-if [-f $HOME/git/dotzshrc/configs/p10k.zsh ]; then
+if [ -f $HOME/git/dotzshrc/configs/p10k.zsh ]; then
     source $HOME/git/dotzshrc/configs/p10k.zsh
 fi
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
