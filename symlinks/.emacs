@@ -251,6 +251,7 @@
   :config (powerline-center-theme)
   )
 
+;; Eats all of the empty spaces when you type DELETE
 (use-package hungry-delete
   :straight t
   :ensure t
@@ -292,7 +293,9 @@
   :after flyspell-correct)
 (global-set-key (kbd "C-,") 'flyspell-buffer)
 
-
+;; A rather convenient snippet manager.  When you create a snippet, it
+;; understands the mode you're in and puts the snippet in the right
+;; place.
 (use-package yasnippets
   :straight (yasnippets :type git :host github :repo "joaotavora/yasnippet")
   :ensure t
