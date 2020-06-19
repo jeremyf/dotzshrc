@@ -525,8 +525,8 @@ to consider doing so."
 ;; (global-set-key (kbd "C-x r") 'elfeed)
 
 (if (eq system-type 'darwin)
-    ((add-to-list 'load-path "~/git/dotzshrc/emacs/darwin")
-     (require 'emacs-config.el)))
+    (progn (add-to-list 'load-path "~/git/dotzshrc/emacs/darwin")
+           (require 'emacs-config.el)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; BEGIN ORG mode configuration and concerns
