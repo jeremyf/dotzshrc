@@ -528,6 +528,10 @@ to consider doing so."
     (progn (add-to-list 'load-path "~/git/dotzshrc/emacs/darwin")
            (require 'emacs-config.el)))
 
+(if (eq system-type 'gnu/linux)
+    (progn (add-to-list 'load-path "~/git/dotzshrc/emacs/gnu-linux")
+           (require 'emacs-config.el)))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; BEGIN ORG mode configuration and concerns
 (global-set-key (kbd "C-c l") 'org-store-link)
