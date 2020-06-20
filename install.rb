@@ -36,6 +36,7 @@ if RUBY_PLATFORM.include?('darwin')
   system("git config --system --add core.pager `brew --prefix git`/share/git-core/contrib/diff-highlight/diff-highlight | less -F -X")
 elsif RUBY_PLATFORM.include?('linux')
   $stdout.puts "Installing global git config for gnu-linux"
+  $stdout.puts "You may need to run this as sudo"
   system("git config --system --add credential.helper /usr/lib/git-core/git-credential-libsecret")
   system("git config --system --add interactive.diffFilter /usr/share/git/diff-highlight/diff-highlight")
   system("git config --system --add core.pager /usr/share/git/diff-highlight/diff-highlight | less -F -X")
