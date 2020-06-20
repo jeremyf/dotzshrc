@@ -38,7 +38,7 @@ Then set:
   *  Right option key to send ESC
   *  Caps lock to send CTRL
 
-# ArchLinux
+# Manjaro
 
 * Install rbenv
 * Install "ag": `pacman -S the_silver_searcher`
