@@ -1,5 +1,6 @@
-Install homebrew - https://brew.sh
+# OS X
 
+Install homebrew - https://brew.sh
 Install OhMyZsh - https://github.com/ohmyzsh/ohmyzsh
 
 *   `brew cask install font-hack-nerd-font`
@@ -19,20 +20,16 @@ Install OhMyZsh - https://github.com/ohmyzsh/ohmyzsh
 *   `brew tap homebrew/cask-fonts`
 *   `brew tap homebrew/cask`
 
-# Necessary for some takeonrules dependencies
+## Necessary for some takeonrules dependencies
 
 *   `brew install gmp`
 *   `brew install gsl`
 
-# SSH Keys
+## SSH Keys
 
 Ensure that I have up to date SSH keys
 
-# Ensure that I have the correct plugins https://github.com/jeremyf/dotatom
-
-Download JetBrains Mono for text editor
-
-# Install Karabiner
+## Install Karabiner
 
 https://karabiner-elements.pqrs.org/
 
@@ -40,3 +37,11 @@ Then set:
 
   *  Right option key to send ESC
   *  Caps lock to send CTRL
+
+# ArchLinux
+
+* Install rbenv
+* Install "ag": `pacman -S the_silver_searcher`
+* Install OhMyZsh - https://github.com/ohmyzsh/ohmyzsh
+* Install Powerlevel10k - https://github.com/romkatv/powerlevel10k#oh-my-zsh
+* Install xclip and xsel: `pacman -S xclip xsel`
