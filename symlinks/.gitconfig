@@ -1,10 +1,6 @@
-# Sample gitconfig
-#
 [user]
         name = Jeremy Friesen
         email = jeremy.n.friesen@gmail.com
-[credential]
-	helper = $GIT_CREDENTIAL_HELPER
 [github]
         user = jeremyf
 [url "git@github.com:jeremyf/"]
@@ -238,7 +234,8 @@
         extendedRegexp = true
 [core]
         excludesfile = ~/.gitignore
-        pager = $GIT_DIFF_HIGHLIGHT_PATH | less -F -X
+        # Set via install script
+        # pager
 [rebase]
         stat = true
 [filter "media"]
@@ -249,6 +246,7 @@
         pruneduringfetch = true
         diffcontext = 7
 [interactive]
-        diffFilter = $GIT_DIFF_HIGHLIGHT_PATH
+        # Set via install script
+        # diffFilter 
 [pull]
 	rebase = true
