@@ -372,12 +372,12 @@
 ;; Note: I may want to disable HTML
 (add-hook 'prog-mode-hook #'aggressive-indent-mode)
 
-(use-package column-enforce-mode
-  :straight t
-  :ensure t
-  :defer t
-  :init (setq column-enforce-column 80))
-(global-column-enforce-mode t)
+;; (use-package column-enforce-mode
+;;   :straight t
+;;   :ensure t
+;;   :defer t
+;;   :init (setq column-enforce-column 80))
+;; (global-column-enforce-mode t)
 
 ;; https://github.com/jrblevin/markdown-mode/
 (use-package markdown-mode
