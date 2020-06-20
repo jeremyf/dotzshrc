@@ -4,14 +4,12 @@
 require 'fileutils'
 $stdout.puts 'Installing zshrc aliases…'
 home_dirname = ENV.fetch('HOME')
-symlink_sources = File.expand_path('symlinks/.*', __dir__)
+symlink_sources = File.expand_path('symlinks/dot.*', __dir__)
 Dir.glob(symlink_sources).each do |source_filename|
   basename = File.basename(source_filename)
-  next if basename == '.'
-  next if basename == '..'
-
+  target_basename = basename.to_s.sub(/^dot/,'')
   # Create a symlink in HOME directory to source_filename
-  target_name = File.join(home_dirname, basename.to_s)
+  target_name = File.join(home_dirname, target_basename.to_s)
   $stdout.puts "\t#{target_name} ->\n\t\t#{source_filename}"
   FileUtils.ln_sf(source_filename, target_name)
 end
@@ -36,7 +34,6 @@ if RUBY_PLATFORM.include?('darwin')
   system("git config --system --add core.pager `brew --prefix git`/share/git-core/contrib/diff-highlight/diff-highlight | less -F -X")
 elsif RUBY_PLATFORM.include?('linux')
   $stdout.puts "Installing global git config for gnu-linux"
-  $stdout.puts "You may need to run this as sudo"
   system("git config --system --add credential.helper /usr/lib/git-core/git-credential-libsecret")
   system("git config --system --add interactive.diffFilter /usr/share/git/diff-highlight/diff-highlight")
   system("git config --system --add core.pager /usr/share/git/diff-highlight/diff-highlight | less -F -X")
