@@ -20,6 +20,12 @@ alias psx="ps ax | ag $1"
 alias rss="newsboat -C ~/.newsboatrc -u ~/git/takeonrules.github.io/rss/urls.txt"
 alias rss-init="newsboat -C ~/.newsboatrc -u ~/git/takeonrules.github.io/rss/urls.txt -i ~/git/takeonrules.github.io/rss/full-blogroll.opml"
 
+# A convenience method to keep a few of the "long used" aliases
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    alias pbcopy="xclip"
+    alias pbpaste="xsel"
+fi
+
 # Hyrax aliases
 alias hyrax-devup='fcrepo_wrapper & solr_wrapper & redis-server &'
 alias hyrax-testup='fcrepo_wrapper --config config/fcrepo_wrapper_test.yml & solr_wrapper --config config/solr_wrapper_test.yml & solr_wrapper --config config/solr_wrapper_valkyrie_test.yml & redis-server &'
@@ -34,6 +40,6 @@ alias net_traffic="lsof -r -i"
 
 # `awsassumerole testlibnd-superAdmin` (see ~/.aws/config for profile)
 awsassumerole(){
-  unset AWS_VAULT
-  export $(aws-vault exec $1 --assume-role-ttl 1h -- env | grep AWS)
+    unset AWS_VAULT
+    export $(aws-vault exec $1 --assume-role-ttl 1h -- env | grep AWS)
 }
