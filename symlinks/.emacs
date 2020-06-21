@@ -7,7 +7,7 @@
 ;;  This is my journey into Emacs.  Let's see where we go!
 ;;
 ;;; CODE:
-
+;;
 ;; Make startup faster by reducing the frequency of garbage
 ;; collection.  The default is 800 kilobytes.  Measured in bytes.
 ;; From https://blog.d46.us/advanced-emacs-startup/
@@ -239,6 +239,7 @@
   (global-set-key (kbd "C->") 'mc/mark-next-like-this)
   (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
   (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+  (global-set-key (kbd "C-s-l C-s-l") 'mc/edit-lines) ;; CTRL+CMD+c
   )
 
 ;; Adds some nice chrome to the status line
