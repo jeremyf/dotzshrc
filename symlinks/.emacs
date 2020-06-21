@@ -55,7 +55,7 @@
 ;; I get into the 80s on previous pastes.  Given that the kill ring is
 ;; searchable via ivy/counsel, I think a larger value makes a lot of
 ;; sense.
-(kill-ring-max 120)
+(setq kill-ring-max 120)
 
 ;; Remove reliance on Base16 themes; I find that I prefer the
 ;; coloration of tsdh-(light|dark)
