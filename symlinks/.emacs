@@ -57,6 +57,10 @@
 ;; sense.
 (setq kill-ring-max 120)
 
+
+;; Given the number of symlinks, visit the "linked to" file.
+(setq vc-follow-symlinks t)
+
 ;; Remove reliance on Base16 themes; I find that I prefer the
 ;; coloration of tsdh-(light|dark)
 (load-theme 'misterioso t) ;; For inside work
