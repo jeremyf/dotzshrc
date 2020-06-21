@@ -50,6 +50,13 @@
 ;; Hide the icons of the Emacs toolbar
 (tool-bar-mode -1)
 
+;; The default is 60.  It is rare that I need more than 15 or 20.
+;; However in my long use of Jumpcut there have been a few times where
+;; I get into the 80s on previous pastes.  Given that the kill ring is
+;; searchable via ivy/counsel, I think a larger value makes a lot of
+;; sense.
+(kill-ring-max 120)
+
 ;; Remove reliance on Base16 themes; I find that I prefer the
 ;; coloration of tsdh-(light|dark)
 (load-theme 'misterioso t) ;; For inside work
@@ -251,27 +258,31 @@
   :config (powerline-center-theme)
   )
 
-;; Eats all of the empty spaces when you type DELETE
+;; Eats all of the empty spaces when you type DELETE This is a bit
+;; hungrier than I might want, so I'm keeping an eye on it.
 (use-package hungry-delete
   :straight t
   :ensure t
   :defer t)
-  (global-hungry-delete-mode)
+(global-hungry-delete-mode)
 
 ;; This package ensures that the active window gets the majority of
 ;; the space, while leaving room for other windows.
+;;
+;; Interestingly, having a visual reminder of the active window helps
+;; focus my thinking.
 (use-package golden-ratio
   :straight t
   :ensure t
   :config (golden-ratio-mode 1)
-)
+  )
 
 ;; Adding smartparens options
 (use-package smartparens
   :straight t
   :ensure t
   :config (smartparens-strict-mode 1)
-        (smartparens-global-mode 1))
+  (smartparens-global-mode 1))
 
 (use-package flycheck
   :ensure t
@@ -283,7 +294,7 @@
 (use-package flyspell-correct
   :straight t
   :ensure t
-  :after flyspell
+  :after flycheck
   :defer t)
 
 (use-package flyspell-correct-ivy
@@ -355,7 +366,7 @@
   :init (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
   :config (global-set-key [f8] 'neotree-toggle))
 
-;; Whitespace   hygene  package.   The   author's  documentation   and
+;; Whitespace hygene package.  The author's documentation and
 ;; commentary echoes my sentiments
 (use-package ethan-wspace
   :straight t
@@ -363,9 +374,10 @@
   :defer t
   :init (setq-default mode-require-final-newline nil)
   :config (global-ethan-wspace-mode 1)
-  ) ;; Prefer the following ethan-wspac-mode
+  )
 
-;; While typing, this command uses SEXP to continually auto-indent
+;; While typing, this command uses SEXP to continually auto-indent.   It
+;; saves quite a bit of rework.
 (use-package aggressive-indent
   :straight t
   :ensure t
@@ -390,6 +402,11 @@
          ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "/usr/local/bin/pandoc"))
 
+(use-package yaml-mode
+  :straight t
+  :ensure t
+  :defer t)
+
 ;; Type C-; and a letter. That letter is the beginning of a
 ;; word. Narrow results from there.
 (use-package avy
@@ -409,6 +426,8 @@
 (add-hook 'prog-mode-hook
           (lambda () (yafolding-mode)))
 
+;; Compressed JSON sure is ugly and illegible; This solves that
+;; problem.
 (use-package json-reformat
   :straight t
   :ensure t
