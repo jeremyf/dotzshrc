@@ -57,7 +57,6 @@
 ;; sense.
 (setq kill-ring-max 120)
 
-
 ;; Given the number of symlinks, visit the "linked to" file.
 (setq vc-follow-symlinks t)
 
@@ -80,6 +79,10 @@
 ;; I saw that straight loaded use-package to take advantage of the
 ;; use-package syntax which is often how things are documented.
 (straight-use-package 'use-package)
+
+(use-package savekill
+  :ensure t
+  :straight t)
 
 ;; https://oremacs.com/swiper/
 ;; Note: I've set all searches to use fuzzy regex
