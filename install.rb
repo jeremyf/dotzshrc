@@ -50,9 +50,15 @@ platform = `uname`.strip.downcase
 
 if platform =~ /darwin/
   $stdout.puts "Installing global git config for darwin"
-  system("git config --system --add credential.helper osxkeychain")
-  system("git config --system --add interactive.diffFilter `brew --prefix git`/share/git-core/contrib/diff-highlight/diff-highlight")
-  system("git config --system --add core.pager `brew --prefix git`/share/git-core/contrib/diff-highlight/diff-highlight | less -F -X")
+  unless system("git config --system --get credential.helper")
+    system("git config --system --add credential.helper osxkeychain")
+  end
+  unless system("git config --system --get interactive.diffFilter")
+    system("git config --system --add interactive.diffFilter `brew --prefix git`/share/git-core/contrib/diff-highlight/diff-highlight")
+  end
+  unless system("git config --system --get core.pager")
+    system("git config --system --add core.pager `brew --prefix git`/share/git-core/contrib/diff-highlight/diff-highlight | less -F -X")
+  end
 elsif platform =~ /linux/
   $stdout.puts "Installing global git config for gnu-linux"
   $stdout.puts(%(Run "sudo git config --system --add credential.helper /usr/lib/git-core/git-credential-libsecret"))
