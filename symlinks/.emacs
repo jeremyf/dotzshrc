@@ -105,6 +105,7 @@
 ;; Part of the ivy/counsel/swiper trio
 (use-package counsel
   :straight t
+  :after ivy
   :defer t
   :ensure t
   :init (setq ivy-use-selectable-prompt t)
@@ -132,19 +133,28 @@
 ;; you try wgrep-ag
 (use-package ag
   :straight t
+  :after counsel
   :ensure t)
 
 ;; This package is amazing!!!  Render search results to a buffer, edit
 ;; the buffer and write back to the file hits.  There is not a ripgrep
 ;; option.
-;;
-
 (use-package wgrep-ag
   :ensure t
   :straight t
   :after ag
   :defer t)
 (add-hook 'ag-mode-hook 'wgrep-ag-setup)
+
+;; Search via ag, see candidates and use ivy to show ALL candidates,
+;; then wgrep to edit those candidates and save
+;;
+;; 1) M-s-f 'counsel-ag
+;; 2) C-c C-o 'ivy-occur
+;; 3) C-c C-p 'wgrep-toggle-readonly-area
+;; 4) C-x C-s to save OR C-x C-q to exit without save
+(global-set-key (kbd "M-s-ƒ") 'counsel-ag) ;; CMD+OPT+f
+(global-set-key (kbd "M-s-f") 'counsel-ag) ;; CMD+OPT+f
 
 ;; I have found this package quite "helpful"; When I want to know the
 ;; name of a function or key or variable, I can use the helpful
@@ -178,16 +188,6 @@
   ;; :init (global-set-key (kbd "s-t") 'projectile-find-file)
   :config (global-set-key (kbd "s-.") 'projectile-toggle-between-implementation-and-test)
   )
-
-;; Search via ag, see candidates and use ivy to show ALL candidates,
-;; then wgrep to edit those candidates and save
-;;
-;; 1) M-s-f 'counsel-ag
-;; 2) C-c C-o 'ivy-occur
-;; 3) C-c C-p 'wgrep-toggle-readonly-area
-;; 4) C-x C-s to save OR C-x C-q to exit without save
-(global-set-key (kbd "M-s-ƒ") 'counsel-ag) ;; CMD+OPT+f
-(global-set-key (kbd "M-s-f") 'counsel-ag) ;; CMD+OPT+f
 
 (use-package counsel-projectile
   :straight t
