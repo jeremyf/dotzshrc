@@ -136,7 +136,9 @@
 
 ;; This package is amazing!!!  Render search results to a buffer, edit
 ;; the buffer and write back to the file hits.  There is not a ripgrep
-;; option
+;; option.
+;;
+
 (use-package wgrep-ag
   :ensure t
   :straight t
@@ -175,9 +177,17 @@
   ;; Commented out for counsel-projectile
   ;; :init (global-set-key (kbd "s-t") 'projectile-find-file)
   :config (global-set-key (kbd "s-.") 'projectile-toggle-between-implementation-and-test)
-  (global-set-key (kbd "M-s-ƒ") 'projectile-ag) ;; CMD+OPT+f
-  (global-set-key (kbd "M-s-f") 'projectile-ag) ;; CMD+OPT+f
   )
+
+;; Search via ag, see candidates and use ivy to show ALL candidates,
+;; then wgrep to edit those candidates and save
+;;
+;; 1) M-s-f 'counsel-ag
+;; 2) C-c C-o 'ivy-occur
+;; 3) C-c C-p 'wgrep-toggle-readonly-area
+;; 4) C-x C-s to save OR C-x C-q to exit without save
+(global-set-key (kbd "M-s-ƒ") 'counsel-ag) ;; CMD+OPT+f
+(global-set-key (kbd "M-s-f") 'counsel-ag) ;; CMD+OPT+f
 
 (use-package counsel-projectile
   :straight t
