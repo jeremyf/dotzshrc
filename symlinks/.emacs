@@ -250,10 +250,9 @@
 (use-package string-inflection
   :defer t
   :ensure t
-  :straight (string-inflection :type git :host github :repo "akicho8/string-inflection"))
-
-(global-set-key (kbd "H-u") 'string-inflection-all-cycle)
-(global-set-key (kbd "C-M-u") 'string-inflection-all-cycle)
+  :straight (string-inflection :type git :host github :repo "akicho8/string-inflection")
+  :bind (("H-u" . string-inflection-all-cycle)
+         ("C-M-u" . string-inflection-all-cycle)))
 
 ;; Allow to work with multipe cursors
 ;; https://melpa.org/#/multiple-cursors Aside from the
@@ -263,13 +262,13 @@
   :straight t
   :ensure   t
   :defer    1
-  :config (global-set-key (kbd "H-SPC") 'set-rectangular-region-anchor)
-  (global-set-key (kbd "C-M-SPC") 'set-rectangular-region-anchor)
-  (global-set-key (kbd "C->") 'mc/mark-next-like-this)
-  (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-  (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
-  (global-set-key (kbd "C-s-l C-s-l") 'mc/edit-lines) ;; CTRL+CMD+c
-  )
+  :bind (("H-SPC" . set-rectangular-region-anchor)
+         ("C-M-SPC" . set-rectangular-region-anchor)
+         ("C->" . mc/mark-next-like-this)
+         ("C-<" . mc/mark-previous-like-this)
+         ("C-c C-<" . mc/mark-all-like-this)
+         ("C-s-l C-s-l" . mc/edit-lines) ;; CTRL+CMD+c
+         ))
 
 ;; Adds some nice chrome to the status line
 ;; https://github.com/milkypostman/powerline
@@ -333,11 +332,10 @@
   :straight (yasnippets :type git :host github :repo "joaotavora/yasnippet")
   :ensure t
   :defer t
+  :bind (("C-t" . yas-expand))
   :init (setq yas-snippet-dirs '("~/git/dotzshrc/emacs/snippets"))
   (yas-global-mode 1)
   )
-
-(global-set-key (kbd "C-t") 'yas-expand)
 
 ;; Browse remote git repositories; A prior package I used limited the
 ;; behavior to Github. This one is bitbucket, github, sourcehut,
