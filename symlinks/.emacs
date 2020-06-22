@@ -439,22 +439,22 @@
   :straight t
   :ensure t
   :defer 1)
-
 (add-hook 'prog-mode-hook
           (lambda () (yafolding-mode)))
+
+(use-package json-mode
+  :straight t
+  :ensure t
+  :defer 1)
 
 ;; Compressed JSON sure is ugly and illegible; This solves that
 ;; problem.
 (use-package json-reformat
   :straight t
   :ensure t
+  :after json-mode
   :defer 1
   :init (setq json-reformat:indent-width 2))
-
-(use-package json-mode
-  :straight t
-  :ensure t
-  :defer 1)
 
 ;; Adding format to git-commit-fill-column of 72 as best
 ;; practice.
@@ -464,8 +464,8 @@
   :defer 1 ;; This needs to be an integer. Key bindings fail when set to "t"
   :init (setq git-commit-fill-column 72)
   :config (global-set-key (kbd "H-g") 'magit-status)
-          (global-set-key (kbd "C-M-g") 'magit-status)
-          )
+  (global-set-key (kbd "C-M-g") 'magit-status)
+  )
 
 ;; With the time machine, travel back and forth through a files history
 (use-package git-timemachine
