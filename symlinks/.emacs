@@ -115,7 +115,10 @@
          ("C-c C-r". 'ivy-resume)
          ("<f6>" . ivy-resume)
          ("M-x" . counsel-M-x)
-         ("C-x C-f" . counsel-find-file)
+         ("C-x C-f" . counsel-find-file) ;; A complimentary function to the
+         ;; counsel-projectile-find-file;
+         ;; this scopes to the current
+         ;; director
          ("<f1> f" . counsel-describe-function)
          ("<f1> v" . counsel-describe-variable)
          ("<f1> o" . counsel-describe-symbol)
@@ -196,7 +199,7 @@
   :ensure t
   :defer t
   :after projectile
-  :init (global-set-key (kbd "s-t") 'counsel-projectile-find-file))
+  :bind ("s-t" . counsel-projectile-find-file)) ; CMD+t
 
 (use-package robe
   :straight t
@@ -494,8 +497,8 @@ to consider doing so."
   :straight t
   :ensure t
   :defer 1
-  :init (global-set-key [C-s-down] 'move-text-down)
-        (global-set-key [C-s-up] 'move-text-up))
+  :bind (([C-s-down] . move-text-down)
+         ([C-s-up] . move-text-up)))
 
 ;; From https://stackoverflow.com/questions/88399/how-do-i-duplicate-a-whole-line-in-emacs
 (defun duplicate-line (arg)
