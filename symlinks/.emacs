@@ -434,8 +434,8 @@
 (use-package avy
   :straight t
   :ensure t
-  :defer 1)
-(global-set-key (kbd "C-;") 'avy-goto-word-1)
+  :defer 1
+  :bind (("C-;" . avy-goto-word-1)))
 
 ;; I don't use a lot of folding, this allows me to type C-RET and fold
 ;; the current block.  There's more it can do but for now that's
