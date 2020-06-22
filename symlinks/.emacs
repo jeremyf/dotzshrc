@@ -90,9 +90,8 @@
   :straight t
   :defer t
   :ensure t
+  :after avy
   :diminish (ivy-mode . "")
-  :bind (:map ivy-mode-map
-              ("C-'" . ivy-avy))
   :config (ivy-mode 1)
   (setq ivy-use-virtual-buffers t)
   (setq ivy-height 10)
