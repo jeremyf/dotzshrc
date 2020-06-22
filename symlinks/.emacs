@@ -163,15 +163,17 @@
   :straight t
   :ensure t
   :after counsel
-  :defer 2
-  :bind (("C-c C-d" . helpful-at-point))
+  :defer t
+  :bind (
+         ("C-c C-d" . helpful-at-point)
+         ("C-h v" . helpful-variable)
+         ("C-h k" . helpful-key)
+         ("C-h f" . helpful-function)
+         ("C-h c" . helpful-command)
+         ("C-h f" . helpful-callable)
+         )
   :init (setq counsel-describe-function-function #'helpful-callable)
   (setq counsel-describe-variable-function #'helpful-variable)
-  :config (global-set-key (kbd "C-h f") #'helpful-callable)
-  (global-set-key (kbd "C-h v") #'helpful-variable)
-  (global-set-key (kbd "C-h k") #'helpful-key)
-  (global-set-key (kbd "C-h f") #'helpful-function)
-  (global-set-key (kbd "C-h c") #'helpful-command)
   )
 
 ;; https://docs.projectile.mx/en/latest/
