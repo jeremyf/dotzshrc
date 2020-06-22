@@ -391,9 +391,10 @@
   :straight t
   :ensure t
   :defer t
-  :init (setq-default mode-require-final-newline nil)
-  :config (global-ethan-wspace-mode 1)
-  )
+  :init (setq-default mode-require-final-newline nil))
+(global-ethan-wspace-mode 1)
+(add-hook 'before-save-hook
+          'delete-trailing-whitespace)
 
 ;; While typing, this command uses SEXP to continually auto-indent.   It
 ;; saves quite a bit of rework.
@@ -593,7 +594,7 @@ to consider doing so."
         ("r" "Reading" entry (file+headline "~/git/org/2020/readings.org" "Readings")
          "* %^{SUBJECT} %u\n %?\n")
         ("s" "Session" entry (file+headline "~/git/org/2020/sessions.org" "Sessions")
-         "* Session: %u %^{SUMMARY}\n  %^{ATTENDEES}p\n  %^{SYSTEM}p\n  %?\n")
+         "* Session: %u %^{SUMMARY}\n\n  %^{ATTENDEES}p\n  %^{SYSTEM}p\n  %?\n")
         ("t" "Todo" entry (file+headline "~/git/org/2020/todo.org" "Tasks")
          "* TODO %?\n  %i\n  %a")
         ))
