@@ -80,5 +80,5 @@ if [ -f /usr/local/opt/git-extras/share/git-extras/git-extras-completion.zsh ]; 
 fi
 
 # For bare-metal emacs
-export EDITOR='emacsclient -cn -a "emacs" --frame-parameters="((fullscreen . maximized))"'
+export EDITOR='emacsclient -cn -a "emacs" --frame-parameters="((fullscreen . maximized)(font . \"MesloLGS NF 13\")))"'
 export GIT_EDITOR=$EDITOR
