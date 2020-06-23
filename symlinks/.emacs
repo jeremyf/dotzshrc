@@ -94,7 +94,7 @@
   :diminish (ivy-mode . "")
   :config (ivy-mode 1)
   (setq ivy-use-virtual-buffers t)
-  (setq ivy-height 10)
+  (setq ivy-height 12)
   (setq ivy-count-format "(%d/%d) ")
   (setq ivy-initial-inputs-alist nil)
   (setq ivy-re-builders-alist
@@ -110,9 +110,8 @@
   :init (setq ivy-use-selectable-prompt t)
   (setq search-default-mode #'char-fold-to-regexp)
   :bind (
-         ("\C-s" . swiper)
+         ("C-s" . swiper)
          ("C-c C-r". 'ivy-resume)
-         ("<f6>" . ivy-resume)
          ("M-x" . counsel-M-x)
          ("C-x C-f" . counsel-find-file) ;; A complimentary function to the
          ;; counsel-projectile-find-file;
@@ -124,12 +123,9 @@
          ("<f1> l" . counsel-find-library)
          ("<f2> i" . counsel-info-lookup-symbol)
          ("<f2> u" . counsel-unicode-char)
-         ("C-c g" . counsel-git)
-         ("C-c j" . counsel-git-grep)
-         ("C-c r" . counsel-rg)
-         ("C-x l" . counsel-locate)
-         ("C-S-o" . counsel-rhythmbox))
+         ("C-x l" . counsel-locate))
   :config (counsel-mode 1))
+(define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
 
 ;; The silver searcher; I found ripgrep a bit nicer, but wait until
 ;; you try wgrep-ag
