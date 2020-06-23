@@ -331,10 +331,13 @@
   :straight (yasnippets :type git :host github :repo "joaotavora/yasnippet")
   :ensure t
   :defer t
-  :bind (("C-t" . yas-expand))
+  :bind (("C-c C-e" . yas-expand))
   :init (setq yas-snippet-dirs '("~/git/dotzshrc/emacs/snippets"))
   (yas-global-mode 1)
   )
+
+(defalias 'tp 'transpose-pagraphs)
+(defalias 'ts 'transpose-sentence)
 
 ;; Browse remote git repositories; A prior package I used limited the
 ;; behavior to Github. This one is bitbucket, github, sourcehut,
