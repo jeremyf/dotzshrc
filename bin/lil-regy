@@ -26,7 +26,7 @@
 #
 # Dependencies:
 #
-#   ripgrep
+#   the_silver_searcher (e.g., `ag`)
 #   ruby
 require 'optparse'
 config = { path: '.', do_it: false }
@@ -45,7 +45,7 @@ optparse = OptionParser.new do |options|
     "\twhy would you do that?)\n\n" \
     "\tIf you add the -d option (aka Do It!), then lil-regy will update the\n\tfiles.\n\n" \
     "Note:\n\n" \
-    "\tYou can pass additional options to ripgrep by adding -- and the desired\n\tripgrep options.\n\n" \
+    "\tYou can pass additional options to ag by adding -- and the desired\n\tag options.\n\n" \
     "\tLil' Regy relies on my color configuration (e.g. red for what's found by\n" \
     "\tripgrep). So your mileage may vary.\n\n" \
     "Options:\n"
@@ -96,7 +96,7 @@ replace_pattern = config.fetch(:replace) if try_replace
 path = File.expand_path(config.fetch(:path))
 require 'open3'
 
-class RipGrep
+class SilverSearcher
   def initialize(argv:, path:, find_pattern:)
     @argv = argv.clone
     @path = path
@@ -105,18 +105,18 @@ class RipGrep
   attr_reader :argv, :path, :find_pattern
 
   def do_it_args
-    ['rg', '--files-with-matches', '--pcre2'] + argv + [find_pattern, path]
+    ['ag', '--files-with-matches', "--color-match=31"] + argv + [find_pattern, path]
   end
 
   def preview_args
-    ['rg', '--pretty', '--pcre2'] + argv + [find_pattern, path]
+    ['ag', '--color', "--color-match=31"] + argv + [find_pattern, path]
   end
 end
-rg = RipGrep.new(argv: ARGV, path: path, find_pattern: find_pattern)
+silver_searcher = SilverSearcher.new(argv: ARGV, path: path, find_pattern: find_pattern)
 
 if config.fetch(:do_it, false)
   # This section is for the making the updates
-  Open3.pipeline_r(rg.do_it_args) do |o|
+  Open3.pipeline_r(silver_searcher.do_it_args) do |o|
     while filename = o.gets
       filename = filename.chomp
       $stdout.puts "Updating #{filename}"
@@ -135,12 +135,12 @@ if config.fetch(:do_it, false)
   end
 else
   # This section is for the dry run
-  Open3.pipeline_r(rg.preview_args) do |o|
+  Open3.pipeline_r(silver_searcher.preview_args) do |o|
     while text = o.gets
       # This is the filename
       if text.strip.empty?
         $stdout.print text
-      elsif text.start_with?("\e[0m\e[35m")
+      elsif text.start_with?("\e[35m")
         $stdout.print text
       else
         if try_replace
@@ -148,7 +148,7 @@ else
           $stdout.print text
           replaced_text = text.gsub(find_regexp, replace_pattern)
           if text != replaced_text
-            replaced_text = replaced_text.gsub("\e[0m\e[1m\e[31m", "\e[0m\e[1m\e[32m")
+            replaced_text = replaced_text.gsub("\e[31m", "\e[32m")
             $stdout.print "\e[0m\e[1m\e[32m+ \e[0m"
             $stdout.print replaced_text
           end
