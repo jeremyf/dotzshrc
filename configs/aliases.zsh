@@ -1,5 +1,6 @@
 # Prompt for confirmation
-alias e='emacs -Q'
+alias edaemon='emacs --daemon -fn "MesloLGS NF 13"'
+alias e='emacsclient -cn -a "emacs" --frame-parameters="((fullscreen . maximized))"'
 alias gdh='git diff HEAD'
 alias lr='lil-regy'
 alias rm='rm -i'

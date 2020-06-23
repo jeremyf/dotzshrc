@@ -559,6 +559,7 @@ to consider doing so."
 (global-set-key (kbd "s-l") 'goto-line)
 (global-set-key (kbd "C-w") 'backward-kill-word)
 (global-set-key (kbd "M-DEL") 'backward-kill-paragraph)
+(global-set-key (kbd "s-q") 'save-buffers-kill-terminal)
 
 ;; https://melpa.org/#/elfeed
 ;; (global-set-key (kbd "C-x r") 'elfeed)
@@ -602,6 +603,6 @@ to consider doing so."
 ;; END ORG mode configuration and concerns
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-
+(server-start)
 ;; Make gc pauses faster by decreasing the threshold.
 (setq gc-cons-threshold (* 2 1000 1000))
