@@ -21,3 +21,7 @@ What's the deal with `emacs` and `emacs.d`?  The `install.rb` script
 writes files from `emacs.d` directory to the `~/.emacs.d`.  The
 `emacs` directory contains things referenced in my `.emacs` file.  I'm
 also working to figure out how best to arrange things.
+
+## Emacs and Emacsclient
+
+I have added two aliases: `e` and `edaemon`
