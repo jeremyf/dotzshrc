@@ -5,7 +5,7 @@ outfilename = '/Users/jfriesen/.safe/wallet-database.csv'
 encrypted_filename = '/Users/jfriesen/.safe/wallet-database.csv.encrypted'
 if ARGV[0] == '--open'
   `/usr/bin/openssl des3 -d -salt -out #{outfilename} -in #{encrypted_filename}`
-  `atom #{outfilename}`
+  `#{ENV['EDITOR']} #{outfilename}`
   exit(0)
 elsif ARGV[0] == '--close'
   if File.exist?(outfilename)

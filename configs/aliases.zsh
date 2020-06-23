@@ -1,11 +1,12 @@
 # Prompt for confirmation
 alias edaemon='emacs --daemon -fn "MesloLGS NF 13"'
-alias e='emacsclient -cn -a "emacs" --frame-parameters="((fullscreen . maximized))"'
+alias e=$EDITOR
 alias lr='lil-regy'
 alias rm='rm -i'
 alias file-count="find . -type f -print | wc -l"
 alias bx="bundle exec"
 alias gl='git lg'
+alias gd='git diff'
 alias gst='git st'
 alias gb='git ba'
 alias gwc='git whatchanged -p --abbrev-commit --pretty=medium'
