@@ -1,20 +1,13 @@
 # Prompt for confirmation
 alias edaemon='emacs --daemon -fn "MesloLGS NF 13"'
 alias e='emacsclient -cn -a "emacs" --frame-parameters="((fullscreen . maximized))"'
-alias gdh='git diff HEAD'
 alias lr='lil-regy'
 alias rm='rm -i'
 alias file-count="find . -type f -print | wc -l"
 alias bx="bundle exec"
-alias to="todo.sh"
 alias gl='git lg'
 alias gst='git st'
-alias gsp='git sp'
-alias gc='git co'
-alias gm='git commit'
 alias gb='git ba'
-alias ga='git add'
-alias gd='git diff'
 alias gwc='git whatchanged -p --abbrev-commit --pretty=medium'
 alias hb="hub browse"
 alias psx="ps ax | ag $1"
@@ -25,6 +18,11 @@ alias rss-init="newsboat -C ~/.newsboatrc -u ~/git/takeonrules.github.io/rss/url
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     alias pbcopy="xclip"
     alias pbpaste="xsel"
+fi
+
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    alias light=". $HOME/.config/base16-shell/scripts/base16-google-light.sh"
+    alias dark=". $HOME/.config/base16-shell/scripts/base16-google-dark.sh"
 fi
 
 # Hyrax aliases
