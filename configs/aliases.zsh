@@ -3,7 +3,7 @@ export EDITOR='emacsclient -cn -a "emacs" --frame-parameters="((fullscreen . max
 export GIT_EDITOR=$EDITOR
 
 # Prompt for confirmation
-alias edaemon='emacs --daemon -fn "MesloLGS NF 13"'
+alias edaemon='pkill -f emacs ; emacs --daemon -fn "MesloLGS NF 13"'
 alias e=$EDITOR
 alias lr='lil-regy'
 alias rm='rm -i'
