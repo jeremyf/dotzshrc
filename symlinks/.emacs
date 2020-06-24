@@ -406,15 +406,6 @@
 (add-hook 'before-save-hook
           'delete-trailing-whitespace)
 
-;; While typing, this command uses SEXP to continually auto-indent.   It
-;; saves quite a bit of rework.
-(use-package aggressive-indent
-  :straight t
-  :ensure t
-  :defer t)
-;; Note: I may want to disable HTML
-(add-hook 'prog-mode-hook #'aggressive-indent-mode)
-
 ;; (use-package column-enforce-mode
 ;;   :straight t
 ;;   :ensure t
