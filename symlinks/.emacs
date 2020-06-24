@@ -125,6 +125,8 @@
          ("<f1> l" . counsel-find-library)
          ("<f2> i" . counsel-info-lookup-symbol)
          ("<f2> u" . counsel-unicode-char)
+         ("C-c r" . counsel-register)
+         ("C-c m" . counsel-mark-ring)
          ("C-x l" . counsel-locate))
   :config (counsel-mode 1))
 (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
