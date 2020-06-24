@@ -1,3 +1,7 @@
+# For bare-metal emacs
+export EDITOR='emacsclient -cn -a "emacs" --frame-parameters="((fullscreen . maximized)(font . \"MesloLGS NF 13\")))"'
+export GIT_EDITOR=$EDITOR
+
 # Prompt for confirmation
 alias edaemon='emacs --daemon -fn "MesloLGS NF 13"'
 alias e=$EDITOR
