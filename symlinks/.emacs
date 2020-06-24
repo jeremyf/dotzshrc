@@ -62,11 +62,6 @@
 ;; Given the number of symlinks, visit the "linked to" file.
 (setq vc-follow-symlinks t)
 
-;; Remove reliance on Base16 themes; I find that I prefer the
-;; coloration of tsdh-(light|dark)
-(load-theme 'misterioso t) ;; For inside work
-;; (load-theme 'adwaita t) ;; For bright days
-
 ;; When you open a new frame in an already running Emacs session
 ;; set it to the full height but don't worry about the width
 (add-to-list 'default-frame-alist '(fullscreen . fullheight))
@@ -81,6 +76,18 @@
 ;; I saw that straight loaded use-package to take advantage of the
 ;; use-package syntax which is often how things are documented.
 (straight-use-package 'use-package)
+
+(use-package base16-theme
+  :straight t
+  :ensure t
+  :config (load-theme 'base16-onedark t))
+;; :config (load-theme 'base16-one-light t))
+
+;; Remove reliance on Base16 themes; I find that I prefer the
+;; coloration of tsdh-(light|dark)
+;; (load-theme 'misterioso t) ;; For inside work
+;; (load-theme 'adwaita t) ;; For bright days
+
 
 (use-package savekill
   :ensure t
