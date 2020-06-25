@@ -3,7 +3,7 @@ export EDITOR='emacsclient -cn -a "emacs" --frame-parameters="((fullscreen . max
 export GIT_EDITOR=$EDITOR
 
 # Prompt for confirmation
-alias edaemon='pkill -f emacs ; emacs --daemon -fn "MesloLGS NF 13"'
+alias edaemon='emacs --daemon -fn "MesloLGS NF 13"'
 alias e=$EDITOR
 alias lr='lil-regy'
 alias rm='rm -i'
@@ -32,7 +32,7 @@ fi
 
 # Hyrax aliases
 alias hyrax-devup='fcrepo_wrapper & solr_wrapper & redis-server &'
-alias hyrax-testup='fcrepo_wrapper --config config/fcrepo_wrapper_test.yml & solr_wrapper --config config/solr_wrapper_test.yml & solr_wrapper --config config/solr_wrapper_valkyrie_test.yml & redis-server &'
+alias hyrax-testup='cd $HOME/git/samvera/hyrax/.internal_test_app ; rm -rf tmp/solr-valkyrie-test/server/solr/hyrax-valkyrie-test ; rm -rf tmp/solr-test/server/solr/hydra-test ; fcrepo_wrapper --config config/fcrepo_wrapper_test.yml & solr_wrapper --config config/solr_wrapper_test.yml & solr_wrapper --config config/solr_wrapper_valkyrie_test.yml & redis-server &'
 alias hyrax-devdown='pkill -f solr_wrapper & pkill -f fcrepo_wrapper & redis-cli shutdown'
 alias sqlite-browser="/Applications/DB\ Browser\ for\ SQLite.app/Contents/MacOS/DB\ Browser\ for\ SQLite"
 
