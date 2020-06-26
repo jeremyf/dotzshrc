@@ -595,7 +595,7 @@ to consider doing so."
         ("g" "Game Idea" entry (file+headline "~/git/org/2020/game-ideas.org" "Game Idea")
          "* %?\nEntered on %U\n  %i")
         ("j" "Journal" entry (file+datetree "~/git/org/2020/journal.org")
-         "* %?\nEntered on %U\n  %i\n  %a")
+         "* %U %^{SUBJECT}\n\n    %?\n")
         ("l" "Today I Learned" entry (file+headline "~/git/org/2020/today-i-learned.org" "Today I Learned")
          "* %U: %?")
         ("m" "Meeting" entry (file+headline "~/git/org/2020/meetings.org" "Meetings")
