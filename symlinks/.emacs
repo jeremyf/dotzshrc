@@ -97,7 +97,6 @@
 ;; Note: I've set all searches to use fuzzy regex
 (use-package ivy
   :straight t
-  :defer t
   :ensure t
   :after avy
   :diminish (ivy-mode . "")
@@ -114,7 +113,6 @@
 (use-package counsel
   :straight t
   :after ivy
-  :defer t
   :ensure t
   :init (setq ivy-use-selectable-prompt t)
   (setq search-default-mode #'char-fold-to-regexp)
