@@ -314,7 +314,14 @@
   :straight t
   :defer t
   :init
-  (global-flycheck-mode t))
+  (global-flycheck-mode t)
+  ;; As much as I'd like to have reek and rubocop enabled, it turns
+  ;; out they are quite chatty.  I also find that when syntax errors
+  ;; are on I focus on fixing them and can lose sight of the
+  ;; programming task I'm trying to accomplish.  In other words, while
+  ;; writing, I don't want to see editing suggestions.
+  (setq-default flycheck-disabled-checkers '(ruby-reek ruby-rubocop))
+)
 
 (use-package flyspell-correct
   :straight t
