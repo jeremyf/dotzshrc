@@ -393,7 +393,9 @@
   :ensure t
   :defer 1
   :init (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+  (setq-default neo-window-width 36)
   :config (global-set-key [f8] 'neotree-toggle))
+
 
 ;; Whitespace hygene package.  The author's documentation and
 ;; commentary echoes my sentiments
