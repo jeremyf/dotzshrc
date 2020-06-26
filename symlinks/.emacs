@@ -10,6 +10,9 @@
 
 (server-start)
 
+;; A chunk of code that allows me to pass multiple filenames to
+;; emacsclient AND open those files in different frames within the
+;; same window.(defvar server-visit-files-custom-find:buffer-count)
 (defvar server-visit-files-custom-find:buffer-count)
 (defadvice server-visit-files
   (around server-visit-files-custom-find
