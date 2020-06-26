@@ -4,19 +4,23 @@
 (setq mc/cmds-to-run-for-all
       '(
         comment-line
+        duplicate-line
         end-of-buffer
+        fill-paragraph
+        hungry-delete-backward
         hungry-delete-forward
         indent-for-tab-command
+        magit-status
         markdown-outdent-or-delete
+        mouse-set-region
+        ns-do-show-character-palette
         org-self-insert-command
         org-todo
         sp-backward-delete-char
         string-inflection-all-cycle
         wdired-finish-edit
-        duplicate-line
-        hungry-delete-backward
-        magit-status
-        mouse-set-region
-        ns-do-show-character-palette
         ))
 
+(setq mc/cmds-to-run-once
+      '(
+        ))
