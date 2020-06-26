@@ -111,7 +111,7 @@
 ;; (load-theme 'misterioso t) ;; For inside work
 ;; (load-theme 'adwaita t) ;; For bright days
 
-
+;; Write "kill" command inputs to disk
 (use-package savekill
   :ensure t
   :straight t)
