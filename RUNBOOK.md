@@ -45,3 +45,4 @@ Then set:
 * Install OhMyZsh - https://github.com/ohmyzsh/ohmyzsh
 * Install Powerlevel10k - https://github.com/romkatv/powerlevel10k#oh-my-zsh
 * Install xclip and xsel: `pacman -S xclip xsel`
+* Install emacs
