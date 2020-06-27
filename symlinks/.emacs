@@ -320,6 +320,18 @@
 (global-set-key [M-s-left] 'awesome-tab-forward-tab)
 
 
+;; `C-u M-x scratch` prompts for a mode then creates a buffer in that
+;; mode
+(use-package scratch
+  :ensure t
+  :straight t
+  :defer t)
+
+;; `C-c s` will create a new buffer with the mode set to the current
+;; buffer
+(define-key (current-global-map) "\C-cs" #'scratch)
+
+
 ;; Adding smartparens options
 (use-package smartparens
   :straight t
