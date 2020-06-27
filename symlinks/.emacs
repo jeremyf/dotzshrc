@@ -325,6 +325,25 @@
   :config (golden-ratio-mode 1)
   )
 
+(use-package awesome-tab
+  :ensure t
+  :straight (awesome-tab :type git :host github :repo "manateelazycat/awesome-tab")
+  :config (awesome-tab-mode t))
+
+(global-set-key (kbd "s-1") 'awesome-tab-select-visible-tab)
+(global-set-key (kbd "s-2") 'awesome-tab-select-visible-tab)
+(global-set-key (kbd "s-3") 'awesome-tab-select-visible-tab)
+(global-set-key (kbd "s-4") 'awesome-tab-select-visible-tab)
+(global-set-key (kbd "s-5") 'awesome-tab-select-visible-tab)
+(global-set-key (kbd "s-6") 'awesome-tab-select-visible-tab)
+(global-set-key (kbd "s-7") 'awesome-tab-select-visible-tab)
+(global-set-key (kbd "s-8") 'awesome-tab-select-visible-tab)
+(global-set-key (kbd "s-9") 'awesome-tab-select-visible-tab)
+(global-set-key (kbd "s-0") 'awesome-tab-select-visible-tab)
+(global-set-key [M-s-right] 'awesome-tab-backward-tab)
+(global-set-key [M-s-left] 'awesome-tab-forward-tab)
+
+
 ;; Adding smartparens options
 (use-package smartparens
   :straight t
