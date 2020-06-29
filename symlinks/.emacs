@@ -330,9 +330,10 @@
 (global-set-key (kbd "s-8") 'awesome-tab-select-visible-tab)
 (global-set-key (kbd "s-9") 'awesome-tab-select-visible-tab)
 (global-set-key (kbd "s-0") 'awesome-tab-select-visible-tab)
-(global-set-key [M-s-right] 'awesome-tab-backward-tab)
-(global-set-key [M-s-left] 'awesome-tab-forward-tab)
+(global-set-key [M-s-left] 'awesome-tab-backward-tab)
+(global-set-key [M-s-right] 'awesome-tab-forward-tab)
 (global-set-key (kbd "s-k") 'kill-current-buffer)
+(global-set-key (kbd "s-w") 'kill-current-buffer) ;; Mirrors a lot of OSX behavior
 
 
 ;; `C-u M-x scratch` prompts for a mode then creates a buffer in that
@@ -598,7 +599,6 @@ to consider doing so."
 (global-set-key (kbd "M-n") 'nab-name-of-file) ;; OPT+n
 (global-set-key (kbd "C-M-d") 'duplicate-line) ;; CTRL+OPT+d - duplicate line
 (global-set-key (kbd "C-s-w") 'browse-url-at-point) ;; CTRL+CMD+w
-(global-set-key (kbd "s-w") 'browse-web) ;; CMD+w
 (global-set-key (kbd "s-b") 'switch-to-buffer) ;; CMD+b
 (global-set-key (kbd "C-s-b") 'switch-to-buffer-other-window) ;; CTRL+CMD+b
 (setq browse-url-browser-function 'eww-browse-url)
