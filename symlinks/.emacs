@@ -330,6 +330,7 @@
 (global-set-key (kbd "s-8") 'awesome-tab-select-visible-tab)
 (global-set-key (kbd "s-9") 'awesome-tab-select-visible-tab)
 (global-set-key (kbd "s-0") 'awesome-tab-select-visible-tab)
+(global-set-key (kbd "C-c C-t") 'awesome-tab-counsel-switch-group)
 (global-set-key [M-s-left] 'awesome-tab-backward-tab)
 (global-set-key [M-s-right] 'awesome-tab-forward-tab)
 (global-set-key (kbd "s-k") 'kill-current-buffer)
