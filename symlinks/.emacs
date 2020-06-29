@@ -332,6 +332,7 @@
 (global-set-key (kbd "s-0") 'awesome-tab-select-visible-tab)
 (global-set-key [M-s-right] 'awesome-tab-backward-tab)
 (global-set-key [M-s-left] 'awesome-tab-forward-tab)
+(global-set-key (kbd "s-k") 'kill-current-buffer)
 
 
 ;; `C-u M-x scratch` prompts for a mode then creates a buffer in that
