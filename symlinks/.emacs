@@ -274,13 +274,27 @@
          ))
 
 ;; Adds some nice chrome to the status line
-;; https://github.com/milkypostman/powerline
-(use-package powerline
+;; https://github.com/milkypostman/powerline Note: This is a faster
+;; "line" package than spaceline. If I were not using emacs daemon, I
+;; would use this.
+;;
+;; (use-package powerline
+;;   :ensure t
+;;   :straight t
+;;   :defer 1
+;;   :config (powerline-center-theme)
+;;   )
+
+(use-package spaceline
+  :ensure t
+  :straight t)
+
+(use-package spaceline-all-the-icons
   :ensure t
   :straight t
-  :defer 1
-  :config (powerline-center-theme)
-  )
+  :after spaceline
+  :config (spaceline-all-the-icons-theme)
+  (spaceline-all-the-icons--setup-neotree))
 
 ;; Eats all of the empty spaces when you type DELETE This is a bit
 ;; hungrier than I might want, so I'm keeping an eye on it.
