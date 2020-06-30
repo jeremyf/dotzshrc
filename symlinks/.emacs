@@ -552,44 +552,6 @@ to consider doing so."
   :bind (([C-s-down] . move-text-down)
          ([C-s-up] . move-text-up)))
 
-;; From https://stackoverflow.com/questions/88399/how-do-i-duplicate-a-whole-line-in-emacs
-(defun duplicate-line (arg)
-  "Duplicate current line, leaving point in lower line."
-  (interactive "*p")
-
-  ;; save the point for undo
-  (setq buffer-undo-list (cons (point) buffer-undo-list))
-
-  ;; local variables for start and end of line
-  (let ((bol (save-excursion (beginning-of-line) (point)))
-        eol)
-    (save-excursion
-
-      ;; don't use forward-line for this, because you would have
-      ;; to check whether you are at the end of the buffer
-      (end-of-line)
-      (setq eol (point))
-
-      ;; store the line and disable the recording of undo information
-      (let ((line (buffer-substring bol eol))
-            (buffer-undo-list t)
-            (count arg))
-        ;; insert the line arg times
-        (while (> count 0)
-          (newline)         ;; because there is no newline in 'line'
-          (insert line)
-          (setq count (1- count)))
-        )
-
-      ;; create the undo information
-      (setq buffer-undo-list (cons (cons eol (point)) buffer-undo-list)))
-    ) ; end-of-let
-
-  ;; put the point in the lowest line and return
-  (next-line arg)
-  )
-
-
 ;; And yes "nab" is not idiomatic, but since I'm mapping it to OPT+n, I believe it will help me remembe
 (defun nab-name-of-file ()
     "Copy into the kill ring the full path of the current buffer."
@@ -598,17 +560,11 @@ to consider doing so."
 
 
 (global-set-key (kbd "M-n") 'nab-name-of-file) ;; OPT+n
-(global-set-key (kbd "C-M-d") 'duplicate-line) ;; CTRL+OPT+d - duplicate line
 (global-set-key (kbd "C-c C-b") 'browse-web) ;; CTRL+C CTRL+b
 (global-set-key (kbd "C-s-w") 'browse-url-at-point) ;; CTRL+CMD+w
 (global-set-key (kbd "s-b") 'switch-to-buffer) ;; CMD+b
 (global-set-key (kbd "C-s-b") 'switch-to-buffer-other-window) ;; CTRL+CMD+b
 (setq browse-url-browser-function 'eww-browse-url)
-
-;; Because smie-down-list grabbed C-M-d, I need to set it
-(defun jnf-add-duplicate-line-kbd()
-  (local-set-key (kbd "C-M-d") 'duplicate-line))
-(add-hook 'ruby-mode-hook 'jnf-add-duplicate-line-kbd)
 
 (global-set-key (kbd "s-/") 'comment-line)
 (global-set-key (kbd "s-l") 'goto-line)
