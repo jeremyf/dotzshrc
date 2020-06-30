@@ -599,6 +599,7 @@ to consider doing so."
 
 (global-set-key (kbd "M-n") 'nab-name-of-file) ;; OPT+n
 (global-set-key (kbd "C-M-d") 'duplicate-line) ;; CTRL+OPT+d - duplicate line
+(global-set-key (kbd "C-c C-b") 'browse-web) ;; CTRL+C CTRL+b
 (global-set-key (kbd "C-s-w") 'browse-url-at-point) ;; CTRL+CMD+w
 (global-set-key (kbd "s-b") 'switch-to-buffer) ;; CMD+b
 (global-set-key (kbd "C-s-b") 'switch-to-buffer-other-window) ;; CTRL+CMD+b
