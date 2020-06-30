@@ -318,8 +318,8 @@
 (use-package awesome-tab
   :ensure t
   :straight (awesome-tab :type git :host github :repo "manateelazycat/awesome-tab")
-  :config (awesome-tab-mode t))
-
+  :config (awesome-tab-mode t)
+  (setq awesome-tab-height 130))
 (global-set-key (kbd "s-1") 'awesome-tab-select-visible-tab)
 (global-set-key (kbd "s-2") 'awesome-tab-select-visible-tab)
 (global-set-key (kbd "s-3") 'awesome-tab-select-visible-tab)
