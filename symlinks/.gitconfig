@@ -30,7 +30,7 @@
         co = checkout
         # pull-request-message = log  --reverse --pretty="format:## %s%n%n%b"
         plog = log --pretty=format:'%h\t%Cblue%cr%Creset\t%cn\t%Cgreen%s%Creset'
-        unmerged-edit = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; atom `f` --wait --one"
+        unmerged-edit = "!sh -c 'git-unmerged-edit'" # I like auto-complete for this one
         unmerged-add = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; git add `f`"
         unstage = reset HEAD --
 
@@ -247,6 +247,6 @@
         diffcontext = 7
 [interactive]
         # Set via install script
-        # diffFilter 
+        # diffFilter
 [pull]
 	rebase = true

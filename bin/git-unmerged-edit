@@ -1,0 +1,10 @@
+#!/bin/sh
+#
+# This command edits all files that have changes (according to git)
+files=`git ls-files --unmerged | cut -f2 | sort -u`
+files=($files)
+if [ ${#files[@]} -eq 0 ]; then
+    echo "No unmerged files"
+else
+    $files | xargs editor
+fi

@@ -1,4 +1,4 @@
 #!/bin/sh
 #
 # This command edits all files that have changes (according to git)
-$EDITOR `git status --porcelain | awk '{ print $2}' | sort -u`
+git status --porcelain | awk '{ print $2}' | sort -u | xargs editor
