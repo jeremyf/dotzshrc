@@ -315,6 +315,14 @@
   :config (golden-ratio-mode 1)
   )
 
+;; A window manager for emacs, allowing fast toggles between windows
+;; as well as opening or moving those windows.
+;; https://github.com/abo-abo/ace-window
+(use-package ace-window
+  :straight t
+  :ensure t
+  :bind (("M-o" . ace-window)))
+
 (use-package awesome-tab
   :ensure t
   :straight (awesome-tab :type git :host github :repo "manateelazycat/awesome-tab")
