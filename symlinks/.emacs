@@ -552,7 +552,8 @@ to consider doing so."
   :bind (([C-s-down] . move-text-down)
          ([C-s-up] . move-text-up)))
 
-;; And yes "nab" is not idiomatic, but since I'm mapping it to OPT+n, I believe it will help me remembe
+;; And yes "nab" is not idiomatic, but since I'm mapping it to OPT+n,
+;; I believe it will help me remember.
 (defun nab-name-of-file ()
     "Copy into the kill ring the full path of the current buffer."
     (interactive)
