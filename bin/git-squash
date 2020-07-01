@@ -24,8 +24,8 @@ branch=$1
 if [ ! -z "$1" ]
 then
   current_branch=`git rev-parse --symbolic-full-name --abbrev-ref HEAD`
-  number_of_commits_since_master=`git log master..$current_branch --oneline | wc -l | tr -d " "`
-  git rebase --interactive HEAD~$number_of_commits_since_master
+  number_of_commits_since=`git log $1..$current_branch --oneline | wc -l | tr -d " "`
+  GIT_EDITOR="emacs -Q" git rebase --interactive HEAD~$number_of_commits_since
 else
   echo "You must specify a branch name for which to squash"
   exit 1

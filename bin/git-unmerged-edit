@@ -6,5 +6,5 @@ files=($files)
 if [ ${#files[@]} -eq 0 ]; then
     echo "No unmerged files"
 else
-    $files | xargs editor
+    editor $files
 fi
