@@ -7,6 +7,7 @@
         duplicate-line
         end-of-buffer
         fill-paragraph
+        git-rebase-squash
         hungry-delete-backward
         hungry-delete-forward
         indent-for-tab-command

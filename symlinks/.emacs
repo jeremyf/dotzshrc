@@ -341,8 +341,10 @@
 (global-set-key (kbd "C-c C-t") 'awesome-tab-counsel-switch-group)
 (global-set-key [M-s-left] 'awesome-tab-backward-tab)
 (global-set-key [M-s-right] 'awesome-tab-forward-tab)
-(global-set-key (kbd "s-k") 'kill-current-buffer)
-(global-set-key (kbd "s-w") 'kill-current-buffer) ;; Mirrors a lot of OSX behavior
+(global-set-key [s-{] 'awesome-tab-backward-tab)
+(global-set-key [s-}] 'awesome-tab-forward-tab)
+(global-set-key (kbd "s-k") 'ace-delete-window)
+(global-set-key (kbd "s-w") 'ace-delete-window) ;; Mirrors a lot of OSX behavior
 
 
 ;; `C-u M-x scratch` prompts for a mode then creates a buffer in that
@@ -421,19 +423,16 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(ansi-color-names-vector
-   ["#fdf0ed" "#e95678" "#29d398" "#fadad1"
-    "#26bbd9" "#ee64ac" "#26bbd9" "#403c3d"])
- '(auto-save-file-name-transforms (quote ((".*" "~/.emacs.d/autosaves/\\1" t))))
- '(backup-directory-alist (quote ((".*" . "~/.emacs.d/backups/"))))
+   ["#fdf0ed" "#e95678" "#29d398" "#fadad1" "#26bbd9" "#ee64ac" "#26bbd9" "#403c3d"])
+ '(auto-save-file-name-transforms '((".*" "~/.emacs.d/autosaves/\\1" t)))
+ '(backup-directory-alist '((".*" . "~/.emacs.d/backups/")))
  '(column-number-mode t)
  '(custom-safe-themes
-   (quote
-    ("250268d5c0b4877cc2b7c439687f8145a2c85a48981f7070a72c7f47a2d2dc13"
-     "23ba4b4ba4d1c989784475fed58919225db8d9a9751b32aa8df835134fe7ba6f"
-     default)))
+   '("250268d5c0b4877cc2b7c439687f8145a2c85a48981f7070a72c7f47a2d2dc13" "23ba4b4ba4d1c989784475fed58919225db8d9a9751b32aa8df835134fe7ba6f" default))
  '(dired-listing-switches "-laGhpX")
  '(dired-use-ls-dired t)
  '(global-display-line-numbers-mode t)
+ '(org-export-backends '(ascii html icalendar latex md odt))
  '(show-paren-mode t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -474,6 +473,13 @@
 ;;   :defer t
 ;;   :init (setq column-enforce-column 80))
 ;; (global-column-enforce-mode t)
+
+(use-package emmet-mode
+  :straight t
+  :ensure t)
+(add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
+(add-hook 'css-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.
+
 
 ;; https://github.com/jrblevin/markdown-mode/
 (use-package markdown-mode
@@ -618,6 +624,8 @@ to consider doing so."
          "* Session: %u %^{SUMMARY}\n\n  %^{ATTENDEES}p\n  %^{SYSTEM}p\n  %?\n")
         ("t" "Todo" entry (file+headline "~/git/org/2020/todo.org" "Tasks")
          "* TODO %?\n  %i\n  %a")
+        ("b" "Troubleshooting" entry (file+headline "~/git/org/2020/troubleshooting.org" "Trouble Shooting")
+         "* %u Problem %^{SUMMARY}\n\n  %?\n  %a")
         ))
 
 ;; END ORG mode configuration and concerns
