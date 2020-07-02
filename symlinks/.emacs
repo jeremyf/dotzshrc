@@ -90,7 +90,8 @@
 ;; Write "kill" command inputs to disk
 (use-package savekill
   :ensure t
-  :straight t)
+  :straight t
+  :defer t)
 
 ;; https://oremacs.com/swiper/
 ;; Note: I've set all searches to use fuzzy regex
@@ -140,6 +141,7 @@
 (use-package ag
   :straight t
   :after counsel
+  :defer t
   :ensure t)
 
 ;; This package is amazing!!!  Render search results to a buffer, edit
@@ -363,6 +365,7 @@
 (use-package smartparens
   :straight t
   :ensure t
+  :defer t
   :config (smartparens-strict-mode 1)
   (smartparens-global-mode 1))
 
