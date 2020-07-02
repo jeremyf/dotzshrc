@@ -345,9 +345,8 @@
 (global-set-key [M-s-right] 'awesome-tab-forward-tab)
 (global-set-key [s-{] 'awesome-tab-backward-tab)
 (global-set-key [s-}] 'awesome-tab-forward-tab)
-(global-set-key (kbd "s-k") 'ace-delete-window)
-(global-set-key (kbd "s-w") 'ace-delete-window) ;; Mirrors a lot of OSX behavior
-
+(global-set-key (kbd "s-k") 'kill-current-buffer)
+(global-set-key (kbd "s-w") 'ace-delete-window)
 
 ;; `C-u M-x scratch` prompts for a mode then creates a buffer in that
 ;; mode
@@ -630,6 +629,11 @@ to consider doing so."
         ("b" "Troubleshooting" entry (file+headline "~/git/org/2020/troubleshooting.org" "Trouble Shooting")
          "* %u Problem %^{SUMMARY}\n\n  %?\n  %a")
         ))
+
+(use-package org-web-tools
+  :defer t
+  :ensure t
+  :straight t)
 
 ;; END ORG mode configuration and concerns
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
