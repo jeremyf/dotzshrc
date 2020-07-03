@@ -100,6 +100,7 @@
   :ensure t
   :after avy
   :diminish (ivy-mode . "")
+  :bind (("C-c C-r". 'ivy-resume))
   :config (ivy-mode 1)
   (setq ivy-use-virtual-buffers t)
   (setq ivy-height 12)
@@ -109,6 +110,12 @@
         '((read-file-name-internal . ivy--regex-fuzzy)
           (t . ivy--regex-ignore-order))))
 
+(use-package swiper
+  :straight t
+  :after ivy
+  :ensure t
+  :bind (("C-s" . swiper)))
+
 ;; Part of the ivy/counsel/swiper trio
 (use-package counsel
   :straight t
@@ -117,8 +124,6 @@
   :init (setq ivy-use-selectable-prompt t)
   (setq search-default-mode #'char-fold-to-regexp)
   :bind (
-         ("C-s" . swiper)
-         ("C-c C-r". 'ivy-resume)
          ("M-x" . counsel-M-x)
          ("C-x C-f" . counsel-find-file) ;; A complimentary function to the
          ;; counsel-projectile-find-file;
@@ -131,8 +136,7 @@
          ("<f2> i" . counsel-info-lookup-symbol)
          ("<f2> u" . counsel-unicode-char)
          ("C-c r" . counsel-register)
-         ("C-c m" . counsel-mark-ring)
-         ("C-x l" . counsel-locate))
+         ("C-c m" . counsel-mark-ring))
   :config (counsel-mode 1))
 (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
 

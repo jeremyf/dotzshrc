@@ -28,6 +28,14 @@
 (add-hook 'org-mode-hook (lambda ()
                            (define-key org-mode-map (kbd "C-c C-g") 'org-mac-grab-link)))
 
+;
+;; Keep this after `counsel' so that the key binding is
+;;  overridden only on OSX."
+(use-package counsel-osx-app
+    :ensure t
+    :straight t
+    :after counsel
+    :bind ("C-c C-l" . counsel-osx-app))
 
 (provide 'emacs-config.el)
 ;;; emacs-config.el ends here
