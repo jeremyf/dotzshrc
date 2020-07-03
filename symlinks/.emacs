@@ -52,6 +52,12 @@
 ;; Hide the icons of the Emacs toolbar
 (tool-bar-mode -1)
 
+;; Hide the scroll bar. Let's be clear, I don't use it.
+(scroll-bar-mode -1)
+
+;; Instead of typing "yes" or "no" short-circuit to "y" or "n"
+(defalias 'yes-or-no-p 'y-or-n-p)
+
 ;; The default is 60.  It is rare that I need more than 15 or 20.
 ;; However in my long use of Jumpcut there have been a few times where
 ;; I get into the 80s on previous pastes.  Given that the kill ring is
@@ -431,7 +437,6 @@
  '(ansi-color-names-vector
    ["#fdf0ed" "#e95678" "#29d398" "#fadad1" "#26bbd9" "#ee64ac" "#26bbd9" "#403c3d"])
  '(auto-save-file-name-transforms '((".*" "~/.emacs.d/autosaves/\\1" t)))
- '(backup-directory-alist '((".*" . "~/.emacs.d/backups/")))
  '(column-number-mode t)
  '(custom-safe-themes
    '("250268d5c0b4877cc2b7c439687f8145a2c85a48981f7070a72c7f47a2d2dc13" "23ba4b4ba4d1c989784475fed58919225db8d9a9751b32aa8df835134fe7ba6f" default))
@@ -446,6 +451,22 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+(setq backup-directory-alist '((".*" . "~/.emacs.d/backups/"))
+      backup-by-copying t    ; Don't delink hardlinks
+      version-control t      ; Use version numbers on backups
+      delete-old-versions t  ; Automatically delete excess backups
+      kept-new-versions 20   ; how many of the newest versions to keep
+      kept-old-versions 5    ; and how many of the old
+      )
+
+;; C-a goes to the first non-whitepsace character on the line. Type it
+;; again, and go to the beginning of the line.
+(use-package crux
+  :straight t
+  :ensure t
+  :defer t
+  :bind (("C-a" . crux-move-beginning-of-line)))
 
 ;; Nice for neotree
 (use-package all-the-icons
@@ -534,6 +555,14 @@
   :defer 1
   :init (setq json-reformat:indent-width 2))
 
+
+(use-package undo-tree
+  :ensure t
+  :straight t
+  :defer 5
+  :config
+  (global-undo-tree-mode 1))
+
 ;; Adding format to git-commit-fill-column of 72 as best
 ;; practice.
 (use-package magit
@@ -555,6 +584,11 @@
   :straight t
   :ensure t
   :defer t)
+
+(use-package git-gutter
+  :straight t
+  :ensure t
+  :config (global-git-gutter-mode 't))
 
 ;; Copied from https://github.com/magit/magit/blob/9423edc0b311117ab5fe87457c3e01c7db22a3c7/lisp/git-commit.el
 ;; And set to 50 instead of 68
