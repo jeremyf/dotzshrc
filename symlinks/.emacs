@@ -539,10 +539,16 @@
 (use-package magit
   :straight t
   :ensure t
+  :after ivy
   :defer 1 ;; This needs to be an integer. Key bindings fail when set to "t"
   :init (setq git-commit-fill-column 72)
   :bind (("H-g" . magit-status)
          ("C-M-g" . magit-status)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; magit
+(with-eval-after-load "magit"
+  (setq magit-completing-read-function 'ivy-completing-read))
 
 ;; With the time machine, travel back and forth through a files history
 (use-package git-timemachine
