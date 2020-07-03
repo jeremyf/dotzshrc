@@ -37,5 +37,11 @@
     :after counsel
     :bind ("C-c C-l" . counsel-osx-app))
 
+
+;; On  I use ⌘ as meta and prefer ⌥ to do nothing so I can still insert special characters easily.
+;;
+;; (setq mac-command-modifier 'meta
+;;       mac-option-modifier 'none)
+
 (provide 'emacs-config.el)
 ;;; emacs-config.el ends here
