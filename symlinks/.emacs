@@ -378,10 +378,10 @@
 (global-set-key (kbd "C-c C-t") 'awesome-tab-counsel-switch-group)
 (global-set-key [M-s-left] 'awesome-tab-backward-tab)
 (global-set-key [M-s-right] 'awesome-tab-forward-tab)
-(global-set-key [s-{] 'awesome-tab-backward-tab)
-(global-set-key [s-}] 'awesome-tab-forward-tab)
+(global-set-key (kbd "s-{") 'awesome-tab-backward-tab)
+(global-set-key (kbd "s-}") 'awesome-tab-forward-tab)
 (global-set-key (kbd "s-k") 'kill-current-buffer)
-(global-set-key (kbd "s-w") 'ace-delete-window)
+(global-set-key (kbd "s-w") 'kill-current-buffer)
 
 ;; `C-u M-x scratch` prompts for a mode then creates a buffer in that
 ;; mode
