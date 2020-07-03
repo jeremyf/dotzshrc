@@ -150,6 +150,7 @@
 (use-package ivy-prescient
   :straight t
   :ensure t
+  :init (setq prescient-filter-method '(literal fuzzy regexp initialism))
   :config (ivy-prescient-mode t))
 
 (use-package ivy-hydra
