@@ -99,6 +99,15 @@
   :straight t
   :defer t)
 
+;; Track what keys/commands I most often use
+(use-package keyfreq
+  :straight t
+  :defer t
+  :ensure t
+  :config
+  (keyfreq-mode 1)
+  (keyfreq-autosave-mode 1))
+
 ;; https://oremacs.com/swiper/
 ;; Note: I've set all searches to use fuzzy regex
 (use-package ivy
@@ -129,22 +138,29 @@
   :ensure t
   :init (setq ivy-use-selectable-prompt t)
   (setq search-default-mode #'char-fold-to-regexp)
-  :bind (
-         ("M-x" . counsel-M-x)
-         ("C-x C-f" . counsel-find-file) ;; A complimentary function to the
-         ;; counsel-projectile-find-file;
-         ;; this scopes to the current
-         ;; director
-         ("<f1> f" . counsel-describe-function)
-         ("<f1> v" . counsel-describe-variable)
-         ("<f1> o" . counsel-describe-symbol)
-         ("<f1> l" . counsel-find-library)
-         ("<f2> i" . counsel-info-lookup-symbol)
-         ("<f2> u" . counsel-unicode-char)
-         ("C-c r" . counsel-register)
-         ("C-c m" . counsel-mark-ring))
+  :bind (("M-x" . counsel-M-x))
   :config (counsel-mode 1))
 (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
+
+(use-package prescient
+  :straight t
+  :after counsel
+  :ensure t)
+
+(use-package ivy-prescient
+  :straight t
+  :ensure t
+  :config (ivy-prescient-mode t))
+
+(use-package ivy-hydra
+  :straight t
+  :ensure t
+  :defer t)
+
+(use-package expand-region
+  :straight t
+  :ensure t
+  :bind ("C-=" . er/expand-region))
 
 ;; The silver searcher; I found ripgrep a bit nicer, but wait until
 ;; you try wgrep-ag
@@ -268,6 +284,14 @@
   :straight (string-inflection :type git :host github :repo "akicho8/string-inflection")
   :bind (("H-u" . string-inflection-all-cycle)
          ("C-M-u" . string-inflection-all-cycle)))
+
+(use-package writegood-mode
+  :ensure t
+  :straight t
+  :defer t
+  :bind ("C-c w" . writegood-mode)
+  :config
+  (add-to-list 'writegood-weasel-words "actionable"))
 
 ;; Allow to work with multipe cursors
 ;; https://melpa.org/#/multiple-cursors Aside from the
