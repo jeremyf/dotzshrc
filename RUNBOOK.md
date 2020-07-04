@@ -37,6 +37,7 @@ Then set:
 
   *  Right option key to send ESC
   *  Caps lock to send CTRL
+  *  Left shift + Right shift sends CAPS LOCK
 
 # Manjaro
 
