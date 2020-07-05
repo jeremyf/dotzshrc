@@ -588,6 +588,12 @@
   :config
   (global-undo-tree-mode 1))
 
+;; Add a gopher and gemini client
+(use-package elpher
+  :straight t
+  :ensure t
+  :defer t)
+
 ;; Adding format to git-commit-fill-column of 72 as best
 ;; practice.
 (use-package magit
