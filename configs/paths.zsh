@@ -42,6 +42,10 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
         export PATH="/usr/local/opt/coreutils/libexec/gnubin:${PATH}"
         export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:${MANPATH}"
     fi
+
+    if [ -d /usr/local/lib/pkgconfig ]; then
+        export PKG_CONFIG_PATH=/opt/local/lib/pkgconfig
+    fi
 fi
 
 if [ -d $HOME/.emacs.d/bin ]; then
