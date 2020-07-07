@@ -588,17 +588,6 @@
   :config
   (global-undo-tree-mode 1))
 
-(use-package pdf-tools
-  :pin manual ;; manually update
-  :straight t
-  :defer t
-  :ensure t
-  :config (pdf-tools-install) ;; initialise
-  (setq-default pdf-view-display-size 'fit-page) ;; open pdfs scaled to fit page
-  (setq pdf-annot-activate-created-annotations t) ;; automatically annotate highlights
-  (define-key pdf-view-mode-map (kbd "C-s") 'isearch-forward);; use normal isearch
-  )
-
 ;; Add a gopher and gemini client
 (use-package elpher
   :straight t
@@ -720,6 +709,8 @@ to consider doing so."
   :defer t
   :ensure t
   :straight t)
+
+(add-hook 'org-mode-hook #'toggle-word-wrap)
 
 ;; END ORG mode configuration and concerns
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
