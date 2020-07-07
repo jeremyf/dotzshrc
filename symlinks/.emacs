@@ -721,6 +721,8 @@ to consider doing so."
   :ensure t
   :straight t)
 
+(add-hook 'org-mode-hook #'toggle-word-wrap)
+
 ;; END ORG mode configuration and concerns
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
