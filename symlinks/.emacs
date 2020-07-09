@@ -526,6 +526,11 @@
 ;;   :init (setq column-enforce-column 80))
 ;; (global-column-enforce-mode t)
 
+(use-package unfill
+  :straight t
+  :ensure t
+  :defer t)
+
 (use-package emmet-mode
   :straight t
   :ensure t)
@@ -677,6 +682,14 @@ to consider doing so."
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; BEGIN ORG mode configuration and concerns
+
+(use-package org-sidebar
+  :straight (org-sidebar :type git :host github :repo "alphapapa/org-sidebar")
+  :ensure t
+  :defer t)
+
+(add-hook 'org-mode-hook #'org-sidebar-tree)
+
 (global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c c") 'org-capture)
