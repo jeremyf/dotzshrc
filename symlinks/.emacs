@@ -688,8 +688,6 @@ to consider doing so."
   :ensure t
   :defer t)
 
-(add-hook 'org-mode-hook #'org-sidebar-tree)
-
 (global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c c") 'org-capture)
@@ -724,6 +722,8 @@ to consider doing so."
   :straight t)
 
 (add-hook 'org-mode-hook #'toggle-word-wrap)
+(add-hook 'org-mode-hook #'visual-line-mode)
+(add-hook 'org-mode-hook #'org-sidebar-tree)
 
 ;; END ORG mode configuration and concerns
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
