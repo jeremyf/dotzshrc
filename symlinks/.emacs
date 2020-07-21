@@ -85,8 +85,8 @@
 (use-package base16-theme
   :straight t
   :ensure t
-  :config (load-theme 'base16-onedark t))
-;; :config (load-theme 'base16-one-light t))
+  ;; :config (load-theme 'base16-onedark t))
+:config (load-theme 'base16-one-light t))
 
 ;; Remove reliance on Base16 themes; I find that I prefer the
 ;; coloration of tsdh-(light|dark)
@@ -723,7 +723,8 @@ to consider doing so."
 
 (add-hook 'org-mode-hook #'toggle-word-wrap)
 (add-hook 'org-mode-hook #'visual-line-mode)
-(add-hook 'org-mode-hook #'org-sidebar-tree)
+;; Uncomment to always launch org mode with a sidebar tree
+;; (add-hook 'org-mode-hook #'org-sidebar-tree)
 
 ;; END ORG mode configuration and concerns
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
