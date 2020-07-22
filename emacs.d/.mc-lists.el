@@ -3,6 +3,7 @@
 
 (setq mc/cmds-to-run-for-all
       '(
+        beginning-of-buffer
         comment-line
         duplicate-line
         end-of-buffer
@@ -14,7 +15,10 @@
         magit-status
         markdown-outdent-or-delete
         mouse-set-region
+        ns-copy-including-secondary
         ns-do-show-character-palette
+        org-cycle
+        org-metaright
         org-self-insert-command
         org-todo
         sp-backward-delete-char
@@ -24,4 +28,5 @@
 
 (setq mc/cmds-to-run-once
       '(
+        ivy-switch-buffer
         ))

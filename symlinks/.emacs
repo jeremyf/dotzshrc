@@ -85,8 +85,8 @@
 (use-package base16-theme
   :straight t
   :ensure t
-  :config (load-theme 'base16-onedark t))
-;; :config (load-theme 'base16-one-light t))
+  ;; :config (load-theme 'base16-onedark t))
+  :config (load-theme 'base16-one-light t))
 
 ;; Remove reliance on Base16 themes; I find that I prefer the
 ;; coloration of tsdh-(light|dark)
@@ -608,7 +608,13 @@
   :defer 1 ;; This needs to be an integer. Key bindings fail when set to "t"
   :init (setq git-commit-fill-column 72)
   :bind (("H-g" . magit-status)
-         ("C-M-g" . magit-status)))
+         ("C-M-g" . magit-status)
+         ("M-s-g" . magit-status)))
+
+(use-package password-generator
+  :straight t
+  :ensure t
+  :defer t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; magit
@@ -723,7 +729,14 @@ to consider doing so."
 
 (add-hook 'org-mode-hook #'toggle-word-wrap)
 (add-hook 'org-mode-hook #'visual-line-mode)
-(add-hook 'org-mode-hook #'org-sidebar-tree)
+
+(defun org-frames-toggle ()
+  "Toggle the org-sidebar and org-sidebar-tree; Both are quite useful when working on org docs"
+  (interactive)
+  (org-sidebar-tree-toggle)
+  (org-sidebar-toggle))
+(defalias 'ot 'org-frames-toggle)
+
 
 ;; END ORG mode configuration and concerns
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
