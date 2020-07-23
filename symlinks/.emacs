@@ -730,6 +730,18 @@ to consider doing so."
   :ensure t
   :straight t)
 
+;; This requires helm and I'm leveraging Ivy.  So, for now, I'll hold
+;; off but it's worth following. Bi-directional org links sounds
+;; fantastic.
+;;
+;; (use-package org-super-links
+;;   :defer t
+;;   :ensure t
+;;   :straight (org-super-links :type git :host github :repo "toshism/org-super-links")
+;;   :bind (("C-c s s" . sl-link)
+;;            ("C-c s l" . sl-store-link)
+;;            ("C-c s C-l" . sl-insert-link)))
+
 (add-hook 'org-mode-hook #'toggle-word-wrap)
 (add-hook 'org-mode-hook #'visual-line-mode)
 
