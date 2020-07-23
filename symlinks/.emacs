@@ -721,6 +721,8 @@ to consider doing so."
          "* TODO %?\n  %i\n  %a")
         ("b" "Troubleshooting" entry (file+headline "~/git/org/2020/troubleshooting.org" "Trouble Shooting")
          "* %u Problem %^{SUMMARY}\n\n  %?\n  %a")
+        ("w" "Workday" entry (file+datetree "~/git/org/2020/workday.org")
+         "* TODO %?")
         ))
 
 (use-package org-web-tools

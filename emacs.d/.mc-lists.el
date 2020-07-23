@@ -17,6 +17,7 @@
         mouse-set-region
         ns-copy-including-secondary
         ns-do-show-character-palette
+        org-ctrl-c-minus
         org-cycle
         org-metaright
         org-self-insert-command
