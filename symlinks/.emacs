@@ -699,6 +699,7 @@ to consider doing so."
 (global-set-key (kbd "C-c c") 'org-capture)
 
 (setq org-directory "~/git/org")
+(setq org-agenda-files (list "~/git/org" "~/git/thel-sector/org" "~/git/org/2020"))
 (setq org-default-notes-file (concat org-directory "/captured-notes.org"))
 
 ;; I'm working through what templates I might want. This is a place holder.
