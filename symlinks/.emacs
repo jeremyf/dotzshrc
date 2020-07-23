@@ -86,7 +86,11 @@
   :straight t
   :ensure t
   ;; :config (load-theme 'base16-onedark t))
+<<<<<<< HEAD
   :config (load-theme 'base16-one-light t))
+=======
+:config (load-theme 'base16-one-light t))
+>>>>>>> srht/trunk
 
 ;; Remove reliance on Base16 themes; I find that I prefer the
 ;; coloration of tsdh-(light|dark)
@@ -752,6 +756,8 @@ to consider doing so."
   (org-sidebar-toggle))
 (defalias 'ot 'org-frames-toggle)
 
+;; Uncomment to always launch org mode with a sidebar tree
+;; (add-hook 'org-mode-hook #'org-sidebar-tree)
 
 ;; END ORG mode configuration and concerns
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
