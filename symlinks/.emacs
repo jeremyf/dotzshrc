@@ -746,21 +746,19 @@ to consider doing so."
 ;; I'm working through what templates I might want. This is a place holder.
 (setq org-capture-templates
       '(
-        ("j" "Journal" entry (file+datetree "~/git/org/2020/journal.org")
-         "* %U %^{SUBJECT}\n\n    %?\n")
-        ("l" "Today I Learned" entry (file+headline "~/git/org/2020/today-i-learned.org" "Today I Learned")
-         "* %U: %?")
-        ("m" "Meeting" entry (file+datetree "~/git/org/2020/workday.org")
+        ("m" "Meeting for Work" entry (file+datetree "~/git/org/2020/workday.org")
          "* MEETING %^{SUMMARY}\n\n  %^{ATTENDEES}p\n  %?\n")
-        ("r" "Reading" entry (file+headline "~/git/org/2020/readings.org" "Readings")
+        ("r" "Reading for Work" entry (file+datetree "~/git/org/2020/workday.org")
          "* TO-READ %^{SUBJECT} %u\n %?\n")
         ("s" "Session" entry (file+headline "~/git/org/2020/sessions.org" "Sessions")
          "* Session: %u %^{SUMMARY}\n\n  %^{ATTENDEES}p\n  %^{SYSTEM}p\n  %?\n")
         ("b" "Troubleshooting" entry (file+headline "~/git/org/2020/troubleshooting.org" "Trouble Shooting")
          "* %u Problem %^{SUMMARY}\n\n  %?\n  %a")
-        ("w" "Work Task" entry (file+datetree "~/git/org/2020/workday.org")
+        ("t" "Task for Work" entry (file+datetree "~/git/org/2020/workday.org")
          "* TODO %?")
-        ))
+        ("w" "Waiting for Work" entry (file+datetree "~/git/org/2020/workday.org")
+         "* WAITING %^{SUMMARY}\n\n   %?\n")
+))
 
 (setq org-todo-keywords
           '((sequence "TODO" "|" "DONE")
