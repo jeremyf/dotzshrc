@@ -746,10 +746,12 @@ to consider doing so."
 ;; I'm working through what templates I might want. This is a place holder.
 (setq org-capture-templates
       '(
+        ("c" "Write to Current Clock" plain (clock)
+         "%?\n %a")
         ("m" "Meeting for Work" entry (file+datetree "~/git/org/2020/workday.org")
          "* MEETING %^{SUMMARY}\n\n  %^{ATTENDEES}p\n  %?\n")
         ("r" "Reading for Work" entry (file+datetree "~/git/org/2020/workday.org")
-         "* TO-READ %^{SUBJECT} %u\n %?\n")
+         "* TO-READ %^{SUBJECT} %u\n  %?\n")
         ("s" "Session" entry (file+headline "~/git/org/2020/sessions.org" "Sessions")
          "* Session: %u %^{SUMMARY}\n\n  %^{ATTENDEES}p\n  %^{SYSTEM}p\n  %?\n")
         ("b" "Troubleshooting" entry (file+headline "~/git/org/2020/troubleshooting.org" "Trouble Shooting")
@@ -757,7 +759,7 @@ to consider doing so."
         ("t" "Task for Work" entry (file+datetree "~/git/org/2020/workday.org")
          "* TODO %?")
         ("w" "Waiting for Work" entry (file+datetree "~/git/org/2020/workday.org")
-         "* WAITING %^{SUMMARY}\n\n   %?\n")
+         "* WAITING %^{SUMMARY}\n\n  %?\n")
 ))
 
 (setq org-todo-keywords
