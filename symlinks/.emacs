@@ -752,8 +752,8 @@ to consider doing so."
          "* %U %^{SUBJECT}\n\n    %?\n")
         ("l" "Today I Learned" entry (file+headline "~/git/org/2020/today-i-learned.org" "Today I Learned")
          "* %U: %?")
-        ("m" "Meeting" entry (file+headline "~/git/org/2020/meetings.org" "Meetings")
-         "* Meeting: %u %^{SUMMARY}\n\n  %^{ATTENDEES}p\n  %?\n")
+        ("m" "Meeting" entry (file+datetree "~/git/org/2020/workday.org")
+         "* MEETING %u %^{SUMMARY}\n\n  %^{ATTENDEES}p\n  %?\n")
         ("r" "Reading" entry (file+headline "~/git/org/2020/readings.org" "Readings")
          "* %^{SUBJECT} %u\n %?\n")
         ("s" "Session" entry (file+headline "~/git/org/2020/sessions.org" "Sessions")
@@ -768,7 +768,7 @@ to consider doing so."
 
 (setq org-todo-keywords
           '((sequence "TODO" "|" "DONE")
-            (sequence "PROJECT" "AGENDA" "|" "MINUTES")
+            (sequence "MEETING" "AGENDA" "|" "MINUTES")
             (sequence "WAITING" "|" "PROGRESS")))
 
 (use-package org-web-tools
