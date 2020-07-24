@@ -785,8 +785,16 @@ to consider doing so."
 ;;            ("C-c s l" . sl-store-link)
 ;;            ("C-c s C-l" . sl-insert-link)))
 
+(use-package org-d20
+  :defer t
+  :ensure t
+  :straight t)
+
+(add-hook 'org-mode-hook 'org-d20-mode)
+
 (add-hook 'org-mode-hook #'toggle-word-wrap)
 (add-hook 'org-mode-hook #'visual-line-mode)
+
 
 (defun org-frames-toggle ()
   "Toggle the org-sidebar and org-sidebar-tree; Both are quite useful when working on org docs"
