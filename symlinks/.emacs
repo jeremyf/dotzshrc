@@ -746,30 +746,27 @@ to consider doing so."
 ;; I'm working through what templates I might want. This is a place holder.
 (setq org-capture-templates
       '(
-        ("g" "Game Idea" entry (file+headline "~/git/org/2020/game-ideas.org" "Game Idea")
-         "* %?\nEntered on %U\n  %i")
         ("j" "Journal" entry (file+datetree "~/git/org/2020/journal.org")
          "* %U %^{SUBJECT}\n\n    %?\n")
         ("l" "Today I Learned" entry (file+headline "~/git/org/2020/today-i-learned.org" "Today I Learned")
          "* %U: %?")
         ("m" "Meeting" entry (file+datetree "~/git/org/2020/workday.org")
-         "* MEETING %u %^{SUMMARY}\n\n  %^{ATTENDEES}p\n  %?\n")
+         "* MEETING %^{SUMMARY}\n\n  %^{ATTENDEES}p\n  %?\n")
         ("r" "Reading" entry (file+headline "~/git/org/2020/readings.org" "Readings")
-         "* %^{SUBJECT} %u\n %?\n")
+         "* TO-READ %^{SUBJECT} %u\n %?\n")
         ("s" "Session" entry (file+headline "~/git/org/2020/sessions.org" "Sessions")
          "* Session: %u %^{SUMMARY}\n\n  %^{ATTENDEES}p\n  %^{SYSTEM}p\n  %?\n")
-        ("t" "Todo" entry (file+headline "~/git/org/2020/todo.org" "Tasks")
-         "* TODO %?\n  %i\n  %a")
         ("b" "Troubleshooting" entry (file+headline "~/git/org/2020/troubleshooting.org" "Trouble Shooting")
          "* %u Problem %^{SUMMARY}\n\n  %?\n  %a")
-        ("w" "Workday" entry (file+datetree "~/git/org/2020/workday.org")
+        ("w" "Work Task" entry (file+datetree "~/git/org/2020/workday.org")
          "* TODO %?")
         ))
 
 (setq org-todo-keywords
           '((sequence "TODO" "|" "DONE")
             (sequence "MEETING" "AGENDA" "|" "MINUTES")
-            (sequence "WAITING" "|" "PROGRESS")))
+            (sequence "TO-READ" "READING" "|" "READ")
+            (sequence "WAITING" "|" "PROGRESS" "|" "RECEIVED" )))
 
 (use-package org-web-tools
   :defer t
