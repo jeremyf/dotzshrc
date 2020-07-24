@@ -116,7 +116,10 @@
   :ensure t
   :after avy
   :diminish (ivy-mode . "")
-  :bind (("C-c C-r". 'ivy-resume))
+  :bind (
+         ("C-c C-r". 'ivy-resume)
+         ("<f6>". 'ivy-resume)
+         )
   :config (ivy-mode 1)
   (setq ivy-use-virtual-buffers t)
   (setq ivy-height 12)
@@ -125,6 +128,11 @@
   (setq ivy-re-builders-alist
         '((read-file-name-internal . ivy--regex-fuzzy)
           (t . ivy--regex-ignore-order))))
+
+
+;; This is experimental, I don't know what I'll get
+(setq enable-recursive-minibuffers t)
+(setq minibuffer-depth-indicate-mode t)
 
 (use-package swiper
   :straight t
@@ -655,6 +663,33 @@ to consider doing so."
   :bind (([C-s-down] . move-text-down)
          ([C-s-up] . move-text-up)))
 
+
+;; Allow emacs to be the editor for textareas on a webpage.
+;;
+;; Note: This requires installing plugins in browsers
+;;
+(use-package atomic-chrome
+  :straight t
+  :ensure t
+  :defer t)
+(atomic-chrome-start-server)
+(setq atomic-chrome-default-major-mode 'markdown-mode)
+
+;; Some websites have aggressive JS which triggers when text is
+;; entered to a textarea which can lead to bugs in combination with
+;; AtomicChrome. There’s some websites where I regularly lose the text
+;; that’s entered. While I’m editing, the textarea is updating, but on
+;; C-c C-c, Emacs closes and the textarea is empty. For such cases,
+;; I’m using this simple workaround: Copy the contents to clipboard
+;; just before closing Emacs. So if the contents are lost, I can just
+;; paste the text into the textarea. Not a perfect solution, but this
+;; happens seldomly enough, that it’s good enough for me.
+
+(advice-add 'atomic-chrome-close-current-buffer
+            :before
+            '(lambda()
+               (clipboard-kill-ring-save (point-min) (point-max))))
+
 ;; And yes "nab" is not idiomatic, but since I'm mapping it to OPT+n,
 ;; I believe it will help me remember.
 (defun nab-name-of-file ()
@@ -703,6 +738,11 @@ to consider doing so."
 (setq org-agenda-files (list "~/git/org" "~/git/thel-sector/org" "~/git/org/2020"))
 (setq org-default-notes-file (concat org-directory "/captured-notes.org"))
 
+;; To make Org mode take care of versioning of attachments for you,
+;; add the following to your Emacs config:
+;;
+(require 'org-attach-git)
+
 ;; I'm working through what templates I might want. This is a place holder.
 (setq org-capture-templates
       '(
@@ -725,6 +765,11 @@ to consider doing so."
         ("w" "Workday" entry (file+datetree "~/git/org/2020/workday.org")
          "* TODO %?")
         ))
+
+(setq org-todo-keywords
+          '((sequence "TODO" "|" "DONE")
+            (sequence "PROJECT" "AGENDA" "|" "MINUTES")
+            (sequence "WAITING" "|" "PROGRESS")))
 
 (use-package org-web-tools
   :defer t
