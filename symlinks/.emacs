@@ -424,7 +424,8 @@
   ;; programming task I'm trying to accomplish.  In other words, while
   ;; writing, I don't want to see editing suggestions.
   (setq-default flycheck-disabled-checkers '(ruby-reek ruby-rubocop))
-)
+  )
+(add-to-list 'flycheck-checkers 'proselint)
 
 (use-package flyspell-correct
   :straight t
