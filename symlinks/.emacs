@@ -685,11 +685,25 @@ to consider doing so."
 ;; just before closing Emacs. So if the contents are lost, I can just
 ;; paste the text into the textarea. Not a perfect solution, but this
 ;; happens seldomly enough, that it’s good enough for me.
-
+;;
 (advice-add 'atomic-chrome-close-current-buffer
             :before
             '(lambda()
                (clipboard-kill-ring-save (point-min) (point-max))))
+
+;; When we get to a REALLY long file or long line, emacs develops problems.
+;; This mode helps overcome that.
+;;
+(use-package so-long
+  :ensure t
+  :defer t
+  :straight t
+  :bind
+  (:map so-long-mode-map
+        ("C-s" . isearch-forward)
+        ("C-r" . isearch-backward))
+  :config
+  (global-so-long-mode 1))
 
 ;; And yes "nab" is not idiomatic, but since I'm mapping it to OPT+n,
 ;; I believe it will help me remember.
@@ -763,11 +777,18 @@ to consider doing so."
          "* WAITING %^{SUMMARY}\n\n  %?\n")
 ))
 
+;; Different key words and state machines help contextual the work.
+;;
 (setq org-todo-keywords
           '((sequence "TODO" "|" "DONE")
             (sequence "MEETING" "AGENDA" "|" "MINUTES")
             (sequence "TO-READ" "READING" "|" "READ")
             (sequence "WAITING" "|" "PROGRESS" "|" "RECEIVED" )))
+
+;; When writing org files, once I've written the emphasis (strong,
+;; italics, code), hide the declarative characters for that emphasis.
+;;
+(setq org-hide-emphasis-markers t)
 
 (use-package org-web-tools
   :defer t
