@@ -770,7 +770,7 @@ to consider doing so."
         ("s" "Session" entry (file+headline "~/git/org/2020/sessions.org" "Sessions")
          "* Session: %u %^{SUMMARY}\n\n  %^{ATTENDEES}p\n  %^{SYSTEM}p\n  %?\n")
         ("b" "Troubleshooting" entry (file+headline "~/git/org/2020/troubleshooting.org" "Trouble Shooting")
-         "* %u Problem %^{SUMMARY}\n\n  %?\n  %a")
+         "* TODO %u Problem %^{SUMMARY}\n\n  %?\n  %a")
         ("t" "Task for Work" entry (file+datetree "~/git/org/2020/workday.org")
          "* TODO %?")
         ("w" "Waiting for Work" entry (file+datetree "~/git/org/2020/workday.org")
@@ -784,11 +784,6 @@ to consider doing so."
             (sequence "MEETING" "AGENDA" "|" "MINUTES")
             (sequence "TO-READ" "READING" "|" "READ")
             (sequence "WAITING" "|" "PROGRESS" "|" "RECEIVED" )))
-
-;; When writing org files, once I've written the emphasis (strong,
-;; italics, code), hide the declarative characters for that emphasis.
-;;
-(setq org-hide-emphasis-markers t)
 
 (use-package org-web-tools
   :defer t
