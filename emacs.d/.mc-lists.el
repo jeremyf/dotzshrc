@@ -5,8 +5,10 @@
       '(
         beginning-of-buffer
         comment-line
+        crux-move-beginning-of-line
         duplicate-line
         end-of-buffer
+        end-of-visual-line
         fill-paragraph
         git-rebase-squash
         hungry-delete-backward
@@ -19,6 +21,7 @@
         ns-do-show-character-palette
         org-ctrl-c-minus
         org-cycle
+        org-metaleft
         org-metaright
         org-self-insert-command
         org-todo
