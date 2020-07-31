@@ -778,7 +778,8 @@ to consider doing so."
          "* TODO %?")
         ("w" "Waiting for Work" entry (file+datetree "~/git/org/2020/workday.org")
          "* WAITING %^{SUMMARY}\n\n  %?\n")
-))
+        ))
+
 
 ;; Different key words and state machines help contextual the work.
 ;;
@@ -803,9 +804,11 @@ to consider doing so."
   :bind (:map org-roam-mode-map
               (("C-c r l" . org-roam)
                ("C-c r f" . org-roam-find-file)
+               ("C-c r c" . org-roam-capture)
                ("C-c r g" . org-roam-graph-show))
               :map org-mode-map
               (("C-c r i" . org-roam-insert))
+              (("C-c r c" . org-roam-capture))
               (("C-c r I" . org-roam-insert-immediate)))
   ;; Use the traditional org first "*" element then the "#+title:"
   ;; property to establish the title of the object, then append the
@@ -818,17 +821,24 @@ to consider doing so."
   ;; See https://www.orgroam.com/manual/Tags.html#Tags
   ;;
   (setq org-roam-title-sources '((headline title) alias))
-  )
-;;
+  (setq org-roam-capture-templates
+        '(
+          ("d" "default" plain (function org-roam--capture-get-point)
+           "- tags :: %^{TAGS}\n\n%?"
+           :file-name "%(format-time-string \"%Y%m%d-${slug}\" (current-time) t)"
+           :head "* ${title}\n"
+           :unnarrowed t)
+          ("t" "Thel-Sector note" plain (function org-roam--capture-get-point)
+           "- tags :: %^{THEL-TAGS}\n\n%?"
+           :file-name "thel-sector/${slug}"
+           :head "* ${title}\n"
+           :unnarrowed t)
+          ))
+)
 
 (use-package company-org-roam
   :straight (:host github :repo "org-roam/company-org-roam")
   :config (push 'company-org-roam company-backends))
-
-(use-package org-journal
-  :straight t
-  :defer t
-  :ensure t)
 
 (add-hook 'org-mode-hook #'toggle-word-wrap)
 (add-hook 'org-mode-hook #'visual-line-mode)
