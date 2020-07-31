@@ -793,18 +793,37 @@ to consider doing so."
   :ensure t
   :straight t)
 
+
+;; Consider https://github.com/jkitchin/org-ref as well
 (use-package org-roam
   :ensure t
   :straight t
   :hook (after-init . org-roam-mode)
   :custom (org-roam-directory "~/git/org-roam/")
   :bind (:map org-roam-mode-map
-              (("C-c n l" . org-roam)
-               ("C-c n f" . org-roam-find-file)
-               ("C-c n g" . org-roam-graph-show))
+              (("C-c r l" . org-roam)
+               ("C-c r f" . org-roam-find-file)
+               ("C-c r g" . org-roam-graph-show))
               :map org-mode-map
-              (("C-c n i" . org-roam-insert))
-              (("C-c n I" . org-roam-insert-immediate))))
+              (("C-c r i" . org-roam-insert))
+              (("C-c r I" . org-roam-insert-immediate)))
+  ;; Use the traditional org first "*" element then the "#+title:"
+  ;; property to establish the title of the object, then append the
+  ;; "#+roam_alias:" as alternate titles
+  ;;
+  :init (setq org-roam-tag-sources '(prop all-directories))
+  ;; First use "#+roam_tags:" then the directory structure to build the
+  ;; list of tags.
+  ;;
+  ;; See https://www.orgroam.com/manual/Tags.html#Tags
+  ;;
+  (setq org-roam-title-sources '((headline title) alias))
+  )
+;;
+
+
+
+
 
 (use-package company-org-roam
   :straight (:host github :repo "org-roam/company-org-roam")
