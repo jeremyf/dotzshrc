@@ -839,7 +839,7 @@ to consider doing so."
           ("t" "Thel-Sector note" plain (function org-roam--capture-get-point)
            ""
            :file-name "thel-sector/${slug}"
-           :head "* ${title}\n"
+           :head "#+roam_key: thel-sector:${slug}\n* ${title}\n\n"
            :unnarrowed t)
           ))
   )
@@ -856,7 +856,7 @@ to consider doing so."
         (org-roam-capture-templates (list '("t" "Thel-Sector note" plain #'org-roam--capture-get-point
                                             ""
                                             :file-name "thel-sector/${slug}"
-                                            :head "* ${title}"
+                                            :head "#+roam_key: thel-sector:${slug}\n* ${title}\n\n"
                                             :unnarrowed t
                                             :immediate-finish t))))
     (apply #'org-roam-insert args)))
