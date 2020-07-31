@@ -722,9 +722,17 @@ to consider doing so."
 
 (global-set-key (kbd "s-/") 'comment-line)
 (global-set-key (kbd "s-l") 'goto-line)
-(global-set-key (kbd "C-w") 'backward-kill-word)
+;; (global-set-key (kbd "C-w") 'backward-kill-word)
 (global-set-key (kbd "M-DEL") 'backward-kill-paragraph)
 (global-set-key (kbd "s-q") 'save-buffers-kill-terminal)
+
+(defun jnf/kill-region-or-backward-word ()
+  (interactive)
+  (if (region-active-p)
+      (kill-region (region-beginning) (region-end))
+    (backward-kill-word 1)))
+
+(global-set-key (kbd "C-w") 'jnf/kill-region-or-backward-word)
 
 ;; https://melpa.org/#/elfeed
 ;; (global-set-key (kbd "C-x r") 'elfeed)
