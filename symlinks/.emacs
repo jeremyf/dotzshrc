@@ -753,7 +753,7 @@ to consider doing so."
 (global-set-key (kbd "C-c c") 'org-capture)
 
 (setq org-directory "~/git/org")
-(setq org-agenda-files (list "~/git/org" "~/git/thel-sector/org" "~/git/org/2020"))
+(setq org-agenda-files (list "~/git/org" "~/git/thel-sector/org" "~/git/org/2020" "~/git/org-roam"))
 (setq org-default-notes-file (concat org-directory "/captured-notes.org"))
 
 ;; To make Org mode take care of versioning of attachments for you,
@@ -793,24 +793,27 @@ to consider doing so."
   :ensure t
   :straight t)
 
-;; This requires helm and I'm leveraging Ivy.  So, for now, I'll hold
-;; off but it's worth following. Bi-directional org links sounds
-;; fantastic.
-;;
-;; (use-package org-super-links
-;;   :defer t
-;;   :ensure t
-;;   :straight (org-super-links :type git :host github :repo "toshism/org-super-links")
-;;   :bind (("C-c s s" . sl-link)
-;;            ("C-c s l" . sl-store-link)
-;;            ("C-c s C-l" . sl-insert-link)))
-
-(use-package org-d20
-  :defer t
+(use-package org-roam
   :ensure t
-  :straight t)
+  :straight t
+  :hook (after-init . org-roam-mode)
+  :custom (org-roam-directory "~/git/org-roam/")
+  :bind (:map org-roam-mode-map
+              (("C-c n l" . org-roam)
+               ("C-c n f" . org-roam-find-file)
+               ("C-c n g" . org-roam-graph-show))
+              :map org-mode-map
+              (("C-c n i" . org-roam-insert))
+              (("C-c n I" . org-roam-insert-immediate))))
 
-(add-hook 'org-mode-hook 'org-d20-mode)
+(use-package company-org-roam
+  :straight (:host github :repo "org-roam/company-org-roam")
+  :config (push 'company-org-roam company-backends))
+
+(use-package org-journal
+  :straight t
+  :defer t
+  :ensure t)
 
 (add-hook 'org-mode-hook #'toggle-word-wrap)
 (add-hook 'org-mode-hook #'visual-line-mode)
