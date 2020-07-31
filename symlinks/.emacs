@@ -753,7 +753,7 @@ to consider doing so."
 (global-set-key (kbd "C-c c") 'org-capture)
 
 (setq org-directory "~/git/org")
-(setq org-agenda-files (list "~/git/org" "~/git/thel-sector/org" "~/git/org/2020" "~/git/org-roam"))
+(setq org-agenda-files (list "~/git/org" "~/git/thel-sector/org" "~/git/org/2020"))
 (setq org-default-notes-file (concat org-directory "/captured-notes.org"))
 
 ;; To make Org mode take care of versioning of attachments for you,
@@ -799,7 +799,7 @@ to consider doing so."
   :ensure t
   :straight t
   :hook (after-init . org-roam-mode)
-  :custom (org-roam-directory "~/git/org-roam/")
+  :custom (org-roam-directory "~/git/org")
   :bind (:map org-roam-mode-map
               (("C-c r l" . org-roam)
                ("C-c r f" . org-roam-find-file)
@@ -820,10 +820,6 @@ to consider doing so."
   (setq org-roam-title-sources '((headline title) alias))
   )
 ;;
-
-
-
-
 
 (use-package company-org-roam
   :straight (:host github :repo "org-roam/company-org-roam")
