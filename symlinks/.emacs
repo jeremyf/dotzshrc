@@ -753,7 +753,7 @@ to consider doing so."
 (global-set-key (kbd "C-c c") 'org-capture)
 
 (setq org-directory "~/git/org")
-(setq org-agenda-files (list "~/git/org" "~/git/thel-sector/org" "~/git/org/2020"))
+(setq org-agenda-files (list "~/git/org" "~/git/thel-sector/org" "~/git/org/2020" "~/git/org/thel-sector"))
 (setq org-default-notes-file (concat org-directory "/captured-notes.org"))
 
 ;; To make Org mode take care of versioning of attachments for you,
@@ -784,10 +784,10 @@ to consider doing so."
 ;; Different key words and state machines help contextual the work.
 ;;
 (setq org-todo-keywords
-          '((sequence "TODO" "|" "DONE")
-            (sequence "MEETING" "AGENDA" "|" "MINUTES")
-            (sequence "TO-READ" "READING" "|" "READ")
-            (sequence "WAITING" "|" "PROGRESS" "|" "RECEIVED" )))
+      '((sequence "TODO" "WAITING" "|" "DONE")
+        (sequence "MEETING" "AGENDA" "|" "MINUTES")
+        (sequence "TO-READ" "READING" "|" "READ"))
+      )
 
 (use-package org-web-tools
   :defer t
