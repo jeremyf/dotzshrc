@@ -129,11 +129,6 @@
         '((read-file-name-internal . ivy--regex-fuzzy)
           (t . ivy--regex-ignore-order))))
 
-
-;; This is experimental, I don't know what I'll get
-(setq enable-recursive-minibuffers t)
-(setq minibuffer-depth-indicate-mode t)
-
 (use-package swiper
   :straight t
   :after ivy
