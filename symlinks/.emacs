@@ -805,10 +805,12 @@ to consider doing so."
               (("C-c r l" . org-roam)
                ("C-c r f" . org-roam-find-file)
                ("C-c r c" . org-roam-capture)
+               ("C-c r x" . org-roam-jump-to-index)
                ("C-c r g" . org-roam-graph-show))
               :map org-mode-map
               (("C-c r i" . org-roam-insert))
               (("C-c r c" . org-roam-capture))
+              (("C-c r x" . org-roam-jump-to-index))
               (("<f9>" . org-roam-insert-immediate))
               (("<f4>" . jnf/org-roam-insert-immediate-thel-sector)))
 
@@ -817,6 +819,7 @@ to consider doing so."
   ;; "#+roam_alias:" as alternate titles
   ;;
   :init (setq org-roam-tag-sources '(prop all-directories))
+  (setq org-roam-index-file "~/git/org/index.org")
   ;; First use "#+roam_tags:" then the directory structure to build the
   ;; list of tags.
   ;;
@@ -840,6 +843,11 @@ to consider doing so."
            :unnarrowed t)
           ))
   )
+
+(global-set-key (kbd "C-c r x") 'org-roam-jump-to-index)
+(global-set-key (kbd "<f9>") 'org-roam-insert-immediate)
+(global-set-key (kbd "<f4>") 'jnf/org-roam-insert-immediate-thel-sector)
+
 
 (defun jnf/org-roam-insert-immediate-thel-sector (arg &rest args)
   "Analogue to `org-roam-insert-immediate`, except always use the Thel-Sector insert."
