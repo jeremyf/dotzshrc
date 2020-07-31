@@ -809,7 +809,9 @@ to consider doing so."
               :map org-mode-map
               (("C-c r i" . org-roam-insert))
               (("C-c r c" . org-roam-capture))
-              (("C-c r I" . org-roam-insert-immediate)))
+              (("<f9>" . org-roam-insert-immediate))
+              (("<f4>" . jnf/org-roam-insert-immediate-thel-sector)))
+
   ;; Use the traditional org first "*" element then the "#+title:"
   ;; property to establish the title of the object, then append the
   ;; "#+roam_alias:" as alternate titles
@@ -821,20 +823,36 @@ to consider doing so."
   ;; See https://www.orgroam.com/manual/Tags.html#Tags
   ;;
   (setq org-roam-title-sources '((headline title) alias))
+  ;; Note: Order of these templates matters. The `org-roam-insert-immediate` uses
+  ;; the first one in the list (e.g. default)
+  ;;
   (setq org-roam-capture-templates
         '(
           ("d" "default" plain (function org-roam--capture-get-point)
-           "- tags :: %^{TAGS}\n\n%?"
+           ""
            :file-name "%(format-time-string \"%Y%m%d-${slug}\" (current-time) t)"
            :head "* ${title}\n"
            :unnarrowed t)
           ("t" "Thel-Sector note" plain (function org-roam--capture-get-point)
-           "- tags :: %^{THEL-TAGS}\n\n%?"
+           ""
            :file-name "thel-sector/${slug}"
            :head "* ${title}\n"
            :unnarrowed t)
           ))
-)
+  )
+
+(defun jnf/org-roam-insert-immediate-thel-sector (arg &rest args)
+  "Analogue to `org-roam-insert-immediate`, except always use the Thel-Sector insert."
+  (interactive "P")
+  (let ((args (push arg args))
+        (org-roam-capture-templates (list '("t" "Thel-Sector note" plain #'org-roam--capture-get-point
+                                            ""
+                                            :file-name "thel-sector/${slug}"
+                                            :head "* ${title}"
+                                            :unnarrowed t
+                                            :immediate-finish t))))
+    (apply #'org-roam-insert args)))
+
 
 (use-package company-org-roam
   :straight (:host github :repo "org-roam/company-org-roam")
