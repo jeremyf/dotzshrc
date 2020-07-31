@@ -358,8 +358,8 @@
 (use-package golden-ratio
   :straight t
   :ensure t
-  :config (golden-ratio-mode 1)
-  )
+  :config (golden-ratio-mode 1))
+(setq golden-ratio-adjust-factor 1)
 
 ;; A window manager for emacs, allowing fast toggles between windows
 ;; as well as opening or moving those windows.
