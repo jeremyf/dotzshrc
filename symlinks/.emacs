@@ -473,6 +473,8 @@
  '(dired-listing-switches "-laGhpX")
  '(dired-use-ls-dired t)
  '(global-display-line-numbers-mode t)
+ '(org-agenda-files
+   '("/Users/jfriesen/git/org/agenda.org" "/Users/jfriesen/git/org/inclusion.org" "/Users/jfriesen/git/org/index.org" "/Users/jfriesen/git/org/meetings.org" "/Users/jfriesen/git/org/readings.org" "/Users/jfriesen/git/org/sessions.org" "/Users/jfriesen/git/org/troubleshooting.org"))
  '(org-export-backends '(ascii html icalendar latex md odt))
  '(show-paren-mode t))
 (custom-set-faces
@@ -753,7 +755,7 @@ to consider doing so."
 (global-set-key (kbd "C-c c") 'org-capture)
 
 (setq org-directory "~/git/org")
-(setq org-agenda-files (list "~/git/org" "~/git/org/2020"))
+(setq org-agenda-files (list "~/git/org"))
 (setq org-default-notes-file (concat org-directory "/captured-notes.org"))
 
 ;; To make Org mode take care of versioning of attachments for you,
@@ -846,7 +848,7 @@ to consider doing so."
 
 (global-set-key (kbd "C-c r x") 'org-roam-jump-to-index)
 (global-set-key (kbd "<f9>") 'org-roam-insert-immediate)
-(global-set-key (kbd "<f4>") 'jnf/org-roam-insert-immediate-thel-sector)
+(global-set-key (kbd "<f10>") 'jnf/org-roam-insert-immediate-thel-sector)
 
 
 (defun jnf/org-roam-insert-immediate-thel-sector (arg &rest args)
