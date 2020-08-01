@@ -753,7 +753,7 @@ to consider doing so."
 (global-set-key (kbd "C-c c") 'org-capture)
 
 (setq org-directory "~/git/org")
-(setq org-agenda-files (list "~/git/org" "~/git/thel-sector/org" "~/git/org/2020" "~/git/org/thel-sector"))
+(setq org-agenda-files (list "~/git/org" "~/git/org/2020"))
 (setq org-default-notes-file (concat org-directory "/captured-notes.org"))
 
 ;; To make Org mode take care of versioning of attachments for you,
@@ -832,9 +832,9 @@ to consider doing so."
   (setq org-roam-capture-templates
         '(
           ("d" "default" plain (function org-roam--capture-get-point)
-           ""
-           :file-name "%(format-time-string \"%Y%m%d-${slug}\" (current-time) t)"
-           :head "* ${title}\n"
+           "%?"
+           :file-name "notes/%<%Y%m%d%H%M%S>-${slug}"
+           :head "* ${title}\n\n"
            :unnarrowed t)
           ("t" "Thel-Sector note" plain (function org-roam--capture-get-point)
            "  - Tags ::%?"
