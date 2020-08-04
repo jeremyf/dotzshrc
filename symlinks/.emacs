@@ -847,37 +847,37 @@ to consider doing so."
            :unnarrowed t
            :immediate-finish t)
           ("f" "Faction" plain (function org-roam--capture-get-point)
-           "%?"
+           "  - Tags ::[[file:../factions.org][Factions]]\n\n %?"
            :file-name "rpgs/thel-sector/factions/${slug}"
            :head  "#+roam_key: rpgs-thel-sector-factions:${slug}\n#+roam_tags:\n* ${title}\n\n"
            :unnarrowed t
            :immediate-finish t)
           ("l" "Location" plain (function org-roam--capture-get-point)
-           "%?"
+           "  - Tags ::[[file:../locations.org][Locations]]\n\n %?"
            :file-name "rpgs/thel-sector/locations/${slug}"
            :head  "#+roam_key: rpgs-thel-sector-locations:${slug}\n#+roam_tags:\n* ${title}\n\n"
            :unnarrowed t
            :immediate-finish t)
           ("n" "NPC" plain (function org-roam--capture-get-point)
-           "%?"
+           "  - Tags ::[[file:../npcs.org][NPCs]]\n\n %?"
            :file-name "rpgs/thel-sector/npcs/${slug}"
            :head  "#+roam_key: rpgs-thel-sector-npcs:${slug}\n#+roam_tags:\n* ${title}\n\n"
            :unnarrowed t
            :immediate-finish t)
           ("r" "Religion" plain (function org-roam--capture-get-point)
-           "%?"
+           "  - Tags ::[[file:../religions.org][Religions]]\n\n %?"
            :file-name "rpgs/thel-sector/religions/${slug}"
            :head  "#+roam_key: rpgs-thel-sector-religions:${slug}\n#+roam_tags:\n* ${title}\n\n"
            :unnarrowed t
            :immediate-finish t)
           ("s" "System" plain (function org-roam--capture-get-point)
-           "%?"
+           "  - Tags ::[[file:../systems.org][Systems]]\n\n %?"
            :file-name "rpgs/thel-sector/systems/${slug}"
            :head  "#+roam_key: rpgs-thel-sector-systems:${slug}\n#+roam_tags:\n* ${title}\n\n"
            :unnarrowed t
            :immediate-finish t)
           ("t" "Tags, World" plain (function org-roam--capture-get-point)
-           "%?"
+           "  - Tags ::[[file:../world-tags.org][World Tags]]\n\n %?"
            :file-name "rpgs/swn/tags/worlds/${slug}"
            :head "#+roam_key: rpgs-swn-tags-worlds:${slug}\n#+roam_tags:\n* ${title}\n\n"
            :unnarrowed t
@@ -889,7 +889,7 @@ to consider doing so."
            :unnarrowed t
            :immediate-finish t)
           ("w" "World" plain (function org-roam--capture-get-point)
-           "%?"
+           "  - Tags ::[[file:../worlds.org][Worlds]]\n\n %?"
            :file-name "rpgs/thel-sector/worlds/${slug}"
            :head "#+roam_key: rpgs-thel-sector-worlds:${slug}\n#+roam_tags:\n* ${title}\n\n"
            :unnarrowed t
