@@ -796,6 +796,10 @@ to consider doing so."
   :ensure t
   :straight t)
 
+(use-package org-d20
+  :defer t
+  :ensure t
+  :straight t)
 
 ;; Consider https://github.com/jkitchin/org-ref as well
 (use-package org-roam
@@ -812,9 +816,7 @@ to consider doing so."
               :map org-mode-map
               (("C-c r i" . org-roam-insert))
               (("C-c r c" . org-roam-capture))
-              (("C-c r x" . org-roam-jump-to-index))
-              (("<f9>" . org-roam-insert-immediate))
-              (("<f4>" . jnf/org-roam-insert-immediate-thel-sector)))
+              (("C-c r x" . org-roam-jump-to-index)))
 
   ;; Use the traditional org first "*" element then the "#+title:"
   ;; property to establish the title of the object, then append the
@@ -838,30 +840,138 @@ to consider doing so."
            :file-name "notes/%<%Y%m%d%H%M%S>-${slug}"
            :head "* ${title}\n\n"
            :unnarrowed t)
-          ("t" "Thel-Sector note" plain (function org-roam--capture-get-point)
-           "  - Tags ::%?"
-           :file-name "thel-sector/${slug}"
-           :head "#+roam_key: thel-sector:${slug}\n#+roam_tags:\n* ${title}\n\n"
-           :unnarrowed t)
-          ))
-  )
+          ("a" "Actual Play" plain (function org-roam--capture-get-point)
+           "  - Tags ::[[file:../actual-play.org][Actual Play]]\n\n %?"
+           :file-name "rpgs/actual-play/${slug}"
+           :head  "#+roam_key: rpgs-actual-play:${slug}\n#+roam_tags:\n* ${title}\n\n"
+           :unnarrowed t
+           :immediate-finish t)
+          ("f" "Faction" plain (function org-roam--capture-get-point)
+           "%?"
+           :file-name "rpgs/thel-sector/factions/${slug}"
+           :head  "#+roam_key: rpgs-thel-sector-factions:${slug}\n#+roam_tags:\n* ${title}\n\n"
+           :unnarrowed t
+           :immediate-finish t)
+          ("l" "Location" plain (function org-roam--capture-get-point)
+           "%?"
+           :file-name "rpgs/thel-sector/locations/${slug}"
+           :head  "#+roam_key: rpgs-thel-sector-locations:${slug}\n#+roam_tags:\n* ${title}\n\n"
+           :unnarrowed t
+           :immediate-finish t)
+          ("n" "NPC" plain (function org-roam--capture-get-point)
+           "%?"
+           :file-name "rpgs/thel-sector/npcs/${slug}"
+           :head  "#+roam_key: rpgs-thel-sector-npcs:${slug}\n#+roam_tags:\n* ${title}\n\n"
+           :unnarrowed t
+           :immediate-finish t)
+          ("r" "Religion" plain (function org-roam--capture-get-point)
+           "%?"
+           :file-name "rpgs/thel-sector/religions/${slug}"
+           :head  "#+roam_key: rpgs-thel-sector-religions:${slug}\n#+roam_tags:\n* ${title}\n\n"
+           :unnarrowed t
+           :immediate-finish t)
+          ("s" "System" plain (function org-roam--capture-get-point)
+           "%?"
+           :file-name "rpgs/thel-sector/systems/${slug}"
+           :head  "#+roam_key: rpgs-thel-sector-systems:${slug}\n#+roam_tags:\n* ${title}\n\n"
+           :unnarrowed t
+           :immediate-finish t)
+          ("t" "Tags, World" plain (function org-roam--capture-get-point)
+           "%?"
+           :file-name "rpgs/swn/tags/worlds/${slug}"
+           :head "#+roam_key: rpgs-swn-tags-worlds:${slug}\n#+roam_tags:\n* ${title}\n\n"
+           :unnarrowed t
+           :immediate-finish t)
+          ("u" "Unfiled card" plain (function org-roam--capture-get-point)
+           "%?"
+           :file-name "rpgs/thel-sector/${slug}"
+           :head  "#+roam_key: rpgs-thel-sector:${slug}\n#+roam_tags:\n* ${title}\n\n"
+           :unnarrowed t
+           :immediate-finish t)
+          ("w" "World" plain (function org-roam--capture-get-point)
+           "%?"
+           :file-name "rpgs/thel-sector/worlds/${slug}"
+           :head "#+roam_key: rpgs-thel-sector-worlds:${slug}\n#+roam_tags:\n* ${title}\n\n"
+           :unnarrowed t
+           :immediate-finish t))))
 
 (global-set-key (kbd "C-c r x") 'org-roam-jump-to-index)
 (global-set-key (kbd "<f9>") 'org-roam-insert-immediate)
-(global-set-key (kbd "<f10>") 'jnf/org-roam-insert-immediate-thel-sector)
+(global-set-key (kbd "<f4>") 'org-roam-insert)
 
-
-(defun jnf/org-roam-insert-immediate-thel-sector (arg &rest args)
-  "Analogue to `org-roam-insert-immediate`, except always use the Thel-Sector insert."
+;; Waiting on reddit answers: https://www.reddit.com/r/emacs/comments/i3i4ui/help_with_elisp/
+(global-set-key (kbd "C-c t a") 'jnf/org-roam-insert-immediate-a)
+(defun jnf/org-roam-insert-immediate-a (arg &rest args)
+  "Analogue to `org-roam-insert-immediate`; Except insert 'a' template."
   (interactive "P")
   (let ((args (push arg args))
-        (org-roam-capture-templates (list '("t" "Thel-Sector note" plain #'org-roam--capture-get-point
-                                            "  - Tags ::%?"
-                                            :file-name "thel-sector/${slug}"
-                                            :head "#+roam_key: thel-sector:${slug}\n#+roam_tags:\n* ${title}\n\n"
-                                            :unnarrowed t
-                                            :immediate-finish t))))
+        (org-roam-capture-templates (list `(,@(assoc "a" org-roam-capture-templates) :immediate-finish t))))
     (apply #'org-roam-insert args)))
+
+(global-set-key (kbd "C-c t f") 'jnf/org-roam-insert-immediate-f)
+(defun jnf/org-roam-insert-immediate-f (arg &rest args)
+  "Analogue to `org-roam-insert-immediate`; Except insert 'f' template."
+  (interactive "P")
+  (let ((args (push arg args))
+        (org-roam-capture-templates (list `(,@(assoc "f" org-roam-capture-templates) :immediate-finish t))))
+    (apply #'org-roam-insert args)))
+
+(global-set-key (kbd "C-c t l") 'jnf/org-roam-insert-immediate-l)
+(defun jnf/org-roam-insert-immediate-l (arg &rest args)
+  "Analogue to `org-roam-insert-immediate`; Except insert 'l' template."
+  (interactive "P")
+  (let ((args (push arg args))
+        (org-roam-capture-templates (list `(,@(assoc "l" org-roam-capture-templates) :immediate-finish t))))
+    (apply #'org-roam-insert args)))
+
+(global-set-key (kbd "C-c t n") 'jnf/org-roam-insert-immediate-n)
+(defun jnf/org-roam-insert-immediate-n (arg &rest args)
+  "Analogue to `org-roam-insert-immediate`; Except insert 'n' template."
+  (interactive "P")
+  (let ((args (push arg args))
+        (org-roam-capture-templates (list `(,@(assoc "n" org-roam-capture-templates) :immediate-finish t))))
+    (apply #'org-roam-insert args)))
+
+(global-set-key (kbd "C-c t r") 'jnf/org-roam-insert-immediate-r)
+(defun jnf/org-roam-insert-immediate-r (arg &rest args)
+  "Analogue to `org-roam-insert-immediate`; Except insert 'r' template."
+  (interactive "P")
+  (let ((args (push arg args))
+        (org-roam-capture-templates (list `(,@(assoc "r" org-roam-capture-templates) :immediate-finish t))))
+    (apply #'org-roam-insert args)))
+
+(global-set-key (kbd "C-c t s") 'jnf/org-roam-insert-immediate-s)
+(defun jnf/org-roam-insert-immediate-s (arg &rest args)
+  "Analogue to `org-roam-insert-immediate`; Except insert 's' template."
+  (interactive "P")
+  (let ((args (push arg args))
+        (org-roam-capture-templates (list `(,@(assoc "s" org-roam-capture-templates) :immediate-finish t))))
+    (apply #'org-roam-insert args)))
+
+(global-set-key (kbd "C-c t t") 'jnf/org-roam-insert-immediate-t)
+(defun jnf/org-roam-insert-immediate-t (arg &rest args)
+  "Analogue to `org-roam-insert-immediate`; Except insert 't' template."
+  (interactive "P")
+  (let ((args (push arg args))
+        (org-roam-capture-templates (list `(,@(assoc "t" org-roam-capture-templates) :immediate-finish t))))
+    (apply #'org-roam-insert args)))
+
+(global-set-key (kbd "C-c t u") 'jnf/org-roam-insert-immediate-u)
+(defun jnf/org-roam-insert-immediate-u (arg &rest args)
+  "Analogue to `org-roam-insert-immediate`; Except insert 'u' template."
+  (interactive "P")
+  (let ((args (push arg args))
+        (org-roam-capture-templates (list `(,@(assoc "u" org-roam-capture-templates) :immediate-finish t))))
+    (apply #'org-roam-insert args)))
+
+(global-set-key (kbd "C-c t w") 'jnf/org-roam-insert-immediate-w)
+(defun jnf/org-roam-insert-immediate-w (arg &rest args)
+  "Analogue to `org-roam-insert-immediate`; Except insert 'w' template."
+  (interactive "P")
+  (let ((args (push arg args))
+        (org-roam-capture-templates (list `(,@(assoc "w" org-roam-capture-templates) :immediate-finish t))))
+    (apply #'org-roam-insert args)))
+
 
 
 (use-package company-org-roam
