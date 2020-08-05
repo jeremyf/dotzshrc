@@ -901,6 +901,8 @@ to consider doing so."
            :unnarrowed t
            :immediate-finish t))))
 
+(require 'org-roam-protocol)
+
 (global-set-key (kbd "C-c r x") 'org-roam-jump-to-index)
 (global-set-key (kbd "<f9>") 'org-roam-insert-immediate)
 (global-set-key (kbd "<f4>") 'org-roam-insert)
