@@ -14,6 +14,7 @@
         hungry-delete-backward
         hungry-delete-forward
         indent-for-tab-command
+        jnf/kill-region-or-backward-word
         magit-status
         markdown-outdent-or-delete
         mouse-set-region

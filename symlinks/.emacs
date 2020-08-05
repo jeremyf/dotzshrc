@@ -864,6 +864,12 @@ to consider doing so."
            :head  "#+roam_key: rpgs-thel-sector-npcs:${slug}\n#+roam_tags:\n* ${title}\n\n"
            :unnarrowed t
            :immediate-finish t)
+          ("o" "Objects" plain (function org-roam--capture-get-point)
+           "  - Tags ::[[file:../objects.org][Objects]]\n\n %?"
+           :file-name "rpgs/thel-sector/objects/${slug}"
+           :head  "#+roam_key: rpgs-thel-sector-objects:${slug}\n#+roam_tags:\n* ${title}\n\n"
+           :unnarrowed t
+           :immediate-finish t)
           ("r" "Religion" plain (function org-roam--capture-get-point)
            "  - Tags ::[[file:../religions.org][Religions]]\n\n %?"
            :file-name "rpgs/thel-sector/religions/${slug}"
