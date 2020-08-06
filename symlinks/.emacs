@@ -841,7 +841,7 @@ to consider doing so."
            :head "* ${title}\n\n"
            :unnarrowed t)
           ("a" "Actual Play" plain (function org-roam--capture-get-point)
-           "  - Tags ::[[file:../actual-play.org][Actual Play]]\n\n %?"
+           "  - Tags :: [[file:../actual-play.org][Actual Play]]\n\n %?"
            :file-name "rpgs/actual-play/${slug}"
            :head  "#+roam_key: rpgs-actual-play:${slug}\n#+roam_tags:\n* ${title}\n\n"
            :unnarrowed t
@@ -856,6 +856,12 @@ to consider doing so."
            "  - Tags :: [[file:../factions.org][Factions]]\n\n %?"
            :file-name "rpgs/thel_sector/factions/${slug}"
            :head  "#+roam_key: rpgs-thel-sector-factions:${slug}\n#+roam_tags:\n* ${title}\n\n"
+           :unnarrowed t
+           :immediate-finish t)
+          ("c" "Faction Assets (SWN)" plain (function org-roam--capture-get-point)
+           "  - Tags :: [[file:../faction_assets.org][Faction Assets]]\n\n %?"
+           :file-name "rpgs/swn/faction_assets/${slug}"
+           :head  "#+roam_key: rpgs-swn-faction-assets:${slug}\n#+roam_tags:\n* ${title}\n\n"
            :unnarrowed t
            :immediate-finish t)
           ("n" "NPC (Thel Sector)" plain (function org-roam--capture-get-point)
