@@ -801,6 +801,8 @@ to consider doing so."
   :ensure t
   :straight t)
 
+(defalias 'roll 'org-d20-roll-at-point)
+
 ;; Consider https://github.com/jkitchin/org-ref as well
 (use-package org-roam
   :ensure t
@@ -918,81 +920,6 @@ to consider doing so."
 (global-set-key (kbd "C-c r x") 'org-roam-jump-to-index)
 (global-set-key (kbd "<f9>") 'org-roam-insert-immediate)
 (global-set-key (kbd "<f4>") 'org-roam-insert)
-
-;; Waiting on reddit answers: https://www.reddit.com/r/emacs/comments/i3i4ui/help_with_elisp/
-(global-set-key (kbd "C-c t a") 'jnf/org-roam-insert-immediate-a)
-(defun jnf/org-roam-insert-immediate-a (arg &rest args)
-  "Analogue to `org-roam-insert-immediate`; Except insert 'a' template."
-  (interactive "P")
-  (let ((args (push arg args))
-        (org-roam-capture-templates (list `(,@(assoc "a" org-roam-capture-templates) :immediate-finish t))))
-    (apply #'org-roam-insert args)))
-
-(global-set-key (kbd "C-c t f") 'jnf/org-roam-insert-immediate-f)
-(defun jnf/org-roam-insert-immediate-f (arg &rest args)
-  "Analogue to `org-roam-insert-immediate`; Except insert 'f' template."
-  (interactive "P")
-  (let ((args (push arg args))
-        (org-roam-capture-templates (list `(,@(assoc "f" org-roam-capture-templates) :immediate-finish t))))
-    (apply #'org-roam-insert args)))
-
-(global-set-key (kbd "C-c t l") 'jnf/org-roam-insert-immediate-l)
-(defun jnf/org-roam-insert-immediate-l (arg &rest args)
-  "Analogue to `org-roam-insert-immediate`; Except insert 'l' template."
-  (interactive "P")
-  (let ((args (push arg args))
-        (org-roam-capture-templates (list `(,@(assoc "l" org-roam-capture-templates) :immediate-finish t))))
-    (apply #'org-roam-insert args)))
-
-(global-set-key (kbd "C-c t n") 'jnf/org-roam-insert-immediate-n)
-(defun jnf/org-roam-insert-immediate-n (arg &rest args)
-  "Analogue to `org-roam-insert-immediate`; Except insert 'n' template."
-  (interactive "P")
-  (let ((args (push arg args))
-        (org-roam-capture-templates (list `(,@(assoc "n" org-roam-capture-templates) :immediate-finish t))))
-    (apply #'org-roam-insert args)))
-
-(global-set-key (kbd "C-c t r") 'jnf/org-roam-insert-immediate-r)
-(defun jnf/org-roam-insert-immediate-r (arg &rest args)
-  "Analogue to `org-roam-insert-immediate`; Except insert 'r' template."
-  (interactive "P")
-  (let ((args (push arg args))
-        (org-roam-capture-templates (list `(,@(assoc "r" org-roam-capture-templates) :immediate-finish t))))
-    (apply #'org-roam-insert args)))
-
-(global-set-key (kbd "C-c t s") 'jnf/org-roam-insert-immediate-s)
-(defun jnf/org-roam-insert-immediate-s (arg &rest args)
-  "Analogue to `org-roam-insert-immediate`; Except insert 's' template."
-  (interactive "P")
-  (let ((args (push arg args))
-        (org-roam-capture-templates (list `(,@(assoc "s" org-roam-capture-templates) :immediate-finish t))))
-    (apply #'org-roam-insert args)))
-
-(global-set-key (kbd "C-c t t") 'jnf/org-roam-insert-immediate-t)
-(defun jnf/org-roam-insert-immediate-t (arg &rest args)
-  "Analogue to `org-roam-insert-immediate`; Except insert 't' template."
-  (interactive "P")
-  (let ((args (push arg args))
-        (org-roam-capture-templates (list `(,@(assoc "t" org-roam-capture-templates) :immediate-finish t))))
-    (apply #'org-roam-insert args)))
-
-(global-set-key (kbd "C-c t u") 'jnf/org-roam-insert-immediate-u)
-(defun jnf/org-roam-insert-immediate-u (arg &rest args)
-  "Analogue to `org-roam-insert-immediate`; Except insert 'u' template."
-  (interactive "P")
-  (let ((args (push arg args))
-        (org-roam-capture-templates (list `(,@(assoc "u" org-roam-capture-templates) :immediate-finish t))))
-    (apply #'org-roam-insert args)))
-
-(global-set-key (kbd "C-c t w") 'jnf/org-roam-insert-immediate-w)
-(defun jnf/org-roam-insert-immediate-w (arg &rest args)
-  "Analogue to `org-roam-insert-immediate`; Except insert 'w' template."
-  (interactive "P")
-  (let ((args (push arg args))
-        (org-roam-capture-templates (list `(,@(assoc "w" org-roam-capture-templates) :immediate-finish t))))
-    (apply #'org-roam-insert args)))
-
-
 
 (use-package company-org-roam
   :straight (:host github :repo "org-roam/company-org-roam")
