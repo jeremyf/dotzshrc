@@ -623,6 +623,11 @@
   :ensure t
   :defer t)
 
+;; Open svg files in xml-mode (instead of image rendering mode)
+(add-to-list `auto-mode-alist
+             '("\\.svg\\'" . xml-mode))
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; magit
 (with-eval-after-load "magit"
@@ -843,9 +848,9 @@ to consider doing so."
            :head "* ${title}\n\n"
            :unnarrowed t)
           ("a" "Actual Play" plain (function org-roam--capture-get-point)
-           "  - Tags :: [[file:../actual-play.org][Actual Play]]\n\n %?"
-           :file-name "rpgs/actual-play/${slug}"
-           :head  "#+roam_key: rpgs-actual-play:${slug}\n#+roam_tags:\n* ${title}\n\n"
+           "  - Tags :: [[file:../actual_plays.org][Actual Play]]\n\n %?"
+           :file-name "rpgs/actual_plays/${slug}"
+           :head  "#+roam_key: rpgs-actual_plays:${slug}\n#+roam_tags:\n* ${title}\n\n"
            :unnarrowed t
            :immediate-finish t)
           ("b" "Planning" plain (function org-roam--capture-get-point)
@@ -950,6 +955,11 @@ to consider doing so."
   (org-sidebar-tree-toggle)
   (org-sidebar-toggle))
 (defalias 'ot 'org-frames-toggle)
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((emacs-lisp . t)
+   (ruby . t)))
 
 ;; Uncomment to always launch org mode with a sidebar tree
 ;; (add-hook 'org-mode-hook #'org-sidebar-tree)

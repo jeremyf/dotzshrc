@@ -22,6 +22,7 @@
         ns-do-show-character-palette
         org-ctrl-c-minus
         org-cycle
+        org-force-self-insert
         org-metaleft
         org-metaright
         org-self-insert-command
