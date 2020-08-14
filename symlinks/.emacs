@@ -747,6 +747,57 @@ to consider doing so."
     (progn (add-to-list 'load-path "~/git/dotzshrc/emacs/gnu-linux")
            (require 'emacs-config.el)))
 
+
+;; From https://stackoverflow.com/questions/88399/how-do-i-duplicate-a-whole-line-in-emacs
+(defun duplicate-line (arg)
+  "Duplicate current line, leaving point in lower line."
+  (interactive "*p")
+
+  ;; save the point for undo
+  (setq buffer-undo-list (cons (point) buffer-undo-list))
+
+  ;; local variables for start and end of line
+  (let ((bol (save-excursion (beginning-of-line) (point)))
+        eol)
+    (save-excursion
+
+      ;; don't use forward-line for this, because you would have
+      ;; to check whether you are at the end of the buffer
+      (end-of-line)
+      (setq eol (point))
+
+      ;; store the line and disable the recording of undo information
+      (let ((line (buffer-substring bol eol))
+            (buffer-undo-list t)
+            (count arg))
+        ;; insert the line arg times
+        (while (> count 0)
+          (newline)         ;; because there is no newline in 'line'
+          (insert line)
+          (setq count (1- count)))
+        )
+
+      ;; create the undo information
+      (setq buffer-undo-list (cons (cons eol (point)) buffer-undo-list)))
+    ) ; end-of-let
+
+  ;; put the point in the lowest line and return
+  (next-line arg)
+  )
+
+(global-set-key (kbd "C-M-d") 'duplicate-line) ;; CTRL+OPT+d - duplicate line
+
+;; Because smie-down-list grabbed C-M-d, I need to set it
+(defun jnf-add-duplicate-line-kbd()
+  (local-set-key (kbd "C-M-d") 'duplicate-line))
+(add-hook 'ruby-mode-hook 'jnf-add-duplicate-line-kbd)
+
+
+(use-package plantuml-mode
+  :straight t
+  :ensure t
+  :defer t)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; BEGIN ORG mode configuration and concerns
 
@@ -845,10 +896,10 @@ to consider doing so."
           ("d" "default" plain (function org-roam--capture-get-point)
            "%?"
            :file-name "notes/%<%Y%m%d%H%M%S>-${slug}"
-           :head "* ${title}\n\n"
+           :head "#+roam_tags:\n* ${title}\n\n"
            :unnarrowed t)
           ("a" "Actual Play" plain (function org-roam--capture-get-point)
-           "  - Tags :: [[file:../actual_plays.org][Actual Play]]\n\n %?"
+           "\n  - Tags :: [[file:../actual_plays.org][Actual Play]]\n\n** Planning\n\n%?\n** Session\n\n   - Date ::\n   - Previous Session ::\n   - Next Session ::\n"
            :file-name "rpgs/actual_plays/${slug}"
            :head  "#+roam_key: rpgs-actual_plays:${slug}\n#+roam_tags:\n* ${title}\n\n"
            :unnarrowed t
@@ -895,6 +946,12 @@ to consider doing so."
            :head  "#+roam_key: rpgs-thel-sector-religions:${slug}\n#+roam_tags:\n* ${title}\n\n"
            :unnarrowed t
            :immediate-finish t)
+          ("g" "Unfiled card (RPGs)" plain (function org-roam--capture-get-point)
+           "%?"
+           :file-name "rpgs/${slug}"
+           :head  "#+roam_key: rpgs:${slug}\n#+roam_tags:\n* ${title}\n\n"
+           :unnarrowed t
+           :immediate-finish t)
           ("s" "System (Thel Sector)" plain (function org-roam--capture-get-point)
            "  - Tags :: [[file:../systems.org][Systems]]\n\n %?"
            :file-name "rpgs/thel_sector/systems/${slug}"
@@ -923,13 +980,14 @@ to consider doing so."
 (require 'org-roam-protocol)
 
 (global-set-key (kbd "C-c r x") 'org-roam-jump-to-index)
-(global-set-key (kbd "<f9>") 'org-roam-insert-immediate)
 (global-set-key (kbd "<f4>") 'org-roam-insert)
+(global-set-key (kbd "s-r") 'org-roam-find-file)
 
 (use-package company-org-roam
   :straight (:host github :repo "org-roam/company-org-roam")
   :config (push 'company-org-roam company-backends))
 
+(add-hook 'after-init-hook 'global-company-mode)
 
 (use-package org-roam-server
   :straight t
