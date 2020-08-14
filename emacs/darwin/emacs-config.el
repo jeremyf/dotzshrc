@@ -54,5 +54,21 @@
 ;; (setq mac-command-modifier 'meta
 ;;       mac-option-modifier 'none)
 
+
+
+;; When we get to a REALLY long file or long line, emacs develops problems.
+;; This mode helps overcome that.
+;;
+(use-package so-long
+  :ensure t
+  :defer t
+  :straight t
+  :bind
+  (:map so-long-mode-map
+        ("C-s" . isearch-forward)
+        ("C-r" . isearch-backward))
+  :config
+  (global-so-long-mode 1))
+
 (provide 'emacs-config.el)
 ;;; emacs-config.el ends here

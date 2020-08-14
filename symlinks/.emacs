@@ -693,19 +693,6 @@ to consider doing so."
             '(lambda()
                (clipboard-kill-ring-save (point-min) (point-max))))
 
-;; When we get to a REALLY long file or long line, emacs develops problems.
-;; This mode helps overcome that.
-;;
-(use-package so-long
-  :ensure t
-  :defer t
-  :straight t
-  :bind
-  (:map so-long-mode-map
-        ("C-s" . isearch-forward)
-        ("C-r" . isearch-backward))
-  :config
-  (global-so-long-mode 1))
 
 ;; And yes "nab" is not idiomatic, but since I'm mapping it to OPT+n,
 ;; I believe it will help me remember.
