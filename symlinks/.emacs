@@ -274,14 +274,15 @@
 (add-hook 'ruby-mode-hook 'inf-ruby-minor-mode)
 (add-hook 'compilation-filter-hook 'inf-ruby-auto-enter)
 
-(use-package ac-inf-ruby
-  :straight t
-  :after inf-ruby
-  :defer t
-  :ensure t)
-(eval-after-load 'auto-complete
-  '(add-to-list 'ac-modes 'inf-ruby-minor-mode))
-(add-hook 'ruby-mode-hook 'ac-inf-ruby-enable)
+;; Disabled as I'm using company completio
+;; (use-package ac-inf-ruby
+;;   :straight t
+;;   :after inf-ruby
+;;   :defer t
+;;   :ensure t)
+;; (eval-after-load 'auto-complete
+;;   '(add-to-list 'ac-modes 'inf-ruby-minor-mode))
+;; (add-hook 'ruby-mode-hook 'ac-inf-ruby-enable)
 
 (use-package string-inflection
   :defer t
@@ -350,11 +351,11 @@
 ;;
 ;; Interestingly, having a visual reminder of the active window helps
 ;; focus my thinking.
-(use-package golden-ratio
-  :straight t
-  :ensure t
-  :config (golden-ratio-mode 1))
-(setq golden-ratio-adjust-factor 1)
+;; (use-package golden-ratio
+;;   :straight t
+;;   :ensure t
+;;   :config (golden-ratio-mode nil))
+;; (setq golden-ratio-adjust-factor nil)
 
 ;; A window manager for emacs, allowing fast toggles between windows
 ;; as well as opening or moving those windows.
@@ -734,7 +735,6 @@ to consider doing so."
     (progn (add-to-list 'load-path "~/git/dotzshrc/emacs/gnu-linux")
            (require 'emacs-config.el)))
 
-
 ;; From https://stackoverflow.com/questions/88399/how-do-i-duplicate-a-whole-line-in-emacs
 (defun duplicate-line (arg)
   "Duplicate current line, leaving point in lower line."
@@ -859,7 +859,6 @@ to consider doing so."
                ("C-c r x" . org-roam-jump-to-index)
                ("C-c r g" . org-roam-graph-show))
               :map org-mode-map
-              (("C-c r i" . org-roam-insert))
               (("C-c r c" . org-roam-capture))
               (("C-c r x" . org-roam-jump-to-index)))
 
@@ -875,100 +874,47 @@ to consider doing so."
   ;; See https://www.orgroam.com/manual/Tags.html#Tags
   ;;
   (setq org-roam-title-sources '((headline title) alias))
+
   ;; Note: Order of these templates matters. The `org-roam-insert-immediate` uses
-  ;; the first one in the list (e.g. default)
+  ;; the first one in the list (e.g. Fleeting)
   ;;
   (setq org-roam-capture-templates
         '(
-          ("d" "default" plain (function org-roam--capture-get-point)
+          ("f" "Fleeting" plain (function org-roam--capture-get-point)
            "%?"
-           :file-name "notes/%<%Y%m%d%H%M%S>-${slug}"
-           :head "#+roam_tags:\n* ${title}\n\n"
+           :file-name "fleeting/%<%Y%m%d>-${slug}"
+           :head "#+title: ${title}\n#+roam_tags:\n* ${title}\n\n"
            :unnarrowed t)
-          ("a" "Actual Play" plain (function org-roam--capture-get-point)
-           "\n  - Tags :: [[file:../actual_plays.org][Actual Play]]\n\n** Planning\n\n%?\n** Session\n\n   - Date ::\n   - Previous Session ::\n   - Next Session ::\n"
-           :file-name "rpgs/actual_plays/${slug}"
-           :head  "#+roam_key: rpgs-actual_plays:${slug}\n#+roam_tags:\n* ${title}\n\n"
-           :unnarrowed t
-           :immediate-finish t)
-          ("b" "Planning" plain (function org-roam--capture-get-point)
-           "  - Tags :: [[file:../planning.org][Planning]]\n\n %?"
-           :file-name "rpgs/planning/${slug}"
-           :head  "#+roam_key: rpgs-planning:${slug}\n#+roam_tags:\n* ${title}\n\n"
-           :unnarrowed t
-           :immediate-finish t)
-          ("f" "Faction (Thel Sector)" plain (function org-roam--capture-get-point)
-           "  - Tags :: [[file:../factions.org][Factions]]\n\n %?"
-           :file-name "rpgs/thel_sector/factions/${slug}"
-           :head  "#+roam_key: rpgs-thel-sector-factions:${slug}\n#+roam_tags:\n* ${title}\n\n"
-           :unnarrowed t
-           :immediate-finish t)
-          ("c" "Faction Assets (SWN)" plain (function org-roam--capture-get-point)
-           "  - Tags :: [[file:../faction_assets.org][Faction Assets]]\n\n %?"
-           :file-name "rpgs/swn/faction_assets/${slug}"
-           :head  "#+roam_key: rpgs-swn-faction-assets:${slug}\n#+roam_tags:\n* ${title}\n\n"
-           :unnarrowed t
-           :immediate-finish t)
-          ("n" "NPC (Thel Sector)" plain (function org-roam--capture-get-point)
-           "  - Tags :: [[file:../npcs.org][NPCs]]\n\n %?"
-           :file-name "rpgs/thel_sector/npcs/${slug}"
-           :head  "#+roam_key: rpgs-thel-sector-npcs:${slug}\n#+roam_tags:\n* ${title}\n\n"
-           :unnarrowed t
-           :immediate-finish t)
-          ("o" "Objects (Thel Sector)" plain (function org-roam--capture-get-point)
-           "  - Tags :: [[file:../objects.org][Objects]]\n\n %?"
-           :file-name "rpgs/thel_sector/objects/${slug}"
-           :head  "#+roam_key: rpgs-thel-sector-objects:${slug}\n#+roam_tags:\n* ${title}\n\n"
-           :unnarrowed t
-           :immediate-finish t)
-          ("p" "Points of Interest (Thel Sector)" plain (function org-roam--capture-get-point)
-           "  - Tags :: [[file:../pois.org][Points of Interest]]\n\n %?"
-           :file-name "rpgs/thel_sector/pois/${slug}"
-           :head  "#+roam_key: rpgs-thel-sector-pois:${slug}\n#+roam_tags:\n* ${title}\n\n"
-           :unnarrowed t
-           :immediate-finish t)
-          ("r" "Religion (Thel Sector)" plain (function org-roam--capture-get-point)
-           "  - Tags :: [[file:../religions.org][Religions]]\n\n %?"
-           :file-name "rpgs/thel_sector/religions/${slug}"
-           :head  "#+roam_key: rpgs-thel-sector-religions:${slug}\n#+roam_tags:\n* ${title}\n\n"
-           :unnarrowed t
-           :immediate-finish t)
-          ("g" "Unfiled card (RPGs)" plain (function org-roam--capture-get-point)
+          ("b" "Permanent > Bibliographic" plain (function org-roam--capture-get-point)
            "%?"
-           :file-name "rpgs/${slug}"
-           :head  "#+roam_key: rpgs:${slug}\n#+roam_tags:\n* ${title}\n\n"
-           :unnarrowed t
-           :immediate-finish t)
-          ("s" "System (Thel Sector)" plain (function org-roam--capture-get-point)
-           "  - Tags :: [[file:../systems.org][Systems]]\n\n %?"
-           :file-name "rpgs/thel_sector/systems/${slug}"
-           :head  "#+roam_key: rpgs-thel-sector-systems:${slug}\n#+roam_tags:\n* ${title}\n\n"
-           :unnarrowed t
-           :immediate-finish t)
-          ("t" "Tags, World" plain (function org-roam--capture-get-point)
-           "  - Tags :: [[file:../world-tags.org][World Tags]]\n\n %?"
-           :file-name "rpgs/swn/tags/worlds/${slug}"
-           :head "#+roam_key: rpgs-swn-tags-worlds:${slug}\n#+roam_tags:\n* ${title}\n\n"
-           :unnarrowed t
-           :immediate-finish t)
-          ("u" "Unfiled card (Thel Sector)" plain (function org-roam--capture-get-point)
+           :file-name "permanent/bibliographies/%<%Y%m%d>-${slug}"
+           :head "#+title: ${title}\n#+roam_tags:\n* ${title}\n\n"
+           :unnarrowed t)
+          ("c" "Permanent > Card" plain (function org-roam--capture-get-point)
            "%?"
-           :file-name "rpgs/thel_sector/${slug}"
-           :head  "#+roam_key: rpgs-thel-sector:${slug}\n#+roam_tags:\n* ${title}\n\n"
+           :file-name "permanent/cards/%<%Y%m%d>-${slug}"
+           :head "#+title: ${title}\n#+roam_tags:\n* ${title}\n\n"
+           :unnarrowed t)
+          ("d" "Project > Diversity Equity Incluson (DEI)" plain (function org-roam--capture-get-point)
+           "%?"
+           :file-name "projects/diversity-equity-inclusion/%<%Y%m%d>-${slug}"
+           :head  "#+title: ${title}\n#+roam_tags:\n* ${title}\n\n"
            :unnarrowed t
            :immediate-finish t)
-          ("w" "World (Thel Sector)" plain (function org-roam--capture-get-point)
-           "  - Tags :: [[file:../worlds.org][Worlds]]\n\n %?"
-           :file-name "rpgs/thel_sector/worlds/${slug}"
-           :head "#+roam_key: rpgs-thel-sector-worlds:${slug}\n#+roam_tags:\n* ${title}\n\n"
+          ("t" "Project > Thel Sector" plain (function org-roam--capture-get-point)
+           "%?"
+           :file-name "projects/thel-sector/%<%Y%m%d>-${slug}"
+           :head  "#+title: ${title}\n#+roam_tags:\n* ${title}\n\n"
            :unnarrowed t
            :immediate-finish t))))
 
 (require 'org-roam-protocol)
 
-(global-set-key (kbd "C-c r x") 'org-roam-jump-to-index)
+(global-set-key (kbd "<f3>") 'org-roam-jump-to-index)
+(global-set-key (kbd "s-i") 'org-roam-jump-to-index)
 (global-set-key (kbd "<f4>") 'org-roam-insert)
 (global-set-key (kbd "s-r") 'org-roam-find-file)
+(global-set-key (kbd "<f2>") 'org-roam-find-file)
 
 (use-package company-org-roam
   :straight (:host github :repo "org-roam/company-org-roam")
@@ -1006,11 +952,20 @@ to consider doing so."
  '((emacs-lisp . t)
    (ruby . t)))
 
+(add-to-list 'load-path "~/git/dotzshrc/emacs")
+(require 'jnf-org-latex.el)
+
+
 ;; Uncomment to always launch org mode with a sidebar tree
 ;; (add-hook 'org-mode-hook #'org-sidebar-tree)
 
 ;; END ORG mode configuration and concerns
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(use-package hyperbole
+  :defer t
+  :straight t
+  :ensure t)
 
 ;; A game
 (use-package slime-volleyball
