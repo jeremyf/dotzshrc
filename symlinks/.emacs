@@ -911,7 +911,7 @@ to consider doing so."
 (require 'org-roam-protocol)
 
 (global-set-key (kbd "<f3>") 'org-roam-jump-to-index)
-(global-set-key (kbd "s-i") 'org-roam-jump-to-index)
+(global-set-key (kbd "s-i") 'org-roam-insert)
 (global-set-key (kbd "<f4>") 'org-roam-insert)
 (global-set-key (kbd "s-r") 'org-roam-find-file)
 (global-set-key (kbd "<f2>") 'org-roam-find-file)
