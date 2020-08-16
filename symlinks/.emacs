@@ -157,10 +157,10 @@
   :init (setq prescient-filter-method '(literal fuzzy regexp initialism))
   :config (ivy-prescient-mode t))
 
-(use-package ivy-hydra
-  :straight t
-  :ensure t
-  :defer t)
+;; (use-package ivy-hydra
+;;   :straight t
+;;   :ensure t
+;;   :defer t)
 
 (use-package expand-region
   :straight t
@@ -238,6 +238,7 @@
   :bind ("s-t" . counsel-projectile-find-file)) ; CMD+t
 
 (use-package robe
+  :after company
   :straight t
   :ensure t
   :defer t)
@@ -283,6 +284,12 @@
 ;; (eval-after-load 'auto-complete
 ;;   '(add-to-list 'ac-modes 'inf-ruby-minor-mode))
 ;; (add-hook 'ruby-mode-hook 'ac-inf-ruby-enable)
+
+(use-package company
+  :straight t
+  :after ivy
+  :defer t
+  :ensure t)
 
 (use-package string-inflection
   :defer t
@@ -917,6 +924,7 @@ to consider doing so."
 (global-set-key (kbd "<f2>") 'org-roam-find-file)
 
 (use-package company-org-roam
+  :after company
   :straight (:host github :repo "org-roam/company-org-roam")
   :config (push 'company-org-roam company-backends))
 
@@ -925,6 +933,7 @@ to consider doing so."
 (use-package org-roam-server
   :straight t
   :ensure t
+  :after org-roam
   :config
   (setq org-roam-server-host "127.0.0.1"
         org-roam-server-port 8080
