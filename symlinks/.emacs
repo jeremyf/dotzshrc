@@ -1026,6 +1026,14 @@ to consider doing so."
 (add-hook 'org-mode-hook #'visual-line-mode)
 
 
+;; See
+;; https://www.reddit.com/r/orgmode/comments/i6hl8b/image_preview_size_in_org_mode/
+;; for further discussion
+;;
+;; One consideration is that the below setq should be called as part
+;; of the `org-toggle-inline-images`
+(setq org-image-actual-width (truncate (* (window-pixel-width) 0.8)))
+
 (defun org-frames-toggle ()
   "Toggle the org-sidebar and org-sidebar-tree; Both are quite useful when working on org docs"
   (interactive)
