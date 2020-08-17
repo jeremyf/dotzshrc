@@ -1,0 +1,38 @@
+#!/usr/bin/env ruby -wU
+
+# This script is responsible for finding possible broken links in org
+# and reporting them.
+
+require 'open3'
+
+ORG_DIRECTORY = File.join(ENV["HOME"], "git/org/")
+
+command_args = [
+  "ag",
+  '"\\[\\[file\:[^\\]]+\\.org[^\\]]*\\]\\[[^\\]]+\\]\\]"',
+  "--only-matching",
+  "--nocolor",
+  "--noheading",
+  "--file-search-regex", '"\.org"',
+  ORG_DIRECTORY
+]
+
+broken_links = false
+
+AG_RESULT_REGEXP = %r{^(?<source_filename>[^:]+):(?<line_number>\d+):\[\[file:(?<target_path>[^\]]+)\]\[(?<target_name>[^\]]+)\]}
+
+
+`#{command_args.join(' ')}`.split("\n").each do |line|
+  line.strip!
+  next if line.empty?
+  match = AG_RESULT_REGEXP.match(line)
+  source_dirname = File.dirname(match['source_filename'])
+  target_path = match['target_path']
+  target_path = target_path.split("::")[0] # Because links to headings have ::
+  absolute_target_path = File.expand_path(target_path, source_dirname)
+  next if File.exist?(absolute_target_path)
+  broken_links = true
+  $stderr.puts %(#{match['source_filename']}:#{match['line_number']} has broken link for "#{match['target_name']}")
+end
+
+exit!(1) if broken_links
