@@ -415,6 +415,81 @@
   :config (smartparens-strict-mode 1)
   (smartparens-global-mode 1))
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; BEGIN typopunct
+;;
+(use-package typopunct
+   :straight t
+   :ensure t
+   :defer t)
+(require 'typopunct)
+;; (add-hook 'text-mode-hook 'jnf/typopunct-init)
+(add-hook 'org-mode-hook 'jnf/typopunct-init)
+(defun jnf/typopunct-init ()
+  (typopunct-change-language 'english)
+  (typopunct-mode 1))
+
+;; The minus sign (−) is separate from the hyphen (-), en dash (–) and
+;; em dash (—). To build upon the clever behavior of the ‘-’ key
+(defconst typopunct-ellipsis (decode-char 'ucs #x2026))
+(defconst typopunct-middot   (decode-char 'ucs #xB7)) ; or 2219
+(defun typopunct-insert-ellipsis-or-middot (arg)
+  "Change three consecutive dots to a typographical ellipsis mark."
+  (interactive "p")
+  (cond
+   ((and (= 1 arg)
+         (eq (char-before) ?^))
+    (delete-char -1)
+    (insert typopunct-middot))
+   ((and (= 1 arg)
+         (eq this-command last-command)
+         (looking-back "\\.\\."))
+    (replace-match "")
+    (insert typopunct-ellipsis))
+   (t
+    (self-insert-command arg))))
+(define-key typopunct-map "." 'typopunct-insert-ellipsis-or-middot)
+
+;; To insert a typographical ellipsis sign (…) on three consecutive
+;; dots, or a middle dot (·) on ‘^.’
+(defconst typopunct-minus (decode-char 'ucs #x2212))
+(defconst typopunct-pm    (decode-char 'ucs #xB1))
+(defconst typopunct-mp    (decode-char 'ucs #x2213))
+(defadvice typopunct-insert-typographical-dashes
+    (around minus-or-pm activate)
+  (cond
+   ((or (eq (char-before) typopunct-em-dash)
+        (looking-back "\\([[:blank:]]\\|^\\)\\^"))
+    (delete-char -1)
+    (insert typopunct-minus))
+   ((looking-back "[^[:blank:]]\\^")
+    (insert typopunct-minus))
+   ((looking-back "+/")
+    (progn (replace-match "")
+           (insert typopunct-pm)))
+   (t ad-do-it)))
+(defun typopunct-insert-mp (arg)
+  (interactive "p")
+  (if (and (= 1 arg) (looking-back "-/"))
+      (progn (replace-match "")
+             (insert typopunct-mp))
+    (self-insert-command arg)))
+(define-key typopunct-map "+" 'typopunct-insert-mp)
+
+;; If you want the cross (×) rather than the middle dot:
+(defconst typopunct-times (decode-char 'ucs #xD7))
+(defun typopunct-insert-times (arg)
+  (interactive "p")
+  (if (and (= 1 arg) (looking-back "\\([[:blank:]]\\|^\\)\\^"))
+      (progn (delete-char -1)
+             (insert typopunct-times))
+    (self-insert-command arg)))
+(define-key typopunct-map "x" 'typopunct-insert-times)
+;;
+;; END typopunct
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (use-package flycheck
   :ensure t
   :straight t
@@ -482,7 +557,7 @@
  '(dired-use-ls-dired t)
  '(global-display-line-numbers-mode t)
  '(org-agenda-files
-   '("/Users/jfriesen/git/org/agenda.org" "/Users/jfriesen/git/org/inclusion.org" "/Users/jfriesen/git/org/index.org" "/Users/jfriesen/git/org/meetings.org" "/Users/jfriesen/git/org/readings.org" "/Users/jfriesen/git/org/sessions.org" "/Users/jfriesen/git/org/troubleshooting.org"))
+   '("/Users/jfriesen/git/org/agenda.org" "/Users/jfriesen/git/org/index.org" "/Users/jfriesen/git/org/troubleshooting.org"))
  '(org-export-backends '(ascii html icalendar latex md odt))
  '(show-paren-mode t))
 (custom-set-faces
@@ -803,6 +878,8 @@ to consider doing so."
 (global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c c") 'org-capture)
+(global-set-key (kbd "C-c t") 'org-toggle-link-display)
+
 
 (setq org-directory "~/git/org")
 (setq org-agenda-files (list "~/git/org"))
