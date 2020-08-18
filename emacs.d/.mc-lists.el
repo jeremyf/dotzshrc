@@ -29,10 +29,12 @@
         org-todo
         sp-backward-delete-char
         string-inflection-all-cycle
+        typopunct-insert-typographical-dashes
         wdired-finish-edit
         ))
 
 (setq mc/cmds-to-run-once
       '(
         ivy-switch-buffer
+        xref-find-apropos
         ))

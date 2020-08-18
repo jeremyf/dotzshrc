@@ -990,6 +990,12 @@ to consider doing so."
            :head  "#+title: ${title}\n#+roam_tags:\n* ${title}\n\n"
            :unnarrowed t
            :immediate-finish t)
+          ("h" "Project > Hesburgh Libraries" plain (function org-roam--capture-get-point)
+           "%?"
+           :file-name "projects/hesburgh-libraries/%<%Y%m%d>-${slug}"
+           :head  "#+title: ${title}\n#+roam_tags:\n* ${title}\n\n"
+           :unnarrowed t
+           :immediate-finish t)
           ("t" "Project > Thel Sector" plain (function org-roam--capture-get-point)
            "%?"
            :file-name "projects/thel-sector/%<%Y%m%d>-${slug}"

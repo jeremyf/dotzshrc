@@ -4,7 +4,7 @@
 # to another.
 #
 # - [X] Move the file
-# - [ ] Move the file's attachments
+# - [X] Move the file's attachments
 # - [X] Fix inbound links to the file
 # - [X] Fix outbound links in the to file
 
@@ -137,8 +137,6 @@ if from_pathname.dirname != to_pathname.dirname
       @mover.mv(from_attachment_dirname, to_attachment_parent_dirname)
     end
   end
-
-
 
   list_org_ids_command = [
     "ag",
