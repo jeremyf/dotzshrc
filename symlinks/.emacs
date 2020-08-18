@@ -581,7 +581,10 @@
   :straight t
   :ensure t
   :defer t
-  :bind (("C-a" . crux-move-beginning-of-line)))
+  :bind (
+         ("C-a" . crux-move-beginning-of-line)
+         ("<f9>" . crux-kill-other-buffers)
+         ))
 
 ;; Nice for neotree
 (use-package all-the-icons
@@ -976,7 +979,7 @@ to consider doing so."
            :unnarrowed t)
           ("c" "Permanent > Card" plain (function org-roam--capture-get-point)
            "%?"
-           :file-name "permanent/cards/0000-unsorted-${slug}"
+           :file-name "permanent/cards/000-unsorted---${slug}"
            :head "#+title: ${title}\n#+roam_tags:\n* ${title}\n\n"
            :unnarrowed t)
           ("l" "Permanent > Letters" plain (function org-roam--capture-get-point)
@@ -996,6 +999,12 @@ to consider doing so."
            :head  "#+title: ${title}\n#+roam_tags:\n* ${title}\n\n"
            :unnarrowed t
            :immediate-finish t)
+          ("r" "Project > RPGs" plain (function org-roam--capture-get-point)
+           "%?"
+           :file-name "projects/rpgs/%<%Y%m%d>-${slug}"
+           :head  "#+title: ${title}\n#+roam_tags:\n* ${title}\n\n"
+           :unnarrowed t
+           :immediate-finish t)
           ("t" "Project > Thel Sector" plain (function org-roam--capture-get-point)
            "%?"
            :file-name "projects/thel-sector/%<%Y%m%d>-${slug}"
@@ -1007,9 +1016,23 @@ to consider doing so."
 
 (global-set-key (kbd "<f3>") 'org-roam-jump-to-index)
 (global-set-key (kbd "s-i") 'org-roam-insert)
-(global-set-key (kbd "<f4>") 'org-roam-insert)
 (global-set-key (kbd "s-r") 'org-roam-find-file)
-(global-set-key (kbd "<f2>") 'org-roam-find-file)
+(global-set-key (kbd "<f4>") 'org-roam-find-file)
+
+
+
+(defun jnf/jump-to-org-agenda ()
+  "Jump to the agenda.org file"
+  (interactive)
+  (find-file "~/git/org/agenda.org"))
+(global-set-key (kbd "<f2>") 'jnf/org-jump-to-agenda)
+
+(defun jnf/emacs-config ()
+  "Jump to the agenda.org file"
+  (interactive)
+  (find-file "~/.emacs"))
+(global-set-key (kbd "<f12>") 'jnf/emacs-config)
+
 
 (use-package company-org-roam
   :after company
@@ -1077,6 +1100,14 @@ to consider doing so."
   :defer t
   :straight t
   :ensure t)
+
+(defun dotfiles--gc-on-last-frame-out-of-focus ()
+  "GC if all frames are inactive."
+  (if (seq-every-p #'null (mapcar #'frame-focus-state (frame-list)))
+      (garbage-collect)))
+
+(add-function :after after-focus-change-function
+              #'dotfiles--gc-on-last-frame-out-of-focus)
 
 ;; Make gc pauses faster by decreasing the threshold.
 (setq gc-cons-threshold (* 2 1000 1000))
