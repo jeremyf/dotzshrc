@@ -1,4 +1,4 @@
-#!/usr/bin/env ruby -wU
+#!/usr/bin/env ruby -U
 
 # This script is responsible for moving an org file from one location
 # to another.
@@ -73,9 +73,18 @@ rescue OptionParser::InvalidOption, OptionParser::MissingArgument
 end
 
 ################################################################################
+# Move the FROM to TO
+from_pathname = Pathname.new(@absolute_from_dirname)
+to_pathname = Pathname.new(File.join(@absolute_to_dirname, config.fetch(:rename)))
+mover = config.fetch(:do_it) ? FileUtils : FileUtils::DryRun
+$stdout.puts "*"*72
+$stdout.puts "Moving:\n\tFrom\t#{from_pathname}\n\tTo\t#{to_pathname}"
+
+
+################################################################################
 # Find all of the links to the given FROM
 class Link
-  AG_RESULT_REGEXP = %r{^(?<source_filename>[^:]+):\[\[file:(?<target_path>[^\]]+)\]\[(?<target_name>[^\]]+)\]}
+  AG_RESULT_REGEXP = %r{^(?<source_filename>[^:]+):\[\[file:(?<target_path>[^(:\])]+)(?<line>::[^\]]*)?\]\[(?<target_name>[^\]]+)\]}
   def initialize(line:)
     @line = line
     match = AG_RESULT_REGEXP.match(line)
@@ -104,12 +113,6 @@ Open3.pipeline_r(links_to_the_from_command_args) do |o|
     linking_to_the_from << Link.new(line: line.strip)
   end
 end
-
-################################################################################
-# Move the FROM to TO
-from_pathname = Pathname.new(@absolute_from_dirname)
-to_pathname = Pathname.new(File.join(@absolute_to_dirname, config.fetch(:rename)))
-mover = config.fetch(:do_it) ? FileUtils : FileUtils::DryRun
 
 ################################################################################
 # Move any attachments associated with the file
@@ -195,7 +198,12 @@ end
 Open3.pipeline_r(inbound_links_command_args) do |o|
   while out = o.gets
     link = Link.new(line: out.strip)
-    outbound_link_filename = Pathname.new(`find #{config.fetch(:org_directory)} -name "#{File.basename(link.original_target_path)}"`.strip)
+    file_location = `find #{config.fetch(:org_directory)} -name "#{File.basename(link.original_target_path)}"`.strip
+    if file_location.empty?
+      $stderr.puts "Skipping possible link; Unable to find #{link.original_target_path} within #{config.fetch(:org_directory)}"
+      next
+    end
+    outbound_link_filename = Pathname.new(file_location)
     new_target_path = begin
                         if config[:do_it]
                           outbound_link_filename.relative_path_from(to_pathname.dirname)
@@ -217,3 +225,4 @@ Open3.pipeline_r(inbound_links_command_args) do |o|
     end
   end
 end
+$stdout.puts "*"*72
