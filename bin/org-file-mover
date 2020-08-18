@@ -110,6 +110,53 @@ end
 from_pathname = Pathname.new(@absolute_from_dirname)
 to_pathname = Pathname.new(File.join(@absolute_to_dirname, config.fetch(:rename)))
 mover = config.fetch(:do_it) ? FileUtils : FileUtils::DryRun
+
+################################################################################
+# Move any attachments associated with the file
+if from_pathname.dirname != to_pathname.dirname
+  class Attachment
+    AG_RESULT_REGEXP = %r{^(?<source_filename>[^:]+):(?<line_number>\d+)::ID: +(?<id_prefix>[\w\d-]{2})(?<id_suffix>[\w\d-]+)}
+    def initialize(line:, mover:, from_pathname:, to_pathname:)
+      @line = line
+      @mover = mover
+      @from_pathname = from_pathname
+      @to_pathname = to_pathname
+      match = AG_RESULT_REGEXP.match(line)
+      @source_path = Pathname.new(match[:source_filename])
+      @line_number = match[:line_number]
+      @id_prefix = match[:id_prefix]
+      @id_suffix = match[:id_suffix]
+    end
+
+    def move!
+      from_attachment_dirname = @from_pathname.dirname.join("data", @id_prefix, @id_suffix)
+      return :no_attachment_for_id unless from_attachment_dirname.exist?
+      # Make the target data directory
+      to_attachment_parent_dirname = @to_pathname.dirname.join("data", @id_prefix)
+      @mover.mkdir_p(to_attachment_parent_dirname)
+      @mover.mv(from_attachment_dirname, to_attachment_parent_dirname)
+    end
+  end
+
+
+
+  list_org_ids_command = [
+    "ag",
+    "--only-matching",
+    "--nocolor",
+    "--noheading",
+    '":ID: +[\w\d-]+"',
+    from_pathname.to_s
+  ]
+  `#{list_org_ids_command.join(' ')}`.split("\n") do |line|
+    line.strip!
+    next if line.empty?
+    Attachment.new(line: line, mover: mover, from_pathname: from_pathname, to_pathname: to_pathname).move!
+  end
+end
+
+################################################################################
+# Move the FROM file to the TO destination
 mover.mv(from_pathname, to_pathname) unless from_pathname == to_pathname
 
 ################################################################################

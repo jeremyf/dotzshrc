@@ -976,7 +976,12 @@ to consider doing so."
            :unnarrowed t)
           ("c" "Permanent > Card" plain (function org-roam--capture-get-point)
            "%?"
-           :file-name "permanent/cards/%<%Y%m%d>-${slug}"
+           :file-name "permanent/cards/0000-unsorted-${slug}"
+           :head "#+title: ${title}\n#+roam_tags:\n* ${title}\n\n"
+           :unnarrowed t)
+          ("l" "Permanent > Letters" plain (function org-roam--capture-get-point)
+           "%?"
+           :file-name "permanent/letters/%<%Y%m%d>-${slug}"
            :head "#+title: ${title}\n#+roam_tags:\n* ${title}\n\n"
            :unnarrowed t)
           ("d" "Project > Diversity Equity Incluson (DEI)" plain (function org-roam--capture-get-point)
