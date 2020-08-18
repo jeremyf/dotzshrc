@@ -960,7 +960,7 @@ to consider doing so."
   ;;
   ;; See https://www.orgroam.com/manual/Tags.html#Tags
   ;;
-  (setq org-roam-title-sources '((headline title) alias))
+  (setq org-roam-title-sources '((title headline) alias))
 
   ;; Note: Order of these templates matters. The `org-roam-insert-immediate` uses
   ;; the first one in the list (e.g. Fleeting)
@@ -1017,15 +1017,12 @@ to consider doing so."
 (global-set-key (kbd "<f3>") 'org-roam-jump-to-index)
 (global-set-key (kbd "s-i") 'org-roam-insert)
 (global-set-key (kbd "s-r") 'org-roam-find-file)
-(global-set-key (kbd "<f4>") 'org-roam-find-file)
-
-
 
 (defun jnf/jump-to-org-agenda ()
   "Jump to the agenda.org file"
   (interactive)
   (find-file "~/git/org/agenda.org"))
-(global-set-key (kbd "<f2>") 'jnf/org-jump-to-agenda)
+(global-set-key (kbd "<f2>") 'jnf/jump-to-org-agenda)
 
 (defun jnf/emacs-config ()
   "Jump to the agenda.org file"
