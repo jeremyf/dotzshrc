@@ -28,6 +28,6 @@
                ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
 
 
-(setq org-latex-default-class "jnfarticle")
+;; (setq org-latex-default-class "jnfarticle")
 (provide 'jnf-org-latex.el)
 ;;; jnf-org-latex.el ends here
