@@ -540,7 +540,7 @@
   :straight t
   :ensure t
   :defer t
-  :bind (("C-c g g" . browse-at-remote)))
+  :bind (("C-c b" . browse-at-remote)))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -728,9 +728,13 @@
   :ensure t
   :config (global-git-gutter-mode 't))
 
+;; https://github.com/sshaw/git-link
+;; `M-x git-link` to add the current URL to the kill ring
 (use-package git-link
   :straight t
-  :ensure t)
+  :ensure t
+  :config (setq git-link-use-commit t) ;; URL will be SHA instead of branch
+  )
 
 ;; Copied from https://github.com/magit/magit/blob/9423edc0b311117ab5fe87457c3e01c7db22a3c7/lisp/git-commit.el
 ;; And set to 50 instead of 68
