@@ -712,8 +712,6 @@
 ;; Open svg files in xml-mode (instead of image rendering mode)
 (add-to-list `auto-mode-alist
              '("\\.svg\\'" . xml-mode))
-
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; magit
 (with-eval-after-load "magit"
@@ -729,6 +727,10 @@
   :straight t
   :ensure t
   :config (global-git-gutter-mode 't))
+
+(use-package git-link
+  :straight t
+  :ensure t)
 
 ;; Copied from https://github.com/magit/magit/blob/9423edc0b311117ab5fe87457c3e01c7db22a3c7/lisp/git-commit.el
 ;; And set to 50 instead of 68
@@ -1014,7 +1016,6 @@ to consider doing so."
 
 (require 'org-roam-protocol)
 
-(global-set-key (kbd "<f3>") 'org-roam-jump-to-index)
 (global-set-key (kbd "s-i") 'org-roam-insert)
 (global-set-key (kbd "s-r") 'org-roam-find-file)
 
@@ -1023,9 +1024,16 @@ to consider doing so."
   (interactive)
   (find-file "~/git/org/agenda.org"))
 (global-set-key (kbd "<f2>") 'jnf/jump-to-org-agenda)
-
+(global-set-key (kbd "<f3>") 'org-roam-jump-to-index)
+(defun jnf/jump-to-permanent-card-index ()
+  "Rebuild and jump to the permanent card index."
+  (interactive)
+  ;; Removed the shell command call as it was overly aggressive
+  ;; (shell-command "~/git/org/bin/create-index-for-permanent-cards")
+  (find-file "~/git/org/permanent/card-index.org"))
+(global-set-key (kbd "<f4>") 'jnf/jump-to-permanent-card-index)
 (defun jnf/emacs-config ()
-  "Jump to the agenda.org file"
+  "Jump to my emacs config"
   (interactive)
   (find-file "~/.emacs"))
 (global-set-key (kbd "<f12>") 'jnf/emacs-config)
