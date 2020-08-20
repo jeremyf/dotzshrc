@@ -54,6 +54,10 @@
 ;; (setq mac-command-modifier 'meta
 ;;       mac-option-modifier 'none)
 
+;; (setq mac-right-option-modifier nil) ;; Disable Emacs capturing meta-key and fall back to OS X (useful for diacritics)
+;;
+;; (setq mac-right-option-modifier 'meta) ;; Enable Emacs capturing meta-key, so right M-x will execute extended command
+
 
 
 ;; When we get to a REALLY long file or long line, emacs develops problems.
