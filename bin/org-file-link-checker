@@ -21,10 +21,12 @@ broken_links = false
 
 AG_RESULT_REGEXP = %r{^(?<source_filename>[^:]+):(?<line_number>\d+):\[\[file:(?<target_path>[^\]]+)\]\[(?<target_name>[^\]]+)\]}
 
+number_of_links_checked = 0
 
 `#{command_args.join(' ')}`.split("\n").each do |line|
   line.strip!
   next if line.empty?
+  number_of_links_checked += 1
   match = AG_RESULT_REGEXP.match(line)
   source_dirname = File.dirname(match['source_filename'])
   target_path = match['target_path']
@@ -34,5 +36,7 @@ AG_RESULT_REGEXP = %r{^(?<source_filename>[^:]+):(?<line_number>\d+):\[\[file:(?
   broken_links = true
   $stderr.puts %(#{match['source_filename']}:#{match['line_number']} has broken link for "#{match['target_name']}")
 end
+
+$stdout.puts "Found and checked #{number_of_links_checked} links"
 
 exit!(1) if broken_links
