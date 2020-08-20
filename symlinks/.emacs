@@ -983,40 +983,40 @@ to consider doing so."
            :unnarrowed t)
           ("b" "Permanent > Bibliographic" plain (function org-roam--capture-get-point)
            "%?"
-           :file-name "permanent/bibliographies/%<%Y%m%d>-${slug}"
+           :file-name "permanent/bibliographies/%<%Y%m%d>---${slug}"
            :head "#+title: ${title}\n#+roam_tags:\n* ${title}\n\n"
            :unnarrowed t)
-          ("c" "Permanent > Card" plain (function org-roam--capture-get-point)
+          ("c" "Permanent > Card (Unsorted)" plain (function org-roam--capture-get-point)
            "%?"
            :file-name "permanent/cards/000-unsorted---${slug}"
            :head "#+title: ${title}\n#+roam_tags:\n* ${title}\n\n"
            :unnarrowed t)
           ("l" "Permanent > Letters" plain (function org-roam--capture-get-point)
            "%?"
-           :file-name "permanent/letters/%<%Y%m%d>-${slug}"
+           :file-name "permanent/letters/%<%Y%m%d>---${slug}"
            :head "#+title: ${title}\n#+roam_tags:\n* ${title}\n\n"
            :unnarrowed t)
           ("d" "Project > Diversity Equity Incluson (DEI)" plain (function org-roam--capture-get-point)
            "%?"
-           :file-name "projects/diversity-equity-inclusion/%<%Y%m%d>-${slug}"
+           :file-name "projects/diversity-equity-inclusion/%<%Y%m%d>---${slug}"
            :head  "#+title: ${title}\n#+roam_tags:\n* ${title}\n\n"
            :unnarrowed t
            :immediate-finish t)
           ("h" "Project > Hesburgh Libraries" plain (function org-roam--capture-get-point)
            "%?"
-           :file-name "projects/hesburgh-libraries/%<%Y%m%d>-${slug}"
+           :file-name "projects/hesburgh-libraries/%<%Y%m%d>---${slug}"
            :head  "#+title: ${title}\n#+roam_tags:\n* ${title}\n\n"
            :unnarrowed t
            :immediate-finish t)
           ("r" "Project > RPGs" plain (function org-roam--capture-get-point)
            "%?"
-           :file-name "projects/rpgs/%<%Y%m%d>-${slug}"
+           :file-name "projects/rpgs/%<%Y%m%d>---${slug}"
            :head  "#+title: ${title}\n#+roam_tags:\n* ${title}\n\n"
            :unnarrowed t
            :immediate-finish t)
           ("t" "Project > Thel Sector" plain (function org-roam--capture-get-point)
            "%?"
-           :file-name "projects/thel-sector/%<%Y%m%d>-${slug}"
+           :file-name "projects/thel-sector/%<%Y%m%d>---${slug}"
            :head  "#+title: ${title}\n#+roam_tags:\n* ${title}\n\n"
            :unnarrowed t
            :immediate-finish t))))
