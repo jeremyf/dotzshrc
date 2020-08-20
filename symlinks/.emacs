@@ -165,7 +165,10 @@
 (use-package expand-region
   :straight t
   :ensure t
-  :bind (("C-=" . er/expand-region)))
+  :bind (
+         ("C-=" . er/expand-region)
+         ("C-+" . er/contract-region)
+         ))
 
 ;; The silver searcher; I found ripgrep a bit nicer, but wait until
 ;; you try wgrep-ag
@@ -975,7 +978,7 @@ to consider doing so."
         '(
           ("f" "Fleeting" plain (function org-roam--capture-get-point)
            "%?"
-           :file-name "fleeting/%<%Y%m%d>-${slug}"
+           :file-name "fleeting/%<%Y%m%d>---${slug}"
            :head "#+title: ${title}\n#+roam_tags:\n* ${title}\n\n"
            :unnarrowed t)
           ("b" "Permanent > Bibliographic" plain (function org-roam--capture-get-point)
