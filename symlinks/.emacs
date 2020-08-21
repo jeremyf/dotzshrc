@@ -1095,6 +1095,63 @@ to consider doing so."
 (add-to-list 'load-path "~/git/dotzshrc/emacs")
 (require 'jnf-org-latex.el)
 
+(use-package elfeed
+  :ensure t
+  :straight t
+  :after org-roam
+  :bind (("C-x w" . jnf/elfeed-load-db-and-open)
+         :map elfeed-search-mode-map
+         ("q" . jnf/elfeed-save-db-and-bury)))
+
+;;write to disk when quiting
+(defun jnf/elfeed-save-db-and-bury ()
+  "Wrapper to save the elfeed db to disk before burying buffer"
+  (interactive)
+  (elfeed-db-save)
+  (quit-window))
+
+(defun jnf/elfeed-load-db-and-open ()
+  "Load the elfeed db from disk before opening"
+  (interactive)
+  (elfeed-db-load)
+  (elfeed)
+  (elfeed-search-update--force))
+
+(use-package elfeed-org
+  :straight t
+  :ensure t
+  :after elfeed
+  :config
+  (elfeed-org)
+  (setq rmh-elfeed-org-files (list "~/git/org/elfeed.org")))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; From https://karthinks.com/blog/lazy-elfeed/
+(setq elfeed-show-entry-switch #'elfeed-display-buffer)
+
+(defun elfeed-display-buffer (buf &optional act)
+  (pop-to-buffer buf)
+  (set-window-text-height (get-buffer-window) (round (* 0.7 (frame-height)))))
+
+(defun elfeed-search-show-entry-pre (&optional lines)
+  "Returns a function to scroll forward or back in the Elfeed
+  search results, displaying entries without switching to them."
+      (lambda (times)
+        (interactive "p")
+        (forward-line (* times (or lines 0)))
+        (recenter)
+        (call-interactively #'elfeed-search-show-entry)
+        (select-window (previous-window))
+        (unless elfeed-search-remain-on-entry (forward-line -1))))
+(eval-after-load 'elfeed-search
+  '(define-key elfeed-search-mode-map (kbd "n") (elfeed-search-show-entry-pre +1)))
+(eval-after-load 'elfeed-search
+  '(define-key elfeed-search-mode-map (kbd "p") (elfeed-search-show-entry-pre -1)))
+(eval-after-load 'elfeed-search
+  '(define-key elfeed-search-mode-map (kbd "M-RET") (elfeed-search-show-entry-pre)))
+;; End https://karthinks.com/blog/lazy-elfeed/
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 
 ;; Uncomment to always launch org mode with a sidebar tree
 ;; (add-hook 'org-mode-hook #'org-sidebar-tree)
