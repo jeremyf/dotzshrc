@@ -1037,7 +1037,7 @@ to consider doing so."
   (interactive)
   ;; Removed the shell command call as it was overly aggressive
   ;; (shell-command "~/git/org/bin/create-index-for-permanent-cards")
-  (find-file "~/git/org/permanent/card-index.org"))
+  (find-file "~/git/org/permanent/card_index.org"))
 (global-set-key (kbd "<f4>") 'jnf/jump-to-permanent-card-index)
 (defun jnf/emacs-config ()
   "Jump to my emacs config"
