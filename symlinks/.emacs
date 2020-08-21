@@ -88,6 +88,10 @@
   ;; :config (load-theme 'base16-onedark t))
   :config (load-theme 'base16-one-light t))
 
+;; Doing a bit of configuration of my cursors
+(setq-default cursor-type 'bar)
+(set-cursor-color "#44B4CC") ;; The text color of my
+(blink-cursor-mode t)
 
 ;; Remove reliance on Base16 themes; I find that I prefer the
 ;; coloration of tsdh-(light|dark)
@@ -1162,7 +1166,8 @@ to consider doing so."
 (use-package hyperbole
   :defer t
   :straight t
-  :ensure t)
+  :ensure t
+  :bind (("C-h h" . hyperbole)))
 
 ;; A game
 (use-package slime-volleyball
