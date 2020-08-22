@@ -1046,7 +1046,7 @@ to consider doing so."
 (defun jnf/emacs-config ()
   "Jump to my emacs config"
   (interactive)
-  (find-file "~/.emacs"))
+  (find-file "~/git/dotzshrc/symlinks/.emacs"))
 (global-set-key (kbd "<f12>") 'jnf/emacs-config)
 
 
