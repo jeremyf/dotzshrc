@@ -1131,12 +1131,6 @@ to consider doing so."
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; From https://karthinks.com/blog/lazy-elfeed/
-(setq elfeed-show-entry-switch #'elfeed-display-buffer)
-
-(defun elfeed-display-buffer (buf &optional act)
-  (pop-to-buffer buf)
-  (set-window-text-height (get-buffer-window) (round (* 0.7 (frame-height)))))
-
 (defun elfeed-search-show-entry-pre (&optional lines)
   "Returns a function to scroll forward or back in the Elfeed
   search results, displaying entries without switching to them."
