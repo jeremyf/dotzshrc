@@ -255,7 +255,8 @@
 (use-package rspec-mode
   :straight t
   :ensure t
-  :defer t)
+  :defer t
+  :bind (:map rspec-mode-map (("s-." . 'rspec-toggle-spec-and-target))))
 (add-hook 'ruby-mode-hook 'rspec-mode)
 
 (use-package yard-mode
