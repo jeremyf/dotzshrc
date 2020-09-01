@@ -86,7 +86,9 @@
   :straight t
   :ensure t
   ;; :config (load-theme 'base16-onedark t))
-  :config (load-theme 'base16-one-light t))
+  ;; :config (load-theme 'base16-one-light t))
+:config (load-theme 'base16-google-light t))
+;; :config (load-theme 'base16-google-dark t))
 
 ;; Doing a bit of configuration of my cursors
 (setq-default cursor-type 'bar)
@@ -326,7 +328,7 @@
          ("C-M-SPC" . set-rectangular-region-anchor)
          ("C->" . mc/mark-next-like-this)
          ("C-<" . mc/mark-previous-like-this)
-         ("C-c C-<" . mc/mark-all-like-this)
+         ("C-c C->" . mc/mark-all-like-this)
          ("C-s-l C-s-l" . mc/edit-lines) ;; CTRL+CMD+c
          ))
 
@@ -1158,11 +1160,11 @@ to consider doing so."
 ;; END ORG mode configuration and concerns
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(use-package hyperbole
-  :defer t
-  :straight t
-  :ensure t
-  :bind (("C-h h" . hyperbole)))
+;; (use-package hyperbole
+;;   :defer t
+;;   :straight t
+;;   :ensure t
+;;   :bind (("C-h h" . hyperbole)))
 
 ;; A game
 (use-package slime-volleyball

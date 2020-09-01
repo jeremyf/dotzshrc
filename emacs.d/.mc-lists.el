@@ -31,10 +31,13 @@
         string-inflection-all-cycle
         typopunct-insert-typographical-dashes
         wdired-finish-edit
+        wgrep-finish-edit
         ))
 
 (setq mc/cmds-to-run-once
       '(
+        ivy-occur-click
         ivy-switch-buffer
+        rspec-verify-all
         xref-find-apropos
         ))
