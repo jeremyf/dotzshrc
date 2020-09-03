@@ -711,7 +711,7 @@
   :defer 1 ;; This needs to be an integer. Key bindings fail when set to "t"
   :init (setq git-commit-fill-column 72)
   :bind (("H-g" . magit-status)
-         ("C-s-g" . magit-status)))
+         ("C-M-g" . magit-status)))
 
 (use-package password-generator
   :straight t
