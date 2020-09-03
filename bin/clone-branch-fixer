@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby -w
+
+directory = File.join(ENV["HOME"], "git")
+recursive = true # if false limit to repositories that are directly contained within the given directory
+from_branch_name = "master"
+to_branch_name = "main"
+# If the filename matches an entry in the skip_file, don't prompt for direction
+skip_file = nil
+
+Dir.glob(File.join(directory, "**", ".git")).each do |filename|
+  # next if unclean directory (report this)
+  # next if git repository does not have a master branch (report this)
+  # next unless user says to rename local :from_branch_name to :to_branch_name
+
+  # Assumes that upstream no longer has the :from_branch_name
+  #
+  # git checkout :from_branch_name
+  # git pull
+  # git branch -m :from_branch_name :to_branch_name
+end
