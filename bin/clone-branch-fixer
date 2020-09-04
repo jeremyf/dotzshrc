@@ -1,20 +1,69 @@
 #!/usr/bin/env ruby -w
 
-directory = File.join(ENV["HOME"], "git")
-recursive = true # if false limit to repositories that are directly contained within the given directory
-from_branch_name = "master"
-to_branch_name = "main"
-# If the filename matches an entry in the skip_file, don't prompt for direction
-skip_file = nil
+require 'pathname'
+require 'optparse'
+command_name = File.basename(__FILE__)
+config = {
+  directory: Pathname.new(File.join(ENV['HOME'], "git")),
+  shallow: false,
+  from: "master",
+  to: "main",
+  skip_file: nil
+}
 
-Dir.glob(File.join(directory, "**", ".git")).each do |filename|
+optparse = OptionParser.new do |options|
+  # This banner is the first line of your help documentation.
+  options.set_banner "Usage: #{command_name} [options]\n\n"
+
+  options.on_head("-d DIRECTORY", "--directory", String, %(The path to the directory with git repositories\n#{' ' * 37}(Default: "#{config[:directory]}"))) do |dir|
+    config[:directory] = Pathname.new(dir)
+  end
+
+  options.on("-s SHALLOW", "--shallow", %(Limit renaming to only direct subdirectories of DIRECTORY\n#{' ' * 37}(Default: "#{config[:shallow].inspect}"))) do |recursive|
+    config[:shallow] = shallow
+  end
+
+  options.on("-f FROM", "--from", String, %(What is the branch name we're renaming\n#{' ' * 37}(Default: "#{config[:from]}"))) do |from|
+    config[:from] = from
+  end
+
+  options.on("-t TO", "--to", String, %(What is the new branch name\n#{' ' * 37}(Default: "#{config[:to]}"))) do |to|
+    config[:to] = to
+  end
+
+  options.separator('')
+
+  options.on_tail('-h', '--help', "You're looking at it!") do
+    warn options
+    exit 1
+  end
+end
+
+begin
+  optparse.parse!
+  mandatory = %i[directory from to]
+  missing = mandatory.select { |param| config[param].nil? }
+  raise OptionParser::MissingArgument, missing.join(', ') unless missing.empty?
+rescue OptionParser::InvalidOption, OptionParser::MissingArgument
+  warn "\e[0m\e[1m\e[31m#{$!}\e[0m\n"
+  warn optparse
+  exit
+end
+
+# If the filename matches an entry in the skip_file, don't prompt for direction
+# skip_file = nil
+directory = config.fetch(:directory)
+directory.glob("**/.git").each do |filename|
+  repository = filename.dirname
+  next if config[:shallow] && repository.dirname != directory
   # next if unclean directory (report this)
   # next if git repository does not have a master branch (report this)
   # next unless user says to rename local :from_branch_name to :to_branch_name
-
   # Assumes that upstream no longer has the :from_branch_name
+  #
   #
   # git checkout :from_branch_name
   # git pull
   # git branch -m :from_branch_name :to_branch_name
+  # end
 end
