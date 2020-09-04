@@ -496,6 +496,36 @@
              (insert typopunct-times))
     (self-insert-command arg)))
 (define-key typopunct-map "x" 'typopunct-insert-times)
+
+(defadvice typopunct-insert-quotation-mark (around wrap-region activate)
+      (let* ((lang (or (get-text-property (point) 'typopunct-language)
+                       typopunct-buffer-language))
+             (omark (if single
+                        (typopunct-opening-single-quotation-mark lang)
+                      (typopunct-opening-quotation-mark lang)))
+             (qmark (if single
+                        (typopunct-closing-single-quotation-mark lang)
+                      (typopunct-closing-quotation-mark lang))))
+        (cond
+         (mark-active
+          (let ((skeleton-end-newline nil)
+                (singleo (typopunct-opening-single-quotation-mark lang))
+                (singleq (typopunct-closing-single-quotation-mark lang)))
+            (if (> (point) (mark))
+                (exchange-point-and-mark))
+            (save-excursion
+              (while (re-search-forward (regexp-quote (string omark)) (mark) t)
+                (replace-match (regexp-quote (string singleo)) nil nil)))
+            (save-excursion
+              (while (re-search-forward (regexp-quote (string qmark)) (mark) t)
+                (replace-match (regexp-quote (string singleq)) nil nil)))
+            (skeleton-insert (list nil omark '_ qmark) -1)))
+         ((looking-at (regexp-opt (list (string omark) (string qmark))))
+          (forward-char 1))
+         (t ad-do-it))))
+
+;; Remember [C-q "] will create a " instead of a “
+;; And [C-q '] will create a ' instead of a ‘
 ;;
 ;; END typopunct
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
