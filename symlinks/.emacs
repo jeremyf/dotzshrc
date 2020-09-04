@@ -535,6 +535,8 @@
   :straight (yasnippets :type git :host github :repo "joaotavora/yasnippet")
   :ensure t
   :defer t
+  :after company
+  :config (push 'company-yasnippet company-backends)
   :bind (("C-c C-e" . yas-expand))
   :init (setq yas-snippet-dirs '("~/git/dotzshrc/emacs/snippets"))
   (yas-global-mode 1)

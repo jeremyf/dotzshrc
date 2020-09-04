@@ -25,3 +25,7 @@ also working to figure out how best to arrange things.
 ## Emacs and Emacsclient
 
 I have added two aliases: `e` and `edaemon`
+
+## About Org
+
+I make extensive use of Emacs [Orgmode](https://orgmode.org/) and [Org-Roam](https://orgroam.com/).  See [README-ORG](README-ORG.org).

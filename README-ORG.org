@@ -1,0 +1,47 @@
+#+title: Directory Structure for Org
+#+roam_tags: zettelkasten
+* Directory Structure for Org
+
+In reading [[file:../bibliographies/20200813---how_to_take_smart_notes_by_sonke_ahrens.org]["How to Take Smart Notes" by Sonke Ahrens]], the author discusses three types of notes:
+
+   - Fleeting
+   - Permanent
+   - Project
+
+   *Fleeting* notes are momentary "flashes".  They may be more than that, but their purpose is to capture the moment.  There is an assumed process that will review fleeting notes within two days or so to see if they merit moving to something permanent.
+
+   *Permanent* notes are of two varieties: Bibliographic and Card.
+
+   A *Card* is my own creation, but highlights that its something beyond a note.  The card is where you flesh out ideas, and continue to inter-relate those ideas.  The moniker *card* pays homage to [[https://en.wikipedia.org/wiki/Zettelkasten][Zettelkasten]].
+
+   I’ve assigned a sorting suffix to all ~./permanent/cards~.  The schema for the sorting suffix is set using the following “pattern”: ~000aa00aa00aa00­­­slug_with_many_words.org~.  Top-level concepts, as they arrive in the “slip-box”, will have a three digit prefix, followed by ~­­­~ and the slug.  The the three digit prefix will be “1” greater than the highest prefix.  Concepts “nested” within will then have a prefix of ~000aa~ the ~000~ will match the containing concept and the ~aa~ will increment based on the next available slug.  If we had ~001aa~ and incremented we’d have ~001ab~.[fn:script]
+
+   *Bibliographic* reflects the cited works.  I've adopted a ~"Title" by author~ format for the "root" object; However, nothing limits me from having multiple bibliographic records for the same book/article (perhaps a citation or passage).
+
+   I haven’t settled on what could be bibliographic citations or cards as it relates to chapters or sub-sections or concepts of a book.  For example [[file:../bibliographies/20200817---six_steps_to_successful_writing_separate_and_interlocking_tasks_sonke_ahrens.org]["Six Steps to Successful Writing: Separate and Interlocking Tasks" (Sonke Ahrens)]] (at the time of writing this note) is filed in ~./permanent/bibliographies~ yet the sub-sections (e.g. [[file:../bibliographies/20200817---become_an_expert_instead_of_a_planner_sonke_ahrens.org]["Become an Expert Instead of a Planner" (Sonke Ahrens)]]) is filed in ~./permanent/cards~, as I’m discussing those concepts a bit more.
+
+   *Letters* the weird things for which I’ve felt are important to keep, but are conceptual terminals.
+
+   *Project* notes typically exist in a single project, and when the project completes may be "disposable".
+
+   Below is a diagram of how I've structured my ~org-directory~:
+
+ #+BEGIN_SRC
+ .
+ ├── fleeting
+ ├── permanent
+ │   ├── bibliographies
+ │   ├── cards
+ │   └── letters
+ └── projects
+     └── samvera
+ #+END_SRC
+
+  I created two scripts:
+
+  - [[file:~/git/dotzshrc/bin/org-file-mover][org-file-mover]] :: to help move files within the above structure.
+  - [[file:~/git/dotzshrc/bin/org-file-link-checker][org-file-link-checker]] :: to help audit the health of my Org file links
+
+  These scripts helped [[file:../bibliographies/20200817---reduce_the_number_of_decisions_sonke_ahrens.org]["Reduce the Number of Decisions" (Sonke Ahrens)]].
+
+[fn:script] I wrote [[file:~/git/org/bin/create-index-for-permanent-cards][file:~/git/org/bin/create-index-for-permanent-cards]] to use the above documented schema.  I also have the script [[file:~/git/org/bin/sort-unsorted][./bin/sort-unsorted]] for sorting an unsorted card.
