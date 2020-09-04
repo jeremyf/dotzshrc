@@ -1,0 +1,113 @@
+#!/usr/bin/env ruby -U
+
+# This script will convert the contents of a directory into an org
+# file structured based on the contents.
+#
+# The script follows the sorting suffix schema outlined in Directory
+# Structure for Org
+#
+# @see ~/git/org/permanent/cards/003ac---directory_structure_for_org.org
+require 'pathname'
+org_path = Pathname.new(File.join(ENV['HOME'], "git/org"))
+cards_path = org_path.join("permanent/cards")
+
+class Card
+  def initialize(path:)
+    @path = path
+    @content = path.read
+    @prefix = @path.basename.to_s.split(CARD_SORT_AND_SLUG_SEPARATOR).first
+  end
+  attr_reader :path, :prefix
+
+  TITLE_METADATA_REGEXP = %r{^#\+title: *(?<title>.*)$}
+  HEADING_REGEXP = %r{^\* *(?<title>.*)$}
+  def title
+    match = TITLE_METADATA_REGEXP.match(@content)
+    return match[:title] if match
+    match = HEADING_REGEXP.match(@content)
+    return match[:title] if match
+    return "<<Missing Title>>"
+  end
+
+  CARD_SORT_AND_SLUG_SEPARATOR = "---"
+  def depth
+    return 0 if unsorted?
+    return 0 if prefix.length == 3
+    return (prefix.length - 3) / 2
+  end
+
+  def unsorted?
+    prefix.include?("unsorted")
+  end
+end
+
+class CardIndex
+  def initialize(title:, path:)
+    @title = title
+    @path = path
+    @sorted = []
+    @unsorted = []
+  end
+  attr_reader :title, :path
+
+  def add(card:)
+    if card.unsorted?
+      @unsorted << card
+    else
+      @sorted << card
+    end
+  end
+
+  def render
+    path.open("w+") do |buffer|
+      buffer.puts "#+title: #{title}"
+      buffer.puts "#+roam_tags: index"
+      buffer.puts "#+PROPERTY: created_by #{Pathname.new(File.join(__dir__, File.basename(__FILE__))).relative_path_from(path.dirname)}"
+      buffer.puts ""
+      buffer.puts "* #{title}"
+      buffer.puts ""
+      buffer.puts "  #+begin_quote"
+      buffer.puts "  The slip-box forces us to be selective in reading and note-taking, but the only criterion is the question of /whether somthing adds to a discussion in the slip-box./  The only thing that matters is that it /connects or is open to connections./  --- Sönke Ahrens"
+      buffer.puts "  #+end_quote"
+      buffer.puts ""
+      buffer.puts "** Sorted Cards"
+      buffer.puts ""
+      @sorted.each do |card|
+        render_sorted(card: card, buffer: buffer)
+      end
+      buffer.puts ""
+      buffer.puts "** Unsorted Cards"
+      buffer.puts "" if @unsorted.any?
+      @unsorted.each do |card|
+        render_unsorted(card: card, buffer: buffer)
+      end
+    end
+  end
+
+  private
+
+  LIST_ITEM_SPACING_PER_DEPTH = 2
+
+  def render_sorted(card:, buffer:)
+    line = "   "
+    line += " " * LIST_ITEM_SPACING_PER_DEPTH * card.depth
+    line += "- [[file:#{card.path.relative_path_from(path.dirname)}][#{card.title}]] (#{card.prefix})"
+    buffer.puts line
+  end
+
+  def render_unsorted(card:, buffer:)
+    line = "   "
+    line += " " * LIST_ITEM_SPACING_PER_DEPTH * card.depth
+    line += "- [[file:#{card.path.relative_path_from(path.dirname)}][#{card.title}]] (#{card.prefix})"
+    buffer.puts line
+  end
+
+end
+
+index = CardIndex.new(title: "Permanent Card Index", path: org_path.join("permanent/card_index.org"))
+cards_path.glob("*.org").sort.each do |card_path|
+  card = Card.new(path: card_path)
+  index.add(card: card)
+end
+
+index.render

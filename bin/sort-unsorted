@@ -1,0 +1,193 @@
+#!/usr/bin/env ruby -U
+
+# ```gherkin
+# Given the path to an unsorted card
+# When I provide a `-u 001` switch
+# Then the given unsorted card will be inserted at 001XX where XX is
+# the next sub-incremental
+# ```
+#
+# ```gherkin
+# Given the path to an unsorted card
+# When I do not provide `-u` switch
+# Then the given unsorted card will be inserted at XXX where XXX is
+# the next root level item
+# ```
+require 'open3'
+require 'pathname'
+require 'optparse'
+command_name = File.basename(__FILE__)
+config = {
+  org_directory: Pathname.new(File.join(ENV['HOME'], "git/org")),
+  do_it: false,
+  to: "permanent/cards"
+}
+
+optparse = OptionParser.new do |options|
+  # This banner is the first line of your help documentation.
+  options.set_banner "Usage: #{command_name} [options]\n\n" \
+                     "Move an org file from one location to another.\n\n"
+
+  options.on_head("-f FROM", "--from", String, "The path and basename of the file we're moving") do |from|
+    config[:from] = from
+  end
+
+  options.on("-u UNDER", "--under", String, %(File the card under the given index\n#{' ' * 37}(Default: As a root note))) do |under|
+    config[:under] = under
+  end
+
+  options.on("-t TO", "--to", String, %(Scope the filing process TO this directory\n#{' ' * 37}(Default: "#{config.fetch(:to)}"))) do |to|
+    config[:to] = to
+  end
+
+  options.on("-o ORG_DIRECTORY", "--org-directory", String, %(The absolute path to the org directory\n#{' ' * 37}(Default: "#{config.fetch(:org_directory)}"))) do |org_directory|
+    config[:org_directory] = Pathname.new(org_directory)
+  end
+
+  options.on('-d', 'Do it! Replace without confirmation.') do |_do_it|
+    config[:do_it] = true
+  end
+
+
+  options.separator('')
+
+  options.on_tail('-h', '--help', "You're looking at it!") do
+    warn options
+    exit 1
+  end
+end
+
+class Sorter
+  PREFIX_SEPARATOR = "---"
+  UNSORTED_PREFIX = "000-unsorted#{PREFIX_SEPARATOR}"
+  def initialize(config:)
+    @config = config
+    @from = Pathname.new(config.fetch(:from))
+    validate!
+  end
+
+  def move!
+    # Determine appropriate prefix
+    prefix = determine_appropriate_prefix
+    # Run move command
+    do_the_move!(prefix: prefix)
+  end
+
+  private
+
+  attr_reader :config, :from
+
+  def validate!
+    verify_from!
+    verify_to!
+    verify_under!
+  end
+
+  def verify_from!
+    # Ensure that the given FROM exists
+    return true if from.file?
+    raise ::OptionParser::InvalidOption, "Given --from file does not exist"
+  end
+
+  def verify_to!
+    return true if to_card_path.directory?
+    raise ::OptionParser::InvalidOption, "Given --to directory does not exist"
+  end
+
+  def verify_under!
+    return true unless config.key?(:under)
+    under = config.fetch(:under)
+    return true if to_card_path.glob("#{under}#{PREFIX_SEPARATOR}*")
+    raise ::OptionParser::InvalidOption, "Given --under does not exist"
+  end
+
+  def to_card_path
+    @to_card_path ||= config.fetch(:org_directory).join(config.fetch(:to))
+  end
+
+  LAST_TWO_ARE_ALPHA_ONLY_REGEXP = /[[:alpha:]]{2}+$/
+  def determine_appropriate_prefix
+    return new_root_prefix unless config.key?(:under)
+    under = config[:under]
+    last_child = find_last_child_for(under: under)
+    if last_child
+      last_two_prefix_chars = last_child.basename.to_s.split(PREFIX_SEPARATOR).first[-2..-1]
+      if LAST_TWO_ARE_ALPHA_ONLY_REGEXP.match(last_two_prefix_chars)
+        "#{under}#{increment_character(two_characters: last_two_prefix_chars)}"
+      else
+        "#{under}#{increment_integer(two_digits: last_two_prefix_chars)}"
+      end
+    else
+      if LAST_TWO_ARE_ALPHA_ONLY_REGEXP.match(under)
+        "#{under}01"
+      else
+        "#{under}aa"
+      end
+    end
+  end
+
+  # This assumes the entries are sorted.  And the first three
+  # characters are integers, as per the spec.
+  def new_root_prefix
+    last_entry = to_card_path.entries.map(&:to_s).sort.last.to_s[0..2].to_i
+    sprintf("%03d", last_entry + 1)
+  end
+
+  def find_last_child_for(under:)
+    file_regexp = %r{^#{under}\w{2}#{PREFIX_SEPARATOR}}
+    children = to_card_path.glob("#{under}*").select do |path|
+      file_regexp.match(path.basename.to_s)
+    end
+    children.sort.last
+  end
+
+  MAX_CHAR = "z".ord
+  def increment_character(two_characters:)
+    integers = two_characters.chars.map(&:ord)
+    if integers[1] >= MAX_CHAR
+      [integers[0]+1, "a".ord].pack("c*")
+    else
+      [integers[0], integers[1]+1].pack("c*")
+    end
+  end
+
+  def increment_integer(two_digits:)
+    sprintf("%02d", two_digits.to_i + 1)
+  end
+
+  def do_the_move!(prefix:)
+    new_name = [prefix, from.basename.to_s.split(PREFIX_SEPARATOR)[1]].join(PREFIX_SEPARATOR)
+    command_args = [
+      "org-file-mover",
+      "-f", from.to_s,
+      "-t", config.fetch(:org_directory).join(config.fetch(:to)).to_s,
+      "-r", new_name
+    ]
+    command_args << "-d" if config[:do_it]
+    $stdout.puts("*" * 72)
+    $stdout.puts "Running `#{command_args.join(' ')}'"
+    $stdout.puts("*" * 72)
+    Open3.pipeline_r(command_args) do |o|
+      while out = o.gets
+        puts out
+      end
+    end
+
+    system("create-index-for-permanent-cards") if config[:do_it]
+  end
+end
+
+
+begin
+  optparse.parse!
+  mandatory = %i[from]
+  missing = mandatory.select { |param| config[param].nil? }
+  raise OptionParser::MissingArgument, missing.join(', ') unless missing.empty?
+  @sorter = Sorter.new(config: config)
+rescue OptionParser::InvalidOption, OptionParser::MissingArgument
+  warn "\e[0m\e[1m\e[31m#{$!}\e[0m\n"
+  warn optparse
+  exit
+end
+
+@sorter.move!
