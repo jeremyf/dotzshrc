@@ -40,7 +40,7 @@ In reading "How to Take Smart Notes" by Sonke Ahrens, the author discusses three
 
   - [[file:./bin/org-file-mover][./bin/org-file-mover]] :: to help move files within the above structure.
   - [[file:./bin/org-file-link-checker][./bin/org-file-link-checker]] :: to help audit the health of my Org file links
-  - [[file:./bin/create-index-for-permanent-cards][file:./bin/create-index-for-permanent-cards]] :: Creates an index of the permanent cards
-  - [[file:./bin/sort-unsorted][./bin/sort-unsorted]] :: Provides tooling to move files into the permanent/cards directory
+  - [[file:./bin/create-index-for-permanent-cards][file:./bin/create-index-for-permanent-cards]] :: Creates an index file of the permanent/cards (unsorted and sorted)
+  - [[file:./bin/sort-unsorted][./bin/sort-unsorted]] :: Provides tooling to move files into the permanent/cards directory; Note this handles moving leafs but not branches.  That’s a future consideration.
 
   These scripts helped Reduce the Number of Decisions that I needed to make.
