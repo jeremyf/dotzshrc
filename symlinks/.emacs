@@ -1107,8 +1107,7 @@ to consider doing so."
         org-roam-server-network-label-wrap-length 20))
 
 (add-hook 'org-mode-hook #'toggle-word-wrap)
-(add-hook 'org-mode-hook #'visual-line-mode)
-
+(add-hook 'org-mode-hook #'turn-on-visual-line-mode)
 
 ;; See
 ;; https://www.reddit.com/r/orgmode/comments/i6hl8b/image_preview_size_in_org_mode/
@@ -1140,6 +1139,14 @@ to consider doing so."
   :bind (("C-x w" . jnf/elfeed-load-db-and-open)
          :map elfeed-search-mode-map
          ("q" . jnf/elfeed-save-db-and-bury)))
+
+;; A little bit of RSS beautification
+(add-hook 'elfeed-show-mode-hook 'jnf/elfeed-visual)
+(defun jnf/elfeed-visual ()
+  "A method to turn on visual line mode and adjust text scale."
+  (text-scale-set 2)
+  (turn-on-visual-line-mode)
+  )
 
 ;;write to disk when quiting
 (defun jnf/elfeed-save-db-and-bury ()
