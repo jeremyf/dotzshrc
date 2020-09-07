@@ -15,8 +15,8 @@
 ;; same window.(defvar server-visit-files-custom-find:buffer-count)
 (defvar server-visit-files-custom-find:buffer-count)
 (defadvice server-visit-files
-  (around server-visit-files-custom-find
-      activate compile)
+    (around server-visit-files-custom-find
+            activate compile)
   "Maintain a counter of visited files from a single client call."
   (let ((server-visit-files-custom-find:buffer-count 0))
     ad-do-it))
@@ -24,14 +24,14 @@
   "Arrange to visit the files from a client call in separate windows."
   (if (zerop server-visit-files-custom-find:buffer-count)
       (progn
-    (delete-other-windows)
-    (switch-to-buffer (current-buffer)))
+        (delete-other-windows)
+        (switch-to-buffer (current-buffer)))
     (let ((buffer (current-buffer))
-      (window (split-window-sensibly)))
+          (window (split-window-sensibly)))
       (switch-to-buffer buffer)
       (balance-windows)))
   (setq server-visit-files-custom-find:buffer-count
-    (1+ server-visit-files-custom-find:buffer-count)))
+        (1+ server-visit-files-custom-find:buffer-count)))
 (add-hook 'server-visit-hook 'server-visit-hook-custom-find)
 
 ;; Make startup faster by reducing the frequency of garbage
@@ -111,7 +111,7 @@
   :ensure t
   ;; :config (load-theme 'base16-onedark t))
   ;; :config (load-theme 'base16-one-light t))
-:config (load-theme 'base16-google-light t))
+  :config (load-theme 'base16-google-light t))
 ;; :config (load-theme 'base16-google-dark t))
 
 ;; Doing a bit of configuration of my cursors
@@ -428,17 +428,15 @@
 (global-set-key (kbd "s-}") 'awesome-tab-forward-tab)
 (global-set-key (kbd "s-k") 'kill-current-buffer)
 (global-set-key (kbd "s-w") 'kill-current-buffer)
-
+(setq awesome-tab-show-tab-index t)
 
 (defun awesome-tab-buffer-groups ()
   "`awesome-tab-buffer-groups' control buffers' group rules.
-
-Group awesome-tab with mode if buffer is derived from `eshell-mode' `emacs-lisp-mode' `dired-mode' `org-mode' `magit-mode'.
-All buffer name start with * will group to \"Emacs\".
-Other buffer group by `awesome-tab-get-group-name' with project name."
+Group awesome-tab either with Emacs OR General.
+See https://github.com/manateelazycat/awesome-tab#grouprules"
   (list
    (cond
-        ((or (string-equal "*" (substring (buffer-name) 0 1))
+    ((or (string-equal "*" (substring (buffer-name) 0 1))
          (memq major-mode '(magit-process-mode
                             magit-status-mode
                             magit-diff-mode
@@ -448,8 +446,7 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
                             magit-blame-mode
                             )))
      "Emacs")
-    (t
-     (awesome-tab-get-group-name (current-buffer))))))
+    (t "General"))))
 
 ;; `C-u M-x scratch` prompts for a mode then creates a buffer in that
 ;; mode
@@ -476,9 +473,9 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 ;; BEGIN typopunct
 ;;
 (use-package typopunct
-   :straight t
-   :ensure t
-   :defer t)
+  :straight t
+  :ensure t
+  :defer t)
 (require 'typopunct)
 ;; (add-hook 'text-mode-hook 'jnf/typopunct-init)
 (add-hook 'org-mode-hook 'jnf/typopunct-init)
@@ -544,31 +541,31 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 (define-key typopunct-map "x" 'typopunct-insert-times)
 
 (defadvice typopunct-insert-quotation-mark (around wrap-region activate)
-      (let* ((lang (or (get-text-property (point) 'typopunct-language)
-                       typopunct-buffer-language))
-             (omark (if single
-                        (typopunct-opening-single-quotation-mark lang)
-                      (typopunct-opening-quotation-mark lang)))
-             (qmark (if single
-                        (typopunct-closing-single-quotation-mark lang)
-                      (typopunct-closing-quotation-mark lang))))
-        (cond
-         (mark-active
-          (let ((skeleton-end-newline nil)
-                (singleo (typopunct-opening-single-quotation-mark lang))
-                (singleq (typopunct-closing-single-quotation-mark lang)))
-            (if (> (point) (mark))
-                (exchange-point-and-mark))
-            (save-excursion
-              (while (re-search-forward (regexp-quote (string omark)) (mark) t)
-                (replace-match (regexp-quote (string singleo)) nil nil)))
-            (save-excursion
-              (while (re-search-forward (regexp-quote (string qmark)) (mark) t)
-                (replace-match (regexp-quote (string singleq)) nil nil)))
-            (skeleton-insert (list nil omark '_ qmark) -1)))
-         ((looking-at (regexp-opt (list (string omark) (string qmark))))
-          (forward-char 1))
-         (t ad-do-it))))
+  (let* ((lang (or (get-text-property (point) 'typopunct-language)
+                   typopunct-buffer-language))
+         (omark (if single
+                    (typopunct-opening-single-quotation-mark lang)
+                  (typopunct-opening-quotation-mark lang)))
+         (qmark (if single
+                    (typopunct-closing-single-quotation-mark lang)
+                  (typopunct-closing-quotation-mark lang))))
+    (cond
+     (mark-active
+      (let ((skeleton-end-newline nil)
+            (singleo (typopunct-opening-single-quotation-mark lang))
+            (singleq (typopunct-closing-single-quotation-mark lang)))
+        (if (> (point) (mark))
+            (exchange-point-and-mark))
+        (save-excursion
+          (while (re-search-forward (regexp-quote (string omark)) (mark) t)
+            (replace-match (regexp-quote (string singleo)) nil nil)))
+        (save-excursion
+          (while (re-search-forward (regexp-quote (string qmark)) (mark) t)
+            (replace-match (regexp-quote (string singleq)) nil nil)))
+        (skeleton-insert (list nil omark '_ qmark) -1)))
+     ((looking-at (regexp-opt (list (string omark) (string qmark))))
+      (forward-char 1))
+     (t ad-do-it))))
 
 ;; Remember [C-q "] will create a " instead of a “
 ;; And [C-q '] will create a ' instead of a ‘
@@ -876,9 +873,9 @@ to consider doing so."
 ;; And yes "nab" is not idiomatic, but since I'm mapping it to OPT+n,
 ;; I believe it will help me remember.
 (defun nab-name-of-file ()
-    "Copy into the kill ring the full path of the current buffer."
-    (interactive)
-    (kill-new (buffer-file-name (window-buffer (minibuffer-selected-window)))))
+  "Copy into the kill ring the full path of the current buffer."
+  (interactive)
+  (kill-new (buffer-file-name (window-buffer (minibuffer-selected-window)))))
 
 
 (global-set-key (kbd "M-n") 'nab-name-of-file) ;; OPT+n
@@ -1221,13 +1218,13 @@ to consider doing so."
 (defun elfeed-search-show-entry-pre (&optional lines)
   "Returns a function to scroll forward or back in the Elfeed
   search results, displaying entries without switching to them."
-      (lambda (times)
-        (interactive "p")
-        (forward-line (* times (or lines 0)))
-        (recenter)
-        (call-interactively #'elfeed-search-show-entry)
-        (select-window (previous-window))
-        (unless elfeed-search-remain-on-entry (forward-line -1))))
+  (lambda (times)
+    (interactive "p")
+    (forward-line (* times (or lines 0)))
+    (recenter)
+    (call-interactively #'elfeed-search-show-entry)
+    (select-window (previous-window))
+    (unless elfeed-search-remain-on-entry (forward-line -1))))
 (eval-after-load 'elfeed-search
   '(define-key elfeed-search-mode-map (kbd "n") (elfeed-search-show-entry-pre +1)))
 (eval-after-load 'elfeed-search
