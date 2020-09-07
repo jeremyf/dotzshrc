@@ -438,6 +438,16 @@ All buffer name start with * will group to \"Emacs\".
 Other buffer group by `awesome-tab-get-group-name' with project name."
   (list
    (cond
+        ((or (string-equal "*" (substring (buffer-name) 0 1))
+         (memq major-mode '(magit-process-mode
+                            magit-status-mode
+                            magit-diff-mode
+                            magit-log-mode
+                            magit-file-mode
+                            magit-blob-mode
+                            magit-blame-mode
+                            )))
+     "Emacs")
     (t
      (awesome-tab-get-group-name (current-buffer))))))
 
