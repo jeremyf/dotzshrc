@@ -10,6 +10,30 @@
 
 (server-start)
 
+;; A chunk of code that allows me to pass multiple filenames to
+;; emacsclient AND open those files in different frames within the
+;; same window.(defvar server-visit-files-custom-find:buffer-count)
+(defvar server-visit-files-custom-find:buffer-count)
+(defadvice server-visit-files
+  (around server-visit-files-custom-find
+      activate compile)
+  "Maintain a counter of visited files from a single client call."
+  (let ((server-visit-files-custom-find:buffer-count 0))
+    ad-do-it))
+(defun server-visit-hook-custom-find ()
+  "Arrange to visit the files from a client call in separate windows."
+  (if (zerop server-visit-files-custom-find:buffer-count)
+      (progn
+    (delete-other-windows)
+    (switch-to-buffer (current-buffer)))
+    (let ((buffer (current-buffer))
+      (window (split-window-sensibly)))
+      (switch-to-buffer buffer)
+      (balance-windows)))
+  (setq server-visit-files-custom-find:buffer-count
+    (1+ server-visit-files-custom-find:buffer-count)))
+(add-hook 'server-visit-hook 'server-visit-hook-custom-find)
+
 ;; Make startup faster by reducing the frequency of garbage
 ;; collection.  The default is 800 kilobytes.  Measured in bytes.
 ;; From https://blog.d46.us/advanced-emacs-startup/
@@ -382,28 +406,40 @@
   :ensure t
   :bind (("M-o" . ace-window)))
 
-;; (use-package awesome-tab
-;;   :ensure t
-;;   :straight (awesome-tab :type git :host github :repo "manateelazycat/awesome-tab")
-;;   :config (awesome-tab-mode t)
-;;   (setq awesome-tab-height 130))
-;; (global-set-key (kbd "s-1") 'awesome-tab-select-visible-tab)
-;; (global-set-key (kbd "s-2") 'awesome-tab-select-visible-tab)
-;; (global-set-key (kbd "s-3") 'awesome-tab-select-visible-tab)
-;; (global-set-key (kbd "s-4") 'awesome-tab-select-visible-tab)
-;; (global-set-key (kbd "s-5") 'awesome-tab-select-visible-tab)
-;; (global-set-key (kbd "s-6") 'awesome-tab-select-visible-tab)
-;; (global-set-key (kbd "s-7") 'awesome-tab-select-visible-tab)
-;; (global-set-key (kbd "s-8") 'awesome-tab-select-visible-tab)
-;; (global-set-key (kbd "s-9") 'awesome-tab-select-visible-tab)
-;; (global-set-key (kbd "s-0") 'awesome-tab-select-visible-tab)
-;; (global-set-key (kbd "C-c C-t") 'awesome-tab-counsel-switch-group)
-;; (global-set-key [M-s-left] 'awesome-tab-backward-tab)
-;; (global-set-key [M-s-right] 'awesome-tab-forward-tab)
-;; (global-set-key (kbd "s-{") 'awesome-tab-backward-tab)
-;; (global-set-key (kbd "s-}") 'awesome-tab-forward-tab)
-;; (global-set-key (kbd "s-k") 'kill-current-buffer)
-;; (global-set-key (kbd "s-w") 'kill-current-buffer)
+(use-package awesome-tab
+  :ensure t
+  :straight (awesome-tab :type git :host github :repo "manateelazycat/awesome-tab")
+  :config (awesome-tab-mode t)
+  (setq awesome-tab-height 130))
+(global-set-key (kbd "s-1") 'awesome-tab-select-visible-tab)
+(global-set-key (kbd "s-2") 'awesome-tab-select-visible-tab)
+(global-set-key (kbd "s-3") 'awesome-tab-select-visible-tab)
+(global-set-key (kbd "s-4") 'awesome-tab-select-visible-tab)
+(global-set-key (kbd "s-5") 'awesome-tab-select-visible-tab)
+(global-set-key (kbd "s-6") 'awesome-tab-select-visible-tab)
+(global-set-key (kbd "s-7") 'awesome-tab-select-visible-tab)
+(global-set-key (kbd "s-8") 'awesome-tab-select-visible-tab)
+(global-set-key (kbd "s-9") 'awesome-tab-select-visible-tab)
+(global-set-key (kbd "s-0") 'awesome-tab-select-visible-tab)
+(global-set-key (kbd "C-c C-t") 'awesome-tab-counsel-switch-group)
+(global-set-key [M-s-left] 'awesome-tab-backward-tab)
+(global-set-key [M-s-right] 'awesome-tab-forward-tab)
+(global-set-key (kbd "s-{") 'awesome-tab-backward-tab)
+(global-set-key (kbd "s-}") 'awesome-tab-forward-tab)
+(global-set-key (kbd "s-k") 'kill-current-buffer)
+(global-set-key (kbd "s-w") 'kill-current-buffer)
+
+
+(defun awesome-tab-buffer-groups ()
+  "`awesome-tab-buffer-groups' control buffers' group rules.
+
+Group awesome-tab with mode if buffer is derived from `eshell-mode' `emacs-lisp-mode' `dired-mode' `org-mode' `magit-mode'.
+All buffer name start with * will group to \"Emacs\".
+Other buffer group by `awesome-tab-get-group-name' with project name."
+  (list
+   (cond
+    (t
+     (awesome-tab-get-group-name (current-buffer))))))
 
 ;; `C-u M-x scratch` prompts for a mode then creates a buffer in that
 ;; mode
