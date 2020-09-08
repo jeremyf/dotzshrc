@@ -439,6 +439,7 @@ Group awesome-tab either with Emacs OR General.
 See https://github.com/manateelazycat/awesome-tab#grouprules"
   (list
    (cond
+    ((string-equal "*elf" (substring (buffer-name) 0 4)) "Elfeed")
     ((or (string-equal "*" (substring (buffer-name) 0 1))
          (memq major-mode '(magit-process-mode
                             magit-status-mode
@@ -997,10 +998,12 @@ to consider doing so."
          "* TO-READ %^{SUBJECT} %u\n  %?\n")
         ("s" "Session" entry (file+headline "~/git/org/sessions.org" "Sessions")
          "* Session: %u %^{SUMMARY}\n\n  %^{ATTENDEES}p\n  %^{SYSTEM}p\n  %?\n")
-        ("b" "Troubleshooting" entry (file+headline "~/git/org/troubleshooting.org" "Trouble Shooting")
+        ("g" "Troubleshooting" entry (file+headline "~/git/org/troubleshooting.org" "Trouble Shooting")
          "* TODO %u Problem %^{SUMMARY}\n\n  %?\n  %a")
         ("t" "Task for Work" entry (file+datetree "~/git/org/agenda.org")
          "* TODO %?")
+        ("u" "Unfiled Permanent > Bibliography" entry (file+headline "~/git/org/permanent/unfiled_bibliographic_cards.org" "Unfiled Bibliographic Cards")
+         "* UNFILED %?\nEntered on %U")
         ("w" "Waiting for Work" entry (file+datetree "~/git/org/agenda.org")
          "* WAITING %^{SUMMARY}\n\n  %?\n")
         ))
@@ -1011,6 +1014,7 @@ to consider doing so."
 (setq org-todo-keywords
       '((sequence "TODO" "WAITING" "|" "DONE")
         (sequence "MEETING" "AGENDA" "|" "MINUTES")
+        (sequence "UNFILED" "|" "FILED")
         (sequence "TO-READ" "READING" "|" "READ"))
       )
 
@@ -1184,7 +1188,38 @@ to consider doing so."
   :after org-roam
   :bind (("C-x w" . jnf/elfeed-load-db-and-open)
          :map elfeed-search-mode-map
-         ("q" . jnf/elfeed-save-db-and-bury)))
+         ("q" . jnf/elfeed-save-db-and-bury))
+  :config (elfeed-org)
+
+       ;;
+       ;; linking and capturing
+       ;;
+
+       (defun elfeed-link-title (entry)
+         "Copy the entry title and URL as org link to the clipboard."
+         (interactive)
+         (let* ((link (elfeed-entry-link entry))
+                (title (elfeed-entry-title entry))
+                (titlelink (concat "[[" link "][" title "]]")))
+           (when titlelink
+             (kill-new titlelink)
+             (x-set-selection 'PRIMARY titlelink)
+             (message "Yanked: %s" titlelink))))
+
+       ;; show mode
+
+       (defun elfeed-show-quick-url-note ()
+  "Fastest way to capture entry link to org agenda from elfeed show mode"
+  (interactive)
+  (elfeed-link-title elfeed-show-entry)
+  (org-capture nil "u")
+  (yank)
+  ;; (org-capture-finalize)
+  )
+
+       (bind-keys :map elfeed-show-mode-map
+           ("l" . elfeed-show-link-title)
+           ("v" . elfeed-show-quick-url-note)))
 
 ;; A little bit of RSS beautification
 (add-hook 'elfeed-show-mode-hook 'jnf/elfeed-visual)
@@ -1204,8 +1239,8 @@ to consider doing so."
 (defun jnf/elfeed-load-db-and-open ()
   "Load the elfeed db from disk before opening"
   (interactive)
-  (elfeed-db-load)
   (elfeed)
+  (elfeed-db-load)
   (elfeed-search-update--force))
 
 (use-package elfeed-org
