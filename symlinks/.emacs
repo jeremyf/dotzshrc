@@ -9,6 +9,7 @@
 ;;; CODE:
 
 (server-start)
+(set-frame-font "MesloLGS NF")
 
 ;; A chunk of code that allows me to pass multiple filenames to
 ;; emacsclient AND open those files in different frames within the
@@ -109,10 +110,12 @@
 (use-package base16-theme
   :straight t
   :ensure t
-  ;; :config (load-theme 'base16-onedark t))
-  ;; :config (load-theme 'base16-one-light t))
-  :config (load-theme 'base16-google-light t))
-;; :config (load-theme 'base16-google-dark t))
+  :config
+  ;; (load-theme 'base16-onedark t)
+  ;; (load-theme 'base16-one-light t)
+  (load-theme 'base16-google-light t)
+  ;;(load-theme 'base16-google-dark t)
+  )
 
 ;; Doing a bit of configuration of my cursors
 (setq-default cursor-type 'bar)
