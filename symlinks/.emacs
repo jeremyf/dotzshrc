@@ -646,7 +646,7 @@ See https://github.com/manateelazycat/awesome-tab#grouprules"
  '(dired-use-ls-dired t)
  '(global-display-line-numbers-mode t)
  '(org-agenda-files
-   '("/Users/jfriesen/git/org/agenda.org" "/Users/jfriesen/git/org/index.org" "/Users/jfriesen/git/org/troubleshooting.org"))
+   '("/Users/jfriesen/git/org/agenda.org" "/Users/jfriesen/git/org/index.org" "/Users/jfriesen/git/org/troubleshooting.org" "Users/jfriesen/git/org/permanent/unfiled_bibliographic_cards.org"))
  '(org-export-backends '(ascii html icalendar latex md odt))
  '(show-paren-mode t))
 (custom-set-faces
