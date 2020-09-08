@@ -6,6 +6,7 @@ command_name = File.basename(__FILE__)
 config = {
   directory: Pathname.new(File.join(ENV['HOME'], "git")),
   shallow: false,
+  output: $stdout,
   from: "master",
   to: "main",
   skip_file: nil
@@ -19,7 +20,7 @@ optparse = OptionParser.new do |options|
     config[:directory] = Pathname.new(dir)
   end
 
-  options.on("-s SHALLOW", "--shallow", %(Limit renaming to only direct subdirectories of DIRECTORY\n#{' ' * 37}(Default: "#{config[:shallow].inspect}"))) do |recursive|
+  options.on("-s SHALLOW", "--shallow", %(Limit renaming to only direct subdirectories of DIRECTORY\n#{' ' * 37}(Default: "#{config[:shallow].inspect}"))) do |shallow|
     config[:shallow] = shallow
   end
 
@@ -29,6 +30,10 @@ optparse = OptionParser.new do |options|
 
   options.on("-t TO", "--to", String, %(What is the new branch name\n#{' ' * 37}(Default: "#{config[:to]}"))) do |to|
     config[:to] = to
+  end
+
+  options.on("-o OUTPUT", "--output", String, %(To what file should we output the report\n#{' ' * 37}(Default: "#{config[:output]}"))) do |output|
+    config[:output] = output
   end
 
   options.separator('')
@@ -50,14 +55,29 @@ rescue OptionParser::InvalidOption, OptionParser::MissingArgument
   exit
 end
 
+uncleans = []
+from_branch_missing = []
+from_branch_missing_but_has_to_branch = []
+manually_skipped = []
+changed = []
 # If the filename matches an entry in the skip_file, don't prompt for direction
 # skip_file = nil
 directory = config.fetch(:directory)
 directory.glob("**/.git").each do |filename|
   repository = filename.dirname
   next if config[:shallow] && repository.dirname != directory
-  # next if unclean directory (report this)
-  # next if git repository does not have a master branch (report this)
+  if !(`cd #{repository}; git status`.include?("working tree clean"))
+    uncleans << repository
+    next
+  end
+  if !system("cd #{repository} && git branch | grep #{config.fetch(:from)}")
+    if system("cd #{repository} && git branch | grep #{config.fetch(:to)}")
+      from_branch_missing_but_has_to_branch << repository
+    else
+      from_branch_missing << repository
+    end
+  end
+
   # next unless user says to rename local :from_branch_name to :to_branch_name
   # Assumes that upstream no longer has the :from_branch_name
   #
@@ -66,4 +86,30 @@ directory.glob("**/.git").each do |filename|
   # git pull
   # git branch -m :from_branch_name :to_branch_name
   # end
+end
+
+puts "# Clone Branch Fixer Report"
+puts ""
+puts "## Configuration"
+puts ""
+config.each_pair do |key, value|
+  puts "* **#{key}**: #{value}"
+end
+puts ""
+puts "## Dirty Repositories"
+puts ""
+uncleans.each do |repository|
+  puts "* #{repository.relative_path_from(config.fetch(:directory))}"
+end
+puts ""
+puts "## Missing From Branch and Does NOT Have to Branch"
+puts ""
+from_branch_missing.each do |repository|
+  puts "* #{repository.relative_path_from(config.fetch(:directory))}"
+end
+puts ""
+puts "## Missing From Branch and Has to Branch"
+puts ""
+from_branch_missing_but_has_to_branch.each do |repository|
+  puts "* #{repository.relative_path_from(config.fetch(:directory))}"
 end
