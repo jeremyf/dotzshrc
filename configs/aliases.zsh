@@ -13,7 +13,7 @@ alias bx="bundle exec"
 alias gl='git lg'
 alias gd='git diff'
 alias gst='git st'
-alias gb='git ba'
+alias gb='git branch -vv'
 alias gwc='git whatchanged -p --abbrev-commit --pretty=medium'
 alias hb="hub browse"
 alias psx="ps ax | ag $1"
