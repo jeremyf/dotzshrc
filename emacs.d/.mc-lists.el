@@ -38,6 +38,7 @@
       '(
         ivy-occur-click
         ivy-switch-buffer
+        rspec-toggle-spec-and-target
         rspec-verify-all
         xref-find-apropos
         ))
