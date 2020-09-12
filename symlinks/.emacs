@@ -959,6 +959,11 @@ to consider doing so."
 (add-hook 'ruby-mode-hook 'jnf-add-duplicate-line-kbd)
 
 
+(use-package whole-line-or-region
+  :straight t
+  :ensure t
+  :defer t)
+
 (use-package plantuml-mode
   :straight t
   :ensure t
@@ -1240,6 +1245,7 @@ to consider doing so."
   "Load the elfeed db from disk before opening"
   (interactive)
   (elfeed)
+  (elfeed-update)
   (elfeed-db-load)
   (elfeed-search-update--force))
 
