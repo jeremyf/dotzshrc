@@ -15,6 +15,7 @@
         hungry-delete-forward
         indent-for-tab-command
         jnf/kill-region-or-backward-word
+        kill-visual-line
         magit-status
         markdown-outdent-or-delete
         mouse-set-region
@@ -29,6 +30,7 @@
         org-todo
         sp-backward-delete-char
         string-inflection-all-cycle
+        typopunct-insert-mp
         typopunct-insert-typographical-dashes
         wdired-finish-edit
         wgrep-finish-edit

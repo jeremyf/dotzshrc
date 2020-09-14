@@ -1033,6 +1033,9 @@ to consider doing so."
   :ensure t
   :straight t)
 
+;; Export to Confluence
+(require 'ox-confluence)
+
 (defalias 'roll 'org-d20-roll-at-point)
 
 ;; Consider https://github.com/jkitchin/org-ref as well
