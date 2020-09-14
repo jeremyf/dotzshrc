@@ -1191,7 +1191,7 @@ to consider doing so."
   :ensure t
   :straight t
   :after org-roam
-  :bind (("C-x w" . jnf/elfeed-load-db-and-open)
+  :bind (("C-x r" . jnf/elfeed-load-db-and-open)
          :map elfeed-search-mode-map
          ("q" . jnf/elfeed-save-db-and-bury))
   :config (elfeed-org)
@@ -1248,6 +1248,7 @@ to consider doing so."
   (elfeed-update)
   (elfeed-db-load)
   (elfeed-search-update--force))
+(defalias 'rss 'jnf/elfeed-load-db-and-open)
 
 (use-package elfeed-org
   :straight t
