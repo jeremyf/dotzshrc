@@ -1033,8 +1033,6 @@ to consider doing so."
   :ensure t
   :straight t)
 
-;; Export to Confluence
-(require 'ox-confluence)
 
 (defalias 'roll 'org-d20-roll-at-point)
 
@@ -1189,6 +1187,9 @@ to consider doing so."
 
 (add-to-list 'load-path "~/git/dotzshrc/emacs")
 (require 'jnf-org-latex.el)
+;; Export to Confluence
+(require 'ox-confluence)
+
 
 (use-package elfeed
   :ensure t
