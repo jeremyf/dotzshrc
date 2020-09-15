@@ -1117,6 +1117,18 @@ to consider doing so."
 
 (require 'org-roam-protocol)
 
+(use-package deft
+  :straight t
+  :ensure t
+  :after org-roam
+  :bind
+  ("C-c n d" . deft)
+  :custom
+  (deft-recursive t)
+  (deft-use-filter-string-for-filename t)
+  (deft-default-extension "org")
+  (deft-directory "~/git/org/"))
+
 (global-set-key (kbd "s-i") 'org-roam-insert)
 (global-set-key (kbd "s-r") 'org-roam-find-file)
 
