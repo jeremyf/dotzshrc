@@ -42,6 +42,7 @@
 
 ;; Stop ringing any bell
 (setq ring-bell-function 'ignore)
+(setq delete-selection-mode t)
 
 ;; This preamble is part of straight-use-package My understanding, in
 ;; reading straight documentation is that it has better load
