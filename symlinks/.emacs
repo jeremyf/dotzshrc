@@ -167,6 +167,7 @@
 (use-package ivy-rich
   :ensure t
   :straight t
+  :after (ivy counsel)
   :custom
   (ivy-virtual-abbreviate 'full)
   (ivy-rich-switch-buffer-align-virtual-buffer nil)
@@ -199,14 +200,10 @@
 
 (use-package ivy-prescient
   :straight t
+  :after ivy
   :ensure t
   :init (setq prescient-filter-method '(literal fuzzy regexp initialism))
   :config (ivy-prescient-mode t))
-
-;; (use-package ivy-hydra
-;;   :straight t
-;;   :ensure t
-;;   :defer t)
 
 (use-package expand-region
   :straight t
