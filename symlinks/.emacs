@@ -306,12 +306,12 @@
 
 (setq ruby-insert-encoding-magic-comment nil)
 
-(use-package auto-complete
-  :straight t
-  :ensure t
-  :defer t
-  :config (ac-config-default)
-  :init (setq ac-auto-show-menu t))
+;; (use-package auto-complete
+;;   :straight t
+;;   :ensure t
+;;   :defer t
+;;   :config (ac-config-default)
+;;   :init (setq ac-auto-show-menu t))
 
 (use-package inf-ruby
   :straight t
