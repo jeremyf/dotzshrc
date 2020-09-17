@@ -120,6 +120,14 @@
   ;;(load-theme 'base16-google-dark t)
   )
 
+;; "I find it useful to have a slightly more apparent indicator of which buffer is active at the moment."
+;; https://blog.sumtypeofway.com/posts/emacs-config.html
+(use-package dimmer
+  :ensure t
+  :straight t
+  :custom (dimmer-fraction 0.4)
+  :config (dimmer-mode))
+
 ;; Doing a bit of configuration of my cursors
 (setq-default cursor-type 'bar)
 (set-cursor-color "#44B4CC") ;; The text color of my
