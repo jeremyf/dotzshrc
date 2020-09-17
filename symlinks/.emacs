@@ -1163,6 +1163,12 @@ to consider doing so."
            :head  "#+title: ${title}\n#+roam_tags:\n* ${title}\n\n"
            :unnarrowed t
            :immediate-finish t)
+          ("s" "Project > Samvera" plain (function org-roam--capture-get-point)
+           "%?"
+           :file-name "projects/samvera/%<%Y%m%d>---${slug}"
+           :head  "#+title: ${title}\n#+roam_tags:\n* ${title}\n\n"
+           :unnarrowed t
+           :immediate-finish t)
           ("t" "Project > Thel Sector" plain (function org-roam--capture-get-point)
            "%?"
            :file-name "projects/thel-sector/%<%Y%m%d>---${slug}"
@@ -1192,9 +1198,9 @@ to consider doing so."
 (global-set-key (kbd "<f2>") `(
                                lambda ()
                                       (interactive)
-                                      (if (eq org-clock-current-task nil)
+                                      (if (boundp 'org-clock-current-task)
+                                          (org-clock-goto)
                                           (find-file "~/git/org/agenda.org")
-                                        (org-clock-goto)
                                         )))
 (global-set-key (kbd "<f3>") 'org-roam-jump-to-index)
 (global-set-key (kbd "<f4>") `(lambda () (interactive)(find-file "~/git/org/permanent/card_index.org")))
