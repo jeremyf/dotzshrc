@@ -114,12 +114,27 @@
 (use-package base16-theme
   :straight t
   :ensure t
-  :config
+  ;; :config
   ;; (load-theme 'base16-onedark t)
   ;; (load-theme 'base16-one-light t)
-  (load-theme 'base16-google-light t)
+  ;; (load-theme 'base16-google-light t)
   ;;(load-theme 'base16-google-dark t)
   )
+
+;; I'm just going to trust themes
+(setq custom-safe-themes t)
+
+;; I'm finding the Doom themes to be all around beautiful!
+(use-package doom-themes
+  :straight t
+  :ensure t
+  :config
+  (let ((chosen-theme 'doom-tomorrow-day))
+    (doom-themes-visual-bell-config)
+    (doom-themes-org-config)
+    (setq doom-tomorrow-day-brighter-comments t
+          doom-tomorrow-day-brighter-modeline t)
+    (load-theme chosen-theme)))
 
 ;; "I find it useful to have a slightly more apparent indicator of which buffer is active at the moment."
 ;; https://blog.sumtypeofway.com/posts/emacs-config.html
