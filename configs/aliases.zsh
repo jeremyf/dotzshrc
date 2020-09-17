@@ -6,7 +6,6 @@ export GIT_EDITOR=$EDITOR
 alias e=$EDITOR
 alias edaemon='editor-daemon'
 alias org="$EDITOR ~/git/org/agenda.org"
-alias lr='lil-regy'
 alias rm='rm -i'
 alias file-count="find . -type f -print | wc -l"
 alias bx="bundle exec"
