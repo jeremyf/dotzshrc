@@ -367,8 +367,24 @@
          ("C->" . mc/mark-next-like-this)
          ("C-<" . mc/mark-previous-like-this)
          ("C-c C->" . mc/mark-all-like-this)
-         ("C-s-l C-s-l" . mc/edit-lines) ;; CTRL+CMD+c
+         ("C-c C-SPC" . mc/edit-lines) ;; CTRL+CMD+c
          ))
+
+;; C-; to select words
+(use-package iedit
+  :straight t
+  :ensure t)
+
+(global-so-long-mode)
+
+;; Parenthesis matching is one of the flaws in my Emacs setup as of
+;; this writing. I know that there are a lot of options out
+;; there—paredit, smartparens, etc.—but I haven’t sat down and really
+;; capital-L Learned a better solution than the TextMate-style bracket
+;; completion (which Emacs calls, somewhat fancifully, ‘electric’).
+;;
+;; https://blog.sumtypeofway.com/posts/emacs-config.html
+(electric-pair-mode)
 
 ;; Adds some nice chrome to the status line
 ;; https://github.com/milkypostman/powerline Note: This is a faster
