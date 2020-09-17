@@ -173,6 +173,17 @@
         '((read-file-name-internal . ivy--regex-fuzzy)
           (t . ivy--regex-ignore-order))))
 
+(use-package ivy-rich
+  :ensure t
+  :straight t
+  :custom
+  (ivy-virtual-abbreviate 'full)
+  (ivy-rich-switch-buffer-align-virtual-buffer nil)
+  (ivy-rich-path-style 'full)
+  :config
+  (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line)
+  (ivy-rich-mode))
+
 (use-package swiper
   :straight t
   :after ivy
@@ -385,18 +396,6 @@
 ;;
 ;; https://blog.sumtypeofway.com/posts/emacs-config.html
 (electric-pair-mode)
-
-;; Adds some nice chrome to the status line
-;; https://github.com/milkypostman/powerline Note: This is a faster
-;; "line" package than spaceline. If I were not using emacs daemon, I
-;; would use this.
-;;
-;; (use-package powerline
-;;   :ensure t
-;;   :straight t
-;;   :defer 1
-;;   :config (powerline-center-theme)
-;;   )
 
 (use-package spaceline
   :ensure t
@@ -650,7 +649,7 @@
  '(delete-selection-mode t)
  '(column-number-mode t)
  '(custom-safe-themes
-   '("250268d5c0b4877cc2b7c439687f8145a2c85a48981f7070a72c7f47a2d2dc13" "23ba4b4ba4d1c989784475fed58919225db8d9a9751b32aa8df835134fe7ba6f" default))
+   '("8607fdf417935af22922d10b4664a4ead5a64c01b55ac9e4eb9f4da9d177f612" "250268d5c0b4877cc2b7c439687f8145a2c85a48981f7070a72c7f47a2d2dc13" "23ba4b4ba4d1c989784475fed58919225db8d9a9751b32aa8df835134fe7ba6f" default))
  '(dired-listing-switches "-laGhpX")
  '(dired-use-ls-dired t)
  '(global-display-line-numbers-mode t)
@@ -744,13 +743,11 @@
   :ensure t
   :defer t)
 
-;; Type C-; and a letter. That letter is the beginning of a
-;; word. Narrow results from there.
+;; That letter is the beginning of a word. Narrow results from there.
 (use-package avy
   :straight t
   :ensure t
-  :defer 1
-  :bind (("C-;" . avy-goto-word-1)))
+  :defer 1)
 
 ;; I don't use a lot of folding, this allows me to type C-RET and fold
 ;; the current block.  There's more it can do but for now that's
@@ -800,6 +797,15 @@
   :init (setq git-commit-fill-column 72)
   :bind (("H-g" . magit-status)
          ("C-M-g" . magit-status)))
+
+(use-package libgit
+  :ensure t
+  :straight t)
+
+(use-package magit-libgit
+  :ensure t
+  :straight t
+  :after (magit libgit))
 
 (use-package password-generator
   :straight t
@@ -883,15 +889,18 @@ to consider doing so."
                (clipboard-kill-ring-save (point-min) (point-max))))
 
 
-;; And yes "nab" is not idiomatic, but since I'm mapping it to OPT+n,
-;; I believe it will help me remember.
-(defun nab-name-of-file ()
-  "Copy into the kill ring the full path of the current buffer."
+;; https://blog.sumtypeofway.com/posts/emacs-config.html
+(defun jnf/copy-file-name-to-clipboard ()
+  "Copy the current buffer file name to the clipboard."
   (interactive)
-  (kill-new (buffer-file-name (window-buffer (minibuffer-selected-window)))))
+  (let ((filename (if (equal major-mode 'dired-mode) default-directory (buffer-file-name))))
+    (when filename
+      (kill-new filename)
+      (message "Copied buffer file name '%s' to the clipboard." filename))))
 
 
-(global-set-key (kbd "M-n") 'nab-name-of-file) ;; OPT+n
+(global-set-key (kbd "C-c f") 'jnf/copy-file-name-to-clipboard)
+(global-set-key (kbd "M-n") 'jnf/copy-file-name-to-clipboard) ;; Deprecated
 (global-set-key (kbd "C-c C-b") 'browse-web) ;; CTRL+C CTRL+b
 (global-set-key (kbd "C-s-w") 'browse-url-at-point) ;; CTRL+CMD+w
 (global-set-key (kbd "s-b") 'switch-to-buffer) ;; CMD+b
@@ -903,6 +912,17 @@ to consider doing so."
 ;; (global-set-key (kbd "C-w") 'backward-kill-word)
 (global-set-key (kbd "M-DEL") 'backward-kill-paragraph)
 (global-set-key (kbd "s-q") 'save-buffers-kill-terminal)
+
+
+;; https://blog.sumtypeofway.com/posts/emacs-config.html
+(defun jnf/revert-to-two-windows ()
+  "Delete all other windows and split it into two."
+  (interactive)
+  (delete-other-windows)
+  (split-window-right))
+
+(bind-key "C-x 1" #'jnf/revert-to-two-windows)
+(bind-key "C-x !" #'delete-other-windows) ;; Access to the old keybinding.
 
 (defun jnf/kill-region-or-backward-word ()
   (interactive)
@@ -1310,12 +1330,6 @@ to consider doing so."
 
 ;; END ORG mode configuration and concerns
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(use-package hyperbole
-  :defer t
-  :straight t
-  :ensure t
-  :bind (("C-h h" . hyperbole)))
 
 ;; A game
 (use-package slime-volleyball
