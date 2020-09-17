@@ -785,6 +785,22 @@
   :init (setq json-reformat:indent-width 2))
 
 
+(use-package tree-sitter
+  :straight (tree-sitter :host github
+               :repo "ubolonton/emacs-tree-sitter"
+               :files ("lisp/*.el"))
+  :ensure t
+  :init (global-tree-sitter-mode)
+  :hook ((ruby-mode . tree-sitter-mode)
+         (js-mode . tree-sitter-hl-mode)
+         (typescript-mode . tree-sitter-hl-mode)
+         (go-mode . tree-sitter-hl-mode)))
+;; (global-tree-sitter-mode)
+
+(use-package tree-sitter-langs
+  :straight (tree-sitter-langs :type git :host github :repo "ubolonton/emacs-tree-sitter" :files ("langs/*.el" "langs/queries"))
+  :ensure t)
+
 (use-package undo-tree
   :ensure t
   :straight t
