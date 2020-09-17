@@ -460,8 +460,12 @@
   (centaur-tabs-buffer-groups-function #'centaur-tabs-projectile-buffer-groups)
 
   :bind
-  (("s-{" . #'centaur-tabs-backward)
-   ("s-}" . #'centaur-tabs-forward)))
+  (
+   ("s-{" . #'centaur-tabs-backward)
+   ("s-}" . #'centaur-tabs-forward)
+   ("C-s-t" . #'centaur-tabs-counsel-switch-group)
+   )
+  )
 
 ;; `C-u M-x scratch` prompts for a mode then creates a buffer in that
 ;; mode
