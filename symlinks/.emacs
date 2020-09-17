@@ -144,15 +144,6 @@
   :straight t
   :defer t)
 
-;; Track what keys/commands I most often use
-(use-package keyfreq
-  :straight t
-  :defer t
-  :ensure t
-  :config
-  (keyfreq-mode 1)
-  (keyfreq-autosave-mode 1))
-
 ;; https://oremacs.com/swiper/
 ;; Note: I've set all searches to use fuzzy regex
 (use-package ivy
