@@ -950,6 +950,7 @@ to consider doing so."
 ;; (global-set-key (kbd "C-w") 'backward-kill-word)
 (global-set-key (kbd "M-DEL") 'backward-kill-paragraph)
 (global-set-key (kbd "s-q") 'save-buffers-kill-terminal)
+(global-set-key (kbd "s-w") 'kill-current-buffer)
 
 
 ;; https://blog.sumtypeofway.com/posts/emacs-config.html
