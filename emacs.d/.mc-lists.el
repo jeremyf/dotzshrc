@@ -42,5 +42,6 @@
         ivy-switch-buffer
         rspec-toggle-spec-and-target
         rspec-verify-all
+        swiper
         xref-find-apropos
         ))
