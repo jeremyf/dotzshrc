@@ -1187,24 +1187,19 @@ to consider doing so."
 (global-set-key (kbd "s-i") 'org-roam-insert)
 (global-set-key (kbd "s-r") 'org-roam-find-file)
 
-(defun jnf/jump-to-org-agenda ()
-  "Jump to the agenda.org file"
-  (interactive)
-  (find-file "~/git/org/agenda.org"))
-(global-set-key (kbd "<f2>") 'jnf/jump-to-org-agenda)
+;; Some hot keys to jump to often different relevant files
+;; Jump to the current clock if one is open, otherwise, go to my agenda file.
+(global-set-key (kbd "<f2>") `(
+                               lambda ()
+                                      (interactive)
+                                      (if (eq org-clock-current-task nil)
+                                          (find-file "~/git/org/agenda.org")
+                                        (org-clock-goto)
+                                        )))
 (global-set-key (kbd "<f3>") 'org-roam-jump-to-index)
-(defun jnf/jump-to-permanent-card-index ()
-  "Rebuild and jump to the permanent card index."
-  (interactive)
-  ;; Removed the shell command call as it was overly aggressive
-  ;; (shell-command "~/git/org/bin/create-index-for-permanent-cards")
-  (find-file "~/git/org/permanent/card_index.org"))
-(global-set-key (kbd "<f4>") 'jnf/jump-to-permanent-card-index)
-(defun jnf/emacs-config ()
-  "Jump to my emacs config"
-  (interactive)
-  (find-file "~/git/dotzshrc/symlinks/.emacs"))
-(global-set-key (kbd "<f12>") 'jnf/emacs-config)
+(global-set-key (kbd "<f4>") `(lambda () (interactive)(find-file "~/git/org/permanent/card_index.org")))
+(global-set-key (kbd "<f5>") `(lambda () (interactive)(find-file "~/git/org/troubleshooting.org")))
+(global-set-key (kbd "<f12>") `(lambda () (interactive)(find-file "~/git/dotzshrc/symlinks/.emacs")))
 
 
 (use-package company-org-roam
