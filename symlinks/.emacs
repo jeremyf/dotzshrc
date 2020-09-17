@@ -839,6 +839,12 @@
   :straight t
   :after (magit libgit))
 
+(use-package keychain-environment
+  :straight t
+  :ensure t
+  :config
+  (keychain-refresh-environment))
+
 (use-package password-generator
   :straight t
   :ensure t
