@@ -436,48 +436,29 @@
   :ensure t
   :bind (("M-o" . ace-window)))
 
-(use-package awesome-tab
+;; "The long-awaited Emacs 27 support for native tabs is shaky, both
+;; visually and in terms of functionality. As such, centaur-tabs is
+;; the best way to simulate a conventional tabs setup, in which tab
+;; sets are grouped by the toplevel project working directory."
+;; https://blog.sumtypeofway.com/posts/emacs-config.html
+(use-package centaur-tabs
+  :straight t
   :ensure t
-  :straight (awesome-tab :type git :host github :repo "manateelazycat/awesome-tab")
-  :config (awesome-tab-mode t)
-  (setq awesome-tab-height 130))
-(global-set-key (kbd "s-1") 'awesome-tab-select-visible-tab)
-(global-set-key (kbd "s-2") 'awesome-tab-select-visible-tab)
-(global-set-key (kbd "s-3") 'awesome-tab-select-visible-tab)
-(global-set-key (kbd "s-4") 'awesome-tab-select-visible-tab)
-(global-set-key (kbd "s-5") 'awesome-tab-select-visible-tab)
-(global-set-key (kbd "s-6") 'awesome-tab-select-visible-tab)
-(global-set-key (kbd "s-7") 'awesome-tab-select-visible-tab)
-(global-set-key (kbd "s-8") 'awesome-tab-select-visible-tab)
-(global-set-key (kbd "s-9") 'awesome-tab-select-visible-tab)
-(global-set-key (kbd "s-0") 'awesome-tab-select-visible-tab)
-(global-set-key (kbd "C-c C-t") 'awesome-tab-counsel-switch-group)
-(global-set-key [M-s-left] 'awesome-tab-backward-tab)
-(global-set-key [M-s-right] 'awesome-tab-forward-tab)
-(global-set-key (kbd "s-{") 'awesome-tab-backward-tab)
-(global-set-key (kbd "s-}") 'awesome-tab-forward-tab)
-(global-set-key (kbd "s-k") 'kill-current-buffer)
-(global-set-key (kbd "s-w") 'kill-current-buffer)
-(setq awesome-tab-show-tab-index t)
+  :demand
+  :config
+  (centaur-tabs-mode t)
+  :custom
+  (centaur-tabs-gray-out-icons 'buffer)
+  (centaur-tabs-style "rounded")
+  (centaur-tabs-height 36)
+  (centaur-tabs-set-icons t)
+  (centaur-tabs-set-modified-marker t)
+  (centaur-tabs-modified-marker "●")
+  (centaur-tabs-buffer-groups-function #'centaur-tabs-projectile-buffer-groups)
 
-(defun awesome-tab-buffer-groups ()
-  "`awesome-tab-buffer-groups' control buffers' group rules.
-Group awesome-tab either with Emacs OR General.
-See https://github.com/manateelazycat/awesome-tab#grouprules"
-  (list
-   (cond
-    ((string-equal "*elf" (substring (buffer-name) 0 4)) "Elfeed")
-    ((or (string-equal "*" (substring (buffer-name) 0 1))
-         (memq major-mode '(magit-process-mode
-                            magit-status-mode
-                            magit-diff-mode
-                            magit-log-mode
-                            magit-file-mode
-                            magit-blob-mode
-                            magit-blame-mode
-                            )))
-     "Emacs")
-    (t "General"))))
+  :bind
+  (("s-{" . #'centaur-tabs-backward)
+   ("s-}" . #'centaur-tabs-forward)))
 
 ;; `C-u M-x scratch` prompts for a mode then creates a buffer in that
 ;; mode
