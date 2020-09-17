@@ -40,6 +40,9 @@
 ;; From https://blog.d46.us/advanced-emacs-startup/
 (setq gc-cons-threshold (* 250 1000 1000))
 
+;; Stop ringing any bell
+(setq ring-bell-function 'ignore)
+
 ;; This preamble is part of straight-use-package My understanding, in
 ;; reading straight documentation is that it has better load
 ;; times. However, the configuration options I often see leverage
