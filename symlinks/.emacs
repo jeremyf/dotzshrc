@@ -589,19 +589,22 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package flycheck
-  :ensure t
+  :after org
   :straight t
-  :defer t
-  :init
-  (global-flycheck-mode t)
-  ;; As much as I'd like to have reek and rubocop enabled, it turns
-  ;; out they are quite chatty.  I also find that when syntax errors
-  ;; are on I focus on fixing them and can lose sight of the
-  ;; programming task I'm trying to accomplish.  In other words, while
-  ;; writing, I don't want to see editing suggestions.
-  (setq-default flycheck-disabled-checkers '(ruby-reek ruby-rubocop))
-  )
-(add-to-list 'flycheck-checkers 'proselint)
+  :ensure t
+  :hook
+  (org-src-mode . disable-flycheck-for-elisp)
+  :custom
+  (flycheck-emacs-lisp-initialize-packages t)
+  (flycheck-display-errors-delay 0.1)
+  :config
+  (global-flycheck-mode)
+  (flycheck-set-indication-mode 'left-margin)
+
+  (defun disable-flycheck-for-elisp ()
+    (setq-local flycheck-disabled-checkers '(emacs-lisp-checkdoc)))
+
+  (add-to-list 'flycheck-checkers 'proselint))
 
 (use-package flyspell-correct
   :straight t
@@ -1068,6 +1071,11 @@ to consider doing so."
 
 
 (defalias 'roll 'org-d20-roll-at-point)
+
+(use-package org-bullets
+  :straight t
+  :defer t
+  :hook (org-mode . org-bullets-mode))
 
 ;; Consider https://github.com/jkitchin/org-ref as well
 (use-package org-roam
