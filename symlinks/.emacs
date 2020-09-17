@@ -825,6 +825,11 @@
   :bind (("H-g" . magit-status)
          ("C-M-g" . magit-status)))
 
+(use-package forge
+  :straight t
+  :ensure t
+  :after magit)
+
 (use-package libgit
   :ensure t
   :straight t)
