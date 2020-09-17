@@ -332,11 +332,27 @@
 ;;   '(add-to-list 'ac-modes 'inf-ruby-minor-mode))
 ;; (add-hook 'ruby-mode-hook 'ac-inf-ruby-enable)
 
+
 (use-package company
   :straight t
+  :ensure t
   :after ivy
-  :defer t
-  :ensure t)
+  :diminish
+  :bind (("C-." . #'company-complete))
+  :hook (prog-mode . company-mode)
+  :custom
+  (company-dabbrev-downcase nil "Don't downcase returned candidates.")
+  (company-show-numbers t "Numbers are helpful.")
+  (company-tooltip-limit 20 "The more the merrier.")
+  (company-tooltip-idle-delay 0.4 "Faster!")
+  (company-async-timeout 20 "Some requests can take a long time. That's fine.")
+  :config
+
+  ;; Use the numbers 0-9 to select company completion candidates
+  (let ((map company-active-map))
+    (mapc (lambda (x) (define-key map (format "%d" x)
+   `(lambda () (interactive) (company-complete-number ,x))))
+   (number-sequence 0 9))))
 
 (use-package string-inflection
   :defer t
