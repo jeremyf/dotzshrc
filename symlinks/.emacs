@@ -811,7 +811,7 @@
          (js-mode . tree-sitter-hl-mode)
          (typescript-mode . tree-sitter-hl-mode)
          (go-mode . tree-sitter-hl-mode)))
-;; (global-tree-sitter-mode)
+(global-tree-sitter-mode)
 
 (use-package tree-sitter-langs
   :straight (tree-sitter-langs :type git :host github :repo "ubolonton/emacs-tree-sitter" :files ("langs/*.el" "langs/queries"))
