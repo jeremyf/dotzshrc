@@ -124,16 +124,16 @@
 (setq custom-safe-themes t)
 
 ;; I'm finding the Doom themes to be all around beautiful!
-;; (use-package doom-themes
-;;   :straight t
-;;   :ensure t
-;;   :config
-;;   (let ((chosen-theme 'doom-tomorrow-day))
-;;     (doom-themes-visual-bell-config)
-;;     (doom-themes-org-config)
-;;     (setq doom-tomorrow-day-brighter-comments t
-;;           doom-tomorrow-day-brighter-modeline t)
-;;     (load-theme chosen-theme)))
+(use-package doom-themes
+  :straight t
+  :ensure t
+  :config
+  (let ((chosen-theme 'doom-tomorrow-day))
+    (doom-themes-visual-bell-config)
+    (doom-themes-org-config)
+    (setq doom-tomorrow-day-brighter-comments t
+          doom-tomorrow-day-brighter-modeline t)
+    (load-theme chosen-theme)))
 
 ;; "I find it useful to have a slightly more apparent indicator of which buffer is active at the moment."
 ;; https://blog.sumtypeofway.com/posts/emacs-config.html
@@ -160,8 +160,7 @@
 ;; Write "kill" command inputs to disk
 (use-package savekill
   :ensure t
-  :straight t
-  :defer t)
+  :straight t)
 
 ;; https://oremacs.com/swiper/
 ;; Note: I've set all searches to use fuzzy regex
@@ -186,7 +185,7 @@
 (use-package ivy-rich
   :ensure t
   :straight t
-  :after (ivy counsel)
+  :after (ivy counsel all-the-icons-ivy-rich)
   :custom
   (ivy-virtual-abbreviate 'full)
   (ivy-rich-switch-buffer-align-virtual-buffer nil)
@@ -194,6 +193,12 @@
   :config
   (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line)
   (ivy-rich-mode))
+
+(use-package all-the-icons-ivy-rich
+  :ensure t
+  :straight t
+  :after (ivy counsel counsel-projectile)
+  :init (all-the-icons-ivy-rich-mode 1))
 
 (use-package swiper
   :straight t
@@ -237,7 +242,6 @@
 (use-package ag
   :straight t
   :after counsel
-  :defer t
   :ensure t)
 
 ;; This package is amazing!!!  Render search results to a buffer, edit
@@ -246,8 +250,7 @@
 (use-package wgrep-ag
   :ensure t
   :straight t
-  :after ag
-  :defer t)
+  :after ag)
 (add-hook 'ag-mode-hook 'wgrep-ag-setup)
 
 ;; Search via ag, see candidates and use ivy to show ALL candidates,
@@ -267,7 +270,6 @@
   :straight t
   :ensure t
   :after counsel
-  :defer t
   :bind (
          ("C-c C-d" . helpful-at-point)
          ("C-h v" . helpful-variable)
@@ -298,29 +300,25 @@
 (use-package counsel-projectile
   :straight t
   :ensure t
-  :defer t
   :after projectile
   :bind ("s-t" . counsel-projectile-find-file)) ; CMD+t
 
 (use-package robe
   :after company
   :straight t
-  :ensure t
-  :defer t)
+  :ensure t)
 (add-hook 'ruby-mode-hook 'robe-mode)
 (add-hook 'robe-mode-hook 'ac-robe-setup)
 
 (use-package rspec-mode
   :straight t
   :ensure t
-  :defer t
   :bind (:map rspec-mode-map (("s-." . 'rspec-toggle-spec-and-target))))
 (add-hook 'ruby-mode-hook 'rspec-mode)
 
 (use-package yard-mode
   :straight t
-  :ensure t
-  :defer t)
+  :ensure t)
 (add-hook 'ruby-mode-hook 'yard-mode)
 
 (setq ruby-insert-encoding-magic-comment nil)
@@ -328,14 +326,12 @@
 ;; (use-package auto-complete
 ;;   :straight t
 ;;   :ensure t
-;;   :defer t
 ;;   :config (ac-config-default)
 ;;   :init (setq ac-auto-show-menu t))
 
 (use-package inf-ruby
   :straight t
   :after auto-complete
-  :defer t
   :ensure t)
 (autoload 'inf-ruby-minor-mode "inf-ruby" "Run an inferior Ruby process" t)
 (add-hook 'ruby-mode-hook 'inf-ruby-minor-mode)
@@ -345,7 +341,6 @@
 ;; (use-package ac-inf-ruby
 ;;   :straight t
 ;;   :after inf-ruby
-;;   :defer t
 ;;   :ensure t)
 ;; (eval-after-load 'auto-complete
 ;;   '(add-to-list 'ac-modes 'inf-ruby-minor-mode))
@@ -370,11 +365,10 @@
   ;; Use the numbers 0-9 to select company completion candidates
   (let ((map company-active-map))
     (mapc (lambda (x) (define-key map (format "%d" x)
-   `(lambda () (interactive) (company-complete-number ,x))))
-   (number-sequence 0 9))))
+                        `(lambda () (interactive) (company-complete-number ,x))))
+          (number-sequence 0 9))))
 
 (use-package string-inflection
-  :defer t
   :ensure t
   :straight (string-inflection :type git :host github :repo "akicho8/string-inflection")
   :bind (("H-u" . string-inflection-all-cycle)
@@ -383,7 +377,6 @@
 (use-package writegood-mode
   :ensure t
   :straight t
-  :defer t
   :bind ("C-c w" . writegood-mode)
   :config
   (add-to-list 'writegood-weasel-words "actionable"))
@@ -395,7 +388,6 @@
 (use-package multiple-cursors
   :straight t
   :ensure   t
-  :defer    1
   :bind (("H-SPC" . set-rectangular-region-anchor)
          ("C-M-SPC" . set-rectangular-region-anchor)
          ("C->" . mc/mark-next-like-this)
@@ -430,14 +422,6 @@
   :after spaceline
   :config (spaceline-all-the-icons-theme)
   (spaceline-all-the-icons--setup-neotree))
-
-;; Eats all of the empty spaces when you type DELETE This is a bit
-;; hungrier than I might want, so I'm keeping an eye on it.
-(use-package hungry-delete
-  :straight t
-  :ensure t
-  :defer t)
-(global-hungry-delete-mode)
 
 ;; This package ensures that the active window gets the majority of
 ;; the space, while leaving room for other windows.
@@ -486,23 +470,11 @@
    )
   )
 
-;; `C-u M-x scratch` prompts for a mode then creates a buffer in that
-;; mode
-(use-package scratch
-  :ensure t
-  :straight t
-  :defer t)
-
-;; `C-c s` will create a new buffer with the mode set to the current
-;; buffer
-(define-key (current-global-map) "\C-cs" #'scratch)
-
 
 ;; Adding smartparens options
 (use-package smartparens
   :straight t
   :ensure t
-  :defer t
   :config (smartparens-strict-mode 1)
   (smartparens-global-mode 1))
 
@@ -512,8 +484,7 @@
 ;;
 (use-package typopunct
   :straight t
-  :ensure t
-  :defer t)
+  :ensure t)
 (require 'typopunct)
 ;; (add-hook 'text-mode-hook 'jnf/typopunct-init)
 (add-hook 'org-mode-hook 'jnf/typopunct-init)
@@ -629,21 +600,16 @@
 
   (add-to-list 'flycheck-checkers 'proselint))
 
-(use-package flycheck-inline
-  :straight t
-  :ensure t
-  :config (global-flycheck-inline-mode))
-
 (use-package flyspell-correct
   :straight t
   :ensure t
   :after flycheck
-  :defer t)
+  )
 
 (use-package flyspell-correct-ivy
   :straight t
   :ensure t
-  :defer t
+
   :after flyspell-correct)
 (global-set-key (kbd "C-,") 'flyspell-buffer)
 
@@ -653,7 +619,7 @@
 (use-package yasnippets
   :straight (yasnippets :type git :host github :repo "joaotavora/yasnippet")
   :ensure t
-  :defer t
+
   :after company
   :config (push 'company-yasnippet company-backends)
   :bind (("C-c C-e" . yas-expand))
@@ -670,7 +636,7 @@
 (use-package browse-at-remote
   :straight t
   :ensure t
-  :defer t
+
   :bind (("C-c b" . browse-at-remote)))
 
 (custom-set-variables
@@ -712,7 +678,7 @@
 (use-package crux
   :straight t
   :ensure t
-  :defer t
+
   :bind (
          ("C-a" . crux-move-beginning-of-line)
          ("<f9>" . crux-kill-other-buffers)
@@ -727,7 +693,7 @@
 (use-package neotree
   :straight t
   :ensure t
-  :defer 1
+
   :init (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
   (setq-default neo-window-width 36)
   :config (global-set-key [f8] 'neotree-toggle))
@@ -738,7 +704,7 @@
 (use-package ethan-wspace
   :straight t
   :ensure t
-  :defer t
+
   :init (setq-default mode-require-final-newline nil))
 (global-ethan-wspace-mode 1)
 (add-hook 'before-save-hook
@@ -747,14 +713,14 @@
 ;; (use-package column-enforce-mode
 ;;   :straight t
 ;;   :ensure t
-;;   :defer t
+;;
 ;;   :init (setq column-enforce-column 80))
 ;; (global-column-enforce-mode t)
 
 (use-package unfill
   :straight t
   :ensure t
-  :defer t)
+  )
 
 (use-package emmet-mode
   :straight t
@@ -767,7 +733,7 @@
 (use-package markdown-mode
   :straight t
   :ensure t
-  :defer t
+
   :mode (("README\\.md\\'" . gfm-mode)
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
@@ -776,13 +742,13 @@
 (use-package yaml-mode
   :straight t
   :ensure t
-  :defer t)
+  )
 
 ;; That letter is the beginning of a word. Narrow results from there.
 (use-package avy
   :straight t
   :ensure t
-  :defer 1)
+  )
 
 ;; I don't use a lot of folding, this allows me to type C-RET and fold
 ;; the current block.  There's more it can do but for now that's
@@ -790,14 +756,14 @@
 (use-package yafolding
   :straight t
   :ensure t
-  :defer 1)
+  )
 (add-hook 'prog-mode-hook
           (lambda () (yafolding-mode)))
 
 (use-package json-mode
   :straight t
   :ensure t
-  :defer 1)
+  )
 
 ;; Compressed JSON sure is ugly and illegible; This solves that
 ;; problem.
@@ -805,14 +771,14 @@
   :straight t
   :ensure t
   :after json-mode
-  :defer 1
+
   :init (setq json-reformat:indent-width 2))
 
 
 (use-package tree-sitter
   :straight (tree-sitter :host github
-               :repo "ubolonton/emacs-tree-sitter"
-               :files ("lisp/*.el"))
+                         :repo "ubolonton/emacs-tree-sitter"
+                         :files ("lisp/*.el"))
   :ensure t
   :init (global-tree-sitter-mode)
   :hook ((ruby-mode . tree-sitter-mode)
@@ -828,7 +794,7 @@
 (use-package undo-tree
   :ensure t
   :straight t
-  :defer 5
+
   :config
   (global-undo-tree-mode 1))
 
@@ -836,7 +802,7 @@
 (use-package elpher
   :straight t
   :ensure t
-  :defer t)
+  )
 
 ;; Adding format to git-commit-fill-column of 72 as best
 ;; practice.
@@ -844,7 +810,7 @@
   :straight t
   :ensure t
   :after ivy
-  :defer 1 ;; This needs to be an integer. Key bindings fail when set to "t"
+
   :init (setq git-commit-fill-column 72)
   :bind (("H-g" . magit-status)
          ("C-M-g" . magit-status)))
@@ -872,7 +838,7 @@
 (use-package password-generator
   :straight t
   :ensure t
-  :defer t)
+  )
 
 ;; Open svg files in xml-mode (instead of image rendering mode)
 (add-to-list `auto-mode-alist
@@ -886,7 +852,7 @@
 (use-package git-timemachine
   :straight t
   :ensure t
-  :defer t)
+  )
 
 (use-package git-gutter
   :straight t
@@ -919,7 +885,7 @@ to consider doing so."
 (use-package move-text
   :straight t
   :ensure t
-  :defer 1
+
   :bind (([C-s-down] . move-text-down)
          ([C-s-up] . move-text-up)))
 
@@ -931,7 +897,7 @@ to consider doing so."
 (use-package atomic-chrome
   :straight t
   :ensure t
-  :defer t)
+  )
 (atomic-chrome-start-server)
 (setq atomic-chrome-default-major-mode 'markdown-mode)
 
@@ -1021,12 +987,12 @@ to consider doing so."
 (use-package whole-line-or-region
   :straight t
   :ensure t
-  :defer t)
+  )
 
 (use-package plantuml-mode
   :straight t
   :ensure t
-  :defer t)
+  )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; BEGIN ORG mode configuration and concerns
@@ -1034,7 +1000,7 @@ to consider doing so."
 (use-package org-sidebar
   :straight (org-sidebar :type git :host github :repo "alphapapa/org-sidebar")
   :ensure t
-  :defer t)
+  )
 
 (global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c a") 'org-agenda)
@@ -1083,12 +1049,12 @@ to consider doing so."
       )
 
 (use-package org-web-tools
-  :defer t
+
   :ensure t
   :straight t)
 
 (use-package org-d20
-  :defer t
+
   :ensure t
   :straight t)
 
@@ -1097,7 +1063,7 @@ to consider doing so."
 
 (use-package org-bullets
   :straight t
-  :defer t
+
   :hook (org-mode . org-bullets-mode))
 
 ;; Consider https://github.com/jkitchin/org-ref as well
@@ -1206,11 +1172,11 @@ to consider doing so."
 ;; Jump to the current clock if one is open, otherwise, go to my agenda file.
 (global-set-key (kbd "<f2>") `(
                                lambda ()
-                                      (interactive)
-                                      (if (boundp 'org-clock-current-task)
-                                          (org-clock-goto)
-                                          (find-file "~/git/org/agenda.org")
-                                        )))
+                               (interactive)
+                               (if (boundp 'org-clock-current-task)
+                                   (org-clock-goto)
+                                 (find-file "~/git/org/agenda.org")
+                                 )))
 (global-set-key (kbd "<f3>") 'org-roam-jump-to-index)
 (global-set-key (kbd "<f4>") `(lambda () (interactive)(find-file "~/git/org/permanent/card_index.org")))
 (global-set-key (kbd "<f5>") `(lambda () (interactive)(find-file "~/git/org/troubleshooting.org")))
@@ -1277,35 +1243,35 @@ to consider doing so."
          ("q" . jnf/elfeed-save-db-and-bury))
   :config (elfeed-org)
 
-       ;;
-       ;; linking and capturing
-       ;;
+  ;;
+  ;; linking and capturing
+  ;;
 
-       (defun elfeed-link-title (entry)
-         "Copy the entry title and URL as org link to the clipboard."
-         (interactive)
-         (let* ((link (elfeed-entry-link entry))
-                (title (elfeed-entry-title entry))
-                (titlelink (concat "[[" link "][" title "]]")))
-           (when titlelink
-             (kill-new titlelink)
-             (x-set-selection 'PRIMARY titlelink)
-             (message "Yanked: %s" titlelink))))
+  (defun elfeed-link-title (entry)
+    "Copy the entry title and URL as org link to the clipboard."
+    (interactive)
+    (let* ((link (elfeed-entry-link entry))
+           (title (elfeed-entry-title entry))
+           (titlelink (concat "[[" link "][" title "]]")))
+      (when titlelink
+        (kill-new titlelink)
+        (x-set-selection 'PRIMARY titlelink)
+        (message "Yanked: %s" titlelink))))
 
-       ;; show mode
+  ;; show mode
 
-       (defun elfeed-show-quick-url-note ()
-  "Fastest way to capture entry link to org agenda from elfeed show mode"
-  (interactive)
-  (elfeed-link-title elfeed-show-entry)
-  (org-capture nil "u")
-  (yank)
-  ;; (org-capture-finalize)
-  )
+  (defun elfeed-show-quick-url-note ()
+    "Fastest way to capture entry link to org agenda from elfeed show mode"
+    (interactive)
+    (elfeed-link-title elfeed-show-entry)
+    (org-capture nil "u")
+    (yank)
+    ;; (org-capture-finalize)
+    )
 
-       (bind-keys :map elfeed-show-mode-map
-           ("l" . elfeed-show-link-title)
-           ("v" . elfeed-show-quick-url-note)))
+  (bind-keys :map elfeed-show-mode-map
+             ("l" . elfeed-show-link-title)
+             ("v" . elfeed-show-quick-url-note)))
 
 ;; A little bit of RSS beautification
 (add-hook 'elfeed-show-mode-hook 'jnf/elfeed-visual)
@@ -1369,7 +1335,7 @@ to consider doing so."
 
 ;; A game
 (use-package slime-volleyball
-  :defer t
+
   :straight t
   :ensure t)
 
