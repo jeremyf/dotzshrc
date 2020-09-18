@@ -950,8 +950,7 @@ to consider doing so."
   (delete-other-windows)
   (split-window-right))
 
-(bind-key "C-x 1" #'jnf/revert-to-two-windows)
-(bind-key "C-x !" #'delete-other-windows) ;; Access to the old keybinding.
+(bind-key "C-x C-1" #'jnf/revert-to-two-windows)
 
 (defun jnf/kill-region-or-backward-word ()
   (interactive)
