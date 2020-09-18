@@ -113,9 +113,9 @@
 (use-package base16-theme
   :straight t
   :ensure t
-  ;; :config
+  :config
   ;; (load-theme 'base16-onedark t)
-  ;; (load-theme 'base16-one-light t)
+  (load-theme 'base16-one-light t)
   ;; (load-theme 'base16-google-light t)
   ;;(load-theme 'base16-google-dark t)
   )
@@ -124,24 +124,28 @@
 (setq custom-safe-themes t)
 
 ;; I'm finding the Doom themes to be all around beautiful!
-(use-package doom-themes
-  :straight t
-  :ensure t
-  :config
-  (let ((chosen-theme 'doom-tomorrow-day))
-    (doom-themes-visual-bell-config)
-    (doom-themes-org-config)
-    (setq doom-tomorrow-day-brighter-comments t
-          doom-tomorrow-day-brighter-modeline t)
-    (load-theme chosen-theme)))
+;; (use-package doom-themes
+;;   :straight t
+;;   :ensure t
+;;   :config
+;;   (let ((chosen-theme 'doom-tomorrow-day))
+;;     (doom-themes-visual-bell-config)
+;;     (doom-themes-org-config)
+;;     (setq doom-tomorrow-day-brighter-comments t
+;;           doom-tomorrow-day-brighter-modeline t)
+;;     (load-theme chosen-theme)))
 
 ;; "I find it useful to have a slightly more apparent indicator of which buffer is active at the moment."
 ;; https://blog.sumtypeofway.com/posts/emacs-config.html
-(use-package dimmer
-  :ensure t
-  :straight t
-  :custom (dimmer-fraction 0.4)
-  :config (dimmer-mode))
+;;
+;; I want this to work but I keep experiencing a flicker; I believe
+;; there's a background buffer that gets momentary focus.
+;;
+;; (use-package dimmer
+;;   :ensure t
+;;   :straight t
+;;   :custom (dimmer-fraction 0.4)
+;;   :config (dimmer-mode))
 
 ;; Doing a bit of configuration of my cursors
 (setq-default cursor-type 'bar)
@@ -624,6 +628,11 @@
     (setq-local flycheck-disabled-checkers '(emacs-lisp-checkdoc)))
 
   (add-to-list 'flycheck-checkers 'proselint))
+
+(use-package flycheck-inline
+  :straight t
+  :ensure t
+  :config (global-flycheck-inline-mode))
 
 (use-package flyspell-correct
   :straight t
