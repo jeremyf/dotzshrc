@@ -1,0 +1,99 @@
+#!/usr/bin/env ruby -U
+
+# This script builds an org bibliography file based on the given directory
+require 'pathname'
+org_path = Pathname.new(File.join(ENV['HOME'], "git/org"))
+biblio_path = org_path.join("permanent/bibliographies")
+
+class Card
+  include Comparable
+  def initialize(path:)
+    @path = path
+    @content = path.read
+  end
+  attr_reader :path
+
+  def <=>(other)
+    title <=> other.title
+  end
+
+  TITLE_METADATA_REGEXP = %r{^#\+title: *(?<title>.*)$}
+  HEADING_REGEXP = %r{^\* *(?<title>.*)$}
+  def title
+    return @title if @title
+    match = TITLE_METADATA_REGEXP.match(@content) || HEADING_REGEXP.match(@content)
+    if match
+      @title = match[:title]
+    else
+      @title = "<<Missing Title>>"
+    end
+    @title
+  end
+
+  TAGS_METADATA_REGEXP = %r{^#\+roam_tags?: *(?<tags>.*)$}
+  UNTAGGED = ["Untagged"]
+  def tags
+    return @tags if @tags
+    match = TAGS_METADATA_REGEXP.match(@content)
+    if match
+      @tags = match[:tags].split(/ +/).map(&:strip)
+    else
+      @tags = UNTAGGED
+    end
+    return @tags
+  end
+
+  def untagged?
+    tags == UNTAGGED
+  end
+end
+
+class CardIndex
+  def initialize(title:, path:)
+    @title = title
+    @path = path
+    @tags = {}
+  end
+  attr_reader :title, :path
+
+  def add(card:)
+    card.tags.each do |tag|
+      @tags[tag] ||= []
+      @tags[tag] << card
+    end
+  end
+
+  def render
+    path.open("w+") do |buffer|
+      buffer.puts "#+title: #{title}"
+      buffer.puts "#+roam_tags: index"
+      buffer.puts "#+PROPERTY: created_by #{Pathname.new(File.join(__dir__, File.basename(__FILE__))).relative_path_from(path.dirname)}"
+      buffer.puts ""
+      buffer.puts "* #{title}"
+      @tags.keys.sort.each do |tag|
+        buffer.puts "\n** #{tag}\n\n"
+        @tags.fetch(tag).sort.each do |card|
+          render_card(card: card, buffer: buffer)
+        end
+      end
+    end
+  end
+
+  private
+
+  LIST_ITEM_SPACING_PER_DEPTH = 2
+
+  def render_card(card:, buffer:)
+    line = "   "
+    line += "- [[file:#{card.path.relative_path_from(path.dirname)}][#{card.title}]]"
+    buffer.puts line
+  end
+end
+
+index = CardIndex.new(title: "Bibliography Index", path: org_path.join("permanent/bibliographic_index.org"))
+biblio_path.glob("*.org").sort.each do |card_path|
+  card = Card.new(path: card_path)
+  index.add(card: card)
+end
+
+index.render
