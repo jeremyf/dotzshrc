@@ -1,3 +1,4 @@
 #/bin/sh
 
+pkill -f emacs
 emacs --daemon -fn "MesloLGS NF 13"
