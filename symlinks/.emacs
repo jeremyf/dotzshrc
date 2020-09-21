@@ -110,15 +110,15 @@
 ;; use-package syntax which is often how things are documented.
 (straight-use-package 'use-package)
 
-(use-package base16-theme
-  :straight t
-  :ensure t
-  :config
-  ;; (load-theme 'base16-onedark t)
-  (load-theme 'base16-one-light t)
-  ;; (load-theme 'base16-google-light t)
-  ;;(load-theme 'base16-google-dark t)
-  )
+;; (use-package base16-theme
+;;   :straight t
+;;   :ensure t
+;;   :config
+;;   ;; (load-theme 'base16-onedark t)
+;;   (load-theme 'base16-one-light t)
+;;   ;; (load-theme 'base16-google-light t)
+;;   ;;(load-theme 'base16-google-dark t)
+;;   )
 
 ;; I'm just going to trust themes
 (setq custom-safe-themes t)
@@ -667,7 +667,7 @@
  '(dired-use-ls-dired t)
  '(global-display-line-numbers-mode t)
  '(org-agenda-files
-   '("/Users/jfriesen/git/org/agenda.org" "/Users/jfriesen/git/org/index.org" "/Users/jfriesen/git/org/troubleshooting.org" "Users/jfriesen/git/org/permanent/unfiled_bibliographic_cards.org"))
+   '("/Users/jfriesen/git/org/agenda.org" "/Users/jfriesen/git/org/elfeed.org" "/Users/jfriesen/git/org/index.org" "/Users/jfriesen/git/org/readings.org" "/Users/jfriesen/git/org/sessions.org" "/Users/jfriesen/git/org/troubleshooting.org"))
  '(org-export-backends '(ascii html icalendar latex md odt))
  '(show-paren-mode t))
 (custom-set-faces
