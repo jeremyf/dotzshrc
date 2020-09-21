@@ -14,7 +14,11 @@ class Card
   attr_reader :path
 
   def <=>(other)
-    title <=> other.title
+    sort_on <=> other.sort_on
+  end
+
+  def sort_on
+    title.gsub(/\W+/,"").downcase
   end
 
   TITLE_METADATA_REGEXP = %r{^#\+title: *(?<title>.*)$}
