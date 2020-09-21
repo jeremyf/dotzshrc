@@ -1344,12 +1344,6 @@ to consider doing so."
 ;; END ORG mode configuration and concerns
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; A game
-(use-package slime-volleyball
-
-  :straight t
-  :ensure t)
-
 (defun dotfiles--gc-on-last-frame-out-of-focus ()
   "GC if all frames are inactive."
   (if (seq-every-p #'null (mapcar #'frame-focus-state (frame-list)))
