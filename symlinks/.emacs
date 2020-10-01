@@ -747,7 +747,6 @@
 (use-package markdown-mode
   :straight t
   :ensure t
-
   :mode (("README\\.md\\'" . gfm-mode)
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
@@ -853,6 +852,11 @@
   :straight t
   :ensure t
   )
+
+(use-package hungry-delete
+  :straight t
+  :ensure t
+  :config (global-hungry-delete-mode))
 
 ;; Open svg files in xml-mode (instead of image rendering mode)
 (add-to-list `auto-mode-alist
@@ -1107,6 +1111,7 @@ to consider doing so."
   ;; See https://www.orgroam.com/manual/Tags.html#Tags
   ;;
   (setq org-roam-title-sources '((title headline) alias))
+  (setq org-roam-update-db-idle-seconds 300)
 
   ;; Note: Order of these templates matters. The `org-roam-insert-immediate` uses
   ;; the first one in the list (e.g. Fleeting)
@@ -1186,14 +1191,12 @@ to consider doing so."
 (global-set-key (kbd "<f2>") `(
                                lambda ()
                                (interactive)
-                               (if (boundp 'org-clock-current-task)
-                                   (org-clock-goto)
-                                 (find-file "~/git/org/agenda.org")
-                                 )))
+                               (find-file "~/git/org/agenda.org")))
 (global-set-key (kbd "<f3>") 'org-roam-jump-to-index)
 (global-set-key (kbd "<f4>") `(lambda () (interactive)(find-file "~/git/org/permanent/card_index.org")))
 (global-set-key (kbd "<f5>") `(lambda () (interactive)(find-file "~/git/org/troubleshooting.org")))
 (global-set-key (kbd "<f6>") `(lambda () (interactive)(find-file "~/git/org/permanent/bibliographic_index.org")))
+(global-set-key (kbd "<f13>") `rss)
 (global-set-key (kbd "<f12>") `(lambda () (interactive)(find-file "~/git/dotzshrc/symlinks/.emacs")))
 
 
