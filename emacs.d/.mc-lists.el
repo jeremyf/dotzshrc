@@ -7,6 +7,7 @@
         comment-line
         crux-move-beginning-of-line
         duplicate-line
+        electric-pair-delete-pair
         end-of-buffer
         end-of-visual-line
         fill-paragraph
