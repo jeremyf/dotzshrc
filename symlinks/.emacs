@@ -128,11 +128,15 @@
         modus-operandi-theme-mode-line 'moody
         modus-operandi-theme-completions 'opinionated
         modus-operandi-theme-intense-paren-match t)
-  :custom-face
+  ;; :custom-face
   ;; I'd like to use the following, but I get interpretter errors:
-  ;; (cdr(assoc "green" modus-operandi-theme-default-colors-alist))
-  (font-lock-string-face ((t (:foreground "#005e00" :weight bold :background "#f2f7ed"))))
+  ;;
   :config
+  (custom-set-faces
+   `(font-lock-string-face ((t(:foreground ,(cdr(assoc "green" modus-operandi-theme-default-colors-alist))
+                                           :weight bold
+                                           :background "#f2f7ed")))
+                           ))
   (defadvice load-theme (before theme-dont-propagate activate)
     "Disable theme before loading new one."
     (mapc #'disable-theme custom-enabled-themes))
