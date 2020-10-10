@@ -110,30 +110,47 @@
 ;; use-package syntax which is often how things are documented.
 (straight-use-package 'use-package)
 
-;; (use-package base16-theme
-;;   :straight t
-;;   :ensure t
-;;   :config
-;;   ;; (load-theme 'base16-onedark t)
-;;   (load-theme 'base16-one-light t)
-;;   ;; (load-theme 'base16-google-light t)
-;;   ;;(load-theme 'base16-google-dark t)
-;;   )
-
 ;; I'm just going to trust themes
 (setq custom-safe-themes t)
 
-;; I'm finding the Doom themes to be all around beautiful!
-(use-package doom-themes
-  :straight t
+(use-package modus-operandi-theme
   :ensure t
+  :straight t
+  :init
+  (setq modus-operandi-theme-org-blocks 'rainbow)
+  (setq modus-operandi-theme-completions 'opinionated)
+  (setq modus-operandi-theme-fringes 'subtle)
+  (setq modus-operandi-theme-scale-headings t
+        modus-operandi-theme-slanted-constructs t
+        modus-operandi-theme-bold-constructs t
+        modus-operandi-theme-faint-syntax nil
+        modus-operandi-theme-intense-hl-line nil
+        modus-operandi-theme-mode-line 'moody
+        modus-operandi-theme-completions 'opinionated
+        modus-operandi-theme-intense-paren-match t)
+  :custom-face
+  ;; I'd like to use the following, but I get interpretter errors:
+  ;; (cdr(assoc "green" modus-operandi-theme-default-colors-alist))
+  (font-lock-string-face ((t (:foreground "#005e00" :weight bold))))
   :config
-  (let ((chosen-theme 'doom-tomorrow-day))
-    (doom-themes-visual-bell-config)
-    (doom-themes-org-config)
-    (setq doom-tomorrow-day-brighter-comments t
-          doom-tomorrow-day-brighter-modeline t)
-    (load-theme chosen-theme)))
+  (defadvice load-theme (before theme-dont-propagate activate)
+    "Disable theme before loading new one."
+    (mapc #'disable-theme custom-enabled-themes))
+  (load-theme 'modus-operandi t))
+
+(use-package modus-vivendi-theme
+  :straight t
+  :ensure t)
+
+(defun modus-themes-toggle ()
+  "Toggle between `modus-operandi' and `modus-vivendi' themes."
+  (interactive)
+  (if (eq (car custom-enabled-themes) 'modus-operandi)
+      (progn
+        (disable-theme 'modus-operandi)
+        (load-theme 'modus-vivendi t))
+    (disable-theme 'modus-vivendi)
+    (load-theme 'modus-operandi t)))
 
 ;; "I find it useful to have a slightly more apparent indicator of which buffer is active at the moment."
 ;; https://blog.sumtypeofway.com/posts/emacs-config.html
@@ -313,6 +330,7 @@
 (use-package rspec-mode
   :straight t
   :ensure t
+  :mode (("\\.erb\\'" . ruby-mode))
   :bind (:map rspec-mode-map (("s-." . 'rspec-toggle-spec-and-target))))
 (add-hook 'ruby-mode-hook 'rspec-mode)
 
