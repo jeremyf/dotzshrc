@@ -131,7 +131,7 @@
   :custom-face
   ;; I'd like to use the following, but I get interpretter errors:
   ;; (cdr(assoc "green" modus-operandi-theme-default-colors-alist))
-  (font-lock-string-face ((t (:foreground "#005e00" :weight bold))))
+  (font-lock-string-face ((t (:foreground "#005e00" :weight bold :background "#f2f7ed"))))
   :config
   (defadvice load-theme (before theme-dont-propagate activate)
     "Disable theme before loading new one."
