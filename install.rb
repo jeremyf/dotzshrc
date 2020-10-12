@@ -9,7 +9,6 @@ Dir.glob(symlink_sources).each do |source_filename|
   basename = File.basename(source_filename)
   next if basename == '.'
   next if basename == '..'
-
   target_basename = basename.to_s
   # Create a symlink in HOME directory to source_filename
   target_name = File.join(home_dirname, target_basename)

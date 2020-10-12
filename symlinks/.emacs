@@ -133,10 +133,12 @@
   ;;
   :config
   (custom-set-faces
+   `(font-lock-variable-name-face ((t(:foreground ,(cdr(assoc "blue" modus-operandi-theme-default-colors-alist))
+                                     :background "#e6edff"))))
    `(font-lock-string-face ((t(:foreground ,(cdr(assoc "green" modus-operandi-theme-default-colors-alist))
                                            :weight bold
-                                           :background "#f2f7ed")))
-                           ))
+                                           :background "#f2f7ed"))))
+   )
   (defadvice load-theme (before theme-dont-propagate activate)
     "Disable theme before loading new one."
     (mapc #'disable-theme custom-enabled-themes))
