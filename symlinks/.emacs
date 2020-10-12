@@ -334,7 +334,10 @@
 (use-package rspec-mode
   :straight t
   :ensure t
-  :mode (("\\.erb\\'" . ruby-mode))
+  :mode (
+         ("\\.erb\\'" . web-mode)
+         ("\\.erb\\'" . html-mode)
+         )
   :bind (:map rspec-mode-map (("s-." . 'rspec-toggle-spec-and-target))))
 (add-hook 'ruby-mode-hook 'rspec-mode)
 
@@ -501,6 +504,18 @@
    ([s-down] . #'centaur-tabs-forward-group)
    ("C-s-t" . #'centaur-tabs-counsel-switch-group)
    ("C-c C-d" . #'centaur-tabs-open-directory-in-external-application)
+   )
+  )
+
+(use-package spatial-navigate
+  :straight (spatial-navigate :type git :host gitlab :repo "ideasman42/emacs-spatial-navigate")
+  :ensure t
+  :bind
+  (
+   ("<M-s-up>" . #'spatial-navigate-backward-vertical-bar)
+   ("<M-s-down>" . #'spatial-navigate-forward-vertical-bar)
+   ("<M-s-left>" . #'spatial-navigate-backward-horizontal-bar)
+   ("<M-s-right>" . #'spatial-navigate-forward-horizontal-bar)
    )
   )
 
