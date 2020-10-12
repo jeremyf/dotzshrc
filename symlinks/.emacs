@@ -1152,11 +1152,14 @@ to consider doing so."
 ;; mini-buffer.  When I load the file interactively, I don't
 ;; experience the same problem.  So, until this resolves, I'll need to
 ;; load roam via an interactive command.
-(global-set-key (kbd "<f9>") `(lambda ()
-                                (interactive)
-                                (require 'jnf-org-roam.el)
-                                ))
-;; (require 'jnf-org-roam.el)
+;; (global-set-key (kbd "<f11>") `(lambda ()
+;;                                 (interactive)
+;;                                 (require 'jnf-org-roam.el)
+;;                                 ))
+;;
+;; With the latest update of org-roam, things again behavior
+;; correctly.  Now I can just load org-roam as part of my day to day
+(require 'jnf-org-roam.el)
 
 (global-set-key (kbd "<f2>") `(
                                lambda ()
