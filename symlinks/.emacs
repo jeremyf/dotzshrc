@@ -350,29 +350,13 @@
 
 (setq ruby-insert-encoding-magic-comment nil)
 
-;; (use-package auto-complete
-;;   :straight t
-;;   :ensure t
-;;   :config (ac-config-default)
-;;   :init (setq ac-auto-show-menu t))
-
 (use-package inf-ruby
   :straight t
-  :after auto-complete
+  :after company
   :ensure t)
 (autoload 'inf-ruby-minor-mode "inf-ruby" "Run an inferior Ruby process" t)
 (add-hook 'ruby-mode-hook 'inf-ruby-minor-mode)
 (add-hook 'compilation-filter-hook 'inf-ruby-auto-enter)
-
-;; Disabled as I'm using company completio
-;; (use-package ac-inf-ruby
-;;   :straight t
-;;   :after inf-ruby
-;;   :ensure t)
-;; (eval-after-load 'auto-complete
-;;   '(add-to-list 'ac-modes 'inf-ruby-minor-mode))
-;; (add-hook 'ruby-mode-hook 'ac-inf-ruby-enable)
-
 
 (use-package company
   :straight t
