@@ -418,8 +418,7 @@
   :config (push 'company-yasnippet company-backends)
   :bind (("C-c C-e" . yas-expand))
   :init (setq yas-snippet-dirs '("~/git/dotzshrc/emacs/snippets"))
-  (yas-global-mode 1)
-  )
+  (yas-global-mode 1))
 
 (defalias 'tp 'transpose-pagraphs)
 (defalias 'ts 'transpose-sentence)
