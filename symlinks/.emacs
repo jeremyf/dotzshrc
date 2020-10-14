@@ -354,7 +354,7 @@
          ("C-c C-SPC" . mc/edit-lines) ;; CTRL+CMD+c
          ))
 
-;; C-; to select words
+;; C-; to select current symbol and all matches; Then edit at multiple points.
 (use-package iedit
   :straight t)
 
@@ -378,17 +378,6 @@
   :after spaceline
   :config (spaceline-all-the-icons-theme)
   (spaceline-all-the-icons--setup-neotree))
-
-;; This package ensures that the active window gets the majority of
-;; the space, while leaving room for other windows.
-;;
-;; Interestingly, having a visual reminder of the active window helps
-;; focus my thinking.
-;; (use-package golden-ratio
-;;   :straight t
-;;   :ensure t
-;;   :config (golden-ratio-mode nil))
-;; (setq golden-ratio-adjust-factor nil)
 
 ;; A window manager for emacs, allowing fast toggles between windows
 ;; as well as opening or moving those windows.
@@ -494,13 +483,6 @@
  '(org-export-backends '(ascii html icalendar latex md odt))
  '(show-paren-mode t)
  '(use-package-always-ensure t))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(font-lock-string-face ((t (:foreground "#005e00" :weight bold :background "#f2f7ed"))))
- '(font-lock-variable-name-face ((t (:foreground "#0031a9" :background "#e6edff")))))
 
 (setq backup-directory-alist '((".*" . "~/.emacs.d/backups/"))
       backup-by-copying t    ; Don't delink hardlinks
@@ -623,8 +605,7 @@
   (keychain-refresh-environment))
 
 (use-package password-generator
-  :straight t
-  )
+  :straight t)
 
 (use-package hungry-delete
   :straight t
@@ -713,9 +694,6 @@
     (backward-kill-word 1)))
 
 (global-set-key (kbd "C-w") 'jnf/kill-region-or-backward-word)
-
-;; https://melpa.org/#/elfeed
-;; (global-set-key (kbd "C-x r") 'elfeed)
 
 (if (eq system-type 'darwin)
     (progn (add-to-list 'load-path "~/git/dotzshrc/emacs/darwin")
