@@ -35,6 +35,9 @@
         (1+ server-visit-files-custom-find:buffer-count)))
 (add-hook 'server-visit-hook 'server-visit-hook-custom-find)
 
+;; I have additional files that I require in the emacs directory
+(add-to-list 'load-path "~/git/dotzshrc/emacs")
+
 ;; Make startup faster by reducing the frequency of garbage
 ;; collection.  The default is 800 kilobytes.  Measured in bytes.
 ;; From https://blog.d46.us/advanced-emacs-startup/
@@ -132,6 +135,9 @@
   ;; I'd like to use the following, but I get interpretter errors:
   ;;
   :config
+  ;; To determine the face at point run kbd "C-u C-x =", the "C-x ="
+  ;; is 'what-cursor-position, the prefix of C-u indicates to render
+  ;; the detailed version of 'what-cursor-position
   (custom-set-faces
    `(font-lock-variable-name-face ((t(:foreground ,(cdr(assoc "blue" modus-operandi-theme-default-colors-alist))
                                      :background "#e6edff"))))
@@ -508,108 +514,6 @@
   (smartparens-global-mode 1))
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; BEGIN typopunct
-;;
-(use-package typopunct
-  :straight t
-  :ensure t)
-(require 'typopunct)
-;; (add-hook 'text-mode-hook 'jnf/typopunct-init)
-(add-hook 'org-mode-hook 'jnf/typopunct-init)
-(defun jnf/typopunct-init ()
-  (typopunct-change-language 'english)
-  (typopunct-mode 1))
-
-;; The minus sign (−) is separate from the hyphen (-), en dash (–) and
-;; em dash (—). To build upon the clever behavior of the ‘-’ key
-(defconst typopunct-ellipsis (decode-char 'ucs #x2026))
-(defconst typopunct-middot   (decode-char 'ucs #xB7)) ; or 2219
-(defun typopunct-insert-ellipsis-or-middot (arg)
-  "Change three consecutive dots to a typographical ellipsis mark."
-  (interactive "p")
-  (cond
-   ((and (= 1 arg)
-         (eq (char-before) ?^))
-    (delete-char -1)
-    (insert typopunct-middot))
-   ((and (= 1 arg)
-         (eq this-command last-command)
-         (looking-back "\\.\\."))
-    (replace-match "")
-    (insert typopunct-ellipsis))
-   (t
-    (self-insert-command arg))))
-(define-key typopunct-map "." 'typopunct-insert-ellipsis-or-middot)
-
-;; To insert a typographical ellipsis sign (…) on three consecutive
-;; dots, or a middle dot (·) on ‘^.’
-(defconst typopunct-minus (decode-char 'ucs #x2212))
-(defconst typopunct-pm    (decode-char 'ucs #xB1))
-(defconst typopunct-mp    (decode-char 'ucs #x2213))
-(defadvice typopunct-insert-typographical-dashes
-    (around minus-or-pm activate)
-  (cond
-   ((or (eq (char-before) typopunct-em-dash)
-        (looking-back "\\([[:blank:]]\\|^\\)\\^"))
-    (delete-char -1)
-    (insert typopunct-minus))
-   ((looking-back "[^[:blank:]]\\^")
-    (insert typopunct-minus))
-   ((looking-back "+/")
-    (progn (replace-match "")
-           (insert typopunct-pm)))
-   (t ad-do-it)))
-(defun typopunct-insert-mp (arg)
-  (interactive "p")
-  (if (and (= 1 arg) (looking-back "-/"))
-      (progn (replace-match "")
-             (insert typopunct-mp))
-    (self-insert-command arg)))
-(define-key typopunct-map "+" 'typopunct-insert-mp)
-
-;; If you want the cross (×) rather than the middle dot:
-(defconst typopunct-times (decode-char 'ucs #xD7))
-(defun typopunct-insert-times (arg)
-  (interactive "p")
-  (if (and (= 1 arg) (looking-back "\\([[:blank:]]\\|^\\)\\^"))
-      (progn (delete-char -1)
-             (insert typopunct-times))
-    (self-insert-command arg)))
-(define-key typopunct-map "x" 'typopunct-insert-times)
-
-(defadvice typopunct-insert-quotation-mark (around wrap-region activate)
-  (let* ((lang (or (get-text-property (point) 'typopunct-language)
-                   typopunct-buffer-language))
-         (omark (if single
-                    (typopunct-opening-single-quotation-mark lang)
-                  (typopunct-opening-quotation-mark lang)))
-         (qmark (if single
-                    (typopunct-closing-single-quotation-mark lang)
-                  (typopunct-closing-quotation-mark lang))))
-    (cond
-     (mark-active
-      (let ((skeleton-end-newline nil)
-            (singleo (typopunct-opening-single-quotation-mark lang))
-            (singleq (typopunct-closing-single-quotation-mark lang)))
-        (if (> (point) (mark))
-            (exchange-point-and-mark))
-        (save-excursion
-          (while (re-search-forward (regexp-quote (string omark)) (mark) t)
-            (replace-match (regexp-quote (string singleo)) nil nil)))
-        (save-excursion
-          (while (re-search-forward (regexp-quote (string qmark)) (mark) t)
-            (replace-match (regexp-quote (string singleq)) nil nil)))
-        (skeleton-insert (list nil omark '_ qmark) -1)))
-     ((looking-at (regexp-opt (list (string omark) (string qmark))))
-      (forward-char 1))
-     (t ad-do-it))))
-
-;; Remember [C-q "] will create a " instead of a “
-;; And [C-q '] will create a ' instead of a ‘
-;;
-;; END typopunct
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; A rather convenient snippet manager.  When you create a snippet, it
 ;; understands the mode you're in and puts the snippet in the right
@@ -1100,8 +1004,6 @@ to consider doing so."
  '((emacs-lisp . t)
    (ruby . t)))
 
-(add-to-list 'load-path "~/git/dotzshrc/emacs")
-
 ;; For some reason, when I load emacs in daemon mode, the daemon
 ;; process is the process now renders the GET prompts for the
 ;; mini-buffer.  When I load the file interactively, I don't
@@ -1116,6 +1018,7 @@ to consider doing so."
 ;; correctly.  Now I can just load org-roam as part of my day to day
 (require 'jnf-org-roam.el)
 (require 'jnf-spelling.el)
+(require 'jnf-typopunct.el)
 
 (global-set-key (kbd "<f2>") `(
                                lambda ()
