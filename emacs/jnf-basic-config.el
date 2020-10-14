@@ -8,6 +8,30 @@
 ;;; Code:
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; A chunk of code that allows me to pass multiple filenames to
+;; emacsclient AND open those files in different frames within the
+;; same window.(defvar server-visit-files-custom-find:buffer-count)
+(defvar server-visit-files-custom-find:buffer-count)
+(defadvice server-visit-files
+    (around server-visit-files-custom-find
+            activate compile)
+  "Maintain a counter of visited files from a single client call."
+  (let ((server-visit-files-custom-find:buffer-count 0))
+    ad-do-it))
+(defun server-visit-hook-custom-find ()
+  "Arrange to visit the files from a client call in separate windows."
+  (if (zerop server-visit-files-custom-find:buffer-count)
+      (progn
+        (delete-other-windows)
+        (switch-to-buffer (current-buffer)))
+    (let ((buffer (current-buffer))
+          (window (split-window-sensibly)))
+      (switch-to-buffer buffer)
+      (balance-windows)))
+  (setq server-visit-files-custom-find:buffer-count
+        (1+ server-visit-files-custom-find:buffer-count)))
+(add-hook 'server-visit-hook 'server-visit-hook-custom-find)
+
 (global-so-long-mode)
 
 ;; Parenthesis matching is one of the flaws in my Emacs setup as of

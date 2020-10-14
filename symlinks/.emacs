@@ -10,37 +10,13 @@
 
 (server-start)
 
-;; A chunk of code that allows me to pass multiple filenames to
-;; emacsclient AND open those files in different frames within the
-;; same window.(defvar server-visit-files-custom-find:buffer-count)
-(defvar server-visit-files-custom-find:buffer-count)
-(defadvice server-visit-files
-    (around server-visit-files-custom-find
-            activate compile)
-  "Maintain a counter of visited files from a single client call."
-  (let ((server-visit-files-custom-find:buffer-count 0))
-    ad-do-it))
-(defun server-visit-hook-custom-find ()
-  "Arrange to visit the files from a client call in separate windows."
-  (if (zerop server-visit-files-custom-find:buffer-count)
-      (progn
-        (delete-other-windows)
-        (switch-to-buffer (current-buffer)))
-    (let ((buffer (current-buffer))
-          (window (split-window-sensibly)))
-      (switch-to-buffer buffer)
-      (balance-windows)))
-  (setq server-visit-files-custom-find:buffer-count
-        (1+ server-visit-files-custom-find:buffer-count)))
-(add-hook 'server-visit-hook 'server-visit-hook-custom-find)
-
-;; I have additional files that I require in the emacs directory
-(add-to-list 'load-path "~/git/dotzshrc/emacs")
-
 ;; Make startup faster by reducing the frequency of garbage
 ;; collection.  The default is 800 kilobytes.  Measured in bytes.
 ;; From https://blog.d46.us/advanced-emacs-startup/
 (setq gc-cons-threshold (* 250 1000 1000))
+
+;; I have additional files that I require in the emacs directory
+(add-to-list 'load-path "~/git/dotzshrc/emacs")
 
 ;; This preamble is part of straight-use-package My understanding, in
 ;; reading straight documentation is that it has better load

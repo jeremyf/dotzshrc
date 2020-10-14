@@ -11,7 +11,6 @@
 ;;
 ;;; Code:
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 ;; I'm just going to trust themes
 (setq custom-safe-themes t)
 
