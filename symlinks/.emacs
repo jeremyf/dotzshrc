@@ -63,19 +63,9 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
-;; Run the following to print the load times:
-;;
-;; `emacs . --eval='(message "%s" (emacs-init-time))'`
-;;
-;; Use a hook so the message doesn't get clobbered by other messages.
-(add-hook 'emacs-startup-hook
-          (lambda ()
-            (message "Emacs on \"%s\" ready in %s with %d garbage collections."
-                     system-type
-                     (format "%.2f seconds"
-                             (float-time
-                              (time-subtract after-init-time before-init-time)))
-                     gcs-done)))
+;; I saw that straight loaded use-package to take advantage of the
+;; use-package syntax which is often how things are documented.
+(straight-use-package 'use-package)
 
 ;; When you open Emacs, grab all the space on the screen
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
@@ -109,9 +99,6 @@
 ;; create the autosave dir if necessary, since emacs won't.
 (make-directory "~/.emacs.d/autosaves/" t)
 
-;; I saw that straight loaded use-package to take advantage of the
-;; use-package syntax which is often how things are documented.
-(straight-use-package 'use-package)
 
 ;; I'm just going to trust themes
 (setq custom-safe-themes t)
