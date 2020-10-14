@@ -335,11 +335,8 @@
 
 (use-package rspec-mode
   :straight t
+  :after inf-ruby
   :ensure t
-  :mode (
-         ("\\.erb\\'" . web-mode)
-         ("\\.erb\\'" . html-mode)
-         )
   :bind (:map rspec-mode-map (("s-." . 'rspec-toggle-spec-and-target))))
 (add-hook 'ruby-mode-hook 'rspec-mode)
 
@@ -353,6 +350,10 @@
 (use-package inf-ruby
   :straight t
   :after company
+  :mode (
+         ("\\.erb\\'" . web-mode)
+         ("\\.erb\\'" . html-mode)
+         )
   :ensure t)
 (autoload 'inf-ruby-minor-mode "inf-ruby" "Run an inferior Ruby process" t)
 (add-hook 'ruby-mode-hook 'inf-ruby-minor-mode)
@@ -792,9 +793,10 @@
 (use-package yafolding
   :straight t
   :ensure t
+  :hook (prog-mode . yafolding-mode)
   )
-(add-hook 'prog-mode-hook
-          (lambda () (yafolding-mode)))
+;; (add-hook 'prog-mode-hook
+;;           (lambda () (yafolding-mode)))
 
 (use-package json-mode
   :straight t
@@ -807,8 +809,7 @@
   :straight t
   :ensure t
   :after json-mode
-
-  :init (setq json-reformat:indent-width 2))
+:init (setq json-reformat:indent-width 2))
 
 
 (use-package tree-sitter
@@ -821,7 +822,6 @@
          (js-mode . tree-sitter-hl-mode)
          (typescript-mode . tree-sitter-hl-mode)
          (go-mode . tree-sitter-hl-mode)))
-(global-tree-sitter-mode)
 
 (use-package tree-sitter-langs
   :straight (tree-sitter-langs :type git :host github :repo "ubolonton/emacs-tree-sitter" :files ("langs/*.el" "langs/queries"))
@@ -1027,7 +1027,7 @@ to consider doing so."
 (use-package whole-line-or-region
   :straight t
   :ensure t
-  )
+  :config (whole-line-or-region-global-mode))
 
 (use-package plantuml-mode
   :straight t
@@ -1040,13 +1040,12 @@ to consider doing so."
 (use-package org-sidebar
   :straight (org-sidebar :type git :host github :repo "alphapapa/org-sidebar")
   :ensure t
-  )
-
-(global-set-key (kbd "C-c l") 'org-store-link)
-(global-set-key (kbd "C-c a") 'org-agenda)
-(global-set-key (kbd "C-c c") 'org-capture)
-(global-set-key (kbd "C-c t") 'org-toggle-link-display)
-
+  :bind (
+         ("C-c l" . org-store-link)
+         ("C-c a" . org-agenda)
+         ("C-c c" . org-capture)
+         ("C-c t" . org-toggle-link-display)
+         ))
 
 (setq org-directory "~/git/org")
 (setq org-agenda-files (list "~/git/org"))
@@ -1089,12 +1088,10 @@ to consider doing so."
       )
 
 (use-package org-web-tools
-
   :ensure t
   :straight t)
 
 (use-package org-d20
-
   :ensure t
   :straight t)
 
@@ -1103,11 +1100,13 @@ to consider doing so."
 
 (use-package org-bullets
   :straight t
+  :hook (
+         (org-mode . org-bullets-mode)
+         (org-mode . turn-on-visual-line-mode)
+  ))
 
-  :hook (org-mode . org-bullets-mode))
-
-(add-hook 'org-mode-hook #'toggle-word-wrap)
-(add-hook 'org-mode-hook #'turn-on-visual-line-mode)
+;; (add-hook 'org-mode-hook #'toggle-word-wrap)
+;; (add-hook 'org-mode-hook #'turn-on-visual-line-mode)
 
 ;; See
 ;; https://www.reddit.com/r/orgmode/comments/i6hl8b/image_preview_size_in_org_mode/

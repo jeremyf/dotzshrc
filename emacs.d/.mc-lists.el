@@ -18,6 +18,7 @@
         jnf/kill-region-or-backward-word
         kill-visual-line
         magit-status
+        markdown-cycle
         markdown-outdent-or-delete
         mouse-set-region
         ns-copy-including-secondary
