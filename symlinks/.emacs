@@ -448,29 +448,21 @@
   (centaur-tabs-set-modified-marker t)
   (centaur-tabs-modified-marker "●")
   (centaur-tabs-buffer-groups-function #'centaur-tabs-projectile-buffer-groups)
-  :bind
-  (
-   ("s-{" . #'centaur-tabs-backward)
-   ("s-}" . #'centaur-tabs-forward)
-   ("C-c C-5". #'centaur-tabs-extract-window-to-new-frame)
-   ([s-up] . #'centaur-tabs-backward-group)
-   ([s-down] . #'centaur-tabs-forward-group)
-   ("C-s-t" . #'centaur-tabs-counsel-switch-group)
-   ("C-c C-o" . #'centaur-tabs-open-directory-in-external-application)
-   )
-  )
+  :bind (("s-{" . #'centaur-tabs-backward)
+         ("s-}" . #'centaur-tabs-forward)
+         ("C-c C-5". #'centaur-tabs-extract-window-to-new-frame)
+         ([s-up] . #'centaur-tabs-backward-group)
+         ([s-down] . #'centaur-tabs-forward-group)
+         ("C-s-t" . #'centaur-tabs-counsel-switch-group)
+         ("C-c C-o" . #'centaur-tabs-open-directory-in-external-application)))
 
 (use-package spatial-navigate
   :straight (spatial-navigate :type git :host gitlab :repo "ideasman42/emacs-spatial-navigate")
   :ensure t
-  :bind
-  (
-   ("<M-s-up>" . #'spatial-navigate-backward-vertical-bar)
-   ("<M-s-down>" . #'spatial-navigate-forward-vertical-bar)
-   ("<M-s-left>" . #'spatial-navigate-backward-horizontal-bar)
-   ("<M-s-right>" . #'spatial-navigate-forward-horizontal-bar)
-   )
-  )
+  :bind (("<M-s-up>" . #'spatial-navigate-backward-vertical-bar)
+         ("<M-s-down>" . #'spatial-navigate-forward-vertical-bar)
+         ("<M-s-left>" . #'spatial-navigate-backward-horizontal-bar)
+         ("<M-s-right>" . #'spatial-navigate-forward-horizontal-bar)))
 
 
 ;; Adding smartparens options
@@ -479,8 +471,6 @@
   :ensure t
   :config (smartparens-strict-mode 1)
   (smartparens-global-mode 1))
-
-
 
 ;; A rather convenient snippet manager.  When you create a snippet, it
 ;; understands the mode you're in and puts the snippet in the right
@@ -579,11 +569,9 @@
 (use-package ethan-wspace
   :straight t
   :ensure t
-
-  :init (setq-default mode-require-final-newline nil))
-(global-ethan-wspace-mode 1)
-(add-hook 'before-save-hook
-          'delete-trailing-whitespace)
+  :hook (before-save . delete-trailing-whitespace)
+  :init (setq-default mode-require-final-newline nil)
+  :config (global-ethan-wspace-mode 1))
 
 ;; A package that is a bit of the inverse of 'fill-paragraph
 ;; (e.g. M-q).
@@ -979,6 +967,7 @@ to consider doing so."
 (require 'jnf-spelling.el)
 (require 'jnf-typopunct.el)
 (require 'jnf-ruby.el)
+(require 'jnf-elfeed.el)
 
 (global-set-key (kbd "<f2>") `(
                                lambda ()
@@ -986,101 +975,9 @@ to consider doing so."
                                (find-file "~/git/org/agenda.org")))
 (global-set-key (kbd "<f5>") `(lambda () (interactive)(find-file "~/git/org/troubleshooting.org")))
 (global-set-key (kbd "<f12>") `(lambda () (interactive)(find-file "~/git/dotzshrc/symlinks/.emacs")))
-(global-set-key (kbd "<f13>") `rss)
 
 ;; (require 'jnf-org-latex.el)
 
-(use-package elfeed
-  :ensure t
-  :straight t
-  :after org
-  :bind (("C-x r" . jnf/elfeed-load-db-and-open)
-         :map elfeed-search-mode-map
-         ("q" . jnf/elfeed-save-db-and-bury))
-  :config (elfeed-org)
-
-  ;;
-  ;; linking and capturing
-  ;;
-
-  (defun elfeed-link-title (entry)
-    "Copy the entry title and URL as org link to the clipboard."
-    (interactive)
-    (let* ((link (elfeed-entry-link entry))
-           (title (elfeed-entry-title entry))
-           (titlelink (concat "[[" link "][" title "]]")))
-      (when titlelink
-        (kill-new titlelink)
-        (x-set-selection 'PRIMARY titlelink)
-        (message "Yanked: %s" titlelink))))
-
-  ;; show mode
-
-  (defun elfeed-show-quick-url-note ()
-    "Fastest way to capture entry link to org agenda from elfeed show mode"
-    (interactive)
-    (elfeed-link-title elfeed-show-entry)
-    (org-capture nil "u")
-    (yank)
-    ;; (org-capture-finalize)
-    )
-
-  (bind-keys :map elfeed-show-mode-map
-             ("l" . elfeed-show-link-title)
-             ("v" . elfeed-show-quick-url-note)))
-
-;; A little bit of RSS beautification
-(add-hook 'elfeed-show-mode-hook 'jnf/elfeed-visual)
-(defun jnf/elfeed-visual ()
-  "A method to turn on visual line mode and adjust text scale."
-  (text-scale-set 2)
-  (turn-on-visual-line-mode)
-  )
-
-;;write to disk when quiting
-(defun jnf/elfeed-save-db-and-bury ()
-  "Wrapper to save the elfeed db to disk before burying buffer"
-  (interactive)
-  (elfeed-db-save)
-  (quit-window))
-
-(defun jnf/elfeed-load-db-and-open ()
-  "Load the elfeed db from disk before opening"
-  (interactive)
-  (elfeed)
-  (elfeed-update)
-  (elfeed-db-load)
-  (elfeed-search-update--force))
-(defalias 'rss 'jnf/elfeed-load-db-and-open)
-
-(use-package elfeed-org
-  :straight t
-  :ensure t
-  :after elfeed
-  :config
-  (elfeed-org)
-  (setq rmh-elfeed-org-files (list "~/git/org/elfeed.org")))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; From https://karthinks.com/blog/lazy-elfeed/
-(defun elfeed-search-show-entry-pre (&optional lines)
-  "Returns a function to scroll forward or back in the Elfeed
-  search results, displaying entries without switching to them."
-  (lambda (times)
-    (interactive "p")
-    (forward-line (* times (or lines 0)))
-    (recenter)
-    (call-interactively #'elfeed-search-show-entry)
-    (select-window (previous-window))
-    (unless elfeed-search-remain-on-entry (forward-line -1))))
-(eval-after-load 'elfeed-search
-  '(define-key elfeed-search-mode-map (kbd "n") (elfeed-search-show-entry-pre +1)))
-(eval-after-load 'elfeed-search
-  '(define-key elfeed-search-mode-map (kbd "p") (elfeed-search-show-entry-pre -1)))
-(eval-after-load 'elfeed-search
-  '(define-key elfeed-search-mode-map (kbd "M-RET") (elfeed-search-show-entry-pre)))
-;; End https://karthinks.com/blog/lazy-elfeed/
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
 ;; Uncomment to always launch org mode with a sidebar tree
