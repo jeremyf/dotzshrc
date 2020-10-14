@@ -117,7 +117,6 @@
 (setq custom-safe-themes t)
 
 (use-package modus-operandi-theme
-  :ensure t
   :straight t
   :init
   (setq modus-operandi-theme-org-blocks 'rainbow)
@@ -151,8 +150,7 @@
   (load-theme 'modus-operandi t))
 
 (use-package modus-vivendi-theme
-  :straight t
-  :ensure t)
+  :straight t)
 
 (defun modus-themes-toggle ()
   "Toggle between `modus-operandi' and `modus-vivendi' themes."
@@ -188,20 +186,15 @@
 
 ;; Write "kill" command inputs to disk
 (use-package savekill
-  :ensure t
   :straight t)
 
 ;; https://oremacs.com/swiper/
 ;; Note: I've set all searches to use fuzzy regex
 (use-package ivy
   :straight t
-  :ensure t
   :after avy
   :diminish (ivy-mode . "")
-  :bind (
-         ("C-c C-r". 'ivy-resume)
-         ("<f6>". 'ivy-resume)
-         )
+  :bind (("C-c C-r" . ivy-resume))
   :config (ivy-mode 1)
   (setq ivy-use-virtual-buffers t)
   (setq ivy-height 12)
@@ -215,7 +208,6 @@
 ;; Part of the ivy/counsel/swiper trio
 (use-package counsel
   :straight t
-  :ensure t
   :init (setq ivy-use-selectable-prompt t)
   (setq search-default-mode #'char-fold-to-regexp)
   :bind (("M-x" . counsel-M-x)
@@ -225,13 +217,11 @@
 (defalias 'recent 'counsel-recentf)
 
 (use-package all-the-icons-ivy-rich
-  :ensure t
   :straight t
   :after (ivy counsel counsel-projectile)
   :init (all-the-icons-ivy-rich-mode 1))
 
 (use-package ivy-rich
-  :ensure t
   :straight t
   :custom
   (ivy-virtual-abbreviate 'full)
@@ -244,22 +234,18 @@
 
 (use-package swiper
   :straight t
-  :ensure t
   :bind (("C-s" . swiper)))
 
 (use-package prescient
-  :straight t
-  :ensure t)
+  :straight t)
 
 (use-package ivy-prescient
   :straight t
-  :ensure t
   :init (setq prescient-filter-method '(literal fuzzy regexp initialism))
   :config (ivy-prescient-mode t))
 
 (use-package expand-region
   :straight t
-  :ensure t
   :bind (
          ("C-=" . er/expand-region)
          ("C-+" . er/contract-region)
@@ -270,8 +256,7 @@
 (use-package ag
   :straight t
   :after counsel
-  :bind (("M-s-f" . counsel-ag))
-  :ensure t)
+  :bind (("M-s-f" . counsel-ag)))
 
 ;; This package is amazing!!!  Render search results to a buffer, edit
 ;; the buffer and write back to the file hits.  There is not a ripgrep
@@ -285,7 +270,6 @@
 ;; 3) C-c C-p 'wgrep-toggle-readonly-area
 ;; 4) C-x C-s to save OR C-x C-q to exit without save
 (use-package wgrep-ag
-  :ensure t
   :straight t
   :hook (ag-mode . wgrep-ag-setup)
   :after ag)
@@ -296,7 +280,6 @@
 ;; package.
 (use-package helpful
   :straight t
-  :ensure t
   :bind (
          ("C-h C-d" . helpful-at-point)
          ("C-h v" . helpful-variable)
@@ -313,7 +296,6 @@
 ;;
 ;; Helpful for understanding the likely bounds of directory structure
 (use-package projectile
-  :ensure t
   :straight t
   :config (define-key projectile-mode-map (kbd "M-p") 'projectile-command-map)
   (projectile-mode +1)
@@ -326,14 +308,12 @@
 
 (use-package counsel-projectile
   :straight t
-  :ensure t
   :after projectile
   :bind ("s-t" . counsel-projectile-find-file)) ; CMD+t, which I carry over from Textmate
 
 
 (use-package company
   :straight t
-  :ensure t
   :after ivy
   :diminish
   :bind (("C-." . #'company-complete))
@@ -353,7 +333,6 @@
           (number-sequence 0 9))))
 
 (use-package string-inflection
-  :ensure t
   :straight (string-inflection :type git
                                :host github
                                :repo "akicho8/string-inflection")
@@ -377,8 +356,7 @@
 
 ;; C-; to select words
 (use-package iedit
-  :straight t
-  :ensure t)
+  :straight t)
 
 (global-so-long-mode)
 
@@ -393,11 +371,9 @@
 
 
 (use-package spaceline
-  :ensure t
   :straight t)
 
 (use-package spaceline-all-the-icons
-  :ensure t
   :straight t
   :after spaceline
   :config (spaceline-all-the-icons-theme)
@@ -419,7 +395,6 @@
 ;; https://github.com/abo-abo/ace-window
 (use-package ace-window
   :straight t
-  :ensure t
   :bind (("M-o" . ace-window)))
 
 
@@ -430,7 +405,6 @@
 ;; https://blog.sumtypeofway.com/posts/emacs-config.html
 (use-package centaur-tabs
   :straight t
-  :ensure t
   :demand
   :hook
   (org-agenda-mode . centaur-tabs-local-mode)
@@ -462,7 +436,6 @@
   :straight (spatial-navigate :type git
                               :host gitlab
                               :repo "ideasman42/emacs-spatial-navigate")
-  :ensure t
   :bind (("<M-s-up>" . #'spatial-navigate-backward-vertical-bar)
          ("<M-s-down>" . #'spatial-navigate-forward-vertical-bar)
          ("<M-s-left>" . #'spatial-navigate-backward-horizontal-bar)
@@ -472,7 +445,6 @@
 ;; Adding smartparens options
 (use-package smartparens
   :straight t
-  :ensure t
   :config (smartparens-strict-mode 1)
   (smartparens-global-mode 1))
 
@@ -483,8 +455,6 @@
   :straight (yasnippets :type git
                         :host github
                         :repo "joaotavora/yasnippet")
-  :ensure t
-
   :after company
   :config (push 'company-yasnippet company-backends)
   :bind (("C-c C-e" . yas-expand))
@@ -500,7 +470,6 @@
 ;; gitlab, etc.
 (use-package browse-at-remote
   :straight t
-  :ensure t
   :bind (("C-c b" . browse-at-remote)))
 
 (custom-set-variables
@@ -530,7 +499,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(font-lock-string-face ((t (:foreground "#005e00" :weight bold :background "#f2f7ed"))))
+ '(font-lock-variable-name-face ((t (:foreground "#0031a9" :background "#e6edff")))))
 
 (setq backup-directory-alist '((".*" . "~/.emacs.d/backups/"))
       backup-by-copying t    ; Don't delink hardlinks
@@ -544,28 +514,21 @@
 ;; again, and go to the beginning of the line.
 (use-package crux
   :straight t
-  :ensure t
-
-  :bind (
-         ("C-a" . crux-move-beginning-of-line)
-         ("<f9>" . crux-kill-other-buffers)
-         ))
+  :bind (("C-a" . crux-move-beginning-of-line)
+         ("<f9>" . crux-kill-other-buffers)))
 
 ;; Nice for neotree
 (use-package all-the-icons
-  :straight t
-  :ensure t)
+  :straight t)
 
 (use-package all-the-icons-dired
   :straight t
-  :ensure t
   :after all-the-icons
   :hook (dired-mode . all-the-icons-dired-mode))
 
 ;; Favor neotree over sr-speedbar
 (use-package neotree
   :straight t
-  :ensure t
   :init (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
   (setq-default neo-window-width 36)
   :config (global-set-key [f8] 'neotree-toggle))
@@ -575,7 +538,6 @@
 ;; commentary echoes my sentiments
 (use-package ethan-wspace
   :straight t
-  :ensure t
   :hook (before-save . delete-trailing-whitespace)
   :init (setq-default mode-require-final-newline nil)
   :config (global-ethan-wspace-mode 1))
@@ -583,61 +545,46 @@
 ;; A package that is a bit of the inverse of 'fill-paragraph
 ;; (e.g. M-q).
 (use-package unfill
-  :straight t
-  :ensure t
-  )
+  :straight t)
 
 (use-package emmet-mode
   :straight t
   :hook ((sgml-mode . emmet-mode)
          (html-mode . emmet-mode)
-         (css-mode . emmet-mode))
-  :ensure t)
+         (css-mode . emmet-mode)))
 
 ;; https://github.com/jrblevin/markdown-mode/
 (use-package markdown-mode
   :straight t
-  :ensure t
   :mode (("README\\.md\\'" . gfm-mode)
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "/usr/local/bin/pandoc"))
 
 (use-package yaml-mode
-  :straight t
-  :ensure t
-  )
+  :straight t)
 
 (use-package plantuml-mode
-  :straight t
-  :ensure t
-  )
+  :straight t)
 
 ;; That letter is the beginning of a word. Narrow results from there.
 (use-package avy
-  :straight t
-  :ensure t
-  )
+  :straight t)
 
 ;; I don't use a lot of folding, this allows me to type C-RET and fold
 ;; the current block.  There's more it can do but for now that's
 ;; enough
 (use-package yafolding
   :straight t
-  :ensure t
-  :hook (prog-mode . yafolding-mode)
-  )
+  :hook (prog-mode . yafolding-mode))
 
 (use-package json-mode
-  :straight t
-  :ensure t
-  )
+  :straight t)
 
 ;; Compressed JSON sure is ugly and illegible; This solves that
 ;; problem.
 (use-package json-reformat
   :straight t
-  :ensure t
   :after json-mode
   :init (setq json-reformat:indent-width 2))
 
@@ -646,7 +593,6 @@
   :straight (tree-sitter :host github
                          :repo "ubolonton/emacs-tree-sitter"
                          :files ("lisp/*.el"))
-  :ensure t
   :init (global-tree-sitter-mode)
   :hook ((js-mode . tree-sitter-hl-mode)
          (ruby-mode . tree-sitter-mode) ;; with tree-sitter-hl-mode, the buffer
@@ -659,8 +605,7 @@
   :straight (tree-sitter-langs :type git
                                :host github
                                :repo "ubolonton/emacs-tree-sitter"
-                               :files ("langs/*.el" "langs/queries"))
-  :ensure t)
+                               :files ("langs/*.el" "langs/queries")))
 
 (use-package undo-tree
   :diminish
@@ -671,15 +616,12 @@
 
 ;; Add a gopher and gemini client
 (use-package elpher
-  :straight t
-  :ensure t
-  )
+  :straight t)
 
 ;; Adding format to git-commit-fill-column of 72 as best
 ;; practice.
 (use-package magit
   :straight t
-  :ensure t
   :after ivy
   :init (setq git-commit-fill-column 72)
   :bind (("H-g" . magit-status)
@@ -687,32 +629,26 @@
 
 (use-package forge
   :straight t
-  :ensure t
   :after magit)
 
 (use-package libgit
-  :ensure t
   :straight t)
 
 (use-package magit-libgit
-  :ensure t
   :straight t
   :after (magit libgit))
 
 (use-package keychain-environment
   :straight t
-  :ensure t
   :config
   (keychain-refresh-environment))
 
 (use-package password-generator
   :straight t
-  :ensure t
   )
 
 (use-package hungry-delete
   :straight t
-  :ensure t
   :config (global-hungry-delete-mode))
 
 ;; Open svg files in xml-mode (instead of image rendering mode)
@@ -725,22 +661,17 @@
 
 ;; With the time machine, travel back and forth through a files history
 (use-package git-timemachine
-  :straight t
-  :ensure t
-  )
+  :straight t)
 
 (use-package git-gutter
   :straight t
-  :ensure t
   :config (global-git-gutter-mode 't))
 
 ;; https://github.com/sshaw/git-link
 ;; `M-x git-link` to add the current URL to the kill ring
 (use-package git-link
   :straight t
-  :ensure t
-  :config (setq git-link-use-commit t) ;; URL will be SHA instead of branch
-  )
+  :config (setq git-link-use-commit t) ;; URL will be SHA instead of branch)
 
 ;; Copied from https://github.com/magit/magit/blob/9423edc0b311117ab5fe87457c3e01c7db22a3c7/lisp/git-commit.el
 ;; And set to 50 instead of 68
@@ -759,8 +690,6 @@ to consider doing so."
 ;; Adding ability to move lines up and down
 (use-package move-text
   :straight t
-  :ensure t
-
   :bind (([C-s-down] . move-text-down)
          ([C-s-up] . move-text-up)))
 
@@ -770,9 +699,7 @@ to consider doing so."
 ;; Note: This requires installing plugins in browsers
 ;;
 (use-package atomic-chrome
-  :straight t
-  :ensure t
-  )
+  :straight t)
 (atomic-chrome-start-server)
 (setq atomic-chrome-default-major-mode 'markdown-mode)
 
@@ -854,7 +781,6 @@ to consider doing so."
 ;; Replaces the duplicate line function I once had
 (use-package duplicate-thing
   :straight t
-  :ensure t
   :init
   (defun my-duplicate-thing ()
     "Duplicate thing at point without changing the mark."
@@ -864,7 +790,6 @@ to consider doing so."
 
 (use-package whole-line-or-region
   :straight t
-  :ensure t
   :config (whole-line-or-region-global-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -874,13 +799,11 @@ to consider doing so."
   :straight (org-sidebar :type git
                          :host github
                          :repo "alphapapa/org-sidebar")
-  :ensure t
   :bind (
          ("C-c l" . org-store-link)
          ("C-c a" . org-agenda)
          ("C-c c" . org-capture)
-         ("C-c t" . org-toggle-link-display)
-         ))
+         ("C-c t" . org-toggle-link-display)))
 
 (setq org-directory "~/git/org")
 (setq org-agenda-files (list "~/git/org"))
@@ -923,11 +846,9 @@ to consider doing so."
       )
 
 (use-package org-web-tools
-  :ensure t
   :straight t)
 
 (use-package org-d20
-  :ensure t
   :straight t)
 
 
@@ -935,13 +856,8 @@ to consider doing so."
 
 (use-package org-bullets
   :straight t
-  :hook (
-         (org-mode . org-bullets-mode)
-         (org-mode . turn-on-visual-line-mode)
-  ))
-
-;; (add-hook 'org-mode-hook #'toggle-word-wrap)
-;; (add-hook 'org-mode-hook #'turn-on-visual-line-mode)
+  :hook ((org-mode . org-bullets-mode)
+         (org-mode . turn-on-visual-line-mode)))
 
 ;; See
 ;; https://www.reddit.com/r/orgmode/comments/i6hl8b/image_preview_size_in_org_mode/
