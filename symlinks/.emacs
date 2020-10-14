@@ -329,21 +329,21 @@
 (use-package robe
   :after company
   :straight t
-  :ensure t)
-(add-hook 'ruby-mode-hook 'robe-mode)
-(add-hook 'robe-mode-hook 'ac-robe-setup)
+  :ensure t
+  :hook ((ruby-mode . robe-mode)
+         (ruby-mode . ac-robe-setup)))
 
 (use-package rspec-mode
   :straight t
   :after inf-ruby
   :ensure t
-  :bind (:map rspec-mode-map (("s-." . 'rspec-toggle-spec-and-target))))
-(add-hook 'ruby-mode-hook 'rspec-mode)
+  :bind (:map rspec-mode-map (("s-." . 'rspec-toggle-spec-and-target)))
+  :hook (ruby-mode . rspec-mode))
 
 (use-package yard-mode
   :straight t
-  :ensure t)
-(add-hook 'ruby-mode-hook 'yard-mode)
+  :ensure t
+  :hook (ruby-mode . yard-mode))
 
 (setq ruby-insert-encoding-magic-comment nil)
 
