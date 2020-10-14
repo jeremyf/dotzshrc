@@ -269,17 +269,13 @@
 (use-package ag
   :straight t
   :after counsel
+  :bind (("M-s-f" . counsel-ag))
   :ensure t)
 
 ;; This package is amazing!!!  Render search results to a buffer, edit
 ;; the buffer and write back to the file hits.  There is not a ripgrep
 ;; option.
-(use-package wgrep-ag
-  :ensure t
-  :straight t
-  :hook (ag-mode . wgrep-ag-setup)
-  :after ag)
-
+;;
 ;; Search via ag, see candidates and use ivy to show ALL candidates,
 ;; then wgrep to edit those candidates and save
 ;;
@@ -287,8 +283,12 @@
 ;; 2) C-c C-o 'ivy-occur
 ;; 3) C-c C-p 'wgrep-toggle-readonly-area
 ;; 4) C-x C-s to save OR C-x C-q to exit without save
-(global-set-key (kbd "M-s-ƒ") 'counsel-ag) ;; CMD+OPT+f
-(global-set-key (kbd "M-s-f") 'counsel-ag) ;; CMD+OPT+f
+(use-package wgrep-ag
+  :ensure t
+  :straight t
+  :hook (ag-mode . wgrep-ag-setup)
+  :after ag)
+
 
 ;; I have found this package quite "helpful"; When I want to know the
 ;; name of a function or key or variable, I can use the helpful
@@ -327,7 +327,7 @@
   :straight t
   :ensure t
   :after projectile
-  :bind ("s-t" . counsel-projectile-find-file)) ; CMD+t
+  :bind ("s-t" . counsel-projectile-find-file)) ; CMD+t, which I carry over from Textmate
 
 (use-package robe
   :after company
