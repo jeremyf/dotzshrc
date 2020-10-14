@@ -356,7 +356,7 @@
   :ensure t
   :straight (string-inflection :type git :host github :repo "akicho8/string-inflection")
   :bind (("H-u" . string-inflection-all-cycle)
-         ("C-M-u" . string-inflection-all-cycle)))
+         ("C-M-u" . string-inflection-all-cycle))) ;; CTRL+OPT+u
 
 ;; Allow to work with multipe cursors
 ;; https://melpa.org/#/multiple-cursors Aside from the
@@ -505,7 +505,6 @@
 (use-package browse-at-remote
   :straight t
   :ensure t
-
   :bind (("C-c b" . browse-at-remote)))
 
 (custom-set-variables
@@ -586,6 +585,8 @@
 (add-hook 'before-save-hook
           'delete-trailing-whitespace)
 
+;; A package that is a bit of the inverse of 'fill-paragraph
+;; (e.g. M-q).
 (use-package unfill
   :straight t
   :ensure t
@@ -612,6 +613,11 @@
   :ensure t
   )
 
+(use-package plantuml-mode
+  :straight t
+  :ensure t
+  )
+
 ;; That letter is the beginning of a word. Narrow results from there.
 (use-package avy
   :straight t
@@ -626,8 +632,6 @@
   :ensure t
   :hook (prog-mode . yafolding-mode)
   )
-;; (add-hook 'prog-mode-hook
-;;           (lambda () (yafolding-mode)))
 
 (use-package json-mode
   :straight t
@@ -640,7 +644,7 @@
   :straight t
   :ensure t
   :after json-mode
-:init (setq json-reformat:indent-width 2))
+  :init (setq json-reformat:indent-width 2))
 
 
 (use-package tree-sitter
@@ -679,7 +683,6 @@
   :straight t
   :ensure t
   :after ivy
-
   :init (setq git-commit-fill-column 72)
   :bind (("H-g" . magit-status)
          ("C-M-g" . magit-status)))
@@ -865,11 +868,6 @@ to consider doing so."
   :straight t
   :ensure t
   :config (whole-line-or-region-global-mode))
-
-(use-package plantuml-mode
-  :straight t
-  :ensure t
-  )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; BEGIN ORG mode configuration and concerns
