@@ -192,21 +192,6 @@
          ("C-s-t" . #'centaur-tabs-counsel-switch-group)
          ("C-c C-o" . #'centaur-tabs-open-directory-in-external-application)))
 
-;; A rather convenient snippet manager.  When you create a snippet, it
-;; understands the mode you're in and puts the snippet in the right
-;; place.
-(use-package yasnippets
-  :straight (yasnippets :type git
-                        :host github
-                        :repo "joaotavora/yasnippet")
-  :after company
-  :config (push 'company-yasnippet company-backends)
-  :bind (("C-c C-e" . yas-expand))
-  :init (setq yas-snippet-dirs '("~/git/dotzshrc/emacs/snippets"))
-  (yas-global-mode 1))
-
-(defalias 'tp 'transpose-pagraphs)
-(defalias 'ts 'transpose-sentence)
 
 ;; Browse remote git repositories; A prior package I used limited the
 ;; behavior to Github. This one is bitbucket, github, sourcehut,

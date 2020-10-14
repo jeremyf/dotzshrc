@@ -133,5 +133,21 @@
     (backward-kill-word 1)))
 
 (global-set-key (kbd "C-w") 'jnf/kill-region-or-backward-word)
+
+;; A rather convenient snippet manager.  When you create a snippet, it
+;; understands the mode you're in and puts the snippet in the right
+;; place.
+(use-package yasnippets
+  :straight (yasnippets :type git
+                        :host github
+                        :repo "joaotavora/yasnippet")
+  :after company
+  :config (push 'company-yasnippet company-backends)
+  :bind (("C-c C-e" . yas-expand))
+  :init (setq yas-snippet-dirs '("~/git/dotzshrc/emacs/snippets"))
+  (yas-global-mode 1))
+
+(defalias 'tp 'transpose-pagraphs)
+(defalias 'ts 'transpose-sentence)
 (provide 'jnf-in-buffer.el)
 ;;; jnf-in-buffer.el ends here
