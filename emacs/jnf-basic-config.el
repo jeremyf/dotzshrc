@@ -7,6 +7,18 @@
 ;;
 ;;; Code:
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(global-so-long-mode)
+
+;; Parenthesis matching is one of the flaws in my Emacs setup as of
+;; this writing. I know that there are a lot of options out
+;; there—paredit, smartparens, etc.—but I haven’t sat down and really
+;; capital-L Learned a better solution than the TextMate-style bracket
+;; completion (which Emacs calls, somewhat fancifully, ‘electric’).
+;;
+;; https://blog.sumtypeofway.com/posts/emacs-config.html
+(electric-pair-mode)
+
 (set-frame-font "MesloLGS NF")
 
 ;; Put autosave files (ie #foo#) and backup files (ie foo~) in ~/.emacs.d/.
