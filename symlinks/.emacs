@@ -617,27 +617,6 @@
 ;; Add a gopher and gemini client
 (use-package elpher
   :straight t)
-
-;; Adding format to git-commit-fill-column of 72 as best
-;; practice.
-(use-package magit
-  :straight t
-  :after ivy
-  :init (setq git-commit-fill-column 72)
-  :bind (("H-g" . magit-status)
-         ("C-M-g" . magit-status)))
-
-(use-package forge
-  :straight t
-  :after magit)
-
-(use-package libgit
-  :straight t)
-
-(use-package magit-libgit
-  :straight t
-  :after (magit libgit))
-
 (use-package keychain-environment
   :straight t
   :config
@@ -654,38 +633,7 @@
 ;; Open svg files in xml-mode (instead of image rendering mode)
 (add-to-list `auto-mode-alist
              '("\\.svg\\'" . xml-mode))
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; magit
-(with-eval-after-load "magit"
-  (setq magit-completing-read-function 'ivy-completing-read))
 
-;; With the time machine, travel back and forth through a files history
-(use-package git-timemachine
-  :straight t)
-
-(use-package git-gutter
-  :straight t
-  :config (global-git-gutter-mode 't))
-
-;; https://github.com/sshaw/git-link
-;; `M-x git-link` to add the current URL to the kill ring
-(use-package git-link
-  :straight t
-  :config (setq git-link-use-commit t) ;; URL will be SHA instead of branch)
-
-;; Copied from https://github.com/magit/magit/blob/9423edc0b311117ab5fe87457c3e01c7db22a3c7/lisp/git-commit.el
-;; And set to 50 instead of 68
-(defcustom git-commit-summary-max-length 50
-  "Column beyond which characters in the summary lines are highlighted.
-The highlighting indicates that the summary is getting too long
-by some standards.  It does in no way imply that going over the
-limit a few characters or in some cases even many characters is
-anything that deserves shaming.  It's just a friendly reminder
-that if you can make the summary shorter, then you might want
-to consider doing so."
-  :group 'git-commit
-  :safe 'numberp
-  :type 'number)
 
 ;; Adding ability to move lines up and down
 (use-package move-text
@@ -892,6 +840,7 @@ to consider doing so."
 ;; With the latest update of org-roam, things again behavior
 ;; correctly.  Now I can just load org-roam as part of my day to day
 (require 'jnf-org-roam.el)
+(require 'jnf-git.el)
 (require 'jnf-spelling.el)
 (require 'jnf-typopunct.el)
 (require 'jnf-ruby.el)
