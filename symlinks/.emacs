@@ -523,7 +523,8 @@
  '(org-agenda-files
    '("/Users/jfriesen/git/org/agenda.org" "/Users/jfriesen/git/org/elfeed.org" "/Users/jfriesen/git/org/index.org" "/Users/jfriesen/git/org/readings.org" "/Users/jfriesen/git/org/sessions.org" "/Users/jfriesen/git/org/troubleshooting.org"))
  '(org-export-backends '(ascii html icalendar latex md odt))
- '(show-paren-mode t))
+ '(show-paren-mode t)
+ '(use-package-always-ensure t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
