@@ -211,10 +211,27 @@
         '((read-file-name-internal . ivy--regex-fuzzy)
           (t . ivy--regex-ignore-order))))
 
+
+;; Part of the ivy/counsel/swiper trio
+(use-package counsel
+  :straight t
+  :ensure t
+  :init (setq ivy-use-selectable-prompt t)
+  (setq search-default-mode #'char-fold-to-regexp)
+  :bind (("M-x" . counsel-M-x))
+  :config (counsel-mode 1))
+(define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
+(defalias 'recent 'counsel-recentf)
+
+(use-package all-the-icons-ivy-rich
+  :ensure t
+  :straight t
+  :after (ivy counsel counsel-projectile)
+  :init (all-the-icons-ivy-rich-mode 1))
+
 (use-package ivy-rich
   :ensure t
   :straight t
-  :after (ivy counsel all-the-icons-ivy-rich)
   :custom
   (ivy-virtual-abbreviate 'full)
   (ivy-rich-switch-buffer-align-virtual-buffer nil)
@@ -223,37 +240,18 @@
   (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line)
   (ivy-rich-mode))
 
-(use-package all-the-icons-ivy-rich
-  :ensure t
-  :straight t
-  :after (ivy counsel counsel-projectile)
-  :init (all-the-icons-ivy-rich-mode 1))
 
 (use-package swiper
   :straight t
-  :after ivy
   :ensure t
   :bind (("C-s" . swiper)))
 
-;; Part of the ivy/counsel/swiper trio
-(use-package counsel
-  :straight t
-  :after ivy
-  :ensure t
-  :init (setq ivy-use-selectable-prompt t)
-  (setq search-default-mode #'char-fold-to-regexp)
-  :bind (("M-x" . counsel-M-x))
-  :config (counsel-mode 1))
-(define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
-
 (use-package prescient
   :straight t
-  :after counsel
   :ensure t)
 
 (use-package ivy-prescient
   :straight t
-  :after ivy
   :ensure t
   :init (setq prescient-filter-method '(literal fuzzy regexp initialism))
   :config (ivy-prescient-mode t))
@@ -279,8 +277,8 @@
 (use-package wgrep-ag
   :ensure t
   :straight t
+  :hook (ag-mode . wgrep-ag-setup)
   :after ag)
-(add-hook 'ag-mode-hook 'wgrep-ag-setup)
 
 ;; Search via ag, see candidates and use ivy to show ALL candidates,
 ;; then wgrep to edit those candidates and save
