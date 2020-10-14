@@ -7,8 +7,7 @@
 ;;; Code:
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (use-package typopunct
-  :straight t
-  :ensure t)
+  :straight t)
 (require 'typopunct)
 ;; (add-hook 'text-mode-hook 'jnf/typopunct-init)
 (add-hook 'org-mode-hook 'jnf/typopunct-init)

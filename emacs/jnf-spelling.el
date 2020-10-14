@@ -20,7 +20,6 @@
 ;;; Code:
 (use-package flycheck
   :straight t
-  :ensure t
   :hook
   (org-src-mode . disable-flycheck-for-elisp)
   :custom
@@ -37,24 +36,20 @@
 
 (use-package flyspell-correct
   :straight t
-  :ensure t
   )
 
 (use-package flyspell-correct-ivy
   :straight t
-  :ensure t
   :config (global-set-key (kbd "C-,") 'flyspell-buffer))
 
 ;; Run flyspell-buffer
 (use-package flyspell-popup
   :straight t
-  :ensure t
   :bind (("C-'" . #'flyspell-popup-correct))
   :hook (flyspell-mode . flyspell-popup-auto-correct-mode))
 
 ;; For grammar nerd
 (use-package writegood-mode
-  :ensure t
   :straight t
   :bind ("C-c w" . writegood-mode)
   :config

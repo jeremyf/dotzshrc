@@ -8,7 +8,6 @@
 ;;; Code:
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (use-package elfeed
-  :ensure t
   :straight t
   :after org
   :bind (("C-x r" . jnf/elfeed-load-db-and-open)
@@ -73,7 +72,6 @@
 
 (use-package elfeed-org
   :straight t
-  :ensure t
   :after elfeed
   :config
   (elfeed-org)

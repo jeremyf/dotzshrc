@@ -7,7 +7,6 @@
 ;;; Code:
 ;; ;; Consider https://github.com/jkitchin/org-ref as well
 (use-package org-roam
-  :ensure t
   :straight t
   :hook (after-init . org-roam-mode)
   :custom (org-roam-directory "~/git/org")
@@ -98,7 +97,6 @@
 ;; (add-hook 'after-init-hook 'global-company-mode)
 (use-package org-roam-server
   :straight t
-  :ensure t
   :after org-roam
   :config
   (setq org-roam-server-host "127.0.0.1"
