@@ -329,38 +329,6 @@
   :after projectile
   :bind ("s-t" . counsel-projectile-find-file)) ; CMD+t, which I carry over from Textmate
 
-(use-package robe
-  :after company
-  :straight t
-  :ensure t
-  :hook ((ruby-mode . robe-mode)
-         (ruby-mode . ac-robe-setup)))
-
-(use-package rspec-mode
-  :straight t
-  :after inf-ruby
-  :ensure t
-  :bind (:map rspec-mode-map (("s-." . 'rspec-toggle-spec-and-target)))
-  :hook (ruby-mode . rspec-mode))
-
-(use-package yard-mode
-  :straight t
-  :ensure t
-  :hook (ruby-mode . yard-mode))
-
-(setq ruby-insert-encoding-magic-comment nil)
-
-(use-package inf-ruby
-  :straight t
-  :after company
-  :mode (
-         ("\\.erb\\'" . web-mode)
-         ("\\.erb\\'" . html-mode)
-         )
-  :ensure t)
-(autoload 'inf-ruby-minor-mode "inf-ruby" "Run an inferior Ruby process" t)
-(add-hook 'ruby-mode-hook 'inf-ruby-minor-mode)
-(add-hook 'compilation-filter-hook 'inf-ruby-auto-enter)
 
 (use-package company
   :straight t
@@ -688,8 +656,10 @@
                          :files ("lisp/*.el"))
   :ensure t
   :init (global-tree-sitter-mode)
-  :hook ((ruby-mode . tree-sitter-mode)
-         (js-mode . tree-sitter-hl-mode)
+  :hook ((js-mode . tree-sitter-hl-mode)
+         (ruby-mode . tree-sitter-mode) ;; with tree-sitter-hl-mode, the buffer
+                                        ;; is quite a bit busier with color, and
+                                        ;; works against my asthetic preferences
          (typescript-mode . tree-sitter-hl-mode)
          (go-mode . tree-sitter-hl-mode)))
 
@@ -1017,6 +987,7 @@ to consider doing so."
 (require 'jnf-org-roam.el)
 (require 'jnf-spelling.el)
 (require 'jnf-typopunct.el)
+(require 'jnf-ruby.el)
 
 (global-set-key (kbd "<f2>") `(
                                lambda ()
