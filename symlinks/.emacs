@@ -292,9 +292,8 @@
 (use-package helpful
   :straight t
   :ensure t
-  :after counsel
   :bind (
-         ("C-c C-d" . helpful-at-point)
+         ("C-h C-d" . helpful-at-point)
          ("C-h v" . helpful-variable)
          ("C-h k" . helpful-key)
          ("C-h f" . helpful-function)
@@ -424,6 +423,7 @@
 ;; https://blog.sumtypeofway.com/posts/emacs-config.html
 (electric-pair-mode)
 
+
 (use-package spaceline
   :ensure t
   :straight t)
@@ -490,7 +490,7 @@
    ([s-up] . #'centaur-tabs-backward-group)
    ([s-down] . #'centaur-tabs-forward-group)
    ("C-s-t" . #'centaur-tabs-counsel-switch-group)
-   ("C-c C-d" . #'centaur-tabs-open-directory-in-external-application)
+   ("C-c C-o" . #'centaur-tabs-open-directory-in-external-application)
    )
   )
 
@@ -639,15 +639,19 @@
 (use-package flyspell-correct
   :straight t
   :ensure t
-  :after flycheck
   )
 
 (use-package flyspell-correct-ivy
   :straight t
   :ensure t
+  :config (global-set-key (kbd "C-,") 'flyspell-buffer))
 
-  :after flyspell-correct)
-(global-set-key (kbd "C-,") 'flyspell-buffer)
+;; Run flyspell-buffer
+(use-package flyspell-popup
+  :straight t
+  :ensure t
+  :bind (("C-'" . #'flyspell-popup-correct))
+  :hook (flyspell-mode . flyspell-popup-auto-correct-mode))
 
 ;; A rather convenient snippet manager.  When you create a snippet, it
 ;; understands the mode you're in and puts the snippet in the right
@@ -726,6 +730,12 @@
 (use-package all-the-icons
   :straight t
   :ensure t)
+
+(use-package all-the-icons-dired
+  :straight t
+  :ensure t
+  :after all-the-icons
+  :hook (dired-mode . all-the-icons-dired-mode))
 
 ;; Favor neotree over sr-speedbar
 (use-package neotree
@@ -828,11 +838,11 @@
   :ensure t)
 
 (use-package undo-tree
-  :ensure t
-  :straight t
-
+  :diminish
+  :bind (("C-c _" . undo-tree-visualize))
   :config
-  (global-undo-tree-mode 1))
+  (global-undo-tree-mode +1)
+  (unbind-key "M-_" undo-tree-map))
 
 ;; Add a gopher and gemini client
 (use-package elpher
@@ -967,6 +977,10 @@ to consider doing so."
       (kill-new filename)
       (message "Copied buffer file name '%s' to the clipboard." filename))))
 
+;; I never want these.
+(unbind-key "C-x C-f") ;; find-file-read-only
+(unbind-key "C-x C-d") ;; list-directory
+(unbind-key "C-z") ;; suspend-frame
 
 (global-set-key (kbd "C-c f") 'jnf/copy-file-name-to-clipboard)
 (global-set-key (kbd "M-n") 'jnf/copy-file-name-to-clipboard) ;; Deprecated
