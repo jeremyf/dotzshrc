@@ -162,27 +162,10 @@
     (disable-theme 'modus-vivendi)
     (load-theme 'modus-operandi t)))
 
-;; "I find it useful to have a slightly more apparent indicator of which buffer is active at the moment."
-;; https://blog.sumtypeofway.com/posts/emacs-config.html
-;;
-;; I want this to work but I keep experiencing a flicker; I believe
-;; there's a background buffer that gets momentary focus.
-;;
-;; (use-package dimmer
-;;   :ensure t
-;;   :straight t
-;;   :custom (dimmer-fraction 0.4)
-;;   :config (dimmer-mode))
-
 ;; Doing a bit of configuration of my cursors
 (setq-default cursor-type 'bar)
 (set-cursor-color "#44B4CC") ;; The text color of my
 (blink-cursor-mode t)
-
-;; Remove reliance on Base16 themes; I find that I prefer the
-;; coloration of tsdh-(light|dark)
-;; (load-theme 'misterioso t) ;; For inside work
-;; (load-theme 'adwaita t) ;; For bright days
 
 ;; Write "kill" command inputs to disk
 (use-package savekill
