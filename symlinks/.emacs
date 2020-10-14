@@ -41,10 +41,6 @@
 
 (require 'jnf-display.el)
 
-;; Write "kill" command inputs to disk
-(use-package savekill
-  :straight t)
-
 ;; https://oremacs.com/swiper/
 ;; Note: I've set all searches to use fuzzy regex
 (use-package ivy
@@ -60,7 +56,6 @@
   (setq ivy-re-builders-alist
         '((read-file-name-internal . ivy--regex-fuzzy)
           (t . ivy--regex-ignore-order))))
-
 
 ;; Part of the ivy/counsel/swiper trio
 (use-package counsel
@@ -88,11 +83,6 @@
   (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line)
   (ivy-rich-mode))
 
-
-(use-package swiper
-  :straight t
-  :bind (("C-s" . swiper)))
-
 (use-package prescient
   :straight t)
 
@@ -100,13 +90,6 @@
   :straight t
   :init (setq prescient-filter-method '(literal fuzzy regexp initialism))
   :config (ivy-prescient-mode t))
-
-(use-package expand-region
-  :straight t
-  :bind (
-         ("C-=" . er/expand-region)
-         ("C-+" . er/contract-region)
-         ))
 
 ;; The silver searcher; I found ripgrep a bit nicer, but wait until
 ;; you try wgrep-ag
@@ -168,53 +151,6 @@
   :after projectile
   :bind ("s-t" . counsel-projectile-find-file)) ; CMD+t, which I carry over from Textmate
 
-
-(use-package company
-  :straight t
-  :after ivy
-  :diminish
-  :bind (("C-." . #'company-complete))
-  :hook (prog-mode . company-mode)
-  :custom
-  (company-dabbrev-downcase nil "Don't downcase returned candidates.")
-  (company-show-numbers t "Numbers are helpful.")
-  (company-tooltip-limit 20 "The more the merrier.")
-  (company-tooltip-idle-delay 0.4 "Faster!")
-  (company-async-timeout 20 "Some requests can take a long time. That's fine.")
-  :config
-
-  ;; Use the numbers 0-9 to select company completion candidates
-  (let ((map company-active-map))
-    (mapc (lambda (x) (define-key map (format "%d" x)
-                        `(lambda () (interactive) (company-complete-number ,x))))
-          (number-sequence 0 9))))
-
-(use-package string-inflection
-  :straight (string-inflection :type git
-                               :host github
-                               :repo "akicho8/string-inflection")
-  :bind (("H-u" . string-inflection-all-cycle)
-         ("C-M-u" . string-inflection-all-cycle))) ;; CTRL+OPT+u
-
-;; Allow to work with multipe cursors
-;; https://melpa.org/#/multiple-cursors Aside from the
-;; set-rectangular-region-anchor, there are several additional
-;; features to practice
-(use-package multiple-cursors
-  :straight t
-  :ensure   t
-  :bind (("H-SPC" . set-rectangular-region-anchor)
-         ("C-M-SPC" . set-rectangular-region-anchor)
-         ("C->" . mc/mark-next-like-this)
-         ("C-<" . mc/mark-previous-like-this)
-         ("C-c C->" . mc/mark-all-like-this)
-         ("C-c C-SPC" . mc/edit-lines) ;; CTRL+CMD+c
-         ))
-
-;; C-; to select current symbol and all matches; Then edit at multiple points.
-(use-package iedit
-  :straight t)
-
 ;; A window manager for emacs, allowing fast toggles between windows
 ;; as well as opening or moving those windows.
 ;; https://github.com/abo-abo/ace-window
@@ -255,16 +191,6 @@
          ([s-down] . #'centaur-tabs-forward-group)
          ("C-s-t" . #'centaur-tabs-counsel-switch-group)
          ("C-c C-o" . #'centaur-tabs-open-directory-in-external-application)))
-
-(use-package spatial-navigate
-  :straight (spatial-navigate :type git
-                              :host gitlab
-                              :repo "ideasman42/emacs-spatial-navigate")
-  :bind (("<M-s-up>" . #'spatial-navigate-backward-vertical-bar)
-         ("<M-s-down>" . #'spatial-navigate-forward-vertical-bar)
-         ("<M-s-left>" . #'spatial-navigate-backward-horizontal-bar)
-         ("<M-s-right>" . #'spatial-navigate-forward-horizontal-bar)))
-
 
 ;; A rather convenient snippet manager.  When you create a snippet, it
 ;; understands the mode you're in and puts the snippet in the right
@@ -320,34 +246,12 @@
       kept-old-versions 5    ; and how many of the old
       )
 
-;; C-a goes to the first non-whitepsace character on the line. Type it
-;; again, and go to the beginning of the line.
-(use-package crux
-  :straight t
-  :bind (("C-a" . crux-move-beginning-of-line)
-         ("<f9>" . crux-kill-other-buffers)))
-
-
 ;; Favor neotree over sr-speedbar
 (use-package neotree
   :straight t
   :init (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
   (setq-default neo-window-width 36)
   :config (global-set-key [f8] 'neotree-toggle))
-
-
-;; Whitespace hygene package.  The author's documentation and
-;; commentary echoes my sentiments
-(use-package ethan-wspace
-  :straight t
-  :hook (before-save . delete-trailing-whitespace)
-  :init (setq-default mode-require-final-newline nil)
-  :config (global-ethan-wspace-mode 1))
-
-;; A package that is a bit of the inverse of 'fill-paragraph
-;; (e.g. M-q).
-(use-package unfill
-  :straight t)
 
 (use-package emmet-mode
   :straight t
@@ -390,13 +294,6 @@
   :after json-mode
   :init (setq json-reformat:indent-width 2))
 
-(use-package undo-tree
-  :diminish
-  :bind (("C-c _" . undo-tree-visualize))
-  :config
-  (global-undo-tree-mode +1)
-  (unbind-key "M-_" undo-tree-map))
-
 ;; Add a gopher and gemini client
 (use-package elpher
   :straight t)
@@ -408,20 +305,12 @@
 (use-package password-generator
   :straight t)
 
-(use-package hungry-delete
-  :straight t
-  :config (global-hungry-delete-mode))
 
 ;; Open svg files in xml-mode (instead of image rendering mode)
 (add-to-list `auto-mode-alist
              '("\\.svg\\'" . xml-mode))
 
 
-;; Adding ability to move lines up and down
-(use-package move-text
-  :straight t
-  :bind (([C-s-down] . move-text-down)
-         ([C-s-up] . move-text-up)))
 
 
 ;; Allow emacs to be the editor for textareas on a webpage.
@@ -487,14 +376,6 @@
   (split-window-right))
 
 (bind-key "C-x C-1" #'jnf/revert-to-two-windows)
-
-(defun jnf/kill-region-or-backward-word ()
-  (interactive)
-  (if (region-active-p)
-      (kill-region (region-beginning) (region-end))
-    (backward-kill-word 1)))
-
-(global-set-key (kbd "C-w") 'jnf/kill-region-or-backward-word)
 
 (if (eq system-type 'darwin)
     (progn (add-to-list 'load-path "~/git/dotzshrc/emacs/darwin")
@@ -625,6 +506,7 @@
 (require 'jnf-typopunct.el)
 (require 'jnf-ruby.el)
 (require 'jnf-elfeed.el)
+(require 'jnf-in-buffer.el)
 
 (global-set-key (kbd "<f2>") `(
                                lambda ()
