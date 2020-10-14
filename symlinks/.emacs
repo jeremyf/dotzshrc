@@ -9,7 +9,6 @@
 ;;; CODE:
 
 (server-start)
-(set-frame-font "MesloLGS NF")
 
 ;; A chunk of code that allows me to pass multiple filenames to
 ;; emacsclient AND open those files in different frames within the
@@ -43,9 +42,6 @@
 ;; From https://blog.d46.us/advanced-emacs-startup/
 (setq gc-cons-threshold (* 250 1000 1000))
 
-;; Stop ringing any bell
-(setq ring-bell-function 'ignore)
-
 ;; This preamble is part of straight-use-package My understanding, in
 ;; reading straight documentation is that it has better load
 ;; times. However, the configuration options I often see leverage
@@ -66,38 +62,6 @@
 ;; I saw that straight loaded use-package to take advantage of the
 ;; use-package syntax which is often how things are documented.
 (straight-use-package 'use-package)
-
-;; When you open Emacs, grab all the space on the screen
-(add-to-list 'initial-frame-alist '(fullscreen . maximized))
-
-;; Hide the icons of the Emacs toolbar
-(tool-bar-mode -1)
-
-;; Hide the scroll bar. Let's be clear, I don't use it.
-(scroll-bar-mode -1)
-
-;; Instead of typing "yes" or "no" short-circuit to "y" or "n"
-(defalias 'yes-or-no-p 'y-or-n-p)
-
-;; The default is 60.  It is rare that I need more than 15 or 20.
-;; However in my long use of Jumpcut there have been a few times where
-;; I get into the 80s on previous pastes.  Given that the kill ring is
-;; searchable via ivy/counsel, I think a larger value makes a lot of
-;; sense.
-(setq kill-ring-max 120)
-
-;; Given the number of symlinks, visit the "linked to" file.
-(setq vc-follow-symlinks t)
-
-;; When you open a new frame in an already running Emacs session
-;; set it to the full height but don't worry about the width
-(setq-default indent-tabs-mode nil) ;; Ensure tabs are expanded, not inserted
-(setq inhibit-startup-screen t) ;; Don't include the  emacs "start" window
-
-;; Put autosave files (ie #foo#) and backup files (ie foo~) in ~/.emacs.d/.
-;; See https://snarfed.org/gnu_emacs_backup_files
-;; create the autosave dir if necessary, since emacs won't.
-(make-directory "~/.emacs.d/autosaves/" t)
 
 
 ;; I'm just going to trust themes
@@ -153,6 +117,15 @@
 (setq-default cursor-type 'bar)
 (set-cursor-color "#44B4CC") ;; The text color of my
 (blink-cursor-mode t)
+
+;; Nice for neotree
+(use-package all-the-icons
+  :straight t)
+
+(use-package all-the-icons-dired
+  :straight t
+  :after all-the-icons
+  :hook (dired-mode . all-the-icons-dired-mode))
 
 ;; Write "kill" command inputs to disk
 (use-package savekill
@@ -328,34 +301,12 @@
 (use-package iedit
   :straight t)
 
-(global-so-long-mode)
-
-;; Parenthesis matching is one of the flaws in my Emacs setup as of
-;; this writing. I know that there are a lot of options out
-;; there—paredit, smartparens, etc.—but I haven’t sat down and really
-;; capital-L Learned a better solution than the TextMate-style bracket
-;; completion (which Emacs calls, somewhat fancifully, ‘electric’).
-;;
-;; https://blog.sumtypeofway.com/posts/emacs-config.html
-(electric-pair-mode)
-
-
-(use-package spaceline
-  :straight t)
-
-(use-package spaceline-all-the-icons
-  :straight t
-  :after spaceline
-  :config (spaceline-all-the-icons-theme)
-  (spaceline-all-the-icons--setup-neotree))
-
 ;; A window manager for emacs, allowing fast toggles between windows
 ;; as well as opening or moving those windows.
 ;; https://github.com/abo-abo/ace-window
 (use-package ace-window
   :straight t
   :bind (("M-o" . ace-window)))
-
 
 ;; "The long-awaited Emacs 27 support for native tabs is shaky, both
 ;; visually and in terms of functionality. As such, centaur-tabs is
@@ -400,6 +351,27 @@
          ("<M-s-left>" . #'spatial-navigate-backward-horizontal-bar)
          ("<M-s-right>" . #'spatial-navigate-forward-horizontal-bar)))
 
+
+(global-so-long-mode)
+
+;; Parenthesis matching is one of the flaws in my Emacs setup as of
+;; this writing. I know that there are a lot of options out
+;; there—paredit, smartparens, etc.—but I haven’t sat down and really
+;; capital-L Learned a better solution than the TextMate-style bracket
+;; completion (which Emacs calls, somewhat fancifully, ‘electric’).
+;;
+;; https://blog.sumtypeofway.com/posts/emacs-config.html
+(electric-pair-mode)
+
+
+(use-package spaceline
+  :straight t)
+
+(use-package spaceline-all-the-icons
+  :straight t
+  :after spaceline
+  :config (spaceline-all-the-icons-theme)
+  (spaceline-all-the-icons--setup-neotree))
 
 ;; Adding smartparens options
 (use-package smartparens
@@ -468,14 +440,6 @@
   :bind (("C-a" . crux-move-beginning-of-line)
          ("<f9>" . crux-kill-other-buffers)))
 
-;; Nice for neotree
-(use-package all-the-icons
-  :straight t)
-
-(use-package all-the-icons-dired
-  :straight t
-  :after all-the-icons
-  :hook (dired-mode . all-the-icons-dired-mode))
 
 ;; Favor neotree over sr-speedbar
 (use-package neotree
@@ -787,6 +751,7 @@
 ;; With the latest update of org-roam, things again behavior
 ;; correctly.  Now I can just load org-roam as part of my day to day
 (require 'jnf-org-roam.el)
+(require 'jnf-basic-config.el)
 (require 'jnf-git.el)
 (require 'jnf-spelling.el)
 (require 'jnf-typopunct.el)
