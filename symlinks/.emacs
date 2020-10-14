@@ -218,7 +218,8 @@
   :ensure t
   :init (setq ivy-use-selectable-prompt t)
   (setq search-default-mode #'char-fold-to-regexp)
-  :bind (("M-x" . counsel-M-x))
+  :bind (("M-x" . counsel-M-x)
+         ("C-x C-f" . counsel-find-file))
   :config (counsel-mode 1))
 (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
 (defalias 'recent 'counsel-recentf)
@@ -569,7 +570,6 @@
 (use-package neotree
   :straight t
   :ensure t
-
   :init (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
   (setq-default neo-window-width 36)
   :config (global-set-key [f8] 'neotree-toggle))
@@ -586,13 +586,6 @@
 (add-hook 'before-save-hook
           'delete-trailing-whitespace)
 
-;; (use-package column-enforce-mode
-;;   :straight t
-;;   :ensure t
-;;
-;;   :init (setq column-enforce-column 80))
-;; (global-column-enforce-mode t)
-
 (use-package unfill
   :straight t
   :ensure t
@@ -600,10 +593,10 @@
 
 (use-package emmet-mode
   :straight t
+  :hook ((sgml-mode . emmet-mode)
+         (html-mode . emmet-mode)
+         (css-mode . emmet-mode))
   :ensure t)
-(add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
-(add-hook 'css-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.
-
 
 ;; https://github.com/jrblevin/markdown-mode/
 (use-package markdown-mode
@@ -807,8 +800,8 @@ to consider doing so."
       (kill-new filename)
       (message "Copied buffer file name '%s' to the clipboard." filename))))
 
+
 ;; I never want these.
-(unbind-key "C-x C-f") ;; find-file-read-only
 (unbind-key "C-x C-d") ;; list-directory
 (unbind-key "C-z") ;; suspend-frame
 
