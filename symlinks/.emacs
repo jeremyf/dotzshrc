@@ -354,7 +354,9 @@
 
 (use-package string-inflection
   :ensure t
-  :straight (string-inflection :type git :host github :repo "akicho8/string-inflection")
+  :straight (string-inflection :type git
+                               :host github
+                               :repo "akicho8/string-inflection")
   :bind (("H-u" . string-inflection-all-cycle)
          ("C-M-u" . string-inflection-all-cycle))) ;; CTRL+OPT+u
 
@@ -457,7 +459,9 @@
          ("C-c C-o" . #'centaur-tabs-open-directory-in-external-application)))
 
 (use-package spatial-navigate
-  :straight (spatial-navigate :type git :host gitlab :repo "ideasman42/emacs-spatial-navigate")
+  :straight (spatial-navigate :type git
+                              :host gitlab
+                              :repo "ideasman42/emacs-spatial-navigate")
   :ensure t
   :bind (("<M-s-up>" . #'spatial-navigate-backward-vertical-bar)
          ("<M-s-down>" . #'spatial-navigate-forward-vertical-bar)
@@ -476,7 +480,9 @@
 ;; understands the mode you're in and puts the snippet in the right
 ;; place.
 (use-package yasnippets
-  :straight (yasnippets :type git :host github :repo "joaotavora/yasnippet")
+  :straight (yasnippets :type git
+                        :host github
+                        :repo "joaotavora/yasnippet")
   :ensure t
 
   :after company
@@ -649,7 +655,10 @@
          (go-mode . tree-sitter-hl-mode)))
 
 (use-package tree-sitter-langs
-  :straight (tree-sitter-langs :type git :host github :repo "ubolonton/emacs-tree-sitter" :files ("langs/*.el" "langs/queries"))
+  :straight (tree-sitter-langs :type git
+                               :host github
+                               :repo "ubolonton/emacs-tree-sitter"
+                               :files ("langs/*.el" "langs/queries"))
   :ensure t)
 
 (use-package undo-tree
@@ -861,7 +870,9 @@ to consider doing so."
 ;; BEGIN ORG mode configuration and concerns
 
 (use-package org-sidebar
-  :straight (org-sidebar :type git :host github :repo "alphapapa/org-sidebar")
+  :straight (org-sidebar :type git
+                         :host github
+                         :repo "alphapapa/org-sidebar")
   :ensure t
   :bind (
          ("C-c l" . org-store-link)
