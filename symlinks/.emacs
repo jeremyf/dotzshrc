@@ -385,13 +385,6 @@
   :bind (("H-u" . string-inflection-all-cycle)
          ("C-M-u" . string-inflection-all-cycle)))
 
-(use-package writegood-mode
-  :ensure t
-  :straight t
-  :bind ("C-c w" . writegood-mode)
-  :config
-  (add-to-list 'writegood-weasel-words "actionable"))
-
 ;; Allow to work with multipe cursors
 ;; https://melpa.org/#/multiple-cursors Aside from the
 ;; set-rectangular-region-anchor, there are several additional
@@ -617,41 +610,6 @@
 ;;
 ;; END typopunct
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(use-package flycheck
-  :after org
-  :straight t
-  :ensure t
-  :hook
-  (org-src-mode . disable-flycheck-for-elisp)
-  :custom
-  (flycheck-emacs-lisp-initialize-packages t)
-  (flycheck-display-errors-delay 0.1)
-  :config
-  (global-flycheck-mode)
-  (flycheck-set-indication-mode 'left-margin)
-
-  (defun disable-flycheck-for-elisp ()
-    (setq-local flycheck-disabled-checkers '(emacs-lisp-checkdoc)))
-
-  (add-to-list 'flycheck-checkers 'proselint))
-
-(use-package flyspell-correct
-  :straight t
-  :ensure t
-  )
-
-(use-package flyspell-correct-ivy
-  :straight t
-  :ensure t
-  :config (global-set-key (kbd "C-,") 'flyspell-buffer))
-
-;; Run flyspell-buffer
-(use-package flyspell-popup
-  :straight t
-  :ensure t
-  :bind (("C-'" . #'flyspell-popup-correct))
-  :hook (flyspell-mode . flyspell-popup-auto-correct-mode))
 
 ;; A rather convenient snippet manager.  When you create a snippet, it
 ;; understands the mode you're in and puts the snippet in the right
@@ -1157,6 +1115,7 @@ to consider doing so."
 ;; With the latest update of org-roam, things again behavior
 ;; correctly.  Now I can just load org-roam as part of my day to day
 (require 'jnf-org-roam.el)
+(require 'jnf-spelling.el)
 
 (global-set-key (kbd "<f2>") `(
                                lambda ()
