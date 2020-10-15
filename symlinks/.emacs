@@ -63,10 +63,11 @@
   :init (setq ivy-use-selectable-prompt t)
   (setq search-default-mode #'char-fold-to-regexp)
   :bind (("M-x" . counsel-M-x)
-         ("C-x C-f" . counsel-find-file))
-  :config (counsel-mode 1))
+         ("C-x C-f" . counsel-find-file)
+         ("s-r" . counsel-recentf))
+  :config (counsel-mode 1)
+  (defalias 'recent 'counsel-recentf))
 (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
-(defalias 'recent 'counsel-recentf)
 
 (use-package all-the-icons-ivy-rich
   :straight t

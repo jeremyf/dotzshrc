@@ -13,6 +13,7 @@
   :bind (:map org-roam-mode-map
               (("C-c r l" . org-roam)
                ("C-c r f" . org-roam-find-file)
+               ("C-c r i" . org-roam-insert)
                ("C-c r c" . org-roam-capture)
                ("C-c r x" . org-roam-jump-to-index)
                ("C-c r g" . org-roam-graph-show))
@@ -114,9 +115,6 @@
 (global-set-key (kbd "<f3>") 'org-roam-jump-to-index)
 (global-set-key (kbd "<f4>") `(lambda () (interactive)(find-file "~/git/org/permanent/card_index.org")))
 (global-set-key (kbd "<f6>") `(lambda () (interactive)(find-file "~/git/org/permanent/bibliographic_index.org")))
-
-(global-set-key (kbd "s-i") 'org-roam-insert)
-(global-set-key (kbd "s-r") 'org-roam-find-file)
 
 (provide 'jnf-org-roam.el)
 ;;; jnf-org-roam.el ends here
