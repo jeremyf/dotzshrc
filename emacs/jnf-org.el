@@ -69,9 +69,9 @@
 
 (defalias 'roll 'org-d20-roll-at-point)
 
-(use-package org-bullets
+(use-package org-superstar
   :straight t
-  :hook ((org-mode . org-bullets-mode)
+  :hook ((org-mode . org-superstar-mode)
          (org-mode . turn-on-visual-line-mode)))
 
 ;; See
