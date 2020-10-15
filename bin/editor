@@ -1,4 +1,4 @@
 #/bin/sh
 
 # A shell-script for predictable editing via emacsclient
-emacsclient -cn -a "emacs" --frame-parameters="((fullscreen . maximized)(font . \"MesloLGS NF 13\")))" "$@"
+emacsclient --create-frame --no-wait --alternate-editor="emacs" --frame-parameters="((fullscreen . maximized)(font . \"MesloLGS NF 13\")))" "$@"
