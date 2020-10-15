@@ -17,6 +17,9 @@
          ("C-c c" . org-capture)
          ("C-c t" . org-toggle-link-display)))
 
+;; Uncomment to always launch org mode with a sidebar tree
+;; (add-hook 'org-mode-hook #'org-sidebar-tree)
+
 (setq org-directory "~/git/org")
 (setq org-agenda-files (list "~/git/org"))
 (setq org-default-notes-file (concat org-directory "/captured-notes.org"))
@@ -90,6 +93,30 @@
  'org-babel-load-languages
  '((emacs-lisp . t)
    (ruby . t)))
+
+(global-set-key (kbd "<f2>") `(
+                               lambda ()
+                               (interactive)
+                               (find-file "~/git/org/agenda.org")))
+(global-set-key (kbd "<f5>") `(lambda () (interactive)(find-file "~/git/org/troubleshooting.org")))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; BEGIN ORG ROAM  and concerns
+
+;; For some reason, when I load emacs in daemon mode, the daemon
+;; process is the process now renders the GET prompts for the
+;; mini-buffer.  When I load the file interactively, I don't
+;; experience the same problem.  So, until this resolves, I'll need to
+;; load roam via an interactive command.
+;; (global-set-key (kbd "<f11>") `(lambda ()
+;;                                 (interactive)
+;;                                 (require 'jnf-org-roam.el)
+;;                                 ))
+;;
+;; With the latest update of org-roam, things again behavior
+;; correctly.  Now I can just load org-roam as part of my day to day
+
 
 (use-package org-roam
   :straight t
@@ -200,16 +227,6 @@
 (global-set-key (kbd "<f3>") 'org-roam-jump-to-index)
 (global-set-key (kbd "<f4>") `(lambda () (interactive)(find-file "~/git/org/permanent/card_index.org")))
 (global-set-key (kbd "<f6>") `(lambda () (interactive)(find-file "~/git/org/permanent/bibliographic_index.org")))
-
-(global-set-key (kbd "<f2>") `(
-                               lambda ()
-                               (interactive)
-                               (find-file "~/git/org/agenda.org")))
-(global-set-key (kbd "<f5>") `(lambda () (interactive)(find-file "~/git/org/troubleshooting.org")))
-(global-set-key (kbd "<f12>") `(lambda () (interactive)(find-file "~/git/dotzshrc/symlinks/.emacs")))
-
-;; Uncomment to always launch org mode with a sidebar tree
-;; (add-hook 'org-mode-hook #'org-sidebar-tree)
 
 (provide 'jnf-org.el)
 ;;; jnf-org.el ends here

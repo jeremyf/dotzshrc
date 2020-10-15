@@ -165,5 +165,23 @@
   :straight t
   :config (whole-line-or-region-global-mode))
 
+
+;; https://blog.sumtypeofway.com/posts/emacs-config.html
+;; Replaces the duplicate line function I once had
+(use-package duplicate-thing
+  :straight t
+  :init
+  (defun my-duplicate-thing ()
+    "Duplicate thing at point without changing the mark."
+    (interactive)
+    (save-mark-and-excursion (duplicate-thing 1)))
+  :bind (("C-M-d" . my-duplicate-thing)))
+
+(global-set-key (kbd "s-/") 'comment-line)
+(global-set-key (kbd "s-l") 'goto-line)
+(global-set-key (kbd "M-DEL") 'backward-kill-paragraph)
+(global-set-key (kbd "s-q") 'save-buffers-kill-terminal)
+(global-set-key (kbd "s-w") 'kill-current-buffer)
+
 (provide 'jnf-in-buffer.el)
 ;;; jnf-in-buffer.el ends here

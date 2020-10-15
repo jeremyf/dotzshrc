@@ -293,11 +293,7 @@
 
 
 ;; Open svg files in xml-mode (instead of image rendering mode)
-(add-to-list `auto-mode-alist
-             '("\\.svg\\'" . xml-mode))
-
-
-
+(add-to-list `auto-mode-alist '("\\.svg\\'" . xml-mode))
 
 ;; Allow emacs to be the editor for textareas on a webpage.
 ;;
@@ -336,14 +332,6 @@
 (global-set-key (kbd "C-s-b") 'switch-to-buffer-other-window) ;; CTRL+CMD+b
 (setq browse-url-browser-function 'eww-browse-url)
 
-(global-set-key (kbd "s-/") 'comment-line)
-(global-set-key (kbd "s-l") 'goto-line)
-;; (global-set-key (kbd "C-w") 'backward-kill-word)
-(global-set-key (kbd "M-DEL") 'backward-kill-paragraph)
-(global-set-key (kbd "s-q") 'save-buffers-kill-terminal)
-(global-set-key (kbd "s-w") 'kill-current-buffer)
-
-
 ;; https://blog.sumtypeofway.com/posts/emacs-config.html
 (defun jnf/revert-to-two-windows ()
   "Delete all other windows and split it into two."
@@ -361,33 +349,7 @@
     (progn (add-to-list 'load-path "~/git/dotzshrc/emacs/gnu-linux")
            (require 'emacs-config.el)))
 
-;; https://blog.sumtypeofway.com/posts/emacs-config.html
-;; Replaces the duplicate line function I once had
-(use-package duplicate-thing
-  :straight t
-  :init
-  (defun my-duplicate-thing ()
-    "Duplicate thing at point without changing the mark."
-    (interactive)
-    (save-mark-and-excursion (duplicate-thing 1)))
-  :bind (("C-M-d" . my-duplicate-thing)))
 
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; BEGIN ORG mode configuration and concerns
-
-;; For some reason, when I load emacs in daemon mode, the daemon
-;; process is the process now renders the GET prompts for the
-;; mini-buffer.  When I load the file interactively, I don't
-;; experience the same problem.  So, until this resolves, I'll need to
-;; load roam via an interactive command.
-;; (global-set-key (kbd "<f11>") `(lambda ()
-;;                                 (interactive)
-;;                                 (require 'jnf-org-roam.el)
-;;                                 ))
-;;
-;; With the latest update of org-roam, things again behavior
-;; correctly.  Now I can just load org-roam as part of my day to day
 (require 'jnf-org.el)
 (require 'jnf-basic-config.el)
 (require 'jnf-git.el)
@@ -397,8 +359,7 @@
 (require 'jnf-elfeed.el)
 (require 'jnf-in-buffer.el)
 
-;; END ORG mode configuration and concerns
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(global-set-key (kbd "<f12>") `(lambda () (interactive)(find-file "~/git/dotzshrc/symlinks/.emacs")))
 
 (defun dotfiles--gc-on-last-frame-out-of-focus ()
   "GC if all frames are inactive."
