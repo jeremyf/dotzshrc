@@ -160,5 +160,10 @@
       (kill-new filename)
       (message "Copied buffer file name '%s' to the clipboard." filename))))
 
+
+(use-package whole-line-or-region
+  :straight t
+  :config (whole-line-or-region-global-mode))
+
 (provide 'jnf-in-buffer.el)
 ;;; jnf-in-buffer.el ends here
