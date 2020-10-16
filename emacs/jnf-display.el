@@ -90,6 +90,13 @@
   :config (smartparens-strict-mode 1)
   (smartparens-global-mode 1))
 
+;; Core APIs of tree-sitter
+(use-package tsc
+	     :straight (tsc :host github
+			    :repo "ubolonton/emacs-tree-sitter"
+			    :files ("core/*.el")))
+
+;; Base framework, syntax highlighting.
 (use-package tree-sitter
   :straight (tree-sitter :host github
                          :repo "ubolonton/emacs-tree-sitter"
@@ -102,6 +109,7 @@
          (typescript-mode . tree-sitter-hl-mode)
          (go-mode . tree-sitter-hl-mode)))
 
+;; Language bundle.
 (use-package tree-sitter-langs
   :straight (tree-sitter-langs :type git
                                :host github
