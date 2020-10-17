@@ -261,13 +261,6 @@
 (use-package avy
   :straight t)
 
-;; I don't use a lot of folding, this allows me to type C-RET and fold
-;; the current block.  There's more it can do but for now that's
-;; enough
-(use-package yafolding
-  :straight t
-  :hook (prog-mode . yafolding-mode))
-
 (use-package json-mode
   :straight t)
 

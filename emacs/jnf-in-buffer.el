@@ -25,6 +25,13 @@
 (use-package savekill
   :straight t)
 
+;; I don't use a lot of folding, this allows me to type C-RET and fold
+;; the current block.  There's more it can do but for now that's
+;; enough
+(use-package yafolding
+  :straight t
+  :hook (prog-mode . yafolding-mode))
+
 ;; Expand or contract point/region to next logical element.
 (use-package expand-region
   :straight t
