@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: newthought
+# key: nt
+# --
+<span class="newthought">$1</span>$0

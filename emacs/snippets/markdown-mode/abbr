@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: abbr
+# key: ab
+# --
+{{< abbr "$1" >}} $0
