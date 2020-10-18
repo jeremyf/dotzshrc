@@ -42,6 +42,12 @@
                                            :weight bold
                                            :background "#f2f7ed"))))
    )
+   ;; Main typeface
+  (set-face-attribute 'default nil :family "Hack" :height 130)
+  ;; Proportionately spaced typeface
+  (set-face-attribute 'variable-pitch nil :family "FiraGO" :height 1.0)
+  ;; Monospaced typeface
+  (set-face-attribute 'fixed-pitch nil :family "Hack" :height 1.0)
   (defadvice load-theme (before theme-dont-propagate activate)
     "Disable theme before loading new one."
     (mapc #'disable-theme custom-enabled-themes))
