@@ -253,3 +253,5 @@
 	rebase = true
 [init]
 	defaultBranch = trunk
+[commit]
+	verbose = true
