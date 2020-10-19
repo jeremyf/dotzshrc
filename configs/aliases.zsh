@@ -1,6 +1,6 @@
 # For bare-metal emacs
 export EDITOR='editor'
-export GIT_EDITOR=$EDITOR
+export GIT_EDITOR='git_editor'
 
 # Prompt for confirmation
 alias e=$EDITOR
