@@ -18,6 +18,7 @@
   :bind (:map org-roam-mode-map
               (("C-c r l" . org-roam)
                ("C-c r f" . org-roam-find-file)
+               ("s-1" . org-roam-find-file)
                ("C-c r i" . org-roam-insert)
                ("C-c r c" . org-roam-capture)
                ("C-c r x" . org-roam-jump-to-index)
