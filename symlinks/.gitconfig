@@ -234,6 +234,7 @@
         extendedRegexp = true
 [core]
         excludesfile = ~/.gitignore
+        attributesfile = ~/.gitattributes
         # Set via install script
         # pager
 [rebase]
