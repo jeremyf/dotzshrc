@@ -42,15 +42,16 @@
                                            :weight bold
                                            :background "#f2f7ed"))))
    )
-   ;; Main typeface
-  (set-face-attribute 'default nil :family "Hack" :height 130)
+   ;; Main typeface, I'm toggling between "JetBrains Mono" and "Hack"
+  (set-face-attribute 'default nil :family "JetBrains Mono" :height 140)
   ;; Proportionately spaced typeface
-  (set-face-attribute 'variable-pitch nil :family "FiraGO" :height 1.0)
+  (set-face-attribute 'variable-pitch nil :family "Times" :height 1.0)
   ;; Monospaced typeface
-  (set-face-attribute 'fixed-pitch nil :family "Hack" :height 1.0)
+  (set-face-attribute 'fixed-pitch nil :family "JetBrains Mono" :height 1.0)
   (defadvice load-theme (before theme-dont-propagate activate)
     "Disable theme before loading new one."
     (mapc #'disable-theme custom-enabled-themes))
+
   (load-theme 'modus-operandi t))
 
 (use-package modus-vivendi-theme
@@ -66,10 +67,12 @@
     (disable-theme 'modus-vivendi)
     (load-theme 'modus-operandi t)))
 
+;; The text color of my
+(set-cursor-color (cdr(assoc "red-alt-other" modus-operandi-theme-default-colors-alist)))
+(blink-cursor-mode t)
+
 ;; Doing a bit of configuration of my cursors
 (setq-default cursor-type 'bar)
-(set-cursor-color "#44B4CC") ;; The text color of my
-(blink-cursor-mode t)
 
 
 ;; Nice for neotree

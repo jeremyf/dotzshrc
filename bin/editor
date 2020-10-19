@@ -1,24 +1,24 @@
 #/bin/sh
 
-# A shell-script for predictable editing via emacsclient
+# A shell-script for predictable editing via /usr/local/bin/emacsclient
 
 # Determine if we have an existing emacs daemon
 ps ax | grep --quiet  emacs | grep --quiet daemon
 if [ "$?" != "1" ]; then
   # Launch an emacs daemon
   # emacs --daemon -fn "MesloLGS NF 13" --debug-init
-  emacs --daemon -fn "Hack 13" --debug-init
+  /usr/local/bin/emacs --daemon -fn "Hack 14" --debug-init
 fi
 
 # Now that we know we have an emacs daemon, determine if we have an
 # existing frame.  The goal is to not proliferate frames, but
 # instead edit the specified file(s) to an existing frame.
-emacsclient --no-wait -e "(if (> (length (frame-list)) 1) 't)" | grep -q t
+/usr/local/bin/emacsclient --no-wait -e "(if (> (length (frame-list)) 1) 't)" | grep -q t
 
 if [ "$?" = "1" ]; then
   # If a frame does not exist, create a frame
-  emacsclient --create-frame --no-wait --alternate-editor="" --frame-parameters="((fullscreen . maximized)(font . \"Hack 13\")))" "$@"
+  /usr/local/bin/emacsclient --create-frame --no-wait --alternate-editor="" --frame-parameters="((fullscreen . maximized)(font . \"Hack 14\")))" "$@"
 else
   # If a frame does exist, attach to that frame
-  emacsclient --no-wait --alternate-editor="" --frame-parameters="((fullscreen . maximized)(font . \"Hack 13\")))" "$@"
+  /usr/local/bin/emacsclient --no-wait --alternate-editor="" --frame-parameters="((fullscreen . maximized)(font . \"Hack 14\")))" "$@"
 fi
