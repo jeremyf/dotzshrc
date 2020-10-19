@@ -7,7 +7,7 @@ ps ax | grep --quiet  emacs | grep --quiet daemon
 if [ "$?" != "1" ]; then
   # Launch an emacs daemon
   # emacs --daemon -fn "MesloLGS NF 13" --debug-init
-  /usr/local/bin/emacs --daemon -fn "Hack 14" --debug-init
+  /usr/local/bin/emacs --daemon --debug-init
 fi
 
 # Now that we know we have an emacs daemon, determine if we have an
@@ -17,8 +17,8 @@ fi
 
 if [ "$?" = "1" ]; then
   # If a frame does not exist, create a frame
-  /usr/local/bin/emacsclient --create-frame --alternate-editor="" --frame-parameters="((fullscreen . maximized)(font . \"Hack 14\")))" "$@"
+  /usr/local/bin/emacsclient --create-frame --alternate-editor="" --frame-parameters="((fullscreen . maximized)))" "$@"
 else
   # If a frame does exist, attach to that frame
-  /usr/local/bin/emacsclient --alternate-editor="" --frame-parameters="((fullscreen . maximized)(font . \"Hack 14\")))" "$@"
+  /usr/local/bin/emacsclient --alternate-editor="" --frame-parameters="((fullscreen . maximized)))" "$@"
 fi

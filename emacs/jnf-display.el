@@ -14,6 +14,9 @@
 ;; I'm just going to trust themes
 (setq custom-safe-themes t)
 
+(add-to-list 'default-frame-alist '(font . "JetBrains Mono 14" ))
+(set-face-attribute 'default t :font "JetBrains Mono 14" )
+
 (use-package modus-operandi-theme
   :straight t
   :init
@@ -42,12 +45,6 @@
                                            :weight bold
                                            :background "#f2f7ed"))))
    )
-   ;; Main typeface, I'm toggling between "JetBrains Mono" and "Hack"
-  (set-face-attribute 'default nil :family "JetBrains Mono" :height 140)
-  ;; Proportionately spaced typeface
-  (set-face-attribute 'variable-pitch nil :family "Times" :height 1.0)
-  ;; Monospaced typeface
-  (set-face-attribute 'fixed-pitch nil :family "JetBrains Mono" :height 1.0)
   (defadvice load-theme (before theme-dont-propagate activate)
     "Disable theme before loading new one."
     (mapc #'disable-theme custom-enabled-themes))
@@ -70,6 +67,14 @@
 ;; The text color of my
 (set-cursor-color (cdr(assoc "red-alt-other" modus-operandi-theme-default-colors-alist)))
 (blink-cursor-mode t)
+
+;; Main typeface, I'm toggling between "JetBrains Mono" and "Hack"
+(set-face-attribute 'default nil :family "JetBrains Mono" :height 140)
+;; Proportionately spaced typeface
+(set-face-attribute 'variable-pitch nil :family "Times" :height 1.0)
+;; Monospaced typeface
+(set-face-attribute 'fixed-pitch nil :family "JetBrains Mono" :height 1.0)
+
 
 ;; Doing a bit of configuration of my cursors
 (setq-default cursor-type 'bar)

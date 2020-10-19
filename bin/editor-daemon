@@ -1,4 +1,4 @@
 #/bin/sh
 
 pkill -f emacs
-emacs --daemon -fn "MesloLGS NF 13" --debug-init
+emacs --daemon --debug-init
