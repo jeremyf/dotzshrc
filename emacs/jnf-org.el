@@ -111,7 +111,7 @@
                                 (require 'jnf-org-roam.el)
                                 ))
 
-;; (require 'jnf-org-roam.el)
+(require 'jnf-org-roam.el)
 
 (provide 'jnf-org.el)
 ;;; jnf-org.el ends here
