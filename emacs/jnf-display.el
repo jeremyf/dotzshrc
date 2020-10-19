@@ -86,6 +86,8 @@
                                              :background "#f2f7ed")))))
     (load-theme 'modus-operandi t)))
 
+(global-set-key (kbd "<s-clear>") 'modus-themes-toggle)
+
 ;; The text color of my
 (set-cursor-color (cdr(assoc "red-alt-other" modus-operandi-theme-default-colors-alist)))
 (blink-cursor-mode t)
