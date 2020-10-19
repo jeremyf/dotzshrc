@@ -88,9 +88,9 @@
 
 (global-set-key (kbd "<s-clear>") 'modus-themes-toggle)
 
-;; The text color of my
-(set-cursor-color (cdr(assoc "red-alt-other" modus-operandi-theme-default-colors-alist)))
 (blink-cursor-mode t)
+;; Doing a bit of configuration of my cursors
+(setq-default cursor-type 'bar)
 
 ;; Main typeface, I'm toggling between "JetBrains Mono" and "Hack"
 (set-face-attribute 'default nil :family "JetBrains Mono" :height 140)
@@ -98,10 +98,6 @@
 (set-face-attribute 'variable-pitch nil :family "Times" :height 1.0)
 ;; Monospaced typeface
 (set-face-attribute 'fixed-pitch nil :family "JetBrains Mono" :height 1.0)
-
-
-;; Doing a bit of configuration of my cursors
-(setq-default cursor-type 'bar)
 
 
 ;; Nice for neotree
