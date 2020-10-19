@@ -52,6 +52,18 @@
   (load-theme 'modus-operandi t))
 
 (use-package modus-vivendi-theme
+  :init
+  (setq modus-vivendi-theme-org-blocks 'rainbow)
+  (setq modus-vivendi-theme-completions 'opinionated)
+  (setq modus-vivendi-theme-fringes 'subtle)
+  (setq modus-vivendi-theme-scale-headings t
+        modus-vivendi-theme-slanted-constructs t
+        modus-vivendi-theme-bold-constructs t
+        modus-vivendi-theme-faint-syntax nil
+        modus-vivendi-theme-intense-hl-line nil
+        modus-vivendi-theme-mode-line 'moody
+        modus-vivendi-theme-completions 'opinionated
+        modus-vivendi-theme-intense-paren-match t)
   :straight t)
 
 (defun modus-themes-toggle ()
@@ -60,8 +72,18 @@
   (if (eq (car custom-enabled-themes) 'modus-operandi)
       (progn
         (disable-theme 'modus-operandi)
+        (custom-set-faces
+         `(font-lock-variable-name-face ((t(:foreground ,(cdr(assoc "blue" modus-vivendi-theme-default-colors-alist))))))
+         `(font-lock-string-face ((t(:foreground ,(cdr(assoc "green" modus-vivendi-theme-default-colors-alist)) :weight bold))))
+	 )
         (load-theme 'modus-vivendi t))
     (disable-theme 'modus-vivendi)
+    (custom-set-faces
+     `(font-lock-variable-name-face ((t(:foreground ,(cdr(assoc "blue" modus-operandi-theme-default-colors-alist))
+                                                    :background "#e6edff"))))
+     `(font-lock-string-face ((t(:foreground ,(cdr(assoc "green" modus-operandi-theme-default-colors-alist))
+                                             :weight bold
+                                             :background "#f2f7ed")))))
     (load-theme 'modus-operandi t)))
 
 ;; The text color of my
