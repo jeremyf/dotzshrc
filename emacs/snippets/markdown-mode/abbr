@@ -1,5 +1,7 @@
 # -*- mode: snippet -*-
-# name: abbr
-# key: ab
+# contributor: Jeremy Friesen <jeremy.n.friesen@gmail.com>
+# group: hugo
+# key: abbr
+# name: {{< abbr >}}
 # --
 {{< abbr "$1" >}} $0

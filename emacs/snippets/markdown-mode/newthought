@@ -1,5 +1,7 @@
 # -*- mode: snippet -*-
-# name: newthought
-# key: nt
+# contributor: Jeremy Friesen <jeremy.n.friesen@gmail.com>
+# group: hugo
+# key: newthought
+# name: <span class=\"newthought\">
 # --
 <span class="newthought">$1</span>$0

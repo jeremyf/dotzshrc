@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# contributor: Jeremy Friesen
+# group: hugo
+# key: update
+# name: {{< update >}}
+# --
+{{< update date="`(format-time-string "%Y-%m-%d")` mode="${2:$$(yas-choose-value '("marginnote" "paragraph" "sidenote" "section"))}" >}}$0{{< /update >}}
