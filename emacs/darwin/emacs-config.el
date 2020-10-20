@@ -19,14 +19,14 @@
   :ensure t
   :straight t
   :defer 1)
-(global-set-key (kbd "C-c C-g") 'grab-mac-link)
+(global-set-key (kbd "C-c g") 'grab-mac-link)
 
 (use-package org-mac-link
   :ensure t
   :straight (org-mac-link :type git :host github :repo "jeremyf/org-mac-link")
   :defer t)
 (add-hook 'org-mode-hook (lambda ()
-                           (define-key org-mode-map (kbd "C-c C-g") 'org-mac-grab-link)))
+                           (define-key org-mode-map (kbd "C-c g") 'org-mac-grab-link)))
 
 
 (use-package pdf-tools
