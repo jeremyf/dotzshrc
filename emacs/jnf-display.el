@@ -30,6 +30,8 @@
         modus-operandi-theme-intense-hl-line nil
         modus-operandi-theme-mode-line 'moody
         modus-operandi-theme-completions 'opinionated
+        modus-operandi-theme-links 'faint
+        modus-operandi-theme-comments 'yellow
         modus-operandi-theme-intense-paren-match t)
   ;; :custom-face
   ;; I'd like to use the following, but I get interpretter errors:
@@ -63,6 +65,8 @@
         modus-vivendi-theme-intense-hl-line nil
         modus-vivendi-theme-mode-line 'moody
         modus-vivendi-theme-completions 'opinionated
+        modus-vivendi-theme-links 'faint
+        modus-vivendi-theme-comments 'yellow
         modus-vivendi-theme-intense-paren-match t)
   :straight t)
 
