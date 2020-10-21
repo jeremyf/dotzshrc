@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# contributor: Jeremy Friesen
+# group: hugo
+# key: table
+# name: {{< table >}}
+# --
+{{<table caption="$1">}}
+<thead>$0</thead>
+<tbody></tbody>
+{{</table>}}
