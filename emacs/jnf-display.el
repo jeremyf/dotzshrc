@@ -17,6 +17,13 @@
 (add-to-list 'default-frame-alist '(font . "JetBrains Mono 14" ))
 (set-face-attribute 'default t :font "JetBrains Mono 14" )
 
+;; Main typeface, I'm toggling between "JetBrains Mono" and "Hack"
+(set-face-attribute 'default nil :family "JetBrains Mono" :height 140)
+;; Proportionately spaced typeface
+(set-face-attribute 'variable-pitch nil :family "Times" :height 1.0)
+;; Monospaced typeface
+(set-face-attribute 'fixed-pitch nil :family "JetBrains Mono" :height 1.0)
+
 (use-package modus-operandi-theme
   :straight t
   :init
@@ -33,9 +40,6 @@
         modus-operandi-theme-links 'faint
         modus-operandi-theme-comments 'yellow
         modus-operandi-theme-intense-paren-match t)
-  ;; :custom-face
-  ;; I'd like to use the following, but I get interpretter errors:
-  ;;
   :config
   ;; To determine the face at point run kbd "C-u C-x =", the "C-x ="
   ;; is 'what-cursor-position, the prefix of C-u indicates to render
@@ -70,6 +74,14 @@
         modus-vivendi-theme-intense-paren-match t)
   :straight t)
 
+;; At present, I have not figured out enough about Emacs to remove the
+;; duplication present in the use-package modus-operandi-them and the
+;; below font-lock configuration.
+;;
+;; Note, I have not added font lock declarations to my
+;; modus-vivendi-theme, as I default to modus-operandi and use the
+;; toggle below to switch to vivendi.  Were I to default to vivendi,
+;; I'd need to make some updates to the config.
 (defun modus-themes-toggle ()
   "Toggle between `modus-operandi' and `modus-vivendi' themes."
   (interactive)
@@ -95,14 +107,6 @@
 (blink-cursor-mode t)
 ;; Doing a bit of configuration of my cursors
 (setq-default cursor-type 'bar)
-
-;; Main typeface, I'm toggling between "JetBrains Mono" and "Hack"
-(set-face-attribute 'default nil :family "JetBrains Mono" :height 140)
-;; Proportionately spaced typeface
-(set-face-attribute 'variable-pitch nil :family "Times" :height 1.0)
-;; Monospaced typeface
-(set-face-attribute 'fixed-pitch nil :family "JetBrains Mono" :height 1.0)
-
 
 ;; Nice for neotree
 (use-package all-the-icons
