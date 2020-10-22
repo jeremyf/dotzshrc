@@ -1,7 +1,7 @@
 # -*- mode: snippet -*-
 # contributor: Jeremy Friesen <jeremy.n.friesen@gmail.com>
-# group: hugo
-# key: abbr
+# group: takeonrules.com
+# key: ab
 # name: {{< abbr >}}
 # --
 {{< abbr "$1" >}} $0

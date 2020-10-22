@@ -1,7 +1,7 @@
 # -*- mode: snippet -*-
 # contributor: Jeremy Friesen
-# group: hugo
-# key: table
+# group: takeonrules.com
+# key: tab
 # name: {{< table >}}
 # --
 {{<table caption="$1">}}
