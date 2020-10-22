@@ -13,8 +13,7 @@
   :straight t
   :init (setq git-commit-fill-column 72) ;; Adding format to git-commit-fill-column of 72 as best practice.
   (setq git-commit-summary-max-length 50)
-  :bind (("H-g" . magit-status)
-         ("C-M-g" . magit-status)))
+  :bind (("C-c m" . magit-status)))
 
 (use-package forge
   :straight t)
