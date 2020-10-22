@@ -95,6 +95,15 @@
 (use-package ag
   :straight t
   :after counsel
+  :init
+  ;; There are two paths into ag, I most often (like 99.9% of the
+  ;; time) use the counsel-ag.  I want both ways into ag to be
+  ;; similar.
+  ;;
+  ;; I've added "--hidden --ignore-dir .git" to both of the default
+  ;; cases.
+  (setq counsel-ag-base-command "ag --hidden --ignore-dir .git --vimgrep %s"
+        ag-arguments (list "--smart-case" "--stats" "--hidden" "--ignore" ".git"))
   :bind (("C-c f" . counsel-ag)
          ("M-s-f" . counsel-ag))) ; Deprecated
 
