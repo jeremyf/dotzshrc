@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# contributor: Jeremy Friesen <jeremy.n.friesen@gmail.com>
+# group: hugo
+# key: mf
+# name: {{< marginfgure >}}
+# --
+{{% marginfigure src="/images/$1" alt="$2" caption="$3" ${4: rotate="${5:270}"}%}}$0
