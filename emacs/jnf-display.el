@@ -17,13 +17,6 @@
 (add-to-list 'default-frame-alist '(font . "JetBrains Mono 14" ))
 (set-face-attribute 'default t :font "JetBrains Mono 14" )
 
-;; Main typeface, I'm toggling between "JetBrains Mono" and "Hack"
-(set-face-attribute 'default nil :family "JetBrains Mono" :height 140)
-;; Proportionately spaced typeface
-(set-face-attribute 'variable-pitch nil :family "Times" :height 1.0)
-;; Monospaced typeface
-(set-face-attribute 'fixed-pitch nil :family "JetBrains Mono" :height 1.0)
-
 (use-package modus-operandi-theme
   :straight t
   :init
@@ -103,6 +96,26 @@
     (load-theme 'modus-operandi t)))
 
 (global-set-key (kbd "<s-clear>") 'modus-themes-toggle)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; BEGIN BLOCK
+;;
+;; With a quick bit of testing, it appears that the following
+;; set-face-attribute declarations should be made after the theme
+;; declarations.  When the following statements were declared before
+;; the themes, and I toggled my theme, the font changed to something
+;; unexpected.  With them declared after, I keep the fonts between
+;; toggles.
+;;
+;; Main typeface, I'm toggling between "JetBrains Mono" and "Hack"
+(set-face-attribute 'default nil :family "JetBrains Mono" :height 140)
+;; Proportionately spaced typeface
+(set-face-attribute 'variable-pitch nil :family "Times" :height 1.0)
+;; Monospaced typeface
+(set-face-attribute 'fixed-pitch nil :family "JetBrains Mono" :height 1.0)
+;;
+;; END BLOCK
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (blink-cursor-mode t)
 ;; Doing a bit of configuration of my cursors
