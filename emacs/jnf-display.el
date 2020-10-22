@@ -27,8 +27,6 @@
         modus-operandi-theme-slanted-constructs t
         modus-operandi-theme-bold-constructs t
         modus-operandi-theme-faint-syntax nil
-        modus-operandi-theme-intense-hl-line nil
-        modus-operandi-theme-mode-line 'moody
         modus-operandi-theme-completions 'opinionated
         modus-operandi-theme-links 'faint
         modus-operandi-theme-comments 'yellow
@@ -59,8 +57,6 @@
         modus-vivendi-theme-slanted-constructs t
         modus-vivendi-theme-bold-constructs t
         modus-vivendi-theme-faint-syntax nil
-        modus-vivendi-theme-intense-hl-line nil
-        modus-vivendi-theme-mode-line 'moody
         modus-vivendi-theme-completions 'opinionated
         modus-vivendi-theme-links 'faint
         modus-vivendi-theme-comments 'yellow
