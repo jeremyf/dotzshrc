@@ -85,7 +85,9 @@
          `(font-lock-variable-name-face ((t(:foreground ,(cdr(assoc "blue" modus-vivendi-theme-default-colors-alist))))))
          `(font-lock-string-face ((t(:foreground ,(cdr(assoc "green" modus-vivendi-theme-default-colors-alist)) :weight bold))))
 	 )
-        (load-theme 'modus-vivendi t))
+        (load-theme 'modus-vivendi t)
+        (set-background-color "#172637") ;; Background color for dark theme TakeOnRules.com
+        )
     (disable-theme 'modus-vivendi)
     (custom-set-faces
      `(font-lock-variable-name-face ((t(:foreground ,(cdr(assoc "blue" modus-operandi-theme-default-colors-alist))
@@ -93,9 +95,22 @@
      `(font-lock-string-face ((t(:foreground ,(cdr(assoc "green" modus-operandi-theme-default-colors-alist))
                                              :weight bold
                                              :background "#f2f7ed")))))
-    (load-theme 'modus-operandi t)))
+    (load-theme 'modus-operandi t)
+    (set-background-color "#fffff8") ;; Background color for light theme TakeOnRules.com
+    ))
 
 (global-set-key (kbd "<s-clear>") 'modus-themes-toggle)
+(global-set-key (kbd "s-9") 'modus-themes-toggle)
+
+;; I really like the background colors of my blog (light and dark
+;; mode).  I'm using this to over-write the background colors.  I
+;; don't not believe this to be the recommended way for Modus themes,
+;; but it's what I've found to work.
+;;
+;; As the theme continues to move toward v1.0, I'd imagine more clear
+;; instructions will emerge.  It turns out, I need more Elisp practice.
+(add-to-list 'default-frame-alist '(background-color . "#fffff8"))
+(set-background-color "#fffff8")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; BEGIN BLOCK
