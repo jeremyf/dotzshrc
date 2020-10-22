@@ -54,6 +54,7 @@
 
 (use-package string-inflection
   :bind (("H-u" . string-inflection-all-cycle)
+         ("C-c i" . string-inflection-all-cycle)
          ("C-M-u" . string-inflection-all-cycle)) ;; CTRL+OPT+u
   :straight (string-inflection :type git
                                :host github
@@ -164,7 +165,7 @@
                         :repo "joaotavora/yasnippet")
   :after company
   :config (push 'company-yasnippet company-backends)
-  :bind (("C-c C-e" . yas-expand))
+  ;; :bind (("C-c C-e" . yas-expand))
   :init (setq yas-snippet-dirs '("~/git/dotzshrc/emacs/snippets"))
   (yas-global-mode 1))
 
@@ -173,14 +174,15 @@
 
 
 ;; https://blog.sumtypeofway.com/posts/emacs-config.html
-(defun jnf/copy-file-name-to-clipboard ()
-  "Copy the current buffer file name to the clipboard."
+(defun jnf/nab-file-name-to-clipboard ()
+  "Nab, I mean copy, the current buffer file name to the clipboard."
   (interactive)
   (let ((filename (if (equal major-mode 'dired-mode) default-directory (buffer-file-name))))
     (when filename
       (kill-new filename)
       (message "Copied buffer file name '%s' to the clipboard." filename))))
-
+(global-set-key (kbd "C-c n") 'jnf/nab-file-name-to-clipboard)
+(global-set-key (kbd "M-n") 'jnf/nab-file-name-to-clipboard) ;; Deprecated
 
 (use-package whole-line-or-region
   :straight t
@@ -196,7 +198,8 @@
     "Duplicate thing at point without changing the mark."
     (interactive)
     (save-mark-and-excursion (duplicate-thing 1)))
-  :bind (("C-M-d" . my-duplicate-thing)))
+  :bind (("C-M-d" . my-duplicate-thing)
+         ("C-c d" . my-duplicate-thing)))
 
 (global-set-key (kbd "s-/") 'comment-line)
 (global-set-key (kbd "s-l") 'goto-line)

@@ -95,7 +95,8 @@
 (use-package ag
   :straight t
   :after counsel
-  :bind (("M-s-f" . counsel-ag)))
+  :bind (("C-c f" . counsel-ag)
+         ("M-s-f" . counsel-ag))) ; Deprecated
 
 ;; This package is amazing!!!  Render search results to a buffer, edit
 ;; the buffer and write back to the file hits.  There is not a ripgrep
@@ -196,8 +197,7 @@
 ;; behavior to Github. This one is bitbucket, github, sourcehut,
 ;; gitlab, etc.
 (use-package browse-at-remote
-  :straight t
-  :bind (("C-c b" . browse-at-remote)))
+  :straight t)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -313,11 +313,10 @@
 
 ;; I never want these.
 (unbind-key "C-x C-d") ;; list-directory
+(global-set-key (kbd "C-x C-d") 'dired)
 (unbind-key "C-z") ;; suspend-frame
 
-(global-set-key (kbd "C-c f") 'jnf/copy-file-name-to-clipboard)
-(global-set-key (kbd "M-n") 'jnf/copy-file-name-to-clipboard) ;; Deprecated
-(global-set-key (kbd "C-c C-b") 'browse-web) ;; CTRL+C CTRL+b
+
 (global-set-key (kbd "C-s-w") 'browse-url-at-point) ;; CTRL+CMD+w
 (global-set-key (kbd "s-b") 'switch-to-buffer) ;; CMD+b
 (global-set-key (kbd "C-s-b") 'switch-to-buffer-other-window) ;; CTRL+CMD+b
