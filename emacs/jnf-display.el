@@ -125,14 +125,17 @@
 (use-package all-the-icons
   :straight t)
 
+;; Incorporates file icons with file listings of dired
 (use-package all-the-icons-dired
   :straight t
   :after all-the-icons
   :hook (dired-mode . all-the-icons-dired-mode))
 
+;; A nice looking modeline enhancement
 (use-package spaceline
   :straight t)
 
+;; Add some visual flair to the modeline enhancements
 (use-package spaceline-all-the-icons
   :straight t
   :after spaceline
