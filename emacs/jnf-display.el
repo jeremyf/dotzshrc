@@ -20,28 +20,29 @@
 (use-package modus-operandi-theme
   :straight t
   :init
-  (setq modus-operandi-theme-org-blocks 'rainbow)
-  (setq modus-operandi-theme-completions 'opinionated)
-  (setq modus-operandi-theme-fringes 'subtle)
-  (setq modus-operandi-theme-scale-headings t
-        modus-operandi-theme-slanted-constructs t
+  (setq modus-operandi-theme-slanted-constructs t
         modus-operandi-theme-bold-constructs t
-        modus-operandi-theme-faint-syntax nil
-        modus-operandi-theme-completions 'opinionated
+        modus-operandi-theme-fringes 'subtle
+        modus-operandi-theme-mode-line '3d
+        modus-operandi-theme-syntax 'alt-syntax-yellow-comments
+        modus-operandi-theme-intense-paren-match t
         modus-operandi-theme-links 'faint
-        modus-operandi-theme-comments 'yellow
-        modus-operandi-theme-intense-paren-match t)
+        modus-operandi-theme-prompts 'intense
+        modus-operandi-theme-completions 'opinionated
+        modus-operandi-theme-diffs 'desaturated
+        modus-operandi-theme-org-blocks 'rainbow
+        modus-operandi-theme-scale-headings t)
   :config
   ;; To determine the face at point run kbd "C-u C-x =", the "C-x ="
   ;; is 'what-cursor-position, the prefix of C-u indicates to render
   ;; the detailed version of 'what-cursor-position
-  (custom-set-faces
-   `(font-lock-variable-name-face ((t(:foreground ,(cdr(assoc "blue" modus-operandi-theme-default-colors-alist))
-                                     :background "#e6edff"))))
-   `(font-lock-string-face ((t(:foreground ,(cdr(assoc "green" modus-operandi-theme-default-colors-alist))
-                                           :weight bold
-                                           :background "#f2f7ed"))))
-   )
+  ;; (custom-set-faces
+  ;;  `(font-lock-variable-name-face ((t(:foreground ,(cdr(assoc "blue" modus-operandi-theme-default-colors-alist))
+  ;;                                    :background "#e6edff"))))
+  ;;  `(font-lock-string-face ((t(:foreground ,(cdr(assoc "green" modus-operandi-theme-default-colors-alist))
+  ;;                                          :weight bold
+  ;;                                          :background "#f2f7ed"))))
+  ;;  )
   (defadvice load-theme (before theme-dont-propagate activate)
     "Disable theme before loading new one."
     (mapc #'disable-theme custom-enabled-themes))
@@ -50,17 +51,18 @@
 
 (use-package modus-vivendi-theme
   :init
-  (setq modus-vivendi-theme-org-blocks 'rainbow)
-  (setq modus-vivendi-theme-completions 'opinionated)
-  (setq modus-vivendi-theme-fringes 'subtle)
-  (setq modus-vivendi-theme-scale-headings t
-        modus-vivendi-theme-slanted-constructs t
+  (setq modus-vivendi-theme-slanted-constructs t
         modus-vivendi-theme-bold-constructs t
-        modus-vivendi-theme-faint-syntax nil
-        modus-vivendi-theme-completions 'opinionated
+        modus-vivendi-theme-fringes 'subtle
+        modus-vivendi-theme-mode-line '3d
+        modus-vivendi-theme-syntax 'alt-syntax-yellow-comments
+        modus-vivendi-theme-intense-paren-match t
         modus-vivendi-theme-links 'faint
-        modus-vivendi-theme-comments 'yellow
-        modus-vivendi-theme-intense-paren-match t)
+        modus-vivendi-theme-prompts 'intense
+        modus-vivendi-theme-completions 'opinionated
+        modus-vivendi-theme-diffs 'desaturated
+        modus-vivendi-theme-org-blocks 'rainbow
+        modus-vivendi-theme-scale-headings t)
   :straight t)
 
 ;; At present, I have not figured out enough about Emacs to remove the
@@ -77,20 +79,10 @@
   (if (eq (car custom-enabled-themes) 'modus-operandi)
       (progn
         (disable-theme 'modus-operandi)
-        (custom-set-faces
-         `(font-lock-variable-name-face ((t(:foreground ,(cdr(assoc "blue" modus-vivendi-theme-default-colors-alist))))))
-         `(font-lock-string-face ((t(:foreground ,(cdr(assoc "green" modus-vivendi-theme-default-colors-alist)) :weight bold))))
-	 )
         (load-theme 'modus-vivendi t)
         (set-background-color "#172637") ;; Background color for dark theme TakeOnRules.com
         )
     (disable-theme 'modus-vivendi)
-    (custom-set-faces
-     `(font-lock-variable-name-face ((t(:foreground ,(cdr(assoc "blue" modus-operandi-theme-default-colors-alist))
-                                                    :background "#e6edff"))))
-     `(font-lock-string-face ((t(:foreground ,(cdr(assoc "green" modus-operandi-theme-default-colors-alist))
-                                             :weight bold
-                                             :background "#f2f7ed")))))
     (load-theme 'modus-operandi t)
     (set-background-color "#fffff8") ;; Background color for light theme TakeOnRules.com
     ))
