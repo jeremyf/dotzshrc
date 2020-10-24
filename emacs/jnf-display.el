@@ -24,7 +24,7 @@
         modus-operandi-theme-bold-constructs t
         modus-operandi-theme-fringes 'subtle
         modus-operandi-theme-mode-line '3d
-        modus-operandi-theme-syntax 'alt-syntax-yellow-comments
+        modus-operandi-theme-syntax 'yellow-comments-green-strings
         modus-operandi-theme-intense-paren-match t
         modus-operandi-theme-links 'faint
         modus-operandi-theme-prompts 'intense
@@ -55,7 +55,7 @@
         modus-vivendi-theme-bold-constructs t
         modus-vivendi-theme-fringes 'subtle
         modus-vivendi-theme-mode-line '3d
-        modus-vivendi-theme-syntax 'alt-syntax-yellow-comments
+        modus-vivendi-theme-syntax 'yellow-comments-green-strings
         modus-vivendi-theme-intense-paren-match t
         modus-vivendi-theme-links 'faint
         modus-vivendi-theme-prompts 'intense
