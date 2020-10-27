@@ -207,6 +207,7 @@
 	oldest-ancestor = !zsh -c 'diff --old-line-format= --new-line-format= <(git rev-list --first-parent \"${1:-master}\") <(git rev-list --first-parent \"${2:-HEAD}\") | head -1' -
 	branchlog = !sh -c \"git log `git oldest-ancestor`..\"
 	new = !git init && git symbolic-ref HEAD refs/heads/trunk
+	home = "!f() { git reset --hard; git clean -d -f; git checkout $1; git pull --rebase; }; f"
 
         # This simpler version does not work because 'git stash save'
         # does not create a stash when the tree is clean. In that case,
