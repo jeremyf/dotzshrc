@@ -90,6 +90,10 @@
   :init (setq prescient-filter-method '(literal fuzzy regexp initialism))
   :config (ivy-prescient-mode t))
 
+(use-package company-prescient
+  :straight t
+  :config (company-prescient-mode t))
+
 ;; The silver searcher; I found ripgrep a bit nicer, but wait until
 ;; you try wgrep-ag
 (use-package ag
