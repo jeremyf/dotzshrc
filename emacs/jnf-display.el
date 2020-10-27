@@ -33,16 +33,6 @@
         modus-operandi-theme-org-blocks 'rainbow
         modus-operandi-theme-scale-headings t)
   :config
-  ;; To determine the face at point run kbd "C-u C-x =", the "C-x ="
-  ;; is 'what-cursor-position, the prefix of C-u indicates to render
-  ;; the detailed version of 'what-cursor-position
-  ;; (custom-set-faces
-  ;;  `(font-lock-variable-name-face ((t(:foreground ,(cdr(assoc "blue" modus-operandi-theme-default-colors-alist))
-  ;;                                    :background "#e6edff"))))
-  ;;  `(font-lock-string-face ((t(:foreground ,(cdr(assoc "green" modus-operandi-theme-default-colors-alist))
-  ;;                                          :weight bold
-  ;;                                          :background "#f2f7ed"))))
-  ;;  )
   (defadvice load-theme (before theme-dont-propagate activate)
     "Disable theme before loading new one."
     (mapc #'disable-theme custom-enabled-themes))
@@ -80,11 +70,11 @@
       (progn
         (disable-theme 'modus-operandi)
         (load-theme 'modus-vivendi t)
-        (set-background-color "#172637") ;; Background color for dark theme TakeOnRules.com
+        ;; (set-background-color "#172637") ;; Background color for dark theme TakeOnRules.com
         )
     (disable-theme 'modus-vivendi)
     (load-theme 'modus-operandi t)
-    (set-background-color "#fffff8") ;; Background color for light theme TakeOnRules.com
+    ;; (set-background-color "#fffff8") ;; Background color for light theme TakeOnRules.com
     ))
 
 (global-set-key (kbd "<s-clear>") 'modus-themes-toggle)
@@ -97,8 +87,8 @@
 ;;
 ;; As the theme continues to move toward v1.0, I'd imagine more clear
 ;; instructions will emerge.  It turns out, I need more Elisp practice.
-(add-to-list 'default-frame-alist '(background-color . "#fffff8"))
-(set-background-color "#fffff8")
+;; (add-to-list 'default-frame-alist '(background-color . "#fffff8"))
+;; (set-background-color "#fffff8")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; BEGIN BLOCK
