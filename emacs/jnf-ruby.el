@@ -27,10 +27,14 @@
   :straight t
   :hook (ruby-mode . yard-mode))
 
+(defun rubocop-autocheck-setup ()
+  (add-hook 'after-save-hook
+            'rubocop-check-current-file))
 ;; An ability to run and report Rubocop violations
 (use-package rubocop
   :straight t
-  :hook (ruby-mode . rubocop-mode))
+  :hook ((ruby-mode . rubocop-mode)
+         (ruby-mode . rubocop-autocheck-setup)))
 
 ;; A package to run a ruby process inside emacs.
 (use-package inf-ruby
