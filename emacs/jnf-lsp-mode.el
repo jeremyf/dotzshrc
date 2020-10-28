@@ -17,6 +17,8 @@
   :commands lsp-ivy-workspace-symbol)
 
 ;; This package provides some nice UI behavior for documentation and linting
+;;
+;; In particular, I like 'lsp-ui-peek-find-reference
 (use-package lsp-ui
   :commands lsp-ui-mode
   :hook ((ruby-mode . lsp-ui-mode)
