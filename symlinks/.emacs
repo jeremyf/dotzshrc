@@ -312,8 +312,6 @@
 ;; END Typescript
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-
-
 (use-package yaml-mode
   :straight t)
 
@@ -425,6 +423,7 @@ echo the method signature of `'delete-duplicate-lines`"
 (require 'jnf-ruby.el)
 (require 'jnf-elfeed.el)
 (require 'jnf-in-buffer.el)
+(require 'jnf-lsp-mode.el)
 
 (global-set-key (kbd "<f12>") `(lambda () (interactive)(find-file "~/git/dotzshrc/symlinks/.emacs")))
 
