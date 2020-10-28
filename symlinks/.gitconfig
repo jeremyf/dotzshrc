@@ -253,6 +253,6 @@
 [pull]
 	rebase = true
 [init]
-	defaultBranch = trunk
+	defaultBranch = main
 [commit]
 	verbose = true
