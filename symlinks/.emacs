@@ -285,6 +285,8 @@
   :straight t
   :mode (("\\.ts\\'" . typescript-mode)))
 
+;; Command `M-.` to jump to definition
+;; Command `M-,` to jump back from the definition
 (use-package tide
   :straight t)
 
