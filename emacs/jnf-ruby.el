@@ -21,11 +21,16 @@
   :bind (:map rspec-mode-map (("s-." . 'rspec-toggle-spec-and-target)))
   :hook (ruby-mode . rspec-mode))
 
-;; I most often write documentation using yard.  See https://yardoc.org.
+;; I most often write documentation using yard.  See
+;; https://yardoc.org.
 (use-package yard-mode
   :straight t
   :hook (ruby-mode . yard-mode))
 
+;; An ability to run and report Rubocop violations
+(use-package rubocop
+  :straight t
+  :hook (ruby-mode . rubocop-mode))
 
 ;; A package to run a ruby process inside emacs.
 (use-package inf-ruby
