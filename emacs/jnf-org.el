@@ -105,7 +105,7 @@ If no file is given default to the \"magic filename\"
   (let ((current_filename (if (equal major-mode 'dired-mode) default-directory (buffer-file-name))))
     (if (equal current_filename (expand-file-name filename))
         (progn (org-sidebar-toggle))
-      (find-file filename))))
+        (progn (find-file filename) (delete-other-windows)))))
 
 (global-set-key (kbd "<f2>") 'gorg)
 (global-set-key (kbd "<f5>") `(lambda () (interactive) (gorg "~/git/org/troubleshooting.org")))
