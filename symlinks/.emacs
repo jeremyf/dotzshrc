@@ -440,8 +440,7 @@ Tries to preserve the order of window buffers and active window."
     ;; Switch to previously visible buffer’s window.
     (select-window (get-buffer-window cbuf))))
 
-(bind-key "C-x \\" #'gk-layouts-3col)
-(bind-key "C-x C-\\" #'gk-layouts-main-and-sidekicks)
+(bind-key "C-x \\" #'gk-layouts-main-and-sidekicks)
 
 
 ;; END frame and window quick setup
