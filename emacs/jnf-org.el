@@ -104,7 +104,7 @@ If no file is given default to the \"magic filename\"
   (unless filename (setq filename "~/git/org/agenda.org"))
   (let ((current_filename (if (equal major-mode 'dired-mode) default-directory (buffer-file-name))))
     (if (equal current_filename (expand-file-name filename))
-        (org-sidebar-toggle)
+        (progn (org-sidebar-toggle))
       (find-file filename))))
 
 (global-set-key (kbd "<f2>") 'gorg)
