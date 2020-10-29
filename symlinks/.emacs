@@ -425,6 +425,17 @@ echo the method signature of `'delete-duplicate-lines`"
 (require 'jnf-in-buffer.el)
 (require 'jnf-lsp-mode.el)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Begin burly
+;;
+;; At present, I don't need the following.  It preserves frame shapes
+;; but not frame contents
+
+;; (use-package burly :straight (burly :type git :host github :repo "alphapapa/burly.el"))
+
+;; End burly
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (global-set-key (kbd "<f12>") `(lambda () (interactive)(find-file "~/git/dotzshrc/symlinks/.emacs")))
 
 (defun dotfiles--gc-on-last-frame-out-of-focus ()
