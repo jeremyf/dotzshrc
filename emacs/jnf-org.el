@@ -94,11 +94,21 @@
  '((emacs-lisp . t)
    (ruby . t)))
 
-(global-set-key (kbd "<f2>") `(
-                               lambda ()
-                               (interactive)
-                               (find-file "~/git/org/agenda.org")))
-(global-set-key (kbd "<f5>") `(lambda () (interactive)(find-file "~/git/org/troubleshooting.org")))
+(defun gorg (&optional filename)
+  "Jump to the given FILENAME or toggle it's org-sidebar.
+
+If no file is given default to the \"magic filename\"
+~/git/org/agenda.org."
+  (interactive)
+  ;; Need to know the location on disk for the buffer
+  (unless filename (setq filename "~/git/org/agenda.org"))
+  (let ((current_filename (if (equal major-mode 'dired-mode) default-directory (buffer-file-name))))
+    (if (equal current_filename (expand-file-name filename))
+        (org-sidebar-toggle)
+      (find-file filename))))
+
+(global-set-key (kbd "<f2>") 'gorg)
+(global-set-key (kbd "<f5>") `(lambda () (interactive) (gorg "~/git/org/troubleshooting.org")))
 
 
 ;; For some reason, when I load emacs in daemon mode, the daemon
@@ -106,10 +116,10 @@
 ;; mini-buffer.  When I load the file interactively, I don't
 ;; experience the same problem.  So, until this resolves, I'll need to
 ;; load roam via an interactive command.
-(global-set-key (kbd "<f10>") `(lambda ()
-                                (interactive)
-                                (require 'jnf-org-roam.el)
-                                ))
+;; (global-set-key (kbd "<f10>") `(lambda ()
+;;                                 (interactive)
+;;                                 (require 'jnf-org-roam.el)
+;;                                 ))
 
 (require 'jnf-org-roam.el)
 
