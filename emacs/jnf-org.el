@@ -83,13 +83,6 @@
 ;; of the `org-toggle-inline-images`
 (setq org-image-actual-width (truncate (* (window-pixel-width) 0.8)))
 
-(defun org-frames-toggle ()
-  "Toggle the org-sidebar and org-sidebar-tree; Both are quite useful when working on org docs"
-  (interactive)
-  (org-sidebar-tree-toggle)
-  (org-sidebar-toggle))
-(defalias 'ot 'org-frames-toggle)
-
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((emacs-lisp . t)
