@@ -16,8 +16,7 @@ alias gb='git branch -vv'
 alias gwc='git whatchanged -p --abbrev-commit --pretty=medium'
 alias hb="hub browse"
 alias psx="ps ax | ag $1"
-alias rss="newsboat -C ~/.newsboatrc -u ~/git/takeonrules.github.io/rss/urls.txt"
-alias rss-init="newsboat -C ~/.newsboatrc -u ~/git/takeonrules.github.io/rss/urls.txt -i ~/git/takeonrules.github.io/rss/full-blogroll.opml"
+alias rss="$EDITOR --eval \"(rss)\""
 
 # A convenience method to keep a few of the "long used" aliases
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
