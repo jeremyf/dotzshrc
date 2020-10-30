@@ -150,7 +150,7 @@
 ;; Helpful for understanding the likely bounds of directory structure
 (use-package projectile
   :straight t
-  :config (define-key projectile-mode-map (kbd "M-p") 'projectile-command-map)
+  :config (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   (projectile-mode +1)
   (setq projectile-completion-system 'ivy)
   (setq projectile-project-search-path '("~/git/"))
