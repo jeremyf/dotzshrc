@@ -15,12 +15,6 @@
 ;;; Code:
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; I use this all of the freaking time to peak at other parts of my
-;; code.  It's also a navigation tool.
-(use-package swiper
-  :straight t
-  :bind (("C-s" . swiper)))
-
 ;; Write "kill" command inputs to disk
 (use-package savekill
   :straight t)
@@ -152,7 +146,6 @@
 
 (use-package company
   :straight t
-  :after ivy
   :diminish
   :bind (("C-." . #'company-complete))
   :hook (prog-mode . company-mode)
