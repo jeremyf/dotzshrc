@@ -174,10 +174,11 @@
 ;; A rather convenient snippet manager.  When you create a snippet, it
 ;; understands the mode you're in and puts the snippet in the right
 ;; place.
-(use-package yasnippets
-  :straight (yasnippets :type git
-                        :host github
-                        :repo "joaotavora/yasnippet")
+(use-package yasnippet
+  :straight t
+  ;; :straight (yasnippets :type git
+  ;;                       :host github
+  ;;                       :repo "joaotavora/yasnippet")
   :after company
   :config (push 'company-yasnippet company-backends)
   ;; :bind (("C-c C-e" . yas-expand))
