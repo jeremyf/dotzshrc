@@ -522,12 +522,15 @@ echo the method signature of `'delete-duplicate-lines`"
 (require 'jnf-lsp-mode.el)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Begin burly
+;; Begin burly/bufly
 ;;
-;; At present, I don't need the following.  It preserves frame shapes
-;; but not frame contents
 
 ;; (use-package burly :straight (burly :type git :host github :repo "alphapapa/burly.el"))
+;; (use-package bufly :straight (bufly :type git :host github :repo "alphapapa/burly.el"))
+
+;; (use-package bufler
+;;   :straight (bufler :type git :host github :repo "alphapapa/bufler.el"
+;;                     :files (:defaults (:exclude "helm-bufler.el"))))
 
 ;; End burly
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
