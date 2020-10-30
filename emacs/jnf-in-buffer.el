@@ -52,9 +52,17 @@
   :bind (("C-=" . er/expand-region)
          ("C-+" . er/contract-region)))
 
+;; This package allows me to toggle between different string cases.
+;;
+;; - HELLO WORLD
+;; - HelloWorld
+;; - helloWorld
+;; - hello-world
+;; - Hello_World
+;; - hellow_world
+;; - HELLO_WORLD
 (use-package string-inflection
   :bind (("H-u" . string-inflection-all-cycle)
-         ("C-c i" . string-inflection-all-cycle)
          ("C-M-u" . string-inflection-all-cycle)) ;; CTRL+OPT+u
   :straight (string-inflection :type git
                                :host github
