@@ -191,12 +191,14 @@
   (centaur-tabs-headline-match)
   :custom
   (centaur-tabs-gray-out-icons 'buffer)
+  (centaur-tabs-change-fonts "JetBrains Mono" 90)
   (centaur-tabs-style "rounded")
   (centaur-tabs-height 36)
   (centaur-tabs-set-icons t)
   (centaur-tabs-set-modified-marker t)
   (centaur-tabs-modified-marker "●")
-  (centaur-tabs-buffer-groups-function #'centaur-tabs-projectile-buffer-groups)
+  ;; (centaur-tabs-buffer-groups-function #'centaur-tabs-projectile-buffer-groups)
+  (centaur-tabs-buffer-groups-function #'jnf-centaur-tabs-buffer-groups)
   :bind (("s-{" . #'centaur-tabs-backward)
          ("s-}" . #'centaur-tabs-forward)
          ("C-c C-5". #'centaur-tabs-extract-window-to-new-frame)
@@ -204,6 +206,45 @@
          ([s-down] . #'centaur-tabs-forward-group)
          ("C-s-t" . #'centaur-tabs-counsel-switch-group)
          ("C-c C-o" . #'centaur-tabs-open-directory-in-external-application)))
+
+  (defun jnf-centaur-tabs-buffer-groups ()
+    "`centaur-tabs-buffer-groups' control buffers' group rules.
+
+    Group centaur-tabs with mode if buffer is derived from `eshell-mode' `emacs-lisp-mode' `dired-mode' `org-mode' `magit-mode'.
+    All buffer name start with * will group to \"Emacs\".
+    Other buffer group by `centaur-tabs-get-group-name' with project name."
+    (list
+     (cond
+      ((or (string-equal "*" (substring (buffer-name) 0 1))
+	   (memq major-mode '(magit-process-mode
+			      magit-status-mode
+			      magit-diff-mode
+			      magit-log-mode
+			      magit-file-mode
+			      magit-blob-mode
+			      magit-blame-mode
+			      )))
+       "Emacs")
+      ((derived-mode-p 'dired-mode)
+       "Dired")
+      ((memq major-mode '(helpful-mode
+			  help-mode))
+       "Help")
+      ((or (derived-mode-p 'prog-mode)
+           (derived-mode-p 'text-mode)
+           (memq major-mode '(org-mode
+			      org-agenda-clockreport-mode
+			      org-src-mode
+			      org-agenda-mode
+			      org-beamer-mode
+			      org-indent-mode
+			      org-bullets-mode
+			      org-cdlatex-mode
+			      org-agenda-log-mode
+			      diary-mode)))
+       "Editing")
+      (t
+       (centaur-tabs-get-group-name (current-buffer))))))
 
 
 ;; Browse remote git repositories; A prior package I used limited the
