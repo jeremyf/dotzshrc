@@ -7,6 +7,11 @@
 ;;  using helm-swoop instead.  The swoop provides an easier edit
 ;;  matches functionality.
 ;;
+;;  I poked a bit more at other parts of Helm, helm-mini seems like a
+;;  good little application for finding buffers.  Note, I read through
+;;  the tutorial at the following URL:
+;;  https://tuhdo.github.io/helm-intro.html
+;;
 ;;; Code:
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
