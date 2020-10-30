@@ -190,7 +190,6 @@
       (kill-new filename)
       (message "Copied buffer file name '%s' to the clipboard." filename))))
 (global-set-key (kbd "C-c n") 'jnf/nab-file-name-to-clipboard)
-(global-set-key (kbd "M-n") 'jnf/nab-file-name-to-clipboard) ;; Deprecated
 
 (use-package whole-line-or-region
   :straight t
