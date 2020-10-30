@@ -95,21 +95,22 @@
  '((emacs-lisp . t)
    (ruby . t)))
 
-(defun gorg (&optional filename)
-  "Jump to the given FILENAME or toggle it's org-sidebar.
+(defun gorg (&optional org_file_basename)
+  "Jump to the given ORG_FILE_BASENAME or toggle it's org-sidebar.
 
-If no file is given default to the \"magic filename\"
-~/git/org/agenda.org."
+If no ORG_FILE_BASENAME is given default to `agenda.org'. I chose
+`gorg' as the mnemonic Goto Org."
   (interactive)
   ;; Need to know the location on disk for the buffer
-  (unless filename (setq filename "~/git/org/agenda.org"))
+  (unless org_file_basename (setq org_file_basename "agenda.org"))
+  (setq org_filename (concat org-directory "/" org_file_basename))
   (let ((current_filename (if (equal major-mode 'dired-mode) default-directory (buffer-file-name))))
-    (if (equal current_filename (expand-file-name filename))
+    (if (equal current_filename (expand-file-name org_filename))
         (progn (org-sidebar-toggle))
-        (progn (find-file filename) (delete-other-windows)))))
+      (progn (find-file org_filename) (delete-other-windows)))))
 
 (global-set-key (kbd "<f2>") 'gorg)
-(global-set-key (kbd "<f5>") `(lambda () (interactive) (gorg "~/git/org/troubleshooting.org")))
+(global-set-key (kbd "<f5>") `(lambda () (interactive) (gorg "troubleshooting.org")))
 
 
 ;; Insert immediate timestamp

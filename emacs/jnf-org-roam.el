@@ -118,9 +118,9 @@
 
 ;; Some hot keys to jump to often different relevant files
 ;; Jump to the current clock if one is open, otherwise, go to my agenda file.
-(global-set-key (kbd "<f3>") `(lambda () (interactive) (gorg org-roam-index-file)))
-(global-set-key (kbd "<f4>") `(lambda () (interactive) (gorg "~/git/org/permanent/card_index.org")))
-(global-set-key (kbd "<f6>") `(lambda () (interactive) (gorg "~/git/org/permanent/bibliographic_index.org")))
+(global-set-key (kbd "<f3>") `(lambda () (interactive) (gorg "index.org")))
+(global-set-key (kbd "<f4>") `(lambda () (interactive) (gorg "permanent/card_index.org")))
+(global-set-key (kbd "<f6>") `(lambda () (interactive) (gorg "permanent/bibliographic_index.org")))
 (global-set-key (kbd "s-i") 'org-roam-insert)
 (provide 'jnf-org-roam.el)
 ;;; jnf-org-roam.el ends here
