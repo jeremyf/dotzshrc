@@ -45,6 +45,11 @@
 
 (set-frame-font "MesloLGS NF")
 
+;; Don't create lock files.  Emacs drops these files on the file
+;; system.  I found this most cumbersome when working in hugo.  The
+;; hugo build would file because it tried to handle a lock file.
+(setq create-lockfiles nil)
+
 ;; Put autosave files (ie #foo#) and backup files (ie foo~) in ~/.emacs.d/.
 ;; See https://snarfed.org/gnu_emacs_backup_files
 ;; create the autosave dir if necessary, since emacs won't.
