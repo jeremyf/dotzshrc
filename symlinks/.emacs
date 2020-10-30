@@ -62,6 +62,7 @@
   (setq search-default-mode #'char-fold-to-regexp)
   :bind (("M-x" . counsel-M-x)
          ("C-x C-f" . counsel-find-file)
+         ("C-x 8 RET" . counsel-unicode-char)
          ("s-r" . counsel-recentf))
   :config (counsel-mode 1)
   (defalias 'recent 'counsel-recentf))
@@ -387,31 +388,6 @@
 
 ;; Open svg files in xml-mode (instead of image rendering mode)
 (add-to-list `auto-mode-alist '("\\.svg\\'" . xml-mode))
-
-;; Allow emacs to be the editor for textareas on a webpage.
-;;
-;; Note: This requires installing plugins in browsers
-;;
-(use-package atomic-chrome
-  :straight t)
-(atomic-chrome-start-server)
-(setq atomic-chrome-default-major-mode 'markdown-mode)
-
-;; Some websites have aggressive JS which triggers when text is
-;; entered to a textarea which can lead to bugs in combination with
-;; AtomicChrome. There’s some websites where I regularly lose the text
-;; that’s entered. While I’m editing, the textarea is updating, but on
-;; C-c C-c, Emacs closes and the textarea is empty. For such cases,
-;; I’m using this simple workaround: Copy the contents to clipboard
-;; just before closing Emacs. So if the contents are lost, I can just
-;; paste the text into the textarea. Not a perfect solution, but this
-;; happens seldomly enough, that it’s good enough for me.
-;;
-(advice-add 'atomic-chrome-close-current-buffer
-            :before
-            '(lambda()
-               (clipboard-kill-ring-save (point-min) (point-max))))
-
 
 ;; I never want these.
 (unbind-key "C-x C-d") ;; list-directory
