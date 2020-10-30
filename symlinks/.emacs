@@ -55,6 +55,10 @@
         '((read-file-name-internal . ivy--regex-fuzzy)
           (t . ivy--regex-ignore-order))))
 
+;; Remember helm-sweep if I look to replace Ivy/Swiper/Counsel
+;;
+;; https://github.com/emacsorphanage/helm-swoop
+
 ;; Part of the ivy/counsel/swiper trio
 (use-package counsel
   :straight t
