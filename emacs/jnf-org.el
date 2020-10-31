@@ -137,29 +137,6 @@ If no ORG_FILE_BASENAME is given default to `agenda.org'. I chose
         (progn (org-sidebar-toggle))
       (progn (find-file org_filename) (delete-other-windows)))))
 
-
-
-
-;; (defmacro gorg-sexp-eval (sexp &rest key value)
-;;   `(eval (read (format ,(format "%S" sexp) ,@key ,@value))))
-
-;; (dolist (the-map  '(("a" . "agenda.org")
-;;                     ("b" . "permanent/bibliographic_index.org")
-;;                     ("c" . "permanent/card_index.org")
-;;                     ("e" . "elfeed.org")
-;;                     ("i" . "index.org")
-;;                     ("t" . "troubleshooting.org")))
-;;   ;; Create a function for element in the above alist.  The `car'
-;;   ;; (e.g. "a"), will be used for the kbd shortcut.  The `cdr'
-;;   ;; (e.g. "agenda.org") will be the filename sent to `gorg'
-;;   (gorg-sexp-eval
-;;    (progn (defun gorg--%1$s-%2$s ()
-;;       "Invoke `gorg' with %2$s"
-;;       (interactive)
-;;       (gorg "%2$s"))
-;;           (global-set-key (kbd "C-c o %1$s") 'gorg--%1$s-%2$s))
-;;    (car the-map) (cdr the-map)))
-
 ;; End goto org file
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
