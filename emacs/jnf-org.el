@@ -108,7 +108,22 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Begin goto org file
-(defun gorg (&optional org_file_basename)
+(defmacro go-org-file-fn (file)
+  "Define a function to go to Org FILE."
+  (let* ((fn-name (intern (concat "go-org-file-" file)))
+         (docstring (concat "Go to Org file at: " file)))
+    `(defun ,fn-name ()
+       ,docstring
+       (gorg file))))
+
+(global-set-key (kbd "C-c o i") (go-org-file-fn "index.org"))
+(global-set-key (kbd "C-c o a") (go-org-file-fn "agenda.org"))
+(global-set-key (kbd "C-c o b") (go-org-file-fn "permanent/bibliographic_index.org"))
+(global-set-key (kbd "C-c o c") (go-org-file-fn "permanent/card_index.org"))
+(global-set-key (kbd "C-c o e") (go-org-file-fn "elfeed.org"))
+(global-set-key (kbd "C-c o i") (go-org-file-fn "index.org"))
+
+(defun gorg(&optional org_file_basename)
   "Jump to the given ORG_FILE_BASENAME or toggle it's org-sidebar.
 
 If no ORG_FILE_BASENAME is given default to `agenda.org'. I chose
@@ -122,25 +137,29 @@ If no ORG_FILE_BASENAME is given default to `agenda.org'. I chose
         (progn (org-sidebar-toggle))
       (progn (find-file org_filename) (delete-other-windows)))))
 
-(defmacro gorg-sexp-eval (sexp &rest key value)
-  `(eval (read (format ,(format "%S" sexp) ,@key ,@value))))
 
-(dolist (the-map  '(("a" . "agenda.org")
-                    ("b" . "permanent/bibliographic_index.org")
-                    ("c" . "permanent/card_index.org")
-                    ("e" . "elfeed.org")
-                    ("i" . "index.org")
-                    ("t" . "troubleshooting.org")))
-  ;; Create a function for element in the above alist.  The `car'
-  ;; (e.g. "a"), will be used for the kbd shortcut.  The `cdr'
-  ;; (e.g. "agenda.org") will be the filename sent to `gorg'
-  (gorg-sexp-eval
-   (progn (defun gorg--%1$s-%2$s ()
-      "Invoke `gorg' with %2$s"
-      (interactive)
-      (gorg "%2$s"))
-          (global-set-key (kbd "C-c o %1$s") 'gorg--%1$s-%2$s))
-   (car the-map) (cdr the-map)))
+
+
+;; (defmacro gorg-sexp-eval (sexp &rest key value)
+;;   `(eval (read (format ,(format "%S" sexp) ,@key ,@value))))
+
+;; (dolist (the-map  '(("a" . "agenda.org")
+;;                     ("b" . "permanent/bibliographic_index.org")
+;;                     ("c" . "permanent/card_index.org")
+;;                     ("e" . "elfeed.org")
+;;                     ("i" . "index.org")
+;;                     ("t" . "troubleshooting.org")))
+;;   ;; Create a function for element in the above alist.  The `car'
+;;   ;; (e.g. "a"), will be used for the kbd shortcut.  The `cdr'
+;;   ;; (e.g. "agenda.org") will be the filename sent to `gorg'
+;;   (gorg-sexp-eval
+;;    (progn (defun gorg--%1$s-%2$s ()
+;;       "Invoke `gorg' with %2$s"
+;;       (interactive)
+;;       (gorg "%2$s"))
+;;           (global-set-key (kbd "C-c o %1$s") 'gorg--%1$s-%2$s))
+;;    (car the-map) (cdr the-map)))
+
 ;; End goto org file
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
