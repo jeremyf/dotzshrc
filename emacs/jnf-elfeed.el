@@ -10,9 +10,8 @@
 (use-package elfeed
   :straight t
   :after org
-  :bind (("C-x r" . jnf/elfeed-load-db-and-open)
-         :map elfeed-search-mode-map
-         ("q" . jnf/elfeed-save-db-and-bury))
+  :bind (:map elfeed-search-mode-map
+              ("q" . jnf/elfeed-save-db-and-bury))
   :config (elfeed-org)
 
   ;;
