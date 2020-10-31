@@ -114,7 +114,8 @@
          (docstring (concat "Go to Org file at: " file)))
     `(defun ,fn-name ()
        ,docstring
-       (gorg file))))
+       (interactive)
+       (gorg ,file))))
 
 (global-set-key (kbd "C-c o i") (go-org-file-fn "index.org"))
 (global-set-key (kbd "C-c o a") (go-org-file-fn "agenda.org"))
