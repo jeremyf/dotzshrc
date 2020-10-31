@@ -102,10 +102,6 @@ If no ORG_FILE_BASENAME is given default to `agenda.org'. I chose
         (progn (org-sidebar-toggle))
       (progn (find-file org_filename) (delete-other-windows)))))
 
-(global-set-key (kbd "<f2>") 'gorg)
-(global-set-key (kbd "<f5>") `(lambda () (interactive) (gorg "troubleshooting.org")))
-
-
 ;; Insert immediate timestamp
 (defun jnf-org-insert-immediate-inactive-timestamp ()
   "Inserts a timestamp with a single button press for the current time."
@@ -123,6 +119,26 @@ If no ORG_FILE_BASENAME is given default to `agenda.org'. I chose
 ;;                                 ))
 
 (require 'jnf-org-roam.el)
+
+(defmacro gorg-sexp-eval (sexp &rest key value)
+  `(eval (read (format ,(format "%S" sexp) ,@key ,@value))))
+
+(dolist (the-map  '(("a" . "agenda.org")
+                    ("b" . "permanent/bibliographic_index.org")
+                    ("c" . "permanent/card_index.org")
+                    ("e" . "elfeed.org")
+                    ("i" . "index.org")
+                    ("t" . "troubleshooting.org")))
+  (gorg-sexp-eval
+   (defun gorg--%1$s ()
+      "Gorg to %2$s"
+      (interactive)
+      (gorg "%2$s"))
+   (car the-map) (cdr the-map))
+  (gorg-sexp-eval
+   (global-set-key (kbd "C-c o %1$s") 'gorg--%1$s)
+   (car the-map) (cdr the-map)))
+
 
 (provide 'jnf-org.el)
 ;;; jnf-org.el ends here
