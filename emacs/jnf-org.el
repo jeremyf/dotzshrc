@@ -88,20 +88,6 @@
  '((emacs-lisp . t)
    (ruby . t)))
 
-(defun gorg (&optional org_file_basename)
-  "Jump to the given ORG_FILE_BASENAME or toggle it's org-sidebar.
-
-If no ORG_FILE_BASENAME is given default to `agenda.org'. I chose
-`gorg' as the mnemonic Goto Org."
-  (interactive)
-  ;; Need to know the location on disk for the buffer
-  (unless org_file_basename (setq org_file_basename "agenda.org"))
-  (setq org_filename (concat org-directory "/" org_file_basename))
-  (let ((current_filename (if (equal major-mode 'dired-mode) default-directory (buffer-file-name))))
-    (if (equal current_filename (expand-file-name org_filename))
-        (progn (org-sidebar-toggle))
-      (progn (find-file org_filename) (delete-other-windows)))))
-
 ;; Insert immediate timestamp
 (defun jnf-org-insert-immediate-inactive-timestamp ()
   "Inserts a timestamp with a single button press for the current time."
@@ -120,6 +106,22 @@ If no ORG_FILE_BASENAME is given default to `agenda.org'. I chose
 
 (require 'jnf-org-roam.el)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Begin goto org file
+(defun gorg (&optional org_file_basename)
+  "Jump to the given ORG_FILE_BASENAME or toggle it's org-sidebar.
+
+If no ORG_FILE_BASENAME is given default to `agenda.org'. I chose
+`gorg' as the mnemonic Goto Org."
+  (interactive)
+  ;; Need to know the location on disk for the buffer
+  (unless org_file_basename (setq org_file_basename "agenda.org"))
+  (setq org_filename (concat org-directory "/" org_file_basename))
+  (let ((current_filename (if (equal major-mode 'dired-mode) default-directory (buffer-file-name))))
+    (if (equal current_filename (expand-file-name org_filename))
+        (progn (org-sidebar-toggle))
+      (progn (find-file org_filename) (delete-other-windows)))))
+
 (defmacro gorg-sexp-eval (sexp &rest key value)
   `(eval (read (format ,(format "%S" sexp) ,@key ,@value))))
 
@@ -129,16 +131,18 @@ If no ORG_FILE_BASENAME is given default to `agenda.org'. I chose
                     ("e" . "elfeed.org")
                     ("i" . "index.org")
                     ("t" . "troubleshooting.org")))
+  ;; Create a function for element in the above alist.  The `car'
+  ;; (e.g. "a"), will be used for the kbd shortcut.  The `cdr'
+  ;; (e.g. "agenda.org") will be the filename sent to `gorg'
   (gorg-sexp-eval
-   (defun gorg--%1$s ()
-      "Gorg to %2$s"
+   (progn (defun gorg--%1$s-%2$s ()
+      "Invoke `gorg' with %2$s"
       (interactive)
       (gorg "%2$s"))
-   (car the-map) (cdr the-map))
-  (gorg-sexp-eval
-   (global-set-key (kbd "C-c o %1$s") 'gorg--%1$s)
+          (global-set-key (kbd "C-c o %1$s") 'gorg--%1$s-%2$s))
    (car the-map) (cdr the-map)))
-
+;; End goto org file
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (provide 'jnf-org.el)
 ;;; jnf-org.el ends here
