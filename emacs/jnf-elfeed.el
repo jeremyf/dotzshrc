@@ -67,7 +67,6 @@
   (elfeed-db-load)
   (elfeed-search-update--force))
 (defalias 'rss 'jnf/elfeed-load-db-and-open)
-(global-set-key (kbd "<f13>") `rss)
 
 (use-package elfeed-org
   :straight t
