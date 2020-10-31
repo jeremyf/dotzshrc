@@ -63,6 +63,7 @@
   :bind (("M-x" . counsel-M-x)
          ("C-x C-f" . counsel-find-file)
          ("C-x 8 RET" . counsel-unicode-char)
+         ("<f3>" . counsel-bookmark)
          ("s-r" . counsel-recentf))
   :config (counsel-mode 1)
   (defalias 'recent 'counsel-recentf))
@@ -81,7 +82,7 @@
   (ivy-rich-path-style 'full)
   :config
   (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line)
-  (ivy-rich-mode))
+  (ivy-rich-mode 1))
 
 (use-package prescient
   :straight t)
