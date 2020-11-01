@@ -106,6 +106,9 @@
 
 (require 'jnf-org-roam.el)
 
+(use-package org-bookmark-heading
+  :straight t)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Begin goto org file
 (defmacro go-org-file-fn (file)
