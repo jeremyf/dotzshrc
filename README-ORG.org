@@ -13,9 +13,9 @@ In reading "How to Take Smart Notes" by Sonke Ahrens, the author discusses three
 
    A *Card* is my own creation, but highlights that its something beyond a note.  The card is where you flesh out ideas, and continue to inter-relate those ideas.  The moniker *card* pays homage to [[https://en.wikipedia.org/wiki/Zettelkasten][Zettelkasten]].
 
-   I’ve assigned a sorting suffix to all ~./permanent/cards~.  The schema for the sorting suffix is set using the following “pattern”: ~000aa00aa00aa00­­­slug_with_many_words.org~.  Top-level concepts, as they arrive in the “slip-box”, will have a three digit prefix, followed by ~­­­~ and the slug.  The the three digit prefix will be “1” greater than the highest prefix.  Concepts “nested” within will then have a prefix of ~000aa~ the ~000~ will match the containing concept and the ~aa~ will increment based on the next available slug.  If we had ~001aa~ and incremented we’d have ~001ab~.
+   I’ve assigned a sorting suffix to all =./permanent/cards=.  The schema for the sorting suffix is set using the following “pattern”: =000aa00aa00aa00­­­slug_with_many_words.org=.  Top-level concepts, as they arrive in the “slip-box”, will have a three digit prefix, followed by =­­-= and the slug.  The the three digit prefix will be “1” greater than the highest prefix.  Concepts “nested” within will then have a prefix of =000aa= the =000= will match the containing concept and the =aa= will increment based on the next available slug.  If we had =001aa= and incremented we’d have =001ab=.
 
-   *Bibliographic* reflects the cited works.  I've adopted a ~"Title" by author~ format for the "root" object; However, nothing limits me from having multiple bibliographic records for the same book/article (perhaps a citation or passage).
+   *Bibliographic* reflects the cited works.  I've adopted a ="Title" by author= format for the "root" object; However, nothing limits me from having multiple bibliographic records for the same book/article (perhaps a citation or passage).
 
    I haven’t settled on what could be bibliographic citations or cards as it relates to chapters or sub-sections or concepts of a book.
 
@@ -23,7 +23,7 @@ In reading "How to Take Smart Notes" by Sonke Ahrens, the author discusses three
 
    *Project* notes typically exist in a single project, and when the project completes may be "disposable".
 
-   Below is a diagram of how I've structured my ~org-directory~:
+   Below is a diagram of how I've structured my =org-directory=:
 
  #+BEGIN_SRC
  .
