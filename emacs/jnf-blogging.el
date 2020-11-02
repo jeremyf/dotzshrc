@@ -50,7 +50,7 @@ for TakeOnRules.com."
 (defun tor-tags-list ()
   "Return a list of tags from takeonrules.com."
   (with-temp-buffer
-    (insert-file-contents (concat tor--repository-path "/artifacts/tags.txt")
+    (insert-file-contents (concat tor--repository-path "/artifacts/tags.txt"))
     (split-string (buffer-string) "\n" t)))
 
 (provide 'jnf-blogging.el)
