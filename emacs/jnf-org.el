@@ -88,11 +88,12 @@
  '((emacs-lisp . t)
    (ruby . t)))
 
-;; Insert immediate timestamp
-(defun jnf-org-insert-immediate-inactive-timestamp ()
-  "Inserts a timestamp with a single button press for the current time."
+;; Insert immediate timestamp at point.
+(defun jnf-org-insert-immediate-active-timestamp ()
+  "Insert an active timestamp for the current time."
   (interactive)
-  (org-insert-time-stamp nil t nil " " " "))
+  (org-insert-time-stamp nil t nil))
+(global-set-key (kbd "<f2>") 'jnf-org-insert-immediate-inactive-timestamp)
 
 ;; For some reason, when I load emacs in daemon mode, the daemon
 ;; process is the process now renders the GET prompts for the

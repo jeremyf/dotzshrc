@@ -221,7 +221,7 @@
 (global-set-key (kbd "M-DEL") 'backward-kill-paragraph)
 (global-set-key (kbd "s-q") 'save-buffers-kill-terminal)
 (global-set-key (kbd "s-w") 'kill-current-buffer)
-(global-set-key (kbd "<f2>") 'counsel-imenu)
+(global-set-key (kbd "<f3>") 'counsel-imenu)
 
 (provide 'jnf-in-buffer.el)
 ;;; jnf-in-buffer.el ends here
