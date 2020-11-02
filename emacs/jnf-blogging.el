@@ -12,6 +12,8 @@
 ;;; Code:
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(setq tor--repository-path "~/git/takeonrules.github.io/")
+
 ;; TODO - Complete this function.
 ;; - [X] Prompt for and build proper filename
 ;; - [X] Create named file
@@ -19,12 +21,14 @@
 (defun tor-post-new (title &optional)
   "Create and visit a new draft blog post for the prompted TITLE.
 
-The file for the blog post conforms to the path schema of posts for TakeOnRules.com."
+The file for the blog post conforms to the path schema of posts
+for TakeOnRules.com."
   (interactive (list (read-from-minibuffer
 		      "Title: "
 		      nil nil nil nil)))
 
-  (let ((default-directory (concat "~/git/takeonrules.github.io/content/posts/"
+  (let ((default-directory (concat tor--repository-path
+                                   "/content/posts/"
                                    (format-time-string "%Y/"))))
     (let ((fpath (concat default-directory (s-dashed-words title) ".md"))
           (slug (s-dashed-words title)))
@@ -46,7 +50,7 @@ The file for the blog post conforms to the path schema of posts for TakeOnRules.
 (defun tor-tags-list ()
   "Return a list of tags from takeonrules.com."
   (with-temp-buffer
-    (insert-file-contents "~/git/takeonrules.github.io/artifacts/tags.txt")
+    (insert-file-contents (concat tor--repository-path "/artifacts/tags.txt")
     (split-string (buffer-string) "\n" t)))
 
 (provide 'jnf-blogging.el)
