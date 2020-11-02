@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# contributor: Jeremy Friesen <jeremy.n.friesen@gmail.com>
+# group: takeonrules
+# key: license
+# name: license
+# --
+- ${1:$$(yas-choose-value '("all-rights-reserved" "apache2" "by-nc-nd-4_0" "by-sa-3_0" "ogl"))}
+$0

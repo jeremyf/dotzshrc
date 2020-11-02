@@ -7,7 +7,7 @@
 ;;  Todo:
 ;;
 ;;  - [X] tor-post-new :: a function for creating a new post
-;;  - [ ] tor-tags :: a function for prompting for existing tags
+;;  - [X] tor-tags-list :: a function for prompting for existing tags
 ;;
 ;;; Code:
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -40,5 +40,14 @@ The file for the blog post conforms to the path schema of posts for TakeOnRules.
                     nil (expand-file-name fpath) nil nil nil t)
       (find-file (expand-file-name fpath))
       )))
+
+
+
+(defun tor-tags-list ()
+  "Return a list of tags from takeonrules.com."
+  (with-temp-buffer
+    (insert-file-contents "~/git/takeonrules.github.io/artifacts/tags.txt")
+    (split-string (buffer-string) "\n" t)))
+
 (provide 'jnf-blogging.el)
 ;;; jnf--blogging.el ends here

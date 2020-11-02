@@ -173,41 +173,6 @@
   :straight t
   :bind (("M-o" . ace-window)))
 
-;; "The long-awaited Emacs 27 support for native tabs is shaky, both
-;; visually and in terms of functionality. As such, centaur-tabs is
-;; the best way to simulate a conventional tabs setup, in which tab
-;; sets are grouped by the toplevel project working directory."
-;; https://blog.sumtypeofway.com/posts/emacs-config.html
-(use-package centaur-tabs
-  :straight t
-  :demand
-  :hook
-  (org-agenda-mode . centaur-tabs-local-mode)
-  (helpful-mode . centaur-tabs-local-mode)
-  :config
-  (centaur-tabs-mode t)
-  (setq centaur-tabs-show-navigation-buttons t
-        centaur-tabs-set-icons t
-        centaur-tabs-cycle-scope 'tabs
-        centaur-tabs-set-bar 'under)
-  (centaur-tabs-headline-match)
-  :custom
-  (centaur-tabs-gray-out-icons 'buffer)
-  (centaur-tabs-change-fonts "JetBrains Mono" 90)
-  (centaur-tabs-style "rounded")
-  (centaur-tabs-height 36)
-  (centaur-tabs-set-icons t)
-  (centaur-tabs-set-modified-marker t)
-  (centaur-tabs-modified-marker "●")
-  (centaur-tabs-buffer-groups-function #'centaur-tabs-projectile-buffer-groups)
-  :bind (("s-{" . #'centaur-tabs-backward)
-         ("s-}" . #'centaur-tabs-forward)
-         ("C-c C-5". #'centaur-tabs-extract-window-to-new-frame)
-         ([s-up] . #'centaur-tabs-backward-group)
-         ([s-down] . #'centaur-tabs-forward-group)
-         ("C-s-t" . #'centaur-tabs-counsel-switch-group)
-         ("C-c C-o" . #'centaur-tabs-open-directory-in-external-application)))
-
 ;; Browse remote git repositories; A prior package I used limited the
 ;; behavior to Github. This one is bitbucket, github, sourcehut,
 ;; gitlab, etc.
@@ -456,6 +421,8 @@ echo the method signature of `'delete-duplicate-lines`"
 (require 'jnf-elfeed.el)
 (require 'jnf-in-buffer.el)
 (require 'jnf-lsp-mode.el)
+(require 'jnf-blogging.el)
+(require 'jnf-tabs.el)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Begin burly/bufly
