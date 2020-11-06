@@ -40,7 +40,7 @@
            modus-%1$s-theme-bold-constructs t
            modus-%1$s-theme-fringes 'subtle
            modus-%1$s-theme-mode-line '3d
-           modus-%1$s-theme-syntax 'yellow-comments-green-strings
+           modus-%1$s-theme-syntax 'alt-syntax-yellow-comments
            modus-%1$s-theme-intense-hl-line nil
            modus-%1$s-theme-intense-paren-match t
            modus-%1$s-theme-links 'faint
