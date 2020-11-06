@@ -4,6 +4,7 @@ export GIT_EDITOR='git_editor'
 
 # Prompt for confirmation
 alias e=$EDITOR
+alias dr="dired.sh"
 alias edaemon='editor-daemon'
 alias org="$EDITOR ~/git/org/agenda.org"
 alias rm='rm -i'
