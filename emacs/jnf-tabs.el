@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 ;;; jnf-tabs.el --- Summary
 ;;
 ;;; Commentary:

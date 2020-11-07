@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 ;;; jnf-git.el --- Summary
 ;;
 ;;; Commentary:

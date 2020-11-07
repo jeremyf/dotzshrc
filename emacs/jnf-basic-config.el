@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 ;;; jnf-basic-config.el --- Summary
 ;;
 ;;; Commentary:

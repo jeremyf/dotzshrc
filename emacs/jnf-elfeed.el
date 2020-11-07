@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 ;;; jnf-elfeed.el --- Summary
 ;;
 ;;; Commentary:

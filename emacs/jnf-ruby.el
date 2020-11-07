@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 ;;; jnf-ruby.el --- Summary
 ;;
 ;;; Commentary:
