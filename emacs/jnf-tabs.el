@@ -41,6 +41,8 @@
  Other buffer group by `centaur-tabs-get-group-name' with project name."
     (list
      (cond
+      ((string-equal "*elf" (substring (buffer-name) 0 4))
+       "RSS")
       ;; ((not (eq (file-remote-p (buffer-file-name)) nil))
       ;; "Remote")
       ((or (string-equal "*" (substring (buffer-name) 0 1))
@@ -70,7 +72,7 @@
 			  org-cdlatex-mode
 			  org-agenda-log-mode
 			  diary-mode))
-       "OrgMode")
+       "Editing")
       (t
        (centaur-tabs-get-group-name (current-buffer))))))
   :custom
