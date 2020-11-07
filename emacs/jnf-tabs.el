@@ -20,12 +20,6 @@
 (use-package centaur-tabs
   :straight t
   :demand
-  :hook
-  (dashboard-mode . centaur-tabs-local-mode)
-  (term-mode . centaur-tabs-local-mode)
-  (calendar-mode . centaur-tabs-local-mode)
-  (org-agenda-mode . centaur-tabs-local-mode)
-  (helpful-mode . centaur-tabs-local-mode)
   :config
   (centaur-tabs-mode t)
   (setq centaur-tabs-show-navigation-buttons t
@@ -41,10 +35,7 @@
  Other buffer group by `centaur-tabs-get-group-name' with project name."
     (list
      (cond
-      ((string-equal "*elf" (substring (buffer-name) 0 4)
-       "RSS")
-      ;; ((not (eq (file-remote-p (buffer-file-name)) nil))
-      ;; "Remote")
+      ((string-equal "*elf" (substring (buffer-name) 0 4)) "RSS")
       ((or (string-equal "*" (substring (buffer-name) 0 1))
 	   (memq major-mode '(magit-process-mode
 			      magit-status-mode
