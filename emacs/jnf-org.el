@@ -16,7 +16,7 @@
          ("C-c a" . org-agenda)
          ("C-c c" . org-capture)
          ("C-c t" . org-toggle-link-display)
-         ("s-2" . jnf-org-insert-immediate-inactive-timestamp)))
+         ("s-2" . jnf-org-insert-immediate-active-timestamp)))
 
 ;; Uncomment to always launch org mode with a sidebar tree
 ;; (add-hook 'org-mode-hook #'org-sidebar-tree)
@@ -93,7 +93,7 @@
   "Insert an active timestamp for the current time."
   (interactive)
   (org-insert-time-stamp nil t nil))
-(global-set-key (kbd "<f2>") 'jnf-org-insert-immediate-inactive-timestamp)
+(global-set-key (kbd "<f2>") 'jnf-org-insert-immediate-active-timestamp)
 
 ;; For some reason, when I load emacs in daemon mode, the daemon
 ;; process is the process now renders the GET prompts for the
