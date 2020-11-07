@@ -17,6 +17,7 @@
          ("C-c a" . org-agenda)
          ("C-c c" . org-capture)
          ("C-c t" . org-toggle-link-display)
+         ("C-c C-q" . counsel-org-tag)
          ("s-2" . jnf-org-insert-immediate-active-timestamp)))
 
 ;; Uncomment to always launch org mode with a sidebar tree
@@ -142,6 +143,15 @@ If no ORG_FILE_BASENAME is given default to `agenda.org'. I chose
     (if (equal current_filename (expand-file-name org_filename))
         (progn (org-sidebar-toggle))
       (progn (find-file org_filename) (delete-other-windows)))))
+
+(setq org-publish-project-alist
+      '(("Thel Sector"
+         :base-directory "~/git/org/projects/thel-sector"
+         :publishing-directory "~/git/thel-sector/pub"
+         :publishing-function org-html-publish-to-html
+         :auto-sitemap t
+         :sitemap-filename "index.org"
+         :sitemap-title "Index")))
 
 ;; End goto org file
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

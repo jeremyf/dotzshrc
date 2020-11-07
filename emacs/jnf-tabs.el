@@ -41,7 +41,7 @@
  Other buffer group by `centaur-tabs-get-group-name' with project name."
     (list
      (cond
-      ((string-equal "*elf" (substring (buffer-name) 0 4))
+      ((string-equal "*elf" (substring (buffer-name) 0 4)
        "RSS")
       ;; ((not (eq (file-remote-p (buffer-file-name)) nil))
       ;; "Remote")
