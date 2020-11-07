@@ -34,7 +34,7 @@ for TakeOnRules.com."
           (slug (s-dashed-words title)))
       (write-region (concat
                      "---"
-                     "\ndate: " (format-time-string "%Y-%m-%d %H:%M:%S %Z")
+                     "\ndate: " (format-time-string "%Y-%m-%d %H:%M:%S %z")
                      "\ndraft: true"
                      "\nlicenses:\n- by-nc-nd-4_0"
                      "\nslug: " slug
