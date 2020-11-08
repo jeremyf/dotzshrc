@@ -35,7 +35,7 @@
  Other buffer group by `centaur-tabs-get-group-name' with project name."
     (list
      (cond
-      ((string-equal "*elf" (substring (buffer-name) 0 4)) "RSS")
+      ((string-equal "*el" (substring (buffer-name) 0 3)) "RSS")
       ((or (string-equal "*" (substring (buffer-name) 0 1))
 	   (memq major-mode '(magit-process-mode
 			      magit-status-mode
