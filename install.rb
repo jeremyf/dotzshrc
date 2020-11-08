@@ -1,3 +1,4 @@
+# coding: utf-8
 # frozen_string_literal: true
 
 # This script installs the various files from the dotzshrc "ecosystem".
@@ -30,18 +31,23 @@ end
 $stdout.puts 'Finished installing bin aliases…'
 
 $stdout.puts 'Installing emacs.d symlinks…'
-emacs_dot_d = File.expand_path('emacs.d/.*', __dir__)
 FileUtils.mkdir_p(File.join(home_dirname, '.emacs.d'))
-Dir.glob(emacs_dot_d).each do |source_filename|
-  basename = File.basename(source_filename)
-  next if basename == '.'
-  next if basename == '..'
 
-  target_basename = basename.to_s
-  # Create a symlink in HOME directory to source_filename
-  target_name = File.join(home_dirname, '.emacs.d', target_basename)
-  $stdout.puts "\t#{target_name} ->\n\t\t#{source_filename}"
-  FileUtils.ln_sf(source_filename, target_name)
+[
+  File.expand_path('emacs.d/.*', __dir__), # Hidden files
+  File.expand_path('emacs.d/*', __dir__)  # Non-hidden files
+].each do |glob|
+  Dir.glob(glob).each do |source_filename|
+    basename = File.basename(source_filename)
+    next if basename == '.'
+    next if basename == '..'
+
+    target_basename = basename.to_s
+    # Create a symlink in HOME directory to source_filename
+    target_name = File.join(home_dirname, '.emacs.d', target_basename)
+    $stdout.puts "\t#{target_name} ->\n\t\t#{source_filename}"
+    FileUtils.ln_sf(source_filename, target_name)
+  end
 end
 $stdout.puts 'Finished installing .emacs.d aliases…'
 
