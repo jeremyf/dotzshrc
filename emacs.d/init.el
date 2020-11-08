@@ -423,6 +423,7 @@ echo the method signature of `'delete-duplicate-lines`"
 (require 'jnf-lsp-mode.el)
 (require 'jnf-blogging.el)
 (require 'jnf-tabs.el)
+(require 'jnf-stars-without-number.el)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Begin burly/bufly
