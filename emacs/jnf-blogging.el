@@ -37,6 +37,7 @@ for TakeOnRules.com."
                      "---"
                      "\ndate: " (format-time-string "%Y-%m-%d %H:%M:%S %z")
                      "\ndraft: true"
+                     "\nlayout: post"
                      "\nlicenses:\n- by-nc-nd-4_0"
                      "\nslug: " slug
                      "\ntitle: " title
