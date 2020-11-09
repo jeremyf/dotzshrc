@@ -18,7 +18,9 @@ The filename is conformant to my org-roam capture templates."
   (f-join org-directory
           "projects"
           "thel-sector"
-          (concat (format-time-string "%Y%m%d---") (s-snake-case title) ".org")))
+          (concat
+           (format-time-string "%Y%m%d---")
+           (s-snake-case title) ".org")))
 
 ;; TODO - Can this be shifted to an org-roam capture template?
 (defun swn-npc (culture &optional)
