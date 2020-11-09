@@ -4,4 +4,4 @@
 # key: tag
 # --
 - ${1:$$(yas-choose-value (tor-tags-list))}
-tag$0
+${0:tag}
