@@ -43,13 +43,15 @@ project in my org-directory."
                                ("Russian" 9)
                                ("Spanish" 10)))))
   (let* (
-         ;; Get a list of the lines output from swnt's command.
+         ;; Get a list of the lines output from
+         ;; swnt's command.
          (npc-string-list (split-string-and-unquote
                            (shell-command-to-string
                             (concat
                              "swnt new npc "
                              "--is-patron "
-                             "--culture " culture))
+                             "--culture "
+                             culture))
                            "\n"))
          ;; Extract the NPCs name
          (npc-name (string-trim
@@ -57,19 +59,24 @@ project in my org-directory."
                      ":"
                      ""
                      (car npc-string-list))))
-         ;; Build the document's body, conforming to org-mode format.
+         ;; Build the document's body, conforming
+         ;; to org-mode format.
          (body (concat
                 "#+title: " npc-name
                 "\n\n* " npc-name
-                "\n\n" (string-join npc-string-list "\n")))
+                "\n\n" (string-join
+                        npc-string-list "\n")))
          ;; Get the path to the file
          (fpath (thel-sector-filename npc-name)))
 
     ;; Write the body to the file at the FPATH.
     (write-region body nil fpath nil nil nil t)
 
-    ;; Insert at point an org-mode link to the randomly generated NPC.
-    (insert (concat "[[file:" fpath "][" npc-name "]]"))
+    ;; Insert at point an org-mode link to
+    ;; the randomly generated NPC.
+    (insert (concat
+             "[[file:" fpath "]["
+             npc-name "]]"))
 
     ;; Rebuild the org-roam cache, as I've just added an NPC.  This is
     ;; a kludge, as I'm treating org-roam as a black box.  My
