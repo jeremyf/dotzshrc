@@ -65,7 +65,7 @@ project in my org-directory."
          ;; to org-mode format.
          (body (concat
                 "#+title: " npc-name
-                "#+roam_tags: npc"
+                "\n#+roam_tags: npc"
                 "\n\n* " npc-name
                 "\n\n" (string-join
                         npc-string-list "\n")))
