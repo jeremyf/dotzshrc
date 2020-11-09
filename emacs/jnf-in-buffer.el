@@ -147,7 +147,7 @@
 (use-package company
   :straight t
   :diminish
-  :bind (("C-." . #'company-complete))
+  :bind (("C-." . #'company-capf))
   :hook (prog-mode . company-mode)
   :custom
   (company-dabbrev-downcase nil "Don't downcase returned candidates.")
