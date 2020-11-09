@@ -69,6 +69,9 @@
   (defalias 'recent 'counsel-recentf))
 (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
 
+(use-package all-the-icons
+  :straight t)
+
 (use-package all-the-icons-ivy-rich
   :straight t
   :after (ivy counsel counsel-projectile)
@@ -223,9 +226,10 @@
 ;; Favor neotree over sr-speedbar
 (use-package neotree
   :straight t
-  :init (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
-  (setq-default neo-window-width 36)
+  :after (all-the-icons)
+  :init (setq-default neo-window-width 36)
   :config (global-set-key [f8] 'neotree-toggle))
+(setq neo-theme (if (display-graphic-p) 'icons 'arrow))
 
 (use-package emmet-mode
   :straight t
@@ -236,6 +240,7 @@
 ;; https://github.com/jrblevin/markdown-mode/
 (use-package markdown-mode
   :straight t
+  :hook ((markdown-mode . turn-on-visual-line-mode))
   :mode (("README\\.md\\'" . gfm-mode)
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
