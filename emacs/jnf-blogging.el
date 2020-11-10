@@ -40,7 +40,7 @@ for TakeOnRules.com."
                      "\nlayout: post"
                      "\nlicenses:\n- by-nc-nd-4_0"
                      "\nslug: " slug
-                     "\ntitle: " title
+                     "\ntitle: '" title "'"
                      "\ntype: post"
                      "\n---\n")
                     nil (expand-file-name fpath) nil nil nil t)
