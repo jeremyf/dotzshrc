@@ -55,5 +55,13 @@ for TakeOnRules.com."
     (insert-file-contents (concat tor--repository-path "/artifacts/tags.txt"))
     (split-string (buffer-string) "\n" t)))
 
+(defun tor-series-list ()
+  "Return a list of series from TakeOnRules.com."
+  (split-string-and-unquote
+   (shell-command-to-string (concat
+                            "ag \"^series: .*$\" "
+                            (f-join tor--repository-path "content")
+                            " -o --nofilename | sort | uniq | cut -d \":\" -f 2 | sort"))))
+
 (provide 'jnf-blogging.el)
 ;;; jnf--blogging.el ends here
