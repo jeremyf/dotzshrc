@@ -1,4 +1,5 @@
-;;; package --- Summary:
+;;; init.el --- Summary:
+;;; -*- lexical-binding: t; -*-
 ;;
 ;;  Emacs configuration for Jeremy Friesen
 ;;
@@ -14,7 +15,7 @@
 (setq gc-cons-threshold (* 250 1000 1000))
 
 ;; I have additional files that I require in the emacs directory
-(add-to-list 'load-path "~/git/dotzshrc/emacs")
+(add-to-list 'load-path (expand-file-name "~/git/dotzshrc/emacs"))
 
 ;; This preamble is part of straight-use-package My understanding, in
 ;; reading straight documentation is that it has better load
@@ -68,9 +69,6 @@
   :config (counsel-mode 1)
   (defalias 'recent 'counsel-recentf))
 (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
-
-(use-package all-the-icons
-  :straight t)
 
 (use-package all-the-icons-ivy-rich
   :straight t
@@ -456,3 +454,5 @@ echo the method signature of `'delete-duplicate-lines`"
 
 ;; Make gc pauses faster by decreasing the threshold.
 (setq gc-cons-threshold (* 2 1000 1000))
+(provide 'init)
+;;; init.el ends here
