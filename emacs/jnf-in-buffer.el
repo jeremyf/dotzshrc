@@ -25,6 +25,12 @@
   :straight t
   :config (global-smartscan-mode t))
 
+
+;; Add emoji handling
+(use-package emojify
+  :straight t
+  :hook (after-init . global-emojify-mode))
+
 ;; Provides a prompt for what key chords are available.
 (use-package guide-key
   :straight t
