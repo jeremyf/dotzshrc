@@ -48,13 +48,14 @@ for TakeOnRules.com."
       )))
 
 
-;; Used in ./emacs/snippets/markdown-mode/tag
+;; Used in ./emacs/snippets/text-mode/tag
 (defun tor-tags-list ()
   "Return a list of tags from TakeOnRules.com."
   (with-temp-buffer
     (insert-file-contents (concat tor--repository-path "/artifacts/tags.txt"))
     (split-string (buffer-string) "\n" t)))
 
+;; Used in ./emacs/snippets/text-mode/series
 (defun tor-series-list ()
   "Return a list of series from TakeOnRules.com."
   (split-string-and-unquote
