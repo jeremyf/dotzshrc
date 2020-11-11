@@ -154,7 +154,7 @@
   :straight t
   :diminish
   :bind (("C-." . #'company-capf))
-  :hook (prog-mode . company-mode)
+  :hook (after-init . global-company-mode)
   :custom
   (company-dabbrev-downcase nil "Don't downcase returned candidates.")
   (company-show-numbers t "Numbers are helpful.")
