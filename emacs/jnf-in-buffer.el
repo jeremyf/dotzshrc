@@ -157,9 +157,10 @@
   :hook (after-init . global-company-mode)
   :custom
   (company-dabbrev-downcase nil "Don't downcase returned candidates.")
-  (company-show-numbers t "Numbers are helpful.")
-  (company-tooltip-limit 20 "The more the merrier.")
-  (company-tooltip-idle-delay 0.4 "Faster!")
+  (company-show-numbers t)
+  (company-tooltip-limit 10)
+  (company-minimum-prefix-length 3)
+  (company-tooltip-idle-delay 0.25 "Faster!")
   (company-async-timeout 20 "Some requests can take a long time. That's fine.")
   :config
 
@@ -182,12 +183,7 @@
 ;; place.
 (use-package yasnippet
   :straight t
-  ;; :straight (yasnippets :type git
-  ;;                       :host github
-  ;;                       :repo "joaotavora/yasnippet")
   :after company
-  :config (push 'company-yasnippet company-backends)
-  ;; :bind (("C-c C-e" . yas-expand))
   :init (setq yas-snippet-dirs '("~/git/dotzshrc/emacs/snippets"))
   (yas-global-mode 1))
 
