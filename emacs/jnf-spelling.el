@@ -46,7 +46,7 @@
 ;; Run flyspell-buffer
 (use-package flyspell-popup
   :straight t
-  :bind (("C-'" . #'flyspell-popup-correct))
+  :bind (("s-4" . #'flyspell-popup-correct))
   :hook (flyspell-mode . flyspell-popup-auto-correct-mode))
 
 ;; For grammar nerd
