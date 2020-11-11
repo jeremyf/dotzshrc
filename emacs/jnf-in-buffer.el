@@ -222,6 +222,14 @@
   :bind (("C-M-d" . my-duplicate-thing)
          ("C-c d" . my-duplicate-thing)))
 
+
+(defun sp-wrap-double-quote ()
+  "Wrap following sexp in double quotes (e.g. `\"')."
+  (interactive)
+  (sp-wrap-with-pair  "\""))
+
+(global-set-key (kbd "C-'") 'sp-wrap-double-quote)
+(global-set-key (kbd "<f5>") 'eval-region)
 (global-set-key (kbd "s-/") 'comment-line)
 (global-set-key (kbd "s-l") 'goto-line)
 (global-set-key (kbd "M-DEL") 'backward-kill-paragraph)
