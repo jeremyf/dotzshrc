@@ -19,10 +19,23 @@
 (use-package lsp-ui
   :after lsp-mode
   :commands lsp-ui-mode
-  :hook ((ruby-mode . lsp-ui-mode)
+  :hook (
+         (ruby-mode . lsp-ui-mode)
          (ruby-mode . lsp-ui-peek-mode)
-         (ruby-mode . lsp-ui-sideline-mode))
+         (ruby-mode . lsp-ui-sideline-mode)
+         (typescript-mode . lsp-ui-mode)
+         (typescript-mode . lsp-ui-peek-mode)
+         (typescript-mode . lsp-ui-sideline-mode)
+         (js-mode . lsp-ui-mode)
+         (js-mode . lsp-ui-peek-mode)
+         (js-mode . lsp-ui-sideline-mode)
+         )
   :straight t)
+
+;; By default indent levels are often 4; That is against what I've seen.
+(setq ruby-indent-level 2
+      typescript-indent-level 2
+      js-indent-level 2)
 
 (use-package lsp-ivy
   :after ivy
