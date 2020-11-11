@@ -98,11 +98,6 @@
 (require 'org-roam-protocol)
 
 
-;; (use-package company-org-roam
-;;   :after company
-;;   :straight (:host github :repo "org-roam/company-org-roam")
-;;   :config (push 'company-org-roam company-backends))
-;; (add-hook 'after-init-hook 'global-company-mode)
 (use-package org-roam-server
   :straight t
   :after org-roam
