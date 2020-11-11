@@ -495,8 +495,6 @@ echo the method signature of `'delete-duplicate-lines`"
 ;; End burly
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(global-set-key (kbd "<f12>") `(lambda () (interactive)(find-file "~/git/dotzshrc/symlinks/.emacs")))
-
 (defun dotfiles--gc-on-last-frame-out-of-focus ()
   "GC if all frames are inactive."
   (if (seq-every-p #'null (mapcar #'frame-focus-state (frame-list)))
