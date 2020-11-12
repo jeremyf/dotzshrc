@@ -1,14 +1,28 @@
-#!/usr/bin/env ruby -w
+#!/usr/bin/env ruby
 
-# Toggle the dark/light setting
+# This script toggles the Operating System, Terminal, and Emacs
+# themes.  It uses the state of the the Operating System to determine
+# if the terminal and Emacs should be "dark" or "light".
+
+# First, tell OS-x to toggle dark mode.
 system(%(osascript -e'tell application "System Events" to tell appearance preferences to set dark mode to not dark mode'))
 
-# Commands for turning on dark or light
+# With the dark mode toggled, determine what our display mode is.
+# Dark mode returns "Dark", the non-dark mode writes to standard
+# error.
+appearance = `defaults read -g AppleInterfaceStyle 2>/dev/null`.strip
+
+# There are two valid appearences: "Dark" and "" (eg empty string).
 commands = {
-  "Dark" => ". $HOME/.config/base16-shell/scripts/base16-google-dark.sh",
-  "" => ". $HOME/.config/base16-shell/scripts/base16-google-light.sh"
+  "Dark" => [
+    ". $HOME/.config/base16-shell/scripts/base16-google-dark.sh",
+    %(editor -e "(modus-vivendi-theme-load)" 1> /dev/null)
+  ],
+  "" => [
+    ". $HOME/.config/base16-shell/scripts/base16-google-light.sh",
+    %(editor -e "(modus-operandi-theme-load)" 1> /dev/null)
+  ]
 }
 
-# Determine current dark/light setting.
-appearance = `defaults read -g AppleInterfaceStyle 2> /dev/null`.strip
-system(commands.fetch(appearance))
+# Based on the current appearance, set the editor and terminal.
+system(Array(commands.fetch(appearance)).join(";"))
