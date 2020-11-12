@@ -19,13 +19,6 @@
 (use-package savekill
   :straight t)
 
-;; Smartscan
-;; With the symbol at point, `M-n` move to next one, `M-p` moves to the pervious one
-(use-package smartscan
-  :straight t
-  :config (global-smartscan-mode t))
-
-
 ;; Add emoji handling
 (use-package emojify
   :straight t
