@@ -25,11 +25,6 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     alias pbpaste="xsel"
 fi
 
-if [[ "$OSTYPE" == "darwin"* ]]; then
-    alias light=". $HOME/.config/base16-shell/scripts/base16-google-light.sh"
-    alias dark=". $HOME/.config/base16-shell/scripts/base16-google-dark.sh"
-fi
-
 # Hyrax aliases
 alias hyrax-devup='cp $HOME/git/dotzshrc/hyrax/solr_wrapper_dev.yml $HOME/git/samvera/hyrax/.internal_test_app/config/ ; cd $HOME/git/samvera/hyrax/.internal_test_app ; rm -rf tmp/solr-development ; fcrepo_wrapper & solr_wrapper --config  config/solr_wrapper_dev.yml & redis-server &'
 alias hyrax-testup='cd $HOME/git/samvera/hyrax/.internal_test_app ; rm -rf tmp/solr-valkyrie-test/server/solr/hyrax-valkyrie-test ; rm -rf tmp/solr-test/server/solr/hydra-test ; fcrepo_wrapper --config config/fcrepo_wrapper_test.yml & solr_wrapper --config config/solr_wrapper_test.yml & solr_wrapper --config config/solr_wrapper_valkyrie_test.yml & redis-server &'
