@@ -9,7 +9,11 @@
 (setq lsp-keymap-prefix "C-l")
 (use-package lsp-mode
   :straight t
-  :hook ((ruby-mode . lsp))
+  :hook (
+         (ruby-mode . lsp)
+         (js-mode . lsp)
+         (typescript-mode . lsp)
+         )
   :commands (lsp))
 
 
