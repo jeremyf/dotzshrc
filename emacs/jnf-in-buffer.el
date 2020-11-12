@@ -153,7 +153,8 @@
 (use-package company
   :straight t
   :diminish
-  :bind (("C-." . #'company-capf))
+  :bind (("C-." . #'company-capf)
+         (:map company-active-map (("<tab>" . 'company-complete-selection ))))
   :hook (after-init . global-company-mode)
   :custom
   (company-dabbrev-downcase nil "Don't downcase returned candidates.")
@@ -169,6 +170,12 @@
     (mapc (lambda (x) (define-key map (format "%d" x)
                         `(lambda () (interactive) (company-complete-number ,x))))
           (number-sequence 0 9))))
+
+;; In auto-complete, display any associated help with the completion options.
+(use-package company-quickhelp
+  :straight t
+  :bind (:map company-active-map ("C-c h" . 'company-quickhelp-manual-begin))
+  :config (company-quickhelp-mode))
 
 (defun jnf/kill-region-or-backward-word ()
   (interactive)
