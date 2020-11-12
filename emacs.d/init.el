@@ -65,6 +65,7 @@
          ("C-x C-f" . counsel-find-file)
          ("C-x 8 RET" . counsel-unicode-char)
          ("<f4>" . counsel-bookmark)
+         ("s-4" . counsel-bookmark)
          ("s-r" . counsel-recentf))
   :config (counsel-mode 1)
   (defalias 'recent 'counsel-recentf))

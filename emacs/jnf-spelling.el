@@ -46,7 +46,6 @@
 ;; Run flyspell-buffer
 (use-package flyspell-popup
   :straight t
-  :bind (("s-4" . #'flyspell-popup-correct))
   :hook (flyspell-mode . flyspell-popup-auto-correct-mode))
 
 ;; For grammar nerd
