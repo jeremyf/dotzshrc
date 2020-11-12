@@ -60,17 +60,39 @@
      (load-theme 'modus-%1$s t))
    theme))
 
-(defun modus-themes-toggle ()
-  "Toggle between `modus-operandi' and `modus-vivendi' themes."
-  (interactive)
-  (if (eq (car custom-enabled-themes) 'modus-operandi)
-      (progn
-        (disable-theme 'modus-operandi)
-        (modus-vivendi-theme-load))
-    (disable-theme 'modus-vivendi)
-    (modus-operandi-theme-load)))
+;; Based on system type, either load the OSX apperance (e.g. dark or
+;; light) and load accordingly.
+(if (eq system-type 'darwin)
+    (progn
+      (defun jnf-dark ()
+        "Toggle system-wide Dark or Light setting."
+        (interactive)
+        (shell-command "osascript -e 'tell application \"System Events\" to tell appearance preferences to set dark mode to not dark mode'")
+        (jnf-emacs-theme-by-osx-appearance))
 
-(modus-operandi-theme-load)
+      (defalias 'modus-themes-toggle 'jnf-dark)
+      (defun jnf-emacs-theme-by-osx-appearance ()
+        "Set theme based on OSX apperance state."
+        (if (equal "Dark" (substring (shell-command-to-string "defaults read -g AppleInterfaceStyle") 0 4))
+            (progn
+              (disable-theme 'modus-operandi)
+              (modus-vivendi-theme-load))
+          (progn
+            (disable-theme 'modus-vivendi)
+            (modus-operandi-theme-load))
+          ))
+      (jnf-emacs-theme-by-osx-appearance))
+  (progn
+    (defun modus-themes-toggle ()
+      "Toggle between `modus-operandi' and `modus-vivendi' themes."
+      (interactive)
+      (if (eq (car custom-enabled-themes) 'modus-operandi)
+          (progn
+            (disable-theme 'modus-operandi)
+            (modus-vivendi-theme-load))
+        (disable-theme 'modus-vivendi)
+        (modus-operandi-theme-load)))
+    (modus-operandi-theme-load)))
 
 (global-set-key (kbd "<s-clear>") 'modus-themes-toggle)
 (global-set-key (kbd "s-9") 'modus-themes-toggle)
