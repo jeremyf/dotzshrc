@@ -45,13 +45,16 @@
              ("l" . elfeed-show-link-title)
              ("v" . elfeed-show-quick-url-note)))
 
+(use-package eww
+  :hook ((eww-mode . jnf-reader-visual)))
+
+
 ;; A little bit of RSS beautification
-(add-hook 'elfeed-show-mode-hook 'jnf/elfeed-visual)
-(defun jnf/elfeed-visual ()
+(add-hook 'elfeed-show-mode-hook 'jnf-reader-visual)
+(defun jnf-reader-visual ()
   "A method to turn on visual line mode and adjust text scale."
   (text-scale-set 2)
-  (turn-on-visual-line-mode)
-  )
+  (turn-on-visual-line-mode))
 
 ;;write to disk when quiting
 (defun jnf/elfeed-save-db-and-bury ()
