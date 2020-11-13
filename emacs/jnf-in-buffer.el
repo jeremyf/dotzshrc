@@ -226,7 +226,6 @@
 
 (global-set-key (kbd "C-'") 'sp-wrap-double-quote)
 (global-set-key (kbd "<f5>") 'eval-region)
-(global-set-key (kbd "s-/") 'comment-line)
 (global-set-key (kbd "s-l") 'goto-line)
 (global-set-key (kbd "M-DEL") 'backward-kill-paragraph)
 (global-set-key (kbd "s-q") 'save-buffers-kill-terminal)
