@@ -181,16 +181,6 @@
 (use-package browse-at-remote
   :straight t)
 
-;; - "<s-tab>" 'buffer-expose
-;; - "<C-tab>" 'buffer-expose-no-stars
-;; - "C-c <C-tab>" 'buffer-expose-current-mode
-;; - "C-c C-m" 'buffer-expose-major-mode
-;; - "C-c C-d" 'buffer-expose-dired-buffers
-;; - "C-c C-*" 'buffer-expose-stars
-(use-package buffer-expose
-  :straight t
-  :config (buffer-expose-mode 1))
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
