@@ -19,11 +19,6 @@
 (use-package savekill
   :straight t)
 
-;; Add emoji handling
-(use-package emojify
-  :straight t
-  :hook (after-init . global-emojify-mode))
-
 ;; Provides a prompt for what key chords are available.
 (use-package guide-key
   :straight t
@@ -170,6 +165,14 @@
   :bind (:map company-active-map ("C-c h" . 'company-quickhelp-manual-begin))
   :config (company-quickhelp-mode))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; BEGIN EMOJIS
+;;
+;; Add emoji handling
+(use-package emojify
+  :straight t
+  :hook (after-init . global-emojify-mode))
+
 (use-package company-emoji
   :straight (company-emoji :type git :host github :repo "dunn/company-emoji" :branch "trunk")
   :config (add-to-list 'company-backends 'company-emoji))
@@ -187,7 +190,9 @@
 ;; Hook for when a frame is created with emacsclient
 ;; see https://www.gnu.org/software/emacs/manual/html_node/elisp/Creating-Frames.html
 (add-hook 'after-make-frame-functions '--set-emoji-font)
-
+;;
+;; END EMOJIS
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defun jnf/kill-region-or-backward-word ()
   (interactive)
