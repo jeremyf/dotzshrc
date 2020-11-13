@@ -49,5 +49,11 @@
 	     :config (setq git-link-use-commit t) ;; URL will be SHA instead of branch
 	     :straight t)
 
+(use-package git-messenger
+  :config (setq git-messenger:show-detail t)
+  :custom (git-messenger:use-magit-popup t)
+  :bind (("s-6" . git-messenger:popup-message))
+  :straight t)
+
 (provide 'jnf-git.el)
 ;;; jnf-git.el ends here
