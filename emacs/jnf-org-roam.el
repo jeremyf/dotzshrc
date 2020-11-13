@@ -112,6 +112,50 @@
         org-roam-server-network-label-truncate-length 60
         org-roam-server-network-label-wrap-length 20))
 
+;; https://ag91.github.io/blog/2020/11/12/write-org-roam-notes-via-elisp/
+(defun jnf/make-filepath (title now &optional zone)
+  "Make filename from note TITLE and NOW time (assumed in the current time ZONE)."
+  (j-join
+   org-roam-directory
+   "fleeting"
+   (concat
+    (format-time-string "%Y%m%d---" now (or zone (current-time-zone))))
+    (org-roam--title-to-slug title)
+    ".org"))
+
+(defun jnf/insert-org-roam-file (file-path title &optional links sources text quote)
+  "Insert org roam file in FILE-PATH with TITLE, LINKS, SOURCES, TEXT, QUOTE."
+  (with-temp-file file-path
+    (insert
+     "#+TITLE: " title
+     "\n\n- tags :: " (--reduce (concat acc ", " it) links) "\n"
+     (if sources (concat "- source :: " (--reduce (concat acc ", " it) sources) "\n") "")
+     "\n"
+     (if text text "")
+     "\n"
+     "\n"
+     (if quote
+         (concat "#+begin_src text \n"
+     quote "\n"
+     "#+end_src")
+       ""))))
+
+(defun send-roaming ()
+  "Convert an org node to a `org-roam' note."
+  (interactive)
+  (let* ((heading (org-get-heading t t t t))
+         (body (org-get-entry))
+         (link (format "[[id:%s][%s]]" (org-id-get-create) heading))
+         (filepath (jnf/make-filepath heading (current-time))))
+    (jnf/insert-org-roam-file
+     filepath
+     heading
+     nil
+     (list link)
+     (format "* Note stored from tasks\n%s" body)
+     nil)
+    (find-file filepath)))
+
 ;; Some hot keys to jump to often different relevant files
 ;; Jump to the current clock if one is open, otherwise, go to my agenda file.
 (global-set-key (kbd "s-i") 'org-roam-insert)
