@@ -82,8 +82,10 @@
 ;; for further discussion
 ;;
 ;; One consideration is that the below setq should be called as part
-;; of the `org-toggle-inline-images`
-(setq org-image-actual-width (truncate (* (window-pixel-width) 0.8)))
+;; of the `org-toggle-inline-images`.  <2020-11-14 Sat 12:09>: I
+;; commented out the lines below as it created a very small image
+;; (about the size of one character).  (setq org-image-actual-width
+;; (truncate (* (window-pixel-width) 0.8)))
 
 (org-babel-do-load-languages
  'org-babel-load-languages
