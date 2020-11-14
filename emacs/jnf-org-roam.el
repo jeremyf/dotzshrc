@@ -115,13 +115,13 @@
 ;; https://ag91.github.io/blog/2020/11/12/write-org-roam-notes-via-elisp/
 (defun jnf/make-filepath (title now &optional zone)
   "Make filename from note TITLE and NOW time (assumed in the current time ZONE)."
-  (j-join
+  (f-join
    org-roam-directory
    "fleeting"
    (concat
-    (format-time-string "%Y%m%d---" now (or zone (current-time-zone))))
+    (format-time-string "%Y%m%d---" now (or zone (current-time-zone)))
     (org-roam--title-to-slug title)
-    ".org"))
+    ".org")))
 
 (defun jnf/insert-org-roam-file (file-path title &optional links sources text quote)
   "Insert org roam file in FILE-PATH with TITLE, LINKS, SOURCES, TEXT, QUOTE."
