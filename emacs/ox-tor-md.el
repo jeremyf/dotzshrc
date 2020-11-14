@@ -35,13 +35,39 @@
 ;;
 ;;; Code:
 ;; ;; Consider https://github.com/jkitchin/org-ref as well
-
+(require 's)
 (org-export-define-derived-backend 'take-on-rules 'md
+  :translate-alist '(
+                     (headline . org-tor-headline)
+                     (timestamp . org-tor-timestamp)
+                     )
   :menu-entry
   '(?T "Export to Take on Rules"
-       ((?f "As Markdown buffer" org-take-on-rules-export-as-markdown))))
+       ((?f "As Markdown buffer" org-tor-export-as-markdown))))
 
-(defun org-take-on-rules-export-as-markdown
+
+(defun org-tor-headline (headline contents info)
+  (let* ((low-level-rank (org-export-low-level-p headline info))
+         (text (org-export-data (org-element-property :title headline)
+                                info))
+         (level (org-export-get-relative-level headline info))
+         (prefix (s-repeat level "#")))
+    (format "%s %s\n\n%s"
+            prefix
+            text
+            (if (org-string-nw-p contents) contents ""))))
+
+(defun org-tor-timestamp (timestamp _contents _info)
+  "Transcode a TIMESTAMP object from Org to ToR.
+CONTENTS and INFO are ignored."
+  (let ((time (org-timestamp-to-time timestamp)))
+    (format
+     "<time datetime=\"%s\">%s</time>"
+     (format-time-string "%Y-%m-%d" time)
+     (format-time-string "%B %d, %Y" time)
+     )))
+
+(defun org-tor-export-as-markdown
   (&optional async subtreep visible-only body-only ext-plist)
   "Export current buffer to a text buffer.
 
@@ -73,6 +99,6 @@ will be displayed when `org-export-show-temporary-export-buffer'
 is non-nil."
   (interactive)
   (org-export-to-buffer 'take-on-rules "*org Take on Rules Export*"
-    async subtreep visible-only body-only ext-plist (lambda () (text-mode))))
+    async subtreep visible-only t ext-plist (lambda () (text-mode))))
 (provide 'ox-tor-md.el)
 ;;; ox-tor-md.el ends here

@@ -163,5 +163,6 @@ If no ORG_FILE_BASENAME is given default to `agenda.org'. I chose
 ;; End goto org file
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(require 'ox-tor-md.el)
 (provide 'jnf-org.el)
 ;;; jnf-org.el ends here
