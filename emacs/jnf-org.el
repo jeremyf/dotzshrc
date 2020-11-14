@@ -1,5 +1,5 @@
-;;; -*- lexical-binding: t; -*-
 ;;; jnf-org.el --- Summary
+;;; -*- lexical-binding: t; -*-
 ;;
 ;;; Commentary:
 ;;
