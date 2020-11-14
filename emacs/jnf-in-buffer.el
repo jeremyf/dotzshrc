@@ -173,6 +173,11 @@
   :straight t
   :hook (after-init . global-emojify-mode))
 
+(use-package unicode-fonts
+  :straight t
+  :ensure t
+  :config (unicode-fonts-setup))
+
 (use-package company-emoji
   :straight (company-emoji :type git :host github :repo "dunn/company-emoji" :branch "trunk")
   :config (add-to-list 'company-backends 'company-emoji))
