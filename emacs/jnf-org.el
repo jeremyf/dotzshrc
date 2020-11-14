@@ -88,7 +88,12 @@
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((emacs-lisp . t)
+   (plantuml . t)
    (ruby . t)))
+
+;; I'd prefer to use the executable, but that doe not appear to be the
+;; implementation of org-babel.
+(setq org-plantuml-jar-path (expand-file-name "/usr/local/Cellar/plantuml/1.2020.16/libexec/plantuml.jar"))
 
 ;; Insert immediate timestamp at point.
 (defun jnf-org-insert-immediate-active-timestamp ()

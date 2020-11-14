@@ -323,6 +323,11 @@
   :straight t)
 
 (use-package plantuml-mode
+  :config (setq plantuml-executable-path "/usr/local/bin/plantuml"
+                plantuml-default-exec-mode 'executable
+                org-plantuml-executable-path "/usr/local/bin/plantuml"
+                org-plantuml-exec-mode 'executable)
+  :mode (("\\.plantuml\\'" . plantuml-mode))
   :straight t)
 
 ;; That letter is the beginning of a word. Narrow results from there.
