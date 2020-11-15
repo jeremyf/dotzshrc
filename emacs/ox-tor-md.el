@@ -61,7 +61,7 @@ as a communication channel."
      "\nlayout: page"
      "\nlicenses: []"
      (format "\npermalink: /thel-sector/%s/" (s-dashed-words (format "%s" title)))
-     (format "\ntitle: %s" title)
+     (format "\ntitle: \"%s\"" title)
      "\ntype: page"
      "\n---\n"
      contents)))
@@ -122,11 +122,21 @@ EXT-PLIST, when provided, is a property list with external
 parameters overriding Org default settings, but still inferior to
 file-local settings.
 
-Export is done in a buffer named \"*org Take on Rules Export*\", which
+Export is done in a buffer named `*org Take on Rules Export*', which
 will be displayed when `org-export-show-temporary-export-buffer'
 is non-nil."
   (interactive)
   (org-export-to-buffer 'take-on-rules "*org Take on Rules Export*"
-    async subtreep visible-only t ext-plist (lambda () (text-mode))))
+    async subtreep visible-only body-only ext-plist (lambda () (text-mode))))
+
+
+;; Cribbed from https://github.com/juanjosegarciaripoll/org-thtml
+(defun org-tor-export (plist filename pub-dir)
+  "Publish an org file to MD.
+
+FILENAME is the filename of the Org file to be published.  PLIST
+is the property list for the given project.  PUB-DIR is the
+publishing directory."
+    (org-publish-org-to 'take-on-rules filename ".md" plist  pub-dir))
 (provide 'ox-tor-md.el)
 ;;; ox-tor-md.el ends here

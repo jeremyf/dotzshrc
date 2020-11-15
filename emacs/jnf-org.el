@@ -154,11 +154,10 @@ If no ORG_FILE_BASENAME is given default to `agenda.org'. I chose
 (setq org-publish-project-alist
       '(("Thel Sector"
          :base-directory "~/git/org/projects/thel-sector"
-         :publishing-directory "~/git/thel-sector/pub"
-         :publishing-function org-html-publish-to-html
-         :auto-sitemap t
-         :sitemap-filename "index.org"
-         :sitemap-title "Index")))
+         :publishing-directory "~/git/takeonrules.github.io/content/thel-sector/"
+         :publishing-function org-tor-export
+         :with-toc nil
+         :auto-sitemap nil)))
 
 ;; End goto org file
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
