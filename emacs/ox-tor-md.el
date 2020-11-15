@@ -10,6 +10,8 @@
 ;;  - [ ] Determine how to invoke the export function without menu (I
 ;;        believe it would be org-export-to-buffer, but would want to
 ;;        pass - the named buffer in the TOR project)
+;;  - [ ] Handle title wrapped in "(title)"
+;;  - [ ] Write file to
 ;;
 ;;  First, I want to export an org-file to a basic markdown format
 ;;  that:
@@ -40,22 +42,48 @@
   :translate-alist '(
                      (headline . org-tor-headline)
                      (timestamp . org-tor-timestamp)
+                     (inner-template . org-tor-template)
                      )
   :menu-entry
   '(?T "Export to Take on Rules"
        ((?f "As Markdown buffer" org-tor-export-as-markdown))))
 
+(defun org-tor-template (contents info)
+  "Return complete document string after Markdown conversion.
+CONTENTS is the transcoded contents string.  INFO is a plist used
+as a communication channel."
+  (let ((title (plist-get info :title))
+        (input-file (plist-get info :input-file))
+        )
+    (concat
+     "---"
+     "\ndate: 2018-01-01"
+     "\nlayout: page"
+     "\nlicenses: []"
+     (format "\npermalink: /thel-sector/%s/" (s-dashed-words (format "%s" title)))
+     (format "\ntitle: %s" title)
+     "\ntype: page"
+     "\n---\n"
+     contents)))
 
 (defun org-tor-headline (headline contents info)
-  (let* ((low-level-rank (org-export-low-level-p headline info))
-         (text (org-export-data (org-element-property :title headline)
+  "Transcode a HEADLINE to ToR.
+
+An assumption of files going to takeonrules.com is that they
+originating org file has a top-level header in addition to its
+:TITLE:.
+
+CONTENTS appended to the title.  INFO used as well."
+  (let* ((text (org-export-data (org-element-property :title headline)
                                 info))
          (level (org-export-get-relative-level headline info))
          (prefix (s-repeat level "#")))
-    (format "%s %s\n\n%s"
-            prefix
-            text
-            (if (org-string-nw-p contents) contents ""))))
+    (if (eq level 1)
+        (format "%s" (if (org-string-nw-p contents) contents ""))
+      (format "%s %s\n\n%s"
+              prefix
+              text
+              (if (org-string-nw-p contents) contents "")))))
 
 (defun org-tor-timestamp (timestamp _contents _info)
   "Transcode a TIMESTAMP object from Org to ToR.
