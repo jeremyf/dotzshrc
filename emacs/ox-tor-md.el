@@ -145,12 +145,13 @@ publishing directory."
          :base-directory "~/git/org/projects/thel-sector"
          :publishing-directory "~/git/takeonrules.github.io/content/campaigns/thel-sector/"
          :publishing-function org-tor-export
-         :exclude "\\(actual_play\\|katsina\\|askira\\|faction_turn\\)"
+         :exclude "\\(actual_play\\|katsina\\|askira\\|faction_turn\\|compline_synthesis\\)"
          :with-toc nil
          :auto-sitemap nil)))
+
 (defun org-confirm-babel-evaluate (language body)
+  "Should babel evaluate the BODY of code in the given LANGUAGE?"
   t)
-(org-publish-project "Thel Sector" t)
 
 (provide 'ox-tor-md.el)
 ;;; ox-tor-md.el ends here
