@@ -150,15 +150,6 @@ If no ORG_FILE_BASENAME is given default to `agenda.org'. I chose
     (if (equal current_filename (expand-file-name org_filename))
         (progn (org-sidebar-toggle))
       (progn (find-file org_filename) (delete-other-windows)))))
-
-(setq org-publish-project-alist
-      '(("Thel Sector"
-         :base-directory "~/git/org/projects/thel-sector"
-         :publishing-directory "~/git/takeonrules.github.io/content/thel-sector/"
-         :publishing-function org-tor-export
-         :with-toc nil
-         :auto-sitemap nil)))
-
 ;; End goto org file
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
