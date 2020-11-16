@@ -56,8 +56,8 @@
 
 ;; Solargraph is the language tool for lsp-mode and Ruby
 (use-package solargraph
-  :straight (solargraph :host github :repo "guskovd/emacs-solargraph"))
+  :straight (solargraph :host github :repo "guskovd/emacs-solargraph")
+  :bind (:map ruby-mode-map ("M-i" . solargraph:complete)))
 
-(define-key ruby-mode-map (kbd "M-i") 'solargraph:complete)
 (provide 'jnf-lsp-mode.el)
 ;;; jnf-lsp-mode.el ends here
