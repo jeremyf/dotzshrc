@@ -1,3 +1,4 @@
+# coding: utf-8
 # frozen_string_literal: true
 
 # This script installs the various files from the dotzshrc "ecosystem".
@@ -35,7 +36,7 @@ FileUtils.mkdir_p(File.join(home_dirname, '.emacs.d'))
 
 [
   File.expand_path('emacs.d/.*', __dir__), # Hidden files
-  File.expand_path('emacs.d/*', __dir__)  # Non-hidden files
+  File.expand_path('emacs.d/*', __dir__) # Non-hidden files
 ].each do |glob|
   Dir.glob(glob).each do |source_filename|
     basename = File.basename(source_filename)

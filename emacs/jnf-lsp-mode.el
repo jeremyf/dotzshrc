@@ -8,7 +8,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (use-package lsp-mode
   :straight t
-  :init (setq lsp-keymap-prefix "C-l")
   :hook (
          (ruby-mode . lsp)
          (js-mode . lsp)
@@ -16,10 +15,8 @@
          (yaml-mode . lsp)
          (json-mode . lsp)
          (html-mode . lsp)
-         (bash-mode . lsp)
-         )
+         (bash-mode . lsp))
   :commands (lsp))
-
 
 ;; This package provides some nice UI behavior for documentation and linting
 ;;
