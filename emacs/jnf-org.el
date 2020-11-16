@@ -8,10 +8,41 @@
 ;;; Code:
 ;; ;; Consider https://github.com/jkitchin/org-ref as well
 
-(use-package org-sidebar
-  :straight (org-sidebar :type git
-                         :host github
-                         :repo "alphapapa/org-sidebar")
+(use-package org
+  :straight t
+  :config (setq
+           org-directory "~/git/org"
+           org-agenda-files (list "~/git/org")
+           org-default-notes-file (concat org-directory "/captured-notes.org")
+           org-todo-keywords
+           '((sequence "TODO" "WAITING" "|" "DONE")
+             (sequence "MEETING" "AGENDA" "|" "MINUTES")
+             (sequence "UNFILED" "|" "FILED")
+             (sequence "TO-READ" "READING" "|" "READ")))
+  (setq org-capture-templates
+        '(
+          ("c" "Write to Current Clock" plain (clock)
+           "%?\n %a")
+          ("m" "Meeting for Work" entry (file+datetree "~/git/org/agenda.org")
+           "* MEETING %^{SUMMARY}\n\n  %^{ATTENDEES}p\n  %?\n")
+          ("r" "Reading for Work" entry (file+datetree "~/git/org/agenda.org")
+           "* TO-READ %^{SUBJECT} %u\n  %?\n")
+          ("s" "Session" entry (file+headline "~/git/org/sessions.org" "Sessions")
+           "* Session: %u %^{SUMMARY}\n\n  %^{ATTENDEES}p\n  %^{SYSTEM}p\n  %?\n")
+          ("g" "Troubleshooting" entry (file+headline "~/git/org/troubleshooting.org" "Trouble Shooting")
+           "* TODO %u Problem %^{SUMMARY}\n\n  %?\n  %a")
+          ("t" "Task for Work" entry (file+datetree "~/git/org/agenda.org")
+           "* TODO %?")
+          ("u" "Unfiled Permanent > Bibliography" entry (file+headline "~/git/org/permanent/unfiled_bibliographic_cards.org" "Unfiled Bibliographic Cards")
+           "* UNFILED %?\nEntered on %U")
+          ("w" "Waiting for Work" entry (file+datetree "~/git/org/agenda.org")
+           "* WAITING %^{SUMMARY}\n\n  %?\n")
+          ))
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((emacs-lisp . t)
+     (plantuml . t)
+     (ruby . t)))
   :bind (
          ("C-c l" . org-store-link)
          ("C-c a" . org-agenda)
@@ -20,12 +51,16 @@
          ("C-c C-q" . counsel-org-tag)
          ("s-2" . jnf-org-insert-immediate-active-timestamp)))
 
+
+
+(use-package org-sidebar
+  :straight (org-sidebar :type git
+                         :host github
+                         :repo "alphapapa/org-sidebar"))
+
 ;; Uncomment to always launch org mode with a sidebar tree
 ;; (add-hook 'org-mode-hook #'org-sidebar-tree)
 
-(setq org-directory "~/git/org")
-(setq org-agenda-files (list "~/git/org"))
-(setq org-default-notes-file (concat org-directory "/captured-notes.org"))
 
 ;; To make Org mode take care of versioning of attachments for you,
 ;; add the following to your Emacs config:
@@ -33,35 +68,10 @@
 (require 'org-attach-git)
 
 ;; I'm working through what templates I might want. This is a place holder.
-(setq org-capture-templates
-      '(
-        ("c" "Write to Current Clock" plain (clock)
-         "%?\n %a")
-        ("m" "Meeting for Work" entry (file+datetree "~/git/org/agenda.org")
-         "* MEETING %^{SUMMARY}\n\n  %^{ATTENDEES}p\n  %?\n")
-        ("r" "Reading for Work" entry (file+datetree "~/git/org/agenda.org")
-         "* TO-READ %^{SUBJECT} %u\n  %?\n")
-        ("s" "Session" entry (file+headline "~/git/org/sessions.org" "Sessions")
-         "* Session: %u %^{SUMMARY}\n\n  %^{ATTENDEES}p\n  %^{SYSTEM}p\n  %?\n")
-        ("g" "Troubleshooting" entry (file+headline "~/git/org/troubleshooting.org" "Trouble Shooting")
-         "* TODO %u Problem %^{SUMMARY}\n\n  %?\n  %a")
-        ("t" "Task for Work" entry (file+datetree "~/git/org/agenda.org")
-         "* TODO %?")
-        ("u" "Unfiled Permanent > Bibliography" entry (file+headline "~/git/org/permanent/unfiled_bibliographic_cards.org" "Unfiled Bibliographic Cards")
-         "* UNFILED %?\nEntered on %U")
-        ("w" "Waiting for Work" entry (file+datetree "~/git/org/agenda.org")
-         "* WAITING %^{SUMMARY}\n\n  %?\n")
-        ))
 
 
 ;; Different key words and state machines help contextual the work.
 ;;
-(setq org-todo-keywords
-      '((sequence "TODO" "WAITING" "|" "DONE")
-        (sequence "MEETING" "AGENDA" "|" "MINUTES")
-        (sequence "UNFILED" "|" "FILED")
-        (sequence "TO-READ" "READING" "|" "READ"))
-      )
 
 (use-package org-web-tools
   :straight t)
@@ -87,11 +97,6 @@
 ;; (about the size of one character).  (setq org-image-actual-width
 ;; (truncate (* (window-pixel-width) 0.8)))
 
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((emacs-lisp . t)
-   (plantuml . t)
-   (ruby . t)))
 
 ;; I'd prefer to use the executable, but that doe not appear to be the
 ;; implementation of org-babel.
