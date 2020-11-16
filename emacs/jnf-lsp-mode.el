@@ -6,13 +6,17 @@
 ;;
 ;;; Code:
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(setq lsp-keymap-prefix "C-l")
 (use-package lsp-mode
   :straight t
+  :init (setq lsp-keymap-prefix "C-l")
   :hook (
          (ruby-mode . lsp)
          (js-mode . lsp)
          (typescript-mode . lsp)
+         (yaml-mode . lsp)
+         (json-mode . lsp)
+         (html-mode . lsp)
+         (bash-mode . lsp)
          )
   :commands (lsp))
 
@@ -33,6 +37,18 @@
          (js-mode . lsp-ui-mode)
          (js-mode . lsp-ui-peek-mode)
          (js-mode . lsp-ui-sideline-mode)
+         (yaml-mode . lsp-ui-mode)
+         (yaml-mode . lsp-ui-peek-mode)
+         (yaml-mode . lsp-ui-sideline-mode)
+         (json-mode . lsp-ui-mode)
+         (json-mode . lsp-ui-peek-mode)
+         (json-mode . lsp-ui-sideline-mode)
+         (html-mode . lsp-ui-mode)
+         (html-mode . lsp-ui-peek-mode)
+         (html-mode . lsp-ui-sideline-mode)
+         (bash-mode . lsp-ui-mode)
+         (bash-mode . lsp-ui-peek-mode)
+         (bash-mode . lsp-ui-sideline-mode)
          )
   :straight t)
 
@@ -58,6 +74,12 @@
 (use-package solargraph
   :straight (solargraph :host github :repo "guskovd/emacs-solargraph")
   :bind (:map ruby-mode-map ("M-i" . solargraph:complete)))
+
+(use-package tree-sitter
+  :straight t
+  :config (global-tree-sitter-mode))
+(use-package tree-sitter-langs
+  :straight t)
 
 (provide 'jnf-lsp-mode.el)
 ;;; jnf-lsp-mode.el ends here
