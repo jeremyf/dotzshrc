@@ -12,11 +12,11 @@
 ;; The OMG awesome git client for emacs.
 (use-package magit
   :straight t
-  :init (setq git-commit-fill-column 72) ;; Adding format to git-commit-fill-column of 72 as best practice.
-  (setq git-commit-summary-max-length 50)
   :bind (("C-c m" . magit-status)
          ("C-c RET" . magit-file-dispath))
-  :init
+  :init (use-package with-editor :straight t)
+  (setq git-commit-fill-column 72) ;; Adding format to git-commit-fill-column of 72 as best practice.
+  (setq git-commit-summary-max-length 50)
   ;; Have magit-status go full screen and quit to previous
   ;; configuration.  Taken from
   ;; http://whattheemacsd.com/setup-magit.el-01.html#comment-748135498
