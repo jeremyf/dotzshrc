@@ -171,7 +171,7 @@
 ;; Add emoji handling
 (use-package emojify
   :straight t
-  :hook (after-init . global-emojify-mode))
+  :hook (text-mode . emojify-mode))
 
 (use-package unicode-fonts
   :straight t
