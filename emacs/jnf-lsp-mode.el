@@ -59,12 +59,6 @@
   :straight t
   :commands lsp-ivy-workspace-symbol)
 
-(use-package company-lsp
-  :straight t
-  :custom (company-lsp-enable-snippet t)
-  :after (company lsp-mode))
-
-(add-hook 'emacs-lisp-mode 'company-mode)
 (add-hook 'emacs-lisp-mode 'eldoc-mode)
 
 ;; Solargraph is the language tool for lsp-mode and Ruby
