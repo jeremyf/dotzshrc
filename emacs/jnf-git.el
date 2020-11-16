@@ -14,7 +14,8 @@
   :straight t
   :init (setq git-commit-fill-column 72) ;; Adding format to git-commit-fill-column of 72 as best practice.
   (setq git-commit-summary-max-length 50)
-  :bind ("C-c m" . magit-status)
+  :bind (("C-c m" . magit-status)
+         ("C-c RET" . magit-file-dispath))
   :init
   ;; Have magit-status go full screen and quit to previous
   ;; configuration.  Taken from
@@ -24,14 +25,10 @@
     (window-configuration-to-register :magit-fullscreen)
     ad-do-it
     (delete-other-windows))
-  (defadvice magit-quit-window (after magit-restore-screen activate)
+  (defadvice magit-mode-quit-window (after magit-restore-screen activate)
     (jump-to-register :magit-fullscreen))
   :config
-  (remove-hook 'magit-status-sections-hook 'magit-insert-tags-header)
-  (remove-hook 'magit-status-sections-hook 'magit-insert-status-headers)
-  (remove-hook 'magit-status-sections-hook 'magit-insert-unpulled-from-pushremote)
-  (remove-hook 'magit-status-sections-hook 'magit-insert-unpulled-from-upstream)
-  (remove-hook 'magit-status-sections-hook 'magit-insert-unpushed-to-upstream-or-recent))
+  (remove-hook 'magit-status-sections-hook 'magit-insert-tags-header))
 
 (use-package forge
   :straight t)
