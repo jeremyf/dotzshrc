@@ -13,7 +13,8 @@
   :straight t
   :after inf-ruby
   :bind (:map rspec-mode-map (("s-." . 'rspec-toggle-spec-and-target)))
-  :hook (ruby-mode . rspec-mode))
+  :hook (ruby-mode . rspec-mode)
+  (ruby-mode . eldoc-mode))
 
 ;; I most often write documentation using yard.  See
 ;; https://yardoc.org.
