@@ -13,7 +13,7 @@
 (use-package magit
   :straight t
   :bind (("C-c m" . magit-status)
-         ("C-c RET" . magit-file-dispath))
+         ("C-c RET" . magit-file-dispatch))
   :init (use-package with-editor :straight t)
   (setq git-commit-fill-column 72) ;; Adding format to git-commit-fill-column of 72 as best practice.
   (setq git-commit-summary-max-length 50)
