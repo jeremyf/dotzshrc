@@ -19,13 +19,9 @@
 (use-package savekill
   :straight t)
 
-;; Provides a prompt for what key chords are available.
-(use-package guide-key
-  :straight t
-  :config
-  (progn
-  (setq guide-key/guide-key-sequence '("C-x 4" "C-c"))
-  (guide-key-mode 1)))
+(use-package which-key
+  :config (which-key-mode)
+  :straight t)
 
 ;; I don't use a lot of folding, this allows me to type C-RET and fold
 ;; the current block.  There's more it can do but for now that's

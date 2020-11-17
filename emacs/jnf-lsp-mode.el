@@ -18,6 +18,9 @@
          (bash-mode . lsp))
   :commands (lsp))
 
+(with-eval-after-load 'lsp-mode
+  (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration))
+
 ;; This package provides some nice UI behavior for documentation and linting
 ;;
 ;; In particular, I like 'lsp-ui-peek-find-reference
