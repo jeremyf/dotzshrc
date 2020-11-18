@@ -1,5 +1,4 @@
-;;; -*- lexical-binding: t; -*-
-;;; jnf-ruby.el --- Summary
+;;; jnf-ruby.el --- Summary -*- lexical-binding: t; -*-
 ;;
 ;;; Commentary:
 ;;
@@ -15,6 +14,13 @@
   :bind (:map rspec-mode-map (("s-." . 'rspec-toggle-spec-and-target)))
   :hook (ruby-mode . rspec-mode)
   (ruby-mode . eldoc-mode))
+
+(defun rspec-hyrax ()
+  "Setup rspec mode docker configuration for Hyrax."
+  (interactive)
+  (setq rspec-docker-command "docker-compose exec -w /app/samvera/hyrax-engine")
+  (setq rspec-docker-cwd "/app/samvera/hyrax-engine/")
+  (setq rspec-docker-container "app"))
 
 ;; I most often write documentation using yard.  See
 ;; https://yardoc.org.
