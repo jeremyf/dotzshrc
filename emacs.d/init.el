@@ -293,6 +293,14 @@
   :straight t
   :mode (("\\.vue\\'" . vue-mode)))
 
+(use-package web-mode
+  :straight t
+  :config (setq web-mode-markup-indent-offset 2
+                web-mode-css-indent-offset 2
+                web-mode-code-indent-offset 2))
+(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; BEGIN Typescript
 (use-package typescript-mode
@@ -469,6 +477,10 @@ echo the method signature of `'delete-duplicate-lines`"
 (require 'jnf-blogging.el)
 (require 'jnf-tabs.el)
 (require 'jnf-stars-without-number.el)
+
+;; Consider for publishing: https://github.com/rnkn/binder
+;; Consider as replacement for org-roam: https://github.com/EFLS/zetteldeft
+;; And https://github.com/zzamboni/ox-leanpub
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Begin burly/bufly
