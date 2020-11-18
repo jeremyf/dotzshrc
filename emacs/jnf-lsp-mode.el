@@ -15,7 +15,11 @@
          (yaml-mode . lsp)
          (json-mode . lsp)
          (html-mode . lsp)
+         (css-mode . lsp)
          (bash-mode . lsp))
+  :config (setq read-process-output-max (* 1024 1024)
+                lsp-completion-provider :capf
+                lsp-idle-delay 0.500)
   :commands (lsp))
 
 (with-eval-after-load 'lsp-mode
@@ -46,6 +50,9 @@
          (html-mode . lsp-ui-mode)
          (html-mode . lsp-ui-peek-mode)
          (html-mode . lsp-ui-sideline-mode)
+         (css-mode . lsp-ui-mode)
+         (css-mode . lsp-ui-peek-mode)
+         (css-mode . lsp-ui-sideline-mode)
          (bash-mode . lsp-ui-mode)
          (bash-mode . lsp-ui-peek-mode)
          (bash-mode . lsp-ui-sideline-mode)
