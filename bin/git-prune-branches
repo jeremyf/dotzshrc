@@ -7,6 +7,7 @@ then
   git checkout $1
   git remote prune origin
   git branch --merged | grep -v "\*" | grep -v $1 | xargs -n 1 git branch -d
+  git byegone
 else
   echo "You must specify a branch name for which to prune against"
   exit 1
