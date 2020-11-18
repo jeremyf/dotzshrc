@@ -42,6 +42,7 @@
 (eval-when-compile (require 'cl))
 
 (defun append-aspell-word (new-word)
+  "Append the given NEW-WORD to the current dictionary, and reload the dictionary."
  (let ((header "personal_ws-1.1")
        (file-name (substitute-in-file-name "$HOME/.aspell.en.pws"))
        (read-words (lambda (file-name)
@@ -70,8 +71,8 @@
  (flyspell-mode)
  (flyspell-mode))
 
-(defun append-aspell-current ()
- "Add current word to aspell dictionary"
+(defun append-current-word-to-aspell-dictionary ()
+ "Add current word to aspell dictionary."
  (interactive)
  (append-aspell-word (thing-at-point 'word)))
 
