@@ -11,15 +11,13 @@ osascript -e 'tell application "System Events" to tell appearance preferences to
 appearance=`defaults read -g AppleInterfaceStyle 2>/dev/null`
 if [ -z "$appearance" ]
 then
-  # No value for AppleInterfaceStyle, so the OS has us in light mode,
-  # proceed accordingly.
-  sh $HOME/.config/base16-shell/scripts/base16-google-light.sh
-  editor --eval "(disable-theme 'modus-vivendi)" \
-    --eval "(modus-operandi-theme-load)" 1> /dev/null
+    # No value for AppleInterfaceStyle, so the OS has us in light mode,
+    # proceed accordingly.
+    sh term-light
+    editor --eval "(modus-themes-load-operandi)" 1> /dev/null
 else
-  # AppleInterfaceStyle is set, and that means we're now in "Dark"
-  # mode.
-  sh $HOME/.config/base16-shell/scripts/base16-google-dark.sh
-  editor --eval "(disable-theme 'modus-operandi)" \
-    --eval "(modus-vivendi-theme-load)" 1> /dev/null
+    # AppleInterfaceStyle is set, and that means we're now in "Dark"
+    # mode.
+    sh term-dark
+    editor --eval "(modus-themes-load-vivendi)" 1> /dev/null
 fi

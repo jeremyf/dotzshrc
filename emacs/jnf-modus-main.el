@@ -23,11 +23,6 @@
         modus-themes-completions 'opinionated ; {nil,'moderate,'opinionated}
         modus-themes-diffs nil ; {nil,'desaturated,'fg-only}
         modus-themes-org-blocks 'rainbow
-        modus-themes-headings  ; Read the manual for this one
-        '((1 . section)
-          (2 . section-no-bold)
-          (3 . rainbow-line)
-          (t . rainbow-line-no-bold))
         modus-themes-variable-pitch-headings nil
         modus-themes-scale-headings t
         modus-themes-scale-1 1.1
