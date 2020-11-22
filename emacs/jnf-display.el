@@ -13,8 +13,10 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (add-to-list 'default-frame-alist '(font . "JetBrains Mono 14" ))
 (set-face-attribute 'default t :font "JetBrains Mono 14" )
+;; I'm just going to trust themes
+(setq custom-safe-themes t)
 
-(require 'jnf-modus-master.el)
+(require 'jnf-modus-main.el)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

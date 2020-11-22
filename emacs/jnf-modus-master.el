@@ -5,8 +5,6 @@
 ;; This package provides the "master" branch method for loading modus themes.
 ;;; Code:
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; I'm just going to trust themes
-(setq custom-safe-themes t)
 
 (use-package modus-operandi-theme
   :straight t
