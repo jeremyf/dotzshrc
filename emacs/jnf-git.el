@@ -52,7 +52,11 @@
 ;; Show the current git state in the gutter
 (use-package git-gutter
   :straight t
-  :config (global-git-gutter-mode 't))
+  :config (global-git-gutter-mode 't)
+  (setq git-gutter:window-width 2
+        git-gutter:modified-sign "Δ"
+        git-gutter:added-sign "+"
+        git-gutter:deleted-sign "-"))
 
 ;; https://github.com/sshaw/git-link
 ;;
