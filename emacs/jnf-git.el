@@ -53,8 +53,7 @@
 (use-package git-gutter
   :straight t
   :config (global-git-gutter-mode 't)
-  (setq git-gutter:window-width 2
-        git-gutter:modified-sign "Δ"
+  (setq git-gutter:modified-sign "Δ"
         git-gutter:added-sign "+"
         git-gutter:deleted-sign "-"))
 
