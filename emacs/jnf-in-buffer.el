@@ -118,10 +118,12 @@
 ;; Provides a UI for undo trees.  I'm not certain what I want to do with this.
 (use-package undo-tree
   :diminish
-  :bind (("C-c _" . undo-tree-visualize))
+  :bind (("C-z" . undo)
+         ("C-S-z" . undo-tree-redo))
   :config
   (global-undo-tree-mode +1)
   (unbind-key "M-_" undo-tree-map))
+
 
 ;; Delete multiple spaces
 (use-package hungry-delete
