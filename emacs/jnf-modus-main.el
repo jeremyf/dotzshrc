@@ -16,9 +16,10 @@
         modus-themes-mode-line '3d ; {nil,'3d,'moody}
         modus-themes-syntax 'alt-syntax-yellow-comments
         modus-themes-intense-hl-line nil
-        modus-themes-intense-paren-match t
+        modus-themes-intense-paren-match 'intense-bold
         modus-themes-links 'faint
         modus-themes-no-mixed-fonts nil
+        modus-themes-region 'bg-only
         modus-themes-prompts 'intense
         modus-themes-completions 'opinionated ; {nil,'moderate,'opinionated}
         modus-themes-diffs nil ; {nil,'desaturated,'fg-only}
