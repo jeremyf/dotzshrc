@@ -28,5 +28,9 @@
   :straight t
   :hook (ruby-mode . yard-mode))
 
+;; Adds the helpful `bundle-open'
+(use-package bundler
+  :straight (bundler :type git :host github :repo "endofunky/bundler.el"))
+
 (provide 'jnf-ruby.el)
 ;;; jnf-ruby.el ends here
