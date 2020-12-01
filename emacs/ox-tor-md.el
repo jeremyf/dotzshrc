@@ -42,7 +42,6 @@
   :translate-alist '(
                      (headline . org-tor-headline)
                      (timestamp . org-tor-timestamp)
-                     ;; (link . org-tor-link)
                      (inner-template . org-tor-template)
                      )
   :menu-entry
