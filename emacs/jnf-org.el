@@ -27,8 +27,6 @@
            "* MEETING %^{SUMMARY}\n\n  %^{ATTENDEES}p\n  %?\n")
           ("r" "Reading for Work" entry (file+datetree "~/git/org/agenda.org")
            "* TO-READ %^{SUBJECT} %u\n  %?\n")
-          ("s" "Session" entry (file+headline "~/git/org/sessions.org" "Sessions")
-           "* Session: %u %^{SUMMARY}\n\n  %^{ATTENDEES}p\n  %^{SYSTEM}p\n  %?\n")
           ("g" "Troubleshooting" entry (file+headline "~/git/org/troubleshooting.org" "Trouble Shooting")
            "* TODO %u Problem %^{SUMMARY}\n\n  %?\n  %a")
           ("t" "Task for Work" entry (file+datetree "~/git/org/agenda.org")
@@ -49,7 +47,7 @@
          ("C-c c" . org-capture)
          ("C-c t" . org-toggle-link-display)
          ("C-c C-q" . counsel-org-tag)
-         ("s-2" . jnf-org-insert-immediate-active-timestamp)))
+         ("s-9" . jnf-org-insert-immediate-active-timestamp)))
 
 
 
@@ -126,35 +124,35 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Begin goto org file
-(defmacro go-org-file-fn (file)
-  "Define a function to go to Org FILE."
-  (let* ((fn-name (intern (concat "go-org-file-" file)))
-         (docstring (concat "Go to Org file at: " file)))
-    `(defun ,fn-name ()
-       ,docstring
-       (interactive)
-       (gorg ,file))))
+;; (defmacro go-org-file-fn (file)
+;;   "Define a function to go to Org FILE."
+;;   (let* ((fn-name (intern (concat "go-org-file-" file)))
+;;          (docstring (concat "Go to Org file at: " file)))
+;;     `(defun ,fn-name ()
+;;        ,docstring
+;;        (interactive)
+;;        (gorg ,file))))
 
-(global-set-key (kbd "C-c o i") (go-org-file-fn "index.org"))
-(global-set-key (kbd "C-c o a") (go-org-file-fn "agenda.org"))
-(global-set-key (kbd "C-c o b") (go-org-file-fn "permanent/bibliographic_index.org"))
-(global-set-key (kbd "C-c o c") (go-org-file-fn "permanent/card_index.org"))
-(global-set-key (kbd "C-c o e") (go-org-file-fn "elfeed.org"))
-(global-set-key (kbd "C-c o i") (go-org-file-fn "index.org"))
+;; (global-set-key (kbd "C-c o i") (go-org-file-fn "index.org"))
+;; (global-set-key (kbd "C-c o a") (go-org-file-fn "agenda.org"))
+;; (global-set-key (kbd "C-c o b") (go-org-file-fn "permanent/bibliographic_index.org"))
+;; (global-set-key (kbd "C-c o c") (go-org-file-fn "permanent/card_index.org"))
+;; (global-set-key (kbd "C-c o e") (go-org-file-fn "elfeed.org"))
+;; (global-set-key (kbd "C-c o i") (go-org-file-fn "index.org"))
 
-(defun gorg(&optional org_file_basename)
-  "Jump to the given ORG_FILE_BASENAME or toggle it's org-sidebar.
+;; (defun gorg(&optional org_file_basename)
+;;   "Jump to the given ORG_FILE_BASENAME or toggle it's org-sidebar.
 
-If no ORG_FILE_BASENAME is given default to `agenda.org'. I chose
-`gorg' as the mnemonic Goto Org."
-  (interactive)
-  ;; Need to know the location on disk for the buffer
-  (unless org_file_basename (setq org_file_basename "agenda.org"))
-  (setq org_filename (concat org-directory "/" org_file_basename))
-  (let ((current_filename (if (equal major-mode 'dired-mode) default-directory (buffer-file-name))))
-    (if (equal current_filename (expand-file-name org_filename))
-        (progn (org-sidebar-toggle))
-      (progn (find-file org_filename) (delete-other-windows)))))
+;; If no ORG_FILE_BASENAME is given default to `agenda.org'. I chose
+;; `gorg' as the mnemonic Goto Org."
+;;   (interactive)
+;;   ;; Need to know the location on disk for the buffer
+;;   (unless org_file_basename (setq org_file_basename "agenda.org"))
+;;   (setq org_filename (concat org-directory "/" org_file_basename))
+;;   (let ((current_filename (if (equal major-mode 'dired-mode) default-directory (buffer-file-name))))
+;;     (if (equal current_filename (expand-file-name org_filename))
+;;         (progn (org-sidebar-toggle))
+;;       (progn (find-file org_filename) (delete-other-windows)))))
 ;; End goto org file
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 

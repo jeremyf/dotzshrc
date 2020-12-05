@@ -19,7 +19,6 @@
   :bind (:map org-roam-mode-map
               (("C-c r l" . org-roam)
                ("C-c r f" . org-roam-find-file)
-               ("s-1" . org-roam-find-file)
                ("C-c r i" . org-roam-insert)
                ("C-c r c" . org-roam-capture)
                ("C-c r x" . org-roam-jump-to-index)
@@ -65,6 +64,12 @@
            :file-name "permanent/letters/%<%Y%m%d>---${slug}"
            :head "#+title: ${title}\n#+roam_tags:\n* ${title}\n\n"
            :unnarrowed t)
+          ("a" "Project > Ardu" plain (function org-roam--capture-get-point)
+           "%?"
+           :file-name "projects/ardu/%<%Y%m%d>---${slug}"
+           :head  "#+title: ${title}\n#+roam_tags:\n* ${title}\n\n"
+           :unnarrowed t
+           :immediate-finish t)
           ("d" "Project > Diversity Equity Incluson (DEI)" plain (function org-roam--capture-get-point)
            "%?"
            :file-name "projects/diversity-equity-inclusion/%<%Y%m%d>---${slug}"
@@ -97,6 +102,17 @@
            :immediate-finish t))))
 (require 'org-roam-protocol)
 
+(defmacro go-roam-find-file-project-fn (project)
+  "Define a function to find an `org-roam' file within the given PROJECT."
+  (let* ((fn-name (intern (concat "go-roam-" project)))
+         (docstring (concat "Find an `org-roam' file for: " project)))
+    `(defun ,fn-name (&optional completions filter-nf no-confirm)
+       ,docstring
+       (interactive)
+       (org-roam-find-file (concat ,project " ") completions filter-nf no-confirm))))
+
+(global-set-key (kbd "s-1") (go-roam-find-file-project-fn "thel-sector"))
+(global-set-key (kbd "s-2") (go-roam-find-file-project-fn "ardu"))
 
 (use-package org-roam-server
   :straight t
