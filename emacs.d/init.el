@@ -468,6 +468,7 @@ echo the method signature of `'delete-duplicate-lines`"
   (sort-lines reverse beg end)
   (delete-duplicate-lines beg end reverse adjacent keep-blanks interactive))
 
+(require 'jnf-in-buffer.el)
 (require 'jnf-swiper.el)
 (require 'jnf-org.el)
 (require 'jnf-basic-config.el)
@@ -476,7 +477,6 @@ echo the method signature of `'delete-duplicate-lines`"
 (require 'jnf-typopunct.el)
 (require 'jnf-ruby.el)
 (require 'jnf-elfeed.el)
-(require 'jnf-in-buffer.el)
 (require 'jnf-lsp-mode.el)
 (require 'jnf-blogging.el)
 (require 'jnf-tabs.el)
