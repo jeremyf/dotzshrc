@@ -40,6 +40,8 @@
 
 (require 'jnf-display.el)
 
+(global-auto-revert-mode)
+
 ;; https://oremacs.com/swiper/
 ;; Note: I've set all searches to use fuzzy regex
 (use-package ivy
