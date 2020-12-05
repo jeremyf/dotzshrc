@@ -116,7 +116,7 @@
 (go-roam-find-file-project-fn "ardu")
 (go-roam-find-file-project-fn "permanent bibliographies")
 (go-roam-find-file-project-fn "permanent cards")
-(go-roam-find-file-project-fn "hesburgh libraries")
+(go-roam-find-file-project-fn "hesburgh-libraries")
 (go-roam-find-file-project-fn "samvera")
 (defvar jnf-find-file-in-roam-project--title (with-faicon "book" "Find File in Roam Project" 1 -0.05))
 (pretty-hydra-define jnf-find-file-in-roam-project (:foreign-keys warn :title jnf-find-file-in-roam-project--title :quit-key "q")
@@ -128,8 +128,8 @@
    (("a" go-roam-find-ardu "Ardu, World of")
     ("t" go-roam-find-thel-sector "Thel Sector"))
    "Work"
-   (("h" go-roam-find-permanent-hesburgh-libraries "Hesburgh Libraries")
-    ("s" go-roam-find-permanent-samvera "Samvera"))
+   (("h" go-roam-find-hesburgh-libraries "Hesburgh Libraries")
+    ("s" go-roam-find-samvera "Samvera"))
 
    ))
 (global-set-key (kbd "s-1") 'jnf-find-file-in-roam-project/body)
