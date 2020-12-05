@@ -113,13 +113,17 @@
 
 (go-roam-find-file-project-fn "thel-sector")
 (go-roam-find-file-project-fn "ardu")
+(go-roam-find-file-project-fn "bibliographies")
+(go-roam-find-file-project-fn "cards")
 (defvar jnf-find-file-in-roam-project--title (all-the-icons-faicon "book" "Find File in Roam Project" 1 -0.05))
 (pretty-hydra-define jnf-find-file-in-roam-project (:foreign-keys warn :title jnf-find-file-in-roam-project--title :quit-key "q")
-  ("Projects"
-   (
-    ("t" go-roam-find-thel-sector "Thel Sector")
-    ("a" go-roam-find-ardu "Ardu, World of")
-    )))
+  ("RPGs"
+   (("a" go-roam-find-ardu "Ardu, World of")
+    ("t" go-roam-find-thel-sector "Thel Sector"))
+   "Permanent"
+   (("b" go-roam-find-bibliographies "Bibliography")
+    ("c" go-roam-find-cards "Card"))
+   ))
 (global-set-key (kbd "s-1") 'jnf-find-file-in-roam-project/body)
 
 (use-package org-roam-server
