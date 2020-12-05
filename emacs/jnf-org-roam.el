@@ -14,6 +14,7 @@
 ;; correctly.  Now I can just load org-roam as part of my day to day
 (use-package org-roam
   :straight t
+  :after pretty-hydra
   :hook (after-init . org-roam-mode)
   :custom (org-roam-directory "~/git/org")
   :bind (:map org-roam-mode-map

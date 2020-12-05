@@ -140,17 +140,18 @@
 ;; package.
 (use-package helpful
   :straight t
-  :bind (
-         ("C-h C-d" . helpful-at-point)
-         ("C-h v" . helpful-variable)
-         ("C-h k" . helpful-key)
-         ("C-h f" . helpful-function)
-         ("C-h c" . helpful-command)
-         ("C-h f" . helpful-callable)
-         )
+  :pretty-hydra
+  ((:title (with-material "help_outline" "Helpful Menus") :quit-key "q")
+   ("Helpful"
+    (("f" helpful-callable "callable")
+     ("c" helpful-command "command")
+     ("u" helpful-function "function")
+     ("k" helpful-key "key")
+     ("d" helpful-at-point "thing at point")
+     ("v" helpful-variable "variable"))))
+  :bind ("C-h" . helpful-hydra/body)
   :init (setq counsel-describe-function-function #'helpful-callable)
-  (setq counsel-describe-variable-function #'helpful-variable)
-  )
+  (setq counsel-describe-variable-function #'helpful-variable))
 
 ;; https://docs.projectile.mx/en/latest/
 ;;

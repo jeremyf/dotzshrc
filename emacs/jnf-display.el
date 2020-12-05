@@ -75,5 +75,9 @@
     "Displays an icon from Font Awesome icon."
     (s-concat (all-the-icons-faicon icon :v-adjust (or v-adjust 0) :height (or height 1)) " " str))
 
+(defun with-material (icon str &optional height v-adjust)
+    "Displays an icon from Font Awesome icon."
+    (s-concat (all-the-icons-material icon :v-adjust (or v-adjust 0) :height (or height 1)) " " str))
+
 (provide 'jnf-display.el)
 ;;; jnf-display.el ends here
