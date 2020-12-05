@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: sessionReport
+# key: session
+# --
+sessionReport:
+  date: $1
+  game: $2
+  location: "around the table"
