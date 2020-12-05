@@ -104,7 +104,7 @@
 
 (defmacro go-roam-find-file-project-fn (project)
   "Define a function to find an `org-roam' file within the given PROJECT."
-  (let* ((fn-name (intern (concat "go-roam-find-" project)))
+  (let* ((fn-name (intern (concat "go-roam-find-" (replace-regexp-in-string " +" "-" project))))
          (docstring (concat "Find an `org-roam' file for: " project)))
     `(defun ,fn-name (&optional completions filter-nf no-confirm)
        ,docstring
@@ -113,16 +113,23 @@
 
 (go-roam-find-file-project-fn "thel-sector")
 (go-roam-find-file-project-fn "ardu")
-(go-roam-find-file-project-fn "bibliographies")
-(go-roam-find-file-project-fn "cards")
+(go-roam-find-file-project-fn "permanent bibliographies")
+(go-roam-find-file-project-fn "permanent cards")
+(go-roam-find-file-project-fn "hesburgh libraries")
+(go-roam-find-file-project-fn "samvera")
 (defvar jnf-find-file-in-roam-project--title (all-the-icons-faicon "book" "Find File in Roam Project" 1 -0.05))
 (pretty-hydra-define jnf-find-file-in-roam-project (:foreign-keys warn :title jnf-find-file-in-roam-project--title :quit-key "q")
-  ("RPGs"
+  (
+   "Permanent"
+   (("b" go-roam-find-permanent-bibliographies "Bibliography")
+    ("c" go-roam-find-permanent-cards "Card"))
+   "RPGs"
    (("a" go-roam-find-ardu "Ardu, World of")
     ("t" go-roam-find-thel-sector "Thel Sector"))
-   "Permanent"
-   (("b" go-roam-find-bibliographies "Bibliography")
-    ("c" go-roam-find-cards "Card"))
+   "Work"
+   (("h" go-roam-find-permanent-hesburgh-libraries "Hesburgh Libraries")
+    ("s" go-roam-find-permanent-samvera "Samvera"))
+
    ))
 (global-set-key (kbd "s-1") 'jnf-find-file-in-roam-project/body)
 
