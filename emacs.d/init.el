@@ -203,6 +203,7 @@
  '(org-agenda-files
    '("/Users/jfriesen/git/org/agenda.org" "/Users/jfriesen/git/org/elfeed.org" "/Users/jfriesen/git/org/index.org" "/Users/jfriesen/git/org/readings.org" "/Users/jfriesen/git/org/sessions.org" "/Users/jfriesen/git/org/troubleshooting.org"))
  '(org-export-backends '(ascii html icalendar latex md odt))
+ '(safe-local-variable-values '((encoding . utf-8)))
  '(show-paren-mode t)
  '(use-package-always-ensure t))
 
