@@ -65,4 +65,4 @@ for TakeOnRules.com."
                             " -o --nofilename | sort | uniq | cut -d \":\" -f 2 | sort"))))
 
 (provide 'jnf-blogging.el)
-;;; jnf--blogging.el ends here
+;;; jnf-blogging.el ends here

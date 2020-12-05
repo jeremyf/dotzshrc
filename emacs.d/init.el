@@ -39,6 +39,7 @@
 (straight-use-package 'use-package)
 
 (require 'jnf-display.el)
+(require 'jnf-hydra.el)
 
 (global-auto-revert-mode)
 

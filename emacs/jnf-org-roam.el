@@ -104,15 +104,23 @@
 
 (defmacro go-roam-find-file-project-fn (project)
   "Define a function to find an `org-roam' file within the given PROJECT."
-  (let* ((fn-name (intern (concat "go-roam-" project)))
+  (let* ((fn-name (intern (concat "go-roam-find-" project)))
          (docstring (concat "Find an `org-roam' file for: " project)))
     `(defun ,fn-name (&optional completions filter-nf no-confirm)
        ,docstring
        (interactive)
        (org-roam-find-file (concat ,project " ") completions filter-nf no-confirm))))
 
-(global-set-key (kbd "s-1") (go-roam-find-file-project-fn "thel-sector"))
-(global-set-key (kbd "s-2") (go-roam-find-file-project-fn "ardu"))
+(go-roam-find-file-project-fn "thel-sector")
+(go-roam-find-file-project-fn "ardu")
+(defvar jnf-find-file-in-roam-project--title (all-the-icons-faicon "book" "Find File in Roam Project" 1 -0.05))
+(pretty-hydra-define jnf-find-file-in-roam-project (:foreign-keys warn :title jnf-find-file-in-roam-project--title :quit-key "q")
+  ("Projects"
+   (
+    ("t" go-roam-find-thel-sector "Thel Sector")
+    ("a" go-roam-find-ardu "Ardu, World of")
+    )))
+(global-set-key (kbd "s-1") 'jnf-find-file-in-roam-project/body)
 
 (use-package org-roam-server
   :straight t
