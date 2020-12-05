@@ -117,7 +117,7 @@
 (go-roam-find-file-project-fn "permanent cards")
 (go-roam-find-file-project-fn "hesburgh libraries")
 (go-roam-find-file-project-fn "samvera")
-(defvar jnf-find-file-in-roam-project--title (all-the-icons-faicon "book" "Find File in Roam Project" 1 -0.05))
+(defvar jnf-find-file-in-roam-project--title (with-faicon "book" "Find File in Roam Project" 1 -0.05))
 (pretty-hydra-define jnf-find-file-in-roam-project (:foreign-keys warn :title jnf-find-file-in-roam-project--title :quit-key "q")
   (
    "Permanent"
