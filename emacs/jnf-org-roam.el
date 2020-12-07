@@ -118,9 +118,12 @@
 (go-roam-find-file-project-fn "permanent cards")
 (go-roam-find-file-project-fn "hesburgh-libraries")
 (go-roam-find-file-project-fn "samvera")
-(defvar jnf-find-file-in-roam-project--title (with-faicon "book" "Find File in Roam Project" 1 -0.05))
+(defvar jnf-find-file-in-roam-project--title (with-faicon "book" "Find File in Org Projects" 1 -0.05))
 (pretty-hydra-define jnf-find-file-in-roam-project (:foreign-keys warn :title jnf-find-file-in-roam-project--title :quit-key "q")
   (
+   "Org"
+   (("o" gorg "Agenda")
+    ("i" org-roam-jump-to-index "Roam Index"))
    "Permanent"
    (("b" go-roam-find-permanent-bibliographies "Bibliography")
     ("c" go-roam-find-permanent-cards "Card"))
