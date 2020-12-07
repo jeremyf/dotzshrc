@@ -23,7 +23,7 @@
                ("C-c r i" . org-roam-insert)
                ("C-c r c" . org-roam-capture)
                ("C-c r x" . org-roam-jump-to-index)
-               ("C-c r g" . org-roam-graph-show))
+               ("C-c r g" . org-roam-graph))
               :map org-mode-map
               (("C-c r c" . org-roam-capture))
               (("C-c r x" . org-roam-jump-to-index)))
