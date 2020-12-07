@@ -42,7 +42,7 @@
   :translate-alist '(
                      (headline . org-tor-headline)
                      (timestamp . org-tor-timestamp)
-                     (inner-template . org-tor-template)
+                     (template . org-tor-template)
                      )
   :menu-entry
   '(?T "Export to Take on Rules"
@@ -52,9 +52,8 @@
   "Return complete document string after Markdown conversion.
 CONTENTS is the transcoded contents string.  INFO is a plist used
 as a communication channel."
-  (let ((title (plist-get info :title))
-        (input-file (plist-get info :input-file))
-        )
+  (let* ((title (format "%s" (plist-get info :title)))
+         (input-file (plist-get info :input-file)))
     (concat
      "---"
      "\ndate: 2018-01-01"
