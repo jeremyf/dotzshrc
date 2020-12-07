@@ -140,19 +140,18 @@
 ;; (global-set-key (kbd "C-c o e") (go-org-file-fn "elfeed.org"))
 ;; (global-set-key (kbd "C-c o i") (go-org-file-fn "index.org"))
 
-;; (defun gorg(&optional org_file_basename)
-;;   "Jump to the given ORG_FILE_BASENAME or toggle it's org-sidebar.
-
-;; If no ORG_FILE_BASENAME is given default to `agenda.org'. I chose
-;; `gorg' as the mnemonic Goto Org."
-;;   (interactive)
-;;   ;; Need to know the location on disk for the buffer
-;;   (unless org_file_basename (setq org_file_basename "agenda.org"))
-;;   (setq org_filename (concat org-directory "/" org_file_basename))
-;;   (let ((current_filename (if (equal major-mode 'dired-mode) default-directory (buffer-file-name))))
-;;     (if (equal current_filename (expand-file-name org_filename))
-;;         (progn (org-sidebar-toggle))
-;;       (progn (find-file org_filename) (delete-other-windows)))))
+(defun gorg(&optional org_file_basename)
+  "Jump to the given ORG_FILE_BASENAME or toggle it's org-sidebar.
+If no ORG_FILE_BASENAME is given default to `agenda.org'. I chose
+`gorg' as the mnemonic Goto Org."
+  (interactive)
+  ;; Need to know the location on disk for the buffer
+  (unless org_file_basename (setq org_file_basename "agenda.org"))
+  (setq org_filename (concat org-directory "/" org_file_basename))
+  (let ((current_filename (if (equal major-mode 'dired-mode) default-directory (buffer-file-name))))
+    (if (equal current_filename (expand-file-name org_filename))
+        (progn (org-sidebar-toggle))
+      (progn (find-file org_filename) (delete-other-windows)))))
 ;; End goto org file
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
