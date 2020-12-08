@@ -60,6 +60,5 @@
       (modus-themes-load-operandi)))
 
   (global-set-key (kbd "<s-clear>") 'modus-themes-toggle)
-  (global-set-key (kbd "s-9") 'modus-themes-toggle)
   (provide 'jnf-modus-main.el)
 ;;; jnf-modus-main.el ends here
