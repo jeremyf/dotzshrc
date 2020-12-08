@@ -194,10 +194,13 @@ Version 2016-07-18"
   "Define a function to find an `org-roam' file within the given PROJECT."
   (let* ((fn-name (intern (concat "org-roam-find-file--" (replace-regexp-in-string " +" "-" project))))
          (docstring (concat "Find an `org-roam' file for: " project)))
-    `(defun ,fn-name (&optional completions filter-nf no-confirm)
+    `(defun ,fn-name (&optional initial-prompt completions)
        ,docstring
        (interactive)
-       (org-roam-find-file (concat ,project " ") completions filter-nf no-confirm))))
+       (let* ((filter (lambda(completions) (xah-filter-list
+                                            (lambda(item) (string-match-p (concat "\\W" ,project "\\W") (first item)))
+                                            completions))))
+         (org-roam-find-file initial-prompt completions filter)))))
 
 (go-roam-find-file-project-fn "thel-sector")
 (go-roam-find-file-project-fn "ardu")
