@@ -103,40 +103,6 @@
            :immediate-finish t))))
 (require 'org-roam-protocol)
 
-(defmacro go-roam-find-file-project-fn (project)
-  "Define a function to find an `org-roam' file within the given PROJECT."
-  (let* ((fn-name (intern (concat "go-roam-find-" (replace-regexp-in-string " +" "-" project))))
-         (docstring (concat "Find an `org-roam' file for: " project)))
-    `(defun ,fn-name (&optional completions filter-nf no-confirm)
-       ,docstring
-       (interactive)
-       (org-roam-find-file (concat ,project " ") completions filter-nf no-confirm))))
-
-(go-roam-find-file-project-fn "thel-sector")
-(go-roam-find-file-project-fn "ardu")
-(go-roam-find-file-project-fn "permanent bibliographies")
-(go-roam-find-file-project-fn "permanent cards")
-(go-roam-find-file-project-fn "hesburgh-libraries")
-(go-roam-find-file-project-fn "samvera")
-(defvar jnf-find-file-in-roam-project--title (with-faicon "book" "Find File in Org Projects" 1 -0.05))
-(pretty-hydra-define jnf-find-file-in-roam-project (:foreign-keys warn :title jnf-find-file-in-roam-project--title :quit-key "q")
-  (
-   "Org"
-   (("o" gorg "Agenda")
-    ("i" org-roam-jump-to-index "Roam Index"))
-   "Permanent"
-   (("b" go-roam-find-permanent-bibliographies "Bibliography")
-    ("c" go-roam-find-permanent-cards "Card"))
-   "RPGs"
-   (("a" go-roam-find-ardu "Ardu, World of")
-    ("t" go-roam-find-thel-sector "Thel Sector"))
-   "Work"
-   (("h" go-roam-find-hesburgh-libraries "Hesburgh Libraries")
-    ("s" go-roam-find-samvera "Samvera"))
-
-   ))
-(global-set-key (kbd "s-1") 'jnf-find-file-in-roam-project/body)
-
 (use-package org-roam-server
   :straight t
   :after org-roam
@@ -212,13 +178,62 @@ Version 2016-07-18"
         "e3824ad41f2ec1ed" ))
     @sequence)))
 
-(defun jnf/filter-fn (path-completions)
-  (let ((predicate (lambda(x) (string-match-p "\\Wthel-sector\\W" (first x)))))
-    (xah-filter-list predicate path-completions)))
+(defmacro org-roam-inserter-fn (project)
+  "Define a function to wrap the `org-roam-inser' with a filter for the given PROJECT."
+  (let* ((fn-name (intern (concat "org-roam-insert--filter-with--" (replace-regexp-in-string " +" "-" project))))
+         (docstring (concat "Insert an `org-roam' file for: " project)))
+    `(defun ,fn-name (&optional lowercase completions description link-type)
+       ,docstring
+       (interactive "P")
+       (let* ((filter (lambda(completions) (xah-filter-list
+                                            (lambda(item) (string-match-p (concat "\\W" ,project "\\W") (first item)))
+                                            completions))))
+         (org-roam-insert lowercase completions filter description link-type)))))
 
-(defun jnf/org-roam-insert--ardu (&optional lowercase completions description link-type)
-  (interactive "P")
-  (org-roam-insert lowercase completions 'jnf/filter-fn description link-type))
+(defmacro go-roam-find-file-project-fn (project)
+  "Define a function to find an `org-roam' file within the given PROJECT."
+  (let* ((fn-name (intern (concat "org-roam-find-file--" (replace-regexp-in-string " +" "-" project))))
+         (docstring (concat "Find an `org-roam' file for: " project)))
+    `(defun ,fn-name (&optional completions filter-nf no-confirm)
+       ,docstring
+       (interactive)
+       (org-roam-find-file (concat ,project " ") completions filter-nf no-confirm))))
+
+(go-roam-find-file-project-fn "thel-sector")
+(go-roam-find-file-project-fn "ardu")
+(go-roam-find-file-project-fn "permanent bibliographies")
+(go-roam-find-file-project-fn "permanent cards")
+(go-roam-find-file-project-fn "hesburgh-libraries")
+(go-roam-find-file-project-fn "samvera")
+(org-roam-inserter-fn "thel-sector")
+(org-roam-inserter-fn "ardu")
+(org-roam-inserter-fn "permanent bibliographies")
+(org-roam-inserter-fn "permanent cards")
+(org-roam-inserter-fn "hesburgh-libraries")
+(org-roam-inserter-fn "samvera")
+
+(defvar jnf-find-file-in-roam-project--title (with-faicon "book" "Org Project Menu" 1 -0.05))
+(pretty-hydra-define jnf-find-file-in-roam-project (:foreign-keys warn :title jnf-find-file-in-roam-project--title :quit-key "q")
+  (
+   "Insert"
+   (("a" org-roam-insert--filter-with--ardu "Ardu, World of")
+    ("b" org-roam-insert--filter-with--permanent-bibliographies "Bibliography")
+    ("c" org-roam-insert--filter-with--permanent-cards "Card")
+    ("h" org-roam-insert--filter-with--hesbrugh-libraries "Hesburgh Libraries")
+    ("s" org-roam-insert--filter-with--samvera "Samvera")
+    ("t" org-roam-insert--filter-with--thel-sector "Thel Sector"))
+   "Open"
+   (("O" gorg "Agenda")
+    ("I" org-roam-jump-to-index "Roam Index")
+    ("A" org-roam-find-file--ardu "Ardu, World of")
+    ("B" org-roam-find-file--permanent-bibliographies "Bibliography")
+    ("C" org-roam-find-file--permanent-cards "Card")
+    ("H" org-roam-find-file--hesburgh-libraries "Hesburgh Libraries")
+    ("S" org-roam-find-file--samvera "Samvera")
+    ("T" org-roam-find-file--thel-sector "Thel Sector"))
+
+   ))
+(global-set-key (kbd "s-1") 'jnf-find-file-in-roam-project/body)
 
 (provide 'jnf-org-roam.el)
 ;;; jnf-org-roam.el ends here
