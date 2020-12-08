@@ -73,8 +73,7 @@ originating org file has a top-level header in addition to its
 :TITLE:.
 
 CONTENTS appended to the title.  INFO used as well."
-  (let* ((text (org-export-data (org-element-property :title headline)
-                                info))
+  (let* ((text (org-export-data (org-element-property :title headline) info))
          (level (org-export-get-relative-level headline info))
          (prefix (s-repeat level "#")))
     (if (eq level 1)

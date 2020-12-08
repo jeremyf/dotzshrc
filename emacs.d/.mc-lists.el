@@ -36,6 +36,7 @@
         typopunct-insert-typographical-dashes
         wdired-finish-edit
         wgrep-finish-edit
+        whole-line-or-region-comment-dwim-2
         ))
 
 (setq mc/cmds-to-run-once
