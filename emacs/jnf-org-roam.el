@@ -39,7 +39,7 @@
   ;; See https://www.orgroam.com/manual/Tags.html#Tags
   ;;
   (setq org-roam-title-sources '((title headline) alias))
-  (setq org-roam-update-db-idle-seconds 300)
+  (setq org-roam-db-update-idle-seconds 2)
   ;; Note: Order of these templates matters. The `org-roam-insert-immediate` uses
   ;; the first one in the list (e.g. Fleeting)
   ;;
@@ -212,33 +212,33 @@ Version 2016-07-18"
 (org-roam-inserter-fn "hesburgh-libraries")
 (org-roam-inserter-fn "samvera")
 
-(defvar jnf-find-file-in-roam-project--title (with-faicon "book" "Org Project Menu" 1 -0.05))
-(pretty-hydra-define jnf-find-file-in-roam-project (:foreign-keys warn :title jnf-find-file-in-roam-project--title :quit-key "q")
+(defvar jnf-org-subject-menu--title (with-faicon "book" "Org Subject Menu" 1 -0.05))
+(pretty-hydra-define jnf-org-subject-menu (:foreign-keys warn :title jnf-org-subject-menu--title :quit-key "q")
   (
    "Permanent"
    (("b" org-roam-insert--filter-with--permanent-bibliographies "Bibliography")
-    ("B" org-roam-find-file--permanent-bibliographies "-- Find")
+    ("B" org-roam-find-file--permanent-bibliographies " └─ Find")
     ("c" org-roam-insert--filter-with--permanent-cards "Card")
-    ("C" org-roam-find-file--permanent-cards "-- Find"))
+    ("C" org-roam-find-file--permanent-cards " └─ Find"))
    "RPGs"
    (("a" org-roam-insert--filter-with--ardu "Ardu, World of")
-    ("A" org-roam-find-file--ardu "-- Find")
+    ("A" org-roam-find-file--ardu " └─ Find")
     ("t" org-roam-insert--filter-with--thel-sector "Thel Sector")
-    ("T" org-roam-find-file--thel-sector "-- Find"))
+    ("T" org-roam-find-file--thel-sector " └─ Find"))
    "Work"
    (("h" org-roam-insert--filter-with--hesbrugh-libraries "Hesburgh Libraries")
-    ("H" org-roam-find-file--hesburgh-libraries "-- Find")
+    ("H" org-roam-find-file--hesburgh-libraries " └─ Find")
     ("s" org-roam-insert--filter-with--samvera "Samvera")
-    ("S" org-roam-find-file--samvera "-- Find"))
+    ("S" org-roam-find-file--samvera " └─ Find"))
    "General Org"
    (("i" org-roam-insert "Insert Unfiltered")
-    ("I" org-roam-find-file "-- Find")
+    ("I" org-roam-find-file " └─ Find")
     ("O" gorg "Agenda")
     ("R" org-roam-jump-to-index "Roam Index"))
 ))
 
-(global-set-key (kbd "s-1") 'jnf-find-file-in-roam-project/body) ;; Deprecated
-(global-set-key (kbd "s-i") 'jnf-find-file-in-roam-project/body)
+(global-set-key (kbd "s-1") 'jnf-org-subject-menu/body) ;; Deprecated
+(global-set-key (kbd "s-i") 'jnf-org-subject-menu/body)
 
 
 (provide 'jnf-org-roam.el)
