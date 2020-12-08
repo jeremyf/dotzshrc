@@ -141,8 +141,8 @@
      "\n"
      (if quote
          (concat "#+begin_src text \n"
-     quote "\n"
-     "#+end_src")
+                 quote "\n"
+                 "#+end_src")
        ""))))
 
 (defun send-roaming ()
@@ -161,10 +161,6 @@
      nil)
     (find-file filepath)))
 
-;; Some hot keys to jump to often different relevant files
-;; Jump to the current clock if one is open, otherwise, go to my agenda file.
-(global-set-key (kbd "s-i") 'org-roam-insert)
-
 (defun xah-filter-list (@predicate @sequence)
   "Return a new list such that @PREDICATE is true on all members of @SEQUENCE.
 URL `http://ergoemacs.org/emacs/elisp_filter_list.html'
@@ -180,7 +176,8 @@ Version 2016-07-18"
 
 (defmacro org-roam-inserter-fn (project)
   "Define a function to wrap the `org-roam-inser' with a filter for the given PROJECT."
-  (let* ((fn-name (intern (concat "org-roam-insert--filter-with--" (replace-regexp-in-string " +" "-" project))))
+  (let* ((fn-name (intern (concat "org-roam-insert--filter-with--"
+                                  (replace-regexp-in-string " +" "-" project))))
          (docstring (concat "Insert an `org-roam' file for: " project)))
     `(defun ,fn-name (&optional lowercase completions description link-type)
        ,docstring
@@ -218,25 +215,31 @@ Version 2016-07-18"
 (defvar jnf-find-file-in-roam-project--title (with-faicon "book" "Org Project Menu" 1 -0.05))
 (pretty-hydra-define jnf-find-file-in-roam-project (:foreign-keys warn :title jnf-find-file-in-roam-project--title :quit-key "q")
   (
-   "Insert"
-   (("a" org-roam-insert--filter-with--ardu "Ardu, World of")
-    ("b" org-roam-insert--filter-with--permanent-bibliographies "Bibliography")
+   "Permanent"
+   (("b" org-roam-insert--filter-with--permanent-bibliographies "Bibliography")
+    ("B" org-roam-find-file--permanent-bibliographies "-- Find")
     ("c" org-roam-insert--filter-with--permanent-cards "Card")
-    ("h" org-roam-insert--filter-with--hesbrugh-libraries "Hesburgh Libraries")
+    ("C" org-roam-find-file--permanent-cards "-- Find"))
+   "RPGs"
+   (("a" org-roam-insert--filter-with--ardu "Ardu, World of")
+    ("A" org-roam-find-file--ardu "-- Find")
+    ("t" org-roam-insert--filter-with--thel-sector "Thel Sector")
+    ("T" org-roam-find-file--thel-sector "-- Find"))
+   "Work"
+   (("h" org-roam-insert--filter-with--hesbrugh-libraries "Hesburgh Libraries")
+    ("H" org-roam-find-file--hesburgh-libraries "-- Find")
     ("s" org-roam-insert--filter-with--samvera "Samvera")
-    ("t" org-roam-insert--filter-with--thel-sector "Thel Sector"))
-   "Open"
-   (("O" gorg "Agenda")
-    ("I" org-roam-jump-to-index "Roam Index")
-    ("A" org-roam-find-file--ardu "Ardu, World of")
-    ("B" org-roam-find-file--permanent-bibliographies "Bibliography")
-    ("C" org-roam-find-file--permanent-cards "Card")
-    ("H" org-roam-find-file--hesburgh-libraries "Hesburgh Libraries")
-    ("S" org-roam-find-file--samvera "Samvera")
-    ("T" org-roam-find-file--thel-sector "Thel Sector"))
+    ("S" org-roam-find-file--samvera "-- Find"))
+   "General Org"
+   (("i" org-roam-insert "Insert Unfiltered")
+    ("I" org-roam-find-file "-- Find")
+    ("O" gorg "Agenda")
+    ("R" org-roam-jump-to-index "Roam Index"))
+))
 
-   ))
-(global-set-key (kbd "s-1") 'jnf-find-file-in-roam-project/body)
+(global-set-key (kbd "s-1") 'jnf-find-file-in-roam-project/body) ;; Deprecated
+(global-set-key (kbd "s-i") 'jnf-find-file-in-roam-project/body)
+
 
 (provide 'jnf-org-roam.el)
 ;;; jnf-org-roam.el ends here
