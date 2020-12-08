@@ -198,5 +198,27 @@
 ;; Some hot keys to jump to often different relevant files
 ;; Jump to the current clock if one is open, otherwise, go to my agenda file.
 (global-set-key (kbd "s-i") 'org-roam-insert)
+
+(defun xah-filter-list (@predicate @sequence)
+  "Return a new list such that @PREDICATE is true on all members of @SEQUENCE.
+URL `http://ergoemacs.org/emacs/elisp_filter_list.html'
+Version 2016-07-18"
+  (delete
+   "e3824ad41f2ec1ed"
+   (mapcar
+    (lambda ($x)
+      (if (funcall @predicate $x)
+          $x
+        "e3824ad41f2ec1ed" ))
+    @sequence)))
+
+(defun jnf/filter-fn (path-completions)
+  (let ((predicate (lambda(x) (string-match-p "\\Wthel-sector\\W" (first x)))))
+    (xah-filter-list predicate path-completions)))
+
+(defun jnf/org-roam-insert--ardu (&optional lowercase completions description link-type)
+  (interactive "P")
+  (org-roam-insert lowercase completions 'jnf/filter-fn description link-type))
+
 (provide 'jnf-org-roam.el)
 ;;; jnf-org-roam.el ends here
