@@ -79,6 +79,48 @@
   (elfeed-org)
   (setq rmh-elfeed-org-files (list "~/git/org/elfeed.org")))
 
+
+;; https://github.com/alphapapa/unpackaged.el#feed-for-url
+;;;###autoload
+(cl-defun unpackaged/feed-for-url (url &key (prefer 'atom) (all nil))
+  "Return feed URL for web page at URL.
+Interactively, insert the URL at point.  PREFER may be
+`atom' (the default) or `rss'.  When ALL is non-nil, return all
+feed URLs of all types; otherwise, return only one feed URL,
+preferring the preferred type."
+  (interactive (list (org-web-tools--get-first-url)))
+  (require 'esxml-query)
+  (require 'org-web-tools)
+  (cl-flet ((feed-p (type)
+                    ;; Return t if TYPE appears to be an RSS/ATOM feed
+                    (string-match-p (rx "application/" (or "rss" "atom") "+xml")
+                                    type)))
+    (let* ((preferred-type (format "application/%s+xml" (symbol-name prefer)))
+           (html (org-web-tools--get-url url))
+           (dom (with-temp-buffer
+                  (insert html)
+                  (libxml-parse-html-region (point-min) (point-max))))
+           (potential-feeds (esxml-query-all "link[rel=alternate]" dom))
+           (return (if all
+                       ;; Return all URLs
+                       (cl-loop for (_tag attrs) in potential-feeds
+                                when (feed-p (alist-get 'type attrs))
+                                collect (url-expand-file-name (alist-get 'href attrs) url))
+                     (or
+                      ;; Return the first URL of preferred type
+                      (cl-loop for (_tag attrs) in potential-feeds
+                               when (equal preferred-type (alist-get 'type attrs))
+                               return (url-expand-file-name (alist-get 'href attrs) url))
+                      ;; Return the first URL of non-preferred type
+                      (cl-loop for (_tag attrs) in potential-feeds
+                               when (feed-p (alist-get 'type attrs))
+                               return (url-expand-file-name (alist-get 'href attrs) url))))))
+      (if (called-interactively-p 'interactive)
+          (insert (if (listp return)
+                      (s-join " " return)
+                    return))
+        return))))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; From https://karthinks.com/blog/lazy-elfeed/
 (defun elfeed-search-show-entry-pre (&optional lines)
