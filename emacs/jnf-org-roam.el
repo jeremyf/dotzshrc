@@ -162,17 +162,17 @@
     (find-file filepath)))
 
 (defun xah-filter-list (@predicate @sequence)
-  "Return a new list such that @PREDICATE is true on all members of @SEQUENCE.
+   "Return a new list such that @PREDICATE is true on all members of @SEQUENCE.
 URL `http://ergoemacs.org/emacs/elisp_filter_list.html'
 Version 2016-07-18"
-  (delete
-   "e3824ad41f2ec1ed"
-   (mapcar
-    (lambda ($x)
-      (if (funcall @predicate $x)
-          $x
-        "e3824ad41f2ec1ed" ))
-    @sequence)))
+   (delete
+    "e3824ad41f2ec1ed"
+    (mapcar
+     (lambda ($x)
+       (if (funcall @predicate $x)
+           $x
+         "e3824ad41f2ec1ed" ))
+     @sequence)))
 
 (defmacro org-roam-inserter-fn (project)
   "Define a function to wrap the `org-roam-inser' with a filter for the given PROJECT."
@@ -226,7 +226,7 @@ Version 2016-07-18"
     ("t" org-roam-insert--filter-with--thel-sector "Thel Sector")
     ("T" org-roam-find-file--thel-sector " └─ Find"))
    "Work"
-   (("h" org-roam-insert--filter-with--hesbrugh-libraries "Hesburgh Libraries")
+   (("h" org-roam-insert--filter-with--hesburgh-libraries "Hesburgh Libraries")
     ("H" org-roam-find-file--hesburgh-libraries " └─ Find")
     ("s" org-roam-insert--filter-with--samvera "Samvera")
     ("S" org-roam-find-file--samvera " └─ Find"))
