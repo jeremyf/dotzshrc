@@ -13,7 +13,7 @@
   :after org
   :bind (:map elfeed-search-mode-map
               ("q" . jnf/elfeed-save-db-and-bury))
-  :config (elfeed-org)
+  :config
 
   ;;
   ;; linking and capturing
@@ -75,8 +75,7 @@
 (use-package elfeed-org
   :straight t
   :after elfeed
-  :config
-  (elfeed-org)
+  :config (elfeed-org)
   (setq rmh-elfeed-org-files (list "~/git/org/elfeed.org")))
 
 

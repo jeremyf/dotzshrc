@@ -477,11 +477,11 @@ echo the method signature of `'delete-duplicate-lines`"
 (require 'jnf-spelling.el)
 (require 'jnf-typopunct.el)
 (require 'jnf-ruby.el)
-(require 'jnf-elfeed.el)
 (require 'jnf-lsp-mode.el)
 (require 'jnf-blogging.el)
 (require 'jnf-tabs.el)
 (require 'jnf-stars-without-number.el)
+(require 'jnf-elfeed.el)
 
 ;; Consider for publishing: https://github.com/rnkn/binder
 ;; Consider as replacement for org-roam: https://github.com/EFLS/zetteldeft
