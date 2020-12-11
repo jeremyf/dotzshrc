@@ -4,4 +4,4 @@
 # key: update
 # name: {{< update >}}
 # --
-{{< update date="`(format-time-string "%Y-%m-%d")`" mode="${2:$$(yas-choose-value '("inline" "marginnote" "sidenote" "section"))}" >}}$0{{< /update >}}
+{{< update date="`(format-time-string "%Y-%m-%d")`" mode="${2:$$(yas-choose-value '("inline" "paragraph" "marginnote" "sidenote" "section"))}" >}}$0{{< /update >}}
