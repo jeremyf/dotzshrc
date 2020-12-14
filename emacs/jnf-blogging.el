@@ -63,6 +63,13 @@ for TakeOnRules.com."
                             "ag \"^series: .*$\" "
                             (f-join tor--repository-path "content")
                             " -o --nofilename | sort | uniq | cut -d \":\" -f 2 | sort"))))
+(defun tor-game-list ()
+  "Return a list of games from TakeOnRules.com."
+  (split-string-and-unquote
+   (shell-command-to-string (concat
+                            "ag \"game: .*$\" "
+                            (f-join tor--repository-path "data/games.yml")
+                            " -o --nofilename | sort | awk '{ print $2 }'"))))
 
 (provide 'jnf-blogging.el)
 ;;; jnf-blogging.el ends here
