@@ -57,11 +57,11 @@ as a communication channel."
     (concat
      "---"
      "\ndate: 2018-01-01"
-     "\nlayout: page"
+     "\nlayout: post"
      "\nlicenses: []"
      (format "\nslug: /%s/" (s-dashed-words (format "%s" title)))
      (format "\ntitle: \"%s\"" (substring title 1 (- (length title) 1)))
-     "\ntype: page"
+     "\ntype: post"
      "\n---\n"
      contents)))
 
