@@ -13,8 +13,8 @@
 ;; (add-hook 'text-mode-hook 'jnf/typopunct-init)
 (add-hook 'org-mode-hook 'jnf/typopunct-init)
 (defun jnf/typopunct-init ()
-  (typopunct-change-language 'english)
   (typopunct-mode 1))
+(setq typopunct-buffer-language 'english)
 
 ;; The minus sign (−) is separate from the hyphen (-), en dash (–) and
 ;; em dash (—). To build upon the clever behavior of the ‘-’ key

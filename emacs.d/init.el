@@ -207,6 +207,7 @@
  '(org-export-backends '(ascii html icalendar latex md odt))
  '(safe-local-variable-values '((encoding . utf-8)))
  '(show-paren-mode t)
+ '(typopunct-buffer-language 'english)
  '(use-package-always-ensure t))
 
 (setq backup-directory-alist '((".*" . "~/.emacs.d/backups/"))
@@ -513,3 +514,9 @@ echo the method signature of `'delete-duplicate-lines`"
 (setq gc-cons-threshold (* 2 1000 1000))
 (provide 'init)
 ;;; init.el ends here
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
