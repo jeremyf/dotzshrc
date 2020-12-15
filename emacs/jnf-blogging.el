@@ -60,9 +60,9 @@ for TakeOnRules.com."
   "Return a list of series from TakeOnRules.com."
   (split-string-and-unquote
    (shell-command-to-string (concat
-                            "ag \"^series: .*$\" "
-                            (f-join tor--repository-path "content")
-                            " -o --nofilename | sort | uniq | cut -d \":\" -f 2 | sort"))))
+                            "ag \"key: .*$\" "
+                            (f-join tor--repository-path "data/series.yml")
+                            " -o --nofilename | sort | awk '{ print $2 }'"))))
 (defun tor-game-list ()
   "Return a list of games from TakeOnRules.com."
   (split-string-and-unquote
