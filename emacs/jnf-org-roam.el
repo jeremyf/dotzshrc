@@ -241,5 +241,7 @@ Version 2016-07-18"
 (global-set-key (kbd "s-i") 'jnf-org-subject-menu/body)
 
 
+(global-set-key (kbd "s-2") 'org-roam-insert--filter-with--thel-sector)
+
 (provide 'jnf-org-roam.el)
 ;;; jnf-org-roam.el ends here
