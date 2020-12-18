@@ -23,6 +23,7 @@
                ("C-c r i" . org-roam-insert)
                ("C-c r c" . org-roam-capture)
                ("C-c r x" . org-roam-jump-to-index)
+               ("C-c r t" . jnf-toggle-roam-project-filter)
                ("C-c r g" . org-roam-graph))
               :map org-mode-map
               (("C-c r c" . org-roam-capture))
@@ -240,8 +241,21 @@ Version 2016-07-18"
 (global-set-key (kbd "s-1") 'jnf-org-subject-menu/body) ;; Deprecated
 (global-set-key (kbd "s-i") 'jnf-org-subject-menu/body)
 
+(defun jnf-toggle-roam-project-filter (project)
+  "Prompt for a PROJECT, then toggle the `s-i' kbd to filter for that project."
+  (interactive (list
+                (completing-read
+                 "Project: " '((":all" 1)
+                               ("ardu" 2)
+                               ("hesburgh-libraries" 3)
+                               ("permanent-bibliographies" 4)
+                               ("permanent-cards" 5)
+                               ("samvera" 6)
+                               ("thel-sector" 7)))))
+  (if (string= project ":all")
+      (global-set-key (kbd "s-i") 'jnf-org-subject-menu/body)
+    (global-set-key (kbd "s-i") (intern (concat "org-roam-insert--filter-with--" project)))))
 
-(global-set-key (kbd "s-2") 'org-roam-insert--filter-with--thel-sector)
 
 (provide 'jnf-org-roam.el)
 ;;; jnf-org-roam.el ends here
