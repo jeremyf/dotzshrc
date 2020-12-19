@@ -51,9 +51,26 @@ for TakeOnRules.com."
 ;; Used in ./emacs/snippets/text-mode/tag
 (defun tor-tags-list ()
   "Return a list of tags from TakeOnRules.com."
-  (with-temp-buffer
-    (insert-file-contents (concat tor--repository-path "/artifacts/tags.txt"))
-    (split-string (buffer-string) "\n" t)))
+  (split-string-and-unquote
+   (shell-command-to-string (concat
+                            "ag \"tag: .*$\" "
+                            (f-join tor--repository-path "data/glossary.yml")
+                            " -o --nofilename | sort | awk '{ print $2 }'"))))
+(defun tor-abbrs-list ()
+  "Return a list of abbrs from TakeOnRules.com."
+  (split-string-and-unquote
+   (shell-command-to-string (concat
+                            "ag \"key: .*$\" "
+                            (f-join tor--repository-path "data/glossary.yml")
+                            " -o --nofilename | sort | awk '{ print $2 }'"))))
+
+(defun tor-game-list ()
+  "Return a list of games from TakeOnRules.com."
+  (split-string-and-unquote
+   (shell-command-to-string (concat
+                            "ag \"game: .*$\" "
+                            (f-join tor--repository-path "data/glossary.yml")
+                            " -o --nofilename | sort | awk '{ print $2 }'"))))
 
 ;; Used in ./emacs/snippets/text-mode/series
 (defun tor-series-list ()
@@ -63,13 +80,7 @@ for TakeOnRules.com."
                             "ag \"key: .*$\" "
                             (f-join tor--repository-path "data/series.yml")
                             " -o --nofilename | sort | awk '{ print $2 }'"))))
-(defun tor-game-list ()
-  "Return a list of games from TakeOnRules.com."
-  (split-string-and-unquote
-   (shell-command-to-string (concat
-                            "ag \"game: .*$\" "
-                            (f-join tor--repository-path "data/games.yml")
-                            " -o --nofilename | sort | awk '{ print $2 }'"))))
+
 
 (provide 'jnf-blogging.el)
 ;;; jnf-blogging.el ends here
