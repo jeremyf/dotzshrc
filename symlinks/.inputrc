@@ -1,6 +1,6 @@
 # http://www.cs.colostate.edu/helpdocs/emacs.html
 set editing-mode emacs
-bindkey -e
+# bindkey -e
 set completion-ignore-case on
 
 # Allow the command prompt to wrap to the next line
