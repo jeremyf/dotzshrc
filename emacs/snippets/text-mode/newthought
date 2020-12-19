@@ -1,7 +1,7 @@
 # -*- mode: snippet -*-
 # contributor: Jeremy Friesen <jeremy.n.friesen@gmail.com>
 # group: takeonrules
-# key: newthought
+# key: nt
 # name: <span class=\"newthought\">
 # --
 <span class="newthought">$1</span>$0
