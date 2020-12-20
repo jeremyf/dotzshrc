@@ -52,25 +52,29 @@ for TakeOnRules.com."
 (defun tor-tags-list ()
   "Return a list of tags from TakeOnRules.com."
   (split-string-and-unquote
-   (shell-command-to-string (concat
-                            "ag \"tag: .*$\" "
-                            (f-join tor--repository-path "data/glossary.yml")
-                            " -o --nofilename | sort | awk '{ print $2 }'"))))
+   (shell-command-to-string
+    (concat
+     "ag \"tag: .*$\" "
+     (f-join tor--repository-path "data/glossary.yml")
+     " -o --nofilename | cut -d \" \" -f 2- | sort"))))
+
 (defun tor-abbrs-list ()
   "Return a list of abbrs from TakeOnRules.com."
   (split-string-and-unquote
-   (shell-command-to-string (concat
-                            "ag \"key: .*$\" "
-                            (f-join tor--repository-path "data/glossary.yml")
-                            " -o --nofilename | sort | awk '{ print $2 }'"))))
+   (shell-command-to-string
+    (concat
+     "ag \"key: .*$\" "
+     (f-join tor--repository-path "data/glossary.yml")
+     " -o --nofilename | cut -d \" \" -f 2- | sort"))))
 
 (defun tor-game-list ()
   "Return a list of games from TakeOnRules.com."
   (split-string-and-unquote
-   (shell-command-to-string (concat
-                            "ag \"game: .*$\" "
-                            (f-join tor--repository-path "data/glossary.yml")
-                            " -o --nofilename | sort | awk '{ print $2 }'"))))
+   (shell-command-to-string
+    (concat
+     "ag \"game: .*$\" "
+     (f-join tor--repository-path "data/glossary.yml")
+     " -o --nofilename | cut -d \" \" -f 2- | sort"))))
 
 ;; Used in ./emacs/snippets/text-mode/series
 (defun tor-series-list ()
@@ -79,7 +83,7 @@ for TakeOnRules.com."
    (shell-command-to-string (concat
                             "ag \"key: .*$\" "
                             (f-join tor--repository-path "data/series.yml")
-                            " -o --nofilename | sort | awk '{ print $2 }'"))))
+                            " -o --nofilename | cut -d \" \" -f 2- | sort"))))
 
 
 (provide 'jnf-blogging.el)
