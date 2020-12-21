@@ -56,7 +56,8 @@ for TakeOnRules.com."
     (concat
      "ag \"tag: .*$\" "
      (f-join tor--repository-path "data/glossary.yml")
-     " -o --nofilename | cut -d \" \" -f 2- | sort"))))
+     " -o --nofilename | cut -d \" \" -f 2- | sort | tr '\n' '~'"))
+   "~"))
 
 (defun tor-abbrs-list ()
   "Return a list of abbrs from TakeOnRules.com."
@@ -65,7 +66,8 @@ for TakeOnRules.com."
     (concat
      "ag \"key: .*$\" "
      (f-join tor--repository-path "data/glossary.yml")
-     " -o --nofilename | cut -d \" \" -f 2- | sort"))))
+     " -o --nofilename | cut -d \" \" -f 2- | sort | tr '\n' '~'"))
+   "~"))
 
 (defun tor-game-list ()
   "Return a list of games from TakeOnRules.com."
@@ -74,7 +76,8 @@ for TakeOnRules.com."
     (concat
      "ag \"game: .*$\" "
      (f-join tor--repository-path "data/glossary.yml")
-     " -o --nofilename | cut -d \" \" -f 2- | sort"))))
+     " -o --nofilename | cut -d \" \" -f 2- | sort | tr '\n' '~'"))
+   "~"))
 
 ;; Used in ./emacs/snippets/text-mode/series
 (defun tor-series-list ()

@@ -65,10 +65,10 @@
   (spaceline-all-the-icons--setup-neotree))
 
 ;; Adding smartparens options
-(use-package smartparens
-  :straight t
-  :config (smartparens-strict-mode 1)
-  (smartparens-global-mode 1))
+;; (use-package smartparens
+;;   :straight t
+;;   :config (smartparens-strict-mode 1)
+;;   (smartparens-global-mode 1))
 
 ;; A convenience function to create a nice string
 (defun with-faicon (icon str &optional height v-adjust)
