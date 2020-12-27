@@ -183,6 +183,9 @@ exist after each headings's drawers."
 (use-package org-bookmark-heading
   :straight t)
 
+(use-package org-noter
+  :straight t)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Begin goto org file
 ;; (defmacro go-org-file-fn (file)

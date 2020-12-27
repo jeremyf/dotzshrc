@@ -41,6 +41,7 @@
   ;;
   (setq org-roam-title-sources '((title headline) alias))
   (setq org-roam-db-update-idle-seconds 2)
+  (setq org-roam-db-update-method 'immediate)
   ;; Note: Order of these templates matters. The `org-roam-insert-immediate` uses
   ;; the first one in the list (e.g. Fleeting)
   ;;
@@ -69,7 +70,7 @@
           ("a" "Project > Ardu" plain (function org-roam--capture-get-point)
            "%?"
            :file-name "projects/ardu/%<%Y%m%d>---${slug}"
-           :head  "#+title: ${title}\n#+roam_tags:\n* ${title}\n\n"
+           :head  "#+title: ${title}\n#+roam_tags:\n* ${title}\n\n** Summary\n\n** Details\n\n** COMMENT For Referee"
            :unnarrowed t
            :immediate-finish t)
           ("d" "Project > Diversity Equity Incluson (DEI)" plain (function org-roam--capture-get-point)
@@ -99,7 +100,7 @@
           ("t" "Project > Thel Sector" plain (function org-roam--capture-get-point)
            "%?"
            :file-name "projects/thel-sector/%<%Y%m%d>---${slug}"
-           :head  "#+title: ${title}\n#+roam_tags:\n* ${title}\n\n"
+           :head  "#+title: ${title}\n#+roam_tags:\n* ${title}\n\n** Summary\n\n** Details\n\n** COMMENT For Referee"
            :unnarrowed t
            :immediate-finish t))))
 (require 'org-roam-protocol)
@@ -225,7 +226,8 @@ Version 2016-07-18"
    (("a" org-roam-insert--filter-with--ardu "Ardu, World of")
     ("A" org-roam-find-file--ardu " └─ Find")
     ("t" org-roam-insert--filter-with--thel-sector "Thel Sector")
-    ("T" org-roam-find-file--thel-sector " └─ Find"))
+    ("T" org-roam-find-file--thel-sector " ├─ Find")
+    ("2" org-roam-insert-random-thel-sector-npc  " └─ NPC"))
    "Work"
    (("h" org-roam-insert--filter-with--hesburgh-libraries "Hesburgh Libraries")
     ("H" org-roam-find-file--hesburgh-libraries " └─ Find")

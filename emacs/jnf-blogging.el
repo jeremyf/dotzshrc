@@ -89,5 +89,12 @@ for TakeOnRules.com."
                             " -o --nofilename | cut -d \" \" -f 2- | sort"))))
 
 
+(defun org-files-names-in-project-list ()
+  "Return a list of filenames in the current files directory."
+  (split-string-and-unquote
+   (shell-command-to-string
+    (concat
+     "ls " (file-name-directory buffer-file-name)))))
+
 (provide 'jnf-blogging.el)
 ;;; jnf-blogging.el ends here

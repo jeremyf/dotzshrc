@@ -11,8 +11,10 @@
 ;;; Code:
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defun thel-sector-filename (title)
+(defun org-roam-project-filename (title &optional project)
   "Convert the given TITLE to a filename.
+
+PROJECT defaults to \"thel-sector\".
 
 The filename is conformant to my org-roam capture templates."
   (f-join org-directory
@@ -23,7 +25,7 @@ The filename is conformant to my org-roam capture templates."
            (s-snake-case title) ".org")))
 
 ;; TODO - Can this be shifted to an org-roam capture template?
-(defun swn-npc (culture &optional)
+(defun swn-npc (culture &optional project)
   "Capture a random `swnt' npc of the prompted CULTURE.
 
 This function writes to the as-of-now hard-coded Thel Sector
@@ -67,10 +69,13 @@ project in my org-directory."
                 "#+title: " npc-name
                 "\n#+roam_tags: npc"
                 "\n\n* " npc-name
+                "\n\n** Summary"
+                "\n\n** Details"
+                "\n\n** COMMENT For Referee"
                 "\n\n" (string-join
                         npc-string-list "\n")))
          ;; Get the path to the file
-         (fpath (thel-sector-filename npc-name)))
+         (fpath (org-roam-project-filename npc-name)))
 
     ;; Write the body to the file at the FPATH.
     (write-region body nil fpath nil nil nil t)
@@ -91,6 +96,7 @@ project in my org-directory."
 ;; Given that I'm in an org-mode context, then the following kbd
 ;; combination will prompt to generate a random SWN npc.
 (define-key org-mode-map (kbd "C-c s n") 'swn-npc)
+(defalias 'org-roam-insert-random-thel-sector-npc 'swn-npc)
 
 (provide 'jnf-stars-without-number.el)
 ;;; jnf--stars-without-number.el ends here

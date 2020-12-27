@@ -3,6 +3,6 @@
 # key: session
 # --
 sessionReport:
-  date: $1
-  game: $2
-  location: "around the table"
+  date: ${1:`(format-time-string "%Y-%m-%d")`}
+  game: ${2:$$(yas-choose-value (tor-game-list))}
+  location: ${3:$$(yas-choose-value '("around the table" "via Zoom"))}
