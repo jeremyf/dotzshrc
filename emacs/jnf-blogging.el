@@ -47,7 +47,6 @@ for TakeOnRules.com."
       (find-file (expand-file-name fpath))
       )))
 
-
 ;; Used in ./emacs/snippets/text-mode/tag
 (defun tor-tags-list ()
   "Return a list of tags from TakeOnRules.com."
@@ -88,6 +87,15 @@ for TakeOnRules.com."
                             (f-join tor--repository-path "data/series.yml")
                             " -o --nofilename | cut -d \" \" -f 2- | sort"))))
 
+(defun tor-licenses-list ()
+  "Return a list of available licenses for TakeOnRules.com."
+  (split-string-and-unquote
+   (shell-command-to-string
+    (concat
+     "ag \"Key: .*$\" "
+     (f-join tor--repository-path "data/licenses.yml")
+     " -o --nofilename | cut -d \" \" -f 2- | sort | tr '\n' '~'"))
+   "~"))
 
 (defun org-files-names-in-project-list ()
   "Return a list of filenames in the current files directory."
