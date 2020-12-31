@@ -56,7 +56,7 @@ as a communication channel."
          (input-file (plist-get info :input-file)))
     (concat
      "---"
-     "\ndate: 2018-01-01"
+     "\ndate: "  (format-time-string "%Y-%m-%d %H:%M:%S %z")
      "\nlayout: post"
      "\nlicenses: []"
      (format "\nslug: /%s/" (s-dashed-words (format "%s" title)))
