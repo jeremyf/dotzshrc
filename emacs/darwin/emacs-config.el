@@ -21,6 +21,11 @@
   :defer 1)
 (global-set-key (kbd "C-c g") 'grab-mac-link)
 
+(eval-after-load "flyspell"
+  '(progn
+     (define-key flyspell-mouse-map [down-mouse-3] #'flyspell-correct-word)
+     (define-key flyspell-mouse-map [mouse-3] #'undefined)))
+
 (use-package org-mac-link
   :ensure t
   :straight (org-mac-link :type git :host github :repo "jeremyf/org-mac-link")
