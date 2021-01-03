@@ -4,7 +4,9 @@
 # key: tab
 # name: {{< table >}}
 # --
-{{<table caption="$1">}}
-<thead>$0</thead>
-<tbody></tbody>
-{{</table>}}
+{{< table caption="$1" >}}
+<thead><tr><th scope="col">$0</th></tr></thead>
+<tbody>
+<tr></tr>
+</tbody>
+{{< /table >}}
