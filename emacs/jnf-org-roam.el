@@ -179,7 +179,7 @@ Version 2016-07-18"
 (defmacro org-roam-inserter-fn (project)
   "Define a function to wrap the `org-roam-inser' with a filter for the given PROJECT."
   (let* ((fn-name (intern (concat "org-roam-insert--filter-with--"
-                                  (replace-regexp-in-string " +" "-" project))))
+                                  (replace-regexp-in-string "\\W+" "-" project))))
          (docstring (concat "Insert an `org-roam' file for: " project)))
     `(defun ,fn-name (&optional lowercase completions description link-type)
        ,docstring
@@ -191,26 +191,26 @@ Version 2016-07-18"
 
 (defmacro go-roam-find-file-project-fn (project)
   "Define a function to find an `org-roam' file within the given PROJECT."
-  (let* ((fn-name (intern (concat "org-roam-find-file--" (replace-regexp-in-string " +" "-" project))))
+  (let* ((fn-name (intern (concat "org-roam-find-file--" (replace-regexp-in-string "\\W+" "-" project))))
          (docstring (concat "Find an `org-roam' file for: " project)))
     `(defun ,fn-name (&optional initial-prompt completions)
        ,docstring
-       (interactive)
+       (interactive "P")
        (let* ((filter (lambda(completions) (xah-filter-list
-                                            (lambda(item) (string-match-p (concat "\\W" ,project "\\W") (first item)))
+                                            (lambda(item) (progn (message (first item))(string-match-p (concat "\\W" ,project "\\W") (first item))))
                                             completions))))
          (org-roam-find-file initial-prompt completions filter)))))
 
 (go-roam-find-file-project-fn "thel-sector")
 (go-roam-find-file-project-fn "ardu")
-(go-roam-find-file-project-fn "permanent bibliographies")
-(go-roam-find-file-project-fn "permanent cards")
+(go-roam-find-file-project-fn "permanent,bibliographies")
+(go-roam-find-file-project-fn "permanent,cards")
 (go-roam-find-file-project-fn "hesburgh-libraries")
 (go-roam-find-file-project-fn "samvera")
 (org-roam-inserter-fn "thel-sector")
 (org-roam-inserter-fn "ardu")
-(org-roam-inserter-fn "permanent bibliographies")
-(org-roam-inserter-fn "permanent cards")
+(org-roam-inserter-fn "permanent,bibliographies")
+(org-roam-inserter-fn "permanent,cards")
 (org-roam-inserter-fn "hesburgh-libraries")
 (org-roam-inserter-fn "samvera")
 
