@@ -76,6 +76,10 @@
  (interactive)
  (append-aspell-word (thing-at-point 'word)))
 
+(setq ispell-program-name "aspell"
+      ;; force the English dictionary, support Camel Case spelling check (tested with aspell 0.6)
+      ispell-extra-args '("--sug-mode=ultra" "--lang=en_US" "--run-together"))
+
 (use-package flyspell-correct-ivy
   :straight t
   :config (global-set-key (kbd "C-,") 'flyspell-buffer))
