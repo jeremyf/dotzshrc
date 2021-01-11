@@ -248,7 +248,7 @@
 (setq-default split-window-preferred-function 'visual-fill-column-split-window-sensibly)
 
 (defun my-nov-font-setup ()
-  (face-remap-add-relative 'variable-pitch :family "Times"
+  (face-remap-add-relative 'variable-pitch :family "ETBembo"
                            :height 1.3))
 (add-hook 'nov-mode-hook 'my-nov-font-setup)
 

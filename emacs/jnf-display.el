@@ -32,7 +32,7 @@
 ;; Main typeface, I'm toggling between "JetBrains Mono" and "Hack"
 (set-face-attribute 'default nil :family "JetBrains Mono" :height 140)
 ;; Proportionately spaced typeface
-(set-face-attribute 'variable-pitch nil :family "Times" :height 1.0)
+(set-face-attribute 'variable-pitch nil :family "ETBembo" :height 1.0)
 ;; Monospaced typeface
 (set-face-attribute 'fixed-pitch nil :family "JetBrains Mono" :height 1.0)
 ;;
@@ -78,6 +78,19 @@
 (defun with-material (icon str &optional height v-adjust)
     "Displays an icon from Font Awesome icon."
     (s-concat (all-the-icons-material icon :v-adjust (or v-adjust 0) :height (or height 1)) " " str))
+
+(use-package olivetti
+  :straight (olivetti :type git :host github :repo "rnkn/olivetti"))
+
+(defun jnf/toggle-writing-mode ()
+  "A simple toggle for a few nice writing mode behaviors."
+  (interactive)
+  (progn  (olivetti-mode 'toggle) (variable-pitch-mode 'toggle)))
+
+
+;; (use-package dired-auto-readme
+;;   :straight (dired-auto-readme :type git :host github :repo "amno1/dired-auto-readme")
+;;   :config (setq dired-auto-readme-mode t))
 
 (provide 'jnf-display.el)
 ;;; jnf-display.el ends here

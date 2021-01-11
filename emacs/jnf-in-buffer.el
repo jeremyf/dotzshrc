@@ -249,6 +249,8 @@
   :bind (("C-M-d" . my-duplicate-thing)
          ("C-c d" . my-duplicate-thing)))
 
+(use-package smartparens
+  :straight t)
 
 (defun sp-wrap-double-quote ()
   "Wrap following sexp in double quotes (e.g. `\"')."
