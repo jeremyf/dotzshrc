@@ -134,6 +134,10 @@
   :hook (ag-mode . wgrep-ag-setup)
   :after ag)
 
+;; M-o e to open counsel edit mode
+(use-package counsel-edit-mode
+  :straight (counsel-edit-mode :host github :type git :repo "tyler-dodge/counsel-edit-mode")
+  :init (counsel-edit-mode-setup-ivy))
 
 ;; I have found this package quite "helpful"; When I want to know the
 ;; name of a function or key or variable, I can use the helpful

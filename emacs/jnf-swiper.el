@@ -18,21 +18,21 @@
 
 ;; I use this all of the freaking time to peak at other parts of my
 ;; code.  It's also a navigation tool.
-;; (use-package swiper
-;;   :straight t
-;;   :bind (("C-s" . swiper)))
+(use-package swiper
+  :straight t
+  :bind (("C-s" . swiper)))
 
 ;; https://github.com/emacsorphanage/helm-swoop
 ;;
 ;; An interesting option compared to Swiper.  The prompts provide
 ;; clear guidance on how to edit these results.  I may have convinced
 ;; myself to switch from Swiper.
-(use-package helm-swoop
-  :straight t
-  :bind (("C-s" . helm-swoop)
-         (:map helm-swoop-map
-               ;; C-w is typically mapped in helm-swoop mode.
-               (("C-w" . jnf/kill-region-or-backward-word))
-               )))
+;; (use-package helm-swoop
+;;   :straight t
+;;   :bind (("C-s" . helm-swoop)
+;;          (:map helm-swoop-map
+;;                ;; C-w is typically mapped in helm-swoop mode.
+;;                (("C-w" . jnf/kill-region-or-backward-word))
+;;                )))
 (provide 'jnf-swiper.el)
 ;;; jnf-swiper.el ends here
