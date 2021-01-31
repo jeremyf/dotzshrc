@@ -14,6 +14,7 @@ $HOME file
 ├── install.rb
 ├── iterm
 ├── runbooks
+├── stylesheets
 └── symlinks
 ```
 

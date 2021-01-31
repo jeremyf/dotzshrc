@@ -4,4 +4,4 @@
 # key: mn
 # name: {{< marginnote >}}
 # --
-{{< marginnote >}}$0{{< /marginnote >}}
+{{< marginnote${1: tag="aside"}>}}$0{{< /marginnote >}}

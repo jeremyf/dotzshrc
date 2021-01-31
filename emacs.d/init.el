@@ -292,7 +292,7 @@
 ;; https://github.com/jrblevin/markdown-mode/
 (use-package markdown-mode
   :straight t
-  :hook ((markdown-mode . turn-on-visual-line-mode))
+  ;; :hook ((markdown-mode . turn-on-visual-line-mode))
   :mode (("README\\.md\\'" . gfm-mode)
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))

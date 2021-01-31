@@ -42,7 +42,6 @@
     )
 
   (bind-keys :map elfeed-show-mode-map
-             ("l" . elfeed-show-link-title)
              ("v" . elfeed-show-quick-url-note)))
 
 (use-package eww

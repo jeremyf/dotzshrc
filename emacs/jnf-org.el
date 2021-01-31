@@ -23,10 +23,6 @@
         '(
           ("c" "Write to Current Clock" plain (clock)
            "%?\n %a")
-          ("m" "Meeting for Work" entry (file+datetree "~/git/org/agenda.org")
-           "* MEETING %^{SUMMARY}\n\n  %^{ATTENDEES}p\n  %?\n")
-          ("r" "Reading for Work" entry (file+datetree "~/git/org/agenda.org")
-           "* TO-READ %^{SUBJECT} %u\n  %?\n")
           ("g" "Troubleshooting" entry (file+headline "~/git/org/troubleshooting.org" "Trouble Shooting")
            "* TODO %u Problem %^{SUMMARY}\n\n  %?\n  %a")
           ("t" "Task for Work" entry (file+datetree "~/git/org/agenda.org")

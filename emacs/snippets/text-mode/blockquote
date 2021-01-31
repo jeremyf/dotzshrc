@@ -4,6 +4,6 @@
 # key: bq
 # name: {{< blockquote >}}
 # --
-{{< blockquote${6: pre="$7"} cite="$1"${2: cite_url="$3"}${4: post="$5"} >}}
+{{< blockquote${8: epigraph="t"} ${9: preWhiteSpace="t"} ${6: pre="$7"} cite="$1"${2: cite_url="$3"}${4: post="$5"} >}}
 $0
 {{< /blockquote >}}

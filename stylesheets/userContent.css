@@ -1,0 +1,25 @@
+/* Copied from ~/git/dotzshrc/stylesheets/userContent.css via install.rb */
+/* A custom stylesheet for Firefox. */
+kbd, code {
+    color: #145c33;
+}
+
+@media (prefers-color-scheme: dark) {
+    kbd, code {
+        color: #00cd68;
+    }
+}
+
+
+/* Adding color to direct status messages */
+.skin-default #mastodon .status.status-direct {
+    background: #330000 !important;
+}
+
+.skin-mastodon-light #mastodon .status.status-direct {
+    background: #f2b0a2 !important;
+}
+
+cite {
+    font-weight: bold;
+}

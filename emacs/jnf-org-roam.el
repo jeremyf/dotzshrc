@@ -62,6 +62,11 @@
            :file-name "permanent/cards/000-unsorted---${slug}"
            :head "#+title: ${title}\n#+roam_tags:\n* ${title}\n\n"
            :unnarrowed t)
+          ("e" "Epigraph (Permanent > Card)" plain (function org-roam--capture-get-point)
+           "%?"
+           :file-name "permanent/cards/000-unsorted---${slug}"
+           :head "#+title: ${title}\n#+roam_tags: epigraph\n* ${title}\n\n#+begin_quote\n\n#+end_quote"
+           :unnarrowed t)
           ("l" "Permanent > Letters" plain (function org-roam--capture-get-point)
            "%?"
            :file-name "permanent/letters/%<%Y%m%d>---${slug}"
