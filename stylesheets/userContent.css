@@ -1,13 +1,20 @@
 /* Copied from ~/git/dotzshrc/stylesheets/userContent.css via install.rb */
 /* A custom stylesheet for Firefox. */
-kbd, code {
-    color: #145c33;
+@media (prefers-color-scheme: light) {
+    kbd, code {
+        color: #145c33;
+    }
+    /* cite { */
+    /*     text-shadow: 1px 1px 1px #ccc; */
+    /* } */
 }
-
 @media (prefers-color-scheme: dark) {
     kbd, code {
         color: #00cd68;
     }
+    /* cite { */
+    /*     text-shadow: 1px 1px 1px #A00; */
+    /* } */
 }
 
 
@@ -21,5 +28,5 @@ kbd, code {
 }
 
 cite {
-    font-weight: bold;
+    font-weight: 500;
 }
