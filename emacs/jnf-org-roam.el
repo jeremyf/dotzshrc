@@ -208,6 +208,7 @@ Version 2016-07-18"
 
 (go-roam-find-file-project-fn "thel-sector")
 (go-roam-find-file-project-fn "ardu")
+(go-roam-find-file-project-fn "permanent,letters")
 (go-roam-find-file-project-fn "permanent,bibliographies")
 (go-roam-find-file-project-fn "permanent,cards")
 (go-roam-find-file-project-fn "hesburgh-libraries")
@@ -217,6 +218,7 @@ Version 2016-07-18"
 (org-roam-inserter-fn "ardu")
 (org-roam-inserter-fn "permanent,bibliographies")
 (org-roam-inserter-fn "permanent,cards")
+(org-roam-inserter-fn "permanent,letters")
 (org-roam-inserter-fn "hesburgh-libraries")
 (org-roam-inserter-fn "rpgs")
 (org-roam-inserter-fn "samvera")
@@ -228,7 +230,9 @@ Version 2016-07-18"
    (("b" org-roam-insert--filter-with--permanent-bibliographies "Bibliography")
     ("B" org-roam-find-file--permanent-bibliographies " └─ Find")
     ("c" org-roam-insert--filter-with--permanent-cards "Card")
-    ("C" org-roam-find-file--permanent-cards " └─ Find"))
+    ("C" org-roam-find-file--permanent-cards " └─ Find")
+    ("l" org-roam-insert--filter-with--permanent-letters "Letter")
+    ("L" org-roam-find-file--permanent-letters " └─ Find"))
    "RPGs"
    (("a" org-roam-insert--filter-with--ardu "Ardu, World of")
     ("A" org-roam-find-file--ardu " └─ Find")
