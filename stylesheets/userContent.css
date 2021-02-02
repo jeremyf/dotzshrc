@@ -23,6 +23,12 @@
     background: #330000 !important;
 }
 
+/* With a code of green, which I like, Mastodon's default skin is
+   rather hard to see contrast.  This helps a lot. */
+.skin-default #mastodon code {
+        background: #dddddd;
+}
+
 .skin-mastodon-light #mastodon .status.status-direct {
     background: #f2b0a2 !important;
 }
