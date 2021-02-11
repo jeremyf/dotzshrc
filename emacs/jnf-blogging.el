@@ -97,6 +97,14 @@ for TakeOnRules.com."
      " -o --nofilename | cut -d \" \" -f 2- | sort | tr '\n' '~'"))
    "~"))
 
+(defun tor-page-relative-pathname-list ()
+  "Return a list of pages for TakeOnRules.com."
+  (split-string-and-unquote
+   (let ((default-directory (f-join tor--repository-path "content")))
+     (shell-command-to-string (concat
+                               "ag \"^title: \" --files-with-matches | sort"
+                               )))))
+
 (defun org-files-names-in-project-list ()
   "Return a list of filenames in the current files directory."
   (split-string-and-unquote

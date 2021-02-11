@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# contributor: Jeremy Friesen <jeremy.n.friesen@gmail.com>
+# key: cp
+# name: citePage
+# --
+{{< citePage ref="/${1:$$(yas-choose-value (tor-page-relative-pathname-list))}" ${2: withSubtitle="t"} >}}$0
