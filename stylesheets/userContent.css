@@ -19,7 +19,7 @@
 
 
 /* Adding color to direct status messages */
-.skin-default #mastodon .status.status-direct {
+.skin-default #mastodon .status.status-direct, .skin-default #mastodon .detailed-status.detailed-status-direct {
     background: #330000 !important;
 }
 
@@ -29,7 +29,7 @@
         background: #dddddd;
 }
 
-.skin-mastodon-light #mastodon .status.status-direct {
+.skin-mastodon-light #mastodon .status.status-direct, .skin-mastodon-light #mastodon .detailed-status.detailed-status-direct {
     background: #f2b0a2 !important;
 }
 
