@@ -90,6 +90,12 @@
            :head  "#+title: ${title}\n#+roam_tags:\n* ${title}\n\n"
            :unnarrowed t
            :immediate-finish t)
+          ("o" "Project > Distributed Autonomous Organization (DAO)" plain (function org-roam--capture-get-point)
+           "%?"
+           :file-name "projects/distributed-autonomous-organization/%<%Y%m%d>---${slug}"
+           :head  "#+title: ${title}\n#+roam_tags: dao\n* ${title}\n\n"
+           :unnarrowed t
+           :immediate-finish t)
           ("r" "Project > RPGs" plain (function org-roam--capture-get-point)
            "%?"
            :file-name "projects/rpgs/%<%Y%m%d>---${slug}"
@@ -212,6 +218,7 @@ Version 2016-07-18"
 (go-roam-find-file-project-fn "permanent,bibliographies")
 (go-roam-find-file-project-fn "permanent,cards")
 (go-roam-find-file-project-fn "hesburgh-libraries")
+(go-roam-find-file-project-fn "distributed-autonomous-organization")
 (go-roam-find-file-project-fn "rpgs")
 (go-roam-find-file-project-fn "samvera")
 (org-roam-inserter-fn "thel-sector")
@@ -220,6 +227,7 @@ Version 2016-07-18"
 (org-roam-inserter-fn "permanent,cards")
 (org-roam-inserter-fn "permanent,letters")
 (org-roam-inserter-fn "hesburgh-libraries")
+(org-roam-inserter-fn "distributed-autonomous-organization")
 (org-roam-inserter-fn "rpgs")
 (org-roam-inserter-fn "samvera")
 
@@ -242,7 +250,9 @@ Version 2016-07-18"
     ("T" org-roam-find-file--thel-sector " ├─ Find")
     ("2" org-roam-insert-random-thel-sector-npc  " └─ NPC"))
    "Work"
-   (("h" org-roam-insert--filter-with--hesburgh-libraries "Hesburgh Libraries")
+   (("d" org-roam-insert--filter-with--distributed-autonomous-organization "DAOs")
+    ("D" org-roam-find-file--distributed-autonomous-organization " └─ Find")
+    ("h" org-roam-insert--filter-with--hesburgh-libraries "Hesburgh Libraries")
     ("H" org-roam-find-file--hesburgh-libraries " └─ Find")
     ("s" org-roam-insert--filter-with--samvera "Samvera")
     ("S" org-roam-find-file--samvera " └─ Find"))
@@ -262,12 +272,13 @@ Version 2016-07-18"
                 (completing-read
                  "Project: " '((":all" 1)
                                ("ardu" 2)
-                               ("hesburgh-libraries" 3)
-                               ("permanent-bibliographies" 4)
-                               ("permanent-cards" 5)
-                               ("rpgs" 6)
-                               ("samvera" 7)
-                               ("thel-sector" 8)))))
+                               ("distributed-autonomous-organization" 3)
+                               ("hesburgh-libraries" 4)
+                               ("permanent-bibliographies" 5)
+                               ("permanent-cards" 6)
+                               ("rpgs" 7)
+                               ("samvera" 8)
+                               ("thel-sector" 9)))))
   (if (string= project ":all")
       (global-set-key (kbd "s-i") 'jnf-org-subject-menu/body)
     (global-set-key (kbd "s-i") (intern (concat "org-roam-insert--filter-with--" project)))))
