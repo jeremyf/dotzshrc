@@ -2,7 +2,9 @@
 /* A custom stylesheet for Firefox. */
 @media (prefers-color-scheme: light) {
     kbd, code {
-        color: #145c33;
+        color: #145c33 !important;
+        background: #e0e6f0 !important;
+        padding: 0 2px; margin: 0 1px; border-radius: 4px !important;
     }
     /* cite { */
     /*     text-shadow: 1px 1px 1px #ccc; */
@@ -10,7 +12,9 @@
 }
 @media (prefers-color-scheme: dark) {
     kbd, code {
-        color: #00cd68;
+        color: #00cd68 !important;
+        background: #282828 !important;
+        padding: 0 2px; margin: 0 1px; border-radius: 4px !important;
     }
     /* cite { */
     /*     text-shadow: 1px 1px 1px #A00; */
