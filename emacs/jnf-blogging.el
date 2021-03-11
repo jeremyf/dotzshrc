@@ -105,6 +105,12 @@ for TakeOnRules.com."
                                "ag \"^title: \" --files-with-matches | sort"
                                )))))
 
+(defun tor-asset-relative-pathname-list ()
+  "Return a list of image filenames for TakeOnRules.com."
+  (split-string-and-unquote
+   (let ((default-directory (f-join tor--repository-path "assets/images")))
+     (shell-command-to-string "ls"))))
+
 (defun org-files-names-in-project-list ()
   "Return a list of filenames in the current files directory."
   (split-string-and-unquote

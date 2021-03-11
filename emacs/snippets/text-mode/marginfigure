@@ -4,4 +4,6 @@
 # key: mf
 # name: {{< marginfgure >}}
 # --
-{{% marginfigure src="/images/$1" alt="$2" caption="$3" ${4: rotate="${5:270}"}%}}$0
+{{% marginfigureWithCaption src="/images/${1:$$(yas-choose-value (tor-asset-relative-pathname-list))}" " alt="$2" ${3: rotate="${4:270}"} %}}
+$5
+{{% /marginfigureWithCaption %}}$0
