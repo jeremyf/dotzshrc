@@ -1,5 +1,4 @@
 arch_name="$(uname -m)"
-echo "${arch_name} architecture"
 if [ "${arch_name}" = "x86_64" ]; then
     export HB_PATH="/usr/local";
 elif [ "${arch_name}" = "arm64" ]; then
@@ -23,4 +22,5 @@ source $HOME/git/dotzshrc/configs/config.zsh
 source $HOME/git/dotzshrc/configs/paths.zsh
 source $HOME/git/dotzshrc/configs/aliases.zsh
 
+eval "$($HB_PATH/bin/brew shellenv)"
 eval "$(rbenv init -)"
