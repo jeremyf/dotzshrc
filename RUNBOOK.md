@@ -1,7 +1,8 @@
 # OS X
 
-Install homebrew - https://brew.sh
-Install OhMyZsh - https://github.com/ohmyzsh/ohmyzsh
+Install homebrew - https://brew.sh ; package manager
+Install OhMyZsh - https://github.com/ohmyzsh/ohmyzsh ; zshell option
+Install Karabiner-Elements - https://karabiner-elements.pqrs.org ; over-ride keyboard options
 
 *   `brew tap d12frosted/emacs-plus; brew install emacs-plus@27 --with-dbus`
 *   `brew cask install font-hack-nerd-font`
