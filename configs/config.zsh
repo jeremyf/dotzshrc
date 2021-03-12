@@ -75,6 +75,6 @@ bindkey "$terminfo[kcud1]" history-substring-search-down
 ###############################################################################
 
 # darwin
-if [ -f /usr/local/opt/git-extras/share/git-extras/git-extras-completion.zsh ]; then
-    source /usr/local/opt/git-extras/share/git-extras/git-extras-completion.zsh
+if [ -f "${HB_PATH}/opt/git-extras/share/git-extras/git-extras-completion.zsh" ]; then
+    source $HB_PATH/opt/git-extras/share/git-extras/git-extras-completion.zsh
 fi

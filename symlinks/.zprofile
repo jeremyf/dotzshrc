@@ -1,3 +1,14 @@
+arch_name="$(uname -m)"
+echo "${arch_name} architecture"
+if [ "${arch_name}" = "x86_64" ]; then
+    export HB_PATH="/usr/local";
+elif [ "${arch_name}" = "arm64" ]; then
+    export HB_PATH="/opt/homebrew";
+else
+    echo "Unknown architecture: ${arch_name}"
+fi
+
+
 if [[ "$OSTYPE" == "darwin"* ]]; then
     source $HOME/git/dotzshrc/configs/darwin-defaults.zsh
 fi
