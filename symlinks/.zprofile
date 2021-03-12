@@ -18,9 +18,10 @@ fi
 
 ZSH_THEME='powerlevel10k/powerlevel10k'
 
+eval "$($HB_PATH/bin/brew shellenv)"
+
 source $HOME/git/dotzshrc/configs/config.zsh
 source $HOME/git/dotzshrc/configs/paths.zsh
 source $HOME/git/dotzshrc/configs/aliases.zsh
 
-eval "$($HB_PATH/bin/brew shellenv)"
 eval "$(rbenv init -)"
