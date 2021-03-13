@@ -6,7 +6,7 @@
 ps ax | grep --quiet  emacs | grep --quiet daemon
 if [ "$?" != "1" ]; then
   # Launch an emacs daemon
-  # emacs --daemon -fn "MesloLGS NF 13" --debug-init
+  # emacs --daemon -fn "JetBrains Mono 13" --debug-init
   $HB_PATH/bin/emacs --daemon --debug-init
 fi
 

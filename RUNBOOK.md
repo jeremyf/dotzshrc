@@ -7,6 +7,7 @@ Install OhMyZsh - https://github.com/ohmyzsh/ohmyzsh ; zshell option
 *   `brew cask install font-hack-nerd-font`
 *   `brew cask install jumpcut` Multi-paste buffer
 *   `brew install ag` A solid replacement for grep
+*   `brew install cmake`
 *   `brew install git-extras`
 *   `brew install git-secrets`
 *   `brew install git`
@@ -17,6 +18,7 @@ Install OhMyZsh - https://github.com/ohmyzsh/ohmyzsh ; zshell option
 *   `brew install ripgrep` Another solid replacement for grep that allows PERL Regexp
 *   `brew install terminal-notifier`
 *   `brew tap homebrew/cask-fonts`
+*   `brew install font-meslo-lg-nerd-font`
 *   `brew tap homebrew/cask`
 
 ## Necessary for some takeonrules dependencies

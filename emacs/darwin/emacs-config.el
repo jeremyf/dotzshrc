@@ -9,7 +9,7 @@
 
 ;; I have set this in OS X, however without a fallback, on Linux the
 ;; interpretter halts here
-(set-frame-font "MesloLGS NF 13" nil t)
+(set-frame-font "JetBrains Mono 13" nil t)
 
 ;; Adds the ability to grab a link from various OS X applications
 ;; Note, the sibling org-mac-link.  That package works within ORG mode
