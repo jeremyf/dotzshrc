@@ -72,11 +72,11 @@
   :straight (solargraph :host github :repo "guskovd/emacs-solargraph")
   :bind (:map ruby-mode-map ("M-i" . solargraph:complete)))
 
-(use-package tree-sitter
-  :straight t
-  :config (global-tree-sitter-mode))
-(use-package tree-sitter-langs
-  :straight t)
+;; (use-package tree-sitter
+;;   :straight t
+;;   :config (global-tree-sitter-mode))
+;; (use-package tree-sitter-langs
+;;   :straight t)
 
 (provide 'jnf-lsp-mode.el)
 ;;; jnf-lsp-mode.el ends here
