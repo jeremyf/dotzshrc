@@ -18,6 +18,8 @@ alias gwc='git whatchanged -p --abbrev-commit --pretty=medium'
 alias hb="hub browse"
 alias psx="ps ax | ag $1"
 alias rss="$EDITOR --eval \"(rss)\""
+# https://github.com/rbenv/ruby-build/issues/1496#issuecomment-743914842 for ibrew
+alias ibrew="arch -x86_64 brew"
 
 # A convenience method to keep a few of the "long used" aliases
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
