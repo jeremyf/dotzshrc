@@ -4,9 +4,10 @@ Install homebrew - https://brew.sh ; package manager
 Install OhMyZsh - https://github.com/ohmyzsh/ohmyzsh ; zshell option
 Install Powerlevel10k - https://github.com/romkatv/powerlevel10k
 Install MesloLGS NF via Powerlevel10k instructions
+Install Base16 Shell - https://github.com/chriskempson/base16-shell
 
-*   `brew tap d12frosted/emacs-plus; brew install emacs-plus@27 --with-dbus`
 *   `brew cask install font-hack-nerd-font`
+*   `brew tap d12frosted/emacs-plus; brew install emacs-plus@27 --with-dbus`
 *   `brew cask install jumpcut` Multi-paste buffer; set Sticky Bezel and launch at login
 *   `brew install ag` A solid replacement for grep
 *   `brew install cmake`
@@ -36,6 +37,8 @@ Install this font as it's used in Emacs configuration.
 ## SSH Keys
 
 Ensure that I have up to date SSH keys
+
+For Github, need to create a new app token
 
 ## Install Karabiner
 
