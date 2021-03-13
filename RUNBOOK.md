@@ -2,10 +2,12 @@
 
 Install homebrew - https://brew.sh ; package manager
 Install OhMyZsh - https://github.com/ohmyzsh/ohmyzsh ; zshell option
+Install Powerlevel10k - https://github.com/romkatv/powerlevel10k
+Install MesloLGS NF via Powerlevel10k instructions
 
 *   `brew tap d12frosted/emacs-plus; brew install emacs-plus@27 --with-dbus`
 *   `brew cask install font-hack-nerd-font`
-*   `brew cask install jumpcut` Multi-paste buffer
+*   `brew cask install jumpcut` Multi-paste buffer; set Sticky Bezel and launch at login
 *   `brew install ag` A solid replacement for grep
 *   `brew install cmake`
 *   `brew install git-extras`
@@ -18,8 +20,13 @@ Install OhMyZsh - https://github.com/ohmyzsh/ohmyzsh ; zshell option
 *   `brew install ripgrep` Another solid replacement for grep that allows PERL Regexp
 *   `brew install terminal-notifier`
 *   `brew tap homebrew/cask-fonts`
-*   `brew install font-meslo-lg-nerd-font`
 *   `brew tap homebrew/cask`
+*   `brew install coreutils`
+*   `ln -s $HB_PATH/bin/gls $HB_PATH/bin/ls` ; This addresses "*ERROR*: Listing directory failed but ‘access-file’ worked"
+
+## Download JetBrains Mono
+
+Install this font as it's used in Emacs configuration.
 
 ## Necessary for some takeonrules dependencies
 
