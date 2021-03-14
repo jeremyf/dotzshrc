@@ -18,14 +18,7 @@ alias gwc='git whatchanged -p --abbrev-commit --pretty=medium'
 alias hb="hub browse"
 alias psx="ps ax | ag $1"
 alias rss="$EDITOR --eval \"(rss)\""
-# https://github.com/rbenv/ruby-build/issues/1496#issuecomment-743914842 for ibrew
-alias ibrew="arch -x86_64 brew"
-
-# A convenience method to keep a few of the "long used" aliases
-if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    alias pbcopy="xclip"
-    alias pbpaste="xsel"
-fi
+alias ssh-tor = "ssh takeonrules_takeonrules@ssh.phx.nearlyfreespeech.net"
 
 # Hyrax aliases
 alias hyrax-devup='cp $HOME/git/dotzshrc/hyrax/solr_wrapper_dev.yml $HOME/git/samvera/hyrax/.internal_test_app/config/ ; cd $HOME/git/samvera/hyrax/.internal_test_app ; rm -rf tmp/solr-development ; fcrepo_wrapper & solr_wrapper --config  config/solr_wrapper_dev.yml & redis-server &'
