@@ -38,11 +38,6 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
         export PATH="$(brew --prefix openssl@1.1)/bin:$PATH"
     fi
 
-    if [ -d $HB_PATH/opt/coreutils/libexec/gnubin ]; then
-        export PATH="$HB_PATH/opt/coreutils/libexec/gnubin:${PATH}"
-        export MANPATH="$HB_PATH/opt/coreutils/libexec/gnuman:${MANPATH}"
-    fi
-
     if [ -d $HB_PATH/lib/pkgconfig ]; then
         export PKG_CONFIG_PATH=/opt/local/lib/pkgconfig
     fi
