@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: sessionReport
 # key: session
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
 # --
 sessionReport:
   date: ${1:`(format-time-string "%Y-%m-%d")`}
