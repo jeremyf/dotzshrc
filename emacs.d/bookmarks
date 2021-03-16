@@ -27,14 +27,6 @@
 ("Thel Sector - Actual Play"
  (filename . "~/git/org/projects/thel-sector/20200813---actual_plays.org")
  (handler . org-bookmark-jump))
-("Pace Ingest Directory"
- (filename . "~/git/pace-admin/ingest/")
- (front-context-string . "gql/\n  drwxr-xr-")
- (rear-context-string . "2K Nov  9 08:38 ")
- (position . 137))
-("Pace Project"
- (filename . "~/git/org/projects/hesburgh-libraries/20201111---pace_project.org")
- (handler . org-bookmark-jump))
 ("Take on Rules"
  (filename . "~/git/takeonrules.github.io/")
  (front-context-string . "Gemfile\n  -rw-r-")
