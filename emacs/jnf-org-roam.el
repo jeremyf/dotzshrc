@@ -62,10 +62,10 @@
            :file-name "permanent/cards/000-unsorted---${slug}"
            :head "#+title: ${title}\n#+roam_tags:\n* ${title}\n\n"
            :unnarrowed t)
-          ("e" "Epigraph (Permanent > Card)" plain (function org-roam--capture-get-point)
+          ("e" "Epigraph (Permanent > Epigraphs)" plain (function org-roam--capture-get-point)
            "%?"
-           :file-name "permanent/cards/000-unsorted---${slug}"
-           :head "#+title: ${title}\n#+roam_tags: epigraph\n* ${title}\n\n#+begin_quote\n\n#+end_quote"
+           :file-name "permanent/epigraphs/000-unsorted---${slug}"
+           :head "#+title: ${title}\n#+roam_tags:\n* ${title}\n\n#+begin_quote\n\n#+end_quote"
            :unnarrowed t)
           ("l" "Permanent > Letters" plain (function org-roam--capture-get-point)
            "%?"
@@ -217,6 +217,7 @@ Version 2016-07-18"
 (go-roam-find-file-project-fn "permanent,letters")
 (go-roam-find-file-project-fn "permanent,bibliographies")
 (go-roam-find-file-project-fn "permanent,cards")
+(go-roam-find-file-project-fn "permanent,epigraphs")
 (go-roam-find-file-project-fn "hesburgh-libraries")
 (go-roam-find-file-project-fn "distributed-autonomous-organization")
 (go-roam-find-file-project-fn "rpgs")
@@ -226,6 +227,7 @@ Version 2016-07-18"
 (org-roam-inserter-fn "permanent,bibliographies")
 (org-roam-inserter-fn "permanent,cards")
 (org-roam-inserter-fn "permanent,letters")
+(org-roam-inserter-fn "permanent,epigraphs")
 (org-roam-inserter-fn "hesburgh-libraries")
 (org-roam-inserter-fn "distributed-autonomous-organization")
 (org-roam-inserter-fn "rpgs")
@@ -239,6 +241,8 @@ Version 2016-07-18"
     ("B" org-roam-find-file--permanent-bibliographies " └─ Find")
     ("c" org-roam-insert--filter-with--permanent-cards "Card")
     ("C" org-roam-find-file--permanent-cards " └─ Find")
+    ("e" org-roam-insert--filter-with--permanent-epigraphs "Epigraph")
+    ("E" org-roam-find-file--permanent-epigraphs " └─ Find")
     ("l" org-roam-insert--filter-with--permanent-letters "Letter")
     ("L" org-roam-find-file--permanent-letters " └─ Find"))
    "RPGs"
