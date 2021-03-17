@@ -87,10 +87,5 @@
   (interactive)
   (progn  (olivetti-mode 'toggle) (variable-pitch-mode 'toggle)))
 
-
-;; (use-package dired-auto-readme
-;;   :straight (dired-auto-readme :type git :host github :repo "amno1/dired-auto-readme")
-;;   :config (setq dired-auto-readme-mode t))
-
 (provide 'jnf-display.el)
 ;;; jnf-display.el ends here

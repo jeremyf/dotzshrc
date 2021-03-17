@@ -78,6 +78,16 @@ for TakeOnRules.com."
      " -o --nofilename | cut -d \" \" -f 2- | sort | tr '\n' '~'"))
    "~"))
 
+(defun tor-glossary-title-list ()
+  "Return a list of titles from TakeOnRules.com."
+  (split-string-and-unquote
+   (shell-command-to-string
+    (concat
+     "ag \"title: .*$\" "
+     (f-join tor--repository-path "data/glossary.yml")
+     " -o --nofilename | cut -d \" \" -f 2- | sort | tr '\n' '~'"))
+   "~"))
+
 ;; Used in ./emacs/snippets/text-mode/series
 (defun tor-series-list ()
   "Return a list of series from TakeOnRules.com."
