@@ -18,6 +18,7 @@ alias gwc='git whatchanged -p --abbrev-commit --pretty=medium'
 alias hb="hub browse"
 alias psx="ps ax | ag $1"
 alias rss="$EDITOR --eval \"(rss)\""
+alias pand="arch -x86_64 pandoc"
 alias ssh-tor="ssh takeonrules_takeonrules@ssh.phx.nearlyfreespeech.net"
 
 # Hyrax aliases
