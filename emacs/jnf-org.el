@@ -21,16 +21,10 @@
              (sequence "TO-READ" "READING" "|" "READ")))
   (setq org-capture-templates
         '(
-          ("c" "Write to Current Clock" plain (clock)
-           "%?\n %a")
-          ("g" "Troubleshooting" entry (file+headline "~/git/org/troubleshooting.org" "Trouble Shooting")
-           "* TODO %u Problem %^{SUMMARY}\n\n  %?\n  %a")
           ("t" "Task for Work" entry (file+datetree "~/git/org/agenda.org")
            "* TODO %?")
           ("u" "Unfiled Permanent > Bibliography" entry (file+headline "~/git/org/permanent/unfiled_bibliographic_cards.org" "Unfiled Bibliographic Cards")
            "* UNFILED %?\nEntered on %U")
-          ("w" "Waiting for Work" entry (file+datetree "~/git/org/agenda.org")
-           "* WAITING %^{SUMMARY}\n\n  %?\n")
           ))
   (org-babel-do-load-languages
    'org-babel-load-languages
@@ -40,7 +34,7 @@
   :bind (
          ("C-c l" . org-store-link)
          ("C-c a" . org-agenda)
-         ("C-c c" . org-capture)
+         ("C-c c" . counsel-projectile-org-capture)
          ("C-c t" . org-toggle-link-display)
          ("C-c C-q" . counsel-org-tag)
          ("s-9" . jnf-org-insert-immediate-active-timestamp)))
