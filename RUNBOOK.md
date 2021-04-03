@@ -26,6 +26,16 @@ Install ImageOptim - https://imageoptim.com/ ; remove image metadata
 *   `brew install coreutils`
 *   `ln -s $HB_PATH/bin/gls $HB_PATH/bin/ls` ; This addresses "*ERROR*: Listing directory failed but ‘access-file’ worked"
 
+## Emacs
+
+```
+configure --with-ns CFLAGS="-g3 -O2 -I /usr/local/include/libxml2"
+make
+make install
+make install-info
+sudo mv  nextstep/Emacs.app/ /Applications/
+```
+
 ## Download JetBrains Mono
 
 Install this font as it's used in Emacs configuration.
