@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # contributor: Jeremy Friesen <jeremy.n.friesen@gmail.com>
-# key: mention
+# key: m
 # name: mention
 # --
-{{< mention title="${1:$$(yas-choose-value (tor-glossary-title-list))}" >}}$0
+{{< mention title="${1:$$(yas-choose-value (tor-glossary-title-list))}" ${2: tag="cite"}>}}$0
