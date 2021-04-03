@@ -39,7 +39,7 @@ for TakeOnRules.com."
                      "\ndraft: true"
                      "\nhive:"
                      "\n  url:"
-                     "\n  tags: #palnet #archon #neoxian #proofofbrain"
+                     "\n  tags: hive-150329 hive-110490 hive-177956 hive-177682"
                      "\n  postDate: " (format-time-string "%Y-%m-%d")
                      "\nlayout: post"
                      "\nlicenses:\n- by-nc-nd-4_0"
