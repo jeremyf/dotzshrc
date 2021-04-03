@@ -74,6 +74,10 @@
   (defalias 'recent 'counsel-recentf))
 (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
 
+;; https://www.emacswiki.org/emacs/RecentFiles#h5o-1
+;; Save recentf list every five minutes
+(run-at-time nil (* 5 60) 'recentf-save-list)
+
 (use-package all-the-icons-ivy-rich
   :straight t
   :after (ivy counsel counsel-projectile)
