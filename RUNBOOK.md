@@ -5,6 +5,7 @@ Install OhMyZsh - https://github.com/ohmyzsh/ohmyzsh ; zshell option
 Install Powerlevel10k - https://github.com/romkatv/powerlevel10k
 Install MesloLGS NF via Powerlevel10k instructions
 Install Base16 Shell - https://github.com/chriskempson/base16-shell
+Install ImageOptim - https://imageoptim.com/ ; remove image metadata
 
 *   `brew cask install font-hack-nerd-font`
 *   `brew tap d12frosted/emacs-plus; brew install emacs-plus@27 --with-dbus`
