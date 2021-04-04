@@ -213,7 +213,6 @@ Version 2016-07-18"
          (org-roam-find-file initial-prompt completions filter)))))
 
 (go-roam-find-file-project-fn "thel-sector")
-(go-roam-find-file-project-fn "ardu")
 (go-roam-find-file-project-fn "permanent,letters")
 (go-roam-find-file-project-fn "permanent,bibliographies")
 (go-roam-find-file-project-fn "permanent,cards")
@@ -223,7 +222,6 @@ Version 2016-07-18"
 (go-roam-find-file-project-fn "rpgs")
 (go-roam-find-file-project-fn "samvera")
 (org-roam-inserter-fn "thel-sector")
-(org-roam-inserter-fn "ardu")
 (org-roam-inserter-fn "permanent,bibliographies")
 (org-roam-inserter-fn "permanent,cards")
 (org-roam-inserter-fn "permanent,letters")
@@ -246,9 +244,7 @@ Version 2016-07-18"
     ("l" org-roam-insert--filter-with--permanent-letters "Letter")
     ("L" org-roam-find-file--permanent-letters " └─ Find"))
    "RPGs"
-   (("a" org-roam-insert--filter-with--ardu "Ardu, World of")
-    ("A" org-roam-find-file--ardu " └─ Find")
-    ("r" org-roam-insert--filter-with--rpgs "RPGs (General)")
+   (("r" org-roam-insert--filter-with--rpgs "RPGs (General)")
     ("R" org-roam-find-file--rpgs " └─ Find")
     ("t" org-roam-insert--filter-with--thel-sector "Thel Sector")
     ("T" org-roam-find-file--thel-sector " ├─ Find")
