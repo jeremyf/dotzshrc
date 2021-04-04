@@ -236,6 +236,7 @@
 
 (use-package emmet-mode
   :straight t
+  :bind (("C-c C-e" . emmet-expand-yas ))
   :hook ((sgml-mode . emmet-mode)
          (html-mode . emmet-mode)
          (css-mode . emmet-mode)))
