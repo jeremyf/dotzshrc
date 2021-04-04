@@ -42,7 +42,7 @@ for TakeOnRules.com."
                      "\n  tags: hive-150329 hive-110490 hive-177956 hive-177682"
                      "\n  postDate: " (format-time-string "%Y-%m-%d")
                      "\nlayout: post"
-                     "\nlicenses:\n- by-nc-nd-4_0"
+                     "\nlicenses:\n- all-rights-reserved"
                      "\nslug: " slug
                      "\ntitle: '" title "'"
                      "\ntype: post"
