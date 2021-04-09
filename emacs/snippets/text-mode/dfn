@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# contributor: Jeremy Friesen <jeremy.n.friesen@gmail.com>
-# group: takeonrules
-# key: dfn
-# name: {{< dfn >}}
-# --
-{{< dfn "${1:$$(yas-choose-value (tor-abbrs-list))}" >}} $0

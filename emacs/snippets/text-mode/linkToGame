@@ -4,4 +4,4 @@
 # name: {{< linkToGame >}}
 # key: ltg
 # --
-{{< linkToGame game="${1:$$(yas-choose-value (tor-game-list))}" ${2: title="$3" }>}}$0
+{{< linkToGame game="${1:$$(yas-choose-value (tor-game-list))}"${2: title="$3"} >}}$0

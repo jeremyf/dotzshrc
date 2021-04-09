@@ -61,17 +61,6 @@ for TakeOnRules.com."
      (f-join tor--repository-path "data/glossary.yml")
      " -o --nofilename | cut -d \" \" -f 2- | sort | tr '\n' '~'"))
    "~"))
-
-(defun tor-abbrs-list ()
-  "Return a list of abbrs from TakeOnRules.com."
-  (split-string-and-unquote
-   (shell-command-to-string
-    (concat
-     "ag \"key: .*$\" "
-     (f-join tor--repository-path "data/glossary.yml")
-     " -o --nofilename | cut -d \" \" -f 2- | sort | tr '\n' '~'"))
-   "~"))
-
 (defun tor-game-list ()
   "Return a list of games from TakeOnRules.com."
   (split-string-and-unquote
@@ -88,6 +77,16 @@ for TakeOnRules.com."
    (shell-command-to-string
     (concat
      "ag \"title: .*$\" "
+     (f-join tor--repository-path "data/glossary.yml")
+     " -o --nofilename | cut -d \" \" -f 2- | sort | tr '\n' '~'"))
+   "~"))
+
+(defun tor-glossary-key-list ()
+  "Return a list of keys from TakeOnRules.com glossary."
+  (split-string-and-unquote
+   (shell-command-to-string
+    (concat
+     "ag \"key: .*$\" "
      (f-join tor--repository-path "data/glossary.yml")
      " -o --nofilename | cut -d \" \" -f 2- | sort | tr '\n' '~'"))
    "~"))

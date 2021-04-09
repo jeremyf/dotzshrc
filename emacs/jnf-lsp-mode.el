@@ -70,6 +70,7 @@
 ;; Solargraph is the language tool for lsp-mode and Ruby
 (use-package solargraph
   :straight (solargraph :host github :repo "guskovd/emacs-solargraph")
+  :config (setq lsp-solargraph-use-bundler 1)
   :bind (:map ruby-mode-map ("M-i" . solargraph:complete)))
 
 ;; (use-package tree-sitter
