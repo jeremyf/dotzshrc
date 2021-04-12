@@ -47,11 +47,14 @@
 (use-package all-the-icons
   :straight t)
 
+;; Disabled because on 2021-04-11 I got the following error:
+;; *ERROR*: Symbol’s value as variable is void: file
+;;
 ;; Incorporates file icons with file listings of dired
-(use-package all-the-icons-dired
-  :straight t
-  :after all-the-icons
-  :hook (dired-mode . all-the-icons-dired-mode))
+;; (use-package all-the-icons-dired
+;;   :straight t
+;;   :after all-the-icons
+;;   :hook (dired-mode . all-the-icons-dired-mode))
 
 ;; A nice looking modeline enhancement
 (use-package spaceline
