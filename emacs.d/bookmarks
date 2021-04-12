@@ -21,7 +21,7 @@
  (filename . "~/git/org/permanent/card_index.org")
  (handler . org-bookmark-jump))
 ("org-capture-last-stored"
- (filename . "/Users/jfriesen/git/org/permanent/bibliographies/20210403---friction_and_the_aesthetics_of_the_smooth_by_de_bezige_bij.org")
+ (filename . "/Users/jfriesen/git/org/projects/rpgs/20210405---eberron_races_for_wwn.org")
  (handler . org-bookmark-jump))
 ("Thel Sector - Actual Play"
  (filename . "~/git/org/projects/thel-sector/20200813---actual_plays.org")
