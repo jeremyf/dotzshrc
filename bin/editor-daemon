@@ -1,4 +1,5 @@
 #/bin/sh
 
+pkill -f Emacs
 pkill -f emacs
 emacs --daemon --debug-init
