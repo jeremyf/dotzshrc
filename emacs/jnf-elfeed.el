@@ -14,7 +14,7 @@
   :bind (:map elfeed-search-mode-map
               ("q" . jnf/elfeed-save-db-and-bury))
   :config
-
+  (setq-default elfeed-search-filter "@2-days-ago +unread ")
   ;;
   ;; linking and capturing
   ;;

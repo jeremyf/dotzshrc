@@ -17,6 +17,9 @@
 ;; I have additional files that I require in the emacs directory
 (add-to-list 'load-path (expand-file-name "~/git/dotzshrc/emacs"))
 
+;; https://www.reddit.com/r/emacs/comments/mtb05k/emacs_init_time_decreased_65_after_i_realized_the/
+(setq straight-check-for-modifications '(check-on-save find-when-checking))
+
 ;; This preamble is part of straight-use-package My understanding, in
 ;; reading straight documentation is that it has better load
 ;; times. However, the configuration options I often see leverage
@@ -491,6 +494,7 @@ echo the method signature of `'delete-duplicate-lines`"
 (require 'jnf-typopunct.el)
 (require 'jnf-ruby.el)
 (require 'jnf-lsp-mode.el)
+(require 'jnf-beancount.el)
 (require 'jnf-blogging.el)
 (require 'jnf-tabs.el)
 (require 'jnf-stars-without-number.el)
