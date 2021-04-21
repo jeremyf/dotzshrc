@@ -30,7 +30,7 @@ Install ImageOptim - https://imageoptim.com/ ; remove image metadata
 ### By Download
 
 *   Install Emacs via https://emacsformacosx.com/
-*   Create symlinks in ~/bin/ of emacs and emacsclient
+*   Create symlinks in ~/bin/ of emacs and emacsclient; note the `editor` and `edaemon` files require `~/bin/emacs` and `~/bin/emacsclient`
 
 ### From Source
 
