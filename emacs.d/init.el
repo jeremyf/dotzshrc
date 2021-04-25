@@ -246,14 +246,6 @@
       kept-old-versions 5    ; and how many of the old
       )
 
-;; Favor neotree over sr-speedbar
-(use-package neotree
-  :straight t
-  :after (all-the-icons)
-  :init (setq-default neo-window-width 36)
-  :config (global-set-key [f8] 'neotree-toggle))
-(setq neo-theme (if (display-graphic-p) 'icons 'arrow))
-
 (use-package emmet-mode
   :straight t
   :bind (("C-c C-e" . emmet-expand-yas ))
@@ -405,6 +397,8 @@
 ;; I never want these.
 (unbind-key "C-x C-d") ;; list-directory
 (global-set-key (kbd "C-x C-d") 'dired)
+;; This addition echoes a previous mapping of neotree to the F8 key.
+(global-set-key (kbd "<f8>") 'dired)
 (unbind-key "C-z") ;; suspend-frame
 
 
