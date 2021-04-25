@@ -27,6 +27,19 @@ also working to figure out how best to arrange things.
 
 I have added two aliases: `e` and `edaemon`
 
+### About Ivy/Swiper/Counsel
+
+I find myself using:
+
+* Swiper as my search in buffer; on OS X, I mapped <kbd>Cmd</kbd>+<kbd>s</kbd> to the command.
+* `iedit-mode` and related `counsel-edit-mode` to multi-edit; in particular `counsel-edit-mode` from a search (via `ag`).
+
+Those two behaviors are part of my workflow, and any changes should be included.
+
+### About Selectrum/Consult
+
+I'm exploring Selectrum as it's a more narrow focus/cleaner API to the Emacs methods.  Which, based on history, leads me to believe that this solution will have a better chance of ongoing maintenance.
+
 ## About Org
 
 I make extensive use of Emacs [Orgmode](https://orgmode.org/) and [Org-Roam](https://orgroam.com/).  See [README-ORG](README-ORG.org).
