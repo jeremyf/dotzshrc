@@ -138,14 +138,29 @@
 ;; 2) C-c C-o 'ivy-occur
 ;; 3) C-c C-p 'wgrep-toggle-readonly-area
 ;; 4) C-x C-s to save OR C-x C-q to exit without save
+;;
+;; Consider counsel-edit-mode as a possible deprecation for this
 (use-package wgrep-ag
   :straight t
   :hook (ag-mode . wgrep-ag-setup)
   :after ag)
 
 ;; M-o e to open counsel edit mode
+;;
+;; https://github.com/tyler-dodge/counsel-edit-mode
+;; From README:
+;;
+;; > Once installed, run any of the counsel search commands. Once they
+;; > start returning results, type `M-o e` to open up the
+;; > `counsel-edit-mode` buffer to edit the results.
+;;
+;; C-c C-c commits the changes (note analogue to Magit)
+;; C-c C-k discards the changes (note analogue to Magit)
+;;
+;; I suspect that this deprecates wgrep-ag
 (use-package counsel-edit-mode
   :straight (counsel-edit-mode :host github :type git :repo "tyler-dodge/counsel-edit-mode")
+  :after counsel
   :init (counsel-edit-mode-setup-ivy))
 
 ;; I have found this package quite "helpful"; When I want to know the
