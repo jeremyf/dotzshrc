@@ -46,36 +46,7 @@
 
 (global-auto-revert-mode)
 
-;; https://oremacs.com/swiper/
-;; Note: I've set all searches to use fuzzy regex
-(use-package ivy
-  :straight t
-  :after avy
-  :diminish (ivy-mode . "")
-  :bind (("C-c C-r" . ivy-resume))
-  :config (ivy-mode 1)
-  (setq ivy-use-virtual-buffers t)
-  (setq ivy-height 12)
-  (setq ivy-count-format "(%d/%d) ")
-  (setq ivy-initial-inputs-alist nil)
-  (setq ivy-re-builders-alist
-        '((read-file-name-internal . ivy--regex-fuzzy)
-          (t . ivy--regex-ignore-order))))
-
-;; Part of the ivy/counsel/swiper trio
-(use-package counsel
-  :straight t
-  :init (setq ivy-use-selectable-prompt t)
-  (setq search-default-mode #'char-fold-to-regexp)
-  :bind (("M-x" . counsel-M-x)
-         ("C-x C-f" . counsel-find-file)
-         ("C-x 8 RET" . counsel-unicode-char)
-         ("<f4>" . counsel-bookmark)
-         ("s-4" . counsel-bookmark)
-         ("s-r" . counsel-recentf))
-  :config (counsel-mode 1)
-  (defalias 'recent 'counsel-recentf))
-(define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
+(require 'jnf-ivy.el)
 
 ;; https://www.emacswiki.org/emacs/RecentFiles#h5o-1
 ;; Save recentf list every five minutes
@@ -84,84 +55,10 @@
 (setq recentf-max-saved-items 25)
 (run-at-time nil (* 5 60) 'recentf-save-list)
 
-(use-package all-the-icons-ivy-rich
-  :straight t
-  :after (ivy counsel counsel-projectile)
-  :init (all-the-icons-ivy-rich-mode 1))
-
-(use-package ivy-rich
-  :straight t
-  :custom
-  (ivy-virtual-abbreviate 'full)
-  (ivy-rich-switch-buffer-align-virtual-buffer nil)
-  (ivy-rich-path-style 'full)
-  :config
-  (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line)
-  (ivy-rich-mode 1))
-
 (use-package prescient
   :straight t)
 
-(use-package ivy-prescient
-  :straight t
-  :init (setq prescient-filter-method '(literal fuzzy regexp initialism))
-  :config (ivy-prescient-mode t))
 
-(use-package company-prescient
-  :straight t
-  :config (company-prescient-mode t))
-
-;; The silver searcher; I found ripgrep a bit nicer, but wait until
-;; you try wgrep-ag
-(use-package ag
-  :straight t
-  :after counsel
-  :init
-  ;; There are two paths into ag, I most often (like 99.9% of the
-  ;; time) use the counsel-ag.  I want both ways into ag to be
-  ;; similar.
-  ;;
-  ;; I've added "--hidden --ignore-dir .git" to both of the default
-  ;; cases.
-  (setq counsel-ag-base-command "ag --hidden --ignore-dir .git --vimgrep %s"
-        ag-arguments (list "--smart-case" "--stats" "--hidden" "--ignore" ".git"))
-  :bind (("C-c f" . counsel-ag)))
-
-;; This package is amazing!!!  Render search results to a buffer, edit
-;; the buffer and write back to the file hits.  There is not a ripgrep
-;; option.
-;;
-;; Search via ag, see candidates and use ivy to show ALL candidates,
-;; then wgrep to edit those candidates and save
-;;
-;; 1) M-s-f 'counsel-ag
-;; 2) C-c C-o 'ivy-occur
-;; 3) C-c C-p 'wgrep-toggle-readonly-area
-;; 4) C-x C-s to save OR C-x C-q to exit without save
-;;
-;; Consider counsel-edit-mode as a possible deprecation for this
-(use-package wgrep-ag
-  :straight t
-  :hook (ag-mode . wgrep-ag-setup)
-  :after ag)
-
-;; M-o e to open counsel edit mode
-;;
-;; https://github.com/tyler-dodge/counsel-edit-mode
-;; From README:
-;;
-;; > Once installed, run any of the counsel search commands. Once they
-;; > start returning results, type `M-o e` to open up the
-;; > `counsel-edit-mode` buffer to edit the results.
-;;
-;; C-c C-c commits the changes (note analogue to Magit)
-;; C-c C-k discards the changes (note analogue to Magit)
-;;
-;; I suspect that this deprecates wgrep-ag
-(use-package counsel-edit-mode
-  :straight (counsel-edit-mode :host github :type git :repo "tyler-dodge/counsel-edit-mode")
-  :after counsel
-  :init (counsel-edit-mode-setup-ivy))
 
 ;; I have found this package quite "helpful"; When I want to know the
 ;; name of a function or key or variable, I can use the helpful
@@ -188,17 +85,11 @@
   :straight t
   :config (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   (projectile-mode +1)
-  (setq projectile-completion-system 'ivy)
   (setq projectile-project-search-path '("~/git/"))
   ;; Commented out for counsel-projectile
   ;; :init (global-set-key (kbd "s-t") 'projectile-find-file)
   :config (global-set-key (kbd "s-.") 'projectile-toggle-between-implementation-and-test)
   )
-
-(use-package counsel-projectile
-  :straight t
-  :after projectile
-  :bind ("s-t" . counsel-projectile-find-file)) ; CMD+t, which I carry over from Textmate
 
 ;; A window manager for emacs, allowing fast toggles between windows
 ;; as well as opening or moving those windows.
@@ -494,7 +385,6 @@ echo the method signature of `'delete-duplicate-lines`"
   (delete-duplicate-lines beg end reverse adjacent keep-blanks interactive))
 
 (require 'jnf-in-buffer.el)
-(require 'jnf-swiper.el)
 (require 'jnf-org.el)
 (require 'jnf-basic-config.el)
 (require 'jnf-git.el)
