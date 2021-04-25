@@ -14,11 +14,12 @@
 
 (use-package selectrum-prescient
   :straight t
-  :config (;; to make sorting and
+  :after prescient
+  :config ;; to make sorting and
            (selectrum-prescient-mode +1)
            ;; filtering more intelligent to save your command history
            ;; on disk, so the sorting gets more intelligent over time
-           (prescient-persist-mode +1)))
+           (prescient-persist-mode +1))
 
 ;; Enable richer annotations using the Marginalia package
 (use-package marginalia
@@ -80,7 +81,7 @@
          ("M-s g" . consult-grep)
          ("M-s G" . consult-git-grep)
          ("M-s r" . consult-ripgrep)
-         ("M-s l" .consult-line)
+         ("M-s l" . consult-line)
          ("C-s" . consult-line) ;; I've long favored Swiper mapped to c-s
          ("M-s m" . consult-multi-occur)
          ("M-s k" . consult-keep-lines)
