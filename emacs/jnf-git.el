@@ -12,7 +12,7 @@
 ;; The OMG awesome git client for emacs.
 (use-package magit
   :straight t
-  :bind (("C-c m" . magit-status)
+  :bind (("C-c C-m" . magit-status)
          ("C-c RET" . magit-file-dispatch))
   :init (use-package with-editor :straight t)
   (setq git-commit-fill-column 72) ;; Adding format to git-commit-fill-column of 72 as best practice.
