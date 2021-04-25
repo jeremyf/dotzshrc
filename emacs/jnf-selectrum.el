@@ -93,6 +93,8 @@
          ("M-s e" . consult-isearch)               ;; orig. isearch-edit-string
          ("M-s l" . consult-line))                 ;; required by consult-line to detect isearch
 
+
+
   ;; The :init configuration is always executed (Not lazy)
   :init
 
@@ -144,7 +146,9 @@
   ;; (setq consult-project-root-function #'vc-root-dir)
   ;; (setq consult-project-root-function
   ;;       (lambda () (locate-dominating-file "." ".git")))
-)
+  )
+
+
 
 ;; Optionally add the `consult-flycheck' command.
 (use-package consult-flycheck
