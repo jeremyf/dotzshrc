@@ -86,10 +86,13 @@
          ("M-s r" . consult-ripgrep)
          ("C-c f" . consult-ripgrep)
          ("M-s l" . consult-line)
-         ("C-s" . consult-line) ;; I've long favored Swiper mapped to c-s
          ("M-s m" . consult-multi-occur)
          ("M-s k" . consult-keep-lines)
          ("M-s u" . consult-focus-lines)
+         ;; Customizations that map to ivy
+         ("s-r" . consult-recent-file)
+         ("<f4>" . consult-bookmark)
+         ("C-s" . consult-line) ;; I've long favored Swiper mapped to c-s
          ;; Isearch integration
          ("M-s e" . consult-isearch)
          :map isearch-mode-map
