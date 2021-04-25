@@ -46,6 +46,9 @@
 
 (global-auto-revert-mode)
 
+(use-package prescient
+  :straight t)
+
 (require 'jnf-ivy.el)
 
 ;; https://www.emacswiki.org/emacs/RecentFiles#h5o-1
@@ -54,11 +57,6 @@
 (setq recentf-max-menu-items 25)
 (setq recentf-max-saved-items 25)
 (run-at-time nil (* 5 60) 'recentf-save-list)
-
-(use-package prescient
-  :straight t)
-
-
 
 ;; I have found this package quite "helpful"; When I want to know the
 ;; name of a function or key or variable, I can use the helpful
