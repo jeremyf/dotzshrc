@@ -125,8 +125,7 @@
   ;; cases.
   (setq counsel-ag-base-command "ag --hidden --ignore-dir .git --vimgrep %s"
         ag-arguments (list "--smart-case" "--stats" "--hidden" "--ignore" ".git"))
-  :bind (("C-c f" . counsel-ag)
-         ("M-s-f" . counsel-ag))) ; Deprecated
+  :bind (("C-c f" . counsel-ag)))
 
 ;; This package is amazing!!!  Render search results to a buffer, edit
 ;; the buffer and write back to the file hits.  There is not a ripgrep
