@@ -49,7 +49,22 @@
 (use-package prescient
   :straight t)
 
+;; https://docs.projectile.mx/en/latest/
+;;
+;; Helpful for understanding the likely bounds of directory structure
+(use-package projectile
+  :straight t
+  :config (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  (projectile-mode +1)
+  (setq projectile-project-search-path '("~/git/"))
+  ;; Commented out for counsel-projectile
+  :config (global-set-key (kbd "s-t") 'projectile-find-file)
+  (global-set-key (kbd "s-.") 'projectile-toggle-between-implementation-and-test)
+  )
+
+
 (require 'jnf-ivy.el)
+;; (require 'jnf-selectrum.el)  ;;; Still working on this swap out
 
 ;; https://www.emacswiki.org/emacs/RecentFiles#h5o-1
 ;; Save recentf list every five minutes
@@ -75,19 +90,6 @@
   :bind ("C-h" . helpful-hydra/body)
   :init (setq counsel-describe-function-function #'helpful-callable)
   (setq counsel-describe-variable-function #'helpful-variable))
-
-;; https://docs.projectile.mx/en/latest/
-;;
-;; Helpful for understanding the likely bounds of directory structure
-(use-package projectile
-  :straight t
-  :config (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-  (projectile-mode +1)
-  (setq projectile-project-search-path '("~/git/"))
-  ;; Commented out for counsel-projectile
-  ;; :init (global-set-key (kbd "s-t") 'projectile-find-file)
-  :config (global-set-key (kbd "s-.") 'projectile-toggle-between-implementation-and-test)
-  )
 
 ;; A window manager for emacs, allowing fast toggles between windows
 ;; as well as opening or moving those windows.
