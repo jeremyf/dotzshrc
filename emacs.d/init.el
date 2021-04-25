@@ -63,8 +63,8 @@
   )
 
 
-(require 'jnf-ivy.el)
-;; (require 'jnf-selectrum.el)  ;;; Still working on this swap out
+;; (require 'jnf-ivy.el)
+(require 'jnf-selectrum.el)  ;;; Still working on this swap out
 
 ;; https://www.emacswiki.org/emacs/RecentFiles#h5o-1
 ;; Save recentf list every five minutes

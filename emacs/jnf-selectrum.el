@@ -12,6 +12,9 @@
 
 (global-set-key (kbd "C-x C-z") #'selectrum-repeat)
 
+(use-package ripgrep
+  :straight t)
+
 (use-package selectrum-prescient
   :straight t
   :after prescient
@@ -81,6 +84,7 @@
          ("M-s g" . consult-grep)
          ("M-s G" . consult-git-grep)
          ("M-s r" . consult-ripgrep)
+         ("C-c f" . consult-ripgrep)
          ("M-s l" . consult-line)
          ("C-s" . consult-line) ;; I've long favored Swiper mapped to c-s
          ("M-s m" . consult-multi-occur)
@@ -160,7 +164,8 @@
 (use-package embark
   :straight t
   :bind
-  (("C-s-a" . embark-act))       ;; pick some comfortable binding
+  (("C-s-a" . embark-act)       ;; pick some comfortable binding
+   ("C-s-e" . embark-export))
   :init
   ;; Optionally replace the key help with a completing-read interface
   (setq prefix-help-command #'embark-prefix-help-command)
@@ -171,6 +176,7 @@
                  nil
                  (window-parameters (mode-line-format . none)))))
 
+
 ;; Consult users will also want the embark-consult package.
 (use-package embark-consult
   :straight t
@@ -180,6 +186,25 @@
   ;; auto-updating embark collect buffer
   :hook
   (embark-collect-mode . embark-consult-preview-minor-mode))
+
+;; Useful for editing grep results:
+;;
+;; 1) "C-c f" invoke `consult-ripgrep'
+;; 2) "C-s-e" invoke `embark-export' (On OS X map that's Ctrl+Cmd+e)
+;; 3) "e" or "C-c C-p" invoke `wgrep-change-to-wgrep-mode'
+;; 4) Save or cancel
+;;    a) Save: "C-x C-s" invoke `save-buffer' (or "C-c C-c")
+;;    b) Cancel: "C-c C-k"
+(use-package wgrep
+  :after (embark-consult ripgrep)
+  :straight t
+  :bind (:map wgrep-mode-map
+              ;; Added keybinding to echo Magic behavior
+              ("C-c C-c" . save-buffer)
+         :map grep-mode-map
+         ("e" . wgrep-change-to-wgrep-mode)
+         :map ripgrep-search-mode-map
+         ("e" . wgrep-change-to-wgrep-mode)))
 
 (provide 'jnf-selectrum.el)
 ;;; jnf-selectrum.el ends here
