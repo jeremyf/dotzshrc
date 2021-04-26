@@ -188,6 +188,12 @@
   :init (setq yas-snippet-dirs '("~/git/dotzshrc/emacs/snippets"))
   (yas-global-mode 1))
 
+;; I kind of like this little bit of visual feedback
+(use-package goggles
+  :hook ((prog-mode text-mode) . goggles-mode)
+  :config
+  (setq-default goggles-pulse t)) ;; set to nil to disable pulsing
+
 ;; https://blog.sumtypeofway.com/posts/emacs-config.html
 (defun jnf/nab-file-name-to-clipboard ()
   "Nab, I mean copy, the current buffer file name to the clipboard."
