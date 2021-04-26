@@ -218,16 +218,6 @@
 (use-package smartparens
   :straight t)
 
-(defun sp-wrap-double-quote ()
-  "Wrap following sexp in double quotes (e.g. `\"')."
-  (interactive)
-  (sp-wrap-with-pair  "\""))
-
-(defun sp-wrap-single-quote ()
-  "Wrap following sexp in double quotes (e.g. `\'')."
-  (interactive)
-  (sp-wrap-with-pair  "'"))
-
 (global-set-key (kbd "<f5>") 'eval-region)
 (global-set-key (kbd "M-DEL") 'backward-kill-paragraph)
 (global-set-key (kbd "s-q") 'save-buffers-kill-terminal)
