@@ -105,7 +105,6 @@
          ("<C-s-return>" . crux-smart-open-line-above)
          ("C-M-d" . crux-duplicate-current-line-or-region)
          ("C-c d" . crux-duplicate-current-line-or-region)
-         ("C-k" . crux-smart-kill-line)
          ("<f9>" . crux-kill-other-buffers)))
 
 ;; Whitespace hygene package.  The author's documentation and
