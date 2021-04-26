@@ -36,6 +36,8 @@ I find myself using:
 
 Those two behaviors are part of my workflow, and any changes should be included.
 
+I am favoring Selectrum/Consult instead of Ivy.  The `embark` setup is fantastic.
+
 ### About Selectrum/Consult
 
 I'm exploring Selectrum as it's a more narrow focus/cleaner API to the Emacs methods.  Which, based on history, leads me to believe that this solution will have a better chance of ongoing maintenance.
