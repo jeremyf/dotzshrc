@@ -67,12 +67,6 @@
   :config (spaceline-all-the-icons-theme)
   (spaceline-all-the-icons--setup-neotree))
 
-;; Adding smartparens options
-;; (use-package smartparens
-;;   :straight t
-;;   :config (smartparens-strict-mode 1)
-;;   (smartparens-global-mode 1))
-
 ;; A convenience function to create a nice string
 (defun with-faicon (icon str &optional height v-adjust)
     "Displays an icon from Font Awesome icon."
@@ -81,14 +75,6 @@
 (defun with-material (icon str &optional height v-adjust)
     "Displays an icon from Font Awesome icon."
     (s-concat (all-the-icons-material icon :v-adjust (or v-adjust 0) :height (or height 1)) " " str))
-
-(use-package olivetti
-  :straight (olivetti :type git :host github :repo "rnkn/olivetti"))
-
-(defun jnf/toggle-writing-mode ()
-  "A simple toggle for a few nice writing mode behaviors."
-  (interactive)
-  (progn  (olivetti-mode 'toggle) (variable-pitch-mode 'toggle)))
 
 (provide 'jnf-display.el)
 ;;; jnf-display.el ends here
