@@ -359,6 +359,7 @@ echo the method signature of `'delete-duplicate-lines`"
   (sort-lines reverse beg end)
   (delete-duplicate-lines beg end reverse adjacent keep-blanks interactive))
 
+(require 'jnf-company.el)
 (require 'jnf-in-buffer.el)
 (require 'jnf-org.el)
 (require 'jnf-basic-config.el)
