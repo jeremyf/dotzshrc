@@ -78,6 +78,7 @@
 ;; package.
 (use-package helpful
   :straight t
+  :after all-the-icons
   :pretty-hydra
   ((:title (with-material "help_outline" "Helpful Menus") :quit-key "q")
    ("Helpful"
