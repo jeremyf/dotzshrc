@@ -74,8 +74,7 @@
 ;; The default is 60.  It is rare that I need more than 15 or 20.
 ;; However in my long use of Jumpcut there have been a few times where
 ;; I get into the 80s on previous pastes.  Given that the kill ring is
-;; searchable via ivy/counsel, I think a larger value makes a lot of
-;; sense.
+;; searchable, I think a larger value makes a lot of sense.
 (setq kill-ring-max 120)
 
 ;; Given the number of symlinks, visit the "linked to" file.
