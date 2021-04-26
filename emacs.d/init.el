@@ -218,31 +218,7 @@
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; BEGIN Typescript
-(use-package typescript-mode
-  :straight t
-  :mode (("\\.ts\\'" . typescript-mode)))
 
-(defun setup-tide-mode ()
-  (interactive)
-  (tide-setup)
-  (flycheck-mode +1)
-  (setq flycheck-check-syntax-automatically '(save mode-enabled))
-  (eldoc-mode +1)
-  (tide-hl-identifier-mode +1)
-  ;; company is an optional dependency. You have to
-  ;; install it separately via package-install
-  ;; `M-x package-install [ret] company`
-  (company-mode +1))
-
-(use-package tide
-  :straight t
-  :bind (:map typescript-mode-map ("C-l ." . 'tide-references))
-  :hook ((typescript-mode . setup-tide-mode)))
-
-;; END Typescript
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package yaml-mode
   :straight t)
@@ -396,6 +372,7 @@ echo the method signature of `'delete-duplicate-lines`"
 (require 'jnf-tabs.el)
 (require 'jnf-stars-without-number.el)
 (require 'jnf-elfeed.el)
+(require 'jnf-typescript.el)
 
 ;; Consider for publishing: https://github.com/rnkn/binder
 ;; Consider as replacement for org-roam: https://github.com/EFLS/zetteldeft
