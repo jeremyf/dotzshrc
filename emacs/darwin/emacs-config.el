@@ -39,22 +39,6 @@
          (set-fontset-font
           t 'symbol (font-spec :family "Apple Color Emoji") nil 'prepend))
 
-;; Emacs comes with DocView built in.  pdf-tools is a replacement for
-;; DocView.  I've found the rendered images a bit more crisp and the
-;; interactions a bit more responsive.  However, I have not been able
-;; to get `org-noter' working with `pdf-tools'.  `org-noter' provides
-;; annotation services for PDFs.
-(use-package pdf-tools
-  :pin manual ;; manually update
-  :straight t
-  :defer t
-  :ensure t
-  :config (pdf-tools-install) ;; initialise
-  (setq-default pdf-view-display-size 'fit-page) ;; open pdfs scaled to fit page
-  (setq pdf-annot-activate-created-annotations t) ;; automatically annotate highlights
-  (define-key pdf-view-mode-map (kbd "C-s") 'isearch-forward);; use normal isearch
-  )
-
 ;; Keep this after `counsel' so that the key binding is
 ;;  overridden only on OSX."
 (use-package counsel-osx-app
