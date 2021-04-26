@@ -222,5 +222,20 @@
   :straight (consult-lsp :host github :type git :repo "gagbo/consult-lsp")
   :commands consult-lsp-symbols)
 
+;; https://github.com/minad/vertico
+(use-package vertico
+  :straight t
+  :init (vertico-mode))
+
+;; https://github.com/minad/orderless
+;;
+;; Useful for not requiring strict word order
+(use-package orderless
+  :straight t
+  :init
+   (setq completion-styles '(orderless)
+        completion-category-defaults nil
+        completion-category-overrides '((file (styles . (partial-completion))))))
+
 (provide 'jnf-selectrum.el)
 ;;; jnf-selectrum.el ends here
