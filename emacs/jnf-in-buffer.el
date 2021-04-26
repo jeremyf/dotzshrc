@@ -45,6 +45,8 @@
 (global-set-key (kbd "M-SPC") 'hippie-expand)
 
 ;; Expand or contract point/region to next logical element.
+;;
+;; NOTE: I use this all the time.
 (use-package expand-region
   :straight t
   :bind (("C-=" . er/expand-region)
@@ -100,6 +102,10 @@
 (use-package crux
   :straight t
   :bind (("C-a" . crux-move-beginning-of-line)
+         ("<C-s-return>" . crux-smart-open-line-above)
+         ("C-M-d" . crux-duplicate-current-line-or-region)
+         ("C-c d" . crux-duplicate-current-line-or-region)
+         ("C-k" . crux-smart-kill-line)
          ("<f9>" . crux-kill-other-buffers)))
 
 ;; Whitespace hygene package.  The author's documentation and
@@ -208,19 +214,6 @@
 (use-package whole-line-or-region
   :straight t
   :config (whole-line-or-region-global-mode))
-
-
-;; https://blog.sumtypeofway.com/posts/emacs-config.html
-;; Replaces the duplicate line function I once had
-(use-package duplicate-thing
-  :straight t
-  :init
-  (defun my-duplicate-thing ()
-    "Duplicate thing at point without changing the mark."
-    (interactive)
-    (save-mark-and-excursion (duplicate-thing 1)))
-  :bind (("C-M-d" . my-duplicate-thing)
-         ("C-c d" . my-duplicate-thing)))
 
 (use-package smartparens
   :straight t)
