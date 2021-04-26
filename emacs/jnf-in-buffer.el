@@ -228,11 +228,6 @@
   (interactive)
   (sp-wrap-with-pair  "'"))
 
-(global-set-key (kbd "C-\"") 'sp-wrap-double-quote)
-(global-set-key (kbd "C-'") 'sp-wrap-single-quote)
-(global-set-key (kbd "M-[") 'sp-wrap-square)
-(global-set-key (kbd "M-]") 'sp-wrap-round)
-(global-set-key (kbd "M-{") 'sp-wrap-curly)
 (global-set-key (kbd "<f5>") 'eval-region)
 (global-set-key (kbd "M-DEL") 'backward-kill-paragraph)
 (global-set-key (kbd "s-q") 'save-buffers-kill-terminal)
