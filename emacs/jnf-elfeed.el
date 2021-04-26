@@ -45,6 +45,7 @@
              ("v" . elfeed-show-quick-url-note)))
 
 (use-package eww
+  :straight t
   :bind (:map eww-mode-map ("U" . eww-up-url))
   :hook ((eww-mode . jnf-reader-visual)))
 
