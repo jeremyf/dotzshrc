@@ -163,6 +163,7 @@
   :bind (:map company-active-map ("C-c h" . 'company-quickhelp-manual-begin))
   :config (company-quickhelp-mode))
 
+;; A quick and useful visual queue for paranthesis
 (use-package rainbow-delimiters
   :straight t
   :hook (prog-mode . rainbow-delimiters-mode))
