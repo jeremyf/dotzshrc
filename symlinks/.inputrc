@@ -28,3 +28,7 @@ set visible-stats on
 # complete from commands in your history.
 "\e[B": history-search-forward
 "\e[A": history-search-backward
+
+set enable-bracketed-paste on
+
+set show-all-if-ambiguous on
