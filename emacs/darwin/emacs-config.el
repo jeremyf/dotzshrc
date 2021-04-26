@@ -39,15 +39,6 @@
          (set-fontset-font
           t 'symbol (font-spec :family "Apple Color Emoji") nil 'prepend))
 
-;; Keep this after `counsel' so that the key binding is
-;;  overridden only on OSX."
-(use-package counsel-osx-app
-    :ensure t
-    :straight t
-    :after counsel
-    :bind ("C-c C-l" . counsel-osx-app))
-
-
 ;; On  I use ⌘ as meta and prefer ⌥ to do nothing so I can still insert special characters easily.
 ;;
 ;; (setq mac-command-modifier 'meta
