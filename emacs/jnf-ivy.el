@@ -26,8 +26,11 @@
 ;; Part of the ivy/counsel/swiper trio
 (use-package counsel
   :straight t
+  :after helpful
   :init (setq ivy-use-selectable-prompt t)
   (setq search-default-mode #'char-fold-to-regexp)
+  (setq counsel-describe-function-function #'helpful-callable)
+  (setq counsel-describe-variable-function #'helpful-variable)
   :bind (("M-x" . counsel-M-x)
          ("C-x C-f" . counsel-find-file)
          ("C-x 8 RET" . counsel-unicode-char)
@@ -127,6 +130,23 @@
 (use-package swiper
   :straight t
   :bind (("C-s" . swiper)))
+
+(global-set-key (kbd "<f3>") 'counsel-imenu)
+(global-set-key (kbd "s-3") 'counsel-imenu)
+
+(use-package lsp-ivy
+  :after (ivy lsp-mode)
+  :straight t
+  :commands lsp-ivy-workspace-symbol)
+
+;; I believe this means I should first ensure that I've loaded ivy.
+(with-eval-after-load "magit"
+  (setq magit-completing-read-function 'ivy-completing-read))
+
+(use-package flyspell-correct-ivy
+  :after (flyspel ivy)
+  :straight t
+  :config (global-set-key (kbd "C-,") 'flyspell-buffer))
 
 (provide 'jnf-ivy.el)
 ;;; jnf-ivy.el ends here

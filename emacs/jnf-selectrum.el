@@ -92,7 +92,10 @@
          ;; Customizations that map to ivy
          ("s-r" . consult-recent-file)
          ("<f4>" . consult-bookmark)
+         ("s-4" . consult-bookmark)
+         ("C-y" . consult-yank)
          ("C-s" . consult-line) ;; I've long favored Swiper mapped to c-s
+         ("s-l" . consult-goto-line)
          ;; Isearch integration
          ("M-s e" . consult-isearch)
          :map isearch-mode-map
@@ -168,7 +171,8 @@
   :straight t
   :bind
   (("C-s-a" . embark-act)       ;; pick some comfortable binding
-   ("C-s-e" . embark-export))
+   ("C-s-e" . embark-export)
+   ("C-h b" . embark-bindings))
   :init
   ;; Optionally replace the key help with a completing-read interface
   (setq prefix-help-command #'embark-prefix-help-command)
@@ -208,6 +212,15 @@
          ("e" . wgrep-change-to-wgrep-mode)
          :map ripgrep-search-mode-map
          ("e" . wgrep-change-to-wgrep-mode)))
+
+(global-set-key (kbd "<f3>") 'consult-imenu)
+(global-set-key (kbd "s-3") 'consult-imenu)
+
+;; https://github.com/gagbo/consult-lsp
+(use-package consult-lsp
+  :after (consult lsp-mode)
+  :straight (consult-lsp :host github :type git :repo "gagbo/consult-lsp")
+  :commands consult-lsp-symbols)
 
 (provide 'jnf-selectrum.el)
 ;;; jnf-selectrum.el ends here

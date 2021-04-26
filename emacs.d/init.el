@@ -86,10 +86,9 @@
      ("u" helpful-function "function")
      ("k" helpful-key "key")
      ("d" helpful-at-point "thing at point")
-     ("v" helpful-variable "variable"))))
-  :bind ("C-h" . helpful-hydra/body)
-  :init (setq counsel-describe-function-function #'helpful-callable)
-  (setq counsel-describe-variable-function #'helpful-variable))
+     ("v" helpful-variable "variable")
+     ("b" embark-bindings "bindings"))))
+  :bind ("C-h" . helpful-hydra/body))
 
 ;; A window manager for emacs, allowing fast toggles between windows
 ;; as well as opening or moving those windows.

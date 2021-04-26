@@ -60,11 +60,6 @@
       typescript-indent-level 2
       js-indent-level 2)
 
-(use-package lsp-ivy
-  :after ivy
-  :straight t
-  :commands lsp-ivy-workspace-symbol)
-
 (add-hook 'emacs-lisp-mode 'eldoc-mode)
 
 ;; Solargraph is the language tool for lsp-mode and Ruby

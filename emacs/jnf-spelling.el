@@ -80,10 +80,6 @@
       ;; force the English dictionary, support Camel Case spelling check (tested with aspell 0.6)
       ispell-extra-args '("--sug-mode=ultra" "--lang=en_US" "--run-together"))
 
-(use-package flyspell-correct-ivy
-  :straight t
-  :config (global-set-key (kbd "C-,") 'flyspell-buffer))
-
 ;; Run flyspell-buffer
 (use-package flyspell-popup
   :straight t

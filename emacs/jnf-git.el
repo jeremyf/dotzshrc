@@ -37,10 +37,6 @@
 (use-package magit-libgit
   :straight t)
 
-;; I believe this means I should first ensure that I've loaded ivy.
-(with-eval-after-load "magit"
-  (setq magit-completing-read-function 'ivy-completing-read))
-
 ;; With the time machine, travel back and forth through a files history.
 ;;
 ;; While visiting a point in time, you can open

@@ -34,9 +34,7 @@
   :bind (
          ("C-c l" . org-store-link)
          ("C-c a" . org-agenda)
-         ("C-c c" . counsel-projectile-org-capture)
          ("C-c t" . org-toggle-link-display)
-         ("C-c C-q" . counsel-org-tag)
          ("s-9" . jnf-org-insert-immediate-active-timestamp)))
 
 
@@ -157,6 +155,7 @@ exist after each headings's drawers."
   (interactive)
   (org-insert-time-stamp nil t nil))
 (global-set-key (kbd "<f2>") 'jnf-org-insert-immediate-active-timestamp)
+(global-set-key (kbd "s-2") 'jnf-org-insert-immediate-active-timestamp)
 
 ;; For some reason, when I load emacs in daemon mode, the daemon
 ;; process is the process now renders the GET prompts for the
