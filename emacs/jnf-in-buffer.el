@@ -188,10 +188,6 @@
   :init (setq yas-snippet-dirs '("~/git/dotzshrc/emacs/snippets"))
   (yas-global-mode 1))
 
-(defalias 'tp 'transpose-pagraphs)
-(defalias 'ts 'transpose-sentence)
-
-
 ;; https://blog.sumtypeofway.com/posts/emacs-config.html
 (defun jnf/nab-file-name-to-clipboard ()
   "Nab, I mean copy, the current buffer file name to the clipboard."
