@@ -38,6 +38,7 @@
   :straight t)
 
 (use-package magit-libgit
+  :after (libgit magit)
   :straight t)
 
 ;; With the time machine, travel back and forth through a files history.
