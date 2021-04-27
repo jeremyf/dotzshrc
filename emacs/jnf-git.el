@@ -68,7 +68,8 @@
 (use-package git-messenger
   :config (setq git-messenger:show-detail t)
   :custom (git-messenger:use-magit-popup t)
-  :bind (("s-6" . git-messenger:popup-message))
+  :bind (("s-6" . git-messenger:popup-message)
+         ("<f6>" . git-messenger:popup-message))
   :straight t)
 
 ;; https://github.com/alphapapa/unpackaged.el#smerge-mode
