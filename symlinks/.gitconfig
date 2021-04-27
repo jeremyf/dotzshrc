@@ -15,7 +15,7 @@
         amend-no-change = "!sh -c 'git commit --amend -C `git sha-head`'"
         prebase = "!sh -c 'git fetch; git rebase --rebase-merges; git pull --tags'"
         tag-dates = log --tags --simplify-by-decoration --pretty='format:%ai %d'
-        please = "!sh -c 'git fetch; git rebase --rebase-merges; git pull --tags; git push -u --force-with-lease'"
+        please = push -u --force-with-lease
         current-tag = describe --abbrev=0 --tags
         expunge = "!sh -c 'git reflog expire --expire-unreachable=now --all && git gc --prune=now'"
         latest-tag = describe --abbrev=0 --tags
