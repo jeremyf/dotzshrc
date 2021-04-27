@@ -47,7 +47,8 @@
 (use-package git-timemachine
   :straight t)
 
-;; Show the current git state in the gutter
+;; Show the current git state in the gutter Go ahead and edit a line
+;; and look to the gutter for guidance.
 (use-package git-gutter
   :straight t
   :config (global-git-gutter-mode 't)
