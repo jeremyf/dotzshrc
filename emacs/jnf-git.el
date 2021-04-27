@@ -13,7 +13,10 @@
 (use-package magit
   :straight t
   :init (use-package with-editor :straight t)
-  (setq git-commit-fill-column 72) ;; Adding format to git-commit-fill-column of 72 as best practice.
+  ;; Adding format to git-commit-fill-column of 72 as best practice.
+  (setq git-commit-fill-column 72)
+  ;; Keeping the summary terse helps with legibility when you run a
+  ;; report with only summary.
   (setq git-commit-summary-max-length 50)
   ;; Have magit-status go full screen and quit to previous
   ;; configuration.  Taken from
