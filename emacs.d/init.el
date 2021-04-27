@@ -137,65 +137,14 @@
       kept-old-versions 5    ; and how many of the old
       )
 
+(require 'jnf-epub.el)
+
 (use-package emmet-mode
   :straight t
   :bind (("C-c C-e" . emmet-expand-yas ))
   :hook ((sgml-mode . emmet-mode)
          (html-mode . emmet-mode)
          (css-mode . emmet-mode)))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Begin EPUB
-;; https://depp.brause.cc/nov.el/
-(use-package nov
-  :straight t
-  :mode (("\\.epub\\'" . nov-mode)))
-
-(use-package justify-kp
-  :straight (justify-kp :host github :type git :repo "Fuco1/justify-kp"))
-
-(use-package visual-fill-column
-  :straight t)
-
-(setq-default split-window-preferred-function 'visual-fill-column-split-window-sensibly)
-
-(defun my-nov-font-setup ()
-  (face-remap-add-relative 'variable-pitch :family "ETBembo"
-                           :height 1.3))
-(add-hook 'nov-mode-hook 'my-nov-font-setup)
-
-(setq nov-text-width 80)
-(setq nov-text-width t)
-(setq visual-fill-column-center-text t)
-(add-hook 'nov-mode-hook 'visual-line-mode)
-(add-hook 'nov-mode-hook 'visual-fill-column-mode)
-
-(defun my-nov-window-configuration-change-hook ()
-  (my-nov-post-html-render-hook)
-  (remove-hook 'window-configuration-change-hook
-               'my-nov-window-configuration-change-hook
-               t))
-
-(defun my-nov-post-html-render-hook ()
-  (if (get-buffer-window)
-      (let ((max-width (pj-line-width))
-            buffer-read-only)
-        (save-excursion
-          (goto-char (point-min))
-          (while (not (eobp))
-            (when (not (looking-at "^[[:space:]]*$"))
-              (goto-char (line-end-position))
-              (when (> (shr-pixel-column) max-width)
-                (goto-char (line-beginning-position))
-                (pj-justify)))
-            (forward-line 1))))
-    (add-hook 'window-configuration-change-hook
-              'my-nov-window-configuration-change-hook
-              nil t)))
-
-(add-hook 'nov-post-html-render-hook 'my-nov-post-html-render-hook)
-;; End EPUB
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; https://github.com/jrblevin/markdown-mode/
 (use-package markdown-mode
