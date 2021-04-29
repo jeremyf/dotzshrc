@@ -150,8 +150,7 @@
 ;;
 ;; Add emoji handling
 (use-package emojify
-  :straight t
-  :hook (text-mode . emojify-mode))
+  :straight t)
 
 (use-package unicode-fonts
   :straight t
