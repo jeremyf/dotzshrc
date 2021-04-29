@@ -62,8 +62,7 @@
 ;; - hellow_world
 ;; - HELLO_WORLD
 (use-package string-inflection
-  :bind (("H-u" . string-inflection-all-cycle)
-         ("C-M-u" . string-inflection-all-cycle)) ;; CTRL+OPT+u
+  :bind (("C-M-u" . string-inflection-all-cycle)) ;; CTRL+OPT+u
   :straight (string-inflection :type git
                                :host github
                                :repo "akicho8/string-inflection"))
@@ -73,8 +72,7 @@
 ;; set-rectangular-region-anchor, there are several additional
 ;; features to practice
 (use-package multiple-cursors
-  :bind (("H-SPC" . set-rectangular-region-anchor)
-         ("C-M-SPC" . set-rectangular-region-anchor)
+  :bind (("C-M-SPC" . set-rectangular-region-anchor)
          ("C->" . mc/mark-next-like-this)
          ("C-<" . mc/mark-previous-like-this)
          ("C-c C->" . mc/mark-all-like-this)
