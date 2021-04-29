@@ -80,6 +80,8 @@
 ;; Given the number of symlinks, visit the "linked to" file.
 (setq vc-follow-symlinks t)
 
+(setq bookmark-default-file "~/git/org/bookmarks")
+
 ;; When you open a new frame in an already running Emacs session
 ;; set it to the full height but don't worry about the width
 (setq-default indent-tabs-mode nil) ;; Ensure tabs are expanded, not inserted
