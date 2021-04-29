@@ -1,14 +1,20 @@
 #!/bin/sh
+# Note this requires that your terminal application have accessibility features turned on
 
-FILE="/Users/jfriesen/Documents/RPGs/Warhammer-Fantasy-RPG-WHFRPG/The-Enemy-within-Campaign/WFRP-Enemy-in-the-Shadows-v-1.02.pdf"
+FILE=$1
 
 if [ -z "$1" ]
 then
-  echo "You'll need to provide a path and page number"
+  echo "You'll need to provide a path"
   exit -1
 fi
 
-PAGE=$1
+if [ -z "$2" ]
+then
+    PAGE=0
+else
+    PAGE=$2
+fi
 
 # ----------------------
 # Applescript below here
@@ -22,12 +28,23 @@ set fileName to "$FILE"
 set posixFile to POSIX file fileName
 tell application "Finder" to open posixFile
 
-delay 0.2
+delay 0.1
 tell application "System Events"
+  tell application "Preview"
+    # x, y, width, height
+    set bounds of front window to {0, 0, 800, 900}
+  end tell
+
+  if (pageNumber = 0) then
+
+  else
   keystroke "g" using {option down, command down}
   keystroke pageNumber
   delay 0.1
+
+  # Retrun
   key code 36
+end if
 end tell
 
 EOF
