@@ -1,0 +1,33 @@
+#!/bin/sh
+
+FILE="/Users/jfriesen/Documents/RPGs/Warhammer-Fantasy-RPG-WHFRPG/The-Enemy-within-Campaign/WFRP-Enemy-in-the-Shadows-v-1.02.pdf"
+
+if [ -z "$1" ]
+then
+  echo "You'll need to provide a path and page number"
+  exit -1
+fi
+
+PAGE=$1
+
+# ----------------------
+# Applescript below here
+# ----------------------
+
+osascript <<EOF
+
+set pageNumber to $PAGE
+set fileName to "$FILE"
+
+set posixFile to POSIX file fileName
+tell application "Finder" to open posixFile
+
+delay 0.2
+tell application "System Events"
+  keystroke "g" using {option down, command down}
+  keystroke pageNumber
+  delay 0.1
+  key code 36
+end tell
+
+EOF
