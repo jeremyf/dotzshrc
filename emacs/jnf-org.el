@@ -34,6 +34,7 @@
   :bind (
          ("C-c l" . org-store-link)
          ("C-c a" . org-agenda)
+         ("C-c c" . org-capture)
          ("C-c t" . org-toggle-link-display)
          ("s-9" . jnf-org-insert-immediate-active-timestamp)))
 
