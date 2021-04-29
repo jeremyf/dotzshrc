@@ -116,9 +116,11 @@
 ;; A package that is a bit of the inverse of 'fill-paragraph
 ;; (e.g. M-q).
 (use-package unfill
+  :bind ("M-q" . unfill-toggle)
   :straight t)
 
-;; Provides a UI for undo trees.  I'm not certain what I want to do with this.
+;; Provides a UI for undo trees.  I'm not certain what I want to do
+;; with this.
 (use-package undo-tree
   :diminish
   :bind (("C-z" . undo)
@@ -127,8 +129,7 @@
   (global-undo-tree-mode +1)
   (unbind-key "M-_" undo-tree-map))
 
-
-;; Delete multiple spaces
+;; Delete multiple spaces in one delete stroke
 (use-package hungry-delete
   :straight t
   :config (global-hungry-delete-mode))
@@ -142,7 +143,7 @@
 ;; A quick and useful visual queue for paranthesis
 (use-package rainbow-delimiters
   :straight t
-  :hook (prog-mode . rainbow-delimiters-mode))
+  :hook ((prog-mode text-mode org-mode) . rainbow-delimiters-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; BEGIN EMOJIS
