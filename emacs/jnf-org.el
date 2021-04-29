@@ -173,8 +173,15 @@ exist after each headings's drawers."
 (use-package org-bookmark-heading
   :straight t)
 
+;; A package to assist in handling annotations; I wish that DocView
+;; better rendered the PDF.  It's a little too pixelated.
 (use-package org-noter
-  :straight t)
+  :straight t
+  ;; Favor two-thirds of the screen for the PDF and one-third for the
+  ;; org notes.
+  :init (setq org-noter-doc-split-fraction '(0.7 . 0.3))
+  :bind (
+         :map org-noter-notes-mode-map ("C-c o" . 'org-noter-sync-current-note)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Begin goto org file
@@ -186,13 +193,6 @@ exist after each headings's drawers."
 ;;        ,docstring
 ;;        (interactive)
 ;;        (gorg ,file))))
-
-;; (global-set-key (kbd "C-c o i") (go-org-file-fn "index.org"))
-;; (global-set-key (kbd "C-c o a") (go-org-file-fn "agenda.org"))
-;; (global-set-key (kbd "C-c o b") (go-org-file-fn "permanent/bibliographic_index.org"))
-;; (global-set-key (kbd "C-c o c") (go-org-file-fn "permanent/card_index.org"))
-;; (global-set-key (kbd "C-c o e") (go-org-file-fn "elfeed.org"))
-;; (global-set-key (kbd "C-c o i") (go-org-file-fn "index.org"))
 
 (defun gorg(&optional org_file_basename)
   "Jump to the given ORG_FILE_BASENAME or toggle it's org-sidebar.
