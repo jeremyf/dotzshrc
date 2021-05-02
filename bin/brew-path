@@ -1,0 +1,10 @@
+#/bin/sh
+# Echo the expanded path to the given brew package
+
+if [ -z "$1" ]; then
+  echo "You must provide a brew package"
+  exit 1
+fi
+
+brewpath=$(brew --prefix $1)
+echo realpath -z $brewpath
