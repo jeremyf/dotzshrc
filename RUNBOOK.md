@@ -11,18 +11,20 @@ Install ImageOptim - https://imageoptim.com/ ; remove image metadata
 *   `brew cask install jumpcut` Multi-paste buffer; set Sticky Bezel and launch at login
 *   `brew install ag` A solid replacement for grep
 *   `brew install cmake`
+*   `brew install git`
 *   `brew install git-extras`
 *   `brew install git-secrets`
-*   `brew install git`
 *   `brew install openssl` You're going to want this for rbenv, though look at ./runbooks/ruby-openssl
 *   `brew install postgresql`
 *   `brew install rbenv`
-*   `brew install redist`
+*   `brew install redis`
 *   `brew install ripgrep` Another solid replacement for grep that allows PERL Regexp
 *   `brew install terminal-notifier`
 *   `brew tap homebrew/cask-fonts`
 *   `brew tap homebrew/cask`
 *   `brew install coreutils`
+*   `brew install pandoc`
+*   `brew install mactex`
 *   `ln -s $HB_PATH/bin/gls $HB_PATH/bin/ls` ; This addresses "*ERROR*: Listing directory failed but ‘access-file’ worked"
 
 ## Emacs
