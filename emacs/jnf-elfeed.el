@@ -47,11 +47,11 @@
 (use-package eww
   :straight t
   :bind (:map eww-mode-map ("U" . eww-up-url))
-  :hook ((eww-mode . jnf-reader-visual)))
+  :hook ((eww-mode . jnf/reader-visual)))
 
 
 ;; A little bit of RSS beautification
-(add-hook 'elfeed-show-mode-hook 'jnf-reader-visual)
+(add-hook 'elfeed-show-mode-hook 'jnf/reader-visual)
 (defun jnf/reader-visual ()
   "A method to turn on visual line mode and adjust text scale."
   (text-scale-set 2)
