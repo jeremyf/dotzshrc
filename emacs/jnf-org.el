@@ -148,7 +148,7 @@ exist after each headings's drawers."
 
 ;; I'd prefer to use the executable, but that doe not appear to be the
 ;; implementation of org-babel.
-(setq org-plantuml-jar-path (expand-file-name "/usr/local/Cellar/plantuml/1.2020.16/libexec/plantuml.jar"))
+(setq org-plantuml-jar-path (concat (string-trim (shell-command-to-string "brew-path plantuml")) "/libexec/plantuml.jar"))
 
 ;; Insert immediate timestamp at point.
 (defun jnf-org-insert-immediate-active-timestamp ()

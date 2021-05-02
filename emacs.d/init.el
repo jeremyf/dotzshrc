@@ -174,9 +174,9 @@
   :straight t)
 
 (use-package plantuml-mode
-  :config (setq plantuml-executable-path "/usr/local/bin/plantuml"
+  :config (setq plantuml-executable-path (concat (getenv "HB_PATH") "/bin/plantuml")
                 plantuml-default-exec-mode 'executable
-                org-plantuml-executable-path "/usr/local/bin/plantuml"
+                org-plantuml-executable-path (concat (getenv "HB_PATH") "/bin/plantuml")
                 org-plantuml-exec-mode 'executable)
   :mode (("\\.plantuml\\'" . plantuml-mode))
   :straight t)

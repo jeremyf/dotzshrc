@@ -25,8 +25,8 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
         export PATH="$HB_PATH/opt/icu4c/sbin:$PATH"
     fi
 
-    if [ -d "$HB_PATH/Cellar/graphviz/2.44.0/bin" ]; then
-        export PATH="$HB_PATH/Cellar/graphviz/2.44.0/bin:$PATH"
+    if [ -d "$(brew --prefix graphviz)" ]; then
+        export PATH="$(realpath `brew --prefix graphviz`)/bin:$PATH"
     fi
 
     # This helps in building out Ruby using openssl
