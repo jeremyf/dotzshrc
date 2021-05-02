@@ -151,12 +151,12 @@ exist after each headings's drawers."
 (setq org-plantuml-jar-path (concat (string-trim (shell-command-to-string "brew-path plantuml")) "/libexec/plantuml.jar"))
 
 ;; Insert immediate timestamp at point.
-(defun jnf-org-insert-immediate-active-timestamp ()
+(defun jnf/org-insert-immediate-active-timestamp ()
   "Insert an active timestamp for the current time."
   (interactive)
   (org-insert-time-stamp nil t nil))
-(global-set-key (kbd "<f2>") 'jnf-org-insert-immediate-active-timestamp)
-(global-set-key (kbd "s-2") 'jnf-org-insert-immediate-active-timestamp)
+(global-set-key (kbd "<f2>") 'jnf/org-insert-immediate-active-timestamp)
+(global-set-key (kbd "s-2") 'jnf/org-insert-immediate-active-timestamp)
 
 ;; For some reason, when I load emacs in daemon mode, the daemon
 ;; process is the process now renders the GET prompts for the

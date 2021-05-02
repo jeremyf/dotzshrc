@@ -231,8 +231,8 @@ Version 2016-07-18"
 (org-roam-inserter-fn "rpgs")
 (org-roam-inserter-fn "samvera")
 
-(defvar jnf-org-subject-menu--title (with-faicon "book" "Org Subject Menu" 1 -0.05))
-(pretty-hydra-define jnf-org-subject-menu (:foreign-keys warn :title jnf-org-subject-menu--title :quit-key "q")
+(defvar jnf/org-subject-menu--title (with-faicon "book" "Org Subject Menu" 1 -0.05))
+(pretty-hydra-define jnf/org-subject-menu (:foreign-keys warn :title jnf/org-subject-menu--title :quit-key "q")
   (
    "Permanent"
    (("b" org-roam-insert--filter-with--permanent-bibliographies "Bibliography")
@@ -263,10 +263,10 @@ Version 2016-07-18"
     ("R" org-roam-jump-to-index "Roam Index"))
 ))
 
-(global-set-key (kbd "s-1") 'jnf-org-subject-menu/body) ;; Deprecated
-(global-set-key (kbd "s-i") 'jnf-org-subject-menu/body)
+(global-set-key (kbd "s-1") 'jnf/org-subject-menu/body) ;; Deprecated
+(global-set-key (kbd "s-i") 'jnf/org-subject-menu/body)
 
-(defun jnf-toggle-roam-project-filter (project)
+(defun jnf/toggle-roam-project-filter (project)
   "Prompt for a PROJECT, then toggle the `s-i' kbd to filter for that project."
   (interactive (list
                 (completing-read
@@ -280,7 +280,7 @@ Version 2016-07-18"
                                ("samvera" 8)
                                ("thel-sector" 9)))))
   (if (string= project ":all")
-      (global-set-key (kbd "s-i") 'jnf-org-subject-menu/body)
+      (global-set-key (kbd "s-i") 'jnf/org-subject-menu/body)
     (global-set-key (kbd "s-i") (intern (concat "org-roam-insert--filter-with--" project)))))
 
 

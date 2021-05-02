@@ -37,19 +37,19 @@
 ;; light) and load accordingly.
 (if (eq system-type 'darwin)
     (progn
-      (defun jnf-dark ()
+      (defun jnf/dark ()
         "Toggle system-wide Dark or Light setting."
         (interactive)
         (shell-command "osascript -e 'tell application \"System Events\" to tell appearance preferences to set dark mode to not dark mode'")
-        (jnf-emacs-theme-by-osx-appearance))
+        (jnf/emacs-theme-by-osx-appearance))
 
-      (defalias 'modus-themes-toggle 'jnf-dark)
-      (defun jnf-emacs-theme-by-osx-appearance ()
+      (defalias 'modus-themes-toggle 'jnf/dark)
+      (defun jnf/emacs-theme-by-osx-appearance ()
         "Set theme based on OSX apperance state."
         (if (equal "Dark" (substring (shell-command-to-string "defaults read -g AppleInterfaceStyle") 0 4))
             (modus-themes-load-vivendi)
             (modus-themes-load-operandi)))
-      (jnf-emacs-theme-by-osx-appearance))
+      (jnf/emacs-theme-by-osx-appearance))
   (progn
     (defun modus-themes-toggle ()
       "Toggle between `modus-operandi' and `modus-vivendi' themes."

@@ -52,7 +52,7 @@
 
 ;; A little bit of RSS beautification
 (add-hook 'elfeed-show-mode-hook 'jnf-reader-visual)
-(defun jnf-reader-visual ()
+(defun jnf/reader-visual ()
   "A method to turn on visual line mode and adjust text scale."
   (text-scale-set 2)
   (turn-on-visual-line-mode))
