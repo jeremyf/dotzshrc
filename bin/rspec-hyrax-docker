@@ -1,0 +1,7 @@
+# /bin/sh
+#
+# A script to help run rspec against a Hyrax docker instance.
+
+cd $HOME/git/samvera/hyrax
+
+docker-compose exec -w /app/samvera/hyrax-engine app sh -c "bundle exec rspec $@"
