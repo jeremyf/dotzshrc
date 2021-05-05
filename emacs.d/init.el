@@ -127,7 +127,8 @@
  '(safe-local-variable-values '((encoding . utf-8)))
  '(show-paren-mode t)
  '(typopunct-buffer-language 'english)
- '(use-package-always-ensure t))
+ '(use-package-always-ensure t)
+ '(user-mail-address "jeremy@jeremyfriesen.com"))
 
 (setq backup-directory-alist '((".*" . "~/.emacs.d/backups/"))
       backup-by-copying t    ; Don't delink hardlinks
