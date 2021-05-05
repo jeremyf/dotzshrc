@@ -325,7 +325,7 @@ echo the method signature of `'delete-duplicate-lines`"
 (require 'jnf-stars-without-number.el)
 (require 'jnf-elfeed.el)
 (require 'jnf-fennel.el)
-(require 'jnf-typescript.el)
+;; (require 'jnf-typescript.el) ;; I don't use this these days
 
 ;; Consider for publishing: https://github.com/rnkn/binder
 ;; Consider as replacement for org-roam: https://github.com/EFLS/zetteldeft
