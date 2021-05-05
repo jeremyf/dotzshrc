@@ -19,6 +19,9 @@
              (sequence "MEETING" "AGENDA" "|" "MINUTES")
              (sequence "UNFILED" "|" "FILED")
              (sequence "TO-READ" "READING" "|" "READ")))
+  ;; https://orgmode.org/manual/Subscripts-and-Superscripts.html#Subscripts-and-Superscripts
+  (setq org-export-with-sub-superscripts '{})
+  (setq org-use-sub-superscripts '{})
   (setq org-capture-templates
         '(
           ("t" "Task for Work" entry (file+datetree "~/git/org/agenda.org")
