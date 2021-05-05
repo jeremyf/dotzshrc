@@ -187,7 +187,6 @@
 ;; place.
 (use-package yasnippet
   :straight t
-  :after company
   :init (setq yas-snippet-dirs '("~/git/dotzshrc/emacs/snippets"))
   (yas-global-mode 1))
 
