@@ -39,6 +39,38 @@
          (set-fontset-font
           t 'symbol (font-spec :family "Apple Color Emoji") nil 'prepend))
 
+;; Emacs comes with DocView built in.  pdf-tools is a replacement for
+;; DocView.  I've found the rendered images a bit more crisp and the
+;; interactions a bit more responsive.  However, I have not been able
+;; to get `org-noter' working with `pdf-tools'.  `org-noter' provides
+;; annotation services for PDFs.
+(use-package pdf-tools
+  :pin manual ;; manually update
+  :straight t
+  :defer t
+  :ensure t
+  :config (pdf-tools-install) ;; initialise
+  (setq-default pdf-view-display-size 'fit-page) ;; open pdfs scaled to fit page
+  (setq pdf-annot-activate-created-annotations t) ;; automatically annotate highlights
+  (define-key pdf-view-mode-map (kbd "C-s") 'isearch-forward);; use normal isearch
+  )
+
+;; https://blog.binchen.org/posts/org-link-and-pdf-tools/
+(defun my-org-docview-open-hack (orig-func &rest args)
+  (let* ((link (car args)) path page)
+    (string-match "\\(.*?\\)\\(?:::\\([0-9]+\\)\\)?$" link)
+    (setq path (match-string 1 link))
+    (setq page (and (match-beginning 2)
+                    (string-to-number (match-string 2 link))))
+    (org-open-file path 1)
+    (when page
+      (cond
+       ((eq major-mode 'pdf-view-mode)
+        (pdf-view-goto-page page))
+       (t
+        (doc-view-goto-page page))))))
+(advice-add 'org-docview-open :around #'my-org-docview-open-hack)
+
 ;; On  I use ⌘ as meta and prefer ⌥ to do nothing so I can still insert special characters easily.
 ;;
 ;; (setq mac-command-modifier 'meta
