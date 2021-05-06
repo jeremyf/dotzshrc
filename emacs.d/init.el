@@ -89,7 +89,7 @@
      ("d" helpful-at-point "thing at point")
      ("v" helpful-variable "variable")
      ("b" embark-bindings "bindings"))))
-  :bind ("C-h" . helpful-hydra/body))
+  :bind ("C-s-h" . helpful-hydra/body))
 
 ;; A window manager for emacs, allowing fast toggles between windows
 ;; as well as opening or moving those windows.
