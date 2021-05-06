@@ -11,8 +11,15 @@
   :straight t
   :diminish
   :bind (("C-." . #'company-capf)
-         (:map company-active-map (("<tab>" . 'company-complete-selection ))))
+         (:map company-active-map (("<tab>" . 'company-select-next-if-tooltip-visible-or-complete-selection)
+                                   ("C-<tab>" . 'company-select-previous))))
   :hook (after-init . global-company-mode)
+  :init
+  ;; Enable indentation+completion using the TAB key.
+  ;; `completion-at-point' is often bound to M-TAB.
+  (setq tab-always-indent 'complete)
+  (setq completion-cycle-threshold 3)
+
   :custom
   (company-dabbrev-downcase nil "Don't downcase returned candidates.")
   (company-show-numbers t)
@@ -20,6 +27,7 @@
   (company-minimum-prefix-length 3)
   (company-tooltip-idle-delay 0.25 "Faster!")
   (company-async-timeout 20 "Some requests can take a long time. That's fine.")
+  (company-selection-wrap-around t)
   :config
 
   ;; Use the numbers 0-9 to select company completion candidates
