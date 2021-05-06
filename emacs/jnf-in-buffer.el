@@ -19,6 +19,11 @@
 (use-package savekill
   :straight t)
 
+;; https://github.com/shankar2k/math-at-point
+(use-package math-at-point
+  :straight (math-at-point :type git :host github :repo "shankar2k/math-at-point")
+  :bind ("C-c =" . math-at-point))
+
 (use-package which-key
   :config (which-key-mode)
   :straight t)
