@@ -210,5 +210,9 @@ If no ORG_FILE_BASENAME is given default to `agenda.org'. I chose
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (require 'ox-tor-md.el)
+(require 'org-annotate-file.el)
+(global-set-key (kbd "C-c C-a") 'org-annotate-file)
+(setq org-annotate-file-storage-file "~/git/org/annotations.org")
+(setq org-annotate-file-add-search t)
 (provide 'jnf-org.el)
 ;;; jnf-org.el ends here
