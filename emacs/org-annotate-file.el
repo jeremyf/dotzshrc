@@ -152,6 +152,6 @@ The annotation will link to ANNOTATED-BUFFER if specified,
   (call-interactively 'org-insert-subheading)
   (insert link))
 
-(provide 'org-annotate-file)
+(provide 'org-annotate-file.el)
 
 ;;; org-annotate-file.el ends here
