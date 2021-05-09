@@ -89,7 +89,7 @@ parameters."
          ("M-g o" . consult-outline)
          ("M-g m" . consult-mark)
          ("M-g k" . consult-global-mark)
-         ("C-x C-SPC" . consult-global-mark)
+         ("C-x C-SPC" . consult-mark)
          ("M-g i" . consult-imenu)
          ("M-g I" . consult-project-imenu)
          ;; M-s bindings (search-map)
