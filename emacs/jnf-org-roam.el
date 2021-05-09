@@ -78,22 +78,16 @@
            :head  "#+title: ${title}\n#+roam_tags:\n* ${title}\n\n** Summary\n\n** Details\n\n** COMMENT For Referee"
            :unnarrowed t
            :immediate-finish t)
-          ("d" "Project > Diversity Equity Incluson (DEI)" plain (function org-roam--capture-get-point)
-           "%?"
-           :file-name "projects/diversity-equity-inclusion/%<%Y%m%d>---${slug}"
-           :head  "#+title: ${title}\n#+roam_tags:\n* ${title}\n\n"
-           :unnarrowed t
-           :immediate-finish t)
           ("h" "Project > Hesburgh Libraries" plain (function org-roam--capture-get-point)
            "%?"
            :file-name "projects/hesburgh-libraries/%<%Y%m%d>---${slug}"
            :head  "#+title: ${title}\n#+roam_tags:\n* ${title}\n\n"
            :unnarrowed t
            :immediate-finish t)
-          ("o" "Project > Distributed Autonomous Organization (DAO)" plain (function org-roam--capture-get-point)
+          ("j" "Project > Jeremy Friesen Consulting" plain (function org-roam--capture-get-point)
            "%?"
-           :file-name "projects/distributed-autonomous-organization/%<%Y%m%d>---${slug}"
-           :head  "#+title: ${title}\n#+roam_tags: dao\n* ${title}\n\n"
+           :file-name "projects/jeremy-friesen-consulting/%<%Y%m%d>---${slug}"
+           :head  "#+title: ${title}\n#+roam_tags:\n* ${title}\n\n"
            :unnarrowed t
            :immediate-finish t)
           ("r" "Project > RPGs" plain (function org-roam--capture-get-point)
@@ -111,6 +105,12 @@
           ("t" "Project > Thel Sector" plain (function org-roam--capture-get-point)
            "%?"
            :file-name "projects/thel-sector/%<%Y%m%d>---${slug}"
+           :head  "#+title: ${title}\n#+roam_tags:\n* ${title}\n\n** Summary\n\n** Details\n\n** COMMENT For Referee"
+           :unnarrowed t
+           :immediate-finish t)
+          ("w" "Project > Warhammer" plain (function org-roam--capture-get-point)
+           "%?"
+           :file-name "projects/warhammer-frpg/%<%Y%m%d>---${slug}"
            :head  "#+title: ${title}\n#+roam_tags:\n* ${title}\n\n** Summary\n\n** Details\n\n** COMMENT For Referee"
            :unnarrowed t
            :immediate-finish t))))
@@ -218,18 +218,20 @@ Version 2016-07-18"
 (go-roam-find-file-project-fn "permanent,cards")
 (go-roam-find-file-project-fn "permanent,epigraphs")
 (go-roam-find-file-project-fn "hesburgh-libraries")
-(go-roam-find-file-project-fn "distributed-autonomous-organization")
 (go-roam-find-file-project-fn "rpgs")
 (go-roam-find-file-project-fn "samvera")
+(go-roam-find-file-project-fn "warhammer-frpg")
+(go-roam-find-file-project-fn "jeremy-friesen-consulting")
 (org-roam-inserter-fn "thel-sector")
 (org-roam-inserter-fn "permanent,bibliographies")
 (org-roam-inserter-fn "permanent,cards")
 (org-roam-inserter-fn "permanent,letters")
 (org-roam-inserter-fn "permanent,epigraphs")
 (org-roam-inserter-fn "hesburgh-libraries")
-(org-roam-inserter-fn "distributed-autonomous-organization")
 (org-roam-inserter-fn "rpgs")
 (org-roam-inserter-fn "samvera")
+(org-roam-inserter-fn "warhammer-frpg")
+(org-roam-inserter-fn "jeremy-friesen-consulting")
 
 (defvar jnf/org-subject-menu--title (with-faicon "book" "Org Subject Menu" 1 -0.05))
 (pretty-hydra-define jnf/org-subject-menu (:foreign-keys warn :title jnf/org-subject-menu--title :quit-key "q")
@@ -248,12 +250,14 @@ Version 2016-07-18"
     ("R" org-roam-find-file--rpgs " └─ Find")
     ("t" org-roam-insert--filter-with--thel-sector "Thel Sector")
     ("T" org-roam-find-file--thel-sector " ├─ Find")
-    ("2" org-roam-insert-random-thel-sector-npc  " └─ NPC"))
+    ("2" org-roam-insert-random-thel-sector-npc  " └─ NPC")
+    ("w" org-roam-insert--filter-with--warhammer-frpg "Warhammer")
+    ("W" org-roam-find-file--warhammer-frpg " └─ Find"))
    "Work"
-   (("d" org-roam-insert--filter-with--distributed-autonomous-organization "DAOs")
-    ("D" org-roam-find-file--distributed-autonomous-organization " └─ Find")
-    ("h" org-roam-insert--filter-with--hesburgh-libraries "Hesburgh Libraries")
+   (("h" org-roam-insert--filter-with--hesburgh-libraries "Hesburgh Libraries")
     ("H" org-roam-find-file--hesburgh-libraries " └─ Find")
+    ("j" org-roam-insert--filter-with--jeremy-friesen-consulting "JF Consulting")
+    ("J" org-roam-find-file--jeremy-friesen-consulting " └─ Find")
     ("s" org-roam-insert--filter-with--samvera "Samvera")
     ("S" org-roam-find-file--samvera " └─ Find"))
    "General Org"
@@ -271,14 +275,15 @@ Version 2016-07-18"
   (interactive (list
                 (completing-read
                  "Project: " '((":all" 1)
-                               ("ardu" 2)
-                               ("distributed-autonomous-organization" 3)
-                               ("hesburgh-libraries" 4)
-                               ("permanent-bibliographies" 5)
-                               ("permanent-cards" 6)
-                               ("rpgs" 7)
-                               ("samvera" 8)
-                               ("thel-sector" 9)))))
+                               ("hesburgh-libraries" 2)
+                               ("jeremy-friesen-consulting" 3)
+                               ("permanent-bibliographies" 4)
+                               ("permanent-cards" 5)
+                               ("rpgs" 6)
+                               ("samvera" 7)
+                               ("thel-sector" 8)
+                               ("warhammer-frpg" 9)
+                               ))))
   (if (string= project ":all")
       (global-set-key (kbd "s-i") 'jnf/org-subject-menu/body)
     (global-set-key (kbd "s-i") (intern (concat "org-roam-insert--filter-with--" project)))))
