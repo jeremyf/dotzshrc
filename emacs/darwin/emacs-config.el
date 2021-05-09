@@ -65,7 +65,7 @@
 ;; (setq mac-right-option-modifier 'meta) ;; Enable Emacs capturing meta-key, so right M-x will execute extended command
 
 
-(defun jnf/toggle-alternate-modifier ()
+(defun jnf/toggle-osx-alternate-modifier ()
   "Toggle native OS-X Option modifier
 setting (e.g. ns-alternate-modifier)."
   (interactive)
@@ -74,7 +74,7 @@ setting (e.g. ns-alternate-modifier)."
              (message "Enabling OS X native Option modifier"))
     (progn (setq ns-alternate-modifier 'meta)
            (message "Disabling OX X native Option modifier (e.g. Option as Meta)"))))
-(global-set-key (kbd "C-x /") 'jnf/toggle-alternate-modifier)
+(global-set-key (kbd "C-x /") 'jnf/toggle-osx-alternate-modifier)
 
 ;; When we get to a REALLY long file or long line, emacs develops problems.
 ;; This mode helps overcome that.
