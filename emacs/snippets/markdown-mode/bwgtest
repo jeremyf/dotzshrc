@@ -5,7 +5,7 @@
 # key: bwgtest
 # --
 
-<dl class="flex-box">
+<dl class="grid">
 <dt>Task</dt>
 <dd>$1</dd>
 <dt>Intent</dt>
