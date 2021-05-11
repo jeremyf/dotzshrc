@@ -47,18 +47,6 @@
   (setq marginalia-annotators '(marginalia-annotators-heavy marginalia-annotators-light nil))
   )
 
-(defun jnf/consult-line (consult-line-function &rest rest)
-  "Advising function around `CONSULT-LINE-FUNCTION'.
-
-When there's an active region, use that as the first parameter
-for `CONSULT-LINE-FUNCTION'.  Otherwise, use the current word as
-the first parameter.  This function handles the `REST' of the
-parameters."
-  (interactive)
-  (if (use-region-p)
-      (apply consult-line-function (buffer-substring (region-beginning) (region-end)) rest)
-      (apply consult-line-function (thing-at-point 'word) rest)))
-
 ;; Example configuration for Consult
 ;; https://github.com/minad/consult
 (use-package consult
@@ -128,6 +116,18 @@ parameters."
   ;; `consult-register-store' and the Emacs built-ins.
   (setq register-preview-delay 0
         register-preview-function #'consult-register-format)
+
+  (defun jnf/consult-line (consult-line-function &rest rest)
+  "Advising function around `CONSULT-LINE-FUNCTION'.
+
+When there's an active region, use that as the first parameter
+for `CONSULT-LINE-FUNCTION'.  Otherwise, use the current word as
+the first parameter.  This function handles the `REST' of the
+parameters."
+  (interactive)
+  (if (use-region-p)
+      (apply consult-line-function (buffer-substring (region-beginning) (region-end)) rest)
+      (apply consult-line-function (thing-at-point 'word) rest)))
 
   ;; Optionally tweak the register preview window.
   ;; This adds thin lines, sorting and hides the mode line of the window.
