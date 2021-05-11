@@ -7,6 +7,20 @@
 ;;; Code:
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+
+;; I'm provisionally addinig enh-ruby-mode and robe.  I've found that
+;; LSP can work, but has it's own problems; namely you need solargraph
+;; installed for all versions.
+(use-package enh-ruby-mode
+  :straight t)
+(add-to-list 'auto-mode-alist
+             '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'" . enh-ruby-mode))
+(add-to-list 'interpreter-mode-alist '("ruby" . enh-ruby-mode))
+
+(use-package robe
+  :straight t
+  :hook (enh-ruby-mode . robe-mode)))
+
 ;; I most often write tests using rspec.
 (use-package rspec-mode
   :straight t
@@ -26,7 +40,7 @@
 ;; https://yardoc.org.
 (use-package yard-mode
   :straight t
-  :hook (ruby-mode . yard-mode))
+  :hook (enh-ruby-mode . yard-mode))
 
 ;; Adds the helpful `bundle-open'
 (use-package bundler
