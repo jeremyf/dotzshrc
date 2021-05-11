@@ -179,13 +179,22 @@
 ;; END EMOJIS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defun jnf/kill-region-or-backward-word ()
-  (interactive)
+(defun jnf/kill-region-or-backward-word (&optional arg)
+  "Kill selected region otherwise kill backwards the ARG number of words."
+  (interactive "p")
   (if (region-active-p)
       (kill-region (region-beginning) (region-end))
-    (backward-kill-word 1)))
-
+    (backward-kill-word arg)))
 (global-set-key (kbd "C-w") 'jnf/kill-region-or-backward-word)
+
+(defun jnf/kill-line-or-region (&optional ARG)
+  "Kill the selected region otherwise kill the ARG number of lines."
+  (interactive "p")
+  (if (use-region-p)
+      (kill-region (region-beginning) (region-end))
+    (kill-line ARG)))
+(global-set-key (kbd "C-k") 'jnf/kill-line-or-region)
+
 
 ;; A rather convenient snippet manager.  When you create a snippet, it
 ;; understands the mode you're in and puts the snippet in the right
