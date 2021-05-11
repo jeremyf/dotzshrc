@@ -101,6 +101,7 @@
          ("s-l" . consult-goto-line)
          ;; Isearch integration
          ("M-s e" . consult-isearch)
+         ("s-t" . jnf/consult-find-using-fd)
          :map isearch-mode-map
          ("M-e" . consult-isearch)                 ;; orig. isearch-edit-string
          ("M-s e" . consult-isearch)               ;; orig. isearch-edit-string
@@ -116,6 +117,17 @@
   ;; `consult-register-store' and the Emacs built-ins.
   (setq register-preview-delay 0
         register-preview-function #'consult-register-format)
+
+
+  ;; From https://github.com/minad/consult/wiki#find-files-using-fd
+  ;; Note: this requires lexical binding
+  (defun jnf/consult-find-using-fd (&optional dir initial)
+    "Find project files.
+
+A replacement for `projectile-find-file'."
+    (interactive "P")
+    (let ((consult-find-command "fd --color=never --hidden --exclude .git/ --full-path ARG OPTS"))
+      (consult-find dir initial)))
 
   (defun jnf/consult-line (consult-line-function &rest rest)
   "Advising function around `CONSULT-LINE-FUNCTION'.
