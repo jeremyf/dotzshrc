@@ -58,6 +58,7 @@
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   (projectile-mode +1)
   (setq projectile-project-search-path '("~/git/"))
+  (global-set-key (kbd "s-t") 'projectile-find-file)
   (global-set-key (kbd "s-.") 'projectile-toggle-between-implementation-and-test)
   (global-set-key (kbd "s-t") 'projectile-find-file)
   )
