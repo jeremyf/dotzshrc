@@ -14,6 +14,7 @@ Install ImageOptim - https://imageoptim.com/ ; remove image metadata
 *   `brew install git`
 *   `brew install git-extras`
 *   `brew install git-secrets`
+*   `brew install hub`
 *   `brew install openssl` You're going to want this for rbenv, though look at ./runbooks/ruby-openssl
 *   `brew install postgresql`
 *   `brew install rbenv`
