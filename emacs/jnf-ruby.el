@@ -19,7 +19,7 @@
 
 (use-package robe
   :straight t
-  :hook (enh-ruby-mode . robe-mode)))
+  :hook (enh-ruby-mode . robe-mode))
 
 ;; I most often write tests using rspec.
 (use-package rspec-mode
