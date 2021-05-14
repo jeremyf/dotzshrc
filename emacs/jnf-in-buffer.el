@@ -195,6 +195,11 @@
     (kill-line ARG)))
 (global-set-key (kbd "C-k") 'jnf/kill-line-or-region)
 
+;; For myself, it's easier to toggle between CTRL+f and CTRL+CMD+f or
+;; b for moving words.
+(global-set-key (kbd "C-s-f") 'forward-word)
+(global-set-key (kbd "C-s-b") 'backward-word)
+
 
 ;; A rather convenient snippet manager.  When you create a snippet, it
 ;; understands the mode you're in and puts the snippet in the right
