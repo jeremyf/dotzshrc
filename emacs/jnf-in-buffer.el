@@ -189,7 +189,7 @@
 
 (defun jnf/kill-line-or-region (&optional ARG)
   "Kill the selected region otherwise kill the ARG number of lines."
-  (interactive "p")
+  (interactive "P")
   (if (use-region-p)
       (kill-region (region-beginning) (region-end))
     (kill-line ARG)))
