@@ -101,7 +101,7 @@
          ("s-l" . consult-goto-line)
          ;; Isearch integration
          ("M-s e" . consult-isearch)
-         ("s-t" . jnf/consult-find-using-fd)
+         ;; ("s-t" . jnf/consult-find-using-fd)
          :map isearch-mode-map
          ("M-e" . consult-isearch)                 ;; orig. isearch-edit-string
          ("M-s e" . consult-isearch)               ;; orig. isearch-edit-string
