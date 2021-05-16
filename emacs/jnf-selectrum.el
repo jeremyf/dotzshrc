@@ -140,7 +140,7 @@ parameters."
   (interactive)
   (if (use-region-p)
       (apply consult-line-function (buffer-substring (region-beginning) (region-end)) rest)
-      (apply consult-line-function (thing-at-point 'symbol) rest)))
+    (apply consult-line-function (thing-at-point 'symbol) rest)))
 
   ;; Optionally tweak the register preview window.
   ;; This adds thin lines, sorting and hides the mode line of the window.
