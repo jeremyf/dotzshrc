@@ -148,5 +148,8 @@
   :straight t
   :config (global-set-key (kbd "C-,") 'flyspell-buffer))
 
+(global-set-key (kbd "s-b") 'switch-to-buffer) ;; CMD+b
+(global-set-key (kbd "C-s-b") 'switch-to-buffer-other-window) ;; CTRL+CMD+b
+
 (provide 'jnf-ivy.el)
 ;;; jnf-ivy.el ends here

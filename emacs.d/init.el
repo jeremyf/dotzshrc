@@ -167,8 +167,6 @@
 
 
 (global-set-key (kbd "C-s-w") 'browse-url-at-point) ;; CTRL+CMD+w
-(global-set-key (kbd "s-b") 'switch-to-buffer) ;; CMD+b
-(global-set-key (kbd "C-s-b") 'switch-to-buffer-other-window) ;; CTRL+CMD+b
 (setq browse-url-browser-function 'eww-browse-url)
 
 ;; https://blog.sumtypeofway.com/posts/emacs-config.html
