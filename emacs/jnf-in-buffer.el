@@ -57,6 +57,26 @@
   :bind (("C-=" . er/expand-region)
          ("C-+" . er/contract-region)))
 
+;; From https://old.reddit.com/r/orgmode/comments/eq76pv/question_about_orgsuperagenda/feok4ro/
+;; And https://www.reddit.com/r/emacs/comments/n9q662/weekly_tipstricketc_thread/
+(defun jnf/copy-indented-4-spaces (beg end)
+  "Copy the region between BEG and END and add an indent of 4 spaces.
+
+Useful for pasting code into Reddit's Markdown mode."
+  (interactive "r")
+  (let* ((mode major-mode)
+         (buffer (current-buffer))
+         (inhibit-read-only t))
+    (kill-new (with-temp-buffer
+                (funcall mode)
+                (insert-buffer-substring buffer beg end)
+                (when (derived-mode-p 'prog-mode)
+                  (delete-trailing-whitespace)
+                  (indent-region (point-min) (point-max) nil))
+                (indent-rigidly (point-min) (point-max) 4)
+                (buffer-string)))))
+(global-set-key (kbd "C-c 4") 'jnf/copy-indented-4-spaces)
+
 ;; This package allows me to toggle between different string cases.
 ;;
 ;; - HELLO WORLD
