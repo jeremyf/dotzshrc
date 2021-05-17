@@ -24,9 +24,12 @@
            ;; on disk, so the sorting gets more intelligent over time
            (prescient-persist-mode +1))
 
+(use-package savehist
+  :straight t)
+
 ;; Enable richer annotations using the Marginalia package
 (use-package marginalia
-  :after selectrum
+  :after (selectrum)
   :straight t
   ;; Either bind `marginalia-cycle` globally or only in the minibuffer
   :bind (:map minibuffer-local-map
@@ -252,9 +255,13 @@ parameters."
   :commands consult-lsp-symbols)
 
 ;; https://github.com/minad/vertico
-(use-package vertico
-  :straight t
-  :init (vertico-mode))
+;;
+;; See System Crafters - https://www.reddit.com/r/emacs/comments/neh3d7/streamline_your_emacs_completions_with_vertico/
+;; Vertico and Selectrum provide similar functions.  Favor selectrum.
+;; (use-package vertico
+;;   :straight t
+;;   :custom (vertico-cycle t)
+;;   :init (vertico-mode))
 
 ;; https://github.com/minad/orderless
 ;;
