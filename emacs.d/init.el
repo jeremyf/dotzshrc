@@ -168,15 +168,6 @@
 (global-set-key (kbd "C-s-w") 'browse-url-at-point) ;; CTRL+CMD+w
 (setq browse-url-browser-function 'eww-browse-url)
 
-;; https://blog.sumtypeofway.com/posts/emacs-config.html
-(defun jnf/revert-to-two-windows ()
-  "Delete all other windows and split it into two."
-  (interactive)
-  (delete-other-windows)
-  (split-window-right))
-
-(bind-key "C-x C-1" #'jnf/revert-to-two-windows)
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; BEGIN frame and window quick setup
 (defun gk-layouts-3col ()
