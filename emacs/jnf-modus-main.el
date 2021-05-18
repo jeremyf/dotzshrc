@@ -13,14 +13,15 @@
   (setq modus-themes-slanted-constructs t
         modus-themes-bold-constructs t
         modus-themes-fringes 'intense ; {nil,'subtle,'intense}
-        modus-themes-mode-line '3d ; {nil,'3d,'moody}
+        modus-themes-mode-line 'accented-3d ; {nil,'3d,'moody}
         modus-themes-syntax 'alt-syntax-yellow-comments
-        modus-themes-intense-hl-line nil
+        modus-themes-hl-line 'accented-background
         modus-themes-intense-paren-match 'intense-bold
         modus-themes-links 'faint
+        modus-themes-subtle-line-numbers t
         modus-themes-no-mixed-fonts nil
         modus-themes-region 'bg-only
-        modus-themes-prompts 'intense
+        modus-themes-prompts 'intense-accented
         modus-themes-completions 'opinionated ; {nil,'moderate,'opinionated}
         modus-themes-diffs nil ; {nil,'desaturated,'fg-only}
         modus-themes-org-blocks 'rainbow
