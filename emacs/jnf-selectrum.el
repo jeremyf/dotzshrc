@@ -205,10 +205,18 @@ parameters."
   (("C-s-a" . embark-act)       ;; pick some comfortable binding
    ("C-s-e" . embark-export)
    ("C-h b" . embark-bindings))
+  :hook (embark-pre-action . refresh-selectrum)
   :init
+  (defun refresh-selectrum ()
+    (setq selectrum--previous-input-string nil))
   ;; Optionally replace the key help with a completing-read interface
   (setq prefix-help-command #'embark-prefix-help-command)
   :config
+  (setq embark-action-indicator
+      (lambda (map &optional _target)
+        (which-key--show-keymap "Embark" map nil nil 'no-paging)
+        #'which-key--hide-popup-ignore-command)
+      embark-become-indicator embark-action-indicator)
   ;; Hide the mode line of the Embark live/completions buffers
   (add-to-list 'display-buffer-alist
                '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
