@@ -44,8 +44,6 @@
 (require 'jnf-display.el)
 (require 'jnf-hydra.el)
 
-(global-auto-revert-mode)
-
 (use-package prescient
   :straight t)
 
@@ -64,12 +62,6 @@
 
 (require 'jnf-selectrum.el)
 
-;; https://www.emacswiki.org/emacs/RecentFiles#h5o-1
-;; Save recentf list every five minutes
-(recentf-mode 1)
-(setq recentf-max-menu-items 25)
-(setq recentf-max-saved-items 25)
-(run-at-time nil (* 5 60) 'recentf-save-list)
 
 ;; I have found this package quite "helpful"; When I want to know the
 ;; name of a function or key or variable, I can use the helpful
@@ -102,6 +94,13 @@
 (use-package browse-at-remote
   :straight t)
 
+(global-auto-revert-mode)
+;; https://www.emacswiki.org/emacs/RecentFiles#h5o-1
+;; Save recentf list every five minutes
+(recentf-mode 1)
+(setq recentf-max-menu-items 25)
+(setq recentf-max-saved-items 25)
+(run-at-time nil (* 5 60) 'recentf-save-list)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
