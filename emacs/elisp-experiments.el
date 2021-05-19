@@ -38,5 +38,11 @@
                 nil (expand-file-name annotation_file_path) nil nil nil t)
   (find-file (expand-file-name annotation_file_path)))
 
+;; I wanted to experiment with grabbing a random element from a list.
+(defun randomElementFrom (list)
+  "Get a random element from the given LIST."
+  (nth (random (length list)) list))
+(message "%s" (randomElementFrom (list "Hello" "World")))
+
 (provide 'elisp-experiments.el)
 ;;; elisp-experiments.el ends here
