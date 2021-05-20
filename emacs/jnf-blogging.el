@@ -131,5 +131,14 @@ for TakeOnRules.com."
     (concat
      "ls " (file-name-directory buffer-file-name)))))
 
+(defun jnf/roll (&optional sided)
+  "Roll an n SIDED die."
+  (interactive (list (read-from-minibuffer
+		      "Sides: "
+		      nil nil nil nil)))
+  (let ((result (+ 1 (random (cl-parse-integer sided)))))
+    (message "d%s => %s" sided result)))
+(global-set-key (kbd "C-s-r") 'jnf/roll)
+
 (provide 'jnf-blogging.el)
 ;;; jnf-blogging.el ends here
