@@ -24,9 +24,7 @@
 
 The file for the blog post conforms to the path schema of posts
 for TakeOnRules.com."
-  (interactive (list (read-from-minibuffer
-		      "Title: "
-		      nil nil nil nil)))
+  (interactive "sTitle: ")
 
   (let* ((default-directory (concat tor--repository-path
                                    "/content/posts/"
