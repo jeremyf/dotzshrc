@@ -28,28 +28,27 @@ for TakeOnRules.com."
 		      "Title: "
 		      nil nil nil nil)))
 
-  (let ((default-directory (concat tor--repository-path
+  (let* ((default-directory (concat tor--repository-path
                                    "/content/posts/"
-                                   (format-time-string "%Y/"))))
-    (let ((fpath (concat default-directory (s-dashed-words title) ".md"))
-          (slug (s-dashed-words title)))
-      (write-region (concat
-                     "---"
-                     "\ndate: " (format-time-string "%Y-%m-%d %H:%M:%S %z")
-                     "\ndraft: true"
-                     "\nhive:"
-                     "\n  url:"
-                     "\n  tags: hive-150329 hive-110490 hive-177956 hive-177682"
-                     "\n  postDate: " (format-time-string "%Y-%m-%d")
-                     "\nlayout: post"
-                     "\nlicenses:\n- all-rights-reserved"
-                     "\nslug: " slug
-                     "\ntitle: '" title "'"
-                     "\ntype: post"
-                     "\n---\n")
-                    nil (expand-file-name fpath) nil nil nil t)
-      (find-file (expand-file-name fpath))
-      )))
+                                   (format-time-string "%Y/")))
+         (fpath (concat default-directory (s-dashed-words title) ".md"))
+         (slug (s-dashed-words title)))
+    (write-region (concat
+                   "---"
+                   "\ndate: " (format-time-string "%Y-%m-%d %H:%M:%S %z")
+                   "\ndraft: true"
+                   "\nhive:"
+                   "\n  url:"
+                   "\n  tags: hive-150329 hive-110490 hive-177956 hive-177682"
+                   "\n  postDate: " (format-time-string "%Y-%m-%d")
+                   "\nlayout: post"
+                   "\nlicenses:\n- all-rights-reserved"
+                   "\nslug: " slug
+                   "\ntitle: '" title "'"
+                   "\ntype: post"
+                   "\n---\n")
+                  nil (expand-file-name fpath) nil nil nil t)
+    (find-file (expand-file-name fpath))))
 
 ;; Used in ./emacs/snippets/text-mode/tag
 (defun tor-tags-list ()
@@ -138,38 +137,52 @@ for TakeOnRules.com."
 		      nil nil nil nil)))
   (let ((result (+ 1 (random (cl-parse-integer sided)))))
     (message "d%s => %s" sided result)))
-(global-set-key (kbd "C-s-r") 'jnf/roll)
 
+(defun jnf/roll-expression (&optional expression)
+  "Roll the EXPRESSION."
+  (interactive "sExpression: ")
+  (-let* (((rolls . result) (org-d20--roll expression)))
+    (message "%s => %s" expression result)))
+(global-set-key (kbd "C-s-r") 'jnf/roll-expression)
 
 (defun jnf/retitle-tor-content (&optional title)
   "Replace the given buffer's title with the new TITLE.
 
-This function will: replace the content's title, update the slug, and
-rename the buffer."
-    (interactive (list (read-from-minibuffer
-		      "Title: "
-		      nil nil nil nil)))
-    (let* ((metadataTitle (concat "title: " title))
+This function will: replace the content's title, update the slug,
+and rename the buffer."
+    (interactive "sTitle: ")
+    (let* ((metadataTitle (concat "title: '" title "'"))
            (slug (s-dashed-words title))
            (metadataSlug (concat "slug: " slug))
            (filename (buffer-file-name))
-           (new-filename (concat (file-name-directory filename) slug ".md")))
+           (new-filename (concat (file-name-directory filename)
+                                 slug
+                                 ".md")))
+
       ;; Replace the title metadata entry
       (goto-char (point-min))
       (while (search-forward-regexp "^title:.*$" nil t)
         (replace-match metadataTitle))
+
       ;; Replace the slug metadata entry
       (goto-char (point-min))
       (while (search-forward-regexp "^slug:.*$" nil t)
         (replace-match metadataSlug))
+
+
+      ;; Need to save before we rename the buffer
       (save-buffer)
+
+      ;; Rename the buffer, accounting for version control
       (cond
-       ((vc-backend filename) (vc-rename-file filename new-filename))
+       ((vc-backend filename)
+        (vc-rename-file filename new-filename))
          (t
           (rename-file filename new-filename t)
           (set-visited-file-name new-filename t t)))
-      (message "Renamed %s -> %s" filename new-filename)
-      ))
+
+      ;; Report filename change
+      (message "Renamed %s -> %s" filename new-filename)))
 
 (provide 'jnf-blogging.el)
 ;;; jnf-blogging.el ends here
