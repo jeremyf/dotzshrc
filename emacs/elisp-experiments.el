@@ -44,5 +44,10 @@
   (nth (random (length list)) list))
 (message "%s" (randomElementFrom (list "Hello" "World")))
 
+;; I want a script that:
+(let* ((dirs (list "~/git/org" "~/git/dotzshrc" "~/git/takeonrules.github.io" "~/git/takeonrules.github.io/themes/hugo-tufte")))
+  (dolist (dir dirs)
+    (magit-status dir)))
+
 (provide 'elisp-experiments.el)
 ;;; elisp-experiments.el ends here
