@@ -140,5 +140,36 @@ for TakeOnRules.com."
     (message "d%s => %s" sided result)))
 (global-set-key (kbd "C-s-r") 'jnf/roll)
 
+
+(defun jnf/retitle-tor-content (&optional title)
+  "Replace the given buffer's title with the new TITLE.
+
+This function will: replace the content's title, update the slug, and
+rename the buffer."
+    (interactive (list (read-from-minibuffer
+		      "Title: "
+		      nil nil nil nil)))
+    (let* ((metadataTitle (concat "title: " title))
+           (slug (s-dashed-words title))
+           (metadataSlug (concat "slug: " slug))
+           (filename (buffer-file-name))
+           (new-filename (concat (file-name-directory filename) slug ".md")))
+      ;; Replace the title metadata entry
+      (goto-char (point-min))
+      (while (search-forward-regexp "^title:.*$" nil t)
+        (replace-match metadataTitle))
+      ;; Replace the slug metadata entry
+      (goto-char (point-min))
+      (while (search-forward-regexp "^slug:.*$" nil t)
+        (replace-match metadataSlug))
+      (save-buffer)
+      (cond
+       ((vc-backend filename) (vc-rename-file filename new-filename))
+         (t
+          (rename-file filename new-filename t)
+          (set-visited-file-name new-filename t t)))
+      (message "Renamed %s -> %s" filename new-filename)
+      ))
+
 (provide 'jnf-blogging.el)
 ;;; jnf-blogging.el ends here
