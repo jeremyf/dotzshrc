@@ -28,6 +28,9 @@
   :config (which-key-mode)
   :straight t)
 
+(use-package writeroom-mode
+  :straight t)
+
 ;; I don't use a lot of folding, this allows me to type C-RET and fold
 ;; the current block.  There's more it can do but for now that's
 ;; enough
