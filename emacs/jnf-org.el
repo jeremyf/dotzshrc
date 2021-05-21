@@ -26,6 +26,8 @@
           ("u" "Unfiled Permanent > Bibliography" entry (file+headline "~/git/org/permanent/unfiled_bibliographic_cards.org" "Unfiled Bibliographic Cards")
            "* UNFILED %?\nEntered on %U")
           ))
+  (defun my-org-confirm-babel-evaluate (lang body) t)
+  (setq org-confirm-babel-evaluate #'my-org-confirm-babel-evaluate)
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((emacs-lisp . t)

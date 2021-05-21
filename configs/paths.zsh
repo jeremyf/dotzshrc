@@ -41,6 +41,11 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     if [ -d $HB_PATH/lib/pkgconfig ]; then
         export PKG_CONFIG_PATH=/opt/local/lib/pkgconfig
     fi
+
+    if [ -d $HB_PATH/lib/pkgconfig ]; then
+        export PKG_CONFIG_PATH=/opt/local/lib/pkgconfig
+    fi
+    export PATH="$(brew --prefix openssl@1.1)/bin:$PATH"
 fi
 
 if [ -d $HOME/.emacs.d/bin ]; then
@@ -61,5 +66,6 @@ export GOPATH=$HOME/code_of_the_go
 if [ -d $GOPATH ]; then
     echo "$PATH" | grep -q "$GOPATH" || export PATH="$PATH:$GOPATH/bin"
 fi
+
 
 export LYNX_CFG="$HOME/.lynx.cfg"

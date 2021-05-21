@@ -30,20 +30,12 @@ Install ImageOptim - https://imageoptim.com/ ; remove image metadata
 
 ## Emacs
 
-### By Download
+### From Homebrew
 
-*   Install Emacs via https://emacsformacosx.com/
-*   Create symlinks in ~/bin/ of emacs and emacsclient; note the `editor` and `edaemon` files require `~/bin/emacs` and `~/bin/emacsclient`
+*   `brew tap d12frosted/emacs-plus`
+*   `brew install emacs-plus --with-debug --with-dbus --with-xwidgets --with-modern-pen-lds56-icon`
 
-### From Source
-
-```
-configure --with-ns CFLAGS="-g3 -O2 -I /usr/local/include/libxml2"
-make
-make install
-make install-info
-sudo mv  nextstep/Emacs.app/ /Applications/
-```
+Create symlinks in `~/bin/` of emacs and emacsclient; note the `editor` and `edaemon` files require `~/bin/emacs` and `~/bin/emacsclient`.  In adding that symlink indirection, I'm able to bring the best Emacs installation to my ecosystem and configure with that point of inflection.
 
 ## Download JetBrains Mono
 
