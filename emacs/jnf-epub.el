@@ -13,6 +13,7 @@
   :straight t
   :mode (("\\.epub\\'" . nov-mode)))
 
+;; Justify paragraphs algorithm
 (use-package justify-kp
   :straight (justify-kp :host github :type git :repo "Fuco1/justify-kp"))
 
