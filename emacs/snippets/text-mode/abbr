@@ -4,4 +4,4 @@
 # key: ab
 # name: {{< abbr >}}
 # --
-{{< abbr key="${1:$$(yas-choose-value (tor-glossary-key-list))}"${2:${3: simple="t"}${4: compact="t"}${5: dfn="t"}${6: itemprop="mentions"}} >}} $0
+{{< abbr key="${1:$$(yas-choose-value (tor-glossary-key-list))}"${2:${3: simple="t"}${4: compact="t"}${5: dfn="t"}${6: itemprop="mentions"}${7: plural="t"}} >}} $0
