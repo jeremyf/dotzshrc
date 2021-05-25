@@ -56,15 +56,6 @@
 ;;
 (require 'org-attach-git)
 
-;; I'm working through what templates I might want. This is a place holder.
-
-
-;; Different key words and state machines help contextual the work.
-;;
-
-(use-package org-web-tools
-  :straight t)
-
 ;; https://github.com/alphapapa/unpackaged.el#download-and-attach-remote-files
 ;;;###autoload
 (defun unpackaged/org-attach-download (url)
