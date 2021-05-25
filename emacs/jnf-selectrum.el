@@ -13,6 +13,7 @@
 (global-set-key (kbd "C-x C-z") #'selectrum-repeat)
 
 (use-package ripgrep
+  :init (setq ripgrep-arguments "--ignore-case")
   :straight t)
 
 (use-package selectrum-prescient
@@ -153,6 +154,9 @@ parameters."
   ;; Use Consult to select xref locations with preview
   (setq xref-show-xrefs-function #'consult-xref
         xref-show-definitions-function #'consult-xref)
+
+  ;; Updating the default to include "--ignore-case"
+  (setq consult-ripgrep-command "rg --null --line-buffered --color=ansi --max-columns=1000 --ignore-case --no-heading --line-number . -e ARG OPTS")
 
   ;; Configure other variables and modes in the :config section,
   ;; after lazily loading the package.
