@@ -9,10 +9,11 @@
 
 (use-package company
   :straight t
+  :commands (company company-global-mode company-mode)
   :diminish
   :bind (("C-." . #'company-capf)
          (:map company-active-map (("<tab>" . 'company-complete-selection ))))
-  :hook (after-init . global-company-mode)
+  :hook (prog-mode . company-mode)
   :custom
   (company-dabbrev-downcase nil "Don't downcase returned candidates.")
   (company-show-numbers t)
