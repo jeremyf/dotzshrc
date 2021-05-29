@@ -9,10 +9,7 @@
 ;;
 ;;; CODE:
 
-;; Make startup faster by reducing the frequency of garbage
-;; collection.  The default is 800 kilobytes.  Measured in bytes.
-;; From https://blog.d46.us/advanced-emacs-startup/
-(setq gc-cons-threshold (* 250 1000 1000))
+(setq gc-cons-threshold most-positive-fixnum)
 
 ;; I have additional files that I require in the emacs directory
 (add-to-list 'load-path (expand-file-name "~/git/dotzshrc/emacs"))
@@ -41,6 +38,17 @@
 ;; I saw that straight loaded use-package to take advantage of the
 ;; use-package syntax which is often how things are documented.
 (straight-use-package 'use-package)
+
+;; GCMH does GC when the user is idle.
+(use-package gcmh
+  :straight t
+  :init
+  (setq gcmh-idle-delay 5
+	gcmh-high-cons-threshold (* 16 1024 1024))  ; 16mb
+	:config (gcmh-mode))
+
+;;Slow down the UI being updated to improve performance
+(setq idle-update-delay 1.1)
 
 (require 'jnf-display.el)
 (require 'jnf-hydra.el)
@@ -279,16 +287,6 @@ echo the method signature of `'delete-duplicate-lines`"
 ;; End burly
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defun dotfiles--gc-on-last-frame-out-of-focus ()
-  "GC if all frames are inactive."
-  (if (seq-every-p #'null (mapcar #'frame-focus-state (frame-list)))
-      (garbage-collect)))
-
-(add-function :after after-focus-change-function
-              #'dotfiles--gc-on-last-frame-out-of-focus)
-
-;; Make gc pauses faster by decreasing the threshold.
-(setq gc-cons-threshold (* 2 1000 1000))
 (provide 'init)
 ;;; init.el ends here
 (custom-set-faces
