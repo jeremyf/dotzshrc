@@ -25,26 +25,38 @@
 The file for the blog post conforms to the path schema of posts
 for TakeOnRules.com."
   (interactive "sTitle: ")
+  (tor-post--create title))
 
+(defun tor-post-amplifying-the-blogosphere ()
+  "Create and visit a new draft blog post for amplifying the blogosphere.
+
+The file for the blog post conforms to the path schema of posts
+for TakeOnRules.com."
+  (interactive)
+  (let* ((title (format-time-string "Amplifying the Blogosphere (v%Y-%m-%d)"))
+         (tor-post--create title "amplifying-the-blogosphere" (list "responding to other blogs")))))
+
+(defun tor-post--create (title &optional series tags)
+  "Create a post with TITLE for SERIES with TAGS.
+
+If there's an active region, select that text and place it."
   (let* ((default-directory (concat tor--repository-path
-                                   "/content/posts/"
-                                   (format-time-string "%Y/")))
-         (fpath (concat default-directory (s-dashed-words title) ".md"))
-         (slug (s-dashed-words title)))
-    (write-region (concat
-                   "---"
-                   "\ndate: " (format-time-string "%Y-%m-%d %H:%M:%S %z")
-                   "\ndraft: true"
-                   "\nhive:"
-                   "\n  url:"
-                   "\n  tags: hive-150329 hive-110490 hive-177956 hive-177682"
-                   "\n  postDate: " (format-time-string "%Y-%m-%d")
-                   "\nlayout: post"
-                   "\nlicenses:\n- all-rights-reserved"
-                   "\nslug: " slug
-                   "\ntitle: '" title "'"
-                   "\ntype: post"
-                   "\n---\n")
+                             "/content/posts/"
+                             (format-time-string "%Y/")))
+         (slug (s-dashed-words title))
+         (fpath (concat default-directory slug ".md")))
+    (write-region (concat "---"
+          "\ndate: " (format-time-string "%Y-%m-%d %H:%M:%S %z")
+          "\ndraft: true"
+          "\nlayout: post"
+          "\nlicenses:\n- all-rights-reserved"
+          "\nslug: " slug
+          "\ntitle: '" title "'"
+          "\ntype: post"
+          (if series (concat "\nseries: " series))
+          (if tags (concat "\ntags:" (mapconcat (lambda (t) (concat "\n- " t)) tags "")))
+          "\n---\n"
+          (if (use-region-p) (concat "\n"(buffer-substring (region-beginning) (region-end)))))
                   nil (expand-file-name fpath) nil nil nil t)
     (find-file (expand-file-name fpath))))
 
