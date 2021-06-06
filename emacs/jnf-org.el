@@ -120,9 +120,6 @@ exist after each headings's drawers."
 (use-package org-d20
   :straight t)
 
-
-(defalias 'roll 'org-d20-roll-at-point)
-
 (use-package org-superstar
   :straight t
   :hook ((org-mode . org-superstar-mode)
