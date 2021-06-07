@@ -27,15 +27,18 @@ for TakeOnRules.com."
   (interactive "sTitle: ")
   (tor-post---create-or-append title))
 
-(defun tor-post-amplifying-the-blogosphere ()
+(defun tor-post-amplifying-the-blogosphere (subheading &optional)
   "Create and visit draft blog post for amplifying the blogosphere.
 
 The file for the blog post conforms to the path schema of posts
 for TakeOnRules.com."
-  (interactive)
+  (interactive (list (if (use-region-p)
+                         (read-string "Sub-Heading: ")
+                       nil)))
   (tor-post---create-or-append
    (format-time-string "Amplifying the Blogosphere (v%Y-%m-%d)")
    :toc "true"
+   :subheading subheading
    :series "amplifying-the-blogosphere"
    :tags (list "response to other blogs")))
 
@@ -48,6 +51,7 @@ ARGS:
 `:tags' a list of tags to add to the frontmatter.
 `:series' the series to set in the frontmatter.
 `:toc' whether to include a table of contents in the post.
+`:subheading' if you have an active region, use this header
 
 If there's an active region, select that text and place it."
   (let* ((default-directory (concat tor--repository-path
@@ -57,6 +61,7 @@ If there's an active region, select that text and place it."
          (series (plist-get ARGS :series))
          (tags (plist-get ARGS :tags))
          (toc (plist-get ARGS :toc))
+         (subheading (plist-get ARGS :subheading))
          (fpath (expand-file-name (concat default-directory slug ".md"))))
     ;; If the file does not exist, create the file with the proper frontmatter.
     (if (not (file-exists-p fpath))
@@ -83,7 +88,7 @@ If there's an active region, select that text and place it."
     (if (use-region-p)
         (write-region
          (concat
-          "\n## YOUR H2 HERE\n\n"
+          (if subheading (concat "\n## " subheading "\n\n"))
           (buffer-substring (region-beginning) (region-end)))
          nil fpath t))
     ;; Finally open that file for editing.
