@@ -33,44 +33,51 @@ for TakeOnRules.com."
 The file for the blog post conforms to the path schema of posts
 for TakeOnRules.com."
   (interactive)
-  (let* ((title (format-time-string
-                 "Amplifying the Blogosphere (v%Y-%m-%d)")))
-         (tor-post---create-or-append
-          title
-          't
-          "amplifying-the-blogosphere"
-          (list "response to other blogs"))))
+  (tor-post---create-or-append
+   (format-time-string "Amplifying the Blogosphere (v%Y-%m-%d)")
+   :toc "true"
+   :series "amplifying-the-blogosphere"
+   :tags (list "response to other blogs")))
 
 ;; TODO - consider prompting for the H2 heading.
-(defun tor-post---create-or-append (title &optional toc series tags)
-  "Create or append a post with TITLE for SERIES with TAGS with optional TOC.
+(defun tor-post---create-or-append (title &rest ARGS)
+  "Create or append a post with TITLE, any ARGS are optional.
+
+ARGS:
+
+`:tags' a list of tags to add to the frontmatter.
+`:series' the series to set in the frontmatter.
+`:toc' whether to include a table of contents in the post.
 
 If there's an active region, select that text and place it."
   (let* ((default-directory (concat tor--repository-path
-                             "/content/posts/"
-                             (format-time-string "%Y/")))
+                                    "/content/posts/"
+                                    (format-time-string "%Y/")))
          (slug (s-dashed-words title))
+         (series (plist-get ARGS :series))
+         (tags (plist-get ARGS :tags))
+         (toc (plist-get ARGS :toc))
          (fpath (expand-file-name (concat default-directory slug ".md"))))
     ;; If the file does not exist, create the file with the proper frontmatter.
     (if (not (file-exists-p fpath))
-      (write-region
-        (concat "---"
-                "\ndate: " (format-time-string "%Y-%m-%d %H:%M:%S %z")
-                "\ndraft: true"
-                "\nlayout: post"
-                "\nlicenses:\n- all-rights-reserved"
-                "\nslug: " slug
-                "\ntitle: '" title "'"
-                "\ntype: post"
-                (if series (concat "\nseries: " series))
-                (if toc (concat "\ntoc: true"))
-                (if tags (concat "\ntags:"
-                                 (mapconcat
-                                  (lambda (t) (concat "\n- " t))
-                                  tags
-                                  "")))
-                "\n---\n")
-        nil fpath nil nil t))
+        (write-region
+         (concat "---"
+                 "\ndate: " (format-time-string "%Y-%m-%d %H:%M:%S %z")
+                 "\ndraft: true"
+                 "\nlayout: post"
+                 "\nlicenses:\n- all-rights-reserved"
+                 "\nslug: " (format "%s" slug)
+                 "\ntitle: '" title "'"
+                 "\ntype: post"
+                 (if series (concat "\nseries: " series))
+                 (if toc (concat "\ntoc: true"))
+                 (if tags (concat "\ntags:"
+                                  (mapconcat
+                                   (lambda (tag) (concat "\n- " tag))
+                                   tags
+                                   "")))
+                 "\n---\n")
+         nil fpath))
     ;; If we have an active region, append that region's content to
     ;; the given file.
     (if (use-region-p)
@@ -78,9 +85,7 @@ If there's an active region, select that text and place it."
          (concat
           "\n## YOUR H2 HERE\n\n"
           (buffer-substring (region-beginning) (region-end)))
-          nil
-          fpath
-          t nil nil nil))
+         nil fpath t))
     ;; Finally open that file for editing.
     (find-file fpath)))
 
