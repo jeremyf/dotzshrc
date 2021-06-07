@@ -60,51 +60,40 @@ If there's an active region, select that text and place it."
                   nil (expand-file-name fpath) nil nil nil t)
     (find-file (expand-file-name fpath))))
 
-(defun tor-list-glossary-entry (key)
-  "Build a list of entries by KEY."
+(defun tor-list-by-key-from-filename (key filename)
+  "Build a list of entries of the KEY from the FILENAME."
   (split-string-and-unquote
    (shell-command-to-string
     (concat
      "rg \"" key ": .*$\" "
-     (f-join tor--repository-path "data/glossary.yml")
+     (f-join tor--repository-path filename)
      " --only-matching --no-filename | cut -d \" \" -f 2- | sort | tr '\n' '~'"))
    "~"))
 
 ;; Used in ./emacs/snippets/text-mode/tag
 (defun tor-tags-list ()
   "Return a list of tags from TakeOnRules.com."
-  (tor-list-glossary-entry "tag"))
+  (tor-list-by-key-from-filename "tag" "data/glossary.yml"))
 
 (defun tor-game-list ()
   "Return a list of games from TakeOnRules.com."
-  (tor-list-glossary-entry "game"))
+  (tor-list-by-key-from-filename "game" "data/glossary.yml"))
 
 (defun tor-glossary-title-list ()
   "Return a list of titles from TakeOnRules.com."
-  (tor-list-glossary-entry "title"))
+  (tor-list-by-key-from-filename "title" "data/glossary.yml"))
 
 (defun tor-glossary-key-list ()
   "Return a list of keys from TakeOnRules.com glossary."
-  (tor-list-glossary-entry "key"))
+  (tor-list-by-key-from-filename "key" "data/glossary.yml"))
 
-;; Used in ./emacs/snippets/text-mode/series
 (defun tor-series-list ()
   "Return a list of series from TakeOnRules.com."
-  (split-string-and-unquote
-   (shell-command-to-string (concat
-                            "ag \"key: .*$\" "
-                            (f-join tor--repository-path "data/series.yml")
-                            " -o --nofilename | cut -d \" \" -f 2- | sort"))))
+  (tor-list-by-key-from-filename "key" "data/series.yml"))
 
 (defun tor-licenses-list ()
   "Return a list of available licenses for TakeOnRules.com."
-  (split-string-and-unquote
-   (shell-command-to-string
-    (concat
-     "ag \"Key: .*$\" "
-     (f-join tor--repository-path "data/licenses.yml")
-     " -o --nofilename | cut -d \" \" -f 2- | sort | tr '\n' '~'"))
-   "~"))
+    (tor-list-by-key-from-filename "Key" "data/licenses.yml"))
 
 (defun tor-page-relative-pathname-list ()
   "Return a list of pages for TakeOnRules.com."
