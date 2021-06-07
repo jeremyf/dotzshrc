@@ -37,11 +37,12 @@ for TakeOnRules.com."
                  "Amplifying the Blogosphere (v%Y-%m-%d)")))
          (tor-post--create
           title
+          't
           "amplifying-the-blogosphere"
           (list "responding to other blogs"))))
 
-(defun tor-post--create (title &optional series tags)
-  "Create a post with TITLE for SERIES with TAGS.
+(defun tor-post--create (title &optional toc series tags)
+  "Create a post with TITLE for SERIES with TAGS with optional TOC.
 
 If there's an active region, select that text and place it."
   (let* ((default-directory (concat tor--repository-path
@@ -58,6 +59,7 @@ If there's an active region, select that text and place it."
           "\ntitle: '" title "'"
           "\ntype: post"
           (if series (concat "\nseries: " series))
+          (if toc (concat "\ntoc: true"))
           (if tags (concat "\ntags:"
                            (mapconcat
                             (lambda (t) (concat "\n- " t))
