@@ -41,6 +41,9 @@ for TakeOnRules.com."
           "amplifying-the-blogosphere"
           (list "responding to other blogs"))))
 
+;; Add switching logic: If file does not exist, do the current thing.
+;; If file already exists, find the file and write-region to the end
+;; of the file.
 (defun tor-post--create (title &optional toc series tags)
   "Create a post with TITLE for SERIES with TAGS with optional TOC.
 
