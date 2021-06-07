@@ -28,13 +28,17 @@ for TakeOnRules.com."
   (tor-post--create title))
 
 (defun tor-post-amplifying-the-blogosphere ()
-  "Create and visit a new draft blog post for amplifying the blogosphere.
+  "Create and visit draft blog post for amplifying the blogosphere.
 
 The file for the blog post conforms to the path schema of posts
 for TakeOnRules.com."
   (interactive)
-  (let* ((title (format-time-string "Amplifying the Blogosphere (v%Y-%m-%d)"))
-         (tor-post--create title "amplifying-the-blogosphere" (list "responding to other blogs")))))
+  (let* ((title (format-time-string
+                 "Amplifying the Blogosphere (v%Y-%m-%d)"))
+         (tor-post--create
+          title
+          "amplifying-the-blogosphere"
+          (list "responding to other blogs")))))
 
 (defun tor-post--create (title &optional series tags)
   "Create a post with TITLE for SERIES with TAGS.
@@ -54,9 +58,17 @@ If there's an active region, select that text and place it."
           "\ntitle: '" title "'"
           "\ntype: post"
           (if series (concat "\nseries: " series))
-          (if tags (concat "\ntags:" (mapconcat (lambda (t) (concat "\n- " t)) tags "")))
+          (if tags (concat "\ntags:"
+                           (mapconcat
+                            (lambda (t) (concat "\n- " t))
+                            tags
+                            "")))
           "\n---\n"
-          (if (use-region-p) (concat "\n"(buffer-substring (region-beginning) (region-end)))))
+          (if (use-region-p) (concat
+                              "\n"
+                              (buffer-substring
+                               (region-beginning)
+                               (region-end)))))
                   nil (expand-file-name fpath) nil nil nil t)
     (find-file (expand-file-name fpath))))
 
