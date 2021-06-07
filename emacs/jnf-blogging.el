@@ -60,45 +60,32 @@ If there's an active region, select that text and place it."
                   nil (expand-file-name fpath) nil nil nil t)
     (find-file (expand-file-name fpath))))
 
+(defun tor-list-glossary-entry (key)
+  "Build a list of entries by KEY."
+  (split-string-and-unquote
+   (shell-command-to-string
+    (concat
+     "rg \"" key ": .*$\" "
+     (f-join tor--repository-path "data/glossary.yml")
+     " --only-matching --no-filename | cut -d \" \" -f 2- | sort | tr '\n' '~'"))
+   "~"))
+
 ;; Used in ./emacs/snippets/text-mode/tag
 (defun tor-tags-list ()
   "Return a list of tags from TakeOnRules.com."
-  (split-string-and-unquote
-   (shell-command-to-string
-    (concat
-     "ag \"tag: .*$\" "
-     (f-join tor--repository-path "data/glossary.yml")
-     " -o --nofilename | cut -d \" \" -f 2- | sort | tr '\n' '~'"))
-   "~"))
+  (tor-list-glossary-entry "tag"))
+
 (defun tor-game-list ()
   "Return a list of games from TakeOnRules.com."
-  (split-string-and-unquote
-   (shell-command-to-string
-    (concat
-     "ag \"game: .*$\" "
-     (f-join tor--repository-path "data/glossary.yml")
-     " -o --nofilename | cut -d \" \" -f 2- | sort | tr '\n' '~'"))
-   "~"))
+  (tor-list-glossary-entry "game"))
 
 (defun tor-glossary-title-list ()
   "Return a list of titles from TakeOnRules.com."
-  (split-string-and-unquote
-   (shell-command-to-string
-    (concat
-     "ag \"title: .*$\" "
-     (f-join tor--repository-path "data/glossary.yml")
-     " -o --nofilename | cut -d \" \" -f 2- | sort | tr '\n' '~'"))
-   "~"))
+  (tor-list-glossary-entry "title"))
 
 (defun tor-glossary-key-list ()
   "Return a list of keys from TakeOnRules.com glossary."
-  (split-string-and-unquote
-   (shell-command-to-string
-    (concat
-     "ag \"key: .*$\" "
-     (f-join tor--repository-path "data/glossary.yml")
-     " -o --nofilename | cut -d \" \" -f 2- | sort | tr '\n' '~'"))
-   "~"))
+  (tor-list-glossary-entry "key"))
 
 ;; Used in ./emacs/snippets/text-mode/series
 (defun tor-series-list ()
