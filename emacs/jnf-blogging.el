@@ -39,7 +39,7 @@ for TakeOnRules.com."
           title
           't
           "amplifying-the-blogosphere"
-          (list "responding to other blogs"))))
+          (list "response to other blogs"))))
 
 ;; TODO - consider prompting for the H2 heading.
 (defun tor-post---create-or-append (title &optional toc series tags)
