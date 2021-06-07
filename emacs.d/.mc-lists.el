@@ -37,6 +37,7 @@
         wdired-finish-edit
         wgrep-finish-edit
         whole-line-or-region-comment-dwim-2
+        yas-expand
         ))
 
 (setq mc/cmds-to-run-once
