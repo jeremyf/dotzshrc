@@ -34,11 +34,11 @@ The file for the blog post conforms to the path schema of posts
 for TakeOnRules.com."
   (interactive)
   (let* ((title (format-time-string
-                 "Amplifying the Blogosphere (v%Y-%m-%d)"))
+                 "Amplifying the Blogosphere (v%Y-%m-%d)")))
          (tor-post--create
           title
           "amplifying-the-blogosphere"
-          (list "responding to other blogs")))))
+          (list "responding to other blogs"))))
 
 (defun tor-post--create (title &optional series tags)
   "Create a post with TITLE for SERIES with TAGS.
