@@ -41,6 +41,11 @@
     ;; (org-capture-finalize)
     )
 
+  ;; TODO: I want a function that will pre-populate an Amplifying post
+  ;; from an elfeed entry.  If there's an active region, the
+  ;; prepopulation would prompt for a subheading; otherwise it would
+  ;; use the `elfeed-link-title'.  I would add a CITE A tag to the
+  ;; body.  Then, if there's an active region, fill that in.
   (bind-keys :map elfeed-show-mode-map
              ("v" . elfeed-show-quick-url-note)))
 
