@@ -23,12 +23,15 @@ for TakeOnRules.com."
   (interactive "sTitle: ")
   (tor-post---create-or-append title))
 
-(defun tor-post-amplifying-the-blogosphere (subheading &optional)
+(defun tor-post-amplifying-the-blogosphere (subheading &rest ARGS)
   "Create and visit draft post for amplifying the blogosphere.
 
 If there's an active region, prompt for the `SUBHEADING'.  The file
 for the blog post conforms to the path schema of posts for
-TakeOnRules.com."
+TakeOnRules.com.
+
+Pull the `citeTitle' and `citeURL' from `ARGS' and pass those
+along to the `tor-post---create-or-append'"
   (interactive (list (if (use-region-p)
                          (read-string "Sub-Heading: ")
                        nil)))
@@ -37,7 +40,9 @@ TakeOnRules.com."
    :toc "true"
    :subheading subheading
    :series "amplifying-the-blogosphere"
-   :tags "response to other blogs"))
+   :tags "response to other blogs"
+   :citeTitle (plist-get ARGS :citeTitle)
+   :citeURL (plist-get ARGS :citeURL)))
 
 (global-set-key (kbd "s-7") 'tor-post-amplifying-the-blogosphere)
 (global-set-key (kbd "<f7>") 'tor-post-amplifying-the-blogosphere)
@@ -51,7 +56,9 @@ The following `ARGS' are optional:
         frontmatter.
 `:series' the series to set in the frontmatter.
 `:toc' whether to include a table of contents in the post.
-`:subheading' if you have an active region, use this header
+`:citeTitle' the title of the URL cited (if any)
+`:citeURL' the URL cited (if any)
+`:subheading' if you have an active region, use this header.
 
 If there's an active region, select that text and place it."
   (let* ((default-directory (concat tor--repository-path
@@ -59,6 +66,8 @@ If there's an active region, select that text and place it."
                                     (format-time-string "%Y/")))
          (slug (s-dashed-words title))
          (series (plist-get ARGS :series))
+         (citeTitle (plist-get ARGS :citeTitle))
+         (citeURL (plist-get ARGS :citeURL))
          (tags (plist-get ARGS :tags))
          (toc (plist-get ARGS :toc))
          (subheading (plist-get ARGS :subheading))
@@ -88,9 +97,16 @@ If there's an active region, select that text and place it."
     (if (use-region-p)
         (write-region
          (concat
-          (if subheading (concat "\n## " subheading "\n\n"))
-          (buffer-substring (region-beginning) (region-end)))
-         nil fpath t))
+          (if subheading (concat "\n## " subheading "\n") (if citeTitle (concat "\n## " citeTitle "\n")))
+          (if citeURL (concat "\n{{< blockquote cite=\"" citeTitle "\" cite_url=\"" citeURL "\" >}}\n"))
+          (buffer-substring (region-beginning) (region-end))
+          (if citeURL "\n{{< /blockquote >}}"))
+         nil fpath t)
+      (if citeURL
+          (write-region
+           (concat
+            "\n<cite><a href=\"" citeURL "\" class=\"u-url p-name\" rel=\"cite\">" citeTitle "</a></cite>\n")
+           nil fpath t)))
     ;; Finally open that file for editing.
     (find-file fpath)))
 
