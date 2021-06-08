@@ -193,7 +193,7 @@ Tries to preserve the order of window buffers and active window."
       (delete-other-windows)
       (split-window-horizontally width)
       (other-window 1)
-      (split-window-horizontally)k
+      (split-window-horizontally)
       (other-window -1)
       (dolist (b buffers)
         (switch-to-buffer b)
