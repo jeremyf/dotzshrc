@@ -16,7 +16,7 @@
 (setq tor--repository-path "~/git/takeonrules.github.io/")
 
 (defun tor-post-new (title &optional)
-  "Create and visit a new draft post.  Prompt for a TITLE.
+  "Create and visit a new draft post.  Prompt for a `TITLE'.
 
 The file for the blog post conforms to the path schema of posts
 for TakeOnRules.com."
@@ -26,7 +26,7 @@ for TakeOnRules.com."
 (defun tor-post-amplifying-the-blogosphere (subheading &optional)
   "Create and visit draft post for amplifying the blogosphere.
 
-If there's an active region, prompt for the SUBHEADING.  The file
+If there's an active region, prompt for the `SUBHEADING'.  The file
 for the blog post conforms to the path schema of posts for
 TakeOnRules.com."
   (interactive (list (if (use-region-p)
@@ -43,9 +43,9 @@ TakeOnRules.com."
 (global-set-key (kbd "<f7>") 'tor-post-amplifying-the-blogosphere)
 
 (defun tor-post---create-or-append (title &rest ARGS)
-  "Create or append a post with TITLE.
+  "Create or append a post with `TITLE'.
 
-The following ARGS are optional:
+The following `ARGS' are optional:
 
 `:tags' one or more tags, as a list or string, to add to the
         frontmatter.
@@ -95,7 +95,7 @@ If there's an active region, select that text and place it."
     (find-file fpath)))
 
 (defun tor-list-by-key-from-filename (key filename)
-  "Build a list of entries of the KEY from the FILENAME."
+  "Build a list of entries of the `KEY' from the `FILENAME'."
   (split-string-and-unquote
    (shell-command-to-string
     (concat
@@ -151,20 +151,20 @@ If there's an active region, select that text and place it."
      "ls " (file-name-directory buffer-file-name)))))
 
 (defun jnf/roll (&optional sided)
-  "Roll an n SIDED die."
+  "Roll an n `SIDED' die."
   (interactive "sSides: ")
   (let ((result (+ 1 (random (cl-parse-integer sided)))))
     (message "d%s => %s" sided result)))
 
 (defun jnf/roll-expression (&optional expression)
-  "Roll the EXPRESSION."
+  "Roll the `EXPRESSION'."
   (interactive "sExpression: ")
   (-let* (((rolls . result) (org-d20--roll expression)))
     (message "%s => %s" expression result)))
 (global-set-key (kbd "C-s-r") 'jnf/roll-expression)
 
 (defun jnf/retitle-tor-content (&optional title)
-  "Replace the given buffer's title with the new TITLE.
+  "Replace the given buffer's title with the new `TITLE'.
 
 This function will: replace the content's title, update the slug,
 and rename the buffer."
