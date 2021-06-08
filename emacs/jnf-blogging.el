@@ -133,9 +133,7 @@ If there's an active region, select that text and place it."
   "Return a list of pages for TakeOnRules.com."
   (split-string-and-unquote
    (let ((default-directory (f-join tor--repository-path "content")))
-     (shell-command-to-string (concat
-                               "rg \"^title: \" --files-with-matches | sort"
-                               )))))
+     (shell-command-to-string "rg \"^title: \" --files-with-matches | sort"))))
 
 (defun tor-asset-relative-pathname-list ()
   "Return a list of image filenames for TakeOnRules.com."
