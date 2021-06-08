@@ -16,10 +16,19 @@
 ;; with an extended menu option, and assumes ORG styling.  They both
 ;; have the same keybinding as org-mode favors org-mac-link.
 (use-package grab-mac-link
-  :ensure t
   :straight t
-  :defer 1)
-(global-set-key (kbd "C-c g") 'grab-mac-link)
+  :config
+  ;; A replacement function for existing grab-mac-link-make-html-link
+  (defun jnf/grab-mac-link-make-html-link (url name)
+    "Using HTML syntax, link to and cite the URL with the NAME."
+    (format "<cite><a href=\"%s\" class=\"u-url p-name\" rel=\"cite\">%s</a></cite>" url name))
+  ;; The function advice to override the default behavior
+  (advice-add
+   'grab-mac-link-make-html-link
+   :override
+   'jnf/grab-mac-link-make-html-link
+   '((name . "jnf")))
+  :bind (("C-c g" . grab-mac-link)))
 
 (eval-after-load "flyspell"
   '(progn
