@@ -37,7 +37,7 @@ TakeOnRules.com."
    :toc "true"
    :subheading subheading
    :series "amplifying-the-blogosphere"
-   :tags (list "response to other blogs")))
+   :tags "response to other blogs"))
 
 (global-set-key (kbd "s-7") 'tor-post-amplifying-the-blogosphere)
 (global-set-key (kbd "<f7>") 'tor-post-amplifying-the-blogosphere)
@@ -47,7 +47,8 @@ TakeOnRules.com."
 
 The following ARGS are optional:
 
-`:tags' a list of tags to add to the frontmatter.
+`:tags' one or more tags, as a list or string, to add to the
+        frontmatter.
 `:series' the series to set in the frontmatter.
 `:toc' whether to include a table of contents in the post.
 `:subheading' if you have an active region, use this header
@@ -77,9 +78,9 @@ If there's an active region, select that text and place it."
                  (if toc (concat "\ntoc: true"))
                  (if tags (concat "\ntags:"
                                   (mapconcat
-                                   (lambda (tag) (concat "\n- " tag))
-                                   tags
-                                   "")))
+                                   (lambda (tag)
+                                     (concat "\n- " tag))
+                                   (flatten-tree tags) "")))
                  "\n---\n")
          nil fpath))
     ;; If we have an active region, append that region's content to
@@ -133,7 +134,7 @@ If there's an active region, select that text and place it."
   (split-string-and-unquote
    (let ((default-directory (f-join tor--repository-path "content")))
      (shell-command-to-string (concat
-                               "ag \"^title: \" --files-with-matches | sort"
+                               "rg \"^title: \" --files-with-matches | sort"
                                )))))
 
 (defun tor-asset-relative-pathname-list ()
@@ -151,9 +152,7 @@ If there's an active region, select that text and place it."
 
 (defun jnf/roll (&optional sided)
   "Roll an n SIDED die."
-  (interactive (list (read-from-minibuffer
-		      "Sides: "
-		      nil nil nil nil)))
+  (interactive "sSides: ")
   (let ((result (+ 1 (random (cl-parse-integer sided)))))
     (message "d%s => %s" sided result)))
 
