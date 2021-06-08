@@ -15,12 +15,8 @@
 
 (setq tor--repository-path "~/git/takeonrules.github.io/")
 
-;; TODO - Complete this function.
-;; - [X] Prompt for and build proper filename
-;; - [X] Create named file
-;; - [X] Populate named file with pre-amble
 (defun tor-post-new (title &optional)
-  "Create and visit a new draft blog post for the prompted TITLE.
+  "Create and visit a new draft post.  Prompt for a TITLE.
 
 The file for the blog post conforms to the path schema of posts
 for TakeOnRules.com."
@@ -28,10 +24,11 @@ for TakeOnRules.com."
   (tor-post---create-or-append title))
 
 (defun tor-post-amplifying-the-blogosphere (subheading &optional)
-  "Create and visit draft blog post for amplifying the blogosphere.
+  "Create and visit draft post for amplifying the blogosphere.
 
-The file for the blog post conforms to the path schema of posts
-for TakeOnRules.com."
+If there's an active region, prompt for the SUBHEADING.  The file
+for the blog post conforms to the path schema of posts for
+TakeOnRules.com."
   (interactive (list (if (use-region-p)
                          (read-string "Sub-Heading: ")
                        nil)))
@@ -42,11 +39,13 @@ for TakeOnRules.com."
    :series "amplifying-the-blogosphere"
    :tags (list "response to other blogs")))
 
-;; TODO - consider prompting for the H2 heading.
-(defun tor-post---create-or-append (title &rest ARGS)
-  "Create or append a post with TITLE, any ARGS are optional.
+(global-set-key (kbd "s-7") 'tor-post-amplifying-the-blogosphere)
+(global-set-key (kbd "<f7>") 'tor-post-amplifying-the-blogosphere)
 
-ARGS:
+(defun tor-post---create-or-append (title &rest ARGS)
+  "Create or append a post with TITLE.
+
+The following ARGS are optional:
 
 `:tags' a list of tags to add to the frontmatter.
 `:series' the series to set in the frontmatter.
