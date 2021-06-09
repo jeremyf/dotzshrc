@@ -11,24 +11,38 @@
 (use-package elfeed
   :straight t
   :after org
-  :bind (:map elfeed-search-mode-map
-              ("q" . jnf/elfeed-save-db-and-bury))
   :config
   (setq-default elfeed-search-filter "@2-days-ago +unread ")
-
-  (defun jnf/elfeed-amplify-entry ()
+  (defun jnf/amplify-elfeed ()
     "Amplify the current `elfeed-show-entry'"
     (interactive)
     (let* ((citeURL (elfeed-entry-link elfeed-show-entry))
            (citeTitle (elfeed-entry-title elfeed-show-entry)))
-      (tor-post-amplifying-the-blogosphere citeTitle :citeTitle citeTitle :citeURL citeURL)))
-  (bind-keys :map elfeed-show-mode-map
-             ("<f7>" . jnf/elfeed-amplify-entry)
-             ("s-7" . jnf/elfeed-amplify-entry)))
+      (tor-post-amplifying-the-blogosphere citeTitle
+                                           :citeTitle citeTitle
+                                           :citeURL citeURL)))
+  :bind (
+         (:map elfeed-search-mode-map
+               ("q" . jnf/elfeed-save-db-and-bury))
+         (:map elfeed-show-mode-map
+               ("<f7>" . jnf/amplify-elfeed)
+               ("s-7" . jnf/amplify-elfeed))))
 
 (use-package eww
   :straight t
-  :bind (:map eww-mode-map ("U" . eww-up-url))
+  :config
+  (defun jnf/amplify-eww ()
+    "Amplify the current `eww-data'"
+    (interactive)
+    (let* ((citeURL (plist-get eww-data :url))
+           (citeTitle (plist-get eww-data :title)))
+      (tor-post-amplifying-the-blogosphere citeTitle
+                                           :citeTitle citeTitle
+                                           :citeURL citeURL)))
+  :bind (:map eww-mode-map
+              ("U" . eww-up-url)
+              ("<f7>" . jnf/amplify-eww)
+              ("s-7" . jnf/amplify-eww))
   :hook ((eww-mode . jnf/reader-visual)))
 
 
