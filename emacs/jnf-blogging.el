@@ -23,6 +23,9 @@ for TakeOnRules.com."
   (interactive "sTitle: ")
   (tor-post---create-or-append title))
 
+(global-set-key (kbd "s-7") 'tor-post-amplifying-the-blogosphere)
+(global-set-key (kbd "<f7>") 'tor-post-amplifying-the-blogosphere)
+
 (defun tor-post-amplifying-the-blogosphere (subheading &rest ARGS)
   "Create and visit draft post for amplifying the blogosphere.
 
@@ -43,9 +46,6 @@ along to the `tor-post---create-or-append'"
    :tags "response to other blogs"
    :citeTitle (plist-get ARGS :citeTitle)
    :citeURL (plist-get ARGS :citeURL)))
-
-(global-set-key (kbd "s-7") 'tor-post-amplifying-the-blogosphere)
-(global-set-key (kbd "<f7>") 'tor-post-amplifying-the-blogosphere)
 
 (defun tor-post---create-or-append (title &rest ARGS)
   "Create or append a post with `TITLE'.
@@ -71,8 +71,10 @@ If there's an active region, select that text and place it."
          (tags (plist-get ARGS :tags))
          (toc (plist-get ARGS :toc))
          (subheading (plist-get ARGS :subheading))
-         (fpath (expand-file-name (concat default-directory slug ".md"))))
-    ;; If the file does not exist, create the file with the proper frontmatter.
+         (fpath (expand-file-name
+                 (concat default-directory slug ".md"))))
+    ;; If the file does not exist, create the file with the proper
+    ;; frontmatter.
     (if (not (file-exists-p fpath))
         (write-region
          (concat "---"
@@ -97,15 +99,24 @@ If there's an active region, select that text and place it."
     (if (use-region-p)
         (write-region
          (concat
-          (if subheading (concat "\n## " subheading "\n") (if citeTitle (concat "\n## " citeTitle "\n")))
-          (if citeURL (concat "\n{{< blockquote cite=\"" citeTitle "\" cite_url=\"" citeURL "\" >}}\n"))
+          (if subheading
+              (concat "\n## " subheading "\n")
+            (if citeTitle (concat "\n## " citeTitle "\n")))
+          (if citeURL (concat
+                       "\n{{< blockquote cite=\""
+                       citeTitle "\" cite_url=\""
+                       citeURL "\" >}}\n"))
           (buffer-substring (region-beginning) (region-end))
           (if citeURL "\n{{< /blockquote >}}"))
          nil fpath t)
+      ;; Without an active region, if we have a citeURL insert a link
+      ;; to it.
       (if citeURL
           (write-region
            (concat
-            "\n<cite><a href=\"" citeURL "\" class=\"u-url p-name\" rel=\"cite\">" citeTitle "</a></cite>\n")
+            "\n<cite><a href=\"" citeURL
+            "\" class=\"u-url p-name\" rel=\"cite\">"
+            (or (citeTitle) (citeURL)) "</a></cite>\n")
            nil fpath t)))
     ;; Finally open that file for editing.
     (find-file fpath)))
