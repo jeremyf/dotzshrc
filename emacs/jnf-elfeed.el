@@ -15,39 +15,16 @@
               ("q" . jnf/elfeed-save-db-and-bury))
   :config
   (setq-default elfeed-search-filter "@2-days-ago +unread ")
-  ;;
-  ;; linking and capturing
-  ;;
 
-  (defun elfeed-link-title (entry)
-    "Copy the entry title and URL as org link to the clipboard."
+  (defun jnf/elfeed-amplify-entry ()
+    "Amplify the current `elfeed-show-entry'"
     (interactive)
-    (let* ((link (elfeed-entry-link entry))
-           (title (elfeed-entry-title entry))
-           (titlelink (concat "[[" link "][" title "]]")))
-      (when titlelink
-        (kill-new titlelink)
-        (x-set-selection 'PRIMARY titlelink)
-        (message "Yanked: %s" titlelink))))
-
-  ;; show mode
-
-  (defun elfeed-show-quick-url-note ()
-    "Fastest way to capture entry link to org agenda from elfeed show mode"
-    (interactive)
-    (elfeed-link-title elfeed-show-entry)
-    (org-capture nil "u")
-    (yank)
-    ;; (org-capture-finalize)
-    )
-
-  ;; TODO: I want a function that will pre-populate an Amplifying post
-  ;; from an elfeed entry.  If there's an active region, the
-  ;; prepopulation would prompt for a subheading; otherwise it would
-  ;; use the `elfeed-link-title'.  I would add a CITE A tag to the
-  ;; body.  Then, if there's an active region, fill that in.
+    (let* ((citeURL (elfeed-entry-link elfeed-show-entry))
+           (citeTitle (elfeed-entry-title elfeed-show-entry)))
+      (tor-post-amplifying-the-blogosphere citeTitle :citeTitle citeTitle :citeURL citeURL)))
   (bind-keys :map elfeed-show-mode-map
-             ("v" . elfeed-show-quick-url-note)))
+             ("<f7>" . jnf/elfeed-amplify-entry)
+             ("s-7" . jnf/elfeed-amplify-entry)))
 
 (use-package eww
   :straight t
