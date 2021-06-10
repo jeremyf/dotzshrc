@@ -26,15 +26,15 @@ for TakeOnRules.com."
 (global-set-key (kbd "s-7") 'tor-post-amplifying-the-blogosphere)
 (global-set-key (kbd "<f7>") 'tor-post-amplifying-the-blogosphere)
 
-(defun tor-post-amplifying-the-blogosphere (subheading &rest ARGS)
+(cl-defun tor-post-amplifying-the-blogosphere (subheading &key citeTitle citeURL)
   "Create and visit draft post for amplifying the blogosphere.
 
 If there's an active region, prompt for the `SUBHEADING'.  The file
 for the blog post conforms to the path schema of posts for
 TakeOnRules.com.
 
-Pull the `citeTitle' and `citeURL' from `ARGS' and pass those
-along to the `tor-post---create-or-append'"
+We'll pass the `CITETITLE' and `CITEURL' to
+`tor-post---create-or-append'"
   (interactive (list (if (use-region-p)
                          (read-string "Sub-Heading: ")
                        nil)))
@@ -44,8 +44,8 @@ along to the `tor-post---create-or-append'"
    :subheading subheading
    :series "amplifying-the-blogosphere"
    :tags "response to other blogs"
-   :citeTitle (plist-get ARGS :citeTitle)
-   :citeURL (plist-get ARGS :citeURL)))
+   :citeTitle citeTitle
+   :citeURL citeURL))
 
 (defun tor-post---create-or-append (title &rest ARGS)
   "Create or append a post with `TITLE'.
@@ -188,7 +188,7 @@ If there's an active region, select that text and place it."
     (message "%s => %s" expression result)))
 (global-set-key (kbd "C-s-r") 'jnf/roll-expression)
 
-(defun jnf/retitle-tor-content (&optional title)
+(defun jnf/retitle-tor-content (title)
   "Replace the given buffer's title with the new `TITLE'.
 
 This function will: replace the content's title, update the slug,
