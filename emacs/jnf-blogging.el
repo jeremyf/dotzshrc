@@ -47,30 +47,24 @@ We'll pass the `CITETITLE' and `CITEURL' to
    :citeTitle citeTitle
    :citeURL citeURL))
 
-(defun tor-post---create-or-append (title &rest ARGS)
+(cl-defun tor-post---create-or-append (title &key tags series toc citeTitle citeURL subheading)
   "Create or append a post with `TITLE'.
 
-The following `ARGS' are optional:
+The following keys are optional:
 
-`:tags' one or more tags, as a list or string, to add to the
+`TAGS' one or more tags, as a list or string, to add to the
         frontmatter.
-`:series' the series to set in the frontmatter.
-`:toc' whether to include a table of contents in the post.
-`:citeTitle' the title of the URL cited (if any)
-`:citeURL' the URL cited (if any)
-`:subheading' if you have an active region, use this header.
+`SERIES' the series to set in the frontmatter.
+`TOC' whether to include a table of contents in the post.
+`CITETITLE' the title of the URL cited (if any)
+`CITEURL' the URL cited (if any)
+`SUBHEADING' if you have an active region, use this header.
 
 If there's an active region, select that text and place it."
   (let* ((default-directory (concat tor--repository-path
                                     "/content/posts/"
                                     (format-time-string "%Y/")))
          (slug (s-dashed-words title))
-         (series (plist-get ARGS :series))
-         (citeTitle (plist-get ARGS :citeTitle))
-         (citeURL (plist-get ARGS :citeURL))
-         (tags (plist-get ARGS :tags))
-         (toc (plist-get ARGS :toc))
-         (subheading (plist-get ARGS :subheading))
          (fpath (expand-file-name
                  (concat default-directory slug ".md"))))
     ;; If the file does not exist, create the file with the proper
