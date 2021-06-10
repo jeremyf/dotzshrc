@@ -23,6 +23,28 @@ for TakeOnRules.com."
   (interactive "sTitle: ")
   (tor-post---create-or-append title))
 
+(defun tor-sync ()
+  "Synchronize TakeOnRules.com repositories."
+  (interactive)
+  (message "Synchronizing TakeOnRules.com local git repos...")
+  (dolist
+      (path '(
+              ;; The themes directory
+              "~/git/takeonrules.github.io/themes/hugo-tufte"
+              ;; The content directory
+              "~/git/takeonrules.github.io/"
+              ;; The tooling directory
+              "~/git/dotzshrc"
+              ;; The background knowledge directory
+              "~/git/org"))
+    (message (concat "...syncing " path "..."))
+    (shell-command-to-string
+     (concat
+      "cd " path
+      " && git pull --rebase"
+      " && git push -u --force-with-lease")))
+  (message "Finished synchronizing TakeOnRules.com local git repos."))
+
 (global-set-key (kbd "s-7") 'tor-post-amplifying-the-blogosphere)
 (global-set-key (kbd "<f7>") 'tor-post-amplifying-the-blogosphere)
 
