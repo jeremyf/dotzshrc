@@ -1,7 +1,7 @@
 # -*- mode: snippet -*-
 # contributor : Jeremy Friesen <jeremy.n.friesen@gmail.com>
 # group: takeonrules
-# name: {{< linkToGame >}}
+# name: linkToGame
 # key: ltg
 # --
-{{< linkToGame key="${1:$$(yas-choose-value (tor-game-list))}"${2:${3: title="$4"}${5: abbr="t"}} >}}$0
+{{< glossary key="${1:$$(yas-choose-value (tor-game-list))}"${2:${3: title="$4"}${5: abbr="t"}} >}}$0
