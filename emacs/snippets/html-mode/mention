@@ -3,4 +3,4 @@
 # key: m
 # name: mention
 # --
-{{< mention key="${1:$$(yas-choose-value (tor-glossary-key-list))}"${2:${3: link="${4:$$(yas-choose-value '("https://" "offer" "sameAs" "itemid"))}"}${5: tag="${6:cite}"}${7: downcase="t"}${8: title="$9"}${10: itemprop="mention"}} >}}$0
+{{< glossary key="${1:$$(yas-choose-value (tor-glossary-key-list))}"${2:${3: link="${4:$$(yas-choose-value '("https://" "offer" "sameAs" "itemid"))}"}${5: tag="${6:cite}"}${7: downcase="t"}${8: title="$9"}${10: itemprop="mention"}} >}}$0
