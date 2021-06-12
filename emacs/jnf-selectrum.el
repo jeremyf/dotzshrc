@@ -8,9 +8,8 @@
 (use-package selectrum
   :straight t
   :config
-  (selectrum-mode +1))
-
-(global-set-key (kbd "C-x C-z") #'selectrum-repeat)
+  (selectrum-mode +1)
+  :bind ("C-x C-z" . selectrum-repeat))
 
 (use-package ripgrep
   :init (setq ripgrep-arguments "--ignore-case")
@@ -107,12 +106,12 @@
          ;; Isearch integration
          ("M-s e" . consult-isearch)
          ;; ("s-t" . jnf/consult-find-using-fd)
+         ("<f3>" . consult-imenu)
+         ("s-3" . consult-imenu)
          :map isearch-mode-map
          ("M-e" . consult-isearch)                 ;; orig. isearch-edit-string
          ("M-s e" . consult-isearch)               ;; orig. isearch-edit-string
          ("M-s l" . consult-line))                 ;; required by consult-line to detect isearch
-
-
 
   ;; The :init configuration is always executed (Not lazy)
   :init
@@ -256,9 +255,6 @@ parameters."
          ("e" . wgrep-change-to-wgrep-mode)
          :map ripgrep-search-mode-map
          ("e" . wgrep-change-to-wgrep-mode)))
-
-(global-set-key (kbd "<f3>") 'consult-imenu)
-(global-set-key (kbd "s-3") 'consult-imenu)
 
 ;; https://github.com/gagbo/consult-lsp
 (use-package consult-lsp
