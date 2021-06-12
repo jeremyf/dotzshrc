@@ -13,8 +13,6 @@
 ;;; Code:
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defvar tor-content-repository-path "~/git/takeonrules.github.io/")
-
 (defun tor-post-new (title &optional)
   "Create and visit a new draft post.  Prompt for a `TITLE'.
 
@@ -30,14 +28,14 @@ for TakeOnRules.com."
   (dolist
       (path '(
               ;; The themes directory
-              (concat tor-content-repository-path "themes/hugo-tufte")
+              "~/git/takeonrules.github.io/themes/hugo-tufte"
               ;; The content directory
-              tor-content-repository-path
+              "~/git/takeonrules.github.io/"
               ;; The tooling directory
               "~/git/dotzshrc"
               ;; The background knowledge directory
               "~/git/org"))
-    (message (concat "syncing " path "..."))
+    (message (concat "Syncing \"" path "\"..."))
     (shell-command-to-string
      (concat
       "cd " path
@@ -83,7 +81,7 @@ The following keys are optional:
 `SUBHEADING' if you have an active region, use this header.
 
 If there's an active region, select that text and place it."
-  (let* ((default-directory (concat tor-content-repository-path
+  (let* ((default-directory (concat "~/git/takeonrules.github.io/"
                                     "/content/posts/"
                                     (format-time-string "%Y/")))
          (slug (s-dashed-words title))
@@ -143,7 +141,7 @@ If there's an active region, select that text and place it."
    (shell-command-to-string
     (concat
      "rg \"" key ": .*$\" "
-     (f-join tor-content-repository-path filename)
+     (f-join "~/git/takeonrules.github.io/" filename)
      " --only-matching --no-filename | cut -d \" \" -f 2- | sort | tr '\n' '~'"))
    "~"))
 
@@ -175,13 +173,13 @@ If there's an active region, select that text and place it."
 (defun tor-page-relative-pathname-list ()
   "Return a list of pages for TakeOnRules.com."
   (split-string-and-unquote
-   (let ((default-directory (f-join tor-content-repository-path "content")))
+   (let ((default-directory "~/git/takeonrules.github.io/content"))
      (shell-command-to-string "rg \"^title: \" --files-with-matches | sort"))))
 
 (defun tor-asset-relative-pathname-list ()
   "Return a list of image filenames for TakeOnRules.com."
   (split-string-and-unquote
-   (let ((default-directory (f-join tor-content-repository-path "assets/images")))
+   (let ((default-directory "~/git/takeonrules.github.io/assets/images"))
      (shell-command-to-string "ls"))))
 
 (defun org-files-names-in-project-list ()
