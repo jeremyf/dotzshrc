@@ -21,6 +21,22 @@ for TakeOnRules.com."
   (interactive "sTitle: ")
   (tor-post---create-or-append title))
 
+(defun tor-cite-active-region (url start end)
+  "Wrap between START and END in a `CITE A' html tag with URL for href."
+  (interactive "sURL: \nr")
+  ;; Were we to start writing at the START position, we'd invariably
+  ;; change the contents such that the END position was no longer
+  ;; accurate.  So instead, we append at the END position, hop back to
+  ;; the START position and append to the START position.
+  (goto-char end)
+  (insert "</a></cite>")
+  (goto-char start)
+  (insert (concat
+           "<cite><a href=\""
+           url
+           "\" class=\"u-url p-name\" rel=\"cite\">")))
+
+
 (defun tor-sync ()
   "Synchronize TakeOnRules.com repositories."
   (interactive)
