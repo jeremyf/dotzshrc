@@ -28,13 +28,21 @@ for TakeOnRules.com."
   ;; change the contents such that the END position was no longer
   ;; accurate.  So instead, we append at the END position, hop back to
   ;; the START position and append to the START position.
-  (goto-char end)
-  (insert "</a></cite>")
-  (goto-char start)
-  (insert (concat
-           "<cite><a href=\""
-           url
-           "\" class=\"u-url p-name\" rel=\"cite\">")))
+  (if (eq (length url) 0)
+      (progn
+              (goto-char end)
+      (insert "</cite>")
+      (goto-char start)
+      (insert (concat
+               "<cite>")))
+    (progn
+      (goto-char end)
+      (insert "</a></cite>")
+      (goto-char start)
+      (insert (concat
+               "<cite><a href=\""
+               url
+               "\" class=\"u-url p-name\" rel=\"cite\">")))))
 
 
 (defun tor-sync ()
