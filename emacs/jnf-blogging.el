@@ -137,7 +137,7 @@ If there's an active region, select that text and place it."
     ;; Finally open that file for editing.
     (find-file fpath)))
 
-(defun tor-list-by-key-from-filename (key filename)
+(cl-defun tor-list-by-key-from-filename (&key key filename)
   "Build a list of entries of the `KEY' from the `FILENAME'."
   (split-string-and-unquote
    (shell-command-to-string
@@ -150,27 +150,27 @@ If there's an active region, select that text and place it."
 ;; Used in ./emacs/snippets/text-mode/tag
 (defun tor-tags-list ()
   "Return a list of tags from TakeOnRules.com."
-  (tor-list-by-key-from-filename "tag" "data/glossary.yml"))
+  (tor-list-by-key-from-filename :key "tag" :filename "data/glossary.yml"))
 
 (defun tor-game-list ()
   "Return a list of games from TakeOnRules.com."
-  (tor-list-by-key-from-filename "game" "data/glossary.yml"))
+  (tor-list-by-key-from-filename :key "game" :filename "data/glossary.yml"))
 
 (defun tor-glossary-title-list ()
   "Return a list of titles from TakeOnRules.com."
-  (tor-list-by-key-from-filename "title" "data/glossary.yml"))
+  (tor-list-by-key-from-filename :key "title" :filename "data/glossary.yml"))
 
 (defun tor-glossary-key-list ()
   "Return a list of keys from TakeOnRules.com glossary."
-  (tor-list-by-key-from-filename "key" "data/glossary.yml"))
+  (tor-list-by-key-from-filename :key "key" :filename "data/glossary.yml"))
 
 (defun tor-series-list ()
   "Return a list of series from TakeOnRules.com."
-  (tor-list-by-key-from-filename "key" "data/series.yml"))
+  (tor-list-by-key-from-filename :key "key" :filename "data/series.yml"))
 
 (defun tor-licenses-list ()
   "Return a list of available licenses for TakeOnRules.com."
-    (tor-list-by-key-from-filename "Key" "data/licenses.yml"))
+    (tor-list-by-key-from-filename :key "Key" :filename "data/licenses.yml"))
 
 (defun tor-page-relative-pathname-list ()
   "Return a list of pages for TakeOnRules.com."
@@ -191,13 +191,13 @@ If there's an active region, select that text and place it."
     (concat
      "ls " (file-name-directory buffer-file-name)))))
 
-(defun jnf/roll (&optional sided)
+(defun jnf/roll (sided)
   "Roll an n `SIDED' die."
   (interactive "sSides: ")
   (let ((result (+ 1 (random (cl-parse-integer sided)))))
     (message "d%s => %s" sided result)))
 
-(defun jnf/roll-expression (&optional expression)
+(defun jnf/roll-expression (expression)
   "Roll the `EXPRESSION'."
   (interactive "sExpression: ")
   (-let* (((rolls . result) (org-d20--roll expression)))
