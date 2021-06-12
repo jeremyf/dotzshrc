@@ -61,7 +61,7 @@
 (defun unpackaged/org-attach-download (url)
   "Download file at URL and attach with `org-attach'.
 Interactively, look for URL at point, in X clipboard, and in
-kill-ring, prompting if not found.  With prefix, prompt for URL."
+`kill-ring', prompting if not found.  With prefix, prompt for URL."
   (interactive (list (if current-prefix-arg
                          (read-string "URL: ")
                        (or (org-element-property :raw-link (org-element-context))
@@ -85,8 +85,9 @@ kill-ring, prompting if not found.  With prefix, prompt for URL."
 ;; https://github.com/alphapapa/unpackaged.el#ensure-blank-lines-between-headings-and-before-contents
 ;;;###autoload
 (defun unpackaged/org-fix-blank-lines (&optional prefix)
-  "Ensure that blank lines exist between headings and between headings and their contents.
-With prefix, operate on whole buffer. Ensures that blank lines
+  "Ensure blank lines exist between headings and content.
+
+With PREFIX, operate on whole buffer.  Ensures that blank lines
 exist after each headings's drawers."
   (interactive "P")
   (org-map-entries (lambda ()
@@ -186,8 +187,9 @@ exist after each headings's drawers."
 
 (defun gorg(&optional org_file_basename)
   "Jump to the given ORG_FILE_BASENAME or toggle it's org-sidebar.
-If no ORG_FILE_BASENAME is given default to `agenda.org'. I chose
-`gorg' as the mnemonic Goto Org."
+
+If no ORG_FILE_BASENAME is given default to `agenda.org'.  I
+chose `gorg' as the mnemonic Goto Org."
   (interactive)
   ;; Need to know the location on disk for the buffer
   (unless org_file_basename (setq org_file_basename "agenda.org"))
