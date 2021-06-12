@@ -21,28 +21,37 @@ for TakeOnRules.com."
   (interactive "sTitle: ")
   (tor-post---create-or-append title))
 
-(defun tor-cite-active-region (url start end)
-  "Wrap between START and END in a `CITE A' html tag with URL for href."
-  (interactive "sURL: \nr")
+(defun tor-cite-active-region (url)
+  "Wrap current region (or point) in a `CITE A' html tag with URL for href.
+
+If the `car' in `kill-ring' starts with \"http\" use that,
+otherwise prompt for the URL."
+  (interactive (list
+                (if (string= (substring (substring-no-properties (car kill-ring)) 0 4) "http")
+                    (substring-no-properties (car kill-ring))
+                  (read-string "URL: "))))
+
   ;; Were we to start writing at the START position, we'd invariably
   ;; change the contents such that the END position was no longer
   ;; accurate.  So instead, we append at the END position, hop back to
   ;; the START position and append to the START position.
-  (if (eq (length url) 0)
+  (let* ((start (if (use-region-p) (region-beginning) (point)))
+         (end (if (use-region-p) (region-end) (point))))
+    (if (eq (length url) 0)
+        (progn
+          (goto-char end)
+          (insert "</cite>")
+          (goto-char start)
+          (insert (concat
+                   "<cite>")))
       (progn
-              (goto-char end)
-      (insert "</cite>")
-      (goto-char start)
-      (insert (concat
-               "<cite>")))
-    (progn
-      (goto-char end)
-      (insert "</a></cite>")
-      (goto-char start)
-      (insert (concat
-               "<cite><a href=\""
-               url
-               "\" class=\"u-url p-name\" rel=\"cite\">")))))
+        (goto-char end)
+        (insert "</a></cite>")
+        (goto-char start)
+        (insert (concat
+                 "<cite><a href=\""
+                 url
+                 "\" class=\"u-url p-name\" rel=\"cite\">"))))))
 
 
 (defun tor-sync ()
