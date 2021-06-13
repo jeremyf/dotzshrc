@@ -27,7 +27,8 @@ for TakeOnRules.com."
 If the `car' in `kill-ring' starts with \"http\" use that,
 otherwise prompt for the URL."
   (interactive (list
-                (if (string= (substring (substring-no-properties (car kill-ring)) 0 4) "http")
+                (if (string= (substring
+                              (substring-no-properties (car kill-ring)) 0 4) "http")
                     (substring-no-properties (car kill-ring))
                   (read-string "URL: "))))
 
