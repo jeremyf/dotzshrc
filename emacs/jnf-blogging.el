@@ -13,7 +13,7 @@
 ;;; Code:
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defun tor-post-new (title &optional)
+(defun tor-post-new (title)
   "Create and visit a new draft post.  Prompt for a `TITLE'.
 
 The file for the blog post conforms to the path schema of posts
