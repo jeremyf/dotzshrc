@@ -17,6 +17,7 @@
 (use-package markdown-mode
   :straight t
   ;; :hook ((markdown-mode . turn-on-visual-line-mode))
+  :bind (:map markdown-mode-map ("C-c t" . tor-cite-active-region-dwim))
   :mode (("README\\.md\\'" . gfm-mode)
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
@@ -29,6 +30,7 @@
 
 (use-package web-mode
   :straight t
+  :bind (:map html-mode-map ("C-c t" . tor-cite-active-region-dwim))
   :config (setq web-mode-markup-indent-offset 2
                 web-mode-css-indent-offset 2
                 web-mode-code-indent-offset 2))

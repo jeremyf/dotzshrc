@@ -21,16 +21,22 @@ for TakeOnRules.com."
   (interactive "sTitle: ")
   (tor-post---create-or-append title))
 
-(defun tor-cite-active-region (url)
-  "Wrap current region (or point) in a `CITE A' html tag with URL for href.
+(defun tor-cite-active-region-dwim (url)
+  "Wrap current region (or point) in a `CITE' and optional `A' tag with URL.
 
-If the `car' in `kill-ring' starts with \"http\" use that,
-otherwise prompt for the URL."
+For the URL:
+
+- If `car' in `kill-ring' starts with \"http\", then use that as the URL.
+- Otherwise prompt for a URL.
+
+If the URL an empty string, then wrap the current region or point
+in a CITE tag. Else, if we have a non-0 length URL, wrap it in
+CITE and A tag."
   (interactive (list
                 (if (string= (substring
                               (substring-no-properties (car kill-ring)) 0 4) "http")
                     (substring-no-properties (car kill-ring))
-                  (read-string "URL: "))))
+                  (read-string "URL (optional): "))))
 
   ;; Were we to start writing at the START position, we'd invariably
   ;; change the contents such that the END position was no longer
@@ -53,7 +59,6 @@ otherwise prompt for the URL."
                  "<cite><a href=\""
                  url
                  "\" class=\"u-url p-name\" rel=\"cite\">"))))))
-
 
 (defun tor-sync ()
   "Synchronize TakeOnRules.com repositories."
