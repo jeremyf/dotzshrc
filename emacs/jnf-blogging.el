@@ -5,11 +5,6 @@
 ;;
 ;;  This package provides some blogging tooling.
 ;;
-;;  Todo:
-;;
-;;  - [X] tor-post-new :: a function for creating a new post
-;;  - [X] tor-tags-list :: a function for prompting for existing tags
-;;
 ;;; Code:
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
