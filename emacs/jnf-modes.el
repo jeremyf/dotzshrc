@@ -60,5 +60,8 @@
   :after json-mode
   :init (setq json-reformat:indent-width 2))
 
+(use-package go-mode
+  :straight t)
+
 (provide 'jnf-modes.el)
 ;;; jnf-modes.el ends here
