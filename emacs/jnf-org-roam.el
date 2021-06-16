@@ -108,10 +108,10 @@
            :head  "#+title: ${title}\n#+roam_tags:\n* ${title}\n\n** Summary\n\n** Details\n\n** COMMENT For Referee"
            :unnarrowed t
            :immediate-finish t)
-          ("v" "Project > Vaelstad" plain (function org-roam--capture-get-point)
+          ("m" "Project > Teraum" plain (function org-roam--capture-get-point)
            "%?"
-           :file-name "projects/vaelstad/%<%Y%m%d>---${slug}"
-           :head  "#+title: ${title}\n#+roam_tags:\n* Summary\n\n* Details\n"
+           :file-name "projects/teraum/%<%Y%m%d>---${slug}"
+           :head  "#+title: ${title}\n#+roam_tags:\n* ${title}\n\n** Summary\n\n** Details\n\n** COMMENT For Referee"
            :unnarrowed t
            :immediate-finish t)
           ("w" "Project > Warhammer" plain (function org-roam--capture-get-point)
@@ -227,7 +227,7 @@ Version 2016-07-18"
 (go-roam-find-file-project-fn "rpgs")
 (go-roam-find-file-project-fn "samvera")
 (go-roam-find-file-project-fn "warhammer-frpg")
-(go-roam-find-file-project-fn "vaelstad")
+(go-roam-find-file-project-fn "teraum")
 (go-roam-find-file-project-fn "jeremy-friesen-consulting")
 (org-roam-inserter-fn "thel-sector")
 (org-roam-inserter-fn "permanent,bibliographies")
@@ -238,7 +238,7 @@ Version 2016-07-18"
 (org-roam-inserter-fn "rpgs")
 (org-roam-inserter-fn "samvera")
 (org-roam-inserter-fn "warhammer-frpg")
-(org-roam-inserter-fn "vaelstad")
+(org-roam-inserter-fn "teraum")
 (org-roam-inserter-fn "jeremy-friesen-consulting")
 
 (defvar jnf/org-subject-menu--title (with-faicon "book" "Org Subject Menu" 1 -0.05))
@@ -259,8 +259,8 @@ Version 2016-07-18"
     ("t" org-roam-insert--filter-with--thel-sector "Thel Sector")
     ("T" org-roam-find-file--thel-sector " ├─ Find")
     ("2" org-roam-insert-random-thel-sector-npc  " └─ NPC")
-    ("v" org-roam-insert--filter-with--vaelstad "Vaelstad")
-    ("V" org-roam-find-file--vaelstad " └─ Find")
+    ("m" org-roam-insert--filter-with--teraum "Teraum")
+    ("M" org-roam-find-file--teraum " └─ Find")
     ("w" org-roam-insert--filter-with--warhammer-frpg "Warhammer")
     ("W" org-roam-find-file--warhammer-frpg " └─ Find")
     )
@@ -293,7 +293,7 @@ Version 2016-07-18"
                                ("rpgs" 6)
                                ("samvera" 7)
                                ("thel-sector" 8)
-                               ("vaelstad" 9)
+                               ("teraum" 9)
                                ("warhammer-frpg" 10)
                                ))))
   (if (string= project ":all")
