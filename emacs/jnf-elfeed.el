@@ -17,10 +17,19 @@
     "Amplify the current `elfeed-show-entry'"
     (interactive)
     (let* ((citeURL (elfeed-entry-link elfeed-show-entry))
-           (citeTitle (elfeed-entry-title elfeed-show-entry)))
+           (citeTitle (elfeed-entry-title elfeed-show-entry))
+           ;; Grab the author from the elfeed metadata.  Making the
+           ;; assumption that there's only one.
+           (citeAuthor
+            (plist-get
+             (car (plist-get
+                   (elfeed-entry-meta elfeed-show-entry)
+                   :authors))
+             :name)))
       (tor-post-amplifying-the-blogosphere citeTitle
                                            :citeTitle citeTitle
-                                           :citeURL citeURL)))
+                                           :citeURL citeURL
+                                           :citeAuthor citeAuthor)))
   :bind (
          (:map elfeed-search-mode-map
                ("q" . jnf/elfeed-save-db-and-bury))

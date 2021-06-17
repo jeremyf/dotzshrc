@@ -16,6 +16,16 @@ for TakeOnRules.com."
   (interactive "sTitle: ")
   (tor-post---create-or-append title))
 
+(defun tor-tag-post (tag)
+  "Apply the TAG to the current TakeOnRules.com post.
+
+No effort is made to check if this is a post."
+  (interactive (list (completing-read "Tag: " (tor-tags-list))))
+  (let ((saved-point (point))
+        (to-insert (concat "\n- " tag)))
+    (replace-regexp "^tags:$" (concat "tags:" to-insert) nil 0 (point-max))
+    (goto-char (+ saved-point (length to-insert)))))
+
 (defun tor-cite-active-region-dwim (url)
   "Wrap current region (or point) in a `CITE' and optional `A' tag with URL.
 
@@ -80,14 +90,14 @@ CITE and A tag."
 (global-set-key (kbd "s-7") 'tor-post-amplifying-the-blogosphere)
 (global-set-key (kbd "<f7>") 'tor-post-amplifying-the-blogosphere)
 
-(cl-defun tor-post-amplifying-the-blogosphere (subheading &key citeTitle citeURL)
+(cl-defun tor-post-amplifying-the-blogosphere (subheading &key citeTitle citeURL citeAuthor)
   "Create and visit draft post for amplifying the blogosphere.
 
 If there's an active region, prompt for the `SUBHEADING'.  The file
 for the blog post conforms to the path schema of posts for
 TakeOnRules.com.
 
-We'll pass the `CITETITLE' and `CITEURL' to
+We'll pass the `CITETITLE', `CITEAUTHOR', and `CITEURL' to
 `tor-post---create-or-append'"
   (interactive (list (if (use-region-p)
                          (read-string "Sub-Heading: ")
@@ -99,9 +109,10 @@ We'll pass the `CITETITLE' and `CITEURL' to
    :series "amplifying-the-blogosphere"
    :tags "response to other blogs"
    :citeTitle citeTitle
-   :citeURL citeURL))
+   :citeURL citeURL
+   :citeAuthor citeAuthor))
 
-(cl-defun tor-post---create-or-append (title &key tags series toc citeTitle citeURL subheading)
+(cl-defun tor-post---create-or-append (title &key tags series toc citeTitle citeURL citeAuthor subheading)
   "Create or append a post with `TITLE'.
 
 The following keys are optional:
@@ -112,6 +123,7 @@ The following keys are optional:
 `TOC' whether to include a table of contents in the post.
 `CITETITLE' the title of the URL cited (if any)
 `CITEURL' the URL cited (if any)
+`CITEAUTHOR' the author cited (if any)
 `SUBHEADING' if you have an active region, use this header.
 
 If there's an active region, select that text and place it."
@@ -151,7 +163,10 @@ If there's an active region, select that text and place it."
               (concat "\n## " subheading "\n")
             (if citeTitle (concat "\n## " citeTitle "\n")))
           (if citeURL (concat
-                       "\n{{< blockquote cite=\""
+                       "\n{{< blockquote"
+                       (if citeAuthor
+                           (concat " pre=\"" citeAuthor "\""))
+                       " cite=\""
                        citeTitle "\" cite_url=\""
                        citeURL "\" >}}\n"))
           (buffer-substring (region-beginning) (region-end))
