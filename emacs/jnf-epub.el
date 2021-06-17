@@ -57,5 +57,14 @@
               nil t)))
 
 (add-hook 'nov-post-html-render-hook 'my-nov-post-html-render-hook)
+
+(use-package bibliothek
+  :straight (bibliothek
+             :type git
+             :host github
+             :repo "cadadr/elisp"
+             :files ("bibliothek.el")))
+
+
 (provide 'jnf-epub.el)
 ;;; jnf-epub.el ends here
