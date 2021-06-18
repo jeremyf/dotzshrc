@@ -8,6 +8,24 @@
 ;;; Code:
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; https://github.com/jrblevin/markdown-mode/
+(use-package markdown-mode
+  :straight t
+  ;; :hook ((markdown-mode . turn-on-visual-line-mode))
+  :bind (:map markdown-mode-map ("C-c t" . jnf/tor-subject-menu/body))
+  :mode (("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
+  :init (setq markdown-command "/usr/local/bin/pandoc"))
+
+(defvar jnf/tor-menu--title (with-faicon "pencil-square" "Take on Rules" 1 -0.05))
+(pretty-hydra-define jnf/tor-subject-menu (:foreign-keys warn :title jnf/tor-menu--title :quit-key "q")
+  ("Posts"
+   (("c" tor-cite-active-region-dwim "Cite region…")
+    ("n" tor-post-new "New post…")
+    ("r" jnf/retitle-tor-content "Re-title content…")
+    ("t" tor-tag-post "Tag post…"))))
+
 (defun tor-post-new (title)
   "Create and visit a new draft post.  Prompt for a `TITLE'.
 

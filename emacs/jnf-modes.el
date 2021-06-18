@@ -13,16 +13,6 @@
          (html-mode . emmet-mode)
          (css-mode . emmet-mode)))
 
-;; https://github.com/jrblevin/markdown-mode/
-(use-package markdown-mode
-  :straight t
-  ;; :hook ((markdown-mode . turn-on-visual-line-mode))
-  :bind (:map markdown-mode-map ("C-c t" . tor-cite-active-region-dwim))
-  :mode (("README\\.md\\'" . gfm-mode)
-         ("\\.md\\'" . markdown-mode)
-         ("\\.markdown\\'" . markdown-mode))
-  :init (setq markdown-command "/usr/local/bin/pandoc"))
-
 ;; https://github.com/AdamNiederer/vue-mode
 (use-package vue-mode
   :straight t
