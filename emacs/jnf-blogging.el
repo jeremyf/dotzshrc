@@ -23,6 +23,7 @@
   ("Posts"
    (("c" tor-cite-active-region-dwim "Cite region…")
     ("n" tor-post-new "New post…")
+    ("m" tor-wrap-as-marginnote-dwim "Margin note region…")
     ("r" jnf/retitle-tor-content "Re-title content…")
     ("t" tor-tag-post "Tag post…"))))
 
@@ -43,6 +44,19 @@ No effort is made to check if this is a post."
         (to-insert (concat "\n- " tag)))
     (replace-regexp "^tags:$" (concat "tags:" to-insert) nil 0 (point-max))
     (goto-char (+ saved-point (length to-insert)))))
+
+(defun tor-wrap-as-marginnote-dwim ()
+  "Warp between line or current region a marginnote.
+
+TODO: If no region, wrap current line."
+  (interactive)
+  (pcase-let* ((origin (point))
+               (`(,beg . ,end) (crux-get-positions-of-line-or-region)))
+
+    (goto-char end)
+    (insert "\n{{< /marginnote >}}")
+    (goto-char beg)
+    (insert "{{< marginnote >}}\n")))
 
 (defun tor-cite-active-region-dwim (url)
   "Wrap current region (or point) in a `CITE' and optional `A' tag with URL.
@@ -165,8 +179,8 @@ If there's an active region, select that text and place it."
                  "\ntype: post"
                  (if series (concat "\nseries: " series))
                  (if toc (concat "\ntoc: true"))
-                 (if tags (concat "\ntags:"
-                                  (mapconcat
+                 ("\ntags:")
+                 (if tags (concat (mapconcat
                                    (lambda (tag)
                                      (concat "\n- " tag))
                                    (flatten-tree tags) "")))
