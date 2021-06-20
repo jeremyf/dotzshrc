@@ -46,13 +46,10 @@ No effort is made to check if this is a post."
     (goto-char (+ saved-point (length to-insert)))))
 
 (defun tor-wrap-as-marginnote-dwim ()
-  "Warp between line or current region a marginnote.
-
-TODO: If no region, wrap current line."
+  "Wrap the line or current region as a marginnote."
   (interactive)
   (pcase-let* ((origin (point))
                (`(,beg . ,end) (crux-get-positions-of-line-or-region)))
-
     (goto-char end)
     (insert "\n{{< /marginnote >}}")
     (goto-char beg)
