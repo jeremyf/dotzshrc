@@ -11,7 +11,7 @@
 ;; https://github.com/jrblevin/markdown-mode/
 (use-package markdown-mode
   :straight t
-  ;; :hook ((markdown-mode . turn-on-visual-line-mode))
+  :hook ((markdown-mode . turn-on-visual-line-mode))
   :bind (:map markdown-mode-map ("C-c t" . jnf/tor-subject-menu/body))
   :mode (("README\\.md\\'" . gfm-mode)
          ("\\.md\\'" . markdown-mode)
