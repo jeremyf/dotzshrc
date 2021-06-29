@@ -176,7 +176,7 @@ If there's an active region, select that text and place it."
                  "\ntype: post"
                  (if series (concat "\nseries: " series))
                  (if toc (concat "\ntoc: true"))
-                 ("\ntags:")
+                 "\ntags:"
                  (if tags (concat (mapconcat
                                    (lambda (tag)
                                      (concat "\n- " tag))
