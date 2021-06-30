@@ -286,9 +286,6 @@ echo the method signature of `'delete-duplicate-lines`"
 ;; End burly
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Treat dashes and underscores as part of words for navigation
-(global-superword-mode t)
-
 (provide 'init)
 ;;; init.el ends here
 (custom-set-faces

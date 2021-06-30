@@ -262,5 +262,8 @@ Useful for pasting code into Reddit's Markdown mode."
 (global-set-key (kbd "s-q") 'save-buffers-kill-terminal)
 (global-set-key (kbd "s-w") 'kill-current-buffer)
 
+;; Treat dashes and underscores as part of words for navigation
+(global-superword-mode t)
+
 (provide 'jnf-in-buffer.el)
 ;;; jnf-in-buffer.el ends here
