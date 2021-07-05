@@ -49,8 +49,8 @@
 
 ;; Show the current git state in the gutter Go ahead and edit a line
 ;; and look to the gutter for guidance.
-(use-package git-gutter
-  :straight t
+(use-package git-gutter-fringe
+  :straight (git-gutter-fringe :type git :host github :repo "emacsorphanage/git-gutter-fringe")
   :config (global-git-gutter-mode 't)
   (setq git-gutter:modified-sign "Δ"
         git-gutter:added-sign "+"
