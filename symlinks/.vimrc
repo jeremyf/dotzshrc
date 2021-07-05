@@ -1,5 +1,3 @@
-execute pathogen#infect()
-
 " Add numbers in the gutter
 set number
 syntax on
@@ -33,4 +31,3 @@ let g:airline_theme='base16_google'
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
-
