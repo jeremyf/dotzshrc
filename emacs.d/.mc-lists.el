@@ -15,6 +15,7 @@
         hungry-delete-backward
         hungry-delete-forward
         indent-for-tab-command
+        jnf/kill-line-or-region
         jnf/kill-region-or-backward-word
         kill-visual-line
         magit-status
@@ -30,6 +31,7 @@
         org-metaright
         org-self-insert-command
         org-todo
+        org-yank
         sp-backward-delete-char
         string-inflection-all-cycle
         typopunct-insert-mp
@@ -37,6 +39,8 @@
         wdired-finish-edit
         wgrep-finish-edit
         whole-line-or-region-comment-dwim-2
+        yaml-electric-backspace
+        yaml-electric-dash-and-dot
         yas-expand
         ))
 
