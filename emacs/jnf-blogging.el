@@ -21,15 +21,15 @@
 (defvar jnf/tor-menu--title (with-faicon "pencil-square" "Take on Rules" 1 -0.05))
 (pretty-hydra-define jnf/tor-subject-menu (:foreign-keys warn :title jnf/tor-menu--title :quit-key "q")
   ("Posts"
-   (("a" tor-link-active-region-dwim "A link at point or region…")
-    ("c" tor-cite-active-region-dwim "Cite point or region…")
-    ("m" tor-wrap-as-marginnote-dwim "Margin-note line or region…")
-    ("n" tor-post-new "New post…")
+   (("a" jnf/tor-link-active-region-dwim "A link at point or region…")
+    ("c" jnf/tor-cite-active-region-dwim "Cite point or region…")
+    ("m" jnf/tor-wrap-as-marginnote-dwim "Margin-note line or region…")
+    ("n" jnf/tor-post-new "New post…")
     ("r" jnf/retitle-tor-content "Re-title content…")
-    ("s" tor-wrap-as-sidenote-dwim "Side-note sentence or region…")
-    ("t" tor-tag-post "Tag post…"))))
+    ("s" jnf/tor-wrap-as-sidenote-dwim "Side-note sentence or region…")
+    ("t" jnf/tor-tag-post "Tag post…"))))
 
-(defun tor-post-new (title)
+(defun jnf/tor-post-new (title)
   "Create and visit a new draft post.  Prompt for a `TITLE'.
 
 The file for the blog post conforms to the path schema of posts
@@ -37,7 +37,7 @@ for TakeOnRules.com."
   (interactive "sTitle: ")
   (tor-post---create-or-append title))
 
-(defun tor-tag-post (tag)
+(defun jfn/tor-tag-post (tag)
   "Apply the TAG to the current TakeOnRules.com post.
 
 No effort is made to check if this is a post."
@@ -47,7 +47,7 @@ No effort is made to check if this is a post."
     (replace-regexp "^tags:$" (concat "tags:" to-insert) nil 0 (point-max))
     (goto-char (+ saved-point (length to-insert)))))
 
-(cl-defun tor-wrap-with-text (&key before after strategy)
+(cl-defun jnf/tor-wrap-with-text (&key before after strategy)
   "Wrap the STRATEGY determined region with the BEFORE and AFTER text.
 
 Valid STRATEGY options are: `:lineOrRegion', `:pointOrRegion'.
@@ -74,7 +74,7 @@ as the behavior's well defined."
                       (goto-char begin)
                       (insert before)))))
 
-(defun tor-wrap-as-marginnote-dwim ()
+(defun jnf/tor-wrap-as-marginnote-dwim ()
   "Wrap the line or current region as a marginnote."
   (interactive)
   (tor-wrap-with-text
@@ -82,7 +82,7 @@ as the behavior's well defined."
    :after "\n{{< /marginnote >}}"
    :strategy :lineOrRegion))
 
-(defun tor-wrap-as-sidenote-dwim ()
+(defun jnf/tor-wrap-as-sidenote-dwim ()
   "Wrap the line or current region as a sidenote."
   (interactive)
   (tor-wrap-with-text
@@ -90,7 +90,7 @@ as the behavior's well defined."
    :after "{{< /sidenote >}}"
    :strategy :sentenceOrRegion))
 
-(defun tor-link-active-region-dwim (url)
+(defun jnf/tor-link-active-region-dwim (url)
   "Wrap current region (or point) in an `A' tag with URL.
 
 For the URL:
@@ -113,7 +113,7 @@ tag."
      :after "</a>"
      :strategy :pointOrRegion)))
 
-(defun tor-cite-active-region-dwim (url)
+(defun jnf/tor-cite-active-region-dwim (url)
   "Wrap current region (or point) in a `CITE' and optional `A' tag with URL.
 
 For the URL:
@@ -145,7 +145,7 @@ CITE and A tag."
      :after "</a></cite>"
      :strategy :pointOrRegion)))
 
-(defun tor-sync ()
+(defun jnf/tor-sync ()
   "Synchronize TakeOnRules.com repositories."
   (interactive)
   (message "Synchronizing TakeOnRules.com local git repos...")
@@ -170,7 +170,7 @@ CITE and A tag."
 (global-set-key (kbd "s-7") 'tor-post-amplifying-the-blogosphere)
 (global-set-key (kbd "<f7>") 'tor-post-amplifying-the-blogosphere)
 
-(cl-defun tor-post-amplifying-the-blogosphere (subheading &key citeTitle citeURL citeAuthor)
+(cl-defun jnf/tor-post-amplifying-the-blogosphere (subheading &key citeTitle citeURL citeAuthor)
   "Create and visit draft post for amplifying the blogosphere.
 
 If there's an active region, prompt for the `SUBHEADING'.  The file
@@ -192,7 +192,7 @@ We'll pass the `CITETITLE', `CITEAUTHOR', and `CITEURL' to
    :citeURL citeURL
    :citeAuthor citeAuthor))
 
-(cl-defun tor-post---create-or-append (title &key tags series toc citeTitle citeURL citeAuthor subheading)
+(cl-defun jnf/tor-post---create-or-append (title &key tags series toc citeTitle citeURL citeAuthor subheading)
   "Create or append a post with `TITLE'.
 
 The following keys are optional:
@@ -264,7 +264,7 @@ If there's an active region, select that text and place it."
     ;; Finally open that file for editing.
     (find-file fpath)))
 
-(cl-defun tor-list-by-key-from-filename (&key key filename)
+(cl-defun jnf/tor-list-by-key-from-filename (&key key filename)
   "Build a list of entries of the `KEY' from the `FILENAME'."
   (split-string-and-unquote
    (shell-command-to-string
@@ -275,37 +275,37 @@ If there's an active region, select that text and place it."
    "~"))
 
 ;; Used in ./emacs/snippets/text-mode/tag
-(defun tor-tags-list ()
+(defun jnf/tor-tags-list ()
   "Return a list of tags from TakeOnRules.com."
   (tor-list-by-key-from-filename :key "tag" :filename "data/glossary.yml"))
 
-(defun tor-game-list ()
+(defun jnf/tor-game-list ()
   "Return a list of games from TakeOnRules.com."
   (tor-list-by-key-from-filename :key "game" :filename "data/glossary.yml"))
 
-(defun tor-glossary-title-list ()
+(defun jnf/tor-glossary-title-list ()
   "Return a list of titles from TakeOnRules.com."
   (tor-list-by-key-from-filename :key "title" :filename "data/glossary.yml"))
 
-(defun tor-glossary-key-list ()
+(defun jnf/tor-glossary-key-list ()
   "Return a list of keys from TakeOnRules.com glossary."
   (tor-list-by-key-from-filename :key "key" :filename "data/glossary.yml"))
 
-(defun tor-series-list ()
+(defun jnf/tor-series-list ()
   "Return a list of series from TakeOnRules.com."
   (tor-list-by-key-from-filename :key "key" :filename "data/series.yml"))
 
-(defun tor-licenses-list ()
+(defun jnf/tor-licenses-list ()
   "Return a list of available licenses for TakeOnRules.com."
     (tor-list-by-key-from-filename :key "Key" :filename "data/licenses.yml"))
 
-(defun tor-page-relative-pathname-list ()
+(defun jnf/tor-page-relative-pathname-list ()
   "Return a list of pages for TakeOnRules.com."
   (split-string-and-unquote
    (let ((default-directory "~/git/takeonrules.github.io/content"))
      (shell-command-to-string "rg \"^title: \" --files-with-matches | sort"))))
 
-(defun tor-asset-relative-pathname-list ()
+(defun jnf/tor-asset-relative-pathname-list ()
   "Return a list of image filenames for TakeOnRules.com."
   (split-string-and-unquote
    (let ((default-directory "~/git/takeonrules.github.io/assets/images"))
