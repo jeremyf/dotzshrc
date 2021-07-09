@@ -46,25 +46,42 @@ No effort is made to check if this is a post."
     (replace-regexp "^tags:$" (concat "tags:" to-insert) nil 0 (point-max))
     (goto-char (+ saved-point (length to-insert)))))
 
+(cl-defun tor-wrap-with-text (&key before after strategy)
+  "Wrap the STRATEGY determined region with the BEFORE and AFTER text.
+
+Valid STRATEGY options are: `:lineOrRegion', `:pointOrRegion'.
+
+TODO: I would love create a lookup table for the case statement,
+as the behavior's well defined."
+  (pcase strategy
+    (:lineOrRegion (pcase-let* ((origin (point))
+               (`(,begin . ,end) (crux-get-positions-of-line-or-region)))
+                     (goto-char end)
+                     (insert after)
+                     (goto-char begin)
+                     (insert before)))
+    (:pointOrRegion (let* ((begin (if (use-region-p) (region-beginning) (point)))
+                           (end (if (use-region-p) (region-end) (point))))
+                      (goto-char end)
+                      (insert after)
+                      (goto-char begin)
+                      (insert before)))))
+
 (defun tor-wrap-as-marginnote-dwim ()
   "Wrap the line or current region as a marginnote."
   (interactive)
-  (pcase-let* ((origin (point))
-               (`(,beg . ,end) (crux-get-positions-of-line-or-region)))
-    (goto-char end)
-    (insert "\n{{< /marginnote >}}")
-    (goto-char beg)
-    (insert "{{< marginnote >}}\n")))
+  (tor-wrap-with-text
+   :before "{{< marginnote >}}\n"
+   :after "\n{{< /marginnote >}}"
+   :strategy :lineOrRegion))
 
 (defun tor-wrap-as-sidenote-dwim ()
   "Wrap the line or current region as a sidenote."
   (interactive)
-  (pcase-let* ((origin (point))
-               (`(,beg . ,end) (crux-get-positions-of-line-or-region)))
-    (goto-char end)
-    (insert "\n{{< /sidenote >}}")
-    (goto-char beg)
-    (insert "{{< sidenote >}}\n")))
+  (tor-wrap-with-text
+   :before "{{< sidenote >}}"
+   :after "{{< /sidenote >}}"
+   :strategy :pointOrRegion))
 
 (defun tor-cite-active-region-dwim (url)
   "Wrap current region (or point) in a `CITE' and optional `A' tag with URL.
@@ -87,23 +104,18 @@ CITE and A tag."
   ;; change the contents such that the END position was no longer
   ;; accurate.  So instead, we append at the END position, hop back to
   ;; the START position and append to the START position.
-  (let* ((start (if (use-region-p) (region-beginning) (point)))
-         (end (if (use-region-p) (region-end) (point))))
-    (if (eq (length url) 0)
-        (progn
-          (goto-char end)
-          (insert "</cite>")
-          (goto-char start)
-          (insert (concat
-                   "<cite>")))
-      (progn
-        (goto-char end)
-        (insert "</a></cite>")
-        (goto-char start)
-        (insert (concat
+  (if (eq (length url) 0)
+      (tor-wrap-with-text
+       :before "{{< cite >}}"
+       :after "{{< /cite >}}"
+       :strategy :pointOrRegion)
+    (tor-wrap-with-text
+     :before (concat
                  "<cite><a href=\""
                  url
-                 "\" class=\"u-url p-name\" rel=\"cite\">"))))))
+                 "\" class=\"u-url p-name\" rel=\"cite\">")
+     :after "</a></cite>"
+     :strategy :pointOrRegion)))
 
 (defun tor-sync ()
   "Synchronize TakeOnRules.com repositories."
