@@ -31,6 +31,10 @@
 (use-package writeroom-mode
   :straight t)
 
+(use-package vi-tilde-fringe
+  :straight t
+  :hook ((fundamental-mode) . vi-tilde-fringe-mode))
+
 ;; I don't use a lot of folding, this allows me to type C-RET and fold
 ;; the current block.  There's more it can do but for now that's
 ;; enough
