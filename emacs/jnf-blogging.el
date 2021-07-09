@@ -60,6 +60,12 @@ as the behavior's well defined."
                      (insert after)
                      (goto-char begin)
                      (insert before)))
+    (:sentenceOrRegion (let* ((begin (if (use-region-p) (region-beginning) (car (bounds-of-thing-at-point 'sentence))))
+                              (end (if (use-region-p) (region-end) (cdr (bounds-of-thing-at-point 'sentence)))))
+                         (goto-char end)
+                         (insert after)
+                         (goto-char begin)
+                         (insert before)))
     (:pointOrRegion (let* ((begin (if (use-region-p) (region-beginning) (point)))
                            (end (if (use-region-p) (region-end) (point))))
                       (goto-char end)
@@ -81,7 +87,7 @@ as the behavior's well defined."
   (tor-wrap-with-text
    :before "{{< sidenote >}}"
    :after "{{< /sidenote >}}"
-   :strategy :pointOrRegion))
+   :strategy :sentenceOrRegion))
 
 (defun tor-cite-active-region-dwim (url)
   "Wrap current region (or point) in a `CITE' and optional `A' tag with URL.
@@ -110,9 +116,7 @@ CITE and A tag."
        :after "{{< /cite >}}"
        :strategy :pointOrRegion)
     (tor-wrap-with-text
-     :before (concat
-                 "<cite><a href=\""
-                 url
+     :before (concat "<cite><a href=\"" url
                  "\" class=\"u-url p-name\" rel=\"cite\">")
      :after "</a></cite>"
      :strategy :pointOrRegion)))
