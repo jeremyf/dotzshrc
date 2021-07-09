@@ -21,11 +21,12 @@
 (defvar jnf/tor-menu--title (with-faicon "pencil-square" "Take on Rules" 1 -0.05))
 (pretty-hydra-define jnf/tor-subject-menu (:foreign-keys warn :title jnf/tor-menu--title :quit-key "q")
   ("Posts"
-   (("c" tor-cite-active-region-dwim "Cite region…")
+   (("a" tor-link-active-region-dwim "A link at point or region…")
+    ("c" tor-cite-active-region-dwim "Cite point or region…")
+    ("m" tor-wrap-as-marginnote-dwim "Margin-note line or region…")
     ("n" tor-post-new "New post…")
-    ("m" tor-wrap-as-marginnote-dwim "Margin note region…")
     ("r" jnf/retitle-tor-content "Re-title content…")
-    ("s" tor-wrap-as-sidenote-dwim "Sidenote region…")
+    ("s" tor-wrap-as-sidenote-dwim "Side-note sentence or region…")
     ("t" tor-tag-post "Tag post…"))))
 
 (defun tor-post-new (title)
@@ -88,6 +89,29 @@ as the behavior's well defined."
    :before "{{< sidenote >}}"
    :after "{{< /sidenote >}}"
    :strategy :sentenceOrRegion))
+
+(defun tor-link-active-region-dwim (url)
+  "Wrap current region (or point) in an `A' tag with URL.
+
+For the URL:
+
+- If `car' in `kill-ring' starts with \"http\", then use that as the URL.
+- Otherwise prompt for a URL.
+
+If the URL is an empty string, then send a message.  Else, if we
+have a non-0 length URL, use the URL and wrap the region in an A
+tag."
+  (interactive (list
+                (if (string= (substring
+                              (substring-no-properties (car kill-ring)) 0 4) "http")
+                    (substring-no-properties (car kill-ring))
+                  (read-string "URL (optional): "))))
+  (if (eq (length url) 0)
+      (message "No URL to use for A-tag creation")
+    (tor-wrap-with-text
+     :before (concat "<a href=\"" url "\">")
+     :after "</a>"
+     :strategy :pointOrRegion)))
 
 (defun tor-cite-active-region-dwim (url)
   "Wrap current region (or point) in a `CITE' and optional `A' tag with URL.
