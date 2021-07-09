@@ -25,6 +25,7 @@
     ("n" tor-post-new "New post…")
     ("m" tor-wrap-as-marginnote-dwim "Margin note region…")
     ("r" jnf/retitle-tor-content "Re-title content…")
+    ("s" tor-wrap-as-sidenote-dwim "Sidenote region…")
     ("t" tor-tag-post "Tag post…"))))
 
 (defun tor-post-new (title)
@@ -54,6 +55,16 @@ No effort is made to check if this is a post."
     (insert "\n{{< /marginnote >}}")
     (goto-char beg)
     (insert "{{< marginnote >}}\n")))
+
+(defun tor-wrap-as-sidenote-dwim ()
+  "Wrap the line or current region as a sidenote."
+  (interactive)
+  (pcase-let* ((origin (point))
+               (`(,beg . ,end) (crux-get-positions-of-line-or-region)))
+    (goto-char end)
+    (insert "\n{{< /sidenote >}}")
+    (goto-char beg)
+    (insert "{{< sidenote >}}\n")))
 
 (defun tor-cite-active-region-dwim (url)
   "Wrap current region (or point) in a `CITE' and optional `A' tag with URL.
