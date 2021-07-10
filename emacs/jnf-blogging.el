@@ -192,6 +192,14 @@ We'll pass the `CITETITLE', `CITEAUTHOR', and `CITEURL' to
    :citeURL citeURL
    :citeAuthor citeAuthor))
 
+(defun jnf/tor-post-titleize (title)
+  "Convert TITLE to correct format."
+  (interactive)
+  (replace-regexp-in-string
+   "\"\\(\\w+\\)\""
+   "“\\1”"
+   (s-replace "'" "’" title)))
+
 (cl-defun jnf/tor-post---create-or-append (title &key tags series toc citeTitle citeURL citeAuthor subheading)
   "Create or append a post with `TITLE'.
 
@@ -224,7 +232,7 @@ If there's an active region, select that text and place it."
                  "\nlayout: post"
                  "\nlicenses:\n- all-rights-reserved"
                  "\nslug: " (format "%s" slug)
-                 "\ntitle: '" (s-replace "'" "’" title) "'"
+                 "\ntitle: '" (jnf/tor-post-titleize title) "'"
                  "\ntype: post"
                  (if series (concat "\nseries: " series))
                  (if toc (concat "\ntoc: true"))
@@ -338,7 +346,7 @@ If there's an active region, select that text and place it."
 This function will: replace the content's title, update the slug,
 and rename the buffer."
     (interactive "sTitle: ")
-    (let* ((metadataTitle (concat "title: '" (s-replace "'" "’" title) "'"))
+    (let* ((metadataTitle (concat "title: '" (jnf/tor-post-titleize title) "'"))
            (slug (s-replace "'" "" (s-dashed-words title)))
            (metadataSlug (concat "slug: " slug))
            (filename (buffer-file-name))
