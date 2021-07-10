@@ -72,7 +72,11 @@ No effort is made to check if this is a post."
 (cl-defun jnf/tor-wrap-with-text (&key before after strategy)
   "Wrap the STRATEGY determined region with the BEFORE and AFTER text.
 
-Valid STRATEGY options are: `:lineOrRegion', `:pointOrRegion'.
+Valid STRATEGY options are:
+
+* `:lineOrRegion'
+* `:pointOrRegion'
+* `:sentenceOrRegion'
 
 TODO: I would love create a lookup table for the case statement,
 as the behavior's well defined."
