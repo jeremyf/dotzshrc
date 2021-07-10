@@ -242,7 +242,7 @@ Version 2016-07-18"
 (org-roam-inserter-fn "jeremy-friesen-consulting")
 
 (defvar jnf/org-subject-menu--title (with-faicon "book" "Org Subject Menu" 1 -0.05))
-(pretty-hydra-define jnf/org-subject-menu (:foreign-keys warn :title jnf/org-subject-menu--title :quit-key "q")
+(pretty-hydra-define jnf/org-subject-menu (:foreign-keys warn :title jnf/org-subject-menu--title :quit-key "q" :exit t)
   (
    "Permanent"
    (("b" org-roam-insert--filter-with--permanent-bibliographies "Bibliography")
