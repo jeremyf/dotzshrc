@@ -25,11 +25,13 @@
   ("Posts"
    (("a" jnf/tor-link-active-region-dwim "A link at point or region…")
     ("c" jnf/tor-cite-active-region-dwim "Cite point or region…")
+    ("d" jnf/tor-date-it "Date point or region…")
     ("m" jnf/tor-wrap-as-marginnote-dwim "Margin-note line or region…")
     ("n" jnf/tor-post-new "New post…")
     ("r" jnf/retitle-tor-content "Re-title content…")
     ("s" jnf/tor-wrap-as-sidenote-dwim "Side-note sentence or region…")
-    ("t" jnf/tor-tag-post "Tag post…"))))
+    ("t" jnf/tor-tag-post "Tag post…")
+    ("w" jnf/wrap-in-html-tag "Wrap point or region…"))))
 
 (defun jnf/tor-post-new (title)
   "Create and visit a new draft post.  Prompt for a `TITLE'.
@@ -38,6 +40,25 @@ The file for the blog post conforms to the path schema of posts
 for TakeOnRules.com."
   (interactive "sTitle: ")
   (jnf/tor-post---create-or-append title))
+
+(defun jnf/wrap-in-html-tag (tag)
+  "Wrap the point or region with the given TAG."
+  (interactive "sTag: ")
+  (jnf/tor-wrap-with-text
+   :before (concat "<" tag ">")
+   :after (concat "</" tag ">")
+   :strategy :pointOrRegion))
+
+(defun jnf/tor-date-it (date)
+  "Wrap the point or region with the given DATE."
+  (interactive (list
+                (read-string
+                 (concat "Date (default \"" (format-time-string "%Y-%m-%d") "\"): ")
+                 nil nil (format-time-string "%Y-%m-%d"))))
+  (jnf/tor-wrap-with-text
+   :before (concat "<time datetime=\"" date "\">")
+   :after "</time>"
+   :strategy :pointOrRegion))
 
 (defun jnf/tor-tag-post (tag)
   "Apply the TAG to the current TakeOnRules.com post.
