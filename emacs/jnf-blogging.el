@@ -35,13 +35,13 @@
 The file for the blog post conforms to the path schema of posts
 for TakeOnRules.com."
   (interactive "sTitle: ")
-  (tor-post---create-or-append title))
+  (jnf/tor-post---create-or-append title))
 
-(defun jfn/tor-tag-post (tag)
+(defun jnf/tor-tag-post (tag)
   "Apply the TAG to the current TakeOnRules.com post.
 
 No effort is made to check if this is a post."
-  (interactive (list (completing-read "Tag: " (tor-tags-list))))
+  (interactive (list (completing-read "Tag: " (jnf/tor-tags-list))))
   (let ((saved-point (point))
         (to-insert (concat "\n- " tag)))
     (replace-regexp "^tags:$" (concat "tags:" to-insert) nil 0 (point-max))
@@ -77,7 +77,7 @@ as the behavior's well defined."
 (defun jnf/tor-wrap-as-marginnote-dwim ()
   "Wrap the line or current region as a marginnote."
   (interactive)
-  (tor-wrap-with-text
+  (jnf/tor-wrap-with-text
    :before "{{< marginnote >}}\n"
    :after "\n{{< /marginnote >}}"
    :strategy :lineOrRegion))
@@ -85,7 +85,7 @@ as the behavior's well defined."
 (defun jnf/tor-wrap-as-sidenote-dwim ()
   "Wrap the line or current region as a sidenote."
   (interactive)
-  (tor-wrap-with-text
+  (jnf/tor-wrap-with-text
    :before "{{< sidenote >}}"
    :after "{{< /sidenote >}}"
    :strategy :sentenceOrRegion))
@@ -108,7 +108,7 @@ tag."
                   (read-string "URL (optional): "))))
   (if (eq (length url) 0)
       (message "No URL to use for A-tag creation")
-    (tor-wrap-with-text
+    (jnf/tor-wrap-with-text
      :before (concat "<a href=\"" url "\">")
      :after "</a>"
      :strategy :pointOrRegion)))
@@ -135,11 +135,11 @@ CITE and A tag."
   ;; accurate.  So instead, we append at the END position, hop back to
   ;; the START position and append to the START position.
   (if (eq (length url) 0)
-      (tor-wrap-with-text
+      (jnf/tor-wrap-with-text
        :before "{{< cite >}}"
        :after "{{< /cite >}}"
        :strategy :pointOrRegion)
-    (tor-wrap-with-text
+    (jnf/tor-wrap-with-text
      :before (concat "<cite><a href=\"" url
                  "\" class=\"u-url p-name\" rel=\"cite\">")
      :after "</a></cite>"
@@ -277,27 +277,27 @@ If there's an active region, select that text and place it."
 ;; Used in ./emacs/snippets/text-mode/tag
 (defun jnf/tor-tags-list ()
   "Return a list of tags from TakeOnRules.com."
-  (tor-list-by-key-from-filename :key "tag" :filename "data/glossary.yml"))
+  (jnf/tor-list-by-key-from-filename :key "tag" :filename "data/glossary.yml"))
 
 (defun jnf/tor-game-list ()
   "Return a list of games from TakeOnRules.com."
-  (tor-list-by-key-from-filename :key "game" :filename "data/glossary.yml"))
+  (jnf/tor-list-by-key-from-filename :key "game" :filename "data/glossary.yml"))
 
 (defun jnf/tor-glossary-title-list ()
   "Return a list of titles from TakeOnRules.com."
-  (tor-list-by-key-from-filename :key "title" :filename "data/glossary.yml"))
+  (jnf/tor-list-by-key-from-filename :key "title" :filename "data/glossary.yml"))
 
 (defun jnf/tor-glossary-key-list ()
   "Return a list of keys from TakeOnRules.com glossary."
-  (tor-list-by-key-from-filename :key "key" :filename "data/glossary.yml"))
+  (jnf/tor-list-by-key-from-filename :key "key" :filename "data/glossary.yml"))
 
 (defun jnf/tor-series-list ()
   "Return a list of series from TakeOnRules.com."
-  (tor-list-by-key-from-filename :key "key" :filename "data/series.yml"))
+  (jnf/tor-list-by-key-from-filename :key "key" :filename "data/series.yml"))
 
 (defun jnf/tor-licenses-list ()
   "Return a list of available licenses for TakeOnRules.com."
-    (tor-list-by-key-from-filename :key "Key" :filename "data/licenses.yml"))
+    (jnf/tor-list-by-key-from-filename :key "Key" :filename "data/licenses.yml"))
 
 (defun jnf/tor-page-relative-pathname-list ()
   "Return a list of pages for TakeOnRules.com."
