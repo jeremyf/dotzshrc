@@ -179,11 +179,11 @@ for the blog post conforms to the path schema of posts for
 TakeOnRules.com.
 
 We'll pass the `CITETITLE', `CITEAUTHOR', and `CITEURL' to
-`tor-post---create-or-append'"
+`jnf/tor-post---create-or-append'"
   (interactive (list (if (use-region-p)
                          (read-string "Sub-Heading: ")
                        nil)))
-  (tor-post---create-or-append
+  (jnf/tor-post---create-or-append
    (format-time-string "Amplifying the Blogosphere (v%Y-%m-%d)")
    :toc "true"
    :subheading subheading
