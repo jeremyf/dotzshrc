@@ -337,8 +337,8 @@ If there's an active region, select that text and place it."
 This function will: replace the content's title, update the slug,
 and rename the buffer."
     (interactive "sTitle: ")
-    (let* ((metadataTitle (concat "title: '" title "'"))
-           (slug (s-dashed-words title))
+    (let* ((metadataTitle (concat "title: '" (s-replace "'" "’" title) "'"))
+           (slug (s-replace "'" "" (s-dashed-words title)))
            (metadataSlug (concat "slug: " slug))
            (filename (buffer-file-name))
            (new-filename (concat (file-name-directory filename)
