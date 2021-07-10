@@ -200,6 +200,10 @@ We'll pass the `CITETITLE', `CITEAUTHOR', and `CITEURL' to
    "“\\1”"
    (s-replace "'" "’" title)))
 
+(defun jnf/tor-slugify (string)
+  "Convert STRING to appropriate slug."
+  (s-replace "'" "" (s-dashed-words string)))
+
 (cl-defun jnf/tor-post---create-or-append (title &key tags series toc citeTitle citeURL citeAuthor subheading)
   "Create or append a post with `TITLE'.
 
@@ -219,7 +223,7 @@ If there's an active region, select that text and place it."
                                     "/content/posts/"
                                     (format-time-string "%Y/")))
 
-         (slug (s-replace "'" "" (s-dashed-words title)))
+         (slug (jnf/tor-slugify title))
          (fpath (expand-file-name
                  (concat default-directory slug ".md"))))
     ;; If the file does not exist, create the file with the proper
@@ -347,12 +351,11 @@ This function will: replace the content's title, update the slug,
 and rename the buffer."
     (interactive "sTitle: ")
     (let* ((metadataTitle (concat "title: '" (jnf/tor-post-titleize title) "'"))
-           (slug (s-replace "'" "" (s-dashed-words title)))
+           (slug (jnf/tor-slugify title))
            (metadataSlug (concat "slug: " slug))
            (filename (buffer-file-name))
            (new-filename (concat (file-name-directory filename)
-                                 slug
-                                 ".md")))
+                                 slug ".md")))
 
       ;; Replace the title metadata entry
       (goto-char (point-min))
