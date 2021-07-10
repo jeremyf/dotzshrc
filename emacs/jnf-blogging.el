@@ -39,7 +39,7 @@
 The file for the blog post conforms to the path schema of posts
 for TakeOnRules.com."
   (interactive "sTitle: ")
-  (jnf/tor-post---create-or-append title))
+  (jnf/tor-post---create-or-append :title title))
 
 (defun jnf/tor-wrap-in-html-tag (tag)
   "Wrap the point or region with the given TAG."
@@ -207,7 +207,7 @@ We'll pass the `CITETITLE', `CITEAUTHOR', and `CITEURL' to
                          (read-string "Sub-Heading: ")
                        nil)))
   (jnf/tor-post---create-or-append
-   (format-time-string "Amplifying the Blogosphere (v%Y-%m-%d)")
+   :title (format-time-string "Amplifying the Blogosphere (v%Y-%m-%d)")
    :toc "true"
    :subheading subheading
    :series "amplifying-the-blogosphere"
@@ -227,7 +227,7 @@ We'll pass the `CITETITLE', `CITEAUTHOR', and `CITEURL' to
   "Convert STRING to appropriate slug."
   (s-replace "'" "" (s-dashed-words string)))
 
-(cl-defun jnf/tor-post---create-or-append (title &key tags series toc citeTitle citeURL citeAuthor subheading)
+(cl-defun jnf/tor-post---create-or-append (&key title tags series toc citeTitle citeURL citeAuthor subheading)
   "Create or append a post with `TITLE'.
 
 The following keys are optional:
