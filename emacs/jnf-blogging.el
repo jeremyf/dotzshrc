@@ -23,15 +23,15 @@
 (defvar jnf/tor-menu--title (with-faicon "pencil-square" "Take on Rules" 1 -0.05))
 (pretty-hydra-define jnf/tor-subject-menu (:foreign-keys warn :title jnf/tor-menu--title :quit-key "q" :exit t)
   ("Posts"
-   (("a" jnf/tor-link-active-region-dwim "A link at point or region…")
-    ("c" jnf/tor-cite-active-region-dwim "Cite point or region…")
-    ("d" jnf/tor-date-it "Date point or region…")
+   (("a" jnf/tor-wrap-link-active-region-dwim "A link at point or region…")
+    ("c" jnf/tor-wrap-cite-active-region-dwim "Cite point or region…")
+    ("d" jnf/tor-wrap-date "Date point or region…")
     ("m" jnf/tor-wrap-as-marginnote-dwim "Margin-note line or region…")
     ("n" jnf/tor-post-new "New post…")
-    ("r" jnf/retitle-tor-content "Re-title content…")
+    ("r" jnf/tor-retitle-post "Re-title post…")
     ("s" jnf/tor-wrap-as-sidenote-dwim "Side-note sentence or region…")
     ("t" jnf/tor-tag-post "Tag post…")
-    ("w" jnf/wrap-in-html-tag "Wrap point or region…"))))
+    ("w" jnf/tor-wrap-in-html-tag "Wrap point or region…"))))
 
 (defun jnf/tor-post-new (title)
   "Create and visit a new draft post.  Prompt for a `TITLE'.
@@ -41,7 +41,7 @@ for TakeOnRules.com."
   (interactive "sTitle: ")
   (jnf/tor-post---create-or-append title))
 
-(defun jnf/wrap-in-html-tag (tag)
+(defun jnf/tor-wrap-in-html-tag (tag)
   "Wrap the point or region with the given TAG."
   (interactive "sTag: ")
   (jnf/tor-wrap-with-text
@@ -49,14 +49,14 @@ for TakeOnRules.com."
    :after (concat "</" tag ">")
    :strategy :pointOrRegion))
 
-(defun jnf/tor-date-it (date)
+(defun jnf/tor-wrap-date (date)
   "Wrap the point or region with the given DATE."
   (interactive (list
                 (read-string
                  (concat "Date (default \"" (format-time-string "%Y-%m-%d") "\"): ")
                  nil nil (format-time-string "%Y-%m-%d"))))
   (jnf/tor-wrap-with-text
-   :before (concat "<time datetime=\"" date "\">")
+   :before (concat "<time datetime=\"" date "\" title=\"" date "\">")
    :after "</time>"
    :strategy :pointOrRegion))
 
@@ -113,7 +113,7 @@ as the behavior's well defined."
    :after "{{< /sidenote >}}"
    :strategy :sentenceOrRegion))
 
-(defun jnf/tor-link-active-region-dwim (url)
+(defun jnf/tor-wrap-link-active-region-dwim (url)
   "Wrap current region (or point) in an `A' tag with URL.
 
 For the URL:
@@ -141,7 +141,7 @@ tag."
         (substring-no-properties (car kill-ring))
       (read-string "URL (optional): "))))
 
-(defun jnf/tor-cite-active-region-dwim (url)
+(defun jnf/tor-wrap-cite-active-region-dwim (url)
   "Wrap current region (or point) in a `CITE' and optional `A' tag with URL.
 
 For the URL:
@@ -367,7 +367,7 @@ If there's an active region, select that text and place it."
     (message "%s => %s" expression result)))
 (global-set-key (kbd "C-s-r") 'jnf/roll-expression)
 
-(defun jnf/retitle-tor-content (title)
+(defun jnf/tor-retitle-post (title)
   "Replace the given buffer's title with the new `TITLE'.
 
 This function will: replace the content's title, update the slug,
