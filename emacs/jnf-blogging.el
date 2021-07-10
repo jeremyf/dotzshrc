@@ -41,11 +41,11 @@ for TakeOnRules.com."
   (interactive "sTitle: ")
   (jnf/tor-post---create-or-append :title title))
 
-(defun jnf/tor-wrap-in-html-tag (tag)
-  "Wrap the point or region with the given TAG."
-  (interactive "sTag: ")
+(defun jnf/tor-wrap-in-html-tag (tag &optional attributes)
+  "Wrap the point or region with the given TAG with optional ATTRIBUTES."
+  (interactive "sTag: \nsAttributes (optional): ")
   (jnf/tor-wrap-with-text
-   :before (concat "<" tag ">")
+   :before (concat "<" tag (if (s-blank? attributes) "" (concat " " attributes)) ">")
    :after (concat "</" tag ">")
    :strategy :pointOrRegion))
 
@@ -55,10 +55,9 @@ for TakeOnRules.com."
                 (read-string
                  (concat "Date (default \"" (format-time-string "%Y-%m-%d") "\"): ")
                  nil nil (format-time-string "%Y-%m-%d"))))
-  (jnf/tor-wrap-with-text
-   :before (concat "<time datetime=\"" date "\" title=\"" date "\">")
-   :after "</time>"
-   :strategy :pointOrRegion))
+  (jnf/tor-wrap-in-html-tag
+   "time"
+   (concat "datetime=\"" date "\" title=\"" date "\"")))
 
 (defun jnf/tor-tag-post (tag)
   "Apply the TAG to the current TakeOnRules.com post.
