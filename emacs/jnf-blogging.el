@@ -101,17 +101,22 @@ For the URL:
 If the URL is an empty string, then send a message.  Else, if we
 have a non-0 length URL, use the URL and wrap the region in an A
 tag."
-  (interactive (list
-                (if (string= (substring
-                              (substring-no-properties (car kill-ring)) 0 4) "http")
-                    (substring-no-properties (car kill-ring))
-                  (read-string "URL (optional): "))))
+  (interactive (list (jnf/tor-prompt-or-kill-ring-for-url)))
   (if (eq (length url) 0)
       (message "No URL to use for A-tag creation")
     (jnf/tor-wrap-with-text
      :before (concat "<a href=\"" url "\">")
      :after "</a>"
      :strategy :pointOrRegion)))
+
+(defun jnf/tor-prompt-or-kill-ring-for-url ()
+  "Return a URL, either from the kill ring or prompted."
+  (let ((car-of-kill-ring (substring-no-properties (car kill-ring))))
+    ;; Need to ensure we're not dealing with something out of bounds
+    (if (and (> (length car-of-kill-ring) 3)
+             (string= (substring car-of-kill-ring 0 4) "http"))
+        (substring-no-properties (car kill-ring))
+      (read-string "URL (optional): "))))
 
 (defun jnf/tor-cite-active-region-dwim (url)
   "Wrap current region (or point) in a `CITE' and optional `A' tag with URL.
@@ -124,11 +129,7 @@ For the URL:
 If the URL an empty string, then wrap the current region or point
 in a CITE tag. Else, if we have a non-0 length URL, wrap it in
 CITE and A tag."
-  (interactive (list
-                (if (string= (substring
-                              (substring-no-properties (car kill-ring)) 0 4) "http")
-                    (substring-no-properties (car kill-ring))
-                  (read-string "URL (optional): "))))
+  (interactive (list (jnf/tor-prompt-or-kill-ring-for-url)))
 
   ;; Were we to start writing at the START position, we'd invariably
   ;; change the contents such that the END position was no longer
@@ -136,8 +137,8 @@ CITE and A tag."
   ;; the START position and append to the START position.
   (if (eq (length url) 0)
       (jnf/tor-wrap-with-text
-       :before "{{< cite >}}"
-       :after "{{< /cite >}}"
+       :before "<cite>"
+       :after "</cite >"
        :strategy :pointOrRegion)
     (jnf/tor-wrap-with-text
      :before (concat "<cite><a href=\"" url
