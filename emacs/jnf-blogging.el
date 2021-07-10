@@ -18,8 +18,10 @@
          ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "/usr/local/bin/pandoc"))
 
+;; These menu commands, plus some yasnippets, are some useful
+;; functions for helping my blogging effort.
 (defvar jnf/tor-menu--title (with-faicon "pencil-square" "Take on Rules" 1 -0.05))
-(pretty-hydra-define jnf/tor-subject-menu (:foreign-keys warn :title jnf/tor-menu--title :quit-key "q")
+(pretty-hydra-define jnf/tor-subject-menu (:foreign-keys warn :title jnf/tor-menu--title :quit-key "q" :exit t)
   ("Posts"
    (("a" jnf/tor-link-active-region-dwim "A link at point or region…")
     ("c" jnf/tor-cite-active-region-dwim "Cite point or region…")
