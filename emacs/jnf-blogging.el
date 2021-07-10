@@ -210,7 +210,8 @@ If there's an active region, select that text and place it."
   (let* ((default-directory (concat "~/git/takeonrules.github.io/"
                                     "/content/posts/"
                                     (format-time-string "%Y/")))
-         (slug (s-dashed-words title))
+
+         (slug (s-replace "'" "" (s-dashed-words title)))
          (fpath (expand-file-name
                  (concat default-directory slug ".md"))))
     ;; If the file does not exist, create the file with the proper
@@ -223,7 +224,7 @@ If there's an active region, select that text and place it."
                  "\nlayout: post"
                  "\nlicenses:\n- all-rights-reserved"
                  "\nslug: " (format "%s" slug)
-                 "\ntitle: '" title "'"
+                 "\ntitle: '" (s-replace "'" "’" title) "'"
                  "\ntype: post"
                  (if series (concat "\nseries: " series))
                  (if toc (concat "\ntoc: true"))
