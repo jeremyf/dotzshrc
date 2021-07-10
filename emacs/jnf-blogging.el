@@ -191,8 +191,8 @@ CITE and A tag."
       " && git push -u --force-with-lease")))
   (message "Finished synchronizing TakeOnRules.com local git repos."))
 
-(global-set-key (kbd "s-7") 'tor-post-amplifying-the-blogosphere)
-(global-set-key (kbd "<f7>") 'tor-post-amplifying-the-blogosphere)
+(global-set-key (kbd "s-7") 'jnf/tor-post-amplifying-the-blogosphere)
+(global-set-key (kbd "<f7>") 'jnf/tor-post-amplifying-the-blogosphere)
 
 (cl-defun jnf/tor-post-amplifying-the-blogosphere (subheading &key citeTitle citeURL citeAuthor)
   "Create and visit draft post for amplifying the blogosphere.
