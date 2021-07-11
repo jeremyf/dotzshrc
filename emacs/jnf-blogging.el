@@ -221,8 +221,9 @@ We'll pass the `CITETITLE', `CITEAUTHOR', and `CITEURL' to
 
 (defun jnf/tor-post-titleize (title)
   "Convert TITLE to correct format."
+  (message "Titleizing...")
   (replace-regexp-in-string
-   "\"\\(\\w+\\)\""
+   "\"\\([^\"]+\\)\""
    "“\\1”"
    (s-replace "'" "’" title)))
 
