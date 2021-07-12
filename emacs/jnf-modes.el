@@ -28,7 +28,7 @@
 (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
 
 (use-package yaml-mode
-  :bind ("C-c t" . jnf/tor-glossary-entry)
+  :bind ("C-c t" . jnf/tor-glossary-add-entry)
   :straight t)
 
 (use-package plantuml-mode

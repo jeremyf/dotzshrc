@@ -26,6 +26,7 @@
    (("a" jnf/tor-wrap-link-active-region-dwim "A link at point or region…")
     ("c" jnf/tor-wrap-cite-active-region-dwim "Cite point or region…")
     ("d" jnf/tor-wrap-date "Date point or region…")
+    ("g" jnf/tor-find-glossary-and-add-entry "Add glossary entry…")
     ("m" jnf/tor-wrap-as-marginnote-dwim "Margin-note line or region…")
     ("n" jnf/tor-post-new "New post…")
     ("r" jnf/tor-retitle-post "Re-title post…")
@@ -144,13 +145,19 @@ tag."
         (substring-no-properties (car kill-ring))
       (read-string "URL (optional): "))))
 
-(defun jnf/tor-glossary-entry (title)
+(defun jnf/tor-find-glossary-and-add-entry (title)
+  "Find TakeOnRules glossary and add an entry with TITLE."
+  (interactive "sTitle: ")
+  (find-file "~/git/takeonrules.github.io/data/glossary.yml")
+  (jnf/tor-glossary-add-entry title))
+
+(defun jnf/tor-glossary-add-entry (title)
   "Create an glossary entry with the given TITLE."
   (interactive "sTitle: ")
   (let ((key (upcase (s-dashed-words title))))
     (end-of-buffer)
     (insert (concat
-             "\n- title: " title
+             "- title: " title
              "\n  key: " key))))
 
 (defun jnf/tor-wrap-cite-active-region-dwim (url)
