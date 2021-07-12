@@ -44,7 +44,7 @@ for TakeOnRules.com."
 
 (defun jnf/tor-wrap-in-html-tag (tag &optional attributes)
   "Wrap the point or region with the given TAG with optional ATTRIBUTES."
-  (interactive "sTag: \nsAttributes (optional): ")
+  (interactive "sHTML Tag: \nsAttributes (optional): ")
   (jnf/tor-wrap-with-text
    :before (concat "<" tag (if (s-blank? attributes) "" (concat " " attributes)) ">")
    :after (concat "</" tag ">")
@@ -147,13 +147,13 @@ tag."
 
 (defun jnf/tor-find-glossary-and-add-entry (title)
   "Find TakeOnRules glossary and add an entry with TITLE."
-  (interactive "sTitle: ")
+  (interactive "sGlossary Entry's Title: ")
   (find-file "~/git/takeonrules.github.io/data/glossary.yml")
   (jnf/tor-glossary-add-entry title))
 
 (defun jnf/tor-glossary-add-entry (title)
   "Create an glossary entry with the given TITLE."
-  (interactive "sTitle: ")
+  (interactive "sGlossary Entry's Title: ")
   (let ((key (upcase (s-dashed-words title))))
     (end-of-buffer)
     (insert (concat
