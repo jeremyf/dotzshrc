@@ -41,11 +41,6 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     if [ -d $HB_PATH/lib/pkgconfig ]; then
         export PKG_CONFIG_PATH=/opt/local/lib/pkgconfig
     fi
-
-    if [ -d $HB_PATH/lib/pkgconfig ]; then
-        export PKG_CONFIG_PATH=/opt/local/lib/pkgconfig
-    fi
-    export PATH="$(brew --prefix openssl@1.1)/bin:$PATH"
 fi
 
 if [ -d $HOME/.emacs.d/bin ]; then
