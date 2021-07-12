@@ -5,6 +5,7 @@
       '(
         beginning-of-buffer
         comment-line
+        consult-yank
         crux-move-beginning-of-line
         duplicate-line
         electric-pair-delete-pair
