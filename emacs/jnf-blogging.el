@@ -381,13 +381,13 @@ If there's an active region, select that text and place it."
 
 (defun jnf/roll (sided)
   "Roll an n `SIDED' die."
-  (interactive "sSides: ")
+  (interactive "sDice Sides: ")
   (let ((result (+ 1 (random (cl-parse-integer sided)))))
     (message "d%s => %s" sided result)))
 
 (defun jnf/roll-expression (expression)
   "Roll the `EXPRESSION'."
-  (interactive "sExpression: ")
+  (interactive "sDice Expression: ")
   (-let* (((rolls . result) (org-d20--roll expression)))
     (message "%s => %s" expression result)))
 (global-set-key (kbd "C-s-r") 'jnf/roll-expression)
@@ -397,7 +397,7 @@ If there's an active region, select that text and place it."
 
 This function will: replace the content's title, update the slug,
 and rename the buffer."
-    (interactive "sTitle: ")
+    (interactive "sNew Post's Title: ")
     (let* ((metadataTitle (concat "title: '" (jnf/tor-post-titleize title) "'"))
            (slug (jnf/tor-slugify title))
            (metadataSlug (concat "slug: " slug))
