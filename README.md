@@ -1,5 +1,12 @@
 A git repository for managing my .zshrc configuration
 
+Two key concepts:
+
+* RUNBOOK.md - this is the software/scripts I install to ensure I have
+  the appropirate dependencies installed.
+* install.rb - this will create the symlinks and ensure your paths,
+  aliases, etc are correct in the terminal.
+
 You can run `ruby install.rb` to create the symlinks into the current
 $HOME file
 
