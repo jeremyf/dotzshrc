@@ -39,7 +39,7 @@
 
 The file for the blog post conforms to the path schema of posts
 for TakeOnRules.com."
-  (interactive "sTitle: ")
+  (interactive "sBlog Post Title: ")
   (jnf/tor-post---create-or-append :title title))
 
 (defun jnf/tor-wrap-in-html-tag (tag &optional attributes)
