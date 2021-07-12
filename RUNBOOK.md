@@ -9,7 +9,6 @@
 *   `brew cask install font-hack-nerd-font`
 *   `brew cask install jumpcut` Multi-paste buffer; set Sticky Bezel and launch at login
 *   `brew install ag` A solid replacement for grep
-*   `brew install rg` A solid replacement for grep
 *   `brew install cmake`
 *   `brew install git`
 *   `brew install git-extras`
