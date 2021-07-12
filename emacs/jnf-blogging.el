@@ -144,6 +144,15 @@ tag."
         (substring-no-properties (car kill-ring))
       (read-string "URL (optional): "))))
 
+(defun jnf/tor-glossary-entry (title)
+  "Create an glossary entry with the given TITLE."
+  (interactive "sTitle: ")
+  (let ((key (upcase (s-dashed-words title))))
+    (end-of-buffer)
+    (insert (concat
+             "\n- title: " title
+             "\n  key: " key))))
+
 (defun jnf/tor-wrap-cite-active-region-dwim (url)
   "Wrap current region (or point) in a `CITE' and optional `A' tag with URL.
 
