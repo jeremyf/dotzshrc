@@ -30,7 +30,8 @@ Or, if you don't want/need a background service you can just run:
 
 
 ## Installing with custom openssl
-## I needed to set some ldflags and cppflags when building the mysql2 gems
+
+I needed to set some ldflags and cppflags when building the mysql2 gems:
 
 `gem install mysql2 -v 0.4.8 -- --with-cflags=\"-I/usr/local/opt/openssl@1.1/include\" --with-ldflags=\"-L/usr/local/opt/openssl@1.1/lib\"`
 

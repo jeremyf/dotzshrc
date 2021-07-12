@@ -1,15 +1,15 @@
 # OS X
 
-Install homebrew - https://brew.sh ; package manager
-Install OhMyZsh - https://github.com/ohmyzsh/ohmyzsh ; zshell option
-Install Powerlevel10k - https://github.com/romkatv/powerlevel10k
-Install MesloLGS NF via Powerlevel10k instructions
-Install Base16 Shell - https://github.com/chriskempson/base16-shell
-Install ImageOptim - https://imageoptim.com/ ; remove image metadata
-
+*   Install homebrew - https://brew.sh ; package manager
+*   Install OhMyZsh - https://github.com/ohmyzsh/ohmyzsh ; zshell option
+*   Install Powerlevel10k - https://github.com/romkatv/powerlevel10k
+*   Install MesloLGS NF via Powerlevel10k instructions
+*   Install Base16 Shell - https://github.com/chriskempson/base16-shell
+*   Install ImageOptim - https://imageoptim.com/ ; remove image metadata
 *   `brew cask install font-hack-nerd-font`
 *   `brew cask install jumpcut` Multi-paste buffer; set Sticky Bezel and launch at login
 *   `brew install ag` A solid replacement for grep
+*   `brew install rg` A solid replacement for grep
 *   `brew install cmake`
 *   `brew install git`
 *   `brew install git-extras`

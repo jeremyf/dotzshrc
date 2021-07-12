@@ -1,4 +1,14 @@
 # For bare-metal emacs
+#
+# There are three context's that I consider for using my text editor
+# of choice:
+#
+
+# * EDITOR - uh? I forget.  I think it's less used for my cases.  (I
+#   use VISUAL and GIT_EDITOR more often.)
+# * VISUAL - this is for visual paging of things like man-pages or
+#   grep results
+# * GIT_EDITOR - this is used for editing your commit messages
 export EDITOR='editor'
 export GIT_EDITOR='git_editor'
 
@@ -19,6 +29,8 @@ alias gwc='git whatchanged -p --abbrev-commit --pretty=medium'
 alias hb="hub browse"
 alias psx="ps ax | ag $1"
 alias rss="$EDITOR --eval \"(rss)\""
+
+# For pandoc on Apple Silicon chips
 alias pand="arch -x86_64 pandoc"
 alias ssh-tor="ssh takeonrules_takeonrules@ssh.phx.nearlyfreespeech.net"
 alias ledger-balance="bean-report ~/git/org/projects/jeremy-friesen-consulting/ledger.beancount balances"
