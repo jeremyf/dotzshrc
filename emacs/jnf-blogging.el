@@ -213,6 +213,11 @@ CITE and A tag."
 (global-set-key (kbd "s-7") 'jnf/tor-post-amplifying-the-blogosphere)
 (global-set-key (kbd "<f7>") 'jnf/tor-post-amplifying-the-blogosphere)
 
+;; The `C-c t' key combo is engrained for my TakeOnRules incantations;
+;; there's a markdown menu but if I'm not in markdown, it likely means
+;; I'm not in Take on Rules pages.
+(global-set-key (kbd "C-c t") 'jnf/tor-post-new)
+
 (cl-defun jnf/tor-post-amplifying-the-blogosphere (subheading &key citeTitle citeURL citeAuthor)
   "Create and visit draft post for amplifying the blogosphere.
 
