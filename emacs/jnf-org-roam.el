@@ -50,74 +50,80 @@
           ("f" "Fleeting" plain (function org-roam--capture-get-point)
            "%?"
            :file-name "fleeting/%<%Y%m%d>---${slug}"
-           :head "#+title: ${title}\n#+roam_tags:\n* ${title}\n\n"
+           :head "#+title: ${title}\n#+roam_tags:\n\n"
            :unnarrowed t)
           ("b" "Permanent > Bibliographic" plain (function org-roam--capture-get-point)
            "%?"
            :file-name "permanent/bibliographies/%<%Y%m%d>---${slug}"
-           :head "#+title: ${title}\n#+roam_tags:\n* ${title}\n\n"
+           :head "#+title: ${title}\n#+roam_tags:\n\n"
            :unnarrowed t)
           ("c" "Permanent > Card (Unsorted)" plain (function org-roam--capture-get-point)
            "%?"
            :file-name "permanent/cards/000-unsorted---${slug}"
-           :head "#+title: ${title}\n#+roam_tags:\n* ${title}\n\n"
+           :head "#+title: ${title}\n#+roam_tags:\n\n"
            :unnarrowed t)
           ("e" "Epigraph (Permanent > Epigraphs)" plain (function org-roam--capture-get-point)
            "%?"
            :file-name "permanent/epigraphs/000-unsorted---${slug}"
-           :head "#+title: ${title}\n#+roam_tags:\n* ${title}\n\n#+begin_quote\n\n#+end_quote"
+           :head "#+title: ${title}\n#+roam_tags:\n\n#+begin_quote\n\n#+end_quote"
            :unnarrowed t)
           ("l" "Permanent > Letters" plain (function org-roam--capture-get-point)
            "%?"
            :file-name "permanent/letters/%<%Y%m%d>---${slug}"
-           :head "#+title: ${title}\n#+roam_tags:\n* ${title}\n\n"
+           :head "#+title: ${title}\n#+roam_tags:\n\n"
            :unnarrowed t)
           ("a" "Project > Ardu" plain (function org-roam--capture-get-point)
            "%?"
            :file-name "projects/ardu/%<%Y%m%d>---${slug}"
-           :head  "#+title: ${title}\n#+roam_tags:\n* ${title}\n\n** Summary\n\n** Details\n\n** COMMENT For Referee"
+           :head  "#+title: ${title}\n#+roam_tags:\n\n** Summary\n\n** Details\n\n** COMMENT For Referee"
            :unnarrowed t
            :immediate-finish t)
           ("h" "Project > Hesburgh Libraries" plain (function org-roam--capture-get-point)
            "%?"
            :file-name "projects/hesburgh-libraries/%<%Y%m%d>---${slug}"
-           :head  "#+title: ${title}\n#+roam_tags:\n* ${title}\n\n"
+           :head  "#+title: ${title}\n#+roam_tags:\n\n"
            :unnarrowed t
            :immediate-finish t)
           ("j" "Project > Jeremy Friesen Consulting" plain (function org-roam--capture-get-point)
            "%?"
            :file-name "projects/jeremy-friesen-consulting/%<%Y%m%d>---${slug}"
-           :head  "#+title: ${title}\n#+roam_tags:\n* ${title}\n\n"
+           :head  "#+title: ${title}\n#+roam_tags:\n\n"
            :unnarrowed t
            :immediate-finish t)
           ("r" "Project > RPGs" plain (function org-roam--capture-get-point)
            "%?"
            :file-name "projects/rpgs/%<%Y%m%d>---${slug}"
-           :head  "#+title: ${title}\n#+roam_tags:\n* ${title}\n\n"
+           :head  "#+title: ${title}\n#+roam_tags:\n\n"
            :unnarrowed t
            :immediate-finish t)
-          ("s" "Project > Samvera" plain (function org-roam--capture-get-point)
+          ("v" "Project > Samvera" plain (function org-roam--capture-get-point)
            "%?"
            :file-name "projects/samvera/%<%Y%m%d>---${slug}"
-           :head  "#+title: ${title}\n#+roam_tags:\n* ${title}\n\n"
+           :head  "#+title: ${title}\n#+roam_tags:\n\n"
            :unnarrowed t
            :immediate-finish t)
           ("t" "Project > Thel Sector" plain (function org-roam--capture-get-point)
            "%?"
            :file-name "projects/thel-sector/%<%Y%m%d>---${slug}"
-           :head  "#+title: ${title}\n#+roam_tags:\n* ${title}\n\n** Summary\n\n** Details\n\n** COMMENT For Referee"
+           :head  "#+title: ${title}\n#+roam_tags:\n\n** Summary\n\n** Details\n\n** COMMENT For Referee"
+           :unnarrowed t
+           :immediate-finish t)
+          ("s" "Project > Sharn without Number" plain (function org-roam--capture-get-point)
+           "%?"
+           :file-name "projects/sharn-without-number/%<%Y%m%d>---${slug}"
+           :head  "#+title: ${title}\n#+roam_tags:\n\n** Summary\n\n** Details\n\n** COMMENT For Referee"
            :unnarrowed t
            :immediate-finish t)
           ("m" "Project > Teraum" plain (function org-roam--capture-get-point)
            "%?"
            :file-name "projects/teraum/%<%Y%m%d>---${slug}"
-           :head  "#+title: ${title}\n#+roam_tags:\n* ${title}\n\n** Summary\n\n** Details\n\n** COMMENT For Referee"
+           :head  "#+title: ${title}\n#+roam_tags:\n\n** Summary\n\n** Details\n\n** COMMENT For Referee"
            :unnarrowed t
            :immediate-finish t)
           ("w" "Project > Warhammer" plain (function org-roam--capture-get-point)
            "%?"
            :file-name "projects/warhammer-frpg/%<%Y%m%d>---${slug}"
-           :head  "#+title: ${title}\n#+roam_tags:\n* ${title}\n\n** Summary\n\n** Details\n\n** COMMENT For Referee"
+           :head  "#+title: ${title}\n#+roam_tags:\n\n** Summary\n\n** Details\n\n** COMMENT For Referee"
            :unnarrowed t
            :immediate-finish t))))
 (require 'org-roam-protocol)
@@ -227,7 +233,7 @@ Version 2016-07-18"
 (go-roam-find-file-project-fn "rpgs")
 (go-roam-find-file-project-fn "samvera")
 (go-roam-find-file-project-fn "warhammer-frpg")
-(go-roam-find-file-project-fn "teraum")
+(go-roam-find-file-project-fn "sharn")
 (go-roam-find-file-project-fn "jeremy-friesen-consulting")
 (org-roam-inserter-fn "thel-sector")
 (org-roam-inserter-fn "permanent,bibliographies")
@@ -238,7 +244,7 @@ Version 2016-07-18"
 (org-roam-inserter-fn "rpgs")
 (org-roam-inserter-fn "samvera")
 (org-roam-inserter-fn "warhammer-frpg")
-(org-roam-inserter-fn "teraum")
+(org-roam-inserter-fn "sharn")
 (org-roam-inserter-fn "jeremy-friesen-consulting")
 
 (defvar jnf/org-subject-menu--title (with-faicon "book" "Org Subject Menu" 1 -0.05))
@@ -259,8 +265,8 @@ Version 2016-07-18"
     ("t" org-roam-insert--filter-with--thel-sector "Thel Sector")
     ("T" org-roam-find-file--thel-sector " ├─ Find")
     ("2" org-roam-insert-random-thel-sector-npc  " └─ NPC")
-    ("m" org-roam-insert--filter-with--teraum "Teraum")
-    ("M" org-roam-find-file--teraum " └─ Find")
+    ("s" org-roam-insert--filter-with--sharn "Sharn without Number")
+    ("S" org-roam-find-file--sharn " └─ Find")
     ("w" org-roam-insert--filter-with--warhammer-frpg "Warhammer")
     ("W" org-roam-find-file--warhammer-frpg " └─ Find")
     )
@@ -269,8 +275,8 @@ Version 2016-07-18"
     ("H" org-roam-find-file--hesburgh-libraries " └─ Find")
     ("j" org-roam-insert--filter-with--jeremy-friesen-consulting "JF Consulting")
     ("J" org-roam-find-file--jeremy-friesen-consulting " └─ Find")
-    ("s" org-roam-insert--filter-with--samvera "Samvera")
-    ("S" org-roam-find-file--samvera " └─ Find"))
+    ("v" org-roam-insert--filter-with--samvera "Samvera")
+    ("V" org-roam-find-file--samvera " └─ Find"))
    "General Org"
    (("i" org-roam-insert "Insert Unfiltered")
     ("I" org-roam-find-file " └─ Find")
@@ -293,7 +299,7 @@ Version 2016-07-18"
                                ("rpgs" 6)
                                ("samvera" 7)
                                ("thel-sector" 8)
-                               ("teraum" 9)
+                               ("sharn-without-number" 9)
                                ("warhammer-frpg" 10)
                                ))))
   (if (string= project ":all")
