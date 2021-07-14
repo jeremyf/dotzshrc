@@ -56,16 +56,20 @@
 ;;   :after all-the-icons
 ;;   :hook (dired-mode . all-the-icons-dired-mode))
 
-;; A nice looking modeline enhancement
-(use-package spaceline
-  :straight t)
+(use-package powereline
+  :straight (powerline :type git :host github :repo "milkypostman/powerline")
+  :config (powerline-default-theme))
 
-;; Add some visual flair to the modeline enhancements
-(use-package spaceline-all-the-icons
-  :straight t
-  :after spaceline
-  :config (spaceline-all-the-icons-theme)
-  (spaceline-all-the-icons--setup-neotree))
+;; A nice looking modeline enhancement
+;; (use-package spaceline
+  ;; :straight t)
+
+;; ;; Add some visual flair to the modeline enhancements
+;; (use-package spaceline-all-the-icons
+;;   :straight t
+;;   :after spaceline
+;;   :config (spaceline-all-the-icons-theme))
+
 
 ;; A convenience function to create a nice string
 (defun with-faicon (icon str &optional height v-adjust)
