@@ -56,9 +56,9 @@
 ;;   :after all-the-icons
 ;;   :hook (dired-mode . all-the-icons-dired-mode))
 
-(use-package powereline
+(use-package powerline
   :straight (powerline :type git :host github :repo "milkypostman/powerline")
-  :config (powerline-default-theme))
+  :config (powerline-center-theme))
 
 ;; A nice looking modeline enhancement
 ;; (use-package spaceline
