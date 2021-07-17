@@ -13,4 +13,4 @@
 ;; best advice I read online is to double the GC threshold until you
 ;; don't feel improvements. My value is (setq gc-cons-threshold
 ;; 8000000) ;; ~8MB
-(setq gc-cons-threshold 8000000)
+(setq gc-cons-threshold most-positive-fixnum)
