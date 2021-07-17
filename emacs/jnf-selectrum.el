@@ -145,10 +145,22 @@ parameters."
       (apply consult-line-function (buffer-substring (region-beginning) (region-end)) rest)
     (apply consult-line-function (thing-at-point 'symbol) rest)))
 
+  (defun jnf/consult-ripgrep (consult-ripgrep-function &optional dir &rest rest)
+    "Advising function around `CONSULT-RIPGREP-FUNCTION'.
+
+When there's an active region, use that as the initial parameter
+for the `CONSULT-RIPGREP-FUNCTION'.  Otherwise, use the thing at
+point."
+    (interactive "P")
+    (if (use-region-p)
+      (apply consult-ripgrep-function dir (buffer-substring (region-beginning) (region-end)) rest)
+      (apply consult-ripgrep-function dir (thing-at-point 'symbol) rest)))
+
   ;; Optionally tweak the register preview window.
   ;; This adds thin lines, sorting and hides the mode line of the window.
   (advice-add #'register-preview :override #'consult-register-window)
   (advice-add #'consult-line :around #'jnf/consult-line '((name . "wrapper")))
+  (advice-add #'consult-ripgrep :around #'jnf/consult-ripgrep '((name . "wrapper")))
 
   ;; Use Consult to select xref locations with preview
   (setq xref-show-xrefs-function #'consult-xref
