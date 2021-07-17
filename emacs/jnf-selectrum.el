@@ -141,20 +141,26 @@ for `CONSULT-LINE-FUNCTION'.  Otherwise, use the current word as
 the first parameter.  This function handles the `REST' of the
 parameters."
   (interactive)
-  (if (use-region-p)
-      (apply consult-line-function (buffer-substring (region-beginning) (region-end)) rest)
-    (apply consult-line-function (thing-at-point 'symbol) rest)))
+  (apply consult-line-function
+         (if (use-region-p)
+             (buffer-substring (region-beginning) (region-end))
+           (thing-at-point 'symbol))
+           rest))
 
   (defun jnf/consult-ripgrep (consult-ripgrep-function &optional dir &rest rest)
-    "Advising function around `CONSULT-RIPGREP-FUNCTION'.
+    "Use region or thing at point to populate initial parameter for `CONSULT-RIPGREP-FUNCTION'.
 
 When there's an active region, use that as the initial parameter
 for the `CONSULT-RIPGREP-FUNCTION'.  Otherwise, use the thing at
-point."
+point.
+
+`DIR' use the universal argument (e.g. C-u prefix) to first set
+the directory.  `REST' is passed to the `CONSULT-RIPGREP-FUNCTION'."
     (interactive "P")
-    (if (use-region-p)
-      (apply consult-ripgrep-function dir (buffer-substring (region-beginning) (region-end)) rest)
-      (apply consult-ripgrep-function dir (thing-at-point 'symbol) rest)))
+    (apply consult-ripgrep-function
+           dir
+           (if (use-region-p) (buffer-substring (region-beginning) (region-end)) (thing-at-point 'symbol))
+           rest))
 
   ;; Optionally tweak the register preview window.
   ;; This adds thin lines, sorting and hides the mode line of the window.
