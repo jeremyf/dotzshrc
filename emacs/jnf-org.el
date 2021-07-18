@@ -159,7 +159,7 @@ exist after each headings's drawers."
 ;;                                 (require 'jnf-org-roam.el)
 ;;                                 ))
 
-(require 'jnf-org-roam.el)
+(require 'jnf-org-roam-v2.el)
 
 (use-package org-bookmark-heading
   :straight t)
@@ -201,10 +201,9 @@ chose `gorg' as the mnemonic Goto Org."
 ;; End goto org file
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(require 'ox-tor-md.el)
-(require 'org-annotate-file.el)
-(global-set-key (kbd "C-c C-a") 'org-annotate-file)
-(setq org-annotate-file-storage-file "~/git/org/annotations.org")
-(setq org-annotate-file-add-search t)
+;; (require 'org-annotate-file.el)
+;; (global-set-key (kbd "C-c C-a") 'org-annotate-file)
+;; (setq org-annotate-file-storage-file "~/git/org/annotations.org")
+;; (setq org-annotate-file-add-search t)
 (provide 'jnf-org.el)
 ;;; jnf-org.el ends here
