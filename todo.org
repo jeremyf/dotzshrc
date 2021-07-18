@@ -1,0 +1,19 @@
+#+title Todo for dotzshrc
+
+* Maintenance
+** TODO Upgrade ~org-roam~ to v2
+
+*** Capture Templates
+
+Review capture templates; can I reduce the number of templates if I have adequate auto-tagging.  For example, does the org-roam capture template allow for a variable for tags?  If so, can I use a wrapping function to assign tags.
+
+When I’m running or playing an RPG session, I typically want to auto-tag all ~org-roam~ nodes that I create with one or more tags.  Conceptually, I have a list of “contexts” and each “context” has a list of tags to apply.  Then I can apply additional tags.
+
+*** Directory Structure
+
+Review directory structure; at present the directories add tags, this may require further adjustments.
+
+* Hacking
+
+- [X] I want a “roll expression at point” function
+- [ ] I want the option for rolling an expression to write the result to the buffer with =⇢ result=
