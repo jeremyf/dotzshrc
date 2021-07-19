@@ -12,7 +12,7 @@
 (use-package markdown-mode
   :straight t
   :hook ((markdown-mode . turn-on-visual-line-mode))
-  :bind (:map markdown-mode-map ("C-c t" . jnf/tor-subject-menu/body))
+  :bind (:map markdown-mode-map ("C-c t" . jnf/tor-subject-menu-markdown/body))
   :mode (("README\\.md\\'" . gfm-mode)
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
@@ -21,18 +21,31 @@
 ;; These menu commands, plus some yasnippets, are some useful
 ;; functions for helping my blogging effort.
 (defvar jnf/tor-menu--title (with-faicon "pencil-square" "Take on Rules" 1 -0.05))
-(pretty-hydra-define jnf/tor-subject-menu (:foreign-keys warn :title jnf/tor-menu--title :quit-key "q" :exit t)
+(pretty-hydra-define jnf/tor-subject-menu-markdown (:foreign-keys warn :title jnf/tor-menu--title :quit-key "q" :exit t)
   ("Posts"
    (("a" jnf/tor-wrap-link-active-region-dwim "A link at point or region…")
     ("c" jnf/tor-wrap-cite-active-region-dwim "Cite point or region…")
     ("d" jnf/tor-wrap-date "Date point or region…")
     ("g" jnf/tor-find-glossary-and-add-entry "Add glossary entry…")
+    ("k" jnf/tor-insert-glossary-key "Add key at point…")
     ("m" jnf/tor-wrap-as-marginnote-dwim "Margin-note line or region…")
     ("n" jnf/tor-post-new "New post…")
     ("r" jnf/tor-retitle-post "Re-title post…")
     ("s" jnf/tor-wrap-as-sidenote-dwim "Side-note sentence or region…")
     ("t" jnf/tor-tag-post "Tag post…")
     ("w" jnf/tor-wrap-in-html-tag "Wrap point or region…"))))
+
+(pretty-hydra-define jnf/tor-subject-menu-yaml (:foreign-keys warn :title jnf/tor-menu--title :quit-key "q" :exit t)
+  ("Posts"
+   (("g" jnf/tor-find-glossary-and-add-entry "Add glossary entry…")
+    ("k" jnf/tor-insert-glossary-key "Add key at point…"))))
+
+(defun jnf/epigraph-keyify (text)
+  "Convert the given TEXT to an epigraph key."
+  (let ((list-of-words (s-split-words text)))
+    (if (> (length list-of-words) 5)
+        (upcase (s-join "-" (subseq list-of-words 0 5)))
+      "")))
 
 (defun jnf/tor-post-new (title)
   "Create and visit a new draft post.  Prompt for a `TITLE'.
@@ -116,6 +129,11 @@ as the behavior's well defined."
    :before "{{< sidenote >}}"
    :after "{{< /sidenote >}}"
    :strategy :sentenceOrRegion))
+
+(defun jnf/tor-insert-glossary-key (key)
+  "Insert the KEY at point."
+  (interactive (list (completing-read "Key: " (jnf/tor-glossary-key-list))))
+  (insert key))
 
 (defun jnf/tor-wrap-link-active-region-dwim (url)
   "Wrap current region (or point) in an `A' tag with URL.
@@ -339,6 +357,10 @@ If there's an active region, select that text and place it."
 (defun jnf/tor-tags-list ()
   "Return a list of tags from TakeOnRules.com."
   (jnf/tor-list-by-key-from-filename :key "tag" :filename "data/glossary.yml"))
+
+(defun jnf/tor-epigraph-list ()
+  "Return a list of epigraph keys from TakeOnRules.com."
+  (jnf/tor-list-by-key-from-filename :key "key" :filename "data/epigraphs.yml"))
 
 (defun jnf/tor-game-list ()
   "Return a list of games from TakeOnRules.com."
