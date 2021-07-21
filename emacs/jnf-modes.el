@@ -20,7 +20,6 @@
 
 (use-package web-mode
   :straight t
-  :bind (:map html-mode-map ("C-c t" . jnf/tor-wrap-cite-active-region-dwim))
   :config (setq web-mode-markup-indent-offset 2
                 web-mode-css-indent-offset 2
                 web-mode-code-indent-offset 2))

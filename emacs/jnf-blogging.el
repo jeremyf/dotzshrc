@@ -26,10 +26,12 @@
    (("a" jnf/tor-wrap-link-active-region-dwim "A link at point or region…")
     ("c" jnf/tor-wrap-cite-active-region-dwim "Cite point or region…")
     ("d" jnf/tor-wrap-date "Date point or region…")
-    ("g" jnf/tor-find-glossary-and-add-entry "Add glossary entry…")
-    ("k" jnf/tor-insert-glossary-key "Add key at point…")
+    ("e" jnf/tor-insert-epigraph-entry "Create epigraph entry…")
+    ("f" jnf/tor-wrap-as-pseudo-dfn "Wrap word or region in pseudo-dfn…")
+    ("g" jnf/tor-find-glossary-and-insert-entry "Create glossary entry…")
+    ("k" jnf/tor-insert-glossary-key "Insert glossary key at point…")
     ("m" jnf/tor-wrap-as-marginnote-dwim "Margin-note line or region…")
-    ("n" jnf/tor-post-new "New post…")
+    ("n" jnf/tor-create-post "Create new post…")
     ("r" jnf/tor-retitle-post "Re-title post…")
     ("s" jnf/tor-wrap-as-sidenote-dwim "Side-note sentence or region…")
     ("t" jnf/tor-tag-post "Tag post…")
@@ -37,8 +39,16 @@
 
 (pretty-hydra-define jnf/tor-subject-menu-yaml (:foreign-keys warn :title jnf/tor-menu--title :quit-key "q" :exit t)
   ("Posts"
-   (("g" jnf/tor-find-glossary-and-add-entry "Add glossary entry…")
-    ("k" jnf/tor-insert-glossary-key "Add key at point…"))))
+   (("e" jnf/tor-insert-epigraph-entry "Create epigraph entry…")
+    ("g" jnf/tor-find-glossary-and-insert-entry "Create glossary entry…")
+    ("k" jnf/tor-insert-glossary-key "Insert key at point…")
+    ("n" jnf/tor-create-post "Create new post…"))))
+
+(pretty-hydra-define jnf/tor-subject-menu-default (:foreign-keys warn :title jnf/tor-menu--title :quit-key "q" :exit t)
+  ("Posts"
+   (("e" jnf/tor-insert-epigraph-entry "Create epigraph entry…")
+    ("g" jnf/tor-find-glossary-and-insert-entry "Create glossary entry…")
+    ("n" jnf/tor-create-post "Create new post…"))))
 
 (defun jnf/epigraph-keyify (text)
   "Convert the given TEXT to an epigraph key."
@@ -47,7 +57,7 @@
         (upcase (s-join "-" (subseq list-of-words 0 5)))
       "")))
 
-(defun jnf/tor-post-new (title)
+(defun jnf/tor-create-post (title)
   "Create and visit a new draft post.  Prompt for a `TITLE'.
 
 The file for the blog post conforms to the path schema of posts
@@ -112,7 +122,14 @@ as the behavior's well defined."
                       (goto-char end)
                       (insert after)
                       (goto-char begin)
-                      (insert before)))))
+                      (insert before)))
+    (:wordOrRegion (let* ((begin (if (use-region-p) (region-beginning) (cdr (bounds-of-thing-at-point 'word))))
+                           (end (if (use-region-p) (region-end) (cdr (bounds-of-thing-at-point 'word)))))
+                      (goto-char end)
+                      (insert after)
+                      (goto-char begin)
+                      (insert before)))
+    ))
 
 (defun jnf/tor-wrap-as-marginnote-dwim ()
   "Wrap the line or current region as a marginnote."
@@ -154,6 +171,14 @@ tag."
      :after "</a>"
      :strategy :pointOrRegion)))
 
+(defun jnf/tor-wrap-as-pseudo-dfn ()
+  "Wrap current region (or word) in an `span' tag with a `dfn' class."
+  (interactive)
+  (jnf/tor-wrap-with-text
+     :before (concat "<i class=\"dfn\">")
+     :after "</i>"
+     :strategy :wordOrRegion))
+
 (defun jnf/tor-prompt-or-kill-ring-for-url ()
   "Return a URL, either from the kill ring or prompted."
   (let ((car-of-kill-ring (substring-no-properties (car kill-ring))))
@@ -163,20 +188,34 @@ tag."
         (substring-no-properties (car kill-ring))
       (read-string "URL (optional): "))))
 
-(defun jnf/tor-find-glossary-and-add-entry (title)
+(defun jnf/tor-find-glossary-and-insert-entry (title)
   "Find TakeOnRules glossary and add an entry with TITLE."
   (interactive "sGlossary Entry's Title: ")
   (find-file "~/git/takeonrules.github.io/data/glossary.yml")
-  (jnf/tor-glossary-add-entry title))
+  (jnf/tor-insert-glossary-entry title))
 
-(defun jnf/tor-glossary-add-entry (title)
+(defun jnf/tor-insert-glossary-entry (title)
   "Create an glossary entry with the given TITLE."
   (interactive "sGlossary Entry's Title: ")
   (let ((key (upcase (s-dashed-words title))))
     (end-of-buffer)
     (insert (concat
+             (if (looking-at-p "^$") "" "\n")
              "- title: " title
              "\n  key: " key))))
+
+(defun jnf/tor-insert-epigraph-entry ()
+  "Prompt for a new a new data/epigraphs.yml entry."
+  (interactive)
+  (find-file "~/git/takeonrules.github.io/data/epigraphs.yml")
+  (end-of-buffer)
+  (insert (concat
+           (if (looking-at-p "^$") "" "\n")
+           "epi"))
+  (end-of-buffer)
+  "Assumes that the `epi' is the correct expansion"
+  (yas-expand)
+  (message "Ready to insert a new epigraph"))
 
 (defun jnf/tor-wrap-cite-active-region-dwim (url)
   "Wrap current region (or point) in a `CITE' and optional `A' tag with URL.
@@ -234,7 +273,7 @@ CITE and A tag."
 ;; The `C-c t' key combo is engrained for my TakeOnRules incantations;
 ;; there's a markdown menu but if I'm not in markdown, it likely means
 ;; I'm not in Take on Rules pages.
-(global-set-key (kbd "C-c t") 'jnf/tor-post-new)
+(global-set-key (kbd "C-c t") 'jnf/tor-subject-menu-default/body)
 
 (cl-defun jnf/tor-post-amplifying-the-blogosphere (subheading &key citeTitle citeURL citeAuthor)
   "Create and visit draft post for amplifying the blogosphere.
