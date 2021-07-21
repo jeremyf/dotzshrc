@@ -26,9 +26,6 @@
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
 
-(use-package yaml-mode
-  :bind (:map yaml-mode-map ("C-c t" . jnf/tor-subject-menu-yaml/body))
-  :straight t)
 
 (use-package plantuml-mode
   :config (setq plantuml-executable-path (concat (getenv "HB_PATH") "/bin/plantuml")
