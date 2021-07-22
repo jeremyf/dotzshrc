@@ -256,9 +256,11 @@ CITE and A tag."
               ;; The content directory
               "~/git/takeonrules.github.io/"
               ;; The tooling directory
-              "~/git/dotzshrc"
+              "~/git/dotzshrc/"
+              ;; The personal configuration options
+              "~/git/jnf-emacs-config/"
               ;; The background knowledge directory
-              "~/git/org"))
+              "~/git/org/"))
     (message (concat "Syncing \"" path "\"..."))
     (shell-command-to-string
      (concat
