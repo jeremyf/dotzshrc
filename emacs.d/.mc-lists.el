@@ -27,6 +27,7 @@
         ns-do-show-character-palette
         org-ctrl-c-minus
         org-cycle
+        org-end-of-line
         org-force-self-insert
         org-metaleft
         org-metaright
@@ -35,6 +36,7 @@
         org-yank
         sp-backward-delete-char
         string-inflection-all-cycle
+        typopunct-insert-ellipsis-or-middot
         typopunct-insert-mp
         typopunct-insert-typographical-dashes
         wdired-finish-edit
