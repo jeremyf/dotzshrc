@@ -78,7 +78,7 @@
   :straight t
   :after all-the-icons
   :pretty-hydra
-  ((:title (with-material "help_outline" "Helpful Menus") :quit-key "q")
+  ((:title (with-material "help_outline" "Helpful Menus") :quit-key "q" :exit t)
    ("Helpful"
     (("f" helpful-callable "callable")
      ("c" helpful-command "command")
