@@ -6,7 +6,7 @@
 ;;
 ;;; Code:
 
-;; A Property List of my org-roam capture templates.
+;; A Property List of my `org-roam' capture templates.
 (setq jnf/org-roam-capture-templates-plist
       (list
        :thel-sector '("t" "Projects > Thel Sector" plain "%?"
@@ -24,7 +24,7 @@
        ))
 
 (defun jnf/org-roam-templates-for (&rest symbols)
-  "Return a list of templates for the given SYMBOLS."
+  "Return a list of `org-roam' templates for the given SYMBOLS."
   (-map (lambda (symbol) (plist-get jnf/org-roam-capture-templates-plist symbol))
         symbols))
 
@@ -35,15 +35,15 @@ When GOTO is non-nil, go to the note without creating an entry."
   (interactive)
   (org-roam-capture- :goto (when goto '(4))
                      :node (org-roam-node-read
-                            (thing-at-point 'word)
-                            ;; Filter
+                            ;; Initial text.  Use region if one is selected, otherwise the given word.
+                            (if (use-region-p)
+                                (buffer-substring-no-properties (region-beginning) (region-end))
+                              (thing-at-point 'word))
+                            ;; Filter function
                             (lambda (node) (-contains-p (org-roam-node-tags node) "thel-sector")))
                      :props '(:immediate-finish nil)
                      :templates (jnf/org-roam-templates-for :thel-sector)))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; BEGIN ORG ROAM  and concerns
-;;
 ;; With the latest update of org-roam, things again behavior
 ;; correctly.  Now I can just load org-roam as part of my day to day
 (use-package org-roam
