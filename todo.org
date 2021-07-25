@@ -1,7 +1,7 @@
 #+title Todo for dotzshrc
 
 * Maintenance
-** TODO Upgrade ~org-roam~ to v2
+** DONE Upgrade ~org-roam~ to v2
 
 *** Capture Templates
 
