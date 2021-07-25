@@ -21,6 +21,11 @@
 		:unnarrowed t)
       ))
 
+(defun jnf/org-roam-templates-for (&rest symbols)
+  "Return a list of templates for the given SYMBOLS."
+  (-map (lambda (symbol) (plist-get jnf/org-roam-capture-templates-plist symbol))
+        symbols))
+
 (defun jnf/org-roam-capture--thel-sector (&optional goto)
   "Capture a Thel Sector entry.
 
@@ -30,7 +35,7 @@ When GOTO is non-nil, go the note without creating an entry."
     (org-roam-capture- :goto (when goto '(4))
                        :node (org-roam-node-read (thing-at-point 'word) filter)
                        :props '(:immediate-finish nil)
-                       :templates (list (plist-get jnf/org-roam-capture-templates-plist :projects/thel-sector)))))
+                       :templates (jnf/org-roam-templates-for :projects/thel-sector))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; BEGIN ORG ROAM  and concerns
@@ -38,18 +43,16 @@ When GOTO is non-nil, go the note without creating an entry."
 ;; With the latest update of org-roam, things again behavior
 ;; correctly.  Now I can just load org-roam as part of my day to day
 (use-package org-roam
-  ;; :straight (org-roam :type git :host github :repo "org-roam/org-roam" branch: "v2")
   :straight t
   :custom
   (org-roam-directory (file-truename "~/git/org"))
   ;; Set more spaces for tags; As much as I prefer the old format,
   ;; this is the new path forward.
   (org-roam-node-display-template "${title:*} ${tags:40}")
-  (org-roam-capture-templates (list
-                               (plist-get jnf/org-roam-capture-templates-plist :personal)
-                               (plist-get jnf/org-roam-capture-templates-plist :public)
-			       (plist-get jnf/org-roam-capture-templates-plist :projects-thel-sector)
-                              ))
+  (org-roam-capture-templates (jnf/org-roam-templates-for
+                               :personal
+                               :public
+			       :projects/thel-sector))
   :init
   (add-to-list 'display-buffer-alist
                '("\\*org-roam\\*"
