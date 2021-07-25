@@ -23,6 +23,7 @@
   (company-async-timeout 20 "Some requests can take a long time. That's fine.")
   :config
 
+  (add-to-list 'company-backends 'company-capf)
   ;; Use the numbers 0-9 to select company completion candidates
   (let ((map company-active-map))
     (mapc (lambda (x) (define-key map (format "%d" x)
@@ -35,9 +36,9 @@
   :bind (:map company-active-map ("C-c h" . 'company-quickhelp-manual-begin))
   :config (company-quickhelp-mode))
 
-(use-package company-emoji
-  :straight (company-emoji :type git :host github :repo "dunn/company-emoji" :branch "trunk")
-  :config (add-to-list 'company-backends 'company-emoji))
+;; (use-package company-emoji
+;;   :straight (company-emoji :type git :host github :repo "dunn/company-emoji" :branch "trunk")
+;;   :config (add-to-list 'company-backends 'company-emoji))
 
 (provide 'jnf-company.el)
 ;;; jnf-company.el ends here
