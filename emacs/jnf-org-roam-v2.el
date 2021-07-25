@@ -66,6 +66,8 @@ When GOTO is non-nil, go to the note without creating an entry."
                  (window-width . 0.33)
                  (window-parameters . ((no-other-window . t)
                                        (no-delete-other-windows . t)))))
+
+  (setq org-roam-v2-ack t)
   :bind (("C-c r l" . org-roam-buffer-toggle)
          ("C-c r f" . org-roam-node-find)
          ("C-c r i" . org-roam-node-insert)
@@ -73,7 +75,6 @@ When GOTO is non-nil, go to the note without creating an entry."
          ;; Dailies
          ("C-c r j" . org-roam-dailies-capture-today)))
 
-(setq org-roam-v2-ack t)
 (org-roam-setup)
 (provide 'jnf-org-roam-v2.el)
 ;;; jnf-org-roam-v2.el ends here
