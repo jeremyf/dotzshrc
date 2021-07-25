@@ -6,20 +6,22 @@
 ;;
 ;;; Code:
 
-(setq jnf/org-roam-capture-templates-plist (list
-      :projects/thel-sector '("t" "Projects > Thel Sector" plain "%?"
-                               :if-new (file+head "projects/thel-sector/%<%Y%m%d>---${slug}.org"
-                                                  "#+title: ${title}\n#+FILETAGS: :thel-sector: %^G\n\n")
-                               :unnarrowed t)
-      :personal '("p" "Personal" plain "%?"
-		  :if-new (file+head "personal/%<%Y%m%d>---${slug}.org"
-				     "#+title: ${title}\n#+FILETAGS: :personal: %^G\n\n")
-		  :unnarrowed t)
-      :public '("u" "Public" plain "%?"
-		:if-new (file+head "public/%<%Y%m%d>---${slug}.org"
-				   "#+title: ${title}\n#+FILETAGS: :public: %^G\n\n")
-		:unnarrowed t)
-      ))
+;; A Property List of my org-roam capture templates.
+(setq jnf/org-roam-capture-templates-plist
+      (list
+       :thel-sector '("t" "Projects > Thel Sector" plain "%?"
+                      :if-new (file+head "projects/thel-sector/%<%Y%m%d>---${slug}.org"
+                                         "#+title: ${title}\n#+FILETAGS: :thel-sector: %^G\n\n")
+                      :unnarrowed t)
+       :personal '("p" "Personal" plain "%?"
+		   :if-new (file+head "personal/%<%Y%m%d>---${slug}.org"
+				      "#+title: ${title}\n#+FILETAGS: :personal: %^G\n\n")
+		   :unnarrowed t)
+       :public '("u" "Public" plain "%?"
+		 :if-new (file+head "public/%<%Y%m%d>---${slug}.org"
+				    "#+title: ${title}\n#+FILETAGS: :public: %^G\n\n")
+		 :unnarrowed t)
+       ))
 
 (defun jnf/org-roam-templates-for (&rest symbols)
   "Return a list of templates for the given SYMBOLS."
@@ -29,13 +31,15 @@
 (defun jnf/org-roam-capture--thel-sector (&optional goto)
   "Capture a Thel Sector entry.
 
-When GOTO is non-nil, go the note without creating an entry."
+When GOTO is non-nil, go to the note without creating an entry."
   (interactive)
-  (let ((filter (lambda (node) (-contains-p (org-roam-node-tags node) "thel-sector"))))
-    (org-roam-capture- :goto (when goto '(4))
-                       :node (org-roam-node-read (thing-at-point 'word) filter)
-                       :props '(:immediate-finish nil)
-                       :templates (jnf/org-roam-templates-for :projects/thel-sector))))
+  (org-roam-capture- :goto (when goto '(4))
+                     :node (org-roam-node-read
+                            (thing-at-point 'word)
+                            ;; Filter
+                            (lambda (node) (-contains-p (org-roam-node-tags node) "thel-sector")))
+                     :props '(:immediate-finish nil)
+                     :templates (jnf/org-roam-templates-for :thel-sector)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; BEGIN ORG ROAM  and concerns
@@ -52,7 +56,7 @@ When GOTO is non-nil, go the note without creating an entry."
   (org-roam-capture-templates (jnf/org-roam-templates-for
                                :personal
                                :public
-			       :projects/thel-sector))
+			       :thel-sector))
   :init
   (add-to-list 'display-buffer-alist
                '("\\*org-roam\\*"
