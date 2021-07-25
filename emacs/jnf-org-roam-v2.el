@@ -6,29 +6,18 @@
 ;;
 ;;; Code:
 
-(defun jnf/org-roam-capture-templates ()
-  "Assign the capture templates.
+(defun jnf/org-roam-capture--thel-sector (&optional goto)
+  (interactive)
+  "Capture a Thel Sector entry.
 
-TODO: I would like to use a directory's files to assign these
-values.  However, my elisp skills are not yet up for that.  So I'm
-going get this working and seek help online."
-  (setq jnf/org-roam-capture-templates-list '(
-                    ("p" "Public" plain "%?"
-                                 :if-new (file+head "public/%<%Y%m%d>-${slug}.org"
-                                                    "#+title: ${title}\n#+FILETAGS: :public: %^G\n\n")
-                                 :unnarrowed t)
-                    ))
-  (add-to-list 'jnf/org-roam-capture-templates-list
-    '("n" "Notre Dame" plain "%?"
-     :if-new (file+head "notre-dame/%<%Y%m%d>-${slug}.org"
-                        "#+title: ${title}\n#+FILETAGS: :notre-dame: %^G\n\n")
-     :unnarrowed t))
-  jnf/org-roam-capture-templates-list)
-
-;; (defun jnf/capture-template-for-directory (dir)
-;;   (let* ((subdir (format "%s" (car (last (f-split dir)))))
-;;          (prefix (substring subdir 0 1)))
-;;     (list prefix (s-titleize subdir) plain)))
+When GOTO is non-nil, go the note without creating an entry."
+  (org-roam-capture- :goto (when goto '(4))
+                     :node (org-roam-node-read)
+                     :props '(:immediate-finish nil)
+                     :templates '(("t" "Thel Sector" plain "%?"
+                                   :if-new (file+head "projects/thel-sector/%<%Y%m%d>---${slug}.org"
+                                                      "#+title: ${title}\n#+FILETAGS: :thel-sector: %^G\n\n")
+                                   :unnarrowed t))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; BEGIN ORG ROAM  and concerns
@@ -43,15 +32,33 @@ going get this working and seek help online."
   ;; Set more spaces for tags; As much as I prefer the old format,
   ;; this is the new path forward.
   (org-roam-node-display-template "${title:*} ${tags:40}")
-  ;; (org-roam-capture-templates (jnf/org-roam-capture-templates))
+  (org-roam-capture-templates '(
+				("p" "Personal" plain "%?"
+                                 :if-new (file+head "personal/%<%Y%m%d>---${slug}.org"
+                                                    "#+title: ${title}\n#+FILETAGS: :personal: %^G\n\n")
+                                 :unnarrowed t)
+				("u" "Public" plain "%?"
+                                 :if-new (file+head "public/%<%Y%m%d>---${slug}.org"
+                                                    "#+title: ${title}\n#+FILETAGS: :public: %^G\n\n")
+                                 :unnarrowed t)
+				))
+  :init
+  (add-to-list 'display-buffer-alist
+               '("\\*org-roam\\*"
+                 (display-buffer-in-side-window)
+                 (side . right)
+                 (slot . 0)
+                 (window-width . 0.33)
+                 (window-parameters . ((no-other-window . t)
+                                       (no-delete-other-windows . t)))))
   :bind (("C-c r l" . org-roam-buffer-toggle)
          ("C-c r f" . org-roam-node-find)
-         ("C-c r g" . org-roam-graph)
          ("C-c r i" . org-roam-node-insert)
          ("C-c r c" . org-roam-capture)
          ;; Dailies
          ("C-c r j" . org-roam-dailies-capture-today)))
 
+(setq org-roam-v2-ack t)
 (org-roam-setup)
 (provide 'jnf-org-roam-v2.el)
 ;;; jnf-org-roam-v2.el ends here

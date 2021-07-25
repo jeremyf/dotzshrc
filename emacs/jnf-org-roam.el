@@ -72,12 +72,6 @@
            :file-name "permanent/letters/%<%Y%m%d>---${slug}"
            :head "#+title: ${title}\n#+roam_tags:\n\n"
            :unnarrowed t)
-          ("a" "Project > Ardu" plain (function org-roam--capture-get-point)
-           "%?"
-           :file-name "projects/ardu/%<%Y%m%d>---${slug}"
-           :head  "#+title: ${title}\n#+roam_tags:\n\n** Summary\n\n** Details\n\n** COMMENT For Referee"
-           :unnarrowed t
-           :immediate-finish t)
           ("h" "Project > Hesburgh Libraries" plain (function org-roam--capture-get-point)
            "%?"
            :file-name "projects/hesburgh-libraries/%<%Y%m%d>---${slug}"
@@ -114,33 +108,14 @@
            :head  "#+title: ${title}\n#+roam_tags:\n\n** Summary\n\n** Details\n\n** COMMENT For Referee"
            :unnarrowed t
            :immediate-finish t)
-          ("m" "Project > Teraum" plain (function org-roam--capture-get-point)
-           "%?"
-           :file-name "projects/teraum/%<%Y%m%d>---${slug}"
-           :head  "#+title: ${title}\n#+roam_tags:\n\n** Summary\n\n** Details\n\n** COMMENT For Referee"
-           :unnarrowed t
-           :immediate-finish t)
           ("w" "Project > Warhammer" plain (function org-roam--capture-get-point)
            "%?"
            :file-name "projects/warhammer-frpg/%<%Y%m%d>---${slug}"
            :head  "#+title: ${title}\n#+roam_tags:\n\n** Summary\n\n** Details\n\n** COMMENT For Referee"
            :unnarrowed t
            :immediate-finish t))))
-(require 'org-roam-protocol)
 
-(use-package org-roam-server
-  :straight t
-  :after org-roam
-  :config
-  (setq org-roam-server-host "127.0.0.1"
-        org-roam-server-port 8080
-        org-roam-server-export-inline-images t
-        org-roam-server-authenticate nil
-        org-roam-server-network-poll t
-        org-roam-server-network-arrows nil
-        org-roam-server-network-label-truncate t
-        org-roam-server-network-label-truncate-length 60
-        org-roam-server-network-label-wrap-length 20))
+
 
 ;; https://ag91.github.io/blog/2020/11/12/write-org-roam-notes-via-elisp/
 (defun jnf/make-filepath (title now &optional zone)
