@@ -6,11 +6,20 @@
 ;;
 ;;; Code:
 
-(setq jnf/org-roam-capture-templates--thel-sector
-      '("t" "Thel Sector" plain "%?"
-        :if-new (file+head "projects/thel-sector/%<%Y%m%d>---${slug}.org"
-                           "#+title: ${title}\n#+FILETAGS: :thel-sector: %^G\n\n")
-        :unnarrowed t))
+(setq jnf/org-roam-capture-templates-plist (list
+      :projects-thel-sector '("t" "Projects > Thel Sector" plain "%?"
+                               :if-new (file+head "projects/thel-sector/%<%Y%m%d>---${slug}.org"
+                                                  "#+title: ${title}\n#+FILETAGS: :thel-sector: %^G\n\n")
+                               :unnarrowed t)
+      :personal '("p" "Personal" plain "%?"
+		  :if-new (file+head "personal/%<%Y%m%d>---${slug}.org"
+				     "#+title: ${title}\n#+FILETAGS: :personal: %^G\n\n")
+		  :unnarrowed t)
+      :public '("u" "Public" plain "%?"
+		:if-new (file+head "public/%<%Y%m%d>---${slug}.org"
+				   "#+title: ${title}\n#+FILETAGS: :public: %^G\n\n")
+		:unnarrowed t)
+      ))
 
 (defun jnf/org-roam-capture--thel-sector (&optional goto)
   "Capture a Thel Sector entry.
@@ -18,9 +27,9 @@
 When GOTO is non-nil, go the note without creating an entry."
   (interactive)
   (org-roam-capture- :goto (when goto '(4))
-                     :node (org-roam-node-read)
+                     :node (org-roam-node-read (thing-at-point 'word))
                      :props '(:immediate-finish nil)
-                     :templates (list jnf/org-roam-capture-templates--thel-sector)))
+                     :templates (list (plist-get jnf/org-roam-capture-templates-plist :projects-thel-sector))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; BEGIN ORG ROAM  and concerns
@@ -35,16 +44,11 @@ When GOTO is non-nil, go the note without creating an entry."
   ;; Set more spaces for tags; As much as I prefer the old format,
   ;; this is the new path forward.
   (org-roam-node-display-template "${title:*} ${tags:40}")
-  (org-roam-capture-templates '(
-				("p" "Personal" plain "%?"
-                                 :if-new (file+head "personal/%<%Y%m%d>---${slug}.org"
-                                                    "#+title: ${title}\n#+FILETAGS: :personal: %^G\n\n")
-                                 :unnarrowed t)
-				("u" "Public" plain "%?"
-                                 :if-new (file+head "public/%<%Y%m%d>---${slug}.org"
-                                                    "#+title: ${title}\n#+FILETAGS: :public: %^G\n\n")
-                                 :unnarrowed t)
-				))
+  (org-roam-capture-templates (list
+                               (plist-get jnf/org-roam-capture-templates-plist :personal)
+                               (plist-get jnf/org-roam-capture-templates-plist :public)
+			       (plist-get jnf/org-roam-capture-templates-plist :projects-thel-sector)
+                              ))
   :init
   (add-to-list 'display-buffer-alist
                '("\\*org-roam\\*"
