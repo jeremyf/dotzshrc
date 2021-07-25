@@ -6,8 +6,22 @@
 ;;
 ;;; Code:
 
+(defun jnf/filter-list (@predicate @sequence)
+   "Return a new list such that @PREDICATE is true on all members of @SEQUENCE.
+
+URL `http://ergoemacs.org/emacs/elisp_filter_list.html'
+Version 2016-07-18"
+   (delete
+    "e3824ad41f2ec1ed"
+    (mapcar
+     (lambda ($x)
+       (if (funcall @predicate $x)
+           $x
+         "e3824ad41f2ec1ed" ))
+     @sequence)))
+
 (setq jnf/org-roam-capture-templates-plist (list
-      :projects-thel-sector '("t" "Projects > Thel Sector" plain "%?"
+      :projects/thel-sector '("t" "Projects > Thel Sector" plain "%?"
                                :if-new (file+head "projects/thel-sector/%<%Y%m%d>---${slug}.org"
                                                   "#+title: ${title}\n#+FILETAGS: :thel-sector: %^G\n\n")
                                :unnarrowed t)
@@ -26,10 +40,11 @@
 
 When GOTO is non-nil, go the note without creating an entry."
   (interactive)
-  (org-roam-capture- :goto (when goto '(4))
-                     :node (org-roam-node-read (thing-at-point 'word))
-                     :props '(:immediate-finish nil)
-                     :templates (list (plist-get jnf/org-roam-capture-templates-plist :projects-thel-sector))))
+  (let ((filter (lambda (node) (-contains-p (org-roam-node-tags node) "thel-sector"))))
+    (org-roam-capture- :goto (when goto '(4))
+                       :node (org-roam-node-read (thing-at-point 'word) filter)
+                       :props '(:immediate-finish nil)
+                       :templates (list (plist-get jnf/org-roam-capture-templates-plist :projects/thel-sector)))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; BEGIN ORG ROAM  and concerns
