@@ -23,6 +23,21 @@
 		 :unnarrowed t)
        ))
 
+
+;; A menu of common tasks for `org-roam'.
+(defvar jnf/org-subject-menu--title (with-faicon "book" "Org Subject Menu" 1 -0.05))
+(pretty-hydra-define jnf/org-subject-menu (:foreign-keys warn :title jnf/org-subject-menu--title :quit-key "q" :exit t)
+  (
+   "Org Mode"
+   (
+    ("!" org-roam-capture               "Capture Node…")
+    ("@" org-roam-dailies-capture-today " └─ Daily…")
+    (">" org-roam-node-insert           "Insert Node…")
+    ("?" org-roam-node-find             " └─ Find Node…")
+    ("#" org-roam-buffer-toggle         "Toggle Org Roam Buffer")
+    )
+   ))
+
 (defun jnf/org-roam-templates-for (&rest symbols)
   "Return a list of `org-roam' templates for the given SYMBOLS."
   (-map (lambda (symbol) (plist-get jnf/org-roam-capture-templates-plist symbol))
@@ -68,12 +83,8 @@ When GOTO is non-nil, go to the note without creating an entry."
                                        (no-delete-other-windows . t)))))
 
   (setq org-roam-v2-ack t)
-  :bind (("C-c r l" . org-roam-buffer-toggle)
-         ("C-c r f" . org-roam-node-find)
-         ("C-c r i" . org-roam-node-insert)
-         ("C-c r c" . org-roam-capture)
-         ;; Dailies
-         ("C-c r j" . org-roam-dailies-capture-today)))
+  :bind (("s-i" . jnf/org-subject-menu/body)
+         ("C-c r" . jnf/org-subject-menu/body)))
 
 (org-roam-setup)
 (provide 'jnf-org-roam-v2.el)
