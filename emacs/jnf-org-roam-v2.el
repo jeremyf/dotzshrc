@@ -23,6 +23,7 @@
 		 :unnarrowed t)
        ))
 
+
 (defun jnf/org-roam-templates-for (&rest symbols)
   "Return a list of `org-roam' templates for the given SYMBOLS."
   (-map (lambda (symbol) (plist-get jnf/org-roam-capture-templates-plist symbol))
@@ -31,22 +32,16 @@
 ;; A menu of common tasks for `org-roam'.
 (defvar jnf/org-subject-menu--title (with-faicon "book" "Org Subject Menu" 1 -0.05))
 (pretty-hydra-define jnf/org-subject-menu (:foreign-keys warn :title jnf/org-subject-menu--title :quit-key "q" :exit t)
-  (
-   "Projects"
-   (
-    ("t +" jnf/org-roam--thel-sector--capture     "Thel Sector: Capture Node…")
+  ("Projects"
+   (("t +" jnf/org-roam--thel-sector--capture     "Thel Sector: Capture Node…")
     ("t !" jnf/org-roam--thel-sector--node-insert "Thel Sector: Insert Node…")
-    ("t ?" jnf/org-roam--thel-sector--node-find   " └─ Find Node…")
-    )
+    ("t ?" jnf/org-roam--thel-sector--node-find   " └─ Find Node…"))
    "Org Mode"
-   (
-    ("+" jnf/org-roam-capture           "Capture Node…")
+   (("+" jnf/org-roam-capture           "Capture Node…")
     ("@" org-roam-dailies-capture-today " └─ Daily…")
     ("!" jfn/org-roam-node-insert       "Insert Node…")
     ("?" jnf/org-roam-node-find         " └─ Find Node…")
-    ("#" org-roam-buffer-toggle         "Toggle Org Roam Buffer")
-    )
-   ))
+    ("#" org-roam-buffer-toggle         "Toggle Org Roam Buffer"))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; BEGIN org-roam overrides that were very much a copy, paste, and then replace.
