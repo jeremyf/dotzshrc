@@ -65,7 +65,7 @@ NOTE: This is a copy of the code from the original `org-roam-capture'."
                        :keys keys
                        :node node
                        :templates templates
-                       :props '(:immediate-finish nil))))
+                       :props '(:immediate-finish nil)))
 (advice-add 'org-roam-capture :override #'jnf/org-roam-capture)
 
 (cl-defun jnf/org-roam-node-insert (&optional filter-fn &key templates)
@@ -133,32 +133,49 @@ NOTE: This is a copy of the code from the original `org-roam-node-insert'."
 ;; END org-roam overrides
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defun jnf/org-roam--thel-sector--capture (&optional goto keys)
-  "As `jnf/org-roam-capture' but scoped to thel-sector project.
+(defmacro create-org-roam-capture-fn-for (project)
+  "Define a `org-roam-capture' function for PROJECT."
+  (let* ((project-as-symbol (intern (concat ":" project)))
+         (fn-name (intern (concat "jnf/org-roam--" project "--capture")))
+         (docstring (concat "As `jnf/org-roam-capture' but scoped to " project
+                            ".\n\nArguments GOTO and KEYS see `org-capture'.")))
+    `(defun ,fn-name (&optional goto keys)
+       ,docstring
+       (interactive "P")
+       (org-roam-capture goto
+                         keys
+                         :filter-fn (lambda (node) (-contains-p (org-roam-node-tags node) ,project))
+                         :templates (jnf/org-roam-templates-for ,project-as-symbol)))))
 
-Arguments GOTO and KEYS see `org-capture'."
-  (interactive "P")
-  (org-roam-capture goto
-                    keys
-                    :filter-fn (lambda (node) (-contains-p (org-roam-node-tags node) "thel-sector"))
-                    :templates (jnf/org-roam-templates-for :thel-sector)))
+(defmacro create-org-roam-node-insert-fn-for (project)
+  "Define a `org-roam-node-insert' function for PROJECT."
+  (let* ((project-as-symbol (intern (concat ":" project)))
+         (fn-name (intern (concat "jnf/org-roam--" project "--node-insert")))
+         (docstring (concat "As `jnf/org-roam-insert-node' but scoped to " project " project.")))
+      `(defun ,fn-name ()
+         ,docstring
+         (interactive)
+         (org-roam-node-insert (lambda (node) (-contains-p (org-roam-node-tags node) ,project))
+                               :templates (jnf/org-roam-templates-for ,project-as-symbol)))))
 
-(defun jnf/org-roam--thel-sector--node-insert ()
-  "As `org-roam-insert-node' but scoped to thel-sector project."
-  (interactive)
-  (org-roam-node-insert (lambda (node) (-contains-p (org-roam-node-tags node) "thel-sector"))
-                        :templates (jnf/org-roam-templates-for :thel-sector)))
+(defmacro create-org-roam-node-find-fn-for (project)
+  "Define a `org-roam-node-find' function for PROJECT."
+  (let* ((project-as-symbol (intern (concat ":" project)))
+         (fn-name (intern (concat "jnf/org-roam--" project "--node-find")))
+         (docstring (concat "As `jnf/org-roam-find-node' but scoped to "
+                            project " project."
+                            "\n\nArguments INITIAL-INPUT and OTHER-WINDOW are from `org-roam-find-mode'.")))
+      `(defun ,fn-name (&optional other-window initial-input)
+         ,docstring
+         (interactive current-prefix-arg)
+         (org-roam-node-find other-window
+                             initial-input
+                             (lambda (node) (-contains-p (org-roam-node-tags node) ,project))
+                             :templates (jnf/org-roam-templates-for ,project-as-symbol)))))
 
-
-(defun jnf/org-roam--thel-sector--node-find (&optional other-window initial-input)
-  "As `org-roam-find-node' but scoped to thel-sector project.
-
-Arguments INITIAL-INPUT and OTHER-WINDOW are from `org-roam-find-mode'."
-  (interactive current-prefix-arg)
-  (org-roam-node-find other-window
-                      initial-input
-                      (lambda (node) (-contains-p (org-roam-node-tags node) "thel-sector"))
-                      :templates (jnf/org-roam-templates-for :thel-sector)))
+(create-org-roam-capture-fn-for "thel-sector")
+(create-org-roam-node-insert-fn-for "thel-sector")
+(create-org-roam-node-find-fn-for "thel-sector")
 
 ;; With the latest update of org-roam, things again behavior
 ;; correctly.  Now I can just load org-roam as part of my day to day

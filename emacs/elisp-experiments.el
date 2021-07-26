@@ -61,5 +61,6 @@
 (advice-add #'org-roam-capture- :around #'jnf/org-roam-template-wrapper)
 
 
+
 (provide 'elisp-experiments.el)
 ;;; elisp-experiments.el ends here
