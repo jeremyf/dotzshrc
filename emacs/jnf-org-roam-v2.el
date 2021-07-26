@@ -9,8 +9,8 @@
 ;; A Property List of my `org-roam' capture templates.
 (setq jnf/org-roam-capture-templates-plist
       (list
-       :thel-sector '("t" "Projects > Thel Sector" plain "%?"
-                      :if-new (file+head "projects/thel-sector/%<%Y%m%d>---${slug}.org"
+       :thel-sector '("t" "Thel Sector" plain "%?"
+                      :if-new (file+head "personal/thel-sector/%<%Y%m%d>---${slug}.org"
                                          "#+title: ${title}\n#+FILETAGS: :thel-sector: %^G\n\n")
                       :unnarrowed t)
        :personal '("p" "Personal" plain "%?"
