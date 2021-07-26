@@ -82,7 +82,7 @@
   :straight t
   :after elfeed
   :config (elfeed-org)
-  (setq rmh-elfeed-org-files (list "~/git/org/elfeed.org")))
+  (setq rmh-elfeed-org-files (list "~/git/org/personal/elfeed.org")))
 
 
 ;; https://github.com/alphapapa/unpackaged.el#feed-for-url

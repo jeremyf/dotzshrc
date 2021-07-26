@@ -39,7 +39,7 @@
    "Org Mode"
    (("+" jnf/org-roam-capture           "Capture Node…")
     ("@" org-roam-dailies-capture-today " └─ Daily…")
-    ("!" jfn/org-roam-node-insert       "Insert Node…")
+    ("!" jnf/org-roam-node-insert       "Insert Node…")
     ("?" jnf/org-roam-node-find         " └─ Find Node…")
     ("#" org-roam-buffer-toggle         "Toggle Org Roam Buffer"))))
 
