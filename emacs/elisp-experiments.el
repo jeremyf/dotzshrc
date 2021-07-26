@@ -49,5 +49,17 @@
   (dolist (dir dirs)
     (magit-status dir)))
 
+
+;; Begin experimenting with advice to pass templates to `org-roam-capture-'
+;;
+;; In this experiment, I manually add advice, then with that advice,
+;; remove itself.
+(defun jnf/org-roam-template-wrapper (org-roam-capture-function &rest rest)
+  (plist-put rest :templates (jnf/org-roam-templates-for :thel-sector))
+  (apply org-roam-capture-function rest)
+  (advice-remove 'org-roam-capture- #'jnf/org-roam-template-wrapper))
+(advice-add #'org-roam-capture- :around #'jnf/org-roam-template-wrapper)
+
+
 (provide 'elisp-experiments.el)
 ;;; elisp-experiments.el ends here
