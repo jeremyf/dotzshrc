@@ -30,9 +30,9 @@
   (
    "Org Mode"
    (
-    ("!" org-roam-capture               "Capture Node…")
+    ("+" org-roam-capture               "Capture Node…")
     ("@" org-roam-dailies-capture-today " └─ Daily…")
-    (">" org-roam-node-insert           "Insert Node…")
+    ("!" org-roam-node-insert           "Insert Node…")
     ("?" org-roam-node-find             " └─ Find Node…")
     ("#" org-roam-buffer-toggle         "Toggle Org Roam Buffer")
     )
