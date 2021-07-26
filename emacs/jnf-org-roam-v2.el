@@ -40,10 +40,10 @@
     )
    "Org Mode"
    (
-    ("+" org-roam-capture               "Capture Node…")
+    ("+" jnf/org-roam-capture               "Capture Node…")
     ("@" org-roam-dailies-capture-today " └─ Daily…")
-    ("!" org-roam-node-insert           "Insert Node…")
-    ("?" org-roam-node-find             " └─ Find Node…")
+    ("!" jfn/org-roam-node-insert           "Insert Node…")
+    ("?" jnf/org-roam-node-find             " └─ Find Node…")
     ("#" org-roam-buffer-toggle         "Toggle Org Roam Buffer")
     )
    ))
@@ -61,12 +61,10 @@ Argument FILTER-FN see `org-roam-node-read'.
 NOTE: This is a copy of the code from the original `org-roam-capture'."
   (interactive "P")
   (let ((node (org-roam-node-read nil filter-fn)))
-
-                       :keys keys
+    (org-roam-capture- :goto goto
                        :node node
                        :templates templates
-                       :props '(:immediate-finish nil)))
-(advice-add 'org-roam-capture :override #'jnf/org-roam-capture)
+                       :props '(:immediate-finish nil))))
 
 (cl-defun jnf/org-roam-node-insert (&optional filter-fn &key templates)
   "Find an Org-roam node and insert (where the point is) an \"id:\" link to it.
@@ -108,7 +106,6 @@ NOTE: This is a copy of the code from the original `org-roam-node-insert'."
                            :link-description description
                            :finalize 'insert-link))))))
     (deactivate-mark)))
-(advice-add 'org-roam-node-insert :override #'jnf/org-roam-node-insert)
 
 (cl-defun jnf/org-roam-node-find (&optional other-window initial-input filter-fn &key templates)
   "Find and open an Org-roam node by its title or alias.
@@ -128,13 +125,11 @@ NOTE: This is a copy of the code from the original `org-roam-node-insert'."
        :node node
        :templates templates
        :props '(:finalize find-file)))))
-
-(advice-add 'org-roam-node-find :override #'jnf/org-roam-node-find)
 ;; END org-roam overrides
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defmacro create-org-roam-capture-fn-for (project)
-  "Define a `org-roam-capture' function for PROJECT."
+  "Define a `jnf/org-roam-capture' function for PROJECT."
   (let* ((project-as-symbol (intern (concat ":" project)))
          (fn-name (intern (concat "jnf/org-roam--" project "--capture")))
          (docstring (concat "As `jnf/org-roam-capture' but scoped to " project
@@ -142,24 +137,24 @@ NOTE: This is a copy of the code from the original `org-roam-node-insert'."
     `(defun ,fn-name (&optional goto keys)
        ,docstring
        (interactive "P")
-       (org-roam-capture goto
-                         keys
-                         :filter-fn (lambda (node) (-contains-p (org-roam-node-tags node) ,project))
-                         :templates (jnf/org-roam-templates-for ,project-as-symbol)))))
+       (jnf/org-roam-capture goto
+                             keys
+                             :filter-fn (lambda (node) (-contains-p (org-roam-node-tags node) ,project))
+                             :templates (jnf/org-roam-templates-for ,project-as-symbol)))))
 
 (defmacro create-org-roam-node-insert-fn-for (project)
-  "Define a `org-roam-node-insert' function for PROJECT."
+  "Define a `jnf/org-roam-node-insert' function for PROJECT."
   (let* ((project-as-symbol (intern (concat ":" project)))
          (fn-name (intern (concat "jnf/org-roam--" project "--node-insert")))
          (docstring (concat "As `jnf/org-roam-insert-node' but scoped to " project " project.")))
       `(defun ,fn-name ()
          ,docstring
          (interactive)
-         (org-roam-node-insert (lambda (node) (-contains-p (org-roam-node-tags node) ,project))
-                               :templates (jnf/org-roam-templates-for ,project-as-symbol)))))
+         (jnf/org-roam-node-insert (lambda (node) (-contains-p (org-roam-node-tags node) ,project))
+                                   :templates (jnf/org-roam-templates-for ,project-as-symbol)))))
 
 (defmacro create-org-roam-node-find-fn-for (project)
-  "Define a `org-roam-node-find' function for PROJECT."
+  "Define a `jnf/org-roam-node-find' function for PROJECT."
   (let* ((project-as-symbol (intern (concat ":" project)))
          (fn-name (intern (concat "jnf/org-roam--" project "--node-find")))
          (docstring (concat "As `jnf/org-roam-find-node' but scoped to "
@@ -168,10 +163,10 @@ NOTE: This is a copy of the code from the original `org-roam-node-insert'."
       `(defun ,fn-name (&optional other-window initial-input)
          ,docstring
          (interactive current-prefix-arg)
-         (org-roam-node-find other-window
-                             initial-input
-                             (lambda (node) (-contains-p (org-roam-node-tags node) ,project))
-                             :templates (jnf/org-roam-templates-for ,project-as-symbol)))))
+         (jnf/org-roam-node-find other-window
+                                 initial-input
+                                 (lambda (node) (-contains-p (org-roam-node-tags node) ,project))
+                                 :templates (jnf/org-roam-templates-for ,project-as-symbol)))))
 
 (create-org-roam-capture-fn-for "thel-sector")
 (create-org-roam-node-insert-fn-for "thel-sector")
