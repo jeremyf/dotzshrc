@@ -6,86 +6,6 @@
 ;;
 ;;; Code
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; BEGIN org-roam overrides that were very much a copy, paste, and then replace.
-(cl-defun jnf/org-roam-capture (&optional goto keys &key templates filter-fn)
-  "Launches an `org-capture' process for a new or existing note.
-
-This uses the templates defined at `org-roam-capture-templates'.
-Arguments GOTO and KEYS see `org-capture'.
-Argument TEMPLATES see `org-roam-capture-'.
-Argument FILTER-FN see `org-roam-node-read'.
-
-NOTE: This is a copy of the code from the original `org-roam-capture'."
-  (interactive "P")
-  (let ((node (org-roam-node-read nil filter-fn)))
-    (org-roam-capture- :goto goto
-                       :node node
-                       :templates templates
-                       :props '(:immediate-finish nil))))
-
-(cl-defun jnf/org-roam-node-insert (&optional filter-fn &key templates)
-  "Find an Org-roam node and insert (where the point is) an \"id:\" link to it.
-FILTER-FN is a function to filter out nodes: it takes an `org-roam-node',
-and when nil is returned the node will be filtered out.
-
-Argument TEMPLATES see `org-roam-capture-'.
-
-NOTE: This is a copy of the code from the original `org-roam-node-insert'."
-  (interactive)
-  (unwind-protect
-      ;; Group functions together to avoid inconsistent state on quit
-      (atomic-change-group
-        (let* (region-text
-               beg end
-               (_ (when (region-active-p)
-                    (setq beg (set-marker (make-marker) (region-beginning)))
-                    (setq end (set-marker (make-marker) (region-end)))
-                    (setq region-text (org-link-display-format (buffer-substring-no-properties beg end)))))
-               (node (org-roam-node-read region-text filter-fn))
-               (description (or region-text
-                                (org-roam-node-title node))))
-          (if (org-roam-node-id node)
-              (progn
-                (when region-text
-                  (delete-region beg end)
-                  (set-marker beg nil)
-                  (set-marker end nil))
-                (insert (org-link-make-string
-                         (concat "id:" (org-roam-node-id node))
-                         description)))
-            (org-roam-capture-
-             :node node
-             :templates templates
-             :props (append
-                     (when (and beg end)
-                       (list :region (cons beg end)))
-                     (list :insert-at (point-marker)
-                           :link-description description
-                           :finalize 'insert-link))))))
-    (deactivate-mark)))
-
-(cl-defun jnf/org-roam-node-find (&optional other-window initial-input filter-fn &key templates)
-  "Find and open an Org-roam node by its title or alias.
-
-INITIAL-INPUT is the initial input for the prompt.
-FILTER-FN is a function to filter out nodes: it takes an `org-roam-node',
-and when nil is returned the node will be filtered out.
-If OTHER-WINDOW, visit the NODE in another window.
-Argument TEMPLATES see `org-roam-capture-'.
-
-NOTE: This is a copy of the code from the original `org-roam-node-insert'."
-  (interactive current-prefix-arg)
-  (let ((node (org-roam-node-read initial-input filter-fn)))
-    (if (org-roam-node-file node)
-        (org-roam-node-visit node other-window)
-      (org-roam-capture-
-       :node node
-       :templates templates
-       :props '(:finalize find-file)))))
-;; END org-roam overrides
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 (defun jnf/org-roam-templates-for (&rest symbols)
   "Return a list of `org-roam' templates for the given SYMBOLS."
   (-map (lambda (symbol) (plist-get jnf/org-roam-capture-templates-plist symbol))
@@ -100,7 +20,7 @@ NOTE: This is a copy of the code from the original `org-roam-node-insert'."
     `(defun ,fn-name (&optional goto keys)
        ,docstring
        (interactive "P")
-       (jnf/org-roam-capture goto
+       (org-roam-capture goto
                              keys
                              :filter-fn (lambda (node) (-contains-p (org-roam-node-tags node) ,project))
                              :templates (jnf/org-roam-templates-for ,project-as-symbol)))))
@@ -113,7 +33,7 @@ NOTE: This is a copy of the code from the original `org-roam-node-insert'."
       `(defun ,fn-name ()
          ,docstring
          (interactive)
-         (jnf/org-roam-node-insert (lambda (node) (-contains-p (org-roam-node-tags node) ,project))
+         (org-roam-node-insert (lambda (node) (-contains-p (org-roam-node-tags node) ,project))
                                    :templates (jnf/org-roam-templates-for ,project-as-symbol)))))
 
 (defmacro create-org-roam-node-find-fn-for (project)
@@ -126,7 +46,7 @@ NOTE: This is a copy of the code from the original `org-roam-node-insert'."
       `(defun ,fn-name (&optional other-window initial-input)
          ,docstring
          (interactive current-prefix-arg)
-         (jnf/org-roam-node-find other-window
+         (org-roam-node-find other-window
                                  initial-input
                                  (lambda (node) (-contains-p (org-roam-node-tags node) ,project))
                                  :templates (jnf/org-roam-templates-for ,project-as-symbol)))))
