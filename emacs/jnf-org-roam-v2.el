@@ -4,44 +4,7 @@
 ;;
 ;;  This package provides configuration for org-roam
 ;;
-;;; Code:
-
-;; A Property List of my `org-roam' capture templates.
-(setq jnf/org-roam-capture-templates-plist
-      (list
-       :thel-sector '("t" "Thel Sector" plain "%?"
-                      :if-new (file+head "personal/thel-sector/%<%Y%m%d>---${slug}.org"
-                                         "#+title: ${title}\n#+FILETAGS: :thel-sector: %^G\n\n")
-                      :unnarrowed t)
-       :personal '("p" "Personal" plain "%?"
-		   :if-new (file+head "personal/%<%Y%m%d>---${slug}.org"
-				      "#+title: ${title}\n#+FILETAGS: :personal: %^G\n\n")
-		   :unnarrowed t)
-       :public '("u" "Public" plain "%?"
-		 :if-new (file+head "public/%<%Y%m%d>---${slug}.org"
-				    "#+title: ${title}\n#+FILETAGS: :public: %^G\n\n")
-		 :unnarrowed t)
-       ))
-
-
-(defun jnf/org-roam-templates-for (&rest symbols)
-  "Return a list of `org-roam' templates for the given SYMBOLS."
-  (-map (lambda (symbol) (plist-get jnf/org-roam-capture-templates-plist symbol))
-        symbols))
-
-;; A menu of common tasks for `org-roam'.
-(defvar jnf/org-subject-menu--title (with-faicon "book" "Org Subject Menu" 1 -0.05))
-(pretty-hydra-define jnf/org-subject-menu (:foreign-keys warn :title jnf/org-subject-menu--title :quit-key "q" :exit t)
-  ("Projects"
-   (("t +" jnf/org-roam--thel-sector--capture     "Thel Sector: Capture Node…")
-    ("t !" jnf/org-roam--thel-sector--node-insert "Thel Sector: Insert Node…")
-    ("t ?" jnf/org-roam--thel-sector--node-find   " └─ Find Node…"))
-   "Org Mode"
-   (("+" jnf/org-roam-capture           "Capture Node…")
-    ("@" org-roam-dailies-capture-today " └─ Daily…")
-    ("!" jnf/org-roam-node-insert       "Insert Node…")
-    ("?" jnf/org-roam-node-find         " └─ Find Node…")
-    ("#" org-roam-buffer-toggle         "Toggle Org Roam Buffer"))))
+;;; Code
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; BEGIN org-roam overrides that were very much a copy, paste, and then replace.
@@ -123,6 +86,11 @@ NOTE: This is a copy of the code from the original `org-roam-node-insert'."
 ;; END org-roam overrides
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(defun jnf/org-roam-templates-for (&rest symbols)
+  "Return a list of `org-roam' templates for the given SYMBOLS."
+  (-map (lambda (symbol) (plist-get jnf/org-roam-capture-templates-plist symbol))
+        symbols))
+
 (defmacro create-org-roam-capture-fn-for (project)
   "Define a `jnf/org-roam-capture' function for PROJECT."
   (let* ((project-as-symbol (intern (concat ":" project)))
@@ -166,6 +134,37 @@ NOTE: This is a copy of the code from the original `org-roam-node-insert'."
 (create-org-roam-capture-fn-for "thel-sector")
 (create-org-roam-node-insert-fn-for "thel-sector")
 (create-org-roam-node-find-fn-for "thel-sector")
+
+;; A Property List of my `org-roam' capture templates.
+(setq jnf/org-roam-capture-templates-plist
+      (list
+       :thel-sector '("t" "Thel Sector" plain "%?"
+                      :if-new (file+head "personal/thel-sector/%<%Y%m%d>---${slug}.org"
+                                         "#+title: ${title}\n#+FILETAGS: :thel-sector: %^G\n\n")
+                      :unnarrowed t)
+       :personal '("p" "Personal" plain "%?"
+		   :if-new (file+head "personal/%<%Y%m%d>---${slug}.org"
+				      "#+title: ${title}\n#+FILETAGS: :personal: %^G\n\n")
+		   :unnarrowed t)
+       :public '("u" "Public" plain "%?"
+		 :if-new (file+head "public/%<%Y%m%d>---${slug}.org"
+				    "#+title: ${title}\n#+FILETAGS: :public: %^G\n\n")
+		 :unnarrowed t)
+       ))
+
+;; A menu of common tasks for `org-roam'.
+(defvar jnf/org-subject-menu--title (with-faicon "book" "Org Subject Menu" 1 -0.05))
+(pretty-hydra-define jnf/org-subject-menu (:foreign-keys warn :title jnf/org-subject-menu--title :quit-key "q" :exit t)
+  ("Projects"
+   (("t +" jnf/org-roam--thel-sector--capture     "Thel Sector: Capture Node…")
+    ("t !" jnf/org-roam--thel-sector--node-insert "Thel Sector: Insert Node…")
+    ("t ?" jnf/org-roam--thel-sector--node-find   " └─ Find Node…"))
+   "Org Mode"
+   (("+" jnf/org-roam-capture           "Capture Node…")
+    ("@" org-roam-dailies-capture-today " └─ Daily…")
+    ("!" jnf/org-roam-node-insert       "Insert Node…")
+    ("?" jnf/org-roam-node-find         " └─ Find Node…")
+    ("#" org-roam-buffer-toggle         "Toggle Org Roam Buffer"))))
 
 ;; With the latest update of org-roam, things again behavior
 ;; correctly.  Now I can just load org-roam as part of my day to day
