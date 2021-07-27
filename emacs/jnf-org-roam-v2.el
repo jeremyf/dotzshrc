@@ -154,16 +154,24 @@ NOTE: This is a copy of the code from the original `org-roam-node-insert'."
 
 ;; A menu of common tasks for `org-roam'.
 (defvar jnf/org-subject-menu--title (with-faicon "book" "Org Subject Menu" 1 -0.05))
-(pretty-hydra-define jnf/org-subject-menu (:foreign-keys warn :title jnf/org-subject-menu--title :quit-key "q" :exit t)
+(pretty-hydra-define jnf/org-subject-menu--default (:foreign-keys warn :title jnf/org-subject-menu--title :quit-key "q" :exit t)
   ("Projects"
    (("t +" jnf/org-roam--thel-sector--capture     "Thel Sector: Capture Node…")
     ("t !" jnf/org-roam--thel-sector--node-insert "Thel Sector: Insert Node…")
     ("t ?" jnf/org-roam--thel-sector--node-find   " └─ Find Node…"))
    "Org Mode"
    (("+" jnf/org-roam-capture           "Capture Node…")
-    ("@" org-roam-dailies-capture-today " └─ Daily…")
     ("!" jnf/org-roam-node-insert       "Insert Node…")
     ("?" jnf/org-roam-node-find         " └─ Find Node…")
+    ("@" org-roam-dailies-capture-today "Capture Daily…")
+    ("#" org-roam-buffer-toggle         "Toggle Org Roam Buffer"))))
+
+(pretty-hydra-define jnf/org-subject-menu--thel-sector (:foreign-keys warn :title jnf/org-subject-menu--title :quit-key "q" :exit t)
+  ("Thel Sector Subject Menu"
+   (("+" jnf/org-roam--thel-sector--capture     "Thel Sector: Capture Node…")
+    ("!" jnf/org-roam--thel-sector--node-insert "Thel Sector: Insert Node…")
+    ("?" jnf/org-roam--thel-sector--node-find   " └─ Find Node…")
+    ("@" org-roam-dailies-capture-today "Capture Daily…")
     ("#" org-roam-buffer-toggle         "Toggle Org Roam Buffer"))))
 
 ;; With the latest update of org-roam, things again behavior
@@ -190,8 +198,8 @@ NOTE: This is a copy of the code from the original `org-roam-node-insert'."
                                        (no-delete-other-windows . t)))))
 
   (setq org-roam-v2-ack t)
-  :bind (("s-i" . jnf/org-subject-menu/body)
-         ("C-c r" . jnf/org-subject-menu/body)))
+  :bind (("s-i" . jnf/org-subject-menu--default/body)
+         ("C-c r" . jnf/org-subject-menu--default/body)))
 
 (org-roam-setup)
 (provide 'jnf-org-roam-v2.el)
