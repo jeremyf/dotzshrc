@@ -55,13 +55,17 @@
 (create-org-roam-node-insert-fn-for "thel-sector")
 (create-org-roam-node-find-fn-for "thel-sector")
 
+(create-org-roam-capture-fn-for "hesburgh-libraries")
+(create-org-roam-node-insert-fn-for "hesburgh-libraries")
+(create-org-roam-node-find-fn-for "hesburgh-libraries")
+
 ;; A Property List of my `org-roam' capture templates.
 (setq jnf/org-roam-capture-templates-plist
       (list
-       :thel-sector '("t" "Thel Sector" plain "%?"
-                      :if-new (file+head "personal/thel-sector/%<%Y%m%d>---${slug}.org"
-                                         "#+title: ${title}\n#+FILETAGS: :thel-sector: %^G\n\n")
-                      :unnarrowed t)
+       :hesburgh-libraries '("h" "Hesburgh Libraries" plain "%?"
+		   :if-new (file+head "org-hesburgh-libraries/%<%Y%m%d>---${slug}.org"
+				      "#+title: ${title}\n#+FILETAGS: :hesburgh: %^G\n\n")
+		   :unnarrowed t)
        :personal '("p" "Personal" plain "%?"
 		   :if-new (file+head "personal/%<%Y%m%d>---${slug}.org"
 				      "#+title: ${title}\n#+FILETAGS: :personal: %^G\n\n")
@@ -70,15 +74,24 @@
 		 :if-new (file+head "public/%<%Y%m%d>---${slug}.org"
 				    "#+title: ${title}\n#+FILETAGS: :public: %^G\n\n")
 		 :unnarrowed t)
+       :thel-sector '("t" "Thel Sector" plain "%?"
+                      :if-new (file+head "personal/thel-sector/%<%Y%m%d>---${slug}.org"
+                                         "#+title: ${title}\n#+FILETAGS: :thel-sector: %^G\n\n")
+                      :unnarrowed t)
        ))
 
 ;; A menu of common tasks for `org-roam'.
 (defvar jnf/org-subject-menu--title (with-faicon "book" "Org Subject Menu" 1 -0.05))
 (pretty-hydra-define jnf/org-subject-menu--default (:foreign-keys warn :title jnf/org-subject-menu--title :quit-key "q" :exit t)
   ("Projects"
-   (("t +" jnf/org-roam--thel-sector--capture     "Thel Sector: Capture Node…")
+   (
+    ("h +" jnf/org-roam--hesburgh-libraries--capture     "Hesburgh Libraries: Capture Node…")
+    ("h !" jnf/org-roam--hesburgh-libraries--node-insert "Hesburgh Libraries: Insert Node…")
+    ("h ?" jnf/org-roam--hesburgh-libraries--node-find   " └─ Find Node…")
+    ("t +" jnf/org-roam--thel-sector--capture     "Thel Sector: Capture Node…")
     ("t !" jnf/org-roam--thel-sector--node-insert "Thel Sector: Insert Node…")
-    ("t ?" jnf/org-roam--thel-sector--node-find   " └─ Find Node…"))
+    ("t ?" jnf/org-roam--thel-sector--node-find   " └─ Find Node…")
+    )
    "Org Mode"
    (("+" jnf/org-roam-capture           "Capture Node…")
     ("!" jnf/org-roam-node-insert       "Insert Node…")
