@@ -93,9 +93,9 @@
     ("t ?" jnf/org-roam--thel-sector--node-find   " └─ Find Node…")
     )
    "Org Mode"
-   (("+" jnf/org-roam-capture           "Capture Node…")
-    ("!" jnf/org-roam-node-insert       "Insert Node…")
-    ("?" jnf/org-roam-node-find         " └─ Find Node…")
+   (("+" org-roam-capture               "Capture Node…")
+    ("!" org-roam-node-insert           "Insert Node…")
+    ("?" org-roam-node-find             " └─ Find Node…")
     ("@" org-roam-dailies-capture-today "Capture Daily…")
     ("#" org-roam-buffer-toggle         "Toggle Org Roam Buffer"))))
 
