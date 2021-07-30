@@ -245,10 +245,10 @@ CITE and A tag."
      :after "</a></cite>"
      :strategy :pointOrRegion)))
 
-(defun jnf/tor-sync ()
-  "Synchronize TakeOnRules.com repositories."
+(defun jnf/data-sync ()
+  "Synchronize data repositories."
   (interactive)
-  (message "Synchronizing TakeOnRules.com local git repos...")
+  (message "Synchronizing local git repos...")
   (dolist
       (path '(
               ;; The themes directory
@@ -259,15 +259,25 @@ CITE and A tag."
               "~/git/dotzshrc/"
               ;; The personal configuration options
               "~/git/jnf-emacs-config/"
-              ;; The background knowledge directory
-              "~/git/org/"))
-    (message (concat "Syncing \"" path "\"..."))
-    (shell-command-to-string
-     (concat
-      "cd " path
-      " && git pull --rebase"
-      " && git push -u --force-with-lease")))
-  (message "Finished synchronizing TakeOnRules.com local git repos."))
+              ;; An org directory
+              "~/git/org/"
+              ;; An org directory
+              "~/git/org/public"
+              ;; An org directory
+              "~/git/org/personal"
+              ;; An org directory
+              "~/git/org/hesburgh-libraries"
+              ))
+    (if (f-dir-p (file-truename path))
+        (progn
+          (message (concat "Syncing \"" path "\"..."))
+          (shell-command-to-string
+           (concat
+            "cd " path
+            " && git pull --rebase"
+            " && git push -u --force-with-lease")))
+      (message (concat "Skipping missing directory \"" path "\"...")))
+  (message "Finished synchronizing local git repos.")))
 
 (global-set-key (kbd "s-7") 'jnf/tor-post-amplifying-the-blogosphere)
 (global-set-key (kbd "<f7>") 'jnf/tor-post-amplifying-the-blogosphere)
