@@ -20,16 +20,17 @@
   (company-show-numbers t)
   (company-tooltip-limit 10)
   (company-minimum-prefix-length 3)
-  (company-tooltip-idle-delay 0.40)
+  (company-tooltip-idle-delay 0.2)
   (company-async-timeout 20 "Some requests can take a long time. That's fine.")
   :config
 
   (add-to-list 'company-backends 'company-capf)
   ;; Use the numbers 0-9 to select company completion candidates
-  (let ((map company-active-map))
-    (mapc (lambda (x) (define-key map (format "%d" x)
-                        `(lambda () (interactive) (company-complete-number ,x))))
-          (number-sequence 0 9))))
+  ;; (let ((map company-active-map))
+  ;;   (mapc (lambda (x) (define-key map (format "%d" x)
+  ;;                       `(lambda () (interactive) (company-complete-number ,x))))
+  ;;         (number-sequence 0 9)))
+  )
 
 ;; In auto-complete, display any associated help with the completion options.
 (use-package company-quickhelp
