@@ -30,13 +30,10 @@
                              "~/git/org/hesburgh-libraries"
                              ))
 
-(defun jnf/data-sync (&optional supplied-directories)
-  "Synchronize SUPPLIED-DIRECTORIES with git pull/push.
-
-SUPPLIED-DIRECTORIES defaults to `jnf/data-directories' when none are provided."
+(cl-defun jnf/data-sync (&optional (directories jnf/data-directories ))
+  "Synchronize DIRECTORIES with git pull/push."
   (interactive)
   (message "Synchronizing local git repos...")
-  (let ((directories (or supplied-directories jnf/data-directories)))
   (dolist (path directories)
     (if (f-dir-p (file-truename path))
         (progn
@@ -47,19 +44,16 @@ SUPPLIED-DIRECTORIES defaults to `jnf/data-directories' when none are provided."
             " && git pull --rebase"
             " && git push -u --force-with-lease")))
       (message (concat "Skipping missing directory \"" path "\"...")))
-    (message "Finished synchronizing local git repos."))))
+    (message "Finished synchronizing local git repos.")))
 
 
-(defun jnf/git-statuses (&optional supplied-directories)
-  "Review SUPPLIED-DIRECTORIES via `magit'.
-
-SUPPLIED-DIRECTORIES defaults to `jnf/data-directories' when none are provided."
+(cl-defun jnf/git-statuses (&optional (directories jnf/data-directories ))
+  "Review DIRECTORIES via `magit'."
   (interactive)
   (message "Review status of local git repos...")
-  (let ((directories (or supplied-directories jnf/data-directories)))
     (dolist (path directories)
       (if (f-dir-p (file-truename path))
-          (magit-status path)))))
+          (magit-status path))))
 
 (provide 'jnf-config.el)
 ;;; jnf-config.el ends here
