@@ -8,11 +8,22 @@
 ;;; Code:
 ;; ;; Consider https://github.com/jkitchin/org-ref as well
 
+(cl-defun jnf/org-agenda-files (&key paths basenames)
+  "Return the list of filenames where BASENAMES exists in PATHS."
+  (setq returning-list '())
+  (dolist (path paths)
+    (dolist (basename basenames)
+      (if (f-exists-p (f-join path basename))
+          (add-to-list 'returning-list (f-join path basename)))))
+  returning-list)
+
 (use-package org
   :straight t
   :config (setq
            org-directory "~/git/org"
-           org-agenda-files (list "~/git/org")
+           org-agenda-files (jnf/org-agenda-files
+                             :paths jnf/data-directories
+                             :basenames '("agenda.org" "todo.org"))
            org-default-notes-file (concat org-directory "/captured-notes.org")
            org-todo-keywords
            '((sequence "TODO" "WAITING" "|" "DONE")
