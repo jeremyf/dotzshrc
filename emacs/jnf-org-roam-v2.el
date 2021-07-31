@@ -107,6 +107,14 @@
     ("@" org-roam-dailies-capture-today "Capture Daily…")
     ("#" org-roam-buffer-toggle         "Toggle Org Roam Buffer"))))
 
+(pretty-hydra-define jnf/org-subject-menu--hesburgh-libraries (:foreign-keys warn :title jnf/org-subject-menu--title :quit-key "q" :exit t)
+  ("Thel Sector Subject Menu"
+   (("+" jnf/org-roam--hesburgh-libraries--capture     "Hesburgh Libraries: Capture Node…")
+    ("!" jnf/org-roam--hesburgh-libraries--node-insert "Hesburgh Libraries: Insert Node…")
+    ("?" jnf/org-roam--hesburgh-libraries--node-find   " └─ Find Node…")
+    ("@" org-roam-dailies-capture-today "Capture Daily…")
+    ("#" org-roam-buffer-toggle         "Toggle Org Roam Buffer"))))
+
 ;; With the latest update of org-roam, things again behavior
 ;; correctly.  Now I can just load org-roam as part of my day to day
 (use-package org-roam
