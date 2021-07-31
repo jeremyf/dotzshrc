@@ -143,5 +143,6 @@
          ("C-c r" . jnf/org-subject-menu--default/body)))
 
 (org-roam-setup)
+
 (provide 'jnf-org-roam-v2.el)
 ;;; jnf-org-roam-v2.el ends here

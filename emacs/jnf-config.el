@@ -21,6 +21,8 @@
                              ;; An org directory
                              "~/git/org/archive"
                              ;; An org directory
+                             "~/git/org/daily"
+                             ;; An org directory
                              "~/git/org/public"
                              ;; An org directory
                              "~/git/org/personal"
