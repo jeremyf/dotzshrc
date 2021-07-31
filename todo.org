@@ -2,7 +2,7 @@
 
 * Maintenance
 ** DONE Upgrade ~org-roam~ to v2
-** WAITING Topical Capture Template
+** DONE Topical Capture Template
 
 Submitted as Issue to org-roam Github repository: https://github.com/org-roam/org-roam/issues/1681
 
