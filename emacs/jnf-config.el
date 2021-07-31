@@ -30,6 +30,30 @@
                              "~/git/org/hesburgh-libraries"
                              ))
 
+(defun jnf/data-sync ()
+  "Synchronize data repositories."
+  (interactive)
+  (message "Synchronizing local git repos...")
+  (dolist (path jnf/data-directories)
+    (if (f-dir-p (file-truename path))
+        (progn
+          (message (concat "Syncing \"" path "\"..."))
+          (shell-command-to-string
+           (concat
+            "cd " path
+            " && git pull --rebase"
+            " && git push -u --force-with-lease")))
+      (message (concat "Skipping missing directory \"" path "\"...")))
+    (message "Finished synchronizing local git repos.")))
+
+
+(defun jnf/git-statuses ()
+  "Synchronize data repositories."
+  (interactive)
+  (message "Review status of local git repos...")
+  (dolist (path jnf/data-directories)
+    (if (f-dir-p (file-truename path))
+        (magit-status path))))
 
 (provide 'jnf-config.el)
 ;;; jnf-config.el ends here

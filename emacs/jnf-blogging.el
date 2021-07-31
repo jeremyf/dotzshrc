@@ -245,22 +245,6 @@ CITE and A tag."
      :after "</a></cite>"
      :strategy :pointOrRegion)))
 
-(defun jnf/data-sync ()
-  "Synchronize data repositories."
-  (interactive)
-  (message "Synchronizing local git repos...")
-  (dolist (path jnf/data-directories)
-    (if (f-dir-p (file-truename path))
-        (progn
-          (message (concat "Syncing \"" path "\"..."))
-          (shell-command-to-string
-           (concat
-            "cd " path
-            " && git pull --rebase"
-            " && git push -u --force-with-lease")))
-      (message (concat "Skipping missing directory \"" path "\"...")))
-  (message "Finished synchronizing local git repos.")))
-
 (global-set-key (kbd "s-7") 'jnf/tor-post-amplifying-the-blogosphere)
 (global-set-key (kbd "<f7>") 'jnf/tor-post-amplifying-the-blogosphere)
 
