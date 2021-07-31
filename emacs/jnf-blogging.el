@@ -262,6 +262,8 @@ CITE and A tag."
               ;; An org directory
               "~/git/org/"
               ;; An org directory
+              "~/git/org/archive"
+              ;; An org directory
               "~/git/org/public"
               ;; An org directory
               "~/git/org/personal"
