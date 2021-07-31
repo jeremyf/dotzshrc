@@ -13,8 +13,10 @@
   :straight t
   ;; Optionally use TAB for cycling, default is `corfu-complete'.
   :bind (:map corfu-map
-         ("<tab>" . corfu-next)
-         ("S-<tab>" . corfu-previous))
+         ("TAB" . corfu-next)
+         ([tab] . corfu-next)
+         ("S-TAB" . corfu-previous)
+         ([backtab] . corfu-previous))
   :config
 
   ;; Recommended: Enable Corfu globally.
