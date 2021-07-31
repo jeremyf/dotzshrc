@@ -14,12 +14,13 @@
   :bind (("C-." . #'company-capf)
          (:map company-active-map (("<tab>" . 'company-complete-selection ))))
   :hook (prog-mode . company-mode)
+        (org-mode . company-mode)
   :custom
   (company-dabbrev-downcase nil "Don't downcase returned candidates.")
   (company-show-numbers t)
   (company-tooltip-limit 10)
   (company-minimum-prefix-length 3)
-  (company-tooltip-idle-delay 0.25 "Faster!")
+  (company-tooltip-idle-delay 0.40)
   (company-async-timeout 20 "Some requests can take a long time. That's fine.")
   :config
 
