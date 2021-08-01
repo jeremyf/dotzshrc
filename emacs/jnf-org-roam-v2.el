@@ -98,63 +98,75 @@
   (
    "Public / Personal"
    (
-    ("p +" jnf/org-roam--public--capture     "Public: Capture Node…")
-    ("p !" jnf/org-roam--public--node-insert "Public: Insert Node…")
-    ("p ?" jnf/org-roam--public--node-find   " └─ Find Node…")
-    ("r +" jnf/org-roam--personal--capture     "Personal: Capture Node…")
-    ("r !" jnf/org-roam--personal--node-insert "Personal: Insert Node…")
-    ("r ?" jnf/org-roam--personal--node-find   " └─ Find Node…")
+    ("p +" jnf/org-roam--public--capture     "Public: Capture…")
+    ("p !" jnf/org-roam--public--node-insert " ├─ Insert…")
+    ("p ?" jnf/org-roam--public--node-find   " ╰─ Find…")
+    ("r +" jnf/org-roam--personal--capture     "Personal Capture…")
+    ("r !" jnf/org-roam--personal--node-insert " ├─ Insert…")
+    ("r ?" jnf/org-roam--personal--node-find   " ╰─ Find…")
     )
    "Projects"
    (
-    ("h +" jnf/org-roam--hesburgh-libraries--capture     "Hesburgh Libraries: Capture Node…")
-    ("h !" jnf/org-roam--hesburgh-libraries--node-insert "Hesburgh Libraries: Insert Node…")
-    ("h ?" jnf/org-roam--hesburgh-libraries--node-find   " └─ Find Node…")
-    ("t +" jnf/org-roam--thel-sector--capture     "Thel Sector: Capture Node…")
-    ("t !" jnf/org-roam--thel-sector--node-insert "Thel Sector: Insert Node…")
-    ("t ?" jnf/org-roam--thel-sector--node-find   " └─ Find Node…")
+    ("h +" jnf/org-roam--hesburgh-libraries--capture     "Hesburgh Libraries: Capture…")
+    ("h !" jnf/org-roam--hesburgh-libraries--node-insert " ├─ Insert…")
+    ("h ?" jnf/org-roam--hesburgh-libraries--node-find   " ╰─ Find…")
+    ("t +" jnf/org-roam--thel-sector--capture     "Thel Sector: Capture …")
+    ("t !" jnf/org-roam--thel-sector--node-insert " ├─ Insert…")
+    ("t ?" jnf/org-roam--thel-sector--node-find   " ╰─ Find…")
     )
    "Org Mode"
-   (("+" org-roam-capture               "Capture Node…")
-    ("!" org-roam-node-insert           "Insert Node…")
-    ("?" org-roam-node-find             " └─ Find Node…")
+   (("+" org-roam-capture               "Capture…")
+    ("!" org-roam-node-insert           " ├─ Insert…")
+    ("?" org-roam-node-find             " ╰─ Find…")
     ("@" org-roam-dailies-capture-today "Capture Daily…")
-    ("#" org-roam-buffer-toggle         "Toggle Org Roam Buffer")
-    ("*" jnf/toggle-roam-project-filter "Toggle Org Roam Filter")
+    ("#" org-roam-buffer-toggle         "Toggle Buffer")
+    ("*" jnf/toggle-roam-project-filter "Toggle Default Filter")
     )))
 
 (pretty-hydra-define jnf/org-subject-menu--thel-sector (:foreign-keys warn :title jnf/org-subject-menu--title :quit-key "q" :exit t)
   (
    "Thel Sector Subject Menu"
-   (("+" jnf/org-roam--thel-sector--capture     "Thel Sector: Capture Node…")
-    ("!" jnf/org-roam--thel-sector--node-insert "Thel Sector: Insert Node…")
-    ("?" jnf/org-roam--thel-sector--node-find   " └─ Find Node…")
+   (("+" jnf/org-roam--thel-sector--capture     "Thel Sector: Capture…")
+    ("!" jnf/org-roam--thel-sector--node-insert " ├─ Insert…")
+    ("?" jnf/org-roam--thel-sector--node-find   " ╰─ Find Node…")
     ("@" org-roam-dailies-capture-today "Capture Daily…")
-    ("#" org-roam-buffer-toggle         "Toggle Org Roam Buffer")
-    ("*" jnf/toggle-roam-project-filter "Toggle Org Roam Filter")
+    ("#" org-roam-buffer-toggle         "Toggle Buffer")
+    ("*" jnf/toggle-roam-project-filter "Toggle Filter…")
     )))
 
 (pretty-hydra-define jnf/org-subject-menu--personal (:foreign-keys warn :title jnf/org-subject-menu--title :quit-key "q" :exit t)
   (
    "Personal Subject Menu"
    (
-    ("+" jnf/org-roam--personal--capture     "Personal: Capture Node…")
-    ("!" jnf/org-roam--personal--node-insert "Personal: Insert Node…")
-    ("?" jnf/org-roam--personal--node-find   " └─ Find Node…")
+    ("+" jnf/org-roam--personal--capture     "Personal: Capture…")
+    ("!" jnf/org-roam--personal--node-insert " ├─ Insert…")
+    ("?" jnf/org-roam--personal--node-find   " ╰─ Find…")
     ("@" org-roam-dailies-capture-today "Capture Daily…")
-    ("#" org-roam-buffer-toggle         "Toggle Org Roam Buffer")
-    ("*" jnf/toggle-roam-project-filter "Toggle Org Roam Filter")
+    ("#" org-roam-buffer-toggle         "Toggle Buffer")
+    ("*" jnf/toggle-roam-project-filter "Toggle Filter…")
+    )))
+
+(pretty-hydra-define jnf/org-subject-menu--public (:foreign-keys warn :title jnf/org-subject-menu--title :quit-key "q" :exit t)
+  (
+   "Public Subject Menu"
+   (
+    ("+" jnf/org-roam--public--capture     "Public: Capture…")
+    ("!" jnf/org-roam--public--node-insert " ├─ Insert…")
+    ("?" jnf/org-roam--public--node-find   " ╰─ Find…")
+    ("@" org-roam-dailies-capture-today "Capture Daily…")
+    ("#" org-roam-buffer-toggle         "Toggle Buffer")
+    ("*" jnf/toggle-roam-project-filter "Toggle Filter…")
     )))
 
 (pretty-hydra-define jnf/org-subject-menu--hesburgh-libraries (:foreign-keys warn :title jnf/org-subject-menu--title :quit-key "q" :exit t)
   (
    "Thel Sector Subject Menu"
-   (("+" jnf/org-roam--hesburgh-libraries--capture     "Hesburgh Libraries: Capture Node…")
-    ("!" jnf/org-roam--hesburgh-libraries--node-insert "Hesburgh Libraries: Insert Node…")
-    ("?" jnf/org-roam--hesburgh-libraries--node-find   " └─ Find Node…")
+   (("+" jnf/org-roam--hesburgh-libraries--capture     "Hesburgh Libraries: Capture…")
+    ("!" jnf/org-roam--hesburgh-libraries--node-insert " ├─ Insert…")
+    ("?" jnf/org-roam--hesburgh-libraries--node-find   " ╰─ Find Node…")
     ("@" org-roam-dailies-capture-today "Capture Daily…")
-    ("#" org-roam-buffer-toggle         "Toggle Org Roam Buffer")
-    ("*" jnf/toggle-roam-project-filter "Toggle Org Roam Filter")
+    ("#" org-roam-buffer-toggle         "Toggle Buffer")
+    ("*" jnf/toggle-roam-project-filter "Toggle Filter…")
     )))
 
 (defun jnf/toggle-roam-project-filter (project)
