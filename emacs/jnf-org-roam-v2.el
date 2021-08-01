@@ -55,16 +55,17 @@
                       :unnarrowed t)
        ))
 
-(defun jnf/org-roam-templates-for (&rest symbols)
-  "Return a list of `org-roam' templates for the given SYMBOLS."
-  (-map (lambda (symbol) (plist-get jnf/org-roam-capture-templates-plist symbol))
-        symbols))
+(cl-defun jnf/org-roam-templates-for-context (context
+                                              &key
+                                              (contexts-plist jnf/org-roam-capture-contexts-plist)
+                                              (template-definitions-plist jnf/org-roam-capture-templates-plist))
+  "Return a list of `org-roam' templates for the given CONTEXT.
 
-(cl-defun jnf/org-roam-templates-for-context (context &key (contexts-plist jnf/org-roam-capture-contexts-plist))
-  "Return a list of `org-roam' templates for the given CONTEXT from the given CONTEXTS-PLIST."
-  (let ((symbols (plist-get (plist-get contexts-plist context) :templates)))
-    (-map (lambda (symbol) (plist-get jnf/org-roam-capture-templates-plist symbol))
-          symbols)))
+Use the given (or default) CONTEXTS-PLIST to fetch from the
+given (or default) TEMPLATE-DEFINITIONS-PLIST."
+  (let ((templates (plist-get (plist-get contexts-plist context) :templates)))
+    (-map (lambda (template) (plist-get template-definitions-plist template))
+          templates)))
 
 (defmacro create-org-roam-capture-fn-for (project)
   "Define a `jnf/org-roam-capture' function for PROJECT."
