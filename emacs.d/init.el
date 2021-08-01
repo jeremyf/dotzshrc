@@ -268,7 +268,7 @@ echo the method signature of `'delete-duplicate-lines`"
 (require 'jnf-tabs.el)
 (require 'jnf-stars-without-number.el)
 (require 'jnf-elfeed.el)
-(require 'jnf-fennel.el)
+;; (require 'jnf-fennel.el)
 (require 'jnf-yaml.el)
 (require 'jnf-dired.el)
 
