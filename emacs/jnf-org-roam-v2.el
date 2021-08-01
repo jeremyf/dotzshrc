@@ -6,6 +6,8 @@
 ;;
 ;;; Code
 
+;; A plist that contains the various org-roam contexts.  Each context
+;; has a plist of :templates and :name.
 (setq jnf/org-roam-capture-contexts-plist
       (list
        :all (list
