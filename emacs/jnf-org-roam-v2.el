@@ -14,7 +14,7 @@
                           :encrypted-personal
                           :thel-sector
                           :public)
-             :name :all)
+             :name "all")
        :hesburgh-libraries (list
                             :templates '(:hesburgh-libraries)
                             :name "hesburgh-libraries")
@@ -126,7 +126,7 @@ given (or default) TEMPLATE-DEFINITIONS-PLIST."
 
 ;; A menu of common tasks for `org-roam'.
 (defvar jnf/org-subject-menu--title (with-faicon "book" "Org Subject Menu" 1 -0.05))
-(pretty-hydra-define jnf/org-subject-menu--default (:foreign-keys warn :title jnf/org-subject-menu--title :quit-key "q" :exit t)
+(pretty-hydra-define jnf/org-subject-menu--all (:foreign-keys warn :title jnf/org-subject-menu--title :quit-key "q" :exit t)
   (
    "Public / Personal"
    (
@@ -205,21 +205,17 @@ given (or default) TEMPLATE-DEFINITIONS-PLIST."
   "Prompt for a PROJECT, then toggle the `s-i' kbd to filter for that project."
   (interactive (list
                 (completing-read
-                 "Project: " '((:all 1)
+                 "Project: " '(("all" 1)
                                ("hesburgh-libraries" 2)
                                ("thel-sector" 3)
                                ("personal" 4)
                                ("public" 5)
                                ))))
-  (if (string= project :all)
-      (progn
-        (global-set-key (kbd "s-i") 'org-roam-node-insert)
-        (global-set-key (kbd "C-c i") 'jnf/org-subject-menu--default/body)
-        )
-    (progn
-      (global-set-key (kbd "s-i") (intern (concat "jnf/org-roam--" project "--node-insert")))
-      (global-set-key (kbd "C-c i") (intern (concat "jnf/org-subject-menu--" project "/body")))
-      )))
+  (global-set-key (kbd "s-i") (intern (concat "jnf/org-roam--" project "--node-insert")))
+  (global-set-key (kbd "C-c i") (intern (concat "jnf/org-subject-menu--" project "/body"))))
+
+;; Including the alias to reduce switching necessary for `jnf/toggle-roam-project-filter'.
+(defalias 'jnf/org-roam--all--node-insert 'org-roam-node-insert)
 
 ;; With the latest update of org-roam, things again behavior
 ;; correctly.  Now I can just load org-roam as part of my day to day
@@ -242,8 +238,8 @@ given (or default) TEMPLATE-DEFINITIONS-PLIST."
                                        (no-delete-other-windows . t)))))
 
   (setq org-roam-v2-ack t)
-  :bind (("s-i" . org-roam-node-insert)
-         ("C-c i" . jnf/org-subject-menu--default/body)))
+  :bind (("s-i" . jnf/org-roam--all--node-insert)
+         ("C-c i" . jnf/org-subject-menu--all/body)))
 
 (org-roam-setup)
 
