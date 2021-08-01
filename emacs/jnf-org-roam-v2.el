@@ -36,7 +36,7 @@
 (setq jnf/org-roam-capture-templates-plist
       (list
        :hesburgh-libraries '("h" "Hesburgh Libraries" plain "%?"
-		   :if-new (file+head "org-hesburgh-libraries/%<%Y%m%d>---${slug}.org"
+		   :if-new (file+head "hesburgh-libraries/%<%Y%m%d>---${slug}.org"
 				      "#+title: ${title}\n#+FILETAGS: :hesburgh: %^G\n\n")
 		   :unnarrowed t)
        :personal '("p" "Personal" plain "%?"
