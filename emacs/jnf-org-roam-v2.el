@@ -55,6 +55,14 @@
 (create-org-roam-node-insert-fn-for "thel-sector")
 (create-org-roam-node-find-fn-for "thel-sector")
 
+(create-org-roam-capture-fn-for "public")
+(create-org-roam-node-insert-fn-for "public")
+(create-org-roam-node-find-fn-for "public")
+
+(create-org-roam-capture-fn-for "personal")
+(create-org-roam-node-insert-fn-for "personal")
+(create-org-roam-node-find-fn-for "personal")
+
 (create-org-roam-capture-fn-for "hesburgh-libraries")
 (create-org-roam-node-insert-fn-for "hesburgh-libraries")
 (create-org-roam-node-find-fn-for "hesburgh-libraries")
@@ -87,7 +95,17 @@
 ;; A menu of common tasks for `org-roam'.
 (defvar jnf/org-subject-menu--title (with-faicon "book" "Org Subject Menu" 1 -0.05))
 (pretty-hydra-define jnf/org-subject-menu--default (:foreign-keys warn :title jnf/org-subject-menu--title :quit-key "q" :exit t)
-  ("Projects"
+  (
+   "Public / Personal"
+   (
+    ("p +" jnf/org-roam--public--capture     "Public: Capture Node…")
+    ("p !" jnf/org-roam--public--node-insert "Public: Insert Node…")
+    ("p ?" jnf/org-roam--public--node-find   " └─ Find Node…")
+    ("r +" jnf/org-roam--personal--capture     "Personal: Capture Node…")
+    ("r !" jnf/org-roam--personal--node-insert "Personal: Insert Node…")
+    ("r ?" jnf/org-roam--personal--node-find   " └─ Find Node…")
+    )
+   "Projects"
    (
     ("h +" jnf/org-roam--hesburgh-libraries--capture     "Hesburgh Libraries: Capture Node…")
     ("h !" jnf/org-roam--hesburgh-libraries--node-insert "Hesburgh Libraries: Insert Node…")
@@ -101,23 +119,63 @@
     ("!" org-roam-node-insert           "Insert Node…")
     ("?" org-roam-node-find             " └─ Find Node…")
     ("@" org-roam-dailies-capture-today "Capture Daily…")
-    ("#" org-roam-buffer-toggle         "Toggle Org Roam Buffer"))))
+    ("#" org-roam-buffer-toggle         "Toggle Org Roam Buffer")
+    ("*" jnf/toggle-roam-project-filter "Toggle Org Roam Filter")
+    )))
 
 (pretty-hydra-define jnf/org-subject-menu--thel-sector (:foreign-keys warn :title jnf/org-subject-menu--title :quit-key "q" :exit t)
-  ("Thel Sector Subject Menu"
+  (
+   "Thel Sector Subject Menu"
    (("+" jnf/org-roam--thel-sector--capture     "Thel Sector: Capture Node…")
     ("!" jnf/org-roam--thel-sector--node-insert "Thel Sector: Insert Node…")
     ("?" jnf/org-roam--thel-sector--node-find   " └─ Find Node…")
     ("@" org-roam-dailies-capture-today "Capture Daily…")
-    ("#" org-roam-buffer-toggle         "Toggle Org Roam Buffer"))))
+    ("#" org-roam-buffer-toggle         "Toggle Org Roam Buffer")
+    ("*" jnf/toggle-roam-project-filter "Toggle Org Roam Filter")
+    )))
+
+(pretty-hydra-define jnf/org-subject-menu--personal (:foreign-keys warn :title jnf/org-subject-menu--title :quit-key "q" :exit t)
+  (
+   "Personal Subject Menu"
+   (
+    ("+" jnf/org-roam--personal--capture     "Personal: Capture Node…")
+    ("!" jnf/org-roam--personal--node-insert "Personal: Insert Node…")
+    ("?" jnf/org-roam--personal--node-find   " └─ Find Node…")
+    ("@" org-roam-dailies-capture-today "Capture Daily…")
+    ("#" org-roam-buffer-toggle         "Toggle Org Roam Buffer")
+    ("*" jnf/toggle-roam-project-filter "Toggle Org Roam Filter")
+    )))
 
 (pretty-hydra-define jnf/org-subject-menu--hesburgh-libraries (:foreign-keys warn :title jnf/org-subject-menu--title :quit-key "q" :exit t)
-  ("Thel Sector Subject Menu"
+  (
+   "Thel Sector Subject Menu"
    (("+" jnf/org-roam--hesburgh-libraries--capture     "Hesburgh Libraries: Capture Node…")
     ("!" jnf/org-roam--hesburgh-libraries--node-insert "Hesburgh Libraries: Insert Node…")
     ("?" jnf/org-roam--hesburgh-libraries--node-find   " └─ Find Node…")
     ("@" org-roam-dailies-capture-today "Capture Daily…")
-    ("#" org-roam-buffer-toggle         "Toggle Org Roam Buffer"))))
+    ("#" org-roam-buffer-toggle         "Toggle Org Roam Buffer")
+    ("*" jnf/toggle-roam-project-filter "Toggle Org Roam Filter")
+    )))
+
+(defun jnf/toggle-roam-project-filter (project)
+  "Prompt for a PROJECT, then toggle the `s-i' kbd to filter for that project."
+  (interactive (list
+                (completing-read
+                 "Project: " '((:all 1)
+                               ("hesburgh-libraries" 2)
+                               ("thel-sector" 3)
+                               ("personal" 4)
+                               ("public" 5)
+                               ))))
+  (if (string= project :all)
+      (progn
+        (global-set-key (kbd "s-i") 'org-roam-node-insert)
+        (global-set-key (kbd "C-c i") 'jnf/org-subject-menu--default/body)
+        )
+    (progn
+      (global-set-key (kbd "s-i") (intern (concat "jnf/org-roam--" project "--node-insert")))
+      (global-set-key (kbd "C-c i") (intern (concat "jnf/org-subject-menu--" project "/body")))
+      )))
 
 ;; With the latest update of org-roam, things again behavior
 ;; correctly.  Now I can just load org-roam as part of my day to day
@@ -145,8 +203,8 @@
                                        (no-delete-other-windows . t)))))
 
   (setq org-roam-v2-ack t)
-  :bind (("s-i" . jnf/org-subject-menu--default/body)
-         ("C-c r" . jnf/org-subject-menu--default/body)))
+  :bind (("s-i" . org-roam-node-insert)
+         ("C-c i" . jnf/org-subject-menu--default/body)))
 
 (org-roam-setup)
 
