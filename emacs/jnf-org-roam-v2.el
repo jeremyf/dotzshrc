@@ -70,6 +70,10 @@
 		   :if-new (file+head "personal/%<%Y%m%d>---${slug}.org"
 				      "#+title: ${title}\n#+FILETAGS: :personal: %^G\n\n")
 		   :unnarrowed t)
+       :encrypted-personal '("e" "Encrypted Personal" plain "%?"
+		   :if-new (file+head "personal/%<%Y%m%d>---${slug}.org.gpg"
+				      "#+title: ${title}\n#+FILETAGS: :personal:encrypted: %^G\n\n")
+		   :unnarrowed t)
        :public '("u" "Public" plain "%?"
 		 :if-new (file+head "public/%<%Y%m%d>---${slug}.org"
 				    "#+title: ${title}\n#+FILETAGS: :public: %^G\n\n")
@@ -125,6 +129,8 @@
   ;; this is the new path forward.
   (org-roam-node-display-template "${title:*} ${tags:40}")
   (org-roam-capture-templates (jnf/org-roam-templates-for
+                               :encrypted-personal
+                               :hesburgh-libraries
                                :personal
                                :public
 			       :thel-sector))
