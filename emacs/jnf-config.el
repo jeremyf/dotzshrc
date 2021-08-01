@@ -30,7 +30,7 @@
                              "~/git/org/hesburgh-libraries"
                              ))
 
-(cl-defun jnf/data-sync (&optional (directories jnf/data-directories ))
+(cl-defun jnf/git-data-sync (&optional (directories jnf/data-directories ))
   "Synchronize DIRECTORIES with git pull/push."
   (interactive)
   (message "Synchronizing local git repos...")
@@ -47,7 +47,7 @@
     (message "Finished synchronizing local git repos.")))
 
 
-(cl-defun jnf/git-statuses (&optional (directories jnf/data-directories ))
+(cl-defun jnf/git-data-statuses (&optional (directories jnf/data-directories ))
   "Review DIRECTORIES via `magit'."
   (interactive)
   (message "Review status of local git repos...")
