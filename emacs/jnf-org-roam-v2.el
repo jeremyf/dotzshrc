@@ -194,7 +194,7 @@ given (or default) TEMPLATE-DEFINITIONS-PLIST."
 
 (pretty-hydra-define jnf/org-subject-menu--hesburgh-libraries (:foreign-keys warn :title jnf/org-subject-menu--title :quit-key "q" :exit t)
   (
-   "Thel Sector Subject Menu"
+   "Hesburgh Libraries Subject Menu"
    (("+" jnf/org-roam--hesburgh-libraries--capture     "Hesburgh Libraries: Capture…")
     ("!" jnf/org-roam--hesburgh-libraries--node-insert " ├─ Insert…")
     ("?" jnf/org-roam--hesburgh-libraries--node-find   " ╰─ Find Node…")
