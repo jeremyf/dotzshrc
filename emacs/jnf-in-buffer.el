@@ -107,6 +107,7 @@ Useful for pasting code into Reddit's Markdown mode."
   :bind (("C-M-SPC" . set-rectangular-region-anchor)
          ("C->" . mc/mark-next-like-this)
          ("C-<" . mc/mark-previous-like-this)
+         ("C-s-<mouse-1>" . mc/add-cursor-on-click)
          ("C-c C->" . mc/mark-all-like-this)
          ("C-c C-SPC" . mc/edit-lines)) ;; CTRL+CMD+c
   :straight t)
