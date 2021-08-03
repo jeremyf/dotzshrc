@@ -22,15 +22,17 @@
       '(("Name"    25 magit-repolist-column-ident ())
         ("Version" 25 magit-repolist-column-version ())
         ("D"        1 magit-repolist-column-dirty ())
-        ("B<U"      3 magit-repolist-column-unpulled-from-upstream
+        ("⇣"        3 magit-repolist-column-unpulled-from-upstream
          ((:right-align t)
           (:help-echo "Upstream changes not in branch")))
-        ("B>U"      3 magit-repolist-column-unpushed-to-upstream
+        ("⇡"        3 magit-repolist-column-unpushed-to-upstream
          ((:right-align t)
           (:help-echo "Local changes not in upstream")))
+        ("Branch"  25 magit-repolist-column-branch ())
         ("Path"    99 magit-repolist-column-path ())))
   (setq magit-repository-directories
       `(("~/git/takeonrules.github.io/" . 1)
+        ("~/git/takeonrules.github.io/hugo-tufte" . 1)
         ("~/git/org" . 1)
         ("~/git/org/personal" . 1)
         ("~/git/org/public" . 1)
@@ -51,6 +53,22 @@
     (jump-to-register :magit-fullscreen))
   :config
   (remove-hook 'magit-status-sections-hook 'magit-insert-tags-header))
+
+(defun jnf/personal-magit-list-repositories ()
+  "Create a `magit-list-repositories' for my personal repositories."
+  (interactive)
+  (setq magit-repository-directories
+      `(("~/git/takeonrules.github.io/" . 1)
+        ("~/git/takeonrules.github.io/hugo-tufte" . 1)
+        ("~/git/org" . 1)
+        ("~/git/org/personal" . 1)
+        ("~/git/org/public" . 1)
+        ("~/git/org/archive" . 1)
+        ("~/git/org/daily" . 1)
+        ("~/git/org/hesburgh-libraries" . 1)
+        ("~/git/jnf-emacs-config/" . 1)
+        ("~/git/dotzshrc/" .  1)))
+  (magit-list-repositories))
 
 (use-package forge
   :straight t)
