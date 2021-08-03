@@ -21,7 +21,7 @@
   (setq magit-repolist-columns
       '(("Name"    25 magit-repolist-column-ident ())
         ("Version" 25 magit-repolist-column-version ())
-        ("D"        1 magit-repolist-column-dirty ())
+        ("δ"        1 magit-repolist-column-dirty ())
         ("⇣"        3 magit-repolist-column-unpulled-from-upstream
          ((:right-align t)
           (:help-echo "Upstream changes not in branch")))
