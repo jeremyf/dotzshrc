@@ -54,7 +54,7 @@
   :config
   (remove-hook 'magit-status-sections-hook 'magit-insert-tags-header))
 
-(defun jnf/personal-magit-list-repositories ()
+(defun jnf/magit-list-repositories ()
   "Create a `magit-list-repositories' for my personal repositories."
   (interactive)
   (setq magit-repository-directories
