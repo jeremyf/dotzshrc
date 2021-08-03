@@ -49,16 +49,5 @@ By default the DIRECTORIES are `jnf/data-directories'"
       (message (concat "Skipping missing directory \"" path "\"...")))
     (message "Finished synchronizing local git repos.")))
 
-
-(cl-defun jnf/git-data-statuses (&optional (directories jnf/data-directories))
-  "Review DIRECTORIES via `magit'.
-
-By default the DIRECTORIES are `jnf/data-directories'"
-  (interactive)
-  (message "Review status of local git repos...")
-    (dolist (path directories)
-      (if (f-dir-p (file-truename path))
-          (magit-status path))))
-
 (provide 'jnf-config.el)
 ;;; jnf-config.el ends here
