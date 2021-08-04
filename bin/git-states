@@ -1,4 +1,4 @@
 #!/bin/sh
 #
-# This command edits all files that have changes (according to git)
+# This command opens a list of repositories for magit review.
 editor --eval "(jnf/magit-list-repositories)"
