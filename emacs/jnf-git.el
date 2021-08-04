@@ -13,11 +13,15 @@
 (use-package magit
   :straight t
   :init (use-package with-editor :straight t)
+
   ;; Adding format to git-commit-fill-column of 72 as best practice.
   (setq git-commit-fill-column 72)
+
   ;; Keeping the summary terse helps with legibility when you run a
   ;; report with only summary.
   (setq git-commit-summary-max-length 50)
+
+  ;; Set the tabular display columns for the `magit-list-repositories'
   (setq magit-repolist-columns
       '(("Name"    25 magit-repolist-column-ident ())
         ("Version" 25 magit-repolist-column-version ())
@@ -30,17 +34,20 @@
           (:help-echo "Local changes not in upstream")))
         ("Branch"  25 magit-repolist-column-branch ())
         ("Path"    99 magit-repolist-column-path ())))
+
+  ;; The default relevant `magit-list-repositories'
   (setq magit-repository-directories
-      `(("~/git/takeonrules.github.io/" . 1)
-        ("~/git/takeonrules.github.io/hugo-tufte" . 1)
-        ("~/git/org" . 1)
-        ("~/git/org/personal" . 1)
-        ("~/git/org/public" . 1)
-        ("~/git/org/archive" . 1)
-        ("~/git/org/daily" . 1)
-        ("~/git/org/hesburgh-libraries" . 1)
-        ("~/git/jnf-emacs-config/" . 1)
-        ("~/git/dotzshrc/" .  1)))
+        `(("~/git/takeonrules.github.io/" . 1)
+          ("~/git/dotzshrc/" .  1)
+          ("~/git/jnf-emacs-config/" . 1)
+          ("~/git/org" . 1)
+          ("~/git/org/archive" . 1)
+          ("~/git/org/daily" . 1)
+          ("~/git/org/hesburgh-libraries" . 1)
+          ("~/git/org/personal" . 1)
+          ("~/git/org/public" . 1)
+          ("~/git/takeonrules.github.io/hugo-tufte" . 1)))
+
   ;; Have magit-status go full screen and quit to previous
   ;; configuration.  Taken from
   ;; http://whattheemacsd.com/setup-magit.el-01.html#comment-748135498
