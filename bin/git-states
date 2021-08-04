@@ -1,0 +1,4 @@
+#!/bin/sh
+#
+# This command edits all files that have changes (according to git)
+editor --eval "(jnf/magit-list-repositories)"
