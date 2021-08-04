@@ -38,6 +38,7 @@
         string-inflection-all-cycle
         typopunct-insert-ellipsis-or-middot
         typopunct-insert-mp
+        typopunct-insert-quotation-mark
         typopunct-insert-typographical-dashes
         wdired-finish-edit
         wgrep-finish-edit
