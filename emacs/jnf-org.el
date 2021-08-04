@@ -32,10 +32,8 @@
              (sequence "TO-READ" "READING" "|" "READ")))
   (setq org-capture-templates
         '(
-          ("t" "Task for Work" entry (file+datetree "~/git/org/agenda.org")
-           "* TODO %?")
-          ("u" "Unfiled Permanent > Bibliography" entry (file+headline "~/git/org/permanent/unfiled_bibliographic_cards.org" "Unfiled Bibliographic Cards")
-           "* UNFILED %?\nEntered on %U")
+          ("p" "Todo (Personal)" entry (file "~/git/org/personal/todo.org")
+           "* TODO %?" :empty-lines-before 1)
           ))
   (defun my-org-confirm-babel-evaluate (lang body) t)
   (setq org-confirm-babel-evaluate #'my-org-confirm-babel-evaluate)
