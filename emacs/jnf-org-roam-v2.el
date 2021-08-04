@@ -21,14 +21,18 @@
                             :templates '(:hesburgh-libraries)
                             :name "hesburgh-libraries")
        :personal (list
-                  :templates (list :personal
-                               :encrypted-personal)
+                  :templates (list
+                              :personal
+                              :personal-encrypted
+                              :personal-todo)
                   :name "personal")
        :public (list
-                :templates (list :public)
+                :templates (list
+                            :public)
                 :name "public")
        :thel-sector (list
-                :templates (list :thel-sector)
+                     :templates (list
+                                 :thel-sector)
                 :name "thel-sector")
        ))
 
@@ -43,7 +47,7 @@
 		   :if-new (file+head "personal/%<%Y%m%d>---${slug}.org"
 				      "#+title: ${title}\n#+FILETAGS: :personal: %^G\n\n")
 		   :unnarrowed t)
-       :encrypted-personal '("e" "Encrypted Personal" plain "%?"
+       :personal-encrypted '("P" "Personal (Encrypted)" plain "%?"
 		   :if-new (file+head "personal/%<%Y%m%d>---${slug}.org.gpg"
 				      "#+title: ${title}\n#+FILETAGS: :personal:encrypted: %^G\n\n")
 		   :unnarrowed t)
