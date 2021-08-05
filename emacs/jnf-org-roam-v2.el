@@ -11,11 +11,12 @@
 (setq jnf/org-roam-capture-contexts-plist
       (list
        :all (list
-             :templates (list :hesburgh-libraries
-                          :personal
-                          :encrypted-personal
-                          :thel-sector
-                          :public)
+             :templates (list
+                         :hesburgh-libraries
+                         :personal
+                         :encrypted-personal
+                         :thel-sector
+                         :public)
              :name "all")
        :hesburgh-libraries (list
                             :templates '(:hesburgh-libraries)
@@ -23,8 +24,7 @@
        :personal (list
                   :templates (list
                               :personal
-                              :personal-encrypted
-                              :personal-todo)
+                              :personal-encrypted)
                   :name "personal")
        :public (list
                 :templates (list
@@ -33,24 +33,24 @@
        :thel-sector (list
                      :templates (list
                                  :thel-sector)
-                :name "thel-sector")
+                     :name "thel-sector")
        ))
 
 ;; A Property List of my `org-roam' capture templates.
 (setq jnf/org-roam-capture-templates-plist
       (list
        :hesburgh-libraries '("h" "Hesburgh Libraries" plain "%?"
-		   :if-new (file+head "hesburgh-libraries/%<%Y%m%d>---${slug}.org"
-				      "#+title: ${title}\n#+FILETAGS: :hesburgh: %^G\n\n")
-		   :unnarrowed t)
+		             :if-new (file+head "hesburgh-libraries/%<%Y%m%d>---${slug}.org"
+				                "#+title: ${title}\n#+FILETAGS: :hesburgh: %^G\n\n")
+		             :unnarrowed t)
        :personal '("p" "Personal" plain "%?"
 		   :if-new (file+head "personal/%<%Y%m%d>---${slug}.org"
 				      "#+title: ${title}\n#+FILETAGS: :personal: %^G\n\n")
 		   :unnarrowed t)
        :personal-encrypted '("P" "Personal (Encrypted)" plain "%?"
-		   :if-new (file+head "personal/%<%Y%m%d>---${slug}.org.gpg"
-				      "#+title: ${title}\n#+FILETAGS: :personal:encrypted: %^G\n\n")
-		   :unnarrowed t)
+		             :if-new (file+head "personal/%<%Y%m%d>---${slug}.org.gpg"
+				                "#+title: ${title}\n#+FILETAGS: :personal:encrypted: %^G\n\n")
+		             :unnarrowed t)
        :public '("u" "Public" plain "%?"
 		 :if-new (file+head "public/%<%Y%m%d>---${slug}.org"
 				    "#+title: ${title}\n#+FILETAGS: :public: %^G\n\n")
@@ -83,20 +83,20 @@ given (or default) TEMPLATE-DEFINITIONS-PLIST."
        ,docstring
        (interactive "P")
        (org-roam-capture goto
-                             keys
-                             :filter-fn (lambda (node) (-contains-p (org-roam-node-tags node) ,project))
-                             :templates (jnf/org-roam-templates-for-context ,project-as-symbol)))))
+                         keys
+                         :filter-fn (lambda (node) (-contains-p (org-roam-node-tags node) ,project))
+                         :templates (jnf/org-roam-templates-for-context ,project-as-symbol)))))
 
 (defmacro create-org-roam-node-insert-fn-for (project)
   "Define a `jnf/org-roam-node-insert' function for PROJECT."
   (let* ((project-as-symbol (intern (concat ":" project)))
          (fn-name (intern (concat "jnf/org-roam--" project "--node-insert")))
          (docstring (concat "As `jnf/org-roam-insert-node' but scoped to " project " project.")))
-      `(defun ,fn-name ()
-         ,docstring
-         (interactive)
-         (org-roam-node-insert (lambda (node) (-contains-p (org-roam-node-tags node) ,project))
-                                   :templates (jnf/org-roam-templates-for-context ,project-as-symbol)))))
+    `(defun ,fn-name ()
+       ,docstring
+       (interactive)
+       (org-roam-node-insert (lambda (node) (-contains-p (org-roam-node-tags node) ,project))
+                             :templates (jnf/org-roam-templates-for-context ,project-as-symbol)))))
 
 (defmacro create-org-roam-node-find-fn-for (project)
   "Define a `jnf/org-roam-node-find' function for PROJECT."
@@ -105,13 +105,13 @@ given (or default) TEMPLATE-DEFINITIONS-PLIST."
          (docstring (concat "As `jnf/org-roam-find-node' but scoped to "
                             project " project."
                             "\n\nArguments INITIAL-INPUT and OTHER-WINDOW are from `org-roam-find-mode'.")))
-      `(defun ,fn-name (&optional other-window initial-input)
-         ,docstring
-         (interactive current-prefix-arg)
-         (org-roam-node-find other-window
-                                 initial-input
-                                 (lambda (node) (-contains-p (org-roam-node-tags node) ,project))
-                                 :templates (jnf/org-roam-templates-for-context ,project-as-symbol)))))
+    `(defun ,fn-name (&optional other-window initial-input)
+       ,docstring
+       (interactive current-prefix-arg)
+       (org-roam-node-find other-window
+                           initial-input
+                           (lambda (node) (-contains-p (org-roam-node-tags node) ,project))
+                           :templates (jnf/org-roam-templates-for-context ,project-as-symbol)))))
 
 (create-org-roam-capture-fn-for "thel-sector")
 (create-org-roam-node-insert-fn-for "thel-sector")
