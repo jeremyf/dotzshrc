@@ -129,6 +129,16 @@ given (or default) TEMPLATE-DEFINITIONS-PLIST."
 (create-org-roam-node-insert-fn-for "hesburgh-libraries")
 (create-org-roam-node-find-fn-for "hesburgh-libraries")
 
+(defun jnf/find-file--personal-todo ()
+  "Find personal todo file."
+  (interactive)
+  (find-file (file-truename "~/git/org/personal/todo.org")))
+
+(defun jnf/find-file--hesburgh-libraries-todo ()
+  "Find hesburgh-libraries todo file."
+  (interactive)
+  (find-file (file-truename "~/git/org/hesburgh-libraries/todo.org")))
+
 
 ;; A menu of common tasks for `org-roam'.
 (defvar jnf/org-subject-menu--title (with-faicon "book" "Org Subject Menu" 1 -0.05))
@@ -136,16 +146,18 @@ given (or default) TEMPLATE-DEFINITIONS-PLIST."
   (
    "Public / Personal"
    (
-    ("p +" jnf/org-roam--public--capture       "Public: Capture…")
-    ("p !" jnf/org-roam--public--node-insert   " ├─ Insert…")
-    ("p ?" jnf/org-roam--public--node-find     " ╰─ Find…")
-    ("r +" jnf/org-roam--personal--capture     "Personal Capture…")
-    ("r !" jnf/org-roam--personal--node-insert " ├─ Insert…")
-    ("r ?" jnf/org-roam--personal--node-find   " ╰─ Find…")
+    ("p t" jnf/find-file--personal-todo        "Personal Todo…")
+    ("p +" jnf/org-roam--personal--capture     " ├─ Capture…")
+    ("p !" jnf/org-roam--personal--node-insert " ├─ Insert…")
+    ("p ?" jnf/org-roam--personal--node-find   " ╰─ Find…")
+    ("u +" jnf/org-roam--public--capture       "Public: Capture…")
+    ("u !" jnf/org-roam--public--node-insert   " ├─ Insert…")
+    ("u ?" jnf/org-roam--public--node-find     " ╰─ Find…")
     )
    "Projects"
    (
-    ("h +" jnf/org-roam--hesburgh-libraries--capture     "Hesburgh Libraries: Capture…")
+    ("h t" jnf/find-file--hesburgh-libraries-todo        "Hesburgh Libraries Todo…")
+    ("h +" jnf/org-roam--hesburgh-libraries--capture     " ├─ Capture…")
     ("h !" jnf/org-roam--hesburgh-libraries--node-insert " ├─ Insert…")
     ("h ?" jnf/org-roam--hesburgh-libraries--node-find   " ╰─ Find…")
     ("t +" jnf/org-roam--thel-sector--capture            "Thel Sector: Capture …")
@@ -176,7 +188,8 @@ given (or default) TEMPLATE-DEFINITIONS-PLIST."
   (
    "Personal Subject Menu"
    (
-    ("+" jnf/org-roam--personal--capture     "Personal: Capture…")
+    ("t" jnf/find-file--personal-todo       "Personal Todo…")
+    ("+" jnf/org-roam--personal--capture     " ├─ Capture…")
     ("!" jnf/org-roam--personal--node-insert " ├─ Insert…")
     ("?" jnf/org-roam--personal--node-find   " ╰─ Find…")
     ("@" org-roam-dailies-capture-today      "Capture Daily…")
@@ -199,7 +212,9 @@ given (or default) TEMPLATE-DEFINITIONS-PLIST."
 (pretty-hydra-define jnf/org-subject-menu--hesburgh-libraries (:foreign-keys warn :title jnf/org-subject-menu--title :quit-key "q" :exit t)
   (
    "Hesburgh Libraries Subject Menu"
-   (("+" jnf/org-roam--hesburgh-libraries--capture     "Hesburgh Libraries: Capture…")
+   (
+    ("t" jnf/find-file--hesburgh-libraries-todo        "Hesburgh Libraries Todo…")
+    ("+" jnf/org-roam--hesburgh-libraries--capture     " ├─ Capture…")
     ("!" jnf/org-roam--hesburgh-libraries--node-insert " ├─ Insert…")
     ("?" jnf/org-roam--hesburgh-libraries--node-find   " ╰─ Find Node…")
     ("@" org-roam-dailies-capture-today                "Capture Daily…")

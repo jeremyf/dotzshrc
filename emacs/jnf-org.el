@@ -32,7 +32,9 @@
              (sequence "TO-READ" "READING" "|" "READ")))
   (setq org-capture-templates
         '(
-          ("p" "Todo (Personal)" entry (file "~/git/org/personal/todo.org")
+          ("h" "Hesburgh Libraries Todo" entry (file "~/git/org/hesburgh-libraries/todo.org")
+           "* TODO %?" :empty-lines-before 1)
+          ("p" "Personal Todo" entry (file "~/git/org/personal/todo.org")
            "* TODO %?" :empty-lines-before 1)
           ))
   (defun my-org-confirm-babel-evaluate (lang body) t)
