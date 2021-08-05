@@ -14,12 +14,12 @@
              :templates (list
                          :hesburgh-libraries
                          :personal
-                         :encrypted-personal
+                         :personal-encrypted
                          :thel-sector
                          :public)
              :name "all")
        :hesburgh-libraries (list
-                            :templates '(:hesburgh-libraries)
+                            :templates (list :hesburgh-libraries)
                             :name "hesburgh-libraries")
        :personal (list
                   :templates (list
