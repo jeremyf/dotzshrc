@@ -62,5 +62,18 @@
 
 
 
+(defun xah-filter-list (@predicate @sequence)
+   "Return a new list such that @PREDICATE is true on all members of @SEQUENCE.
+URL `http://ergoemacs.org/emacs/elisp_filter_list.html'
+Version 2016-07-18"
+   (delete
+    "e3824ad41f2ec1ed"
+    (mapcar
+     (lambda ($x)
+       (if (funcall @predicate $x)
+           $x
+         "e3824ad41f2ec1ed" ))
+     @sequence)))
+
 (provide 'elisp-experiments.el)
 ;;; elisp-experiments.el ends here
