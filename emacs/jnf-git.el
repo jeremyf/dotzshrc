@@ -46,7 +46,7 @@
           ("~/git/org/hesburgh-libraries" . 1)
           ("~/git/org/personal" . 1)
           ("~/git/org/public" . 1)
-          ("~/git/takeonrules.github.io/hugo-tufte" . 1)))
+          ("~/git/takeonrules.github.io/themes/hugo-tufte" . 1)))
 
   ;; Have magit-status go full screen and quit to previous
   ;; configuration.  Taken from
