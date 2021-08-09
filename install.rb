@@ -6,12 +6,6 @@ require 'fileutils'
 $stdout.puts 'Installing zshrc aliases…'
 home_dirname = ENV.fetch('HOME')
 
-Dir.glob(File.join(home_dirname, "Library/ApplicationSupport/Firefox/Profiles/*")).each do |dirname|
-  target_directory = File.join(dirname, "chrome/")
-  user_stylesheet = File.expand_path('stylesheets/userContent.css', __dir__)
-  FileUtils.cp(user_stylesheet, target_directory)
-end
-
 symlink_sources = File.expand_path('symlinks/.*', __dir__)
 Dir.glob(symlink_sources).each do |source_filename|
   basename = File.basename(source_filename)
@@ -42,8 +36,8 @@ $stdout.puts 'Installing emacs.d symlinks…'
 FileUtils.mkdir_p(File.join(home_dirname, '.emacs.d'))
 
 [
-  File.expand_path('emacs.d/.*', __dir__), # Hidden files
-  File.expand_path('emacs.d/*', __dir__) # Non-hidden files
+  File.expand_path(File.join(home_dirname, 'git/jnf-emacs-config/emacs.d/.*')), # Hidden files
+  File.expand_path(File.join(home_dirname, 'git/jnf-emacs-config/emacs.d/*')), # Non-hidden files
 ].each do |glob|
   Dir.glob(glob).each do |source_filename|
     basename = File.basename(source_filename)
