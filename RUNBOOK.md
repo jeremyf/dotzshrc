@@ -25,6 +25,7 @@
 *   `brew install coreutils`
 *   `brew install pandoc`
 *   `brew install mactex`
+*   `brew install appcleaner` - for cleaning out applications and all their extra files
 *   `ln -s $HB_PATH/bin/gls $HB_PATH/bin/ls` ; This addresses "*ERROR*: Listing directory failed but ‘access-file’ worked"
 
 ## Emacs
