@@ -61,12 +61,3 @@ Then set:
   *  Right option key to send ESC
   *  Caps lock to send CTRL
   *  Left shift + Right shift sends CAPS LOCK
-
-# Manjaro
-
-* Install rbenv
-* Install "ag": `pacman -S the_silver_searcher`
-* Install OhMyZsh - https://github.com/ohmyzsh/ohmyzsh
-* Install Powerlevel10k - https://github.com/romkatv/powerlevel10k#oh-my-zsh
-* Install xclip and xsel: `pacman -S xclip xsel`
-* Install emacs
