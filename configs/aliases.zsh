@@ -16,7 +16,6 @@ export GIT_EDITOR='git_editor'
 alias e=$EDITOR
 alias dr="dired.sh"
 alias edaemon='editor-daemon'
-alias org="$EDITOR ~/git/org/agenda.org"
 alias tor-sync="$EDITOR --eval \"(jnf/git-data-sync)\""
 alias rm='rm -i'
 alias file-count="find . -type f -print | wc -l"
