@@ -12,6 +12,11 @@
 export EDITOR='editor'
 export GIT_EDITOR='git_editor'
 
+# For those pesky Rails configs that assume a password for
+# development.  Someone added that without parameterization, so I've
+# added parameterization to preserve current behavior but help me out.
+export SKIP_MYSQL_PASSWORD_FOR_LOCAL_DEVELOPMENT="true"
+
 # Prompt for confirmation
 alias e=$EDITOR
 alias dr="dired.sh"
