@@ -55,6 +55,7 @@ plugins=(
     osx
     rake
     web-search
+    github
     # zsh-syntax-highlighting
     history-substring-search
 )

@@ -256,3 +256,5 @@
 	defaultBranch = main
 [commit]
 	verbose = true
+[transfer]
+	fsckObjects = true
