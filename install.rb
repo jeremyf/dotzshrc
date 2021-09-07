@@ -36,8 +36,8 @@ $stdout.puts 'Installing emacs.d symlinks…'
 FileUtils.mkdir_p(File.join(home_dirname, '.emacs.d'))
 
 [
-  File.expand_path(File.join(home_dirname, 'git/jnf-emacs-config/emacs.d/.*')), # Hidden files
-  File.expand_path(File.join(home_dirname, 'git/jnf-emacs-config/emacs.d/*')), # Non-hidden files
+  File.expand_path(File.join(home_dirname, 'git/dotemacs/emacs.d/.*')), # Hidden files
+  File.expand_path(File.join(home_dirname, 'git/dotemacs/emacs.d/*')), # Non-hidden files
 ].each do |glob|
   Dir.glob(glob).each do |source_filename|
     basename = File.basename(source_filename)
