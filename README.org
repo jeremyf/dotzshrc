@@ -1,0 +1,31 @@
+#+title: README for dotzshrc
+
+A git repository for managing my ~.zshrc~ configuration.
+
+Below is the top-level directory structure:
+
+#+BEGIN_SRC
+├── License
+├── README.md
+├── RUNBOOK.md
+├── bin
+├── configs
+├── install.rb
+├── iterm
+├── runbooks
+├── stylesheets
+└── symlinks
+#+END_SRC
+
+Two primary files are:
+
+- RUNBOOK.md :: this is the software/scripts I install to ensure I
+  have the appropirate dependencies installed.
+- install.rb :: this creates the symlinks in my ~$HOME~ directory and
+  ensures paths, aliases, etc. are correct in the terminal/shell.
+
+You can run ~ruby install.rb~ to create the symlinks into the current
+~$HOME~ file
+
+*Note:* [[https://github.com/jeremyf/dotzshrc][My dotzshrc repository]] assumes that you also have a clone of
+ [[https://github.com/jeremyf/dotemacs][my dotemacs repository]] in the same parent directory.
