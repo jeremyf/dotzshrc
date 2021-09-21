@@ -4,6 +4,7 @@
 *   Install OhMyZsh - https://github.com/ohmyzsh/ohmyzsh ; zshell option
 *   Install Powerlevel10k - https://github.com/romkatv/powerlevel10k
 *   Install MesloLGS NF via Powerlevel10k instructions
+*   Install Ubuntu https://design.ubuntu.com/font/
 *   Install Base16 Shell - https://github.com/chriskempson/base16-shell
 *   Install ImageOptim - https://imageoptim.com/ ; remove image metadata
 *   `brew cask install font-hack-nerd-font`
@@ -21,6 +22,7 @@
 *   `brew install ripgrep` Another solid replacement for grep that allows PERL Regexp
 *   `brew install terminal-notifier`
 *   `brew tap homebrew/cask-fonts`
+*   `brew install font-iosevka-nerd-font`
 *   `brew tap homebrew/cask`
 *   `brew install coreutils`
 *   `brew install pandoc`
