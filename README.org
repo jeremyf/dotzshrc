@@ -5,6 +5,7 @@ A git repository for managing my =.zshrc= configuration.
 Below is the top-level directory structure:
 
 #+BEGIN_SRC
+.
 ├── License
 ├── README.org
 ├── RUNBOOK.org
@@ -12,21 +13,25 @@ Below is the top-level directory structure:
 ├── configs
 ├── install.rb
 ├── iterm
+├── lib
 ├── runbooks
 ├── stylesheets
-└── symlinks
+├── symlinks
+└── todo.org
 #+END_SRC
 
-- License :: the license associated with this repository
-- README.org :: this file
+- License :: the license associated with this repository.
+- README.org :: this file.
 - RUNBOOK.org :: this is the software/scripts I install to ensure I have the appropirate dependencies installed.
-- bin :: a directory of executable files
-- configs :: a directory containing shell configs
+- bin :: a directory of executable files.
+- configs :: a directory containing shell configs.
 - install.rb :: this creates the symlinks in my =$HOME= directory and ensures paths, aliases, etc. are correct in the terminal/shell.
-- iterm :: iterm configurations along with keymappings for running Emacs in shell (not recommended)
-- runbooks :: varioius runbooks for different situations I’ve encountered
+- iterm :: iterm configurations along with keymappings for running Emacs in shell (not recommended).
+- lib :: a place for weird one off scripts.
+- runbooks :: varioius runbooks for different situations I’ve encountered.
 - stylesheets :: a directory wiith =userContent.css=; a stylesheet for adding to a browser’s default stylesheets
 - symlinks :: a directory containing the various files that I symblink into my =$HOME= directory.
+- todo.org :: my todo items for this repository.
 
 You can run =ruby install.rb= to create the symlinks into the current =$HOME= file
 
