@@ -7,7 +7,7 @@ Below is the top-level directory structure:
 #+BEGIN_SRC
 ├── License
 ├── README.md
-├── RUNBOOK.md
+├── RUNBOOK.org
 ├── bin
 ├── configs
 ├── install.rb
@@ -19,7 +19,7 @@ Below is the top-level directory structure:
 
 Two primary files are:
 
-- RUNBOOK.md :: this is the software/scripts I install to ensure I
+- RUNBOOK.org :: this is the software/scripts I install to ensure I
   have the appropirate dependencies installed.
 - install.rb :: this creates the symlinks in my ~$HOME~ directory and
   ensures paths, aliases, etc. are correct in the terminal/shell.
