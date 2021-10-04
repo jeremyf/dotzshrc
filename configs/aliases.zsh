@@ -34,6 +34,10 @@ alias hb="hub browse"
 alias psx="ps ax | ag $1"
 alias rss="$EDITOR --eval \"(rss)\""
 
+# Including these aliases as a reminder
+alias postgres-start="brew services start postgresql"
+alias postgres-stop="brew services stop postgresql"
+
 # For pandoc on Apple Silicon chips
 alias pand="arch -x86_64 pandoc"
 alias ssh-tor="ssh takeonrules_takeonrules@ssh.phx.nearlyfreespeech.net"
