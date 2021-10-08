@@ -19,6 +19,7 @@ export SKIP_MYSQL_PASSWORD_FOR_LOCAL_DEVELOPMENT="true"
 
 # Prompt for confirmation
 alias e=$EDITOR
+alias db="dashboard"
 alias dr="dired.sh"
 alias edaemon='editor-daemon'
 alias tor-sync="$EDITOR --eval \"(jnf/git-data-sync)\""
