@@ -1,7 +1,9 @@
 #!/usr/bin/env ruby -w
+# rg "\[\[(.*)\]\[" ~/git/org/forem/dashboard.org --only-matching | rg "[^\[|\]]+" --only-matching | xargs open
 
-ORG_LINK_REGEXP = /\[\[(?<url>.*)\]\[(?<title>.*)\]\](?<raw_tags>.*)/
-File.readlines(File.join(ENV["HOME"],"/git/org/forem/dashboard.org")).each do |line|
+filename = ARGV[0] || File.join(ENV["HOME"],"/git/org/forem/dashboard.org")
+ORG_LINK_REGEXP = %r{\[\[(?<url>.*)\]\[(?<title>.*)\]\](?<raw_tags>.*)}
+File.readlines(filename).each do |line|
   match = ORG_LINK_REGEXP.match(line)
   next unless match
   system("open #{match[:url]}")
