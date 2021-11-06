@@ -79,3 +79,6 @@ bindkey "$terminfo[kcud1]" history-substring-search-down
 if [ -f "${HB_PATH}/opt/git-extras/share/git-extras/git-extras-completion.zsh" ]; then
     source $HB_PATH/opt/git-extras/share/git-extras/git-extras-completion.zsh
 fi
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && . "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
