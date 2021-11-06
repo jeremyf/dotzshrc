@@ -231,6 +231,7 @@
         whitespace = fix
 [branch]
         autosetupmerge = true
+	autosetuprebase = always
 [grep]
         extendedRegexp = true
 [core]
