@@ -2,20 +2,13 @@ local meh = {"ctrl", "alt", "cmd"}
 local hyper = {"ctrl", "alt", "cmd", "shift"}
 
 hs.loadSpoon("editWithEmacs")
-editWithEmacs.editBeginCommand = "editor -e '(hammerspoon-edit-begin)'"
 
--- Create the keybindings for editing:
---
--- Edit by selecting everything in the current focus.
-hs.hotkey.bind(meh, 'e', nil, function()
-                  edit_in_emacs(true)
-end)
+spoon.editWithEmacs.beginEditShellCommand = "editor -e '(hammerspoon-edit-begin)'"
 
--- Edit by using only the selected text of the current focus.
-hs.hotkey.bind(hyper, 'e', nil, function()
-                  edit_in_emacs(false)
-end)
-
+spoon.editWithEmacs:bindHotkeys({
+      selection = {hyper, "e"},
+      all = {meh, "e"}
+})
 
 hs.loadSpoon("MiroWindowsManager")
 hs.window.animationDuration = 0.3
