@@ -5,8 +5,8 @@
 # Determine if we have an existing emacs daemon
 ps ax | grep --quiet  emacs | grep --quiet daemon
 if [ "$?" != "1" ]; then
-  # Launch an emacs daemon
-  $HOME/bin/emacs --daemon --debug-init
+    # Launch an emacs daemon
+    $HOME/bin/emacs --daemon --debug-init
 fi
 
 # Now that we know we have an emacs daemon, determine if we have an
@@ -15,9 +15,17 @@ fi
 $HOME/bin/emacsclient --no-wait -e "(if (> (length (frame-list)) 1) 't)" | grep -q t
 
 if [ "$?" = "1" ]; then
-  # If a frame does not exist, create a frame
-  $HOME/bin/emacsclient --create-frame --no-wait --alternate-editor="" --frame-parameters="((fullscreen . maximized)))" "$@"
+    if [ "$#" = "0" ]; then
+        $HOME/bin/emacsclient --create-frame --no-wait --alternate-editor="" --frame-parameters="((fullscreen . maximized)))"
+    else
+        # If a frame does not exist, create a frame
+        $HOME/bin/emacsclient --create-frame --no-wait --alternate-editor="" --frame-parameters="((fullscreen . maximized)))" "$@"
+    fi
 else
-  # If a frame does exist, attach to that frame
-  $HOME/bin/emacsclient --no-wait --alternate-editor="" --frame-parameters="((fullscreen . maximized)))" "$@"
+    if [ "$#" = "0" ]; then
+        $HOME/bin/emacsclient --create-frame --no-wait --alternate-editor="" --frame-parameters="((fullscreen . maximized)))"
+    else
+        # If a frame does exist, attach to that frame
+        $HOME/bin/emacsclient --no-wait --alternate-editor="" --frame-parameters="((fullscreen . maximized)))" "$@"
+    fi
 fi
