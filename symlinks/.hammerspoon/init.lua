@@ -3,6 +3,8 @@ local hyper = {"ctrl", "alt", "cmd", "shift"}
 
 hs.loadSpoon("editWithEmacs")
 
+-- I have a custom command for my editor:
+-- https://github.com/jeremyf/dotzshrc/blob/main/bin/editor
 spoon.editWithEmacs.beginEditShellCommand = "editor -e '(hammerspoon-edit-begin)'"
 
 spoon.editWithEmacs:bindHotkeys({
