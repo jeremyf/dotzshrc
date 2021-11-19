@@ -22,7 +22,6 @@ alias e=$EDITOR
 alias db="dashboard"
 alias dr="dired.sh"
 alias edaemon='editor-daemon'
-alias tor-sync="$EDITOR --eval \"(jnf/git-data-sync)\""
 alias rm='rm -i'
 alias file-count="find . -type f -print | wc -l"
 alias bx="bundle exec"
@@ -33,7 +32,10 @@ alias gb='git branch -vv'
 alias gwc='git whatchanged -p --abbrev-commit --pretty=medium'
 alias hb="hub browse"
 alias psx="ps ax | ag $1"
-alias rss="$EDITOR --eval \"(rss)\""
+alias hammerspoon-focus-emacs="hs -c \"hs.application.launchOrFocus('Emacs')\""
+alias tor-sync="$EDITOR --suppress-output --eval \"(jnf/git-data-sync)\"; hammerspoon-focus-emacs"
+alias rss="$EDITOR --suppress-output --eval \"(rss)\"; hammerspoon-focus-emacs"
+alias magit="$EDITOR --suppress-output --eval \"(magit)\"; hammerspoon-focus-emacs"
 
 # Including these aliases as a reminder
 alias postgres-start="brew services start postgresql"
