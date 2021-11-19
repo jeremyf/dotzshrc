@@ -52,7 +52,7 @@ plugins=(
     copybuffer
     git-extras
     gitfast
-    osx
+    macos
     rake
     web-search
     github
