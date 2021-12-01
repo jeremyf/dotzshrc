@@ -45,6 +45,13 @@ COMPLETION_WAITING_DOTS="true"
 # see 'man strftime' for details.
 # HIST_STAMPS="mm/dd/yyyy"
 
+# https://docs.riak.com/riak/kv/2.1.4/using/performance/open-files-limit/#mac-os-x
+#
+# When running selenium tests I got an error about too many open
+# files.  This helped resolve that.
+ulimit -u 2048
+ulimit -n 16384
+
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
