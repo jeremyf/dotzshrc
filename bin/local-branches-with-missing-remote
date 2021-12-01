@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby -w
+require 'fileutils'
+
+project_dir = FileUtils.pwd
+`cd #{project_dir}; git remote update origin --prune >/dev/null 2>&1`
+
+remote_branches = `cd #{project_dir}; git branch --remotes`.split("\n").map(&:strip)
+local_branches = `cd #{project_dir}; git branch -vv`.split("\n").map { |b| b.gsub(/^\*? +/, '').strip }
+
+local_branches.each do |branch|
+  next if branch.start_with?("main")
+  next unless branch.include?("[origin")
+  branch_name = branch.split(/ +/)[0]
+  next if remote_branches.detect { |rb| rb.include?(branch_name) }
+  puts branch_name
+end
