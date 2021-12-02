@@ -1,16 +1,86 @@
 #!/usr/bin/env ruby -w
-require 'fileutils'
 
-project_dir = FileUtils.pwd
-`cd #{project_dir}; git remote update origin --prune >/dev/null 2>&1`
+##############################################################
+#
+# Begin Commentary
+#
+##############################################################
+#
+# This command writes to STDOUT a list of local branches that
+# have upstream tracking branches, but who's upstream branches
+# are now gone.
+#
+# Fair warning, this perhaps follows some of my internalized
+# assumptions about repository setup.
+#
+# I would love if there already existed a function that does
+# this, but part of why I write code is to also practice
+# algorithms and critical thinking.
+#
+# Example to list local branches with missing remotes:
+#
+#  $ cd ~/git/forem ; local-branches-with-missing-remote
+#
+# Example to delete local branches with missing remotes:
+#
+#  $ local-branches-with-missing-remote | xargs git remote -D
+#
+#
+##############################################################
+#
+# Begin Function
+#
+##############################################################
+#
+# Prune the remote branches that are gone.  Also, don't worry
+# about the output
+`git remote update origin --prune >/dev/null 2>&1`
 
-remote_branches = `cd #{project_dir}; git branch --remotes`.split("\n").map(&:strip)
-local_branches = `cd #{project_dir}; git branch -vv`.split("\n").map { |b| b.gsub(/^\*? +/, '').strip }
+# The remote branch lines are of the form:
+#
+# - space
+# - origin/branch-name
+#
+# Note: by convention, origin is the upstream I'm concerned
+# about
+remote_branches = `git branch --remotes`
+  .split("\n")
+  .map(&:strip)
 
-local_branches.each do |branch|
-  next if branch.start_with?("main")
-  next unless branch.include?("[origin")
-  branch_name = branch.split(/ +/)[0]
-  next if remote_branches.detect { |rb| rb.include?(branch_name) }
+# The verbose branch lines are of the form:
+#
+# - Branch Name
+# - many spaces
+# - SHA of latest commit
+# - space
+# - OPTIONAL: "[Remote Name]"
+# - space
+# - Subject of latest commit
+local_verbose_branches = `git branch -vv`
+  .split("\n")
+  .map { |b| b.gsub(/^\*? +/, '').strip }
+
+local_verbose_branches.each do |verbose_branch|
+  # Definitely don't want to delete this local branch.
+  next if verbose_branch.start_with?("main")
+
+  # Though I no longer use "master" for my projects, there are
+  # some outliers that do.
+  next if verbose_branch.start_with?("master")
+
+  # I might have a local branch that doesn't have a remote
+  # tracking branch.  Skip those
+  next unless verbose_branch.include?("[origin")
+
+  branch_name = verbose_branch.split(/ +/)[0]
+
+  # Test if local branch has a remote branch
+  next if remote_branches.detect do |rb|
+    rb.include?(branch_name)
+  end
+
+  # Output the branch name for a local branch with what
+  # appears to be a removed upstream branch (e.g., the
+  # upstream branch was likely merged and deleted)
   puts branch_name
 end
