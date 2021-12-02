@@ -1,0 +1,53 @@
+#!/usr/bin/env ruby -w
+
+# The purpose of this script is to aggregate git stats by an author.
+# I'm personally about my stats.
+author = "Jeremy Friesen"
+log = `git log --pretty=format:'%H ~~~ %cs' --stat --author="#{author}"`.split("\n")
+
+class Entry
+  def initialize(header:, changes:)
+    @header = header
+    @sha, @date = header.split(" ~~~ ")
+    @changes = changes
+    @file_changes = 0
+    @insertions = 0
+    @deletions = 0
+    split!(changes: changes)
+  end
+  attr_reader :insertions, :deletions, :file_changes, :sha, :date
+
+  private
+
+  def split!(changes:)
+    changes.split(/, +/).each do |element|
+      if element.include?("changed")
+        @file_changes = element.to_i
+      elsif element.include?("insertion")
+        @insertions = element.to_i
+      elsif element.include?("deletion")
+        @deletions = element.to_i
+      end
+    end
+  end
+end
+
+
+HEADER_REGEXP = /^\w{40} ~~~/.freeze
+CHANGES_REGEXP = /files? change/.freeze
+header = nil
+changes = nil
+entries = []
+log.each do |line|
+  if HEADER_REGEXP.match?(line)
+    entries << Entry.new(header: header, changes: changes) if header
+    header = line
+  elsif CHANGES_REGEXP.match?(line)
+    changes = line
+  end
+end
+
+entries << Entry.new(header: header, changes: changes)
+
+require 'pry'
+binding.pry
