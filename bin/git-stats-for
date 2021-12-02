@@ -32,22 +32,44 @@ class Entry
   end
 end
 
+class EntrySet
+  def initialize(author:)
+    @author = author
+    @entries = []
+    @total_file_changes = 0
+    @total_insertions = 0
+    @total_deletions = 0
+  end
+
+  attr_reader :author, :total_file_changes, :total_insertions, :total_deletions
+
+  def add(header:, changes:)
+    entry = Entry.new(header: header, changes: changes)
+    @entries << entry
+     @total_file_changes += entry.file_changes
+    @total_insertions += entry.insertions
+    @total_deletions += entry.deletions
+  end
+end
+
 
 HEADER_REGEXP = /^\w{40} ~~~/.freeze
 CHANGES_REGEXP = /files? change/.freeze
 header = nil
 changes = nil
-entries = []
+entry_set = EntrySet.new(author: author)
 log.each do |line|
   if HEADER_REGEXP.match?(line)
-    entries << Entry.new(header: header, changes: changes) if header
+    entry_set.add(header: header, changes: changes) if header
     header = line
   elsif CHANGES_REGEXP.match?(line)
     changes = line
   end
 end
 
-entries << Entry.new(header: header, changes: changes)
+entry_set.add(header: header, changes: changes)
 
-require 'pry'
-binding.pry
+puts "#{entry_set.author}"
+puts "\tFile Changes: #{entry_set.total_file_changes}"
+puts "\tInsertions: #{entry_set.total_insertions}"
+puts "\tDeletions: #{entry_set.total_deletions}"
