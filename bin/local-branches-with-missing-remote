@@ -6,6 +6,11 @@
 #
 ##############################################################
 #
+# First, if you want to use this, I recommend you change the
+# the file mode to executable:
+#
+#  `chmod +x local-branches-with-missing-remote`
+#
 # This command writes to STDOUT a list of local branches that
 # have upstream tracking branches, but who's upstream branches
 # are now gone.
