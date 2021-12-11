@@ -1,8 +1,13 @@
 #!/usr/bin/env ruby -w
 
 # The purpose of this script is to aggregate git stats by an author.
-# I'm personally about my stats.
-author = "Jeremy Friesen"
+#
+# Have a file that lists authors one at a time?
+#
+#   `cat /path/to/file | xargs -I % git-stats-for %`
+#     or
+#   `</path/to/file xargs -I % git-stats-for %
+author = ARGV[0] || "Jeremy Friesen"
 log = `git log --pretty=format:'%H ~~~ %cs' --stat --author="#{author}"`.split("\n")
 
 class Entry
@@ -43,6 +48,10 @@ class EntrySet
 
   attr_reader :author, :total_file_changes, :total_insertions, :total_deletions
 
+  def total_commits
+    @entries.count
+  end
+
   def add(header:, changes:)
     entry = Entry.new(header: header, changes: changes)
     @entries << entry
@@ -69,7 +78,10 @@ end
 
 entry_set.add(header: header, changes: changes)
 
-puts "#{entry_set.author}"
-puts "\tFile Changes: #{entry_set.total_file_changes}"
-puts "\tInsertions: #{entry_set.total_insertions}"
-puts "\tDeletions: #{entry_set.total_deletions}"
+# puts "#{entry_set.author}"
+# puts "\tTotal Commits: #{entry_set.total_commits}"
+# puts "\tFile Changes: #{entry_set.total_file_changes}"
+# puts "\tInsertions: #{entry_set.total_insertions}"
+# puts "\tDeletions: #{entry_set.total_deletions}"
+
+puts "#{entry_set.author}\t#{entry_set.total_commits}\t#{entry_set.total_file_changes}\t#{entry_set.total_insertions}\t#{entry_set.total_deletions}"
