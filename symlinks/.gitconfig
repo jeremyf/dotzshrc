@@ -259,3 +259,5 @@
 	verbose = true
 [transfer]
 	fsckObjects = true
+[fetch]
+	prune = true
