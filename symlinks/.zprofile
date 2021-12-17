@@ -6,7 +6,7 @@ elif [ "${arch_name}" = "arm64" ]; then
 else
     echo "Unknown architecture: ${arch_name}"
 fi
-
+eval "$($HB_PATH/bin/brew shellenv)"
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
     source $HOME/git/dotzshrc/configs/darwin-defaults.zsh
@@ -17,8 +17,6 @@ if [[ "$OSTYPE" == "linux"* ]]; then
 fi
 
 ZSH_THEME='powerlevel10k/powerlevel10k'
-
-eval "$($HB_PATH/bin/brew shellenv)"
 
 source $HOME/git/dotzshrc/configs/config.zsh
 source $HOME/git/dotzshrc/configs/paths.zsh

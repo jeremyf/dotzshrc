@@ -31,6 +31,7 @@
 - =brew install coreutils=
 - =brew install pandoc=
 - =brew install mactex=
+- =brew install hstr=
 - =brew install appcleaner= - for cleaning out applications and all
   their extra files
 - =ln -s $HB_PATH/bin/gls $HB_PATH/bin/ls= ; This addresses "/ERROR/:
