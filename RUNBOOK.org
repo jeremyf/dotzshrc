@@ -4,7 +4,8 @@
 - Install OhMyZsh - https://github.com/ohmyzsh/ohmyzsh ; zshell option
 - Install Powerlevel10k - https://github.com/romkatv/powerlevel10k
 - Install MesloLGS NF via Powerlevel10k instructions
-- Install Ubuntu https://design.ubuntu.com/font/
+- Install JetBrains Mono font
+- Install Ubuntu font https://design.ubuntu.com/font/
 - Install Base16 Shell - https://github.com/chriskempson/base16-shell
 - Install ImageOptim - https://imageoptim.com/ ; remove image metadata
 - =brew cask install font-hack-nerd-font=
@@ -72,3 +73,7 @@ Then set:
 - Right option key to send ESC
 - Caps lock to send CTRL
 - Left shift + Right shift sends CAPS LOCK
+
+** Install Hammerspoon
+
+See [[https://github.com/Hammerspoon/hammerspoon][Hammerspoon/hammerspoon: Staggeringly powerful macOS desktop automation with Lua]].
