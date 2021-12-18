@@ -58,9 +58,3 @@ alias sqlite-browser="/Applications/DB\ Browser\ for\ SQLite.app/Contents/MacOS/
 
 alias dns-flush="sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder"
 alias net_traffic="lsof -r -i"
-
-# `awsassumerole testlibnd-superAdmin` (see ~/.aws/config for profile)
-awsassumerole(){
-    unset AWS_VAULT
-    export $(aws-vault exec $1 --assume-role-ttl 1h -- env | grep AWS)
-}
