@@ -1,0 +1,3 @@
+[submodule "symlinks/.hammerspoon/Spoons/editWithEmacs.spoon"]
+    path = symlinks/.hammerspoon/Spoons/editWithEmacs.spoon
+    url = https://github.com/dmgerman/editWithEmacs.spoon.git
