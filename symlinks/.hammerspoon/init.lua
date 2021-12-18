@@ -1,16 +1,17 @@
 local meh = {"ctrl", "alt", "cmd"}
 local hyper = {"ctrl", "alt", "cmd", "shift"}
 
-hs.loadSpoon("editWithEmacs")
-
 -- I have a custom command for my editor:
 -- https://github.com/jeremyf/dotzshrc/blob/main/bin/editor
-spoon.editWithEmacs.openEditorShellCommand = "editor -e '(hammerspoon-edit-begin)'"
-
-spoon.editWithEmacs:bindHotkeys({
-      selection = {hyper, "e"},
-      all = {meh, "e"}
-})
+hs.loadSpoon("editWithEmacs")
+if spoon.editWithEmacs then
+   spoon.editWithEmacs.openEditorShellCommand = "editor -e '(hammerspoon-edit-begin)'"
+   local bindings = {
+      edit_selection =  { hyper, "e"},
+      edit_all       = { meh, "e"}
+   }
+   spoon.editWithEmacs:bindHotkeys(bindings)
+end
 
 hs.loadSpoon("MiroWindowsManager")
 hs.window.animationDuration = 0.3
