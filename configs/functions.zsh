@@ -10,7 +10,7 @@
 #   - Bypass fuzzy finder if there's only one match (--select-1)
 #   - Exit if there's no match (--exit-0)
 fe() {
-  IFS=$'\n' files=($(fzf-tmux --query="$1" --multi --select-1 --exit-0 --reverse --cycle))
+  IFS=$'\n' files=($(fzf-tmux --query="$1" --multi --select-1 --exit-0 --cycle --preview 'cat {1}'))
   [[ -n "$files" ]] && ${EDITOR:-vim} "${files[@]}"
 }
 
@@ -31,9 +31,9 @@ fh() {
 fkill() {
     local pid
     if [ "$UID" != "0" ]; then
-        pid=$(ps -f -u $UID | sed 1d | fzf --multi --exact --reverse | awk '{print $2}')
+        pid=$(ps -f -u $UID | sed 1d | fzf --multi --exact | awk '{print $2}')
     else
-        pid=$(ps -ef | sed 1d | fzf --multi --exact --reverse | awk '{print $2}')
+        pid=$(ps -ef | sed 1d | fzf --multi --exact | awk '{print $2}')
     fi
 
     if [ "x$pid" != "x" ]
@@ -51,7 +51,7 @@ function cd() {
     while true; do
         local lsd=$(echo ".." && ls -p | grep '/$' | sed 's;/$;;')
         local dir="$(printf '%s\n' "${lsd[@]}" |
-            fzf --reverse --preview '
+            fzf  --preview '
                 __cd_nxt="$(echo {})";
                 __cd_path="$(echo $(pwd)/${__cd_nxt} | sed "s;//;/;")";
                 echo $__cd_path;

@@ -15,8 +15,7 @@ FZF_DEFAULT_COMMAND="rg --files" fzf \
   --exact \
   --ansi \
   --disabled \
-  --reverse \
-  --bind "ctrl-a:select-all" \
+  --bind "alt-a:select-all" \
   --bind "change:reload:$RG_DEFAULT_COMMAND {q} || true" \
   --preview "rg --ignore-case --pretty --context 2 {q} {}" | cut -d":" -f1,2
 )

@@ -100,3 +100,7 @@ if [ -d "$(brew --prefix hstr)" ]; then
     export HSTR_CONFIG=hicolor       # get more colors
     bindkey -s "\C-r" "\C-a hstr -- \C-j"     # bind hstr to Ctrl-r (for Vi mode check doc)
 fi
+
+
+# See https://github.com/junegunn/fzf#environment-variables
+export FZF_DEFAULT_OPTS="--layout=reverse-list --marker=+ --bind 'ctrl-k:kill-line'"
