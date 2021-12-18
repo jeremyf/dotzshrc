@@ -62,3 +62,10 @@ function cd() {
         builtin cd "$dir" &> /dev/null
     done
 }
+
+if [ -d "$HOME/git/forgit" ]; then
+    export PATH="$HOME/git/forgit/bin:$PATH"
+    export FORGIT_NO_ALIASES=1
+    source "$HOME/git/forgit/forgit.plugin.zsh"
+    alias "${forgit_log:-glo}"='forgit::log'
+fi
