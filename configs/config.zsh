@@ -56,11 +56,13 @@ ulimit -n 16384
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
 plugins=(
+    ag
     copybuffer
     git-extras
     gitfast
     macos
     rake
+    ripgrep
     web-search
     github
     # zsh-syntax-highlighting
