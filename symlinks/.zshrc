@@ -12,3 +12,5 @@ if [ -f $HOME/git/dotzshrc/configs/p10k.zsh ]; then
     source $HOME/git/dotzshrc/configs/p10k.zsh
 fi
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

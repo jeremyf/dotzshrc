@@ -21,5 +21,6 @@ ZSH_THEME='powerlevel10k/powerlevel10k'
 source $HOME/git/dotzshrc/configs/config.zsh
 source $HOME/git/dotzshrc/configs/paths.zsh
 source $HOME/git/dotzshrc/configs/aliases.zsh
+source $HOME/git/dotzshrc/configs/functions.zsh
 
 eval "$(rbenv init -)"
