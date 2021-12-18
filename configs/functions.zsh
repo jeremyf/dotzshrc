@@ -68,4 +68,6 @@ if [ -d "$HOME/git/forgit" ]; then
     export FORGIT_NO_ALIASES=1
     source "$HOME/git/forgit/forgit.plugin.zsh"
     alias "${forgit_log:-glo}"='forgit::log'
+    alias "${forgit_log:-gl}"='forgit::log'
+    alias "${forgit_stash_show:-gss}"='forgit::stash::show'
 fi

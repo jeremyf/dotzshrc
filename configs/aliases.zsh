@@ -25,7 +25,6 @@ alias edaemon='editor-daemon'
 alias rm='rm -i'
 alias file-count="find . -type f -print | wc -l"
 alias bx="bundle exec"
-alias gl='git lg'
 alias gd='git diff'
 alias gst='git st'
 alias gb='git branch -vv'
