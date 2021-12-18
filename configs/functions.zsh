@@ -10,7 +10,7 @@
 #   - Bypass fuzzy finder if there's only one match (--select-1)
 #   - Exit if there's no match (--exit-0)
 fe() {
-  IFS=$'\n' files=($(fzf-tmux --query="$1" --multi --select-1 --exit-0 --cycle --preview 'cat {1}'))
+  IFS=$'\n' files=($(fzf-tmux --query="$1" --multi --select-1 --exit-0 --cycle --preview 'bat --color=always {1}'))
   [[ -n "$files" ]] && ${EDITOR:-vim} "${files[@]}"
 }
 
