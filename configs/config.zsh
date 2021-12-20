@@ -94,13 +94,14 @@ export NVM_DIR="$HOME/.nvm"
 
 
 # `brew install hstr`
-if [ -d "$(brew --prefix hstr)" ]; then
-    alias hh=hstr                    # hh to be alias for hstr
-    setopt histignorespace           # skip cmds w/ leading space from history
-    export HSTR_CONFIG=hicolor       # get more colors
-    bindkey -s "\C-r" "\C-a hstr -- \C-j"     # bind hstr to Ctrl-r (for Vi mode check doc)
-fi
+# if [ -d "$(brew --prefix hstr)" ]; then
+#     alias hh=hstr                    # hh to be alias for hstr
+#     setopt histignorespace           # skip cmds w/ leading space from history
+#     export HSTR_CONFIG=hicolor       # get more colors
+#     bindkey -s "\C-r" "\C-a hstr -- \C-j"     # bind hstr to Ctrl-r (for Vi mode check doc)
+# fi
 
+# bindkey '^r' history-incremental-search-backward
 
 # See https://github.com/junegunn/fzf#environment-variables
 export FZF_DEFAULT_OPTS="--layout=reverse-list --marker=+ --bind 'ctrl-k:kill-line'"
