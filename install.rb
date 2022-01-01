@@ -32,6 +32,13 @@ Dir.glob(bin_sources).each do |source_filename|
 end
 $stdout.puts 'Finished installing bin aliases…'
 
+["emacs", "emacsclient"].each do |basename|
+  source_filename = File.join("/opt/homebrew/opt/emacs-plus@28/bin/", basename)
+  target_name = File.join(home_dirname, 'bin', File.basename(basename))
+  $stdout.puts "\t#{target_name} ->\n\t\t#{source_filename}"
+  FileUtils.ln_sf(source_filename, target_name)
+end
+
 $stdout.puts 'Installing emacs.d symlinks…'
 FileUtils.mkdir_p(File.join(home_dirname, '.emacs.d'))
 
