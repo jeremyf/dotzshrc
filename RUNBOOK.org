@@ -1,42 +1,35 @@
 #+title: Runbook for My OS X Setup
 
-- Install homebrew - https://brew.sh ; package manager
-- Install OhMyZsh - https://github.com/ohmyzsh/ohmyzsh ; zshell option
-- Install Powerlevel10k - https://github.com/romkatv/powerlevel10k
-- Install Base16 Shell - https://github.com/chriskempson/base16-shell
-- =brew install cmake=
-- =brew tap homebrew/cask=
+This is my hopefully complete Runbook for getting a new macOS computer running.
 
-- =brew install git=
-- =brew install git-extras=
-- =brew install git-secrets=
-- =brew install hub=
-- =brew install libgit2=
+- Install homebrew :: https://brew.sh ; package manager
+- Install OhMyZsh :: https://github.com/ohmyzsh/ohmyzsh ; zshell option
+- Install Powerlevel10k :: https://github.com/romkatv/powerlevel10k
+- Install Base16 Shell :: https://github.com/chriskempson/base16-shell
+- Install ImageOptim :: https://imageoptim.com/ ; remove image metadata
 
-- Install ImageOptim - https://imageoptim.com/ ; remove image metadata
-- =brew cask install jumpcut= Multi-paste buffer; set Sticky Bezel and
-  launch at login
-- =brew install openssl= You're going to want this for rbenv, though
-  look at ./runbooks/ruby-openssl
-- =brew install postgresql=
-- =brew install rbenv=
-- =brew install redis=
+- =brew install cmake= :: cross-platform make (may not be necessary with macOS only install)
+- =brew tap homebrew/cask= :: make sure to get access to casks
 
-- =brew install ag= A solid replacement for grep
-- =brew install ripgrep= Another solid replacement for grep that allows
-  PERL Regexp
-- =brew install terminal-notifier=
-- =brew install hstr=
-- =brew install fzf=
-- =brew install bat=
+- =brew install git= :: macOS git is always behind the times, this will help keep it updated.
+- =brew install git-extras= :: some extra commands for git
+- =brew install git-secrets= :: handle git secrets (e.g., keychain)
+- =brew install hub= :: terminal integration with github
 
-- =brew install coreutils=
-- =brew install pandoc=
-- =brew install mactex=
-- =brew install appcleaner= - for cleaning out applications and all
-  their extra files
-- =ln -s $HB_PATH/bin/gls $HB_PATH/bin/ls= ; This addresses "/ERROR/:
-  Listing directory failed but 'access-file' worked"
+- =brew cask install jumpcut= :: Multi-paste buffer; set Sticky Bezel and launch at login
+- =brew install openssl= :: You're going to want this for rbenv, though look at ./runbooks/ruby-openssl
+- =brew install postgresql= :: postgresql database
+- =brew install rbenv= :: Ruby version manager (we’ll install Ruby’s later)
+- =brew install redis= :: Going to need this for asyn rails work
+
+- =brew install ag= :: A solid replacement for grep
+- =brew install ripgrep= :: Another solid replacement for grep that allows PERL Regexp
+- =brew install terminal-notifier= :: Send macOS notifications from terminal
+- =brew install fzf= :: Fuzzy finder
+- =brew install bat= :: A cat clone with syntax highlighting
+- =brew install pandoc= :: for converting documents to different formats
+
+- =brew install appcleaner= :: for cleaning out applications and all their extra files
 
 ** Fonts
 
@@ -49,6 +42,13 @@
 
 
 ** Emacs
+
+The following is necessary for getting Emacs up and running
+
+- =brew install libgit2= :: C-Library for Git that improves Emacs’s magit speed
+- =brew install coreutils= :: GNU file, shell, and text utilities
+- =brew install mactex= :: for LaTeX rendering (e.g., org mode exports)
+- =ln -s $HB_PATH/bin/gls $HB_PATH/bin/ls= :: This addresses "/ERROR/: Listing directory failed but 'access-file' worked"
 
 - =brew tap d12frosted/emacs-plus=
 - =brew install emacs-plus@28 --with-debug --with-dbus --with-xwidgets --with-modern-pen-lds56-icon --with-native-comp=
