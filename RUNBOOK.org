@@ -16,7 +16,6 @@ This is my hopefully complete Runbook for getting a new macOS computer running.
 - =brew install git-secrets= :: handle git secrets (e.g., keychain)
 - =brew install hub= :: terminal integration with github
 
-- =brew cask install jumpcut= :: Multi-paste buffer; set Sticky Bezel and launch at login
 - =brew install openssl= :: You're going to want this for rbenv, though look at ./runbooks/ruby-openssl
 - =brew install postgresql= :: postgresql database
 - =brew install rbenv= :: Ruby version manager (we’ll install Ruby’s later)
@@ -76,3 +75,7 @@ Then set:
 ** Install Hammerspoon
 
 See [[https://github.com/Hammerspoon/hammerspoon][Hammerspoon/hammerspoon: Staggeringly powerful macOS desktop automation with Lua]].
+
+** The Deprecated
+
+Prior to Raycast, I used Jumpcut (=brew cask install jumpcut=)
