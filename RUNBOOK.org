@@ -10,7 +10,7 @@ This is my hopefully complete Runbook for getting a new macOS computer running.
 
 - =brew install cmake= :: cross-platform make (may not be necessary with macOS only install)
 - =brew tap homebrew/cask= :: make sure to get access to casks
-
+- =brew install raycast= :: it’s +Spotlight+ Alfred replacement; a launcher and more.
 - =brew install git= :: macOS git is always behind the times, this will help keep it updated.
 - =brew install git-extras= :: some extra commands for git
 - =brew install git-secrets= :: handle git secrets (e.g., keychain)
