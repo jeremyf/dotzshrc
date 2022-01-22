@@ -224,7 +224,7 @@
 [merge]
         summary = true
 [push]
-        default = current
+	default = upstream
 [log]
         date = local
 [apply]
