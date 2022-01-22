@@ -105,3 +105,6 @@ export NVM_DIR="$HOME/.nvm"
 
 # See https://github.com/junegunn/fzf#environment-variables
 export FZF_DEFAULT_OPTS="--layout=reverse-list --marker=+ --bind 'ctrl-k:kill-line'"
+
+# Spring in Rails just causes endless grief.  Disable it
+export DISABLE_SPRING=1
