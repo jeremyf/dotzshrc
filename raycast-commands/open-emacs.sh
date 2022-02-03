@@ -14,6 +14,6 @@
 # @raycast.author Jeremy Friesen
 # @raycast.authorURL https://jeremyfriesen.com
 
-~/bin/editor ~/git/org/todo.org
+~/bin/editor ~/git/org/agenda.org
 
 exit 0

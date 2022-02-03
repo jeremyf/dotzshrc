@@ -22,6 +22,7 @@ alias e=$EDITOR
 alias db="dashboard"
 alias dr="dired.sh"
 alias edaemon='editor-daemon'
+alias e-reboot='cd ~/git/dotemacs; git stash ; edaemon ; git stash pop ; git edit'
 alias rm='rm -i'
 alias file-count="find . -type f -print | wc -l"
 alias bx="bundle exec"
