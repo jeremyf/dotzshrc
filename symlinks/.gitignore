@@ -26,8 +26,9 @@
 .\#*
 symlinks/.emacs.d.symlink/*
 *~
+*flycheck_*
 
-# Emacs Locals #
+# Emacs locals #
 ################
 .dir-locals.el
 
