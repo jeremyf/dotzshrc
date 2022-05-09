@@ -52,6 +52,10 @@ The following is necessary for getting Emacs up and running
 - =brew tap d12frosted/emacs-plus=
 - =brew install emacs-plus@28 --with-debug --with-dbus --with-xwidgets --with-modern-pen-lds56-icon --with-native-comp=
 
+*** Alternate
+
+~brew install emacs-mac  --with-dbus --with-glib --with-imagemagick --with-jansson --with-libxml2 --with-rsvg  --with-mac-metal --with-native-comp --with-natural-title-bar --with-starter  --with-emacs-sexy-icon~
+
 ** Run ./install.rb
 
 =ruby install.rb= to create various symlinks.

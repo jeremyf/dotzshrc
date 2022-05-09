@@ -50,7 +50,7 @@ COMPLETION_WAITING_DOTS="true"
 # When running selenium tests I got an error about too many open
 # files.  This helped resolve that.
 ulimit -u 2048
-ulimit -n 16384
+ulimit -n 65536
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
@@ -108,3 +108,5 @@ export FZF_DEFAULT_OPTS="--layout=reverse-list --marker=+ --bind 'ctrl-k:kill-li
 
 # Spring in Rails just causes endless grief.  Disable it
 export DISABLE_SPRING=1
+
+export LANG=en_US.UTF-8

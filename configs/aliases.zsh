@@ -33,8 +33,6 @@ alias gwc='git whatchanged -p --abbrev-commit --pretty=medium'
 alias hb="hub browse"
 alias psx="ps ax | ag $1"
 alias hammerspoon-focus-emacs="hs -c \"hs.application.launchOrFocus('Emacs')\""
-alias tor-sync="$EDITOR --suppress-output --eval \"(jnf/git-data-sync)\"; hammerspoon-focus-emacs"
-alias rss="$EDITOR --suppress-output --eval \"(rss)\"; hammerspoon-focus-emacs"
 alias magit="$EDITOR --suppress-output --eval \"(magit)\"; hammerspoon-focus-emacs"
 
 # Including these aliases as a reminder
