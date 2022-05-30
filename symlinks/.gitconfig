@@ -20,7 +20,6 @@
         expunge = "!sh -c 'git reflog expire --expire-unreachable=now --all && git gc --prune=now'"
         latest-tag = describe --abbrev=0 --tags
         sha-head = log --pretty=format:'%H' -1
-        author-count = "! sh -c 'git shortlog -se | sort -r'"
         branch-list = "!sh -c 'git-branch-list.sh'"
         ci = commit -v -a
         st = status
