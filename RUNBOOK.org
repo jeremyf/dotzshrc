@@ -23,22 +23,19 @@ This is my hopefully complete Runbook for getting a new macOS computer running.
 
 - =brew install ag= :: A solid replacement for grep
 - =brew install ripgrep= :: Another solid replacement for grep that allows PERL Regexp
+- =brew install rga= :: A wrapper around ripgrep for PDFs, Office Files, etc.
 - =brew install terminal-notifier= :: Send macOS notifications from terminal
 - =brew install fzf= :: Fuzzy finder
 - =brew install bat= :: A cat clone with syntax highlighting
 - =brew install pandoc= :: for converting documents to different formats
-
 - =brew install appcleaner= :: for cleaning out applications and all their extra files
 
 ** Fonts
 
-- Install MesloLGS NF via Powerlevel10k instructions
 - Install JetBrains Mono font
-- Install Ubuntu font https://design.ubuntu.com/font/
 - =brew cask install font-hack-nerd-font=
 - =brew tap homebrew/cask-fonts=
 - =brew install font-iosevka-nerd-font=
-
 
 ** Emacs
 
