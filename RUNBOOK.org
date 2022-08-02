@@ -29,6 +29,8 @@ This is my hopefully complete Runbook for getting a new macOS computer running.
 - =brew install bat= :: A cat clone with syntax highlighting
 - =brew install pandoc= :: for converting documents to different formats
 - =brew install appcleaner= :: for cleaning out applications and all their extra files
+- =brew install smudge/smudge/nightlight= :: command light control of the Night Shift settings (see https://github.com/smudge/nightlight)
+- =brew install difftastic= :: a more robust diff-ing tool
 
 ** Fonts
 

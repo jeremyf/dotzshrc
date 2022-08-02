@@ -223,7 +223,7 @@
 [merge]
         summary = true
 [push]
-	default = upstream
+	default = current
 [log]
         date = local
 [apply]
@@ -260,3 +260,5 @@
 	fsckObjects = true
 [fetch]
 	prune = true
+[diff]
+	external = difft
