@@ -21,6 +21,7 @@ This is my hopefully complete Runbook for getting a new macOS computer running.
 - =brew install rbenv= :: Ruby version manager (we’ll install Ruby’s later)
 - =brew install redis= :: Going to need this for asyn rails work
 
+- =brew install dbus= :: Message bus system, providing inter-application communication
 - =brew install ag= :: A solid replacement for grep
 - =brew install ripgrep= :: Another solid replacement for grep that allows PERL Regexp
 - =brew install rga= :: A wrapper around ripgrep for PDFs, Office Files, etc.
@@ -38,6 +39,7 @@ This is my hopefully complete Runbook for getting a new macOS computer running.
 - =brew cask install font-hack-nerd-font=
 - =brew tap homebrew/cask-fonts=
 - =brew install font-iosevka-nerd-font=
+- =brew install font-et-book=
 
 ** Emacs
 
