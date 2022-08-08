@@ -32,6 +32,8 @@ This is my hopefully complete Runbook for getting a new macOS computer running.
 - =brew install appcleaner= :: for cleaning out applications and all their extra files
 - =brew install smudge/smudge/nightlight= :: command light control of the Night Shift settings (see https://github.com/smudge/nightlight)
 - =brew install difftastic= :: a more robust diff-ing tool
+- =brew install cloc= :: a Perl tool to determine LOC for a project
+- =brew install npm= :: Node pacakge manager
 
 ** Fonts
 
@@ -53,9 +55,17 @@ The following is necessary for getting Emacs up and running
 - =brew tap d12frosted/emacs-plus=
 - =brew install emacs-plus@28 --with-debug --with-dbus --with-xwidgets --with-modern-pen-lds56-icon --with-native-comp=
 
+*Note:* Once you have Emacs running (see =install.rb= below), make sure to run =M-x all-the-icons-install-fonts=.
+
+
 *** Alternate
 
 ~brew install emacs-mac  --with-dbus --with-glib --with-imagemagick --with-jansson --with-libxml2 --with-rsvg  --with-mac-metal --with-native-comp --with-natural-title-bar --with-starter  --with-emacs-sexy-icon~
+
+** Language Servers
+
+- Ruby :: =gem install solargraph=
+- YAML :: =npm install -global yaml-language-server=
 
 ** Run ./install.rb
 
