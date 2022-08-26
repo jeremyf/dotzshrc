@@ -2,7 +2,7 @@
 
 # The purpose of this script is to aggregate git stats by an author.
 #
-# Have a file that lists authors one at a time?
+# TODO: How to render for multiple folks?
 #
 #   `cat /path/to/file | xargs -I % git-stats-for %`
 #     or
@@ -25,6 +25,7 @@ class Entry
   private
 
   def split!(changes:)
+    return unless changes
     changes.split(/, +/).each do |element|
       if element.include?("changed")
         @file_changes = element.to_i
@@ -78,10 +79,8 @@ end
 
 entry_set.add(header: header, changes: changes)
 
-# puts "#{entry_set.author}"
-# puts "\tTotal Commits: #{entry_set.total_commits}"
-# puts "\tFile Changes: #{entry_set.total_file_changes}"
-# puts "\tInsertions: #{entry_set.total_insertions}"
-# puts "\tDeletions: #{entry_set.total_deletions}"
-
-puts "#{entry_set.author}\t#{entry_set.total_commits}\t#{entry_set.total_file_changes}\t#{entry_set.total_insertions}\t#{entry_set.total_deletions}"
+puts "#{entry_set.author}"
+puts "\tTotal Commits: #{entry_set.total_commits}"
+puts "\tFile Changes: #{entry_set.total_file_changes}"
+puts "\tInsertions: #{entry_set.total_insertions}"
+puts "\tDeletions: #{entry_set.total_deletions}"

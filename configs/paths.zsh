@@ -41,6 +41,10 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     if [ -d $HB_PATH/lib/pkgconfig ]; then
         export PKG_CONFIG_PATH=/opt/local/lib/pkgconfig
     fi
+
+    if [ -d $HB_PATH/opt/openjdk/bin ]; then
+	export PATH="$(brew --prefix java)/bin:$PATH"
+    fi
 fi
 
 if [ -d $HOME/.emacs.d/bin ]; then

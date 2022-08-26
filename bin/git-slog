@@ -5,4 +5,7 @@
 # commit title holds tremendous value in that it aids in the scannability of
 # logs
 
-git log --graph --pretty=format:'%C(auto)%h — %s %C(blue)%an, %C(green)(%cs)%Creset%C(auto)%d%Creset' $@
+git log \
+    --graph \
+    --pretty=format:'%C(auto)%h — %s %C(blue)%an, %C(green)(%cs)%Creset%C(auto)%d%Creset' \
+    $@
