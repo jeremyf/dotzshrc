@@ -67,6 +67,16 @@ The following is necessary for getting Emacs up and running
 - Ruby :: =gem install solargraph=
 - YAML :: =npm install -global yaml-language-server=
 
+** Dictionary
+
+http://mbork.pl/2017-01-14_I'm_now_using_the_right_dictionary
+
+- =brew install sdcv= :: the translation
+- Download https://s3.amazonaws.com/jsomers/dictionary.zip
+- Create =~/.stardict/dic=
+- Copy the unzipped bz2 contents of the above download into =~/.stardict/dic=
+- Verify by running =sdcv -l= (there should be new dictionaries)
+
 ** Run ./install.rb
 
 =ruby install.rb= to create various symlinks.
