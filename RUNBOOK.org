@@ -77,6 +77,12 @@ http://mbork.pl/2017-01-14_I'm_now_using_the_right_dictionary
 - Copy the unzipped bz2 contents of the above download into =~/.stardict/dic=
 - Verify by running =sdcv -l= (there should be new dictionaries)
 
+To add to Dictionary.app:
+
+- Grab https://github.com/ponychicken/WebsterParser dictionary zip
+- Open Dictionary.app > Edit > Open Dictionaries Folder and drag contents of above zip
+- Restart Dictionary.app and re-arrange dictionary order.
+
 ** Run ./install.rb
 
 =ruby install.rb= to create various symlinks.
