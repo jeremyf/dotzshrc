@@ -261,5 +261,5 @@
 [fetch]
 	prune = true
 	fsckobjects = false
-[diff]
-	external = difft
+# [diff]
+# 	external = difft
