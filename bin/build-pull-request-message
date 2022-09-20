@@ -1,0 +1,47 @@
+#!/usr/bin/env sh
+
+show_help() {
+  cat << EOF
+  Leverage your commit messages to build your pull request message.
+
+  Usage: build-pull-request-message [-h] [SINCE_BRANCH]
+
+  Generate a pull request message using the commit messages from the HEAD of
+  the SINCE_BRANCH to the HEAD of the current branch.
+
+  By default, the SINCE_BRANCH is "main" but can be overridden as follows:
+
+  $ build-pull-request-message development
+
+  This generates output based on the commit messages that are after the HEAD of
+  the "development" branch to the HEAD of the current branch.
+
+  Options:
+    -h          display this help and exit
+
+  Note, this script parses the git log in reverse, rendering the first commit
+  on the branch at the top of the output and the last commit on the branch at
+  the bottom of the output.
+
+  This script also works best if you are have terse git commit subjects (e.g.
+  the first line)
+EOF
+}
+# A POSIX variable
+OPTIND=1         # Reset in case getopts has been used previously in the shell.
+
+# Initialize our own variables:
+output_file=""
+verbose=0
+
+while getopts ":h" opt; do
+    case "$opt" in
+    h|\?)
+        show_help
+        exit 0
+        ;;
+    esac
+done
+
+ARG1=${1:-main}
+git log --reverse --pretty="format:## %s%n%n%H%n%n%b" $ARG1..
