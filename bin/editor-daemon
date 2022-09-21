@@ -1,4 +1,4 @@
-#/bin/sh
+#!/bin/sh
 
 pkill -f Emacs
 pkill -f emacs

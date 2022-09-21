@@ -1,4 +1,4 @@
-#/bin/sh
+#!/bin/sh
 
 # A shell-script for predictable editing via $HOME/bin/emacsclient
 

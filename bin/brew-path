@@ -1,4 +1,4 @@
-#/bin/sh
+#!/bin/sh
 # Echo the expanded path to the given brew package
 
 if [ -z "$1" ]; then

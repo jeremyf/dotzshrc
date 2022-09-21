@@ -1,4 +1,4 @@
-#/bin/sh
+#!/bin/sh
 
 if [[ $# -eq 0 ]] ; then
     echo 'Create a new takeonrules blog post entry.  This script uses the'
