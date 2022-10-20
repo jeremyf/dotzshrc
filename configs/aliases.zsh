@@ -34,7 +34,7 @@ alias hb="hub browse"
 alias psx="ps ax | ag $1"
 alias hammerspoon-focus-emacs="hs -c \"hs.application.launchOrFocus('Emacs')\""
 alias magit="$EDITOR --suppress-output --eval \"(magit)\"; hammerspoon-focus-emacs"
-alias v-hyrax="rg \"^ +(hyrax|rails) \(\d+\.\d+\.\d+\" Gemfile.lock"
+alias v-samvera="rg \"^ +(hyrax|rails|blacklight(-spotlight)?) \(\d+\.\d+\.\d+\" Gemfile.lock"
 
 # Including these aliases as a reminder
 alias postgres-start="brew services start postgresql"
