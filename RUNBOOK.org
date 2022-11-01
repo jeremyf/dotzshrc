@@ -34,6 +34,7 @@ This is my hopefully complete Runbook for getting a new macOS computer running.
 - =brew install difftastic= :: a more robust diff-ing tool
 - =brew install cloc= :: a Perl tool to determine LOC for a project
 - =brew install npm= :: Node pacakge manager
+- =brew install vale= :: “Syntax-aware linter for prose”
 
 ** Fonts
 

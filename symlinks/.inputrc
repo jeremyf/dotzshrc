@@ -29,6 +29,11 @@ set visible-stats on
 "\e[B": history-search-forward
 "\e[A": history-search-backward
 
+# https://www.masteringemacs.org/article/keyboard-shortcuts-every-command-line-hacker-should-know-about-gnu-readline
+set keyseq-timeout 1200
+set colored-stats on
+set colored-completion-prefix on
+
 set enable-bracketed-paste on
 
 set show-all-if-ambiguous on
