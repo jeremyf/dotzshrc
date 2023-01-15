@@ -79,7 +79,7 @@ begin
   mandatory = %i[find path]
   missing = mandatory.select { |param| config[param].nil? }
   if config[:do_it]
-    missing << :replace if config[:replace].nil?
+    missing << :replace unless config.key?(:replace)
   end
   raise OptionParser::MissingArgument, missing.join(', ') unless missing.empty?
 rescue OptionParser::InvalidOption, OptionParser::MissingArgument

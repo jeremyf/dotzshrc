@@ -44,6 +44,8 @@ This is my hopefully complete Runbook for getting a new macOS computer running.
 - =brew install font-iosevka-nerd-font=
 - =brew install font-et-book=
 
+- Clone https://git.sr.ht/~protesilaos/iosevka-comfy and install those fonts
+
 ** Emacs
 
 The following is necessary for getting Emacs up and running
@@ -54,7 +56,7 @@ The following is necessary for getting Emacs up and running
 - =ln -s $HB_PATH/bin/gls $HB_PATH/bin/ls= :: This addresses "/ERROR/: Listing directory failed but 'access-file' worked"
 
 - =brew tap d12frosted/emacs-plus=
-- =brew install emacs-plus@28 --with-debug --with-dbus --with-xwidgets --with-modern-pen-lds56-icon --with-native-comp=
+- =brew install emacs-plus@29 --with-debug --with-dbus --with-modern-pen-lds56-icon --with-native-comp --with-mailutils=
 
 *Note:* Once you have Emacs running (see =install.rb= below), make sure to run =M-x all-the-icons-install-fonts=.
 
