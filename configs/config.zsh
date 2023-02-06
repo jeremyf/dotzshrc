@@ -57,16 +57,17 @@ ulimit -n 65536
 
 plugins=(
     ag
+    bgnotify
     copybuffer
+    git
     git-extras
     gitfast
+    github
+    history-substring-search
     macos
     rake
     ripgrep
     web-search
-    github
-    # zsh-syntax-highlighting
-    history-substring-search
 )
 
 ###############################################################################
