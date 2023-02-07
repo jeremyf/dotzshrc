@@ -26,9 +26,10 @@ alias e-reboot='cd ~/git/dotemacs; git stash ; edaemon ; git stash pop ; git edi
 alias rm='rm -i'
 alias file-count="find . -type f -print | wc -l"
 alias bx="bundle exec"
-alias gd='git diff'
-alias gst='git st'
 alias gb='git branch -vv'
+alias gd='git diff'
+alias gpb='git prune-branches main'
+alias gst='git st'
 alias gwc='git whatchanged -p --abbrev-commit --pretty=medium'
 alias hb="hub browse"
 alias psx="ps ax | ag $1"
