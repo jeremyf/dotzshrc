@@ -19,8 +19,6 @@ export SKIP_MYSQL_PASSWORD_FOR_LOCAL_DEVELOPMENT="true"
 
 # Prompt for confirmation
 alias e=$EDITOR
-alias db="dashboard"
-alias dr="dired.sh"
 alias edaemon='editor-daemon'
 alias e-reboot='cd ~/git/dotemacs; git stash ; edaemon ; git stash pop ; git edit'
 alias rm='rm -i'
@@ -32,7 +30,6 @@ alias gpb='git prune-branches main'
 alias gst='git st'
 alias gwc='git whatchanged -p --abbrev-commit --pretty=medium'
 alias hb="hub browse"
-alias psx="ps ax | ag $1"
 alias hammerspoon-focus-emacs="hs -c \"hs.application.launchOrFocus('Emacs')\""
 alias magit="$EDITOR --suppress-output --eval \"(magit)\"; hammerspoon-focus-emacs"
 alias v-samvera="rg \"^ +((bulk|hy)rax|rails|blacklight(-spotlight)?) \(\d+\.\d+\.\d+\" Gemfile.lock"
@@ -45,13 +42,6 @@ alias postgres-stop="brew services stop postgresql"
 alias pand="arch -x86_64 pandoc"
 alias ssh-tor="ssh takeonrules_takeonrules@ssh.phx.nearlyfreespeech.net"
 alias ledger-balance="bean-report ~/git/org/projects/jeremy-friesen-consulting/ledger.beancount balances"
-
-# Hyrax aliases
-alias hyrax-devup='cp $HOME/git/dotzshrc/hyrax/solr_wrapper_dev.yml $HOME/git/samvera/hyrax/.internal_test_app/config/ ; cd $HOME/git/samvera/hyrax/.internal_test_app ; rm -rf tmp/solr-development ; fcrepo_wrapper & solr_wrapper --config  config/solr_wrapper_dev.yml & redis-server &'
-alias hyrax-testup='cd $HOME/git/samvera/hyrax/.internal_test_app ; rm -rf tmp/solr-valkyrie-test/server/solr/hyrax-valkyrie-test ; rm -rf tmp/solr-test/server/solr/hydra-test ; fcrepo_wrapper --config config/fcrepo_wrapper_test.yml & solr_wrapper --config config/solr_wrapper_test.yml & solr_wrapper --config config/solr_wrapper_valkyrie_test.yml & redis-server &'
-alias hyrax-old-testup='cd $HOME/git/samvera/hyrax/.internal_test_app ; rm -rf tmp/solr-valkyrie-test/server/solr/hyrax-valkyrie-test ; rm -rf tmp/solr-test/server/solr/hydra-test ; fcrepo_wrapper --config config/fcrepo_wrapper_test.yml & solr_wrapper --config config/solr_wrapper_test.yml & redis-server &'
-alias hyrax-devdown='pkill -f solr_wrapper & pkill -f fcrepo_wrapper & redis-cli shutdown'
-alias sqlite-browser="/Applications/DB\ Browser\ for\ SQLite.app/Contents/MacOS/DB\ Browser\ for\ SQLite"
 
 # SSH Tunnel:
 # ssh libvirt6.library.nd.edu -L 8080:localhost:8080
