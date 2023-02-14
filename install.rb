@@ -63,6 +63,12 @@ $stdout.puts 'Finished installing .emacs.d aliases…'
 platform = `uname`.strip.downcase
 
 if platform =~ /darwin/
+  $stdout.puts "Installing karabiner elements (you'll need to enable them)"
+  target_filename = File.join(home_dirname, ".config/karabiner/assets/complex_modifications/modifications.json")
+  FileUtils.mkdir_p(File.basename(target_filename))
+  source_filename = File.join(home_dirname, "git/dotzshrc/karabiner/modifications.json")
+  FileUtils.cp(source_filename, target_filename)
+
   $stdout.puts "Installing global git config for darwin"
   unless system("git config --system --get credential.helper")
     system("git config --system --add credential.helper osxkeychain")

@@ -1,0 +1,122 @@
+{
+    "title": "Quick Tap Emacs Keys",
+    "rules": [
+	{
+	"description": "Left Cmd to C-c if alone",
+	"manipulators": [
+            {
+            "type": "basic",
+            "from": {
+		"key_code": "left_command",
+		"modifiers": {
+		    "optional": [
+			"any"
+		    ]
+		}
+            },
+            "to": [
+		{
+		"key_code": "left_command",
+		"lazy": true
+            }
+            ],
+            "to_if_alone": [
+		{
+		"key_code": "c",
+		"modifiers": [
+                    "left_control"
+		]
+            }
+            ]
+        }
+	]
+    },{
+	"description": "Left Option to M-x if alone",
+	"manipulators": [
+            {
+            "type": "basic",
+            "from": {
+		"key_code": "left_option",
+		"modifiers": {
+		    "optional": [
+			"any"
+		    ]
+		}
+            },
+            "to": [
+		{
+		"key_code": "left_option",
+		"lazy": true
+            }
+            ],
+            "to_if_alone": [
+		{
+		"key_code": "x",
+		"modifiers": [
+                    "left_option"
+		]
+            }
+            ]
+        }
+	]
+    },{
+	"description": "Left Control to C-x if alone",
+	"manipulators": [
+            {
+            "type": "basic",
+            "from": {
+		"key_code": "left_control",
+		"modifiers": {
+		    "optional": [
+			"any"
+		    ]
+		}
+            },
+            "to": [
+		{
+		"key_code": "left_control",
+		"lazy": true
+            }
+            ],
+            "to_if_alone": [
+		{
+		"key_code": "x",
+		"modifiers": [
+                    "left_control"
+		]
+            }
+            ]
+        }
+	]
+    },{
+	"description": "Right Option to M-x if alone",
+	"manipulators": [
+            {
+            "type": "basic",
+            "from": {
+		"key_code": "right_option",
+		"modifiers": {
+		    "optional": [
+			"any"
+		    ]
+		}
+            },
+            "to": [
+		{
+		"key_code": "right_option",
+		"lazy": true
+            }
+            ],
+            "to_if_alone": [
+		{
+		"key_code": "x",
+		"modifiers": [
+                    "right_option"
+		]
+            }
+            ]
+        }
+	]
+    }
+    ]
+}

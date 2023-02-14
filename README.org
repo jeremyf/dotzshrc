@@ -13,6 +13,7 @@ Below is the top-level directory structure:
 ├── configs
 ├── install.rb
 ├── iterm
+├── karabiner
 ├── lib
 ├── runbooks
 ├── stylesheets
