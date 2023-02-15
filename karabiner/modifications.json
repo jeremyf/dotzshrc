@@ -109,10 +109,7 @@
             ],
             "to_if_alone": [
 		{
-		"key_code": "x",
-		"modifiers": [
-                    "right_option"
-		]
+		"key_code": "escape"
             }
             ]
         }
@@ -139,6 +136,35 @@
             "to_if_alone": [
 		{
 		"key_code": "u",
+		"modifiers": [
+                    "right_control"
+		]
+            }
+            ]
+        }
+	]
+    },{
+	"description": "Right Command to C-c if alone",
+	"manipulators": [
+            {
+            "type": "basic",
+            "from": {
+		"key_code": "right_command",
+		"modifiers": {
+		    "optional": [
+			"any"
+		    ]
+		}
+            },
+            "to": [
+		{
+		"key_code": "right_command",
+		"lazy": true
+            }
+            ],
+            "to_if_alone": [
+		{
+		"key_code": "c",
 		"modifiers": [
                     "right_control"
 		]
