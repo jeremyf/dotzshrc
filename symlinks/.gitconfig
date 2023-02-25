@@ -10,7 +10,6 @@
 [gc]
         reflogExpireUnreachable = 3 days
 [alias]
-        wipit = !git add --all && git commit -m"WIP"
         amend = commit --amend
         amend-no-change = "!sh -c 'git commit --amend -C `git sha-head`'"
         prebase = "!sh -c 'git fetch; git rebase --rebase-merges; git pull --tags'"
@@ -20,7 +19,6 @@
         expunge = "!sh -c 'git reflog expire --expire-unreachable=now --all && git gc --prune=now'"
         latest-tag = describe --abbrev=0 --tags
         sha-head = log --pretty=format:'%H' -1
-        branch-list = "!sh -c 'git-branch-list.sh'"
         ci = commit -v -a
         st = status
         reset-hard = reset --hard HEAD
@@ -29,7 +27,6 @@
         co = checkout
         # pull-request-message = log  --reverse --pretty="format:## %s%n%n%b"
         plog = log --pretty=format:'%h\t%Cblue%cr%Creset\t%cn\t%Cgreen%s%Creset'
-        unmerged-edit = "!sh -c 'git-unmerged-edit'" # I like auto-complete for this one
         unmerged-add = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; git add `f`"
         unstage = reset HEAD --
 
