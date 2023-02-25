@@ -1,0 +1,30 @@
+#!/usr/bin/env sh
+
+show_help() {
+  cat << EOF
+  Echo to STDOUT an org-mode checklist of local overrides.
+
+  Usage: overrides-checklist [-h]
+
+  Options:
+    -h          display this help and exit
+EOF
+}
+# A POSIX variable
+OPTIND=1         # Reset in case getopts has been used previously in the
+		 # shell.
+
+while getopts ":h" opt; do
+    case "$opt" in
+    h|\?)
+        show_help
+        exit 0
+        ;;
+    esac
+done
+
+template='{ print "- [ ] [[file:" $1 "]]" }'
+
+echo "Overrides found in [[file:$(dirs +0)]] on $(date)\n"
+find $(pwd) -type f -name "*_decorator.rb" | awk "$template"
+rg "^\s*#.*OVERRIDE" -i --files-with-matches $(pwd) | awk "$template"
