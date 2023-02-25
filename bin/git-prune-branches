@@ -1,15 +1,41 @@
 #!/bin/sh
 
-branch=$1
+show_help() {
+  cat << EOF
+  Prune the current repositories local branches that are part of "main"
+  (or the given BRANCH_NAME)
 
-if [ ! -z "$1" ]
+  Usage: git prune-branches [-h] [BRANCH_NAME]
+
+  Options:
+    -h          display this help and exit
+
+EOF
+}
+# A POSIX variable
+OPTIND=1         # Reset in case getopts has been used previously in the
+                 # shell.
+
+while getopts ":h" opt; do
+    case "$opt" in
+    h|\?)
+        show_help
+        exit 0
+        ;;
+    esac
+done
+
+givenBranch=${1:-main}
+
+if [ ! -z "$givenBranch" ]
 then
-  git checkout $1
-  git remote prune origin
-  git branch --merged | grep -v "\*" | grep -v $1 | xargs -n 1 git branch -d
-  # git byegone
-  git fetch -p && for branch in $(git branch -vv | grep ': gone]' | awk '{print $1}'); do git branch -D $branch; done
+    echo "✂✂✂ Pruning branches from main…"
+    git checkout $givenBranch &&
+    git pull --rebase &&
+    git remote prune origin &&
+    git branch --merged | grep -v "\*" | grep -v $givenBranch | xargs -n 1 git branch -d &&
+    git fetch -p && for branch in $(git branch -vv | grep ': gone]' | awk '{print $givenBranch}'); do git branch -D $givenBranch; done
 else
-  echo "You must specify a branch name for which to prune against"
-  exit 1
+    echo "You must specify a branch name for which to prune against"
+    exit 1
 fi
