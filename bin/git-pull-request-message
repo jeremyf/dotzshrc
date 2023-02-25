@@ -4,7 +4,7 @@ show_help() {
   cat << EOF
   Leverage your commit messages to build your pull request message.
 
-  Usage: build-pull-request-message [-h] [SINCE_BRANCH]
+  Usage: git pull-request-message [-h] [SINCE_BRANCH]
 
   Generate a pull request message using the commit messages from the
   HEAD of the SINCE_BRANCH to the HEAD of the current branch.
@@ -12,7 +12,7 @@ show_help() {
   By default, the SINCE_BRANCH is "main" but can be overridden as
   follows:
 
-  $ build-pull-request-message development
+  $ git pull-request-message development
 
   This generates output based on the commit messages that are after the
   HEAD of the "development" branch to the HEAD of the current branch.
