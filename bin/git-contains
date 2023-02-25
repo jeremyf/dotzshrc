@@ -1,0 +1,40 @@
+#!/usr/bin/env sh
+
+show_help() {
+  cat << EOF
+
+  Show the branches and tags that contains the given SHA.
+
+  Usage: git contains [-h] SHA
+
+  Options:
+    -h          display this help and exit
+EOF
+}
+# A POSIX variable
+OPTIND=1         # Reset in case getopts has been used previously in the
+		 # shell.
+
+# Initialize our own variables:
+output_file=""
+verbose=0
+
+while getopts ":h" opt; do
+    case "$opt" in
+    h|\?)
+        show_help
+        exit 0
+        ;;
+    esac
+done
+
+if [ -z "$1" ]; then
+  echo "You must provide a SHA"
+  exit 1
+fi
+
+echo "Branches that contain SHA $1\n"
+git branch --contains $1
+
+echo "\nTags that contain SHA $1\n"
+git tag --contains $1
