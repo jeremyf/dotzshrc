@@ -1,8 +1,0 @@
-#!/bin/sh
-
-if [[ $# -eq 0 ]] ; then
-    echo 'Create a new takeonrules blog post entry.  This script uses the'
-    echo 'arguments passed to construct the title.'
-else
-    editor --eval "(tor-post-new \"`echo $@`\")"
-fi

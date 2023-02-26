@@ -1,13 +1,33 @@
 #!/usr/bin/env sh
 
-# The goal of this command is to capture the STDIN and insert it into:
-#
-# 1) the current clock; else 2) the current buffer
+show_help() {
+  cat << EOF
+  Push either STDIN or arguments to the editor.
 
-if [ -z "$1" ]; then
+  Usage: e-push [-h] [words you typed]
+  Usage: echo "Hello" | e-push
+
+  Options:
+    -h          display this help and exit
+EOF
+}
+# A POSIX variable
+OPTIND=1         # Reset in case getopts has been used previously in the
+		 # shell.
+
+while getopts ":h" opt; do
+    case "$opt" in
+    h|\?)
+        show_help
+        exit 0
+        ;;
+    esac
+done
+
+if [[ $# -eq 0 ]] ; then
     text=$(</dev/stdin)
+    editor --eval "(jf/capture/text-from-stdin \"$text\")" 2>&1 1>/dev/null
 else
-    text=$@
+    editor --eval "(jf/capture/text-from-stdin \"`echo $@`\")" 2>&1 1>/dev/null
 fi
-$EDITOR --eval "(jf/capture/text-from-stdin \"$text\")"
 exit 0
