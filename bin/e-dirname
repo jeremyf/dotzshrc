@@ -1,5 +1,5 @@
 #/bin/sh
 #
 # Get the directory name of the file in emacs buffer buffer.
-file="$(efile)" || return $?
+file="$(e-filename)" || return $?
 echo "$(dirname $file)"

@@ -58,3 +58,5 @@ fcrepo4-test-data
 # If the project already has one, great.  Otherwise assume I've done
 # the lonely work to map folks.
 .mailmap
+
+/Library/

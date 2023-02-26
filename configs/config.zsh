@@ -63,7 +63,6 @@ plugins=(
     git-extras
     gitfast
     github
-    history-substring-search
     macos
     rake
     ripgrep
@@ -76,9 +75,9 @@ plugins=(
 ##
 ###############################################################################
 # bind UP and DOWN arrow keys
-zmodload zsh/terminfo
-bindkey "$terminfo[kcuu1]" history-substring-search-up
-bindkey "$terminfo[kcud1]" history-substring-search-down
+# zmodload zsh/terminfo
+# bindkey "$terminfo[kcuu1]" history-substring-search-up
+# bindkey "$terminfo[kcud1]" history-substring-search-down
 ###############################################################################
 ##
 ## END history-substring-search
@@ -93,21 +92,34 @@ fi
 export NVM_DIR="$HOME/.nvm"
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && . "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
 
-
-# `brew install hstr`
-# if [ -d "$(brew --prefix hstr)" ]; then
-#     alias hh=hstr                    # hh to be alias for hstr
-#     setopt histignorespace           # skip cmds w/ leading space from history
-#     export HSTR_CONFIG=hicolor       # get more colors
-#     bindkey -s "\C-r" "\C-a hstr -- \C-j"     # bind hstr to Ctrl-r (for Vi mode check doc)
-# fi
-
-# bindkey '^r' history-incremental-search-backward
+# In my local tests, bat with "ansi" works best for my color schemes
+export BAT_THEME="ansi"
 
 # See https://github.com/junegunn/fzf#environment-variables
 export FZF_DEFAULT_OPTS="--layout=reverse-list --marker=+ --bind 'ctrl-k:kill-line'"
+export FZF_CTRL_T_COMMAND="fd --type f ."
+export FZF_CTRL_T_OPTS="
+  --preview 'bat -n --color=always {}'
+  --height 80%
+  --bind 'ctrl-e:execute(editor {})'
+  --bind 'ctrl-y:execute-silent(echo {} | pbcopy)'
+  --bind 'ctrl-s:execute-silent(echo {} | e-insert)'
+  --bind 'ctrl-/:change-preview-window(down|hidden|)'
+  --header 'Press CTRL-e to open in EDITOR; CTRL-y to copy to clipboard'"
+export FZF_CTRL_R_OPTS="
+  --preview 'echo {}' --preview-window up:3:hidden:wrap
+  --bind 'ctrl-/:toggle-preview'
+  --height 50%
+  --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)'
+  --color header:italic
+  --header 'Press CTRL-y to copy command into clipboard'"
+export FZF_ALT_C_COMMAND="fd --type d . $HOME"
+export FZF_ALT_C_OPTS="
+  --preview 'tree -C {}'
+  --bind 'ctrl-e:execute(editor {})'
+  --bind 'ctrl-y:execute-silent(echo {} | pbcopy)'
+  --bind 'ctrl-s:execute-silent(echo {} | e-insert)'
+  --header 'Press CTRL-e to open in EDITOR; CTRL-y to copy to clipboard'"
 
 # Spring in Rails just causes endless grief.  Disable it
 export DISABLE_SPRING=1
-
-export LANG=en_US.UTF-8

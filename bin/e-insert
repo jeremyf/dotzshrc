@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+
+# The goal of this command is to capture the STDIN and insert it into:
+#
+# 1) the current clock; else 2) the current buffer
+
+text=$(</dev/stdin)
+$EDITOR --eval "(jf/capture/text-from-stdin \"$text\")"
+exit 0
