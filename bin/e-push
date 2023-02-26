@@ -4,6 +4,10 @@
 #
 # 1) the current clock; else 2) the current buffer
 
-text=$(</dev/stdin)
+if [ -z "$1" ]; then
+    text=$(</dev/stdin)
+else
+    text=$@
+fi
 $EDITOR --eval "(jf/capture/text-from-stdin \"$text\")"
 exit 0
