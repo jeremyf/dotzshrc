@@ -1,4 +1,0 @@
-#!/bin/sh
-#
-# This command opens a list of repositories for magit review.
-editor --eval "(jnf/magit-list-repositories)" 2>&1 1>/dev/null

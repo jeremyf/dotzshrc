@@ -1,34 +1,34 @@
 [user]
-        name = Jeremy Friesen
-        email = jeremy.n.friesen@gmail.com
+        name		= Jeremy Friesen
+        email		= jeremy.n.friesen@gmail.com
 [github]
-        user = jeremyf
+        user		= jeremyf
 [url "git@github.com:jeremyf/"]
-        insteadOf = "git://github.com/jeremyf/"
+        insteadOf	= "git://github.com/jeremyf/"
 [hub]
-        protocol = https
+        protocol	= https
 [gc]
         reflogExpireUnreachable = 3 days
 [alias]
-        amend = commit --amend
-        amend-no-change = "!sh -c 'git commit --amend -C `git sha-head`'"
-        prebase = "!sh -c 'git fetch; git rebase --rebase-merges; git pull --tags'"
-        tag-dates = log --tags --simplify-by-decoration --pretty='format:%ai %d'
-        please = push -u --force-with-lease
-        current-tag = describe --abbrev=0 --tags
-        expunge = "!sh -c 'git reflog expire --expire-unreachable=now --all && git gc --prune=now'"
-        latest-tag = describe --abbrev=0 --tags
-        sha-head = log --pretty=format:'%H' -1
-        ci = commit -v -a
-        st = status
-        reset-hard = reset --hard HEAD
-        undo = reset --soft HEAD
-        ba = branch -avv
-        co = checkout
+        amend		= commit --amend
+        amend-no-change	= "!sh -c 'git commit --amend -C `git sha-head`'"
+        prebase		= "!sh -c 'git fetch; git rebase --rebase-merges; git pull --tags'"
+        tag-dates	= log --tags --simplify-by-decoration --pretty='format:%ai %d'
+        please		= push -u --force-with-lease
+        current-tag	= describe --abbrev=0 --tags
+        expunge		= "!sh -c 'git reflog expire --expire-unreachable=now --all && git gc --prune=now'"
+        latest-tag	= describe --abbrev=0 --tags
+	sha-head	= log --pretty=format:'%H' -1
+        ci		= commit -v -a
+        st		= status
+        reset-hard	= reset --hard HEAD
+        undo		= reset --soft HEAD
+        ba		= branch -avv
+        co		= checkout
         # pull-request-message = log  --reverse --pretty="format:## %s%n%n%b"
-        plog = log --pretty=format:'%h\t%Cblue%cr%Creset\t%cn\t%Cgreen%s%Creset'
-        unmerged-add = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; git add `f`"
-        unstage = reset HEAD --
+        plog		= log --pretty=format:'%h\t%Cblue%cr%Creset\t%cn\t%Cgreen%s%Creset'
+        unmerged-add	= "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; git add `f`"
+        unstage		= reset HEAD --
 
         ######################################################################
         # Clean up whitespace.
@@ -69,17 +69,17 @@
         #
         # The 'rebase --whitespace=fix' trick is from here:
         # http://stackoverflow.com/a/19156679/470844
-        fixws = !"\
+        fixws		= !"\
         if (! git diff-index --quiet --cached HEAD); then \
         \
         git diff-files --quiet . ; \
-        export NEED_TO_STASH=$? ; \
+        export NEED_TO_STASH = $? ; \
         \
         git commit -m FIXWS_SAVE_INDEX && \
-        if [ 1 = $NEED_TO_STASH ] ; then git stash save FIXWS_SAVE_TREE; fi && \
-        git rebase --whitespace=fix HEAD~ && \
+        if [ 1		= $NEED_TO_STASH ] ; then git stash save FIXWS_SAVE_TREE; fi && \
+        git rebase --whitespace = fix HEAD~ && \
         git reset --soft HEAD~ && \
-        if [ 1 = $NEED_TO_STASH ] ; then git stash pop; fi ; \
+        if [ 1		= $NEED_TO_STASH ] ; then git stash pop; fi ; \
         fi"
 
         # Fix whitespace in the index and the tree.
@@ -101,17 +101,17 @@
         git commit -m FIXWS_SAVE_INDEX && \
         git add -u :/ && \
         git commit -m FIXWS_SAVE_TREE && \
-        git rebase --whitespace=fix HEAD~2 && \
+        git rebase --whitespace = fix HEAD~2 && \
         git reset HEAD~ && \
         git reset --soft HEAD~ ; \
         elif (! git diff-files --quiet .) ; then \
         git add -u :/ && \
         git commit -m FIXWS_SAVE_TREE && \
-        git rebase --whitespace=fix HEAD~ && \
+        git rebase --whitespace = fix HEAD~ && \
         git reset HEAD~ ; \
         elif (! git diff-index --quiet --cached HEAD) ; then \
         git commit -m FIXWS_SAVE_INDEX && \
-        git rebase --whitespace=fix HEAD~ && \
+        git rebase --whitespace = fix HEAD~ && \
         git reset --soft HEAD~ ; \
         fi"
 
@@ -135,12 +135,12 @@
         # The if-statements:
         # - if index is clean
         #   - if tree is dirty
-        fixws-local-tree =!"\
+        fixws-local-tree = !"\
         cd \"$GIT_PREFIX\" && \
         if git diff-index --quiet --cached HEAD ; then \
         if ! git diff-files --quiet . ; then \
-        export GIT_EDITOR=: && \
-        git -c apply.whitespace=fix add -ue . && \
+        export GIT_EDITOR = : && \
+        git -c apply.whitespace = fix add -ue . && \
         git checkout . && \
         git reset ; \
         fi ; \
@@ -157,13 +157,13 @@
         # The if-statements:
         # - if tree is clean
         #   - if index is dirty
-        fixws-index =!"\
+        fixws-index	= !"\
         cd `git rev-parse --show-toplevel` && \
         if git diff-files --quiet . ; then \
         if ! git diff-index --quiet --cached HEAD ; then \
-        export GIT_EDITOR=: && \
+        export GIT_EDITOR = : && \
         git reset && \
-        git -c apply.whitespace=fix add -ue . && \
+        git -c apply.whitespace = fix add -ue . && \
         git checkout . ; \
         fi ; \
         else \
@@ -184,7 +184,7 @@
         # avoid the 'git commit', since 'git stash' still stashes the
         # indexed changes in this case, and so fixing whitespace errors in
         # the index causes a conflict on 'git stash pop'.
-        fixws-local-tree-and-index =!"\
+        fixws-local-tree-and-index = !"\
         cd \"$GIT_PREFIX\" && \
         if (! git diff-files --quiet `git rev-parse --show-toplevel`) && \
         (! git diff-index --quiet --cached HEAD) ; then \
@@ -199,11 +199,11 @@
         elif (! git diff-index --quiet --cached HEAD) ; then \
         git fixws-index ; \
         fi"
-	recent = branch --sort=-committerdate --format=\"%(committerdate:relative)%09%(refname:short)\"
-	oldest-ancestor = !zsh -c 'diff --old-line-format= --new-line-format= <(git rev-list --first-parent \"${1:-master}\") <(git rev-list --first-parent \"${2:-HEAD}\") | head -1' -
-	branchlog = !sh -c \"git log `git oldest-ancestor`..\"
-	new = !git init && git symbolic-ref HEAD refs/heads/trunk
-	home = "!f() { git reset --hard; git clean -d -f; git checkout $1; git pull --rebase; }; f"
+	recent		= branch --sort=-committerdate --format=\"%(committerdate:relative)%09%(refname:short)\"
+	oldest-ancestor	= !zsh -c 'diff --old-line-format= --new-line-format= <(git rev-list --first-parent \"${1:-master}\") <(git rev-list --first-parent \"${2:-HEAD}\") | head -1' -
+	branchlog	= !sh -c \"git log `git oldest-ancestor`..\"
+	new		= !git init && git symbolic-ref HEAD refs/heads/trunk
+	home		= "!f() { git reset --hard; git clean -d -f; git checkout $1; git pull --rebase; }; f"
 
         # This simpler version does not work because 'git stash save'
         # does not create a stash when the tree is clean. In that case,
@@ -218,46 +218,46 @@
 
         ######################################################################
 [merge]
-        summary = true
+        summary		= true
 [push]
-	default = current
+	default		= current
 [log]
-        date = local
+        date		= local
 [apply]
-        whitespace = fix
+        whitespace	= fix
 [branch]
-        autosetupmerge = true
-	autosetuprebase = always
+        autosetupmerge	= true
+	autosetuprebase	= always
 [grep]
-        extendedRegexp = true
+        extendedRegexp	= true
 [core]
-        excludesfile = ~/.gitignore
-        attributesfile = ~/.gitattributes
+        excludesfile	= ~/.gitignore
+        attributesfile	= ~/.gitattributes
         # Set via install script
         # pager
 [rebase]
-        stat = true
+        stat		= true
 [filter "media"]
-        required = true
-        clean = git media clean %f
-        smudge = git media smudge %f
+        required	= true
+        clean		= git media clean %f
+        smudge		= git media smudge %f
 [gui]
         pruneduringfetch = true
-        diffcontext = 7
+        diffcontext	= 7
 [interactive]
         # Set via install script
         # diffFilter
 [pull]
-	rebase = true
+	rebase		= true
 [init]
-	defaultBranch = main
+	defaultBranch	= main
 
 [commit]
-	verbose = true
+	verbose		= true
 [transfer]
-	fsckObjects = true
+	fsckObjects	= true
 [fetch]
-	prune = true
-	fsckobjects = false
+	prune		= true
+	fsckobjects	= false
 # [diff]
 # 	external = difft

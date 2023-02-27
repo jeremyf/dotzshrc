@@ -22,13 +22,7 @@ alias e=$EDITOR
 alias edaemon='editor-daemon'
 alias e-reboot='cd ~/git/dotemacs; git stash ; edaemon ; git stash pop ; git edit'
 alias rm='rm -i'
-alias file-count="find . -type f -print | wc -l"
 alias bx="bundle exec"
-alias gb='git branch -vv'
-alias gd='git diff'
-alias gpb='git prune-branches main'
-alias gst='git st'
-alias gwc='git whatchanged -p --abbrev-commit --pretty=medium'
 alias hb="hub browse"
 alias hammerspoon-focus-emacs="hs -c \"hs.application.launchOrFocus('Emacs')\""
 alias magit="$EDITOR --suppress-output --eval \"(magit)\"; hammerspoon-focus-emacs"
@@ -41,7 +35,6 @@ alias postgres-stop="brew services stop postgresql"
 # For pandoc on Apple Silicon chips
 alias pand="arch -x86_64 pandoc"
 alias ssh-tor="ssh takeonrules_takeonrules@ssh.phx.nearlyfreespeech.net"
-alias ledger-balance="bean-report ~/git/org/projects/jeremy-friesen-consulting/ledger.beancount balances"
 
 # SSH Tunnel:
 # ssh libvirt6.library.nd.edu -L 8080:localhost:8080
