@@ -50,8 +50,8 @@ COLOR_REGEXP = %r{\(mode-line-bg-color-name \. ([^\)]+)\)}
 # When I have a "light" MacOS setting use the light colors.
 table = `defaults read -g AppleInterfaceStyle 2>/dev/null`.strip.size.zero? ? COLOR_LOOKUP_LIGHT : COLOR_LOOKUP_DARK
 
-# Set the default
-color = table.fetch("bg-blue-intense")
+# Set the default, which maps to my present default setting in Emacs.
+color = table.fetch("bg-blue-subtle")
 
 # Recursively find the most dominant '.dir-locals.el' file in the ancestor directories
 slugs = Dir.pwd.split("/")
