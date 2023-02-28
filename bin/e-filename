@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 #
 # Get the filename of the current buffer
 cmd="(buffer-file-name (window-buffer))"
