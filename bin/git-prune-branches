@@ -34,7 +34,7 @@ then
     git pull --rebase &&
     git remote prune origin &&
     git branch --merged | grep -v "\*" | grep -v $givenBranch | xargs -n 1 git branch -d &&
-    git fetch -p && for branch in $(git branch -vv | grep ': gone]' | awk '{print $givenBranch}'); do git branch -D $givenBranch; done
+    git byegone
 else
     echo "You must specify a branch name for which to prune against"
     exit 1
