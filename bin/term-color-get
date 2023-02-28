@@ -1,0 +1,68 @@
+#!/usr/bin/env ruby -wU
+
+# This command is responsible for returning a hex color code, prefixed with the # sign.  It will determine
+
+# The following colors come from the modus tinted color palette.  The names are common across
+# modus-vivendi and modus-operandi but the hex colors vary.
+COLOR_LOOKUP_LIGHT = {
+  "bg-red-intense" => "#ff8f88",
+  "bg-green-intense" => "#8adf80",
+  "bg-yellow-intense" => "#f3d000",
+  "bg-blue-intense" => "#bfc9ff",
+  "bg-magenta-intense" => "#dfa0f0",
+  "bg-cyan-intense" => "#a4d5f9",
+  "bg-red-subtle" => "#ffcfbf",
+  "bg-green-subtle" => "#b3fabf",
+  "bg-yellow-subtle" => "#fff576",
+  "bg-blue-subtle" => "#ccdfff",
+  "bg-magenta-subtle" => "#ffddff",
+  "bg-cyan-subtle" => "#bfefff",
+  "bg-red-nuanced" => "#ffe8f0",
+  "bg-green-nuanced" => "#e0f5e0",
+  "bg-yellow-nuanced" => "#f9ead0",
+  "bg-blue-nuanced" => "#ebebff",
+  "bg-magenta-nuanced" => "#f6e7ff",
+  "bg-cyan-nuanced" => "#e1f3fc",
+}
+
+COLOR_LOOKUP_DARK = {
+  "bg-red-intense" => "#9d1f1f",
+  "bg-green-intense" => "#2f822f",
+  "bg-yellow-intense" => "#7a6100",
+  "bg-blue-intense" => "#1640b0",
+  "bg-magenta-intense" => "#7030af",
+  "bg-cyan-intense" => "#2266ae",
+  "bg-red-subtle" => "#620f2a",
+  "bg-green-subtle" => "#00422a",
+  "bg-yellow-subtle" => "#4a4000",
+  "bg-blue-subtle" => "#242679",
+  "bg-magenta-subtle" => "#552f5f",
+  "bg-cyan-subtle" => "#004065",
+  "bg-red-nuanced" => "#350f14",
+  "bg-green-nuanced" => "#002718",
+  "bg-yellow-nuanced" => "#2c1f00",
+  "bg-blue-nuanced" => "#131c4d",
+  "bg-magenta-nuanced" => "#2f133f",
+  "bg-cyan-nuanced" => "#04253f",
+}
+COLOR_REGEXP = %r{\(mode-line-bg-color-name \. ([^\)]+)\)}
+
+# When I have a "light" MacOS setting use the light colors.
+table = `defaults read -g AppleInterfaceStyle 2>/dev/null`.strip.size.zero? ? COLOR_LOOKUP_LIGHT : COLOR_LOOKUP_DARK
+
+# Set the default
+color = table.fetch("bg-blue-intense")
+
+# Recursively find the most dominant '.dir-locals.el' file in the ancestor directories
+slugs = Dir.pwd.split("/")
+(0...slugs.size).each do |i|
+  filename = File.join(*slugs[0...(slugs.size - i)], ".dir-locals.el")
+  next unless File.exist?(filename)
+  content = File.read(filename)
+  match = COLOR_REGEXP.match(content)
+  next unless match
+
+  color = table.fetch(match[1], color)
+  break
+end
+puts color

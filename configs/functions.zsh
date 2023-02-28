@@ -10,15 +10,15 @@
 #   - Bypass fuzzy finder if there's only one match (--select-1)
 #   - Exit if there's no match (--exit-0)
 fe() {
-  IFS=$'\n' files=($(fzf-tmux --query="$1" --multi --select-1 --exit-0 --cycle --preview 'bat --color=always {1}'))
-  [[ -n "$files" ]] && ${EDITOR:-vim} "${files[@]}"
+    IFS=$'\n' files=($(fzf-tmux --query="$1" --multi --select-1 --exit-0 --cycle --preview 'bat --color=always {1}'))
+    [[ -n "$files" ]] && ${EDITOR:-vim} "${files[@]}"
 }
 
 # # fd - cd to selected directory
 # fd() {
 #   local dir
 #   dir=$(find ${1:-.} -path '*/\.*' -prune \
-#                   -o -type d -print 2> /dev/null | fzf +m) &&
+    #                   -o -type d -print 2> /dev/null | fzf +m) &&
 #   cd "$dir"
 # }
 
@@ -66,3 +66,32 @@ if [ -d "$HOME/git/forgit" ]; then
     alias "${forgit_log:-gl}"='forgit::log'
     alias "${forgit_stash_show:-gss}"='forgit::stash::show'
 fi
+
+
+function auto_iterm_tag_color_cwd () {
+    preline="\r\033[A"
+    # Assumes format of `"#aabbcc"'
+    hex=`term-color-get`
+
+    first="${hex:0:1}"
+
+    if [ "#" = "$first" ]; then
+	hex="${hex:1:6}"
+    fi
+
+    hex_r="${hex:0:2}"
+    hex_g="${hex:2:2}"
+    hex_b="${hex:4:2}"
+
+    rgb_r=`echo $((0x${hex_r}))`
+    rgb_g=`echo $((0x${hex_g}))`
+    rgb_b=`echo $((0x${hex_b}))`
+
+    echo -e "\033]6;1;bg;red;brightness;$rgb_r\a"$preline
+    echo -e "\033]6;1;bg;green;brightness;$rgb_g\a"$preline
+    echo -e "\033]6;1;bg;blue;brightness;$rgb_b\a"$preline
+}
+
+auto_iterm_tag_color_cwd
+autoload -U add-zsh-hook
+add-zsh-hook chpwd auto_iterm_tag_color_cwd
