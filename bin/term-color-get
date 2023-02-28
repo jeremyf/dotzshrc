@@ -53,13 +53,21 @@ table = `defaults read -g AppleInterfaceStyle 2>/dev/null`.strip.size.zero? ? CO
 # Set the default, which maps to my present default setting in Emacs.
 color = table.fetch("bg-blue-subtle")
 
+project_theme_colors_filename = File.join(Dir.home, "/git/dotemacs/emacs.d/jf-project-theme-colors.el")
+if !File.exist?(project_theme_colors_filename)
+  puts color
+  exit! 0
+end
+
 # Recursively find the most dominant '.dir-locals.el' file in the ancestor directories
 slugs = Dir.pwd.split("/")
 (0...slugs.size).each do |i|
-  filename = File.join(*slugs[0...(slugs.size - i)], ".dir-locals.el")
+  filename = File.join(*slugs[0...(slugs.size - i)], ".git")
   next unless File.exist?(filename)
-  content = File.read(filename)
-  match = COLOR_REGEXP.match(content)
+  project_name = filename.sub(Dir.home, "~").sub(/\.git$/, "")
+
+  content = File.read(project_theme_colors_filename)
+  match = %r{\("#{project_name}" \. (bg-[^\)]+)\)}.match(content)
   next unless match
 
   color = table.fetch(match[1], color)
