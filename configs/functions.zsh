@@ -67,7 +67,8 @@ if [ -d "$HOME/git/forgit" ]; then
     alias "${forgit_stash_show:-gss}"='forgit::stash::show'
 fi
 
-
+# This function sets the tab color for iTerm based on the "term-color-get"
+# results.
 function auto_iterm_tag_color_cwd () {
     preline="\r\033[A"
     # Assumes format of `"#aabbcc"'

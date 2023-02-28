@@ -23,6 +23,9 @@ COLOR_LOOKUP_LIGHT = {
   "bg-blue-nuanced" => "#ebebff",
   "bg-magenta-nuanced" => "#f6e7ff",
   "bg-cyan-nuanced" => "#e1f3fc",
+  "bg-ochre" => "#f0e0cc",
+  "bg-lavender" => "#dfdbfa",
+  "bg-sage" => "#c0e7d4"
 }
 
 COLOR_LOOKUP_DARK = {
@@ -44,7 +47,11 @@ COLOR_LOOKUP_DARK = {
   "bg-blue-nuanced" => "#131c4d",
   "bg-magenta-nuanced" => "#2f133f",
   "bg-cyan-nuanced" => "#04253f",
+  "bg-ochre" => "#442c2f",
+  "bg-lavender" => "#38325c",
+  "bg-sage" => "#0f3d30"
 }
+
 COLOR_REGEXP = %r{\(mode-line-bg-color-name \. ([^\)]+)\)}
 
 # When I have a "light" MacOS setting use the light colors.
