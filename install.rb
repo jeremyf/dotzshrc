@@ -6,13 +6,13 @@ require 'fileutils'
 $stdout.puts 'Installing zshrc aliases…'
 home_dirname = ENV.fetch('HOME')
 
-symlink_sources = File.expand_path('symlinks/.*', __dir__)
+symlink_sources = File.expand_path('symlinks/dot.*', __dir__)
 Dir.glob(symlink_sources).each do |source_filename|
   basename = File.basename(source_filename)
   next if basename == '.'
   next if basename == '..'
 
-  target_basename = basename.to_s
+  target_basename = basename.to_s.sub("dot.", ".")
   # Create a symlink in HOME directory to source_filename
   target_name = File.join(home_dirname, target_basename)
   $stdout.puts "\t#{target_name} ->\n\t\t#{source_filename}"
