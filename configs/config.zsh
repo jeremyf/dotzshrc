@@ -103,7 +103,7 @@ export FZF_CTRL_T_OPTS="
   --height 80%
   --bind 'ctrl-e:execute(editor {})'
   --bind 'ctrl-y:execute-silent(echo {} | pbcopy)'
-  --bind 'ctrl-p:execute-silent(echo {} | e-push)'
+  --bind 'ctrl-s:execute-silent(echo {} | e-send)'
   --bind 'ctrl-/:change-preview-window(down|hidden|)'
   --header 'Press CTRL-e to open in EDITOR; CTRL-y to copy to clipboard'"
 export FZF_CTRL_R_OPTS="
@@ -118,7 +118,7 @@ export FZF_ALT_C_OPTS="
   --preview 'tree -C {}'
   --bind 'ctrl-e:execute(editor {})'
   --bind 'ctrl-y:execute-silent(echo {} | pbcopy)'
-  --bind 'ctrl-p:execute-silent(echo {} | e-push)'
+  --bind 'ctrl-s:execute-silent(echo {} | e-send)'
   --header 'Press CTRL-e to open in EDITOR; CTRL-y to copy to clipboard'"
 
 # Spring in Rails just causes endless grief.  Disable it

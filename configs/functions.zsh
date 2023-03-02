@@ -59,12 +59,9 @@ function cd() {
 }
 
 if [ -d "$HOME/git/forgit" ]; then
-    export PATH="$HOME/git/forgit/bin:$PATH"
-    export FORGIT_NO_ALIASES=1
+    export PATH="$PATH:$HOME/git/forgit/bin"
     source "$HOME/git/forgit/forgit.plugin.zsh"
-    alias "${forgit_log:-glo}"='forgit::log'
-    alias "${forgit_log:-gl}"='forgit::log'
-    alias "${forgit_stash_show:-gss}"='forgit::stash::show'
+    export FORGIT_NO_ALIASES=1
 fi
 
 # This function sets the tab color for iTerm based on the "term-color-get"

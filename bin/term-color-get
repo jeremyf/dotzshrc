@@ -66,7 +66,7 @@ if !File.exist?(project_theme_colors_filename)
   exit! 0
 end
 
-# Recursively find the most dominant '.dir-locals.el' file in the ancestor directories
+# Recursively find the most dominant '.git' file in the ancestor directories
 slugs = Dir.pwd.split("/")
 (0...slugs.size).each do |i|
   filename = File.join(*slugs[0...(slugs.size - i)], ".git")

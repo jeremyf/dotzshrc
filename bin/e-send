@@ -2,10 +2,10 @@
 
 show_help() {
   cat << EOF
-  Push either STDIN or arguments to the editor.
+  Send either STDIN or arguments to the editor.
 
-  Usage: e-push [-h] [words you typed]
-  Usage: echo "Hello" | e-push
+  Usage: e-send [-h] [words you typed]
+  Usage: echo "Hello" | e-send
 
   Options:
     -h          display this help and exit
