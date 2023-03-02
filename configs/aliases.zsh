@@ -26,7 +26,7 @@ alias bx="bundle exec"
 alias hb="hub browse"
 alias hammerspoon-focus-emacs="hs -c \"hs.application.launchOrFocus('Emacs')\""
 alias magit="$EDITOR --suppress-output --eval \"(magit)\"; hammerspoon-focus-emacs"
-alias v-samvera="rg \"^ +((bulk|hy)rax|rails|blacklight(-spotlight)?) \(\d+\.\d+\.\d+\" Gemfile.lock"
+alias v-samvera="rg \"^ +((bulk|hy)rax|rails|blacklight(-.*)?) \(\d+\.\d+\.\d+\" Gemfile.lock"
 
 # Including these aliases as a reminder
 alias postgres-start="brew services start postgresql"
