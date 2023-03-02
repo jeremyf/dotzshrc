@@ -16,9 +16,17 @@ fi
 $HB_PATH/bin/emacsclient --no-wait -e "(if (> (length (frame-list)) 1) 't)" | grep -q t
 
 if [ "$?" = "1" ]; then
-  # If a frame does not exist, create a frame
-  $HB_PATH/bin/emacsclient --create-frame --alternate-editor="" --frame-parameters="((fullscreen . maximized)))" "$@"
+    if [ "$#" = "0" ]; then
+        $HOME/bin/emacsclient --create-frame --alternate-editor="" --frame-parameters="((fullscreen . maximized)))"
+    else
+        # If a frame does not exist, create a frame
+        $HOME/bin/emacsclient --create-frame --alternate-editor="" --frame-parameters="((fullscreen . maximized)))" "$@"
+    fi
 else
-  # If a frame does exist, attach to that frame
-  $HB_PATH/bin/emacsclient --alternate-editor="" --frame-parameters="((fullscreen . maximized)))" "$@"
+    if [ "$#" = "0" ]; then
+        $HOME/bin/emacsclient --create-frame --alternate-editor="" --frame-parameters="((fullscreen . maximized)))"
+    else
+        # If a frame does exist, attach to that frame
+        $HOME/bin/emacsclient --alternate-editor="" --frame-parameters="((fullscreen . maximized)))" "$@"
+    fi
 fi
