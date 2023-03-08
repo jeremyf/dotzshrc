@@ -13,10 +13,10 @@ then
     # No value for AppleInterfaceStyle, so the OS has us in light mode,
     # proceed accordingly.
     sh term-light
-    editor --eval "(modus-themes-select 'modus-operandi-tinted)" 1> /dev/null
+    editor --eval "(modus-themes-load-theme 'modus-operandi-tinted)" 1> /dev/null
 else
     # AppleInterfaceStyle is set, and that means we're now in "Dark"
     # mode.
     sh term-dark
-    editor --eval "(modus-themes-select 'modus-vivendi-tinted)" 1> /dev/null
+    editor --eval "(modus-themes-load-theme 'modus-vivendi-tinted)" 1> /dev/null
 fi
