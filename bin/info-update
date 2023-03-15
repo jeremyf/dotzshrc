@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+# From https://www.reddit.com/r/emacs/comments/112t0uo/comment/ja41lso/?utm_source=share&utm_medium=web2x&context=3
+
+INFO_DIR="/opt/homebrew/share/info"
+while read -r f; do
+    install-info "$f" "$INFO_DIR"/dir
+done <<< $(find /opt/homebrew/Cellar -name \*.info)
