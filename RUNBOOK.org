@@ -26,7 +26,7 @@ This is my hopefully complete Runbook for getting a new macOS computer running.
 - =brew install ripgrep= :: Another solid replacement for grep that allows PERL Regexp
 - =brew install rga= :: A wrapper around ripgrep for PDFs, Office Files, etc.
 - =brew install terminal-notifier= :: Send macOS notifications from terminal
-- =brew install fd= ::
+- =brew install fd= :: =find= replacement
 - =brew install fzf= :: Fuzzy finder
 - =brew install bat= :: A cat clone with syntax highlighting
 - =brew install pandoc= :: for converting documents to different formats
@@ -35,7 +35,8 @@ This is my hopefully complete Runbook for getting a new macOS computer running.
 - =brew install difftastic= :: a more robust diff-ing tool
 - =brew install cloc= :: a Perl tool to determine LOC for a project
 - =brew install npm= :: Node pacakge manager
-- =brew install vale= :: “Syntax-aware linter for prose”
+- =brew install tree= :: Tree
+- =brew install erdtree= :: a better tree
 
 ** Fonts
 
