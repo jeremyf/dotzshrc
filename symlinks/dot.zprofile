@@ -25,6 +25,18 @@ source $HOME/git/dotzshrc/configs/paths.zsh
 source $HOME/git/dotzshrc/configs/aliases.zsh
 source $HOME/git/dotzshrc/configs/functions.zsh
 
+appearance=`defaults read -g AppleInterfaceStyle 2>/dev/null`
+if [ -z "$appearance" ]
+then
+    # No value for AppleInterfaceStyle, so the OS has us in light mode,
+    # proceed accordingly.
+    sh term-light
+else
+    # AppleInterfaceStyle is set, and that means we're now in "Dark"
+    # mode.
+    sh term-dark
+fi
+
 eval "$(rbenv init -)"
 
 # Fig post block. Keep at the bottom of this file.
