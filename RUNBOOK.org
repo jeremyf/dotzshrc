@@ -74,7 +74,7 @@ The following is necessary for getting Emacs up and running
 
 ** Dictionary
 
-http://mbork.pl/2017-01-14_I'm_now_using_the_right_dictionary
+In http://mbork.pl/2017-01-14_I'm_now_using_the_right_dictionary the author speaks about using the 1918 Webster’s dictionary; in part to fill their reading and references with vibrant and living words.
 
 - =brew install sdcv= :: the translation
 - Download https://s3.amazonaws.com/jsomers/dictionary.zip
@@ -90,7 +90,7 @@ To add to Dictionary.app:
 
 ** Run ./install.rb
 
-=ruby install.rb= to create various symlinks.
+=ruby install.rb= to create various symlinks and set the defau
 
 ** SSH Keys
 
