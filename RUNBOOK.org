@@ -90,7 +90,7 @@ To add to Dictionary.app:
 
 ** Run ./install.rb
 
-=ruby install.rb= to create various symlinks and set the defau
+=ruby install.rb= to create various symlinks and set some MacOS defaults
 
 ** SSH Keys
 
