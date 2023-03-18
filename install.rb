@@ -79,6 +79,8 @@ if platform =~ /darwin/
   unless system("git config --system --get core.pager")
     system("git config --system --add core.pager \"`brew --prefix git`/share/git-core/contrib/diff-highlight/diff-highlight | less -F -X\"")
   end
+
+  system("source $HOME/git/dotzshrc/configs/darwin-defaults.zsh")
 elsif platform =~ /linux/
   $stdout.puts "Installing global git config for gnu-linux"
   $stdout.puts(%(Run "sudo git config --system --add credential.helper /usr/lib/git-core/git-credential-libsecret"))
