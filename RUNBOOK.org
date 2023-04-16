@@ -58,6 +58,7 @@ The following is necessary for getting Emacs up and running
 - =ln -s $HB_PATH/bin/gls $HB_PATH/bin/ls= :: This addresses "/ERROR/: Listing directory failed but 'access-file' worked"
 
 - =brew tap d12frosted/emacs-plus=
+
 - =brew install emacs-plus@29 --with-debug --with-dbus --with-modern-pen-lds56-icon --with-native-comp --with-mailutils --with-imagemagick=
 
 *Note:* Once you have Emacs running (see =install.rb= below), make sure to run =M-x all-the-icons-install-fonts=.
@@ -92,6 +93,10 @@ To add to Dictionary.app:
 
 =ruby install.rb= to create various symlinks and set some MacOS defaults
 
+** NPM Packages
+
+- =npm install -g doctoc= :: A markdown table of contents generator
+  
 ** SSH Keys
 
 Ensure that I have up to date SSH keys

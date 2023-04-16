@@ -7,4 +7,5 @@
 :verbose: true
 :concurrent_downloads: 8
 benchmark: false
-gem: "--no-ri --no-rdoc --document=yri"
+gem: "--document=yri,ri,rdoc"
+update: "--document=yri,ri,rdoc"
