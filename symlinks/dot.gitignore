@@ -60,3 +60,5 @@ fcrepo4-test-data
 .mailmap
 
 /Library/
+.yardoc/
+doc/
