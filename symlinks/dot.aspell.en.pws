@@ -1,4 +1,4 @@
-personal_ws-1.1 en 44 
+personal_ws-1.1 en 46 
 Artha
 Drinax
 Duinhir
@@ -22,6 +22,7 @@ datetree
 dev
 elven
 emacs
+emacsclient
 entwinement
 expungement
 filetags
@@ -38,6 +39,7 @@ rouser
 rpg
 rpgs
 sidenote
+stepskip
 todo
 uncompromised
 undesirous
