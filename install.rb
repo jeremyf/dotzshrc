@@ -1,6 +1,7 @@
 # coding: utf-8
 # frozen_string_literal: true
 
+
 # This script installs the various files from the dotzshrc "ecosystem".
 require 'fileutils'
 $stdout.puts 'Installing zshrc aliases…'

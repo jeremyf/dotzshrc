@@ -37,7 +37,8 @@ This is my hopefully complete Runbook for getting a new macOS computer running.
 - =brew install npm= :: Node pacakge manager
 - =brew install tree= :: Tree
 - =brew install erdtree= :: a better tree
-- brew install enchant :: https://abiword.github.io/enchant/ for spelling  
+- brew install enchant :: https://abiword.github.io/enchant/ for spelling
+- =brew install rsync= :: The default MacOS package was 2.6; homebrew has v3.x
 
 ** Fonts
 
