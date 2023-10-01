@@ -33,9 +33,9 @@ ROLLERS.each do |strategy, (number_of_attributes, roller)|
     end
   end
 
-  print "\n- Strategy: #{strategy} :: "
+  print "- #{strategy} :: "
   results.reverse.each do |result|
     print "#{(result.to_f / SCENARIOS).round} "
   end
+  print "\n"
 end
-puts
