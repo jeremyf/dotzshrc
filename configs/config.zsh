@@ -62,7 +62,7 @@ plugins=(
     git
     git-extras
     gitfast
-    github
+    # github
     macos
     rake
     ripgrep
