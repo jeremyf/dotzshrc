@@ -263,3 +263,5 @@
 	fsckobjects	= false
 # [diff]
 # 	external = difft
+[diff]
+	algorithm = histogram

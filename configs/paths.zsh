@@ -66,5 +66,6 @@ if [ -d $GOPATH ]; then
     echo "$PATH" | grep -q "$GOPATH" || export PATH="$PATH:$GOPATH/bin"
 fi
 
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 export LYNX_CFG="$HOME/.lynx.cfg"

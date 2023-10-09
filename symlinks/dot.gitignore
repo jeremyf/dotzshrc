@@ -62,3 +62,5 @@ fcrepo4-test-data
 /Library/
 .yardoc/
 doc/
+
+docker-compose.override.yml
