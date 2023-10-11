@@ -131,4 +131,4 @@ See [[https://github.com/Hammerspoon/hammerspoon][Hammerspoon/hammerspoon: Stagg
 
 ** The Deprecated
 
-Prior to Raycast, I used Jumpcut (=brew cask install jumpcut=).  The benefit of Raycast is that the multi-paste buffer is Rich Text aware.  The downside?  It’s venture capital funded, so expect enshitification.
+Prior to Maccy +Raycast+, I used Jumpcut (=brew cask install jumpcut=).  The benefit of Raycast is that the multi-paste buffer is Rich Text aware.  The downside?  It’s venture capital funded, so expect enshitification.
