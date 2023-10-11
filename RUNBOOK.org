@@ -10,7 +10,7 @@ This is my hopefully complete Runbook for getting a new macOS computer running.
 
 - =brew install cmake= :: cross-platform make (may not be necessary with macOS only install)
 - =brew tap homebrew/cask= :: make sure to get access to casks
-- =brew install raycast= :: it’s +Spotlight+ Alfred replacement; a launcher and more.
+- =brew install maccy= :: a multi-paste clipboard.
 - =brew install git= :: macOS git is always behind the times, this will help keep it updated.
 - =brew install git-extras= :: some extra commands for git
 - =brew install git-secrets= :: handle git secrets (e.g., keychain)
@@ -23,7 +23,7 @@ This is my hopefully complete Runbook for getting a new macOS computer running.
 
 - =brew install dbus= :: Message bus system, providing inter-application communication
 - =brew install ag= :: A solid replacement for grep
-- =brew install ripgrep= :: Another solid replacement for grep that allows PERL Regexp
+- =brew install ripgrep= :: Another solid replacement for grep that allows PERL Regexp (command is =rg=)
 - =brew install rga= :: A wrapper around ripgrep for PDFs, Office Files, etc.
 - =brew install terminal-notifier= :: Send macOS notifications from terminal
 - =brew install fd= :: =find= replacement
@@ -36,17 +36,15 @@ This is my hopefully complete Runbook for getting a new macOS computer running.
 - =brew install cloc= :: a Perl tool to determine LOC for a project
 - =brew install npm= :: Node pacakge manager
 - =brew install tree= :: Tree
-- =brew install erdtree= :: a better tree
+- =brew install erdtree= :: a better tree (command is =et=)
 - brew install enchant :: https://abiword.github.io/enchant/ for spelling
 - =brew install rsync= :: The default MacOS package was 2.6; homebrew has v3.x
 
 ** Fonts
 
-- Install JetBrains Mono font
-- =brew cask install font-hack-nerd-font=
 - =brew tap homebrew/cask-fonts=
-- =brew install font-iosevka-nerd-font=
 - =brew install font-et-book=
+- =brew install font-iosevka-nerd-font=
 
 - Clone https://git.sr.ht/~protesilaos/iosevka-comfy and install those fonts
 
@@ -117,10 +115,20 @@ Then set:
 - Caps lock to send CTRL
 - Left shift + Right shift sends CAPS LOCK
 
+** Spotlight Skip ~/git
+
+Note the path needs to be absolute:
+
+- =sudo plutil -insert Exclusions.0 -string /Users/jfriesen/git /System/Volumes/Data/.Spotlight-V100/VolumeConfiguration.plist=
+- =launchctl stop com.apple.metadata.mds=
+- =launchctl start com.apple.metadata.mds=
+
+The above is inspired from: https://alexwlchan.net/files/2021/ignore_folders_in_spotlight.py
+  
 ** Install Hammerspoon
 
 See [[https://github.com/Hammerspoon/hammerspoon][Hammerspoon/hammerspoon: Staggeringly powerful macOS desktop automation with Lua]].
 
 ** The Deprecated
 
-Prior to Raycast, I used Jumpcut (=brew cask install jumpcut=)
+Prior to Raycast, I used Jumpcut (=brew cask install jumpcut=).  The benefit of Raycast is that the multi-paste buffer is Rich Text aware.  The downside?  It’s venture capital funded, so expect enshitification.
