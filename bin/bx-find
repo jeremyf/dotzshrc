@@ -1,0 +1,37 @@
+#!/usr/bin/env sh
+
+show_help() {
+  cat << EOF
+  Use \`fd' (fallback to slower, venerable, and ubiquitious `\find') to
+  find files in current path and the bundled gems' path.
+
+  Usage:
+
+  > bx-find application.rb
+  ./config/application.rb
+
+  Options:
+    -h          display this help and exit
+EOF
+}
+# A POSIX variable
+OPTIND=1         # Reset in case getopts has been used previously in the
+		 # shell.
+
+while getopts ":h" opt; do
+    case "$opt" in
+    h|\?)
+        show_help
+        exit 0
+        ;;
+    esac
+done
+
+if ! command -v fd &> /dev/null
+then
+    echo "\`fd' command found; using \`find' fallback">&2
+    echo "Consider installing \`fd' (see https://github.com/sharkdp/fd)">&2
+    find . `bundle list --paths &> /dev/null` -type f -name $@
+else
+    fd  --color never --type file $@ . `bundle list --paths &> /dev/null`
+fi
