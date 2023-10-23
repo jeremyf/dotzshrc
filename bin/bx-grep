@@ -1,0 +1,61 @@
+#!/usr/bin/env sh
+
+show_help() {
+  cat << EOF
+  Use \`rg' or \`ag' to find content within files.
+
+  Usage:
+
+  # Look for Ruby class methods defined in application code
+  # and bundle gem. 
+  > bx-grep "def self\.([\w_]+)"
+  
+  # Find all files in the application code and bundled gem
+  # that define a Ruby class method 
+  > bx-grep "def self\.([\w_]+)" --file-with-matches
+  
+  Options:
+    -h          display this help and exit
+EOF
+}
+# A POSIX variable
+OPTIND=1         # Reset in case getopts has been used previously in the
+		 # shell.
+
+while getopts ":h" opt; do
+    case "$opt" in
+    h|\?)
+        show_help
+        exit 0
+        ;;
+    esac
+done
+
+if [ "$#" -eq 0 ]; then
+    echo "Please provide command arguments."
+    show_help
+    exit 1
+fi
+
+# First argument
+first_arg=$1
+
+# Shift command to remove the first argument from the list
+shift
+
+if ! command -v rg &> /dev/null
+then
+    echo "\`rg' command found; falling back to \`ag'">&2
+    echo "Consider installing \`rg' (see https://github.com/BurntSushi/ripgrep)">&2
+    rg "$first_arg" . $(bundle list --paths &> /dev/null) "$@"
+else
+   if ! command -v ag &> /dev/null
+   then
+      echo "\`ag' command found; falling back to \`grep'"
+      echo "Consider installing \`rg' (see https://github.com/BurntSushi/ripgrep)"
+      echo "Or \`ag' (see https://github.com/ggreer/the_silver_searcher)"
+      exit -1
+   else
+      ag "$first_arg"  . $(bundle list --paths &> /dev/null) "$@"
+   fi
+fi
