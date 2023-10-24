@@ -7,4 +7,4 @@ if [ -z "$1" ]; then
 fi
 
 brewpath=$(brew --prefix $1)
-echo `realpath -z $brewpath`
+echo `realpath $brewpath`
