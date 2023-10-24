@@ -31,7 +31,7 @@ if ! command -v fd &> /dev/null
 then
     echo "\`fd' command found; using \`find' fallback">&2
     echo "Consider installing \`fd' (see https://github.com/sharkdp/fd)">&2
-    find . $(bundle list --paths &> /dev/null) -type f -name "$@"
+    find . $(bundle list --paths &2> /dev/null) -type f -name "$@"
 else
-    fd  --color never --type file "$@" .  $(bundle list --paths &> /dev/null)
+    fd  --color never --type file "$@" .  $(bundle list --paths &2> /dev/null)
 fi

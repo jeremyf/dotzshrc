@@ -47,7 +47,7 @@ if ! command -v rg &> /dev/null
 then
     echo "\`rg' command found; falling back to \`ag'">&2
     echo "Consider installing \`rg' (see https://github.com/BurntSushi/ripgrep)">&2
-    rg "$first_arg" . $(bundle list --paths &> /dev/null) "$@"
+    rg "$first_arg" . $(bundle list --paths &2> /dev/null) "$@"
 else
    if ! command -v ag &> /dev/null
    then
@@ -56,6 +56,6 @@ else
       echo "Or \`ag' (see https://github.com/ggreer/the_silver_searcher)"
       exit -1
    else
-      ag "$first_arg"  . $(bundle list --paths &> /dev/null) "$@"
+      ag "$first_arg"  . $(bundle list --paths &2> /dev/null) "$@"
    fi
 fi
