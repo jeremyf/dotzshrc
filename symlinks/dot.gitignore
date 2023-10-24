@@ -28,10 +28,6 @@ symlinks/.emacs.d.symlink/*
 *~
 *flycheck_*
 
-# Emacs locals #
-################
-.dir-locals.el
-
 # OS generated files #
 ######################
 .DS_Store
