@@ -45,5 +45,4 @@ while getopts ":h" opt; do
     esac
 done
 
-ARG1=${1:-main}
-git log --reverse --pretty="format:## %s%n%n%H%n%n%b" $ARG1..
+git log --no-merges --reverse --pretty="format:## %s%n%n%H%n%n%b" $@

@@ -20,7 +20,7 @@
         latest-tag	= describe --abbrev=0 --tags
 	sha-head	= log --pretty=format:'%H' -1
         ci		= commit -v -a
-	prm             = "! sh -c 'git pull-request-message | pbcopy'"
+	prm             = pull-request-message
 	st		= status
 	flog = forgit log
         reset-hard	= reset --hard HEAD
