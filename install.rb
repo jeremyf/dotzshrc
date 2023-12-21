@@ -33,9 +33,11 @@ Dir.glob(bin_sources).each do |source_filename|
 end
 $stdout.puts 'Finished installing bin aliases…'
 
-["emacs", "emacsclient"].each do |basename|
-  source_filename = File.join("/opt/homebrew/opt/emacs-plus@29/bin/", basename)
-  target_name = File.join(home_dirname, 'bin', File.basename(basename))
+{
+  "emacs" => "/opt/homebrew/opt/emacs-plus@29/bin/emacs",
+  "emacsclient" => "/opt/homebrew/opt/emacs-plus@29/bin/emacsclient"
+}.each do |basename, source_filename|
+    target_name = File.join(home_dirname, 'bin', basename)
   $stdout.puts "\t#{target_name} ->\n\t\t#{source_filename}"
   FileUtils.ln_sf(source_filename, target_name)
 end
