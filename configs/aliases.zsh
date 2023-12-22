@@ -22,6 +22,8 @@ alias e=$EDITOR
 alias edaemon='editor-daemon'
 alias e-reboot='cd ~/git/dotemacs; git stash ; edaemon ; git stash pop ; git edit'
 alias rm='rm -i'
+alias cp="cp -nv"
+alias mv="mv -nv"
 alias bx="bundle exec"
 alias hb="hub browse"
 alias hammerspoon-focus-emacs="hs -c \"hs.application.launchOrFocus('Emacs')\""
@@ -41,3 +43,5 @@ alias ssh-tor="ssh takeonrules_takeonrules@ssh.phx.nearlyfreespeech.net"
 
 alias dns-flush="sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder"
 alias net_traffic="lsof -r -i"
+
+set -o noclobber # Ensure the shell complains if a redirect is trying to overwrite an existing file.
