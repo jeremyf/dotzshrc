@@ -1,0 +1,126 @@
+#!/usr/bin/env ruby -wU
+
+# The purpose of this script is to quickly assess which files should:
+#
+# - be removed (e.g. duplicate in Knapsack and Hyku)
+# - be reviewed (e.g. differences between Knapsack and Hyku)
+# - kept outright (e.g. in Knapsack but not Hyku)
+
+require 'optparse'
+config = { yours: './', upstream: './hyrax-webapp', patterns_to_check: ["spec/**/*.*", "app/**/*.*", "lib/**/*.*"] }
+
+command_name = File.basename(__FILE__)
+
+
+nlp = new_line_padding = " " * 37
+optparse = OptionParser.new do |options|
+  # This banner is the first line of your help documentation.
+  options.set_banner "Usage: #{command_name} [options]\n\n" \
+                     "Knapsacker - A command line tool for assisting on moving from Hyku towards\n             Knapsack.\n\n"
+
+  options.on('-u PATH', '--upstream', String, "The file path that contains the upstream\n#{nlp}repository.  Not your Hyku application.\n#{nlp}Default: #{config[:upstream]}") do |upstream|
+    config[:upstream] = upstream
+  end
+
+  options.on('-y PATH', '--yours', String, "The file path to your application\n#{nlp}(e.g. what you forked from Samvera Hyku or your Knapsack).\n#{nlp}Default: #{config[:yours]}") do |yours|
+    config[:yours] = yours
+  end
+
+  options.on_tail('-h', '--help', "You're looking at it!") do
+    warn options
+    exit 1
+  end
+end
+
+begin
+  optparse.parse!
+  mandatory = %i[yours upstream]
+  missing = mandatory.select { |param| config[param].nil? }
+  raise OptionParser::MissingArgument, missing.join(', ') unless missing.empty?
+rescue OptionParser::InvalidOption, OptionParser::MissingArgument
+  warn "\e[0m\e[1m\e[31m#{$!}\e[0m\n"
+  warn optparse
+  exit
+end
+
+require 'fileutils'
+
+in_yours_but_not_in_upstream = []
+duplicates = []
+changed_in_yours = []
+
+yours = config.fetch(:yours)
+upstream = config.fetch(:upstream)
+dir_glob_patterns_to_check = config.fetch(:patterns_to_check)
+
+unless File.exist?(File.join(yours, "Gemfile"))
+  $stderr.puts "ERROR: Expected \"your\" hyku not found at #{yours}"
+  exit!(2)
+end
+
+unless File.exist?(File.join(upstream, "Gemfile"))
+  $stderr.puts "ERROR: Expected \"upstream\" hyku not found at #{upstream}"
+  exit!(3)
+end
+
+# TODO: This is not generally working.
+dir_glob_patterns_to_check.each do |pattern|
+  Dir.glob(File.join(yours, pattern)).each do |your_path|
+    path = your_path.sub(File.join(yours, '/'), '')
+    upstream_path = File.join(upstream, path)
+    if File.exist?(upstream_path)
+      results = `diff #{your_path} #{upstream_path}`.strip
+      if results.empty?
+        duplicates << path
+      else
+        changed_in_yours << path
+      end
+    else
+      in_yours_but_not_in_upstream << path
+    end
+  end
+end
+
+
+puts "-"*72
+puts "Knapsacker run context:"
+puts "-"*72
+puts "- Working Directory: #{FileUtils.pwd}"
+puts "- Your Dir: #{yours}"
+puts "- Upstream Dir: #{upstream}"
+puts "- Patterns to Check:"
+config.fetch(:patterns_to_check).each do |pattern|
+  puts "  - #{pattern}"
+end
+puts ""
+
+puts "------------------------------------------------------------------"
+puts "Files in \"yours\" that are exact duplicates of \"upstream\" files"
+puts "They are prefixed with a `='"
+puts "------------------------------------------------------------------"
+duplicates.each do |path|
+  puts "= #{path}"
+  if ENV['RM_DUPS']
+    File.unlink(path)
+  end
+end
+
+puts ""
+
+puts "----------------------------------------------------"
+puts "Files that are in \"yours\" but not in \"upstream\" "
+puts "They are prefixed with a `+'"
+puts "----------------------------------------------------"
+in_yours_but_not_in_upstream.each do |path|
+  puts "+ #{path}"
+end
+
+puts ""
+
+puts "-------------------------------------------------------------"
+puts "Files that are changed in \"yours\" relative to \"upstream\""
+puts "They are prefixed with a `Δ'"
+puts "-------------------------------------------------------------"
+changed_in_yours.each do |path|
+  puts "Δ #{path}"
+end
