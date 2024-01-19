@@ -43,5 +43,3 @@ alias ssh-tor="ssh takeonrules_takeonrules@ssh.phx.nearlyfreespeech.net"
 
 alias dns-flush="sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder"
 alias net_traffic="lsof -r -i"
-
-set -o noclobber # Ensure the shell complains if a redirect is trying to overwrite an existing file.
