@@ -31,11 +31,11 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 
     # This helps in building out Ruby using openssl
     # It may require PATH-ing $HB_PATH/Cellar/openssl@1.1/bin (see below)
-    export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
+    export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@3)"
 
     # I'm not certain if this is a good idea or not
-    if [ -d $HB_PATH/opt/openssl@1.1/bin ]; then
-        export PATH="$(brew --prefix openssl@1.1)/bin:$PATH"
+    if [ -d $HB_PATH/opt/openssl@3/bin ]; then
+        export PATH="$(brew --prefix openssl@3)/bin:$PATH"
     fi
 
     if [ -d $HB_PATH/lib/pkgconfig ]; then
