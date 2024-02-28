@@ -20,6 +20,21 @@ Dir.glob(symlink_sources).each do |source_filename|
   FileUtils.ln_sf(source_filename, target_name)
 end
 
+
+zed_sources = File.expand_path("dot.config/zed/*.*", __dir__)
+
+Dir.glob(zed_sources).each do |source_filename|
+  basename = File.basename(source_filename)
+  next if basename == '.'
+  next if basename == '..'
+
+  FileUtils.mkdir_p(File.join(home_dirname, ".config/zed/"))
+  target_basename = basename.to_s.sub("dot.config", ".config")
+  target_name = File.join(home_dirname, ".config/zed/", target_basename)
+  $stdout.puts "\t#{target_name} ->\n\t\t#{source_filename}"
+  FileUtils.ln_sf(source_filename, target_name)
+end
+
 $stdout.puts 'Finished installing zshrc aliases…'
 
 $stdout.puts 'Installing bin aliases…'

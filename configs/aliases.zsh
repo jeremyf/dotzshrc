@@ -24,6 +24,7 @@ alias e-reboot='cd ~/git/dotemacs; git stash ; edaemon ; git stash pop ; git edi
 alias rm='rm -i'
 alias cp="cp -nv"
 alias mv="mv -nv"
+alias hugo-d="hugo serve -D --renderToMemory"
 alias bx="bundle exec"
 alias hb="hub browse"
 alias hammerspoon-focus-emacs="hs -c \"hs.application.launchOrFocus('Emacs')\""
