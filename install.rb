@@ -20,20 +20,21 @@ Dir.glob(symlink_sources).each do |source_filename|
   FileUtils.ln_sf(source_filename, target_name)
 end
 
+## Zed's kind of nice but not enough
 
-zed_sources = File.expand_path("dot.config/zed/*.*", __dir__)
+# zed_sources = File.expand_path("dot.config/zed/*.*", __dir__)
 
-Dir.glob(zed_sources).each do |source_filename|
-  basename = File.basename(source_filename)
-  next if basename == '.'
-  next if basename == '..'
+# Dir.glob(zed_sources).each do |source_filename|
+#   basename = File.basename(source_filename)
+#   next if basename == '.'
+#   next if basename == '..'
 
-  FileUtils.mkdir_p(File.join(home_dirname, ".config/zed/"))
-  target_basename = basename.to_s.sub("dot.config", ".config")
-  target_name = File.join(home_dirname, ".config/zed/", target_basename)
-  $stdout.puts "\t#{target_name} ->\n\t\t#{source_filename}"
-  FileUtils.ln_sf(source_filename, target_name)
-end
+#   FileUtils.mkdir_p(File.join(home_dirname, ".config/zed/"))
+#   target_basename = basename.to_s.sub("dot.config", ".config")
+#   target_name = File.join(home_dirname, ".config/zed/", target_basename)
+#   $stdout.puts "\t#{target_name} ->\n\t\t#{source_filename}"
+#   FileUtils.ln_sf(source_filename, target_name)
+# end
 
 $stdout.puts 'Finished installing zshrc aliases…'
 
@@ -77,6 +78,40 @@ FileUtils.mkdir_p(File.join(home_dirname, '.emacs.d'))
   end
 end
 $stdout.puts 'Finished installing .emacs.d aliases…'
+
+denote_dir = File.join(home_dirname, "git/org/denote")
+FileUtils.mkdir_p(denote_dir)
+denote_domains = {
+  "blog-posts" => "local",
+  "epigraphs" => "shared",
+  "glossary" => "shared",
+  "indices" => "local",
+  "melange" => "local",
+  "people" => "local",
+  "private" => "private",
+  "references" => "shared",
+}
+
+denote_domains.each do |domain, type|
+  target_name = File.join(denote_dir, domain)
+  source_name = case type
+                when "local"
+                  File.join(home_dirname, "git/pkm-local/#{domain}")
+                when "shared"
+                  File.join(home_dirname, "git/pkm-shared/#{domain}")
+                when "private"
+                  File.join(home_dirname, "Documents/denote-private")
+                end
+
+
+
+  if File.exist?(source_name)
+    $stdout.puts "\t#{target_name} ->\n\t\t#{source_name}"
+    FileUtils.ln_sf(source_name, target_name)
+  else
+    $stdout.puts "Skipping #{source_name}; it does not exist"
+  end
+end
 
 platform = `uname`.strip.downcase
 

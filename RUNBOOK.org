@@ -47,6 +47,7 @@ This is my hopefully complete Runbook for getting a new macOS computer running.
 - =brew install font-iosevka-nerd-font=
 
 - Clone https://git.sr.ht/~protesilaos/iosevka-comfy and install those fonts
+- Grab https://github.com/intel/intel-one-mono and install those fonts
 
 ** Emacs
 
