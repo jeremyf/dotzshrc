@@ -53,7 +53,7 @@ $stdout.puts 'Finished installing bin aliases…'
   "emacs" => "/opt/homebrew/opt/emacs-plus@29/bin/emacs",
   "emacsclient" => "/opt/homebrew/opt/emacs-plus@29/bin/emacsclient"
 }.each do |basename, source_filename|
-    target_name = File.join(home_dirname, 'bin', basename)
+  target_name = File.join(home_dirname, 'bin', basename)
   $stdout.puts "\t#{target_name} ->\n\t\t#{source_filename}"
   FileUtils.ln_sf(source_filename, target_name)
 end
@@ -106,8 +106,15 @@ denote_domains.each do |domain, type|
 
 
   if File.exist?(source_name)
-    $stdout.puts "\t#{target_name} ->\n\t\t#{source_name}"
-    FileUtils.ln_sf(source_name, target_name)
+    if File.exist?(target_name)
+      $stdout.puts "Skipping #{source_name}; #{target_name} already exists"
+    else
+      $stdout.puts "\t#{target_name} ->\n\t\t#{source_name}"
+      if domain == "epigraphs"
+        require 'debug'; binding.break
+      end
+      FileUtils.ln_sf(source_name, target_name)
+    end
   else
     $stdout.puts "Skipping #{source_name}; it does not exist"
   end
