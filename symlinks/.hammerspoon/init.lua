@@ -5,7 +5,7 @@ local hyper = {"ctrl", "alt", "cmd", "shift"}
 -- https://github.com/jeremyf/dotzshrc/blob/main/bin/editor
 hs.loadSpoon("editWithEmacs")
 if spoon.editWithEmacs then
-   spoon.editWithEmacs.openEditorShellCommand = "editor -e '(hammerspoon-edit-begin)'"
+   spoon.editWithEmacs.openEditorShellCommand = "editor -e '(emacs-everywhere)'"
    local bindings = {
       edit_selection =  { hyper, "e"},
       edit_all       = { meh, "e"}
