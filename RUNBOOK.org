@@ -28,6 +28,7 @@ This is my hopefully complete Runbook for getting a new macOS computer running.
 - =brew install ripgrep= :: Another solid replacement for grep that allows PERL Regexp (command is =rg=)
 - =brew install rga= :: A wrapper around ripgrep for PDFs, Office Files, etc.
 - =brew install terminal-notifier= :: Send macOS notifications from terminal
+- brew install aspell :: a command line spelling utility
 - =brew install fd= :: =find= replacement
 - =brew install fzf= :: Fuzzy finder
 - =brew install bat= :: A cat clone with syntax highlighting
