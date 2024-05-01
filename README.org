@@ -23,7 +23,7 @@ Below is the top-level directory structure:
 
 - License :: the license associated with this repository.
 - README.org :: this file.
-- RUNBOOK.org :: this is the software/scripts I install to ensure I have the appropirate dependencies installed.
+- RUNBOOK.org :: this is the software/scripts I install to ensure I have the appropirate dependencies installed; it is always a work in progress and one only vetted when I get a new machine.
 - bin :: a directory of executable files.
 - configs :: a directory containing shell configs.
 - install.rb :: this creates the symlinks in my =$HOME= directory and ensures paths, aliases, etc. are correct in the terminal/shell.
