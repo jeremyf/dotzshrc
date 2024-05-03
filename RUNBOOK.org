@@ -43,6 +43,7 @@ This is my hopefully complete Runbook for getting a new macOS computer running.
 - =brew install erdtree= :: a better tree (command is =et=)
 - brew install enchant :: https://abiword.github.io/enchant/ for spelling
 - =brew install rsync= :: The default MacOS package was 2.6; homebrew has v3.x
+- brew install starship :: A Cross-Shell Prompt  
 
 ** Fonts
 :PROPERTIES:

@@ -8,7 +8,7 @@ format = 'on [$symbol$project in $region]($style) '
 
 [git_branch]
 style = 'bold green'
-symbol = ''
+symbol = ' '
 truncation_length = 20
 truncation_symbol = '…'
 
@@ -16,9 +16,10 @@ truncation_symbol = '…'
 ahead = '⇡${count}'
 behind = '⇣${count}'
 diverged = '⇕⇡${ahead_count}⇣${behind_count}'
+format = '([$all_status$ahead_behind]($style) )'
 modified = '${count}󰇂 '
 stashed = '${count}󰼜 '
-untracked = '${count}?'
+untracked = '${count}? '
 style = 'bold green'
 
 [python]
