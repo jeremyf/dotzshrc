@@ -1,0 +1,33 @@
+[directory]
+truncation_length = 8
+truncate_to_repo = false
+truncation_symbol = './'
+
+[gcloud]
+format = 'on [$symbol$project in $region]($style) '
+
+[git_branch]
+style = 'bold green'
+symbol = ''
+truncation_length = 20
+truncation_symbol = '…'
+
+[git_status]
+ahead = '⇡${count}'
+behind = '⇣${count}'
+diverged = '⇕⇡${ahead_count}⇣${behind_count}'
+modified = '${count}󰇂 '
+stashed = '${count}󰼜 '
+untracked = '${count}?'
+style = 'bold green'
+
+[python]
+symbol = '🐍 '
+pyenv_version_name = true
+
+[status]
+symbol = '❌'
+success_symbol = '💚'
+format = '[$symbol $status]($style) '
+map_symbol = false
+disabled = false

@@ -67,7 +67,7 @@ plugins=(
     rake
     ripgrep
     python
-    # starship
+    starship
     web-search
 )
 

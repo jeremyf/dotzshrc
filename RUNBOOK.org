@@ -56,6 +56,8 @@ This is my hopefully complete Runbook for getting a new macOS computer running.
 - Clone https://git.sr.ht/~protesilaos/iosevka-comfy and install those fonts
 - Grab https://github.com/intel/intel-one-mono and install those fonts
 
+- Grab “IntoneMono Nerd Font” and install https://www.nerdfonts.com/font-downloads
+
 ** Emacs
 :PROPERTIES:
 :ID:       908CEB62-481B-4FE3-A9D4-CA60A86BE5DF
