@@ -1,453 +1,247 @@
 {
-    "title": "Quick Tap Emacs Keys",
+    "title": "Emacs key bindings (Move, Delete, Select)",
     "rules": [
-	{
-	    "description": "Left Cmd to C-c if alone",
-	    "conditions": [
-		{
-		    "type": "frontmost_application_if",
-		    "description": "Emacs",
-		    "bundle_identifiers": [
-			"emacs-plus"
-		    ]
-		}
+        {
+            "description": "Delete the previous word [C-w] (C-w -> option + backspace)",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "w",
+                        "modifiers": {
+                            "mandatory": [
+                                "control"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "delete_or_backspace",
+                            "modifiers": [
+                                "option"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "description": "Delete the next word [option + d] (M-d -> option + delete)",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "d",
+                        "modifiers": {
+                            "mandatory": [
+                                "option"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "delete_forward",
+                            "modifiers": [
+                                "option"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "description": "Move to the previous word [option + f] (M-f -> option + right_arrow)",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "f",
+                        "modifiers": {
+                            "mandatory": [
+                                "option"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "right_arrow",
+                            "modifiers": [
+                                "option"
+                            ]
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "frontmost_application_unless",
+                            "bundle_identifiers": [
+                                "emacs-plus"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "description": "Move to the next word [option + b] (M-b -> option + left_arrow)",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "b",
+                        "modifiers": {
+                            "mandatory": [
+                                "option"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "left_arrow",
+                            "modifiers": [
+                                "option"
+                            ]
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "frontmost_application_unless",
+                            "bundle_identifiers": [
+                                "emacs-plus"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "description": "Select the next word [option + shift + f] (M-f + shift -> option + shift + right_arrow)",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "f",
+                        "modifiers": {
+                            "mandatory": [
+                                "option",
+                                "shift"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "right_arrow",
+                            "modifiers": [
+                                "option",
+                                "shift"
+                            ]
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "frontmost_application_unless",
+                            "bundle_identifiers": [
+                                "emacs-plus"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "description": "Select the previous word [option + shift + b] (M-b + shift -> option + shift + left_arrow)",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "b",
+                        "modifiers": {
+                            "mandatory": [
+                                "option",
+                                "shift"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "left_arrow",
+                            "modifiers": [
+                                "option",
+                                "shift"
+                            ]
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "type": "frontmost_application_unless",
+                            "bundle_identifiers": [
+                                "emacs-plus"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "description": "Toggle caps_lock by pressing left_shift + right_shift at the same time",
+            "conditions": [
+                {
+                    "type": "frontmost_application_if",
+                    "description": "Emacs",
+                    "bundle_identifiers": [
+                        "emacs-plus"
+                    ]
+                }
             ],
-	    "manipulators": [
-		{
-		    "type": "basic",
-		    "from": {
-			"key_code": "left_command",
-			"modifiers": {
-			    "optional": [
-				"any"
-			    ]
-			}
-		    },
-		    "to": [
-			{
-			    "key_code": "left_command",
-			    "lazy": true
-			}
-		    ],
-		    "to_if_alone": [
-			{
-			    "key_code": "c",
-			    "modifiers": [
-				"left_control"
-			    ]
-			}
-		    ]
-		}
-	    ]
-	},
-	{
-	    "description": "Right Option to M-x if alone",
-	    "conditions": [
-		{
-		    "type": "frontmost_application_if",
-		    "description": "Emacs",
-		    "bundle_identifiers": [
-			"emacs-plus"
-		    ]
-		}
-            ],
-
-	    "manipulators": [
-		{
-		    "type": "basic",
-		    "from": {
-			"key_code": "right_option",
-			"modifiers": {
-			    "optional": [
-				"any"
-			    ]
-			}
-		    },
-		    "to": [
-			{
-			    "key_code": "right_option",
-			    "lazy": true
-			}
-		    ],
-		    "to_if_alone": [
-			{
-			    "key_code": "x",
-			    "modifiers": [
-				"right_option"
-			    ]
-			}
-		    ]
-		}
-	    ]
-	},
-	{
-	    "description": "Left Control to C-x if alone",
-	    "conditions": [
-		{
-		    "type": "frontmost_application_if",
-		    "description": "Emacs",
-		    "bundle_identifiers": [
-			"emacs-plus"
-		    ]
-		}
-            ],
-
-	    "manipulators": [
-		{
-		    "type": "basic",
-		    "from": {
-			"key_code": "left_control",
-			"modifiers": {
-			    "optional": [
-				"any"
-			    ]
-			}
-		    },
-		    "to": [
-			{
-			    "key_code": "left_control",
-			    "lazy": true
-			}
-		    ],
-		    "to_if_alone": [
-			{
-			    "key_code": "x",
-			    "modifiers": [
-				"left_control"
-			    ]
-			}
-		    ]
-		}
-	    ]
-	},
-	{
-	    "description": "Left Option to ESC if alone",
-	    "conditions": [
-		{
-		    "type": "frontmost_application_if",
-		    "description": "Emacs",
-		    "bundle_identifiers": [
-			"emacs-plus"
-		    ]
-		}
-            ],
-
-	    "manipulators": [
-		{
-		    "type": "basic",
-		    "from": {
-			"key_code": "left_option",
-			"modifiers": {
-			    "optional": [
-				"any"
-			    ]
-			}
-		    },
-		    "to": [
-			{
-			    "key_code": "left_option",
-			    "lazy": true
-			}
-		    ],
-		    "to_if_alone": [
-			{
-			    "key_code": "escape"
-			}
-		    ]
-		}
-	    ]
-	},
-	{
-	    "description": "Right Control to C-u if alone",
-	    "conditions": [
-		{
-		    "type": "frontmost_application_if",
-		    "description": "Emacs",
-		    "bundle_identifiers": [
-			"emacs-plus"
-		    ]
-		}
-            ],
-
-	    "manipulators": [
-		{
-		    "type": "basic",
-		    "from": {
-			"key_code": "right_control",
-			"modifiers": {
-			    "optional": [
-				"any"
-			    ]
-			}
-		    },
-		    "to": [
-			{
-			    "key_code": "right_control",
-			    "lazy": true
-			}
-		    ],
-		    "to_if_alone": [
-			{
-			    "key_code": "u",
-			    "modifiers": [
-				"right_control"
-			    ]
-			}
-		    ]
-		}
-	    ]
-	},
-	{
-	    "description": "Right Command to C-c if alone",
-	    "conditions": [
-		{
-		    "type": "frontmost_application_if",
-		    "description": "Emacs",
-		    "bundle_identifiers": [
-			"emacs-plus"
-		    ]
-		}
-            ],
-
-	    "manipulators": [
-		{
-		    "type": "basic",
-		    "from": {
-			"key_code": "right_command",
-			"modifiers": {
-			    "optional": [
-				"any"
-			    ]
-			}
-		    },
-		    "to": [
-			{
-			    "key_code": "right_command",
-			    "lazy": true
-			}
-		    ],
-		    "to_if_alone": [
-			{
-			    "key_code": "c",
-			    "modifiers": [
-				"right_control"
-			    ]
-			}
-		    ]
-		}
-	    ]
-	},
-	{
-	    "description": "Left Shift as C-s if alone",
-	    "conditions": [
-		{
-		    "type": "frontmost_application_if",
-		    "description": "Emacs",
-		    "bundle_identifiers": [
-			"emacs-plus"
-		    ]
-		}
-	    ],
-	    "manipulators": [
-		{
-		    "type": "basic",
-		    "from": {
-			"key_code": "left_shift",
-			"modifiers": {
-			    "optional": [
-				"any"
-			    ]
-			}
-		    },
-		    "to": [
-			{
-			    "key_code": "left_shift",
-			    "lazy": true
-			}
-		    ],
-		    "to_if_alone": [
-			{
-			    "key_code": "s",
-			    "modifiers": [
-				"left_control"
-			    ]
-			}
-		    ]
-		}
-	    ]
-	},
-	{
-	    "description": "Right Shift as C-g if alone",
-	    "conditions": [
-		{
-		    "type": "frontmost_application_if",
-		    "description": "Emacs",
-		    "bundle_identifiers": [
-			"emacs-plus"
-		    ]
-		}
-	    ],
-	    "manipulators": [
-		{
-		    "type": "basic",
-		    "from": {
-			"key_code": "right_shift",
-			"modifiers": {
-			    "optional": [
-				"any"
-			    ]
-			}
-		    },
-		    "to": [
-			{
-			    "key_code": "right_shift",
-			    "lazy": true
-			}
-		    ],
-		    "to_if_alone": [
-			{
-			    "key_code": "g",
-			    "modifiers": [
-				"right_control"
-			    ]
-			}
-		    ]
-		}
-	    ]
-	},
-	{
-	    "description": "Toggle caps_lock by pressing left_shift + right_shift at the same time",
-	    "conditions": [
-		{
-		    "type": "frontmost_application_if",
-		    "description": "Emacs",
-		    "bundle_identifiers": [
-			"emacs-plus"
-		    ]
-		}
-	    ],
-	    "manipulators": [
-		{
-		    "type": "basic",
-		    "from": {
-			"key_code": "left_shift",
-			"modifiers": {
-			    "mandatory": [
-				"right_shift"
-			    ],
-			    "optional": [
-				"caps_lock"
-			    ]
-			}
-		    },
-		    "to": [
-			{
-			    "key_code": "caps_lock"
-			}
-		    ],
-		    "to_if_alone": [
-			{
-			    "key_code": "left_shift"
-			}
-		    ]
-		},
-		{
-		    "type": "basic",
-		    "from": {
-			"key_code": "right_shift",
-			"modifiers": {
-			    "mandatory": [
-				"left_shift"
-			    ],
-			    "optional": [
-				"caps_lock"
-			    ]
-			}
-		    },
-		    "to": [
-			{
-			    "key_code": "caps_lock"
-			}
-		    ],
-		    "to_if_alone": [
-			{
-			    "key_code": "right_shift"
-			}
-		    ]
-		}
-	    ]
-	},
-	{
-	    "description": "Post space is pressed alone, left_ctrl otherwise",
-	    "conditions": [
-		{
-		    "type": "frontmost_application_if",
-		    "description": "Emacs",
-		    "bundle_identifiers": [
-			"emacs-plus"
-		    ]
-		}
-            ],
-
-	    "manipulators": [
-		{
-		    "from": {
-			"key_code": "spacebar",
-			"modifiers": {
-			    "optional": [
-				"any"
-			    ]
-			}
-		    },
-		    "to": [
-			{
-			    "key_code": "left_control"
-			}
-		    ],
-		    "to_if_alone": [
-			{
-			    "key_code": "spacebar"
-			}
-		    ],
-		    "type": "basic"
-		}
-	    ]
-	},
-	{
-	    "description": "Post space is pressed alone, left_cmd otherwise",
-	    "conditions": [
-		{
-		    "type": "frontmost_application_if",
-		    "description": "Emacs",
-		    "bundle_identifiers": [
-			"emacs-plus"
-		    ]
-		}
-            ],
-
-	    "manipulators": [
-		{
-		    "from": {
-			"key_code": "spacebar",
-			"modifiers": {
-			    "optional": [
-				"any"
-			    ]
-			}
-		    },
-		    "to": [
-			{
-			    "key_code": "left_command"
-			}
-		    ],
-		    "to_if_alone": [
-			{
-			    "key_code": "spacebar"
-			}
-		    ],
-		    "type": "basic"
-		}
-	    ]
-	}
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "left_shift",
+                        "modifiers": {
+                            "mandatory": [
+                                "right_shift"
+                            ],
+                            "optional": [
+                                "caps_lock"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "caps_lock"
+                        }
+                    ],
+                    "to_if_alone": [
+                        {
+                            "key_code": "left_shift"
+                        }
+                    ]
+                },
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "right_shift",
+                        "modifiers": {
+                            "mandatory": [
+                                "left_shift"
+                            ],
+                            "optional": [
+                                "caps_lock"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "caps_lock"
+                        }
+                    ],
+                    "to_if_alone": [
+                        {
+                            "key_code": "right_shift"
+                        }
+                    ]
+                }
+            ]
+        }
     ]
 }
