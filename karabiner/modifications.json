@@ -74,7 +74,7 @@
                         {
                             "type": "frontmost_application_unless",
                             "bundle_identifiers": [
-                                "emacs-plus"
+                                "^org\\.gnu\\.Emacs$"
                             ]
                         }
                     ]
@@ -106,7 +106,7 @@
                         {
                             "type": "frontmost_application_unless",
                             "bundle_identifiers": [
-                                "emacs-plus"
+                                "^org\\.gnu\\.Emacs$"
                             ]
                         }
                     ]
@@ -140,7 +140,7 @@
                         {
                             "type": "frontmost_application_unless",
                             "bundle_identifiers": [
-                                "emacs-plus"
+                                "^org\\.gnu\\.Emacs$"
                             ]
                         }
                     ]
@@ -174,7 +174,7 @@
                         {
                             "type": "frontmost_application_unless",
                             "bundle_identifiers": [
-                                "emacs-plus"
+                                "^org\\.gnu\\.Emacs$"
                             ]
                         }
                     ]
@@ -188,7 +188,7 @@
                     "type": "frontmost_application_if",
                     "description": "Emacs",
                     "bundle_identifiers": [
-                        "emacs-plus"
+                        "^org\\.gnu\\.Emacs$"
                     ]
                 }
             ],
