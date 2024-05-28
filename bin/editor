@@ -9,4 +9,21 @@ if [ "$?" != "1" ]; then
     $HOME/bin/emacs --daemon --debug-init
 fi
 
-$HOME/bin/emacsclient --create-frame --no-wait --alternate-editor="" --frame-parameters="((fullscreen) (width . 0.4) (height . 0.99) (top . 0) (left . 0))" "$@"
+# Now that we know we have an emacs daemon, determine if we have an
+# existing frame.  The goal is to not proliferate frames, but
+# instead edit the specified file(s) to an existing frame.
+$HOME/bin/emacsclient --no-wait -e "(if (> (length (frame-list)) 1) 't)" | grep -q t
+
+if [ "$?" = "1" ]; then
+    if [ "$#" = "0" ]; then # no args no passthrough
+        $HOME/bin/emacsclient --create-frame --no-wait --alternate-editor="" --frame-parameters="((fullscreen . maximized)))"
+    else # We have args passed, so we must pass them through
+        $HOME/bin/emacsclient --create-frame --no-wait --alternate-editor="" --frame-parameters="((fullscreen . maximized)))" "$@"
+    fi
+else # else a frame does exist, attach to that frame
+    if [ "$#" = "0" ]; then # no args no passthrough
+        $HOME/bin/emacsclient --no-wait --alternate-editor="" --frame-parameters="((fullscreen . maximized)))"
+    else # We have args passed, so we must pass them through
+        $HOME/bin/emacsclient --no-wait --alternate-editor="" --frame-parameters="((fullscreen . maximized)))" "$@"
+    fi
+fi
