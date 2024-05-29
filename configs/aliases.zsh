@@ -4,13 +4,10 @@
 # of choice:
 #
 
-# * EDITOR - uh? I forget.  I think it's less used for my cases.  (I
-#   use VISUAL and GIT_EDITOR more often.)
-# * VISUAL - this is for visual paging of things like man-pages or
-#   grep results
+# * EDITOR - uh? I forget.  I think it's less used for my cases.
 # * GIT_EDITOR - this is used for editing your commit messages
 export EDITOR='editor'
-export GIT_EDITOR='git_editor'
+export GIT_EDITOR='editor'
 
 # For those pesky Rails configs that assume a password for
 # development.  Someone added that without parameterization, so I've

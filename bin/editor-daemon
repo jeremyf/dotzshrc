@@ -2,4 +2,5 @@
 
 pkill -f Emacs
 pkill -f emacs
-$HOME/bin/emacs --daemon --debug-init
+
+editor --start-daemon
