@@ -286,9 +286,8 @@ if [ "${start_client}" = "true" ]; then
 
             if [ "${use_gui}" = "true" ]; then
                 # shellcheck disable=SC2086
-
-		# By default re-use the frame, pass -c
-                "$app" -n ${socket_opt} "$@"
+                # By default re-use the frame, pass -c
+                "$app" --no-wait ${socket_opt} "$@"
 
             else
                 # shellcheck disable=SC2086
