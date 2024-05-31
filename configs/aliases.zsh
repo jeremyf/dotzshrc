@@ -1,11 +1,3 @@
-# For bare-metal emacs
-#
-# There are three context's that I consider for using my text editor
-# of choice:
-#
-
-# * EDITOR - uh? I forget.  I think it's less used for my cases.
-# * GIT_EDITOR - this is used for editing your commit messages
 export EDITOR='editor'
 export GIT_EDITOR='editor'
 
@@ -33,7 +25,6 @@ alias postgres-start="brew services start postgresql"
 alias postgres-stop="brew services stop postgresql"
 
 # For pandoc on Apple Silicon chips
-alias pand="arch -x86_64 pandoc"
 alias ssh-tor="ssh takeonrules_takeonrules@ssh.phx.nearlyfreespeech.net"
 
 # SSH Tunnel:
