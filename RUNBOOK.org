@@ -1,6 +1,6 @@
 #+title: Runbook for My OS X Setup
 
-This is my hopefully complete Runbook for getting a new macOS computer running.
+This is my hopefully complete Runbook for getting a new MacOS computer running.
 
 - Install Iterm2 :: https://iterm2.com/; a terminal emulator and long-time companion.
   - From this repository I eventually need to load the Default profile, for all of the keybinding goodness.  See =./iterm/Default.json=.
@@ -11,13 +11,13 @@ This is my hopefully complete Runbook for getting a new macOS computer running.
 - Install Base16 Shell :: https://github.com/chriskempson/base16-shell
 - Install ImageOptim :: https://imageoptim.com/ ; remove image metadata
 
-- =brew install cmake= :: cross-platform make (may not be necessary with macOS only install)
+- =brew install cmake= :: cross-platform make (may not be necessary with MacOS only install)
 - =brew tap homebrew/cask= :: make sure to get access to casks
 - =brew install maccy= :: a multi-paste clipboard.
-- =brew install git= :: macOS git is always behind the times, this will help keep it updated.
+- =brew install git= :: MacOS git is always behind the times, this will help keep it updated.
 - =brew install git-extras= :: some extra commands for git
 - =brew install git-secrets= :: handle git secrets (e.g., keychain)
-- =brew install hub= :: terminal integration with github
+- =brew install hub= :: terminal integration with GitHub
 
 - =brew install openssl= :: You're going to want this for rbenv, though look at ./runbooks/ruby-openssl
 - =brew install postgresql= :: postgresql database
@@ -28,8 +28,8 @@ This is my hopefully complete Runbook for getting a new macOS computer running.
 - =brew install ag= :: A solid replacement for grep
 - =brew install ripgrep= :: Another solid replacement for grep that allows PERL Regexp (command is =rg=)
 - =brew install rga= :: A wrapper around ripgrep for PDFs, Office Files, etc.
-- =brew install terminal-notifier= :: Send macOS notifications from terminal
-- brew install aspell :: a command line spelling utility
+- =brew install terminal-notifier= :: Send MacOS notifications from terminal
+- brew install enchant :: a wonderful spell checker that powers the jinx.el package.
 - =brew install fd= :: =find= replacement
 - =brew install fzf= :: Fuzzy finder
 - =brew install bat= :: A cat clone with syntax highlighting
@@ -38,11 +38,11 @@ This is my hopefully complete Runbook for getting a new macOS computer running.
 - =brew install smudge/smudge/nightlight= :: command light control of the Night Shift settings (see https://github.com/smudge/nightlight)
 - =brew install difftastic= :: a more robust diff-ing tool
 - =brew install cloc= :: a Perl tool to determine LOC for a project
-- =brew install npm= :: Node pacakge manager
+- =brew install npm= :: Node package manager
 - =brew install tree= :: Tree
 - =brew install erdtree= :: a better tree (command is =et=)
 - brew install enchant :: https://abiword.github.io/enchant/ for spelling
-- =brew install rsync= :: The default MacOS package was 2.6; homebrew has v3.x
+- =brew install rsync= :: The default MacOS package was 2.6; =homebrew= has v3.x
 - brew install starship :: A Cross-Shell Prompt
 - =brew install plantuml= :: For this to work in Org Mode, I needed to run =sudo ln -sfn /opt/homebrew/opt/openjdk@21/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-21.jdk=; which pre-supposed having brew installed openjdk
 - brew install yaml-language-server :: To provide linting for YAML (and other features)  
@@ -170,7 +170,7 @@ The above is inspired from: https://alexwlchan.net/files/2021/ignore_folders_in_
 :ID:       3D9EB2B8-F8E2-4F30-8DB8-FE68AF5A3DC4
 :END:
 
-See [[https://github.com/Hammerspoon/hammerspoon][Hammerspoon/hammerspoon: Staggeringly powerful macOS desktop automation with Lua]].
+See [[https://github.com/Hammerspoon/hammerspoon][Hammerspoon/hammerspoon: Staggeringly powerful MacOS desktop automation with Lua]].
 
 For this to be most effective, I nee
 

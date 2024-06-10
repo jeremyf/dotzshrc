@@ -1,0 +1,17 @@
+The authors recommend using a general package manager:
+
+- =brew uninstall elixir= :: per documentation the authors recommend =asdf= package manager
+- =brew install wxwidgets= :: Erlang will want this
+- =brew install asdf= :: A general package manager
+- asdf plugin-add erlang https://github.com/asdf-vm/asdf-erlang.git
+- asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git
+
+Then look for release versions of elixir via =asdf list-all elixir=.  Look for a released version and it’s corresponding OTP (e.g. =1.16.3-otp-26=) then find the corresponding version of erlang via =asdf list-all erlang= (which has the point release of =26.x.x= as per the OTP of Erlang).
+
+We can manage the above on an application basis by creating a =.tool-versions= in the project root directory with the following:
+
+#+begin_example
+elixir 1.16.3-otp-26
+erlang 26.2.5
+#+end_example
+

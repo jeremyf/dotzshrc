@@ -28,3 +28,5 @@ if [ -f "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc" ]; then source "$
 
 # The next line enables shell command completion for gcloud.
 if [ -f "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc" ]; then source "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"; fi
+
+if [ -f "$(brew --prefix)/opt/asdf/libexec/asdf.sh" ]; then source "$(brew --prefix)/opt/asdf/libexec/asdf.sh"; fi
