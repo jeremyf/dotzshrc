@@ -60,8 +60,9 @@ if [ -d $HB_PATH/sbin ]; then
     echo "$PATH" | grep -q "$HB_PATH/sbin:" || export PATH="$HB_PATH/sbin:$PATH"
 fi
 
-export GOROOT=$HB_PATH/opt/go/libexec/
-export GOPATH=$HOME/code_of_the_go
+export GO111MODULE=on
+# export GOROOT=$HB_PATH/opt/go/libexec/
+export GOPATH=$HOME/go
 if [ -d $GOPATH ]; then
     echo "$PATH" | grep -q "$GOPATH" || export PATH="$PATH:$GOPATH/bin"
 fi

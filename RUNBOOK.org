@@ -47,6 +47,13 @@ This is my hopefully complete Runbook for getting a new MacOS computer running.
 - =brew install plantuml= :: For this to work in Org Mode, I needed to run =sudo ln -sfn /opt/homebrew/opt/openjdk@21/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-21.jdk=; which pre-supposed having brew installed openjdk
 - brew install yaml-language-server :: To provide linting for YAML (and other features)  
 
+** Go Lang
+
+- Install Delve :: https://github.com/go-delve/delve?tab=readme-ov-file
+- Install Air 
+- Install gopls :: either =brew install gopls= or =go install golang.org/x/tools/gopls@latest= ; for Language Server support
+- Install goimports :: =go install golang.org/x/tools/cmd/goimports@latest=
+  
 ** Fonts
 :PROPERTIES:
 :ID:       75DA9512-CC07-479D-8A0D-16023A2B79B1
