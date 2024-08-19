@@ -137,9 +137,9 @@ case "${os_name}" in
     Darwin)
 
         # On macOS, check for the presence of required programs
-        if [ ! -d /opt/homebrew/Cellar/emacs-plus@29/29.3/Emacs.app/Contents ]; then
+        if [ ! -d /opt/homebrew/Cellar/emacs-plus@29/29.4/Emacs.app/Contents ]; then
             echo "*** ec: ERROR ***"
-            echo "The required /opt/homebrew/Cellar/emacs-plus@29/29.3/Emacs.app/Contents is missing."
+            echo "The required /opt/homebrew/Cellar/emacs-plus@29/29.4/Emacs.app/Contents is missing."
             echo "Please install Emacs via emacs-plus homebrew "
             echo "*****************"
             exit 1
@@ -159,7 +159,7 @@ case "${os_name}" in
                 fi
             elif [ "${start_daemon}" = "true" ]; then
                 echo "ec: starting the Emacs daemon for default socket name..."
-                if ! exec /opt/homebrew/Cellar/emacs-plus@29/29.3/Emacs.app/Contents/MacOS/Emacs "${daemon_opt}"; then
+                if ! exec /opt/homebrew/Cellar/emacs-plus@29/29.4/Emacs.app/Contents/MacOS/Emacs "${daemon_opt}"; then
                     echo "*** ec: ERROR: failed starting Emacs daemon"
                     exit 1
                 fi
@@ -180,7 +180,7 @@ case "${os_name}" in
                 fi
             elif [ "${start_daemon}" = "true" ]; then
                 echo "ec : starting the Emacs daemon for socket=${daemon_name}..."
-                if ! /opt/homebrew/Cellar/emacs-plus@29/29.3/Emacs.app/Contents/MacOS/Emacs "${daemon_opt}"; then
+                if ! /opt/homebrew/Cellar/emacs-plus@29/29.4/Emacs.app/Contents/MacOS/Emacs "${daemon_opt}"; then
                     echo "*** ec: ERROR: failed starting Emacs daemon ${daemon_name}"
                     exit 1
                 fi
@@ -252,7 +252,7 @@ if [ "${start_client}" = "true" ]; then
             # [:todo 2024-05-24, by Pierre Rouleau: should we depend on the internal symlink instead of checking the os version?]
             case "$(arch)" in
                 arm64)
-                    app=/opt/homebrew/Cellar/emacs-plus@29/29.3/bin/emacsclient
+                    app=/opt/homebrew/Cellar/emacs-plus@29/29.4/bin/emacsclient
                 ;;
 
                 i386)
@@ -281,7 +281,7 @@ if [ "${start_client}" = "true" ]; then
             # Fail safety: use dispatcher if the selected executable does not exists
             # in case older Emacs.app DMG is installed on the computer.
             if [ ! -x "$app" ]; then
-                app=/opt/homebrew/Cellar/emacs-plus@29/29.3/bin/emacsclient
+                app=/opt/homebrew/Cellar/emacs-plus@29/29.4/bin/emacsclient
             fi
 
             if [ "${use_gui}" = "true" ]; then
