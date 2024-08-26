@@ -67,6 +67,11 @@ if [ -d $GOPATH ]; then
     echo "$PATH" | grep -q "$GOPATH" || export PATH="$PATH:$GOPATH/bin"
 fi
 
+if [ -d "$(brew --prefix asdf)/libexec/asdf.sh" ]; then
+    export "$(brew --prefix asdf)/libexec/asdf.sh"
+fi
+
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 export LYNX_CFG="$HOME/.lynx.cfg"
+

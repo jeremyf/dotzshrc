@@ -56,7 +56,7 @@ ulimit -n 65536
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
 plugins=(
-    ag
+    # ag
     bgnotify
     copybuffer
     git
@@ -65,7 +65,7 @@ plugins=(
     # github
     macos
     rake
-    ripgrep
+    # ripgrep
     python
     starship
     web-search
