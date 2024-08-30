@@ -56,16 +56,12 @@ ulimit -n 65536
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
 plugins=(
-    # ag
     bgnotify
     copybuffer
     git
     git-extras
     gitfast
-    # github
     macos
-    rake
-    # ripgrep
     python
     starship
     web-search
@@ -99,3 +95,7 @@ export BAT_THEME="ansi"
 
 # Spring in Rails just causes endless grief.  Disable it
 export DISABLE_SPRING=1
+
+# Given that I'm using private repositories, I need to account for that in
+# module retrieval.
+export GOPRIVATE=github.com/converge-cloud/*
