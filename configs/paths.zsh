@@ -1,4 +1,7 @@
 if [[ "$OSTYPE" == "darwin"* ]]; then
+    if [ -d $HOME/.cargo/bin ]; then
+	export PATH="$HOME/.cargo/bin:$PATH"
+    fi
     if [ -d $HB_PATH/opt/mysql@5.7/bin ]; then
         export PATH="$HB_PATH/opt/mysql@5.7/bin:$PATH"
         # Needed for building mysql gem
