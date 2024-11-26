@@ -82,7 +82,7 @@ The following is necessary for getting Emacs up and running
 
 - =brew tap d12frosted/emacs-plus=
 
-- =brew install emacs-plus@29 --with-ctags --with-poll --with-debug --with-dbus --with-modern-pen-lds56-icon --with-native-comp --with-mailutils --with-imagemagick=
+- =brew install emacs-plus@30 --with-ctags --with-poll --with-debug --with-dbus --with-modern-pen-lds56-icon --with-native-comp --with-mailutils --with-imagemagick=
   
 *Note:* Once you have Emacs running (see =install.rb= below), make sure to run =M-x all-the-icons-install-fonts=.
 
