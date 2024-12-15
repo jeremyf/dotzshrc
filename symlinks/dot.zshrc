@@ -1,3 +1,9 @@
+if [ -d "/Volumes/JOURNAL" ]; then
+    echo "ℹ RC Using Journal history"
+    HISTFILE="/Volumes/Journal/.zsh_history"
+    echo $HISTFILE
+fi
+
 # Fig pre block. Keep at the top of this file.
 [[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.pre.zsh"
 

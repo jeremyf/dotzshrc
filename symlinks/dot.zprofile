@@ -1,4 +1,10 @@
-# Fig pre block. Keep at the top of this file.
+if [ -d "/Volumes/JOURNAL" ]; then
+    echo "ℹ Profile Using Journal history"
+    HISTFILE="/Volumes/Journal/.zsh_history"
+    echo $HISTFILE
+fi
+
+# Fig pre block. Keep at the top of this file.(
 [[ -f "$HOME/.fig/shell/zprofile.pre.zsh" ]] && builtin source "$HOME/.fig/shell/zprofile.pre.zsh"
 arch_name="$(uname -m)"
 if [ "${arch_name}" = "x86_64" ]; then
