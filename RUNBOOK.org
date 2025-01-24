@@ -14,6 +14,7 @@ This is my hopefully complete Runbook for getting a new MacOS computer running.
 - =brew install image2icon= :: a tool for converting images to various Icon formats.
 - =brew install cmake= :: cross-platform make (may not be necessary with MacOS only install)
 - =brew tap homebrew/cask= :: make sure to get access to casks
+- =brew install util-linux= :: add linux commands to MacOS
 - =brew install maccy= :: a multi-paste clipboard.
 - =brew install git= :: MacOS git is always behind the times, this will help keep it updated.
 - =brew install git-extras= :: some extra commands for git
@@ -47,6 +48,13 @@ This is my hopefully complete Runbook for getting a new MacOS computer running.
 - brew install starship :: A Cross-Shell Prompt
 - =brew install plantuml= :: For this to work in Org Mode, I needed to run =sudo ln -sfn /opt/homebrew/opt/openjdk@21/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-21.jdk=; which pre-supposed having brew installed openjdk
 - brew install yaml-language-server :: To provide linting for YAML (and other features)  
+
+** Sync Thing
+
+- =brew install syncthing= :: get that up and running to send syncs everywhere.
+
+I then install the device syncthing clients.  I’m exploring how I’ll use it.
+But began some exploration.
 
 ** Go Lang
 

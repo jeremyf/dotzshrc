@@ -32,6 +32,9 @@ export UPDATE_ZSH_DAYS=13
 # Uncomment the following line to display red dots whilst waiting for completion.
 COMPLETION_WAITING_DOTS="true"
 
+export HISTSIZE=50000
+export SAVEHIST=50000
+
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
 # much, much faster.

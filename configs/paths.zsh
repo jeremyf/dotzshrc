@@ -1,4 +1,13 @@
 if [[ "$OSTYPE" == "darwin"* ]]; then
+    if [ -d $HB_PATH/opt/util-linux/bin ]; then
+	# For compilers to find util-linux you may need to set:
+	#   export LDFLAGS="-L/opt/homebrew/opt/util-linux/lib"
+	#   export CPPFLAGS="-I/opt/homebrew/opt/util-linux/include"
+
+	# For pkg-config to find util-linux you may need to set:
+	#   export PKG_CONFIG_PATH="/opt/homebrew/opt/util-linux/lib/pkgconfig"
+	export PATH="$HB_PATH/opt/util-linux/bin:$HB_PATH/opt/util-linux/sbin:$PATH"
+    fi
     if [ -d $HOME/.cargo/bin ]; then
 	export PATH="$HOME/.cargo/bin:$PATH"
     fi
