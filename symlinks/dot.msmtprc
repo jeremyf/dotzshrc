@@ -1,0 +1,19 @@
+# Set default values for all the accounts.
+defaults
+logfile ~/Maildir/msmtp.log
+tls_trust_file ~/Maildir/certificates/cert.pem
+
+# Account details for foo@bar.tld
+account proton
+auth on
+host 127.0.0.1
+port 1025
+protocol smtp
+from Jeremy Friesen
+user jeremy@jeremyfriesen.com
+passwordeval security find-generic-password -s proton-bridge -a jeremy@jeremyfriesen.com -w
+tls on
+tls_starttls on
+
+# Default
+account default : proton

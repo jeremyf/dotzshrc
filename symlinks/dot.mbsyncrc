@@ -1,0 +1,26 @@
+IMAPAccount proton
+Host 127.0.0.1
+Port 1143
+User jeremy@jeremyfriesen.com
+PassCmd "security find-generic-password -s proton-bridge -a jeremy@jeremyfriesen.com -w"
+TLSType IMAPS
+TLSVersions +1.3
+
+IMAPStore proton-remote
+Account proton
+
+MaildirStore proton-local
+Subfolders Verbatim
+Path ~/Maildir/
+Inbox ~/Maildir/inbox
+
+### Sync settings
+Channel proton
+Far :proton-remote:
+Near :proton-local:
+Patterns *
+CopyArrivalDate yes
+Expunge Both
+Create Near
+Sync All
+SyncState *
