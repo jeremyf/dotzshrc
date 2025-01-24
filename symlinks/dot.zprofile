@@ -1,6 +1,6 @@
 if [ -d "/Volumes/JOURNAL" ]; then
     echo "ℹ Profile Using Journal history"
-    HISTFILE="/Volumes/Journal/.zsh_history"
+    HISTFILE="/Volumes/JOURNAL/.zsh_history"
     echo $HISTFILE
 fi
 

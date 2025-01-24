@@ -3,8 +3,12 @@ Host 127.0.0.1
 Port 1143
 User jeremy@jeremyfriesen.com
 PassCmd "security find-generic-password -s proton-bridge -a jeremy@jeremyfriesen.com -w"
-TLSType IMAPS
-TLSVersions +1.3
+# https://shom.dev/posts/20220108_setting-up-protonmail-in-emacs/
+### Were I not using Proton and Bridge I'd want to use this.
+# TLSType IMAPS
+# TLSVersions +1.3
+### This was exported from ProtonBridge
+CertificateFile ~/Maildir/certificates/cert.pem
 
 IMAPStore proton-remote
 Account proton
