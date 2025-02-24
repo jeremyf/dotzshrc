@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+
+# From https://github.com/mickeynp/ezf/blob/master/ezf
+# Copyright (C) 2022  Mickey Petersen
+#
+# Author: Mickey Petersen <mickey at masteringemacs.org>
+# Keywords: tools, tools
+#
+# This program is free software; you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free Software
+# Foundation, either version 3 of the License, or (at your option) any later
+# version.
+#
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+# details.
+#
+# You should have received a copy of the GNU General Public License along with
+# this program.  If not, see <https://www.gnu.org/licenses/>.
+set -o nounset -o errexit -o pipefail
+
+field=0-
+# the elisp function to use for completing read
+candidate_fn=ezf-default
+while getopts c:f: OPT; do
+    case $OPT in
+        c)
+            candidate_fn=$OPTARG
+            ;;
+        f)
+            field=$OPTARG
+            ;;
+        *)
+            echo "usage: ${0##*/} [-f field] [-c candidate-fn]"
+            exit 2
+    esac
+done
+shift $(( OPTIND - 1 ))
+OPTIND=1
+
+ezftmp="$(mktemp)"
+trap 'rm -f -- "$ezftmp"' EXIT
+> "$ezftmp" cat -
+# xargs is there to strip the "" from the beginning and end of the
+# output from Emacs.  Ensure "field" is always passed as a string by
+# quoting it.
+selection=$(emacsclient -e "(progn (select-frame-set-input-focus (selected-frame)) (require 'ezf) (ezf \"$ezftmp\" \"$field\" #'$candidate_fn))" | xargs)
+if [[ "$selection" == "nil" ]]; then
+    exit 1
+else
+   echo "$selection"
+fi
