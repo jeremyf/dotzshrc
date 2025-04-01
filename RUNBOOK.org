@@ -11,6 +11,7 @@ This is my hopefully complete Runbook for getting a new MacOS computer running.
 - Install Base16 Shell :: https://github.com/chriskempson/base16-shell
 - Install ImageOptim :: https://imageoptim.com/ ; remove image metadata
 
+- =brew install image2icon= :: a tool for converting images to various Icon formats.
 - =brew install cmake= :: cross-platform make (may not be necessary with MacOS only install)
 - =brew tap homebrew/cask= :: make sure to get access to casks
 - =brew install maccy= :: a multi-paste clipboard.

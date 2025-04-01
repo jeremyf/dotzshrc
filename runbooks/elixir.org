@@ -6,7 +6,7 @@ The authors recommend using a general package manager:
 - =asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git= :: asdf needs to know about the plugin we want
 - =asdf plugin-add erlang https://github.com/asdf-vm/asdf-erlang.git= :: as above
 
-Then look for release versions of elixir via =asdf list-all elixir=.  Look for a released version and it’s corresponding OTP (e.g. =1.16.3-otp-26=) then find the corresponding version of erlang via =asdf list-all erlang= (which has the point release of =26.x.x= as per the OTP of Erlang).
+Then look for release versions of elixir via =asdf list all elixir=.  Look for a released version and it’s corresponding OTP (e.g. =1.16.3-otp-26=) then find the corresponding version of erlang via =asdf list all erlang= (which has the point release of =26.x.x= as per the OTP of Erlang).
 
 We can manage the above on an application basis by creating a =.tool-versions= in the project root directory with the following:
 
