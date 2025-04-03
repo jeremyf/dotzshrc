@@ -92,33 +92,33 @@ denote_domains = {
   "references" => "shared",
 }
 
-denote_domains.each do |domain, type|
-  target_name = File.join(denote_dir, domain)
-  source_name = case type
-                when "local"
-                  File.join(home_dirname, "git/pkm-local/#{domain}")
-                when "shared"
-                  File.join(home_dirname, "git/pkm-shared/#{domain}")
-                when "private"
-                  File.join(home_dirname, "Documents/denote-private")
-                end
+# denote_domains.each do |domain, type|
+#   target_name = File.join(denote_dir, domain)
+#   source_name = case type
+#                 when "local"
+#                   File.join(home_dirname, "git/pkm-local/#{domain}")
+#                 when "shared"
+#                   File.join(home_dirname, "git/pkm-shared/#{domain}")
+#                 when "private"
+#                   File.join(home_dirname, "Documents/denote-private")
+#                 end
 
 
 
-  if File.exist?(source_name)
-    if File.exist?(target_name)
-      $stdout.puts "Skipping #{source_name}; #{target_name} already exists"
-    else
-      $stdout.puts "\t#{target_name} ->\n\t\t#{source_name}"
-      if domain == "epigraphs"
-        require 'debug'; binding.break
-      end
-      FileUtils.ln_sf(source_name, target_name)
-    end
-  else
-    $stdout.puts "Skipping #{source_name}; it does not exist"
-  end
-end
+#   if File.exist?(source_name)
+#     if File.exist?(target_name)
+#       $stdout.puts "Skipping #{source_name}; #{target_name} already exists"
+#     else
+#       $stdout.puts "\t#{target_name} ->\n\t\t#{source_name}"
+#       if domain == "epigraphs"
+#         require 'debug'; binding.break
+#       end
+#       FileUtils.ln_sf(source_name, target_name)
+#     end
+#   else
+#     $stdout.puts "Skipping #{source_name}; it does not exist"
+#   end
+# end
 
 platform = `uname`.strip.downcase
 

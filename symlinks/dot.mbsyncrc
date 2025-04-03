@@ -7,16 +7,16 @@ PassCmd "security find-generic-password -s proton-bridge -a jeremy@jeremyfriesen
 ### Were I not using Proton and Bridge I'd want to use this.
 # TLSType IMAPS
 # TLSVersions +1.3
-### This was exported from ProtonBridge
+### This was exported from ProtonBridge 
 CertificateFile ~/Maildir/certificates/cert.pem
 
 IMAPStore proton-remote
 Account proton
 
 MaildirStore proton-local
-Subfolders Verbatim
 Path ~/Maildir/
 Inbox ~/Maildir/inbox
+Subfolders Verbatim
 
 ### Sync settings
 Channel proton
@@ -25,6 +25,7 @@ Near :proton-local:
 Patterns *
 CopyArrivalDate yes
 Expunge Both
-Create Near
-Sync All
+Remove Both
+Create Both
 SyncState *
+Sync PushFlags PushGone Pull
