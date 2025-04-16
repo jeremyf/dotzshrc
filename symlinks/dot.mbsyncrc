@@ -22,9 +22,11 @@ Inbox ~/Maildir/inbox
 Channel proton
 Far :proton-remote:
 Near :proton-local:
-Patterns !"All Mail"
+# See https://takeonrules.com/2025/04/15/fixing-a-mu4e-and-proton-bridge-foible/
+Patterns * !"All Mail"
 CopyArrivalDate yes
 Expunge Both
-Create Near
+Create Both
+Remove Both
 Sync All
 SyncState *
