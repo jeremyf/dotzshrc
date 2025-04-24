@@ -24,7 +24,7 @@ This is my hopefully complete Runbook for getting a new MacOS computer running.
 - =brew install postgresql= :: postgresql database
 - =brew install rbenv= :: Ruby version manager (we’ll install Ruby’s later)
 - =brew install redis= :: Going to need this for asyn rails work
-
+- =brew install --cask nikitabobko/tap/aerospace= :: Install a tiling window manager.
 - =brew install dbus= :: Message bus system, providing inter-application communication
 - =brew install ag= :: A solid replacement for grep
 - =brew install ripgrep= :: Another solid replacement for grep that allows PERL Regexp (command is =rg=)
@@ -46,7 +46,7 @@ This is my hopefully complete Runbook for getting a new MacOS computer running.
 - =brew install rsync= :: The default MacOS package was 2.6; =homebrew= has v3.x
 - brew install starship :: A Cross-Shell Prompt
 - =brew install plantuml= :: For this to work in Org Mode, I needed to run =sudo ln -sfn /opt/homebrew/opt/openjdk@21/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-21.jdk=; which pre-supposed having brew installed openjdk
-- brew install yaml-language-server :: To provide linting for YAML (and other features)  
+- brew install yaml-language-server :: To provide linting for YAML (and other features)
 
 ** Go Lang
 
