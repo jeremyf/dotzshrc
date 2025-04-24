@@ -12,7 +12,7 @@ after-login-command = []
 after-startup-command = []
 
 # Start AeroSpace at login
-start-at-login = false
+start-at-login = true
 
 # Normalizations. See: https://nikitabobko.github.io/AeroSpace/guide#normalization
 enable-normalization-flatten-containers = true
@@ -42,6 +42,14 @@ on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 # Useful if you don't use this macOS feature, but accidentally hit cmd-h or cmd-alt-h key
 # Also see: https://nikitabobko.github.io/AeroSpace/goodies#disable-hide-app
 automatically-unhide-macos-hidden-apps = false
+
+[[on-window-detected]]
+    if.app-id = 'com.microsoft.Outlook'
+    run = ['move-node-to-workspace 4']
+
+[[on-window-detected]]
+    if.app-id = 'com.tinyspeck.slackmacgap'
+    run = ['move-node-to-workspace 3']
 
 # Possible values: (qwerty|dvorak|colemak)
 # See https://nikitabobko.github.io/AeroSpace/guide#key-mapping
@@ -87,20 +95,6 @@ automatically-unhide-macos-hidden-apps = false
 
     # All possible commands: https://nikitabobko.github.io/AeroSpace/commands
 
-    # See: https://nikitabobko.github.io/AeroSpace/commands#exec-and-forget
-    # You can uncomment the following lines to open up terminal with alt + enter shortcut
-    # (like in i3)
-    # alt-enter = '''exec-and-forget osascript -e '
-    # tell application "Terminal"
-    #     do script
-    #     activate
-    # end tell'
-    # '''
-
-    # See: https://nikitabobko.github.io/AeroSpace/commands#layout
-    cmd-alt-ctrl-slash = 'layout tiles horizontal vertical'
-    cmd-alt-ctrl-comma = 'layout accordion horizontal vertical'
-
     # See: https://nikitabobko.github.io/AeroSpace/commands#focus
     cmd-alt-left = 'focus left'
     cmd-alt-down = 'focus down'
@@ -117,6 +111,14 @@ automatically-unhide-macos-hidden-apps = false
     cmd-alt-ctrl-leftSquareBracket = 'resize smart -50'
     cmd-alt-ctrl-rightSquareBracket = 'resize smart +50'
     cmd-alt-ctrl-equal = 'fullscreen'
+
+    # With the use of the pipe operator (e.g., `|`), I need to run an
+    # `exec-and-forget` to compose two functions.
+    cmd-alt-period = 'exec-and-forget aerospace list-workspaces --empty no --monitor all | aerospace workspace --wrap-around next'
+    cmd-alt-comma = 'exec-and-forget aerospace list-workspaces --empty no --monitor all | aerospace workspace --wrap-around prev'
+
+    cmd-alt-ctrl-period = 'move-node-to-workspace --wrap-around --focus-follows-window next'
+    cmd-alt-ctrl-comma = 'move-node-to-workspace --wrap-around --focus-follows-window prev'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
     cmd-alt-1 = 'workspace 1'
@@ -140,9 +142,6 @@ automatically-unhide-macos-hidden-apps = false
     cmd-alt-ctrl-8 = 'move-node-to-workspace 8 --focus-follows-window'
     cmd-alt-ctrl-9 = 'move-node-to-workspace 9 --focus-follows-window'
 
-    # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
-    cmd-alt-ctrl-tab = 'workspace-back-and-forth'
-
 # See: https://nikitabobko.github.io/AeroSpace/commands#mode
     cmd-alt-ctrl-semicolon = 'mode service'
 
@@ -150,18 +149,13 @@ automatically-unhide-macos-hidden-apps = false
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
 [mode.service.binding]
     esc = ['reload-config', 'mode main']
+
     r = ['flatten-workspace-tree', 'mode main'] # reset layout
     f = ['layout floating tiling', 'mode main'] # Toggle between floating and tiling layout
     backspace = ['close-all-windows-but-current', 'mode main']
 
     # sticky is not yet supported https://github.com/nikitabobko/AeroSpace/issues/2
     #s = ['layout sticky tiling', 'mode main']
-
-
-    alt-shift-h = ['join-with left', 'mode main']
-    alt-shift-j = ['join-with down', 'mode main']
-    alt-shift-k = ['join-with up', 'mode main']
-    alt-shift-l = ['join-with right', 'mode main']
 
     down = 'volume down'
     up = 'volume up'
