@@ -48,6 +48,13 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     if [ -d $HB_PATH/opt/openjdk/bin ]; then
 	export PATH="$(brew --prefix java)/bin:$PATH"
     fi
+    # I saw this behavior in OS X, where $HB_PATH/sbin was not in the path
+    if [ -d $HB_PATH/sbin ]; then
+	echo "$PATH" | grep -q "$HB_PATH/sbin:" || export PATH="$HB_PATH/sbin:$PATH"
+    fi
+    if [ -d "$(brew --prefix asdf)/libexec/asdf.sh" ]; then
+	export "$(brew --prefix asdf)/libexec/asdf.sh"
+    fi
 fi
 
 if [ -d $HOME/.emacs.d/bin ]; then
@@ -58,11 +65,6 @@ if [ -d $HOME/bin ]; then
     export PATH="$HOME/bin:$PATH"
 fi
 
-# I saw this behavior in OS X, where $HB_PATH/sbin was not in the path
-if [ -d $HB_PATH/sbin ]; then
-    echo "$PATH" | grep -q "$HB_PATH/sbin:" || export PATH="$HB_PATH/sbin:$PATH"
-fi
-
 export GO111MODULE=on
 # export GOROOT=$HB_PATH/opt/go/libexec/
 export GOPATH=$HOME/go
@@ -70,11 +72,10 @@ if [ -d $GOPATH ]; then
     echo "$PATH" | grep -q "$GOPATH" || export PATH="$PATH:$GOPATH/bin"
 fi
 
-if [ -d "$(brew --prefix asdf)/libexec/asdf.sh" ]; then
-    export "$(brew --prefix asdf)/libexec/asdf.sh"
-fi
-
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 export LYNX_CFG="$HOME/.lynx.cfg"
 
+if [ -d $HOME/.local/emacs/bin ]; then
+    export PATH="$HOME/.local/emacs/bin:$PATH"
+fi
