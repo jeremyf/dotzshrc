@@ -20,22 +20,6 @@ Dir.glob(symlink_sources).each do |source_filename|
   FileUtils.ln_sf(source_filename, target_name)
 end
 
-## Zed's kind of nice but not enough
-
-# zed_sources = File.expand_path("dot.config/zed/*.*", __dir__)
-
-# Dir.glob(zed_sources).each do |source_filename|
-#   basename = File.basename(source_filename)
-#   next if basename == '.'
-#   next if basename == '..'
-
-#   FileUtils.mkdir_p(File.join(home_dirname, ".config/zed/"))
-#   target_basename = basename.to_s.sub("dot.config", ".config")
-#   target_name = File.join(home_dirname, ".config/zed/", target_basename)
-#   $stdout.puts "\t#{target_name} ->\n\t\t#{source_filename}"
-#   FileUtils.ln_sf(source_filename, target_name)
-# end
-
 $stdout.puts 'Finished installing zshrc aliases…'
 
 $stdout.puts 'Installing bin aliases…'
@@ -53,9 +37,11 @@ $stdout.puts 'Finished installing bin aliases…'
   "emacs" => "/opt/homebrew/opt/emacs-plus@30/bin/emacs",
   "emacsclient" => "/opt/homebrew/opt/emacs-plus@30/bin/emacsclient"
 }.each do |basename, source_filename|
-  target_name = File.join(home_dirname, 'bin', basename)
-  $stdout.puts "\t#{target_name} ->\n\t\t#{source_filename}"
-  FileUtils.ln_sf(source_filename, target_name)
+  if File.exist?(source_filename)
+    target_name = File.join(home_dirname, 'bin', basename)
+    $stdout.puts "\t#{target_name} ->\n\t\t#{source_filename}"
+    FileUtils.ln_sf(source_filename, target_name)
+  end
 end
 
 $stdout.puts 'Installing emacs.d symlinks…'
@@ -78,47 +64,6 @@ FileUtils.mkdir_p(File.join(home_dirname, '.emacs.d'))
   end
 end
 $stdout.puts 'Finished installing .emacs.d aliases…'
-
-denote_dir = File.join(home_dirname, "git/org/denote")
-FileUtils.mkdir_p(denote_dir)
-denote_domains = {
-  "blog-posts" => "local",
-  "epigraphs" => "shared",
-  "glossary" => "shared",
-  "indices" => "local",
-  "melange" => "local",
-  "people" => "local",
-  "private" => "private",
-  "references" => "shared",
-}
-
-denote_domains.each do |domain, type|
-  target_name = File.join(denote_dir, domain)
-  source_name = case type
-                when "local"
-                  File.join(home_dirname, "git/pkm-local/#{domain}")
-                when "shared"
-                  File.join(home_dirname, "git/pkm-shared/#{domain}")
-                when "private"
-                  File.join(home_dirname, "Documents/denote-private")
-                end
-
-
-
-  if File.exist?(source_name)
-    if File.exist?(target_name)
-      $stdout.puts "Skipping #{source_name}; #{target_name} already exists"
-    else
-      $stdout.puts "\t#{target_name} ->\n\t\t#{source_name}"
-      if domain == "epigraphs"
-        require 'debug'; binding.break
-      end
-      FileUtils.ln_sf(source_name, target_name)
-    end
-  else
-    $stdout.puts "Skipping #{source_name}; it does not exist"
-  end
-end
 
 platform = `uname`.strip.downcase
 
