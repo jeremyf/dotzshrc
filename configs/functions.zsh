@@ -63,33 +63,3 @@ if [ -d "$HOME/git/forgit" ]; then
     source "$HOME/git/forgit/forgit.plugin.zsh"
     export FORGIT_NO_ALIASES=1
 fi
-
-# This function sets the tab color for iTerm based on the "term-color-get"
-# results.
-function auto_iterm_tag_color_cwd () {
-    preline="\r\033[A"
-    # Assumes format of `"#aabbcc"'
-    hex=`term-color-get`
-
-    first="${hex:0:1}"
-
-    if [ "#" = "$first" ]; then
-	hex="${hex:1:6}"
-    fi
-
-    hex_r="${hex:0:2}"
-    hex_g="${hex:2:2}"
-    hex_b="${hex:4:2}"
-
-    rgb_r=`echo $((0x${hex_r}))`
-    rgb_g=`echo $((0x${hex_g}))`
-    rgb_b=`echo $((0x${hex_b}))`
-
-    echo -e "\033]6;1;bg;red;brightness;$rgb_r\a"$preline
-    echo -e "\033]6;1;bg;green;brightness;$rgb_g\a"$preline
-    echo -e "\033]6;1;bg;blue;brightness;$rgb_b\a"$preline
-}
-
-auto_iterm_tag_color_cwd
-autoload -U add-zsh-hook
-add-zsh-hook chpwd auto_iterm_tag_color_cwd
