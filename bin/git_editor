@@ -6,11 +6,11 @@
 ps ax | grep --quiet  emacs | grep --quiet daemon
 if [ "$?" != "1" ]; then
   # Launch an emacs daemon
-  $HB_PATH/bin/emacs --daemon --debug-init
+  emacs --daemon --debug-init
 fi
 
 if [ "$#" = "0" ]; then
-    $HOME/bin/emacsclient --create-frame --alternate-editor="" --frame-parameters="((fullscreen . maximized)))"
+    emacsclient --create-frame --alternate-editor="" --frame-parameters="((fullscreen . maximized)))"
 else
-    $HOME/bin/emacsclient --create-frame --alternate-editor="" --frame-parameters="((fullscreen . maximized)))" "$@"
+    emacsclient --create-frame --alternate-editor="" --frame-parameters="((fullscreen . maximized)))" "$@"
 fi
