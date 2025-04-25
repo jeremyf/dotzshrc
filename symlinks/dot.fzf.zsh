@@ -10,7 +10,9 @@ fi
 
 # Key bindings
 # ------------
-source "/opt/homebrew/opt/fzf/shell/key-bindings.zsh"
+if [ -f "/opt/homebrew/opt/fzf/shell/key-bindings.zsh" ]; then
+    source "/opt/homebrew/opt/fzf/shell/key-bindings.zsh"
+fi
 
 # See https://github.com/junegunn/fzf#environment-variables
 export FZF_DEFAULT_OPTS="--layout=reverse-list --marker=+ --bind 'ctrl-k:kill-line'"
