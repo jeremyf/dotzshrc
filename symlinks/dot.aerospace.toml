@@ -95,6 +95,8 @@ automatically-unhide-macos-hidden-apps = false
 
     # All possible commands: https://nikitabobko.github.io/AeroSpace/commands
 
+    cmd-alt-slash = ['layout tiles horizontal vertical', 'mode main']
+
     # See: https://nikitabobko.github.io/AeroSpace/commands#focus
     cmd-alt-left = 'focus left'
     cmd-alt-down = 'focus down'
