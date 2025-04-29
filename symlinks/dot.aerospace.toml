@@ -113,6 +113,7 @@ automatically-unhide-macos-hidden-apps = false
     cmd-alt-ctrl-leftSquareBracket = 'resize smart -50'
     cmd-alt-ctrl-rightSquareBracket = 'resize smart +50'
     cmd-alt-ctrl-equal = 'fullscreen'
+    cmd-alt-ctrl-minus = 'macos-native-minimize'
 
     # With the use of the pipe operator (e.g., `|`), I need to run an
     # `exec-and-forget` to compose two functions.
@@ -132,6 +133,11 @@ automatically-unhide-macos-hidden-apps = false
     cmd-alt-7 = 'workspace 7'
     cmd-alt-8 = 'workspace 8'
     cmd-alt-9 = 'workspace 9'
+
+    # Take me to the workspace that is running Emacs
+    cmd-alt-0 = 'exec-and-forget aerospace list-windows --monitor all --format "%{workspace}" --app-bundle-id "org.gnu.Emacs" | xargs aerospace workspace --fail-if-noop'
+    # Throw the current window into the same space as Emacs
+    cmd-alt-ctrl-0 = 'exec-and-forget aerospace list-windows --monitor all --format "%{workspace}" --app-bundle-id "org.gnu.Emacs" | xargs aerospace move-node-to-workspace --fail-if-noop --focus-follows-window'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
     cmd-alt-ctrl-1 = 'move-node-to-workspace 1 --focus-follows-window'
@@ -153,7 +159,8 @@ automatically-unhide-macos-hidden-apps = false
     esc = ['reload-config', 'mode main']
 
     r = ['flatten-workspace-tree', 'mode main'] # reset layout
-    f = ['layout floating tiling', 'mode main'] # Toggle between floating and tiling layout
+    h = ['layout h_tiles', 'mode main']
+    v = ['layout v_tiles', 'mode main']
     backspace = ['close-all-windows-but-current', 'mode main']
 
     # sticky is not yet supported https://github.com/nikitabobko/AeroSpace/issues/2
