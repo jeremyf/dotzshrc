@@ -663,7 +663,7 @@ I’m accustomed to a “system tray” in MacOS that includes actionable icons:
 
 I’m unclear how those icons might behave, or how I might assemble that using I3.
 
-* TODO Outstanding Tasks [0%]
+* TODO Outstanding Tasks [25%]
 
 ** TODO Publish Blog Post
 
@@ -672,6 +672,18 @@ This requires setting up my build engine.
 ** TODO Bring Denote Files Over
 
 ** TODO Get Syncthing Running
+
+** DONE Emacs Everywhere
+CLOSED: [2025-04-29 Tue 08:24]
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2025-04-29 Tue 08:24]
+:END:
+
+I use the [[https://github.com/tecosaur/emacs-everywhere][Emacs Everywhere package]].  On MacOS I rely on [[https://www.hammerspoon.org/][Hammerspoon]] tool for
+launching into Emacs.
+
+As I’m running Pop OS, I followed the [[https://help.ubuntu.com/stable/ubuntu-help/keyboard-shortcuts-set.html.en][Ubuntu instructions for binding a custom
+shortcut]].
 
 * Footnotes
 [fn:6] I had a copy of the Emacs git repository on another machine.  So I used the
