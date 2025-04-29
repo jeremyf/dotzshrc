@@ -663,15 +663,16 @@ I’m accustomed to a “system tray” in MacOS that includes actionable icons:
 
 I’m unclear how those icons might behave, or how I might assemble that using I3.
 
-* TODO Outstanding Tasks [25%]
+* TODO Outstanding Tasks [16%]
 
-** TODO Publish Blog Post
-
-This requires setting up my build engine.
+In this section I outline and detail the steps I consider for a complete
+migration.
 
 ** TODO Bring Denote Files Over
 
-** TODO Get Syncthing Running
+** TODO Read and Compose Emails in Emacs
+
+** TODO Elfeed Running with past DB
 
 ** DONE Emacs Everywhere
 CLOSED: [2025-04-29 Tue 08:24]
@@ -684,6 +685,12 @@ launching into Emacs.
 
 As I’m running Pop OS, I followed the [[https://help.ubuntu.com/stable/ubuntu-help/keyboard-shortcuts-set.html.en][Ubuntu instructions for binding a custom
 shortcut]].
+
+** TODO Get Syncthing Running
+
+** TODO Publish Blog Post
+
+This requires setting up my build engine.
 
 * Footnotes
 [fn:6] I had a copy of the Emacs git repository on another machine.  So I used the
