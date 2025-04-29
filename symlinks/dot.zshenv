@@ -1,7 +1,32 @@
+if [ -f "$HOME/.Xmodmap" ]; then
+    # I'd like to launch this at login to Linux, but I have yet to find the
+    # magic incantation.
+    xmodmap $HOME/.Xmodmap 2> /dev/null
+fi
+
 if [ -d "/Volumes/JOURNAL" ]; then
     echo "ℹ Profile Using Journal history"
     HISTFILE="/Volumes/JOURNAL/.zsh_history"
     echo $HISTFILE
+fi
+
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    SSH_ENV="$HOME/.ssh/agent-environment"
+
+    function start_agent {
+        /usr/bin/ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"
+        chmod 600 "${SSH_ENV}"
+        . "${SSH_ENV}" > /dev/null
+    }
+
+    if [ -f "${SSH_ENV}" ]; then
+        . "${SSH_ENV}" > /dev/null
+        ps -ef | grep ${SSH_AGENT_PID} | grep ssh-agent$ > /dev/null || {
+            start_agent;
+        }
+    else
+        start_agent;
+    fi
 fi
 
 # Fig pre block. Keep at the top of this file.(
