@@ -118,14 +118,15 @@ the above configuration these bind accordingly:
 - =menu= :: =M-x= (kind of nice having a dedicated =M-x= key)
 - =ctrl= :: =C-=
 
-In my initial foray, I bound =Insert/Screen Lock= key to =H-= (hyper).  A major change that
-I'm evaluating is whether the keys to the immediate right and left of =SPC= should
-be =M-= or =s-=.  There is also the left-most =ctrl= that I might remap.
+In my initial foray, I bound =Insert/Screen Lock= key to =H-= (hyper).  A major
+change that I'm evaluating is whether the keys to the immediate right and left
+of =SPC= should be =M-= or =s-=.  There is also the left-most =ctrl= that I might remap.
 
 However, this binding conflicted with later developments, so I preserved =Insert=
 as its original behavior.
 
-Regardless of my considerations, I use the following command to apply the above changes:
+Regardless of my considerations, I use the following command to apply the above
+changes:
 
 #+begin_src bash :results none
   xmodmap ~/.Xmodmap
@@ -261,7 +262,9 @@ I wanted [[*Emacs Commands][Emacs Commands]] setup to help quickly toggle each o
 
 *** Trackpad
 
-With my new laptop and how I hold my hands, I’ve noticed that sometimes I activate my trackpad.  Which is annoying, especially when I’m in a “writing mindset.”
+With my new laptop and how I hold my hands, I’ve noticed that sometimes I
+activate my trackpad.  Which is annoying, especially when I’m in a “writing
+mindset.”
 
 *** Night Light
 
@@ -276,7 +279,8 @@ Related but different from the [[*Night Light][Night Light]] concept is the Ligh
 theming.  In Emacs I had a script to toggle the theme of both the OS and Emacs
 (e.g. my =jf/dark= function).  I wanted something similar in Linux.
 
-Yet, as I explored the changes, I realized that there would be a divergence in implementation based on MacOS or Linux.
+Yet, as I explored the changes, I realized that there would be a divergence in
+implementation based on MacOS or Linux.
 
 *** Radios
 
@@ -298,7 +302,8 @@ With Firefox shifting from an advertising funded Browser company to an
 advertising AI company that makes a browser, I’m wanting to separate from day to
 day usage.
 
-Finding useful the [[https://github.com/mullvad/mullvad-browser/issues/1][Github Issue “What differentiates Mullvad Browser from, for instance, arkenfox's user.js or Librewolf?”]], I have chosen to install both.
+Finding useful the [[https://github.com/mullvad/mullvad-browser/issues/1][Github Issue “What differentiates Mullvad Browser from, for
+instance, arkenfox's user.js or Librewolf?”]], I have chosen to install both.
 
 For LibreWolf:
 
@@ -326,7 +331,8 @@ For Mullvad Browser:
 * Terminal
 
 In MacOS I’ve long used iTerm2, which is a terminal available only in MacOS.  I
-have started using the Vterm package in Emacs, but still want a non-Emacs based option.
+have started using the Vterm package in Emacs, but still want a non-Emacs based
+option.
 
 The built in terminal is adequate, but I’m thinking about using a cross-platform
 terminal.  The top contenders are Alacritty and Kitty.  Normally I’d favor
@@ -352,13 +358,15 @@ Installed [[https://ohmyz.sh/][Oh My Zsh]] then set =zsh= as default shell via t
 On MacOS I was using =~/.zprofile= for my shell configuration.  I needed to instead
 use =~/.zshenv=.
 
-I leverage =fzf= for my reverse history search in my shell (e.g. =ctrl= + =r=), so I installed it via the following:
+I leverage =fzf= for my reverse history search in my shell (e.g. =ctrl= + =r=), so I
+installed it via the following:
 
 #+begin_src shell :dir "/sudo::/home/jfriesen/" :cache no :export source :results raw silent
   sudo apt install fzf --assume-yes
 #+end_src
 
-Curious how to get completions and key-bindings working, I ran =apt info fzf= which pointed me to to the following:
+Curious how to get completions and key-bindings working, I ran =apt info fzf=
+which pointed me to to the following:
 
 #+begin_quote
 Refer /usr/share/doc/fzf/README.Debian for quick instructions on how to add
@@ -380,7 +388,8 @@ Then following instructions, I created the symlink as follows:
   ln -sf $(which fdfind) ~/.local/bin/fd
 #+end_src
 
-In MacOS I regularly use =pbcopy= and =pbpaste=.  Both =xclip= and =xsel= apparently provide similar behavior.  I opted to install both via the following:
+In MacOS I regularly use =pbcopy= and =pbpaste=.  Both =xclip= and =xsel= apparently
+provide similar behavior.  I opted to install both via the following:
 
 #+begin_src shell :dir "/sudo::/home/jfriesen/" :cache no :export source :results raw silent
   sudo apt install xclip xsel --assume-yes
@@ -759,7 +768,7 @@ I’m accustomed to a “system tray” in MacOS that includes actionable icons:
 
 I’m unclear how those icons might behave, or how I might assemble that using I3.
 
-* TODO Outstanding Tasks [55%]
+* TODO Outstanding Tasks [77%]
 
 In this section I outline and detail the steps I consider for a complete
 migration.
@@ -815,7 +824,9 @@ The refining I'm thinking of is along the lines of MacOS’s Little Snitch (or
 some alternative).  I didn’t use Little Snitch, favoring Lulu, but figure when
 searching for alternatives, that Little Snitch is more known.
 
-With a very baseline firewall in place, I set about finding a replacement.  The first candidate is [[https://github.com/evilsocket/opensnitch][GitHub - evilsocket/opensnitch: OpenSnitch is a GNU/Linux interactive application firewall inspired by Little Snitch]].
+With a very baseline firewall in place, I set about finding a replacement.  The
+first candidate is [[https://github.com/evilsocket/opensnitch][GitHub - evilsocket/opensnitch: OpenSnitch is a GNU/Linux
+interactive application firewall inspired by Little Snitch]].
 
 After downloading the files, I ran the following to install the Open Snitch
 daemon:
@@ -831,7 +842,8 @@ And the Open Snitch GUI:
 #+end_src
 
 Along the way I learned about specifying =/sudo::/path/to/dir/= as the =:dir= option
-for the shell.  This means I can run the command via =sudo= and babel will prompt for my password.
+for the shell.  This means I can run the command via =sudo= and babel will prompt
+for my password.
 
 Per the documentation, I needed to patch up my pip install with the following:
 
@@ -928,15 +940,18 @@ As I’m running Pop OS, I followed the [[https://help.ubuntu.com/stable/ubuntu-
 shortcut]].
 
 I also needed to ensure that =pandoc= is installed.  With that done, I ran =M-x
-emacs-everywhere-check-health=.  However, I observed a problem that was only evident when I read the source code.  Namely things didn’t work.
+emacs-everywhere-check-health=.  However, I observed a problem that was only
+evident when I read the source code.  Namely things didn’t work.
 
 Why?  Because in an earlier incarnation of keybindings, I had bound the =Insert=
-key to =Hyper_R=; and =emacs-everywhere= used that key code to perform the “paste” of the initial text into Emacs.
+key to =Hyper_R=; and =emacs-everywhere= used that key code to perform the “paste”
+of the initial text into Emacs.
 
 So I needed to unbind that key.
 
 Further, the [[https://help.ubuntu.com/stable/ubuntu-help/keyboard-shortcuts-set.html.en][Ubuntu instructions for binding a custom shortcut]] did not work.  I
-then tried using =xbindkeys=.  I followed [[l][Make your own keybindings in linux using xbindkeys]].
+then tried using =xbindkeys=.  I followed [[l][Make your own keybindings in linux using
+xbindkeys]].
 
 I installed xbindkeys via:
 
@@ -944,7 +959,8 @@ I installed xbindkeys via:
   sudo apt-get install --assume-yes xbindkeys
 #+end_src
 
-My hasty initial entry, which was what was recorded in the Pop OS shortcut, was as follows:
+My hasty initial entry, which was what was recorded in the Pop OS shortcut, was
+as follows:
 
 #+begin_example
   "emacsclient --eval '(emacs-everywhere)'"
@@ -957,7 +973,11 @@ determine how it interpreted =Alt= + =Super= + =e=.  Which resulted in
 
 I updated my =.xbindkeysrc= to reflect the above.  And things started working.
 
-** TODO Get SyncThing Running
+** DONE Get SyncThing Running
+CLOSED: [2025-04-30 Wed 22:00]
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2025-04-30 Wed 22:00]
+:END:
 
 There are three parts to SyncThing:
 
@@ -1006,7 +1026,8 @@ CLOSED: [2025-04-30 Wed 19:09]
 - State "DONE"       from "TODO"       [2025-04-30 Wed 19:09]
 :END:
 
-Reading [[https://docs.syncthing.net/users/autostart.html#linux][Starting Syncthing Automatically]], I can add the =syncthring-start.desktop= to my auto-start directions:
+Reading [[https://docs.syncthing.net/users/autostart.html#linux][Starting Syncthing Automatically]], I can add the =syncthring-start.desktop=
+to my auto-start directions:
 
 #+begin_src shell :dir "/home/jfriesen" :cache no :export source :results raw silent
   cp /usr/share/applications/syncthing-start.desktop ~/.config/autostart/
@@ -1024,11 +1045,15 @@ This is beyond the scope of this document; though perhaps best identified in a
 SyncThing runbook.  It involves setting up local directories and connecting to
 other devices in my SyncThing “ring”.
 
-** TODO Elfeed with Existing Data
+** DONE Elfeed with Existing Data
+CLOSED: [2025-04-30 Wed 21:59]
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2025-04-30 Wed 21:59]
+:END:
 
-In [[https://takeonrules.com/2025/01/22/on-elfeed-and-backups/][On Elfeed and Backups]], I wrote about using Elfeed for my RSS reader.  I have
-contemplated using my SyncThing backup to practice restoring my data.  However,
-I’m opting for the quicker process; copying what I have.
+In [[https://takeonrules.com/2025/01/22/on-elfeed-and-backups/][On Elfeed and Backups]], I wrote about using Elfeed for my RSS reader.  I
+restored the previous machine’s backup to my new machine.  And all things
+worked; I had the old data and could fetch new information.
 
 ** DONE Denote Files
 CLOSED: [2025-04-30 Wed 21:36]
@@ -1045,11 +1070,15 @@ Emacs functions worked.  This is when I found that the <2025-04-30 Wed>
 installed version of =fd= was =v8.3.1=.  Which lead to the install instructions
 above.
 
+For the time being, I’m sync-ing files from my old machine to the new machine.
+At some point, I’ll flip that.
+
 ** TODO Publish Blog Post
 
 This requires setting up my build engine; which involves building Hugo and Ruby.
 
-First is following some instructions around Ruby Environment (=rbenv=) manager.  Looking at package manager options, it appears that [[https://github.com/rbenv/rbenv?tab=readme-ov-file#basic-git-checkout][cloning is the best option]].
+First is following some instructions around Ruby Environment (=rbenv=) manager.
+Looking at package manager options, it appears that [[https://github.com/rbenv/rbenv?tab=readme-ov-file#basic-git-checkout][cloning is the best option]].
 
 And I’ll need to [[https://gohugo.io/installation/linux/#prebuilt-binaries][either build Hugo from source or install a release version]].
 
@@ -1060,7 +1089,8 @@ deferring.
 
 * Footnotes
 
-[fn:7] My mom has a retinal disease and her research and recommendations from experts leads her to incorporate more red filters in her day to day.
+[fn:7] My mom has a retinal disease and her research and recommendations from
+experts leads her to incorporate more red filters in her day to day.
 
 [fn:6] I had a copy of the Emacs git repository on another machine.  So I used the
 sneaker net (e.g. a thumbdrive) to copy that over to the Linux machine and then
