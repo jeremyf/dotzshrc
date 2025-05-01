@@ -309,7 +309,7 @@ if [ "${start_client}" = "true" ]; then
                 # echo "GUI emacsclient"
                 # exec /usr/bin/env emacsclient -c -n -a "" "$@"
                 # shellcheck disable=SC2086
-                emacsclient -c -n -a "" ${socket_opt} "$@"
+                emacsclient -n -a "" ${socket_opt} "$@"
             else
                 # echo "text emacsclient"
                 # exec /usr/bin/env emacsclient -nw -a "" "$@"
