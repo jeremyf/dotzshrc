@@ -793,8 +793,6 @@ Below is an example of one of those:
 #+begin_src shell :dir "/sudo::/home/jfriesen" :cache no :export source :results raw silent
   sudo systemctl disable cups.service
 #+end_src
-
-
 ** DONE Firewall
 CLOSED: [2025-04-29 Tue 14:59]
 :LOGBOOK:
@@ -1073,14 +1071,24 @@ above.
 For the time being, I’m sync-ing files from my old machine to the new machine.
 At some point, I’ll flip that.
 
-** TODO Publish Blog Post
+** TODO Publish Blog Post [0%]
 
-This requires setting up my build engine; which involves building Hugo and Ruby.
+This requires setting up my build engine.  Which involves:
+
+- [[*Building Hugo][Building Hugo]]
+- [[*Building Ruby][Building Ruby]]
+- [[*Exchanging SSH Keys][Exchanging SSH Keys]]
+
+*** TODO Building Hugo
+
+I’ll need to [[https://gohugo.io/installation/linux/#prebuilt-binaries][either build Hugo from source or install a release version]].
+
+*** TODO Building Ruby
 
 First is following some instructions around Ruby Environment (=rbenv=) manager.
 Looking at package manager options, it appears that [[https://github.com/rbenv/rbenv?tab=readme-ov-file#basic-git-checkout][cloning is the best option]].
 
-And I’ll need to [[https://gohugo.io/installation/linux/#prebuilt-binaries][either build Hugo from source or install a release version]].
+*** TODO Exchanging SSH Keys
 
 ** TODO Read and Compose Emails in Emacs
 
