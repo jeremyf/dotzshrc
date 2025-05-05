@@ -63,6 +63,6 @@ source $HOME/git/dotzshrc/configs/functions.zsh
 # fi
 # 
 # eval "$(rbenv init -)"
-# 
+eval "$(~/.rbenv/bin/rbenv init - --no-rehash zsh)"
 # Fig post block. Keep at the bottom of this file.
 [[ -f "$HOME/.fig/shell/zprofile.post.zsh" ]] && builtin source "$HOME/.fig/shell/zprofile.post.zsh"

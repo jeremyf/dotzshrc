@@ -26,9 +26,9 @@ I’m also looking at how I might use this experience to guide others.  This
 in that the managers I’m considering are a bit more obtuse compared to current
 desktop interactions.
 
-Running contrary to this, is the fact that for the foreseeable future, I’ll be
-using MacOS for my work environment.  Which means I’m looking to maintain
-degrees of similarity.
+Running contrary to this, is that for the foreseeable future I’ll be using MacOS
+for my work environment.  Which means I’m looking to maintain degrees of
+similarity.
 
 * Keyboard Bindings
 
@@ -136,6 +136,19 @@ I’ve attempted to add this keyboard configuration to my windowed session login
 however it is not yet working.  As such, whenever I boot my computer and login,
 it behooves me to launch a terminal.
 
+** Investigating the Boot
+
+I found [[https://unix.stackexchange.com/questions/42611/how-can-i-run-a-script-that-starts-before-my-login-screen][How can I run a script that starts before my login screen?]] on Stack
+Exchange.  This looked promising.
+
+I looked into my =/etc/gdm3/Init/= and there was one file: =Default=.  This was a
+bash script.  Reading the code it was looking for an Xmodmap file in some system
+directories.  One was =/usr/etc/X11/Xmodmap=.
+
+I tried using both a symlink and a copy of my personal =~/.Xmodmap= to the =/usr/etc/X11/Xmodmap= file, but it did not run this before the window manager, so I’ve set it aside.
+
+Until I learn more, I’ll launch Terminal when I first login.
+
 * Coping with Pop OS Keybindings
 
 This was a bit of a side-quest, but one that relates to Emacs.  Namely Pop OS
@@ -158,22 +171,24 @@ I'm also using =dconf dump / > ~/git/dotzshrc/pop_os_settings.conf= which I can
 then use to load, via the following:
 
 #+begin_src shell :dir "/home/jfriesen" :cache no :export source :results raw silent
-  dconf load < ~/git/dotzshrc/pop_os_settings.conf
+  dconf load / < ~/git/dotzshrc/pop_os_settings.conf
 #+end_src
 
 What I noticed is that the =dconf dump= does not include the default keybindings,
 but instead the changes.  To find those, I needed to dig just a bit further.
 
+I forget where I originally learned of =dconf= but I found the following helpful: [[https://linuxconfig.org/introduction-to-the-dconf-configuration-system][Introduction to the dconf configuration system]].
+
 TODO: I referenced the Pop OS schema.
 
-One at present unsolvable is that typing =s-= and releasing invokes Pop OS’s
-launcher.  Given that I’d often used =s-Space= for MacOS to launch apps, I’m okay
-enough with this behavior.
+One at present unsolvable “issue” is that typing =s-= (e.g., =super=) and releasing
+invokes Pop OS’s launcher.  Given that I’d often used =s-Space= for MacOS to
+launch apps, I’m okay enough with this behavior.
 
 And as I’ve been working on Linux, to build this document, I opted to switch the
-bindings on my Macbook.  Now the key to the left of the spacebar on my Macbook
-maps to Option/Alt.  I figure, if I’m going to leave the wall garden perhaps I
-can also leave the muscle memory and rebuild anew.
+bindings on my Macbook.  Now I have mapped the key to the left of the space bar
+on my Macbook maps to Option/Alt.  I figure, if I’m going to leave the wall
+garden perhaps I can also leave the muscle memory and rebuild anew.[fn:10]
 
 * Get Emacs Installed
 
@@ -199,10 +214,18 @@ a stable ref; as of <2025-04-23 Wed> that is =emacs-30.1=.[fn:6]
 
 I used [[https://gist.github.com/zoliky/0445b20676bfa85450d7df006066ceb7][Installing Emacs 29.1 from source on Debian 12 · GitHub]] as my framing.
 
-- =sudo apt build-dep emacs=
-- =sudo apt install libtree-sitter-dev=
-- =sudo apt install libgcc-12-dev libgccjit-12-dev=
-- =mkdir ~/.local/emacs=
+First, building the dependencies:
+
+#+begin_src shell :dir "/sudo::/" :cache no :export source :results raw silent
+  sudo apt build-dep emacs
+  sudo apt install libtree-sitter-dev libgcc-12-dev libgccjit-12-dev
+#+end_src
+
+Then making a home for my new install:
+
+#+begin_src shell :dir "~/" :cache no :export source :results raw silent
+  mkdir -p ~/.local/emacs
+#+end_src
 
 In my source directory for Emacs (e.g., =~/git/emacs/=), I ran the following:
 
@@ -238,6 +261,222 @@ serviceable.
 Note, I could have installed Emacs 30.1 via the Pop Shop, however I chose to
 build from source.
 
+** Toggling Gnome Settings
+
+There are a few settings that I have found useful to toggle:
+
+- [[*Trackpad and Night Light][Trackpad and Night Light]]
+- [[*Light/Dark Theme][Light/Dark Theme]]
+- [[*Radios][Radios]]
+
+*** Trackpad and Night Light
+
+With my new laptop and how I hold my hands, I’ve noticed that sometimes I
+activate my trackpad.  Which is annoying, especially when I’m in a “writing
+mindset.”
+
+I don’t like the bright blues of a normal screen.  Instead I prefer to use a
+display setting that softens the colors.  In MacOS this is “Night Shift.”
+
+I choose a much warmer color, knowing that reds are softer on the retina.[fn:7]
+
+Both of these settings are similar in how they are toggled.  So I wrote some
+[[*Emacs Commands for Setting Toggling][Emacs Commands for Setting Toggling]].
+
+**** DONE Emacs Commands for Setting Toggling
+
+With the toggles identified, I set about writing the functions and macros to
+help with future needs.
+
+To create [[https://github.com/jeremyf/dotemacs/blob/f69f6c5f8058abc133cbd9d6970d96329e5128af/emacs.d/init.el#L358-L362][my Trackpad toggling command]] I call my [[https://github.com/jeremyf/dotemacs/blob/f69f6c5f8058abc133cbd9d6970d96329e5128af/emacs.d/init.el#L336-L356][jf/linux:gsettings-toggler
+Emacs macro]].  Below is the code:
+
+#+BEGIN_SRC emacs-lisp
+  (jf/linux:gsettings-toggler "Trackpad"
+    :property "org.gnome.desktop.peripherals.touchpad send-events"
+    :match "'enabled'"
+    :on_match "disabled"
+    :on_miss "enabled")
+
+#+END_SRC
+
+The first parameter is the named concept (e.g., “Trackpad”).  The =:property= is
+the =gsettings= key that I’m looking to change
+(e.g. “org.gnome.desktop.peripherals.touchpad send-events”).  The =:match= value
+is what I check as the property’s current state.  When the current value is a
+match, I set the property to the =:on_match= value.
+
+And below is [[https://github.com/jeremyf/dotemacs/blob/f69f6c5f8058abc133cbd9d6970d96329e5128af/emacs.d/init.el#L364-L368][how I generate my Night Light toggling command]]:
+
+#+BEGIN_SRC emacs-lisp
+(jf/linux:gsettings-toggler "Night Light"
+    :property "org.gnome.settings-daemon.plugins.color night-light-enabled"
+    :match "true"
+    :on_match "false"
+    :on_miss "true")
+#+END_SRC
+
+As of <2025-05-03 Sat> the generating macro is as follows:
+
+#+BEGIN_SRC emacs-lisp
+(cl-defmacro jf/linux:gsettings-toggler (name &key property match on_match on_miss)
+    "Toggle the NAME setting via the PROPERTY.
+
+When the PROPERTY is a MATCH set the property to ON_MATCH; otherwise set
+it to the ON_MISS value."
+    (let ((docstring
+            (concat "Toggle " name " for Gnome desktop."))
+           (func-name
+             (intern (concat "jf/linux:toggle-" name))))
+      `(defun ,func-name ()
+         ,docstring
+         (interactive)
+         (let ((value
+                 (if (string= ,match
+                       (s-trim
+                         (shell-command-to-string
+                           (concat "gsettings get " ,property))))
+                   ,on_match ,on_miss)))
+           (shell-command
+             (concat "gsettings set " ,property " " value))
+           (message "%s: %s" ,name value)))))
+#+END_SRC
+
+*** Light/Dark Theme
+
+Related but different from the Night Light concept is the Light and Dark
+theming.  In Emacs I had a script to toggle the theme of both the OS and Emacs
+(e.g. my =jf/dark= function).  I wanted something similar in Linux.
+
+Yet, as I explored the changes, I realized that there would be a divergence in
+implementation based on MacOS or Linux.
+
+Toggling the light and dark theme is a bit different; as this requires
+coordination.  [[https://github.com/jeremyf/dotemacs/blob/f69f6c5f8058abc133cbd9d6970d96329e5128af/emacs.d/init.el#L2943-L2958][My jf/color-scheme-system-toggle command]] handles both the MacOS
+and my Linux install.
+
+#+BEGIN_SRC emacs-lisp
+(defun jf/color-scheme-system-toggle ()
+    "Toggle system-wide Dark or Light setting."
+    (interactive)
+    (pcase system-type
+      ('darwin
+        (progn
+          (shell-command
+            (concat "osascript -e 'tell application \"System Events\" "
+              "to tell appearance preferences "
+              "to set dark mode to not dark mode'"))
+          (jf/color-scheme-set-for-emacs)))
+      (_
+        (let ((lightp
+                (eq :dark (jf/current-color-scheme-gnome))))
+          (dolist (fn jf/color-scheme-system-toggle-functions)
+            (funcall fn lightp))))))
+#+END_SRC
+
+The Linux toggling portion determines if the scheme is =:dark=, and uses that
+boolean value to pass to each of the toggling functions.
+
+[[https://github.com/jeremyf/dotemacs/blob/f69f6c5f8058abc133cbd9d6970d96329e5128af/emacs.d/init.el#L2901-L2910][My jf/color-scheme-system-toggle-functions variable]] (which I realized is
+misnamed) defines a list of functions that I’ll call, passing =true= when I want
+to set them to the “light” theme.  Below is that variable’s definition:
+
+#+BEGIN_SRC emacs-lisp
+(defvar jf/color-scheme-system-toggle-functions
+    '(jf/color-scheme:gnome-color-scheme
+       jf/color-scheme:gnome-gtk-theme
+       jf/color-scheme:copyq-theme
+       jf/color-scheme:emacs-theme)
+    "A list of arity one functions that set component schemes based on the
+input parameter.
+
+When the parameter is non-nil, favor the dark option.  Otherwise favor
+the light option.")
+#+END_SRC
+
+The four functions that toggle my system scheme are similar but just different
+enough:
+
+- [[https://github.com/jeremyf/dotemacs/blob/f69f6c5f8058abc133cbd9d6970d96329e5128af/emacs.d/init.el#L2912-L2917][jf/color-scheme:gnome-color-scheme]]
+- [[https://github.com/jeremyf/dotemacs/blob/f69f6c5f8058abc133cbd9d6970d96329e5128af/emacs.d/init.el#L2919-L2926][jf/color-scheme:gnome-gtk-theme]]
+- [[https://github.com/jeremyf/dotemacs/blob/f69f6c5f8058abc133cbd9d6970d96329e5128af/emacs.d/init.el#L2928-L2935][jf/color-scheme:copyq-theme]]
+- [[https://github.com/jeremyf/dotemacs/blob/f69f6c5f8058abc133cbd9d6970d96329e5128af/emacs.d/init.el#L2937-L2941][jf/color-scheme:emacs-theme]]
+
+Below is the definition of those four functions:
+
+#+BEGIN_SRC emacs-lisp
+  (defun jf/color-scheme:gnome-color-scheme (lightp)
+    "Set the gnome color scheme based on LIGHTP (e.g. light/dark)."
+    (shell-command
+     (format
+      "gsettings set org.gnome.desktop.interface color-scheme prefer-%s"
+      (if lightp "light" "dark"))))
+
+  (defun  jf/color-scheme:gnome-gtk-theme (lightp)
+    "Set the gnome gtk theme based on LIGHTP (e.g. light/dark)."
+    (let ((theme
+           (if lightp "Adwaita" "Adwaita-dark")))
+      (shell-command
+       (format
+        "gsettings set org.gnome.desktop.interface gtk-theme %s"
+        theme))))
+
+  (defun jf/color-scheme:copyq-theme (lightp)
+    "Set the copyq theme based on LIGHTP (e.g. light/dark)."
+    (shell-command
+     (format
+      "copyq loadTheme %s/solarized-%s.ini"
+      (s-trim
+       (shell-command-to-string "copyq info themes"))
+      (if lightp "light" "dark"))))
+
+  (defun jf/color-scheme:emacs-theme (lightp)
+    "Set the emacs theme based on LIGHTP (e.g. light/dark)."
+    (ef-themes-select
+     (plist-get jf/themes-plist
+                (if lightp :light :dark))))
+#+END_SRC
+
+An astute reader might notice some duplication of my
+=jf/color-scheme:gnome-color-scheme= and =jf/color-scheme:gnome-gtk-theme= and the
+toggling macro.  There’s a potential refactoring there, but I’m going to leave
+it on the idea shelf.
+
+*** Radios
+
+By default, I like to keep my Bluetooth off.  I wanted a way to turn this off
+and on via Emacs.  And also turn off and on my WiFi.
+
+Below are [[https://github.com/jeremyf/dotemacs/blob/f69f6c5f8058abc133cbd9d6970d96329e5128af/emacs.d/init.el#L370-L391][my functions to go radio silent and start broadcasting]]:
+
+#+BEGIN_SRC emacs-lisp
+(defun jf/linux:radio-silence ()
+    "Soft block laptop radios (e.g. bluetooth and wlan).
+
+Related to `jf/linux:radio-broadcast'."
+    (interactive)
+    (shell-command "rfkill block all"))
+
+  (defun jf/linux:radio-broadcast (&optional all identifiers)
+    "Soft unblock laptop radios (e.g. bluetooth and wlan)
+
+When ALL is non-nil unblock all radios.  Other unblock only the wlan.
+
+Related to `jf/linux:radio-silence'."
+    (interactive "P")
+    (let ((identifiers
+            (mapconcat
+              (lambda (el) el)
+              (or identifiers '("wlan"))
+              " ")))
+      (shell-command
+        (concat "rfkill unblock "
+          (if all "all" identifiers)))))
+
+#+END_SRC
+
+I don’t have a physical switch, so I settle for the soft programmatic block.
+
 ** Grabbing Links
 
 Part of my writing workflow is grabbing links from my browser (and RSS feed).
@@ -248,49 +487,6 @@ links from some X11 apps and insert into Emacs]].
 However, that wasn’t quite enough.  So I wrote up [[https://github.com/jeremyf/dotemacs/blob/943ba0640db5526d5946ec094ab7a4f2d32cfb9b/emacs.d/grab-x-link.el][some changes for my own needs]];
 namely to address having multiple applications based on Firefox.  Along the way
 I learned about =xdotool= and =comm=.
-
-** Toggling Gnome Settings
-
-There are a few settings that I have found useful to toggle:
-
-- [[*Trackpad][Trackpad]]
-- [[*Night Light][Night Light]]
-- [[*Light/Dark Theme][Light/Dark Theme]]
-- [[*Radios][Radios]]
-
-I wanted [[*Emacs Commands][Emacs Commands]] setup to help quickly toggle each of these.
-
-*** Trackpad
-
-With my new laptop and how I hold my hands, I’ve noticed that sometimes I
-activate my trackpad.  Which is annoying, especially when I’m in a “writing
-mindset.”
-
-*** Night Light
-
-I don’t like the bright blues of a normal screen.  Instead I prefer to use a
-display setting that softens the colors.  In MacOS this is “Night Shift.”
-
-I choose a much warmer color, knowing that reds are softer on the retina.[fn:7]
-
-*** Light/Dark Theme
-
-Related but different from the [[*Night Light][Night Light]] concept is the Light and Dark
-theming.  In Emacs I had a script to toggle the theme of both the OS and Emacs
-(e.g. my =jf/dark= function).  I wanted something similar in Linux.
-
-Yet, as I explored the changes, I realized that there would be a divergence in
-implementation based on MacOS or Linux.
-
-*** Radios
-
-By default, I like to keep my Bluetooth off.  I wanted a way to turn this off
-and on via Emacs.  And also turn off and on my WiFi.
-
-*** TODO Emacs Commands
-
-With the toggles identified, I set about writing the functions and macros to
-help with future needs.
 
 * Internet Hygiene
 
@@ -342,10 +538,10 @@ For now I’m holding.
 
 * Authentication with Github
 
-I’ve long used SSH keys for Github.
+I’ve long used SSH keys for Github.  I needed to again create a token and get
+the [[https://github.com/cli/cli/blob/trunk/docs/install_linux.md][Github CLI command tool]] working.  I did some tweaking to the command paths.
 
-I needed to again create a token and get the [[https://github.com/cli/cli/blob/trunk/docs/install_linux.md][Github CLI command tool]] working.  I
-did some tweaking to the command paths.
+I also have code on other Git forges; so I’ll want to consider that.
 
 * General Tasks
 
@@ -357,6 +553,8 @@ Installed [[https://ohmyz.sh/][Oh My Zsh]] then set =zsh= as default shell via t
 
 On MacOS I was using =~/.zprofile= for my shell configuration.  I needed to instead
 use =~/.zshenv=.
+
+** FZF
 
 I leverage =fzf= for my reverse history search in my shell (e.g. =ctrl= + =r=), so I
 installed it via the following:
@@ -373,6 +571,7 @@ Refer /usr/share/doc/fzf/README.Debian for quick instructions on how to add
 keybindings for Bash, Zsh, Fish to call fzf.
 #+end_quote
 
+** FD
 I leverage =fd= as a =find= alternative, I ran: =sudo apt install fd-find
 --assume-yes=.  However, for the Consult package this version was inadequate.
 
@@ -387,6 +586,33 @@ Then following instructions, I created the symlink as follows:
 #+begin_src shell :dir "/home/jfriesen/" :cache no :export source :results raw silent
   ln -sf $(which fdfind) ~/.local/bin/fd
 #+end_src
+
+However, this created problems later; in that I had clobbered the underlying
+=v8.3.1=; which broke other =apt install= commands.
+
+So I undid the install, making sure to then run =sudo apt install fd-find
+--reinstall=.  I returned to the release page for
+[[https://github.com/sharkdp/fd/releases][release of fd]] and downloaded the tar
+for my architecture (=x86_64-unknown-linux-gnu=) and set about installing the
+binary:
+
+#+begin_src shell :dir "~/" :cache no :export source :results raw silent
+  mkdir -p ~/.local/bin
+  rm -f ~/.local/bin/fd
+  cp -f ~/Downloads/fd-v10.2.0-x86_64-unknown-linux-gnu/fd ~/.local/bin/fd
+#+end_src
+
+And then the =man= page:
+
+#+begin_src shell :dir "/sudo::/home/jfriesen/" :cache no :export source :results raw silent
+  sudo mkdir -p /usr/local/share/man/man1/
+
+  sudo cp Downloads/fd-v10.2.0-x86_64-unknown-linux-gnu/fd.1 /usr/local/share/man/man1/
+
+  sudo mandb
+#+end_src
+
+** XClip and XSel
 
 In MacOS I regularly use =pbcopy= and =pbpaste=.  Both =xclip= and =xsel= apparently
 provide similar behavior.  I opted to install both via the following:
@@ -410,6 +636,15 @@ I ran the following:
 This helps, but I’d still love for =C-n= to send =Down= when typed in non-Emacs;
 this is something that I used Karabiner Elements to enforce/provide.
 
+** TODO Exploring Conditional Keymappings
+
+One function I miss from [[denote:20230201T203022][Karabiner-Elements]] is the ability to map a key combination for applications that match (or don’t match) a regular expression.
+
+As mentioned earlier, I would love for =C-n= to send the =Down= key when I’m not in Emacs.  So I explored options by reviewing [[https://alternativeto.net/software/karabiner-elements/?platform=linux][Karabiner Elements Alternatives for Linux: Top 10 Key Mapping Tools]].
+
+Ideally, the key mapper would be cross-platform so I could install on MacOS and
+Linux.  A quick read through the various options and [[https://github.com/joshgoebel/keyszer][joshgoebel/keyszer: a smart, flexible keymapper for X11 (on Github)]] appears to meet my criteria.
+
 * Menu Bar
 
 I'm using the Pop OS flavor of Ubuntu; and wanted to enable the application
@@ -418,6 +653,18 @@ Menu.  I ran the following:
 #+begin_src shell :cache no :export source :results raw silent
   gsettings set org.gnome.shell.extensions.pop-cosmic show-application-menu true
 #+end_src
+
+This adds the basic application window to the top tray.  Which now has on its
+left side three items:
+
+- Workspaces :: clicking provides a graphical overview of what application is
+  running in what workspace.  (/Note to self:/ assuming I keep using the Pop OS
+  window manager, investigate how to activate that preview with a keyboard
+  shortcut).
+- Applications :: clicking on this shows a launch pan, where I can type and
+  filter applications to run.
+- Current Application :: as I’m typing this, it says Emacs.  When I switch to a
+  different application, it changes.
 
 * Window Tiling
 
@@ -457,6 +704,531 @@ During my exploration, I learned of some key functions:
 I appreciate that I have the ability to install the window manager package but
 not install it as the active window manager.  And I can install multiple window
 manager packages, but only activate one of them.
+
+* TODO Outstanding Tasks [90%]
+
+In this section I outline and detail the steps I consider for a complete
+migration.
+
+
+** DONE Hardening
+
+Enable automatic security updates:
+
+#+begin_src shell :dir "/sudo::/home/jfriesen" :cache no :export source :results raw silent
+  sudo dpkg-reconfigure -p low unattended-upgrades
+#+end_src
+
+Disable some services, first run ~sudo systemctl list-unit-files --state=enabled~
+to assess what services are running.
+
+Below is an example of one of those:
+
+#+begin_src shell :dir "/sudo::/home/jfriesen" :cache no :export source :results raw silent
+  sudo systemctl disable cups.service
+#+end_src
+** DONE Firewall
+
+
+#+begin_src shell :dir "/sudo::/home/jfriesen" :cache no :export source :results raw silent
+  sudo ufw default deny incoming
+  sudo ufw default allow outgoing
+  sudo ufw enable
+  sudo nmap localhost
+  sudo ufw deny 139
+  sudo ufw deny 161
+  sudo ufw deny 5353
+#+end_src
+
+Where 139 is NETBIOS, 161 is SNMP, mDNS 5353, as per [[https://github.com/iAnonymous3000/popos-hardening-guide][GitHub -
+iAnonymous3000/popos-hardening-guide]].  I’m sure there’s more to do, but for now
+this is adequate.  However, there are refinements.
+
+*** Open Snitch
+
+The refining I'm thinking of is along the lines of MacOS’s Little Snitch (or
+some alternative).  I didn’t use Little Snitch, favoring Lulu, but figure when
+searching for alternatives, that Little Snitch is more known.
+
+With a very baseline firewall in place, I set about finding a replacement.  The
+first candidate is [[https://github.com/evilsocket/opensnitch][GitHub - evilsocket/opensnitch: OpenSnitch is a GNU/Linux
+interactive application firewall inspired by Little Snitch]].
+
+After downloading the files, I ran the following to install the Open Snitch
+daemon:
+
+#+begin_src shell :dir "/sudo::/home/jfriesen/Downloads/" :cache no :export source :results raw silent
+  sudo apt install --assume-yes ./opensnitch*.deb
+#+end_src
+
+And the Open Snitch GUI:
+
+#+begin_src shell :dir "/sudo::/home/jfriesen/Downloads/" :cache no :export source :results raw silent
+  sudo apt install --assume-yes ./python3-opensnitch-ui*.deb
+#+end_src
+
+Along the way I learned about specifying =/sudo::/path/to/dir/= as the =:dir= option
+for the shell.  This means I can run the command via =sudo= and babel will prompt
+for my password.
+
+Per the documentation, I needed to patch up my pip install with the following:
+
+#+begin_src shell :dir "/sudo::/home/jfriesen" :cache no :export source :results raw silent
+sudo apt install --assume-yes python3-pip
+#+end_src
+
+#+begin_src shell :dir "/home/jfriesen" :cache no :export source :results raw silent
+pip3 install grpcio==1.41.0
+pip3 install protobuf==3.20.0
+#+end_src
+
+I then added Open Snitch to my running services via the following:
+
+#+begin_src shell :dir "/sudo::/home/jfriesen" :cache no :export source :results raw silent
+  sudo systemctl enable --now opensnitch.service
+#+end_src
+
+Rather quickly, Little Snitch started asking me if I wanted to allow or block
+connections.  There were some preliminary “allow forever” decisions that I
+needed to make.
+
+** DONE Clipboard Manager
+
+
+On MacOS, I’ve been using Maccy.  And as more and more of my computering moves
+to Emacs, the clipboard manager has become less crucial.  However, having a
+history is very nice.
+
+As part of my research, I stumbled upon the [[https://copyq.readthedocs.io/en/latest/index.html][CopyQ’s documentation]]; a
+cross-platform clipboard manager.  I decided to give this a go in Linux, and if
+it works start using it on MacOS.
+
+From the documentation I ran:
+
+#+begin_src shell :dir "/sudo::/home/jfriesen" :cache no :export source :results raw silent
+sudo apt install software-properties-common
+sudo add-apt-repository ppa:hluk/copyq
+sudo apt update
+sudo apt install copyq
+#+end_src
+
+With that installed, I was curious about how to ensure that CopyQ always
+launched at login.  And there’s a settings in the preferences.
+
+The primary function I wanted was to have a hot key that would provide a list of
+paste options.  I bound =s-M-v= to CopyQ’s “Show the Menu Tray”; this gives me a
+list of the last five copied items with the option to easily search for more.
+
+CopyQ supports different themes; I wanted to keep the CopyQ theme synchronized
+with the OS theme.
+
+The following toggles the CopyQ theme based on the current state of my
+workspace’s color scheme:
+
+#+begin_src emacs-lisp
+  (defun jf/linux:toggle-copyq-theme (&optional color-scheme)
+      "Toggle the copyq theme based on current COLOR-SCHEME."
+      (interactive)
+      (let ((theme
+              (if (eq :dark
+                    (or color-scheme (jf/current-color-scheme-gnome)))
+                "solarized-dark.ini"
+                "solarized-light.ini"))
+             (theme-dir
+               (s-trim (shell-command-to-string "copyq info themes"))))
+        (shell-command
+          (concat "copyq loadTheme " (f-join theme-dir theme)))))
+#+end_src
+
+The above function is a proof of concept that I can then tie into my color
+scheme toggling process (with modifications I’m sure).
+
+** DONE Emacs Everywhere
+
+
+I use the [[https://github.com/tecosaur/emacs-everywhere][Emacs Everywhere package]].  On MacOS I rely on [[https://www.hammerspoon.org/][Hammerspoon]] tool for
+launching into Emacs.
+
+In short this package, copies the current input field (e.g. a browser’s
+textarea) into a dedicated Emacs buffer, I then edit the text in Emacs, and when
+done paste the content back into the input field.
+
+I have found this quite useful as I’ve also chosen to set that dedicated Emacs
+buffer to use a focused writing context; akin to Writeroom.
+
+As I’m running Pop OS, I followed the [[https://help.ubuntu.com/stable/ubuntu-help/keyboard-shortcuts-set.html.en][Ubuntu instructions for binding a custom
+shortcut]].
+
+I also needed to ensure that =pandoc= is installed.  With that done, I ran =M-x
+emacs-everywhere-check-health=.  However, I observed a problem that was only
+evident when I read the source code.  Namely things didn’t work.
+
+Why?  Because in an earlier incarnation of keybindings, I had bound the =Insert=
+key to =Hyper_R=; and =emacs-everywhere= used that key code to perform the “paste”
+of the initial text into Emacs.
+
+So I needed to unbind that key.
+
+Further, the [[https://help.ubuntu.com/stable/ubuntu-help/keyboard-shortcuts-set.html.en][Ubuntu instructions for binding a custom shortcut]] did not work.  I
+then tried using =xbindkeys=.  I followed [[https://dev-random.net/make-your-own-keybindings-in-linux-using-xbindkeys/][Make your own keybindings in linux using
+xbindkeys]].
+
+I installed =xbindkeys= via:
+
+#+begin_src shell :dir "/sudo::/home/jfriesen/Downloads/" :cache no :export source :results raw silent
+.  sudo apt-get install --assume-yes xbindkeys
+#+end_src
+
+My hasty initial entry, which was what was recorded in the Pop OS shortcut, was
+as follows:
+
+#+begin_example
+  "emacsclient --eval '(emacs-everywhere)'"
+    Alt + Super + e
+#+end_example
+
+That did not work.  Following further instructions, I used =xbindkeys -k= to
+determine how it interpreted =Alt= + =Super= + =e=.  Which resulted in
+=Alt+Mod2+Mod4 + e=.
+
+I updated my =.xbindkeysrc= to reflect the above.  And things started working.
+
+** DONE Get SyncThing Running
+
+There are three parts to SyncThing:
+
+- [[*Installing SyncThing][Installing SyncThing]]
+- [[*Auto-Start SyncThing][Auto-Start SyncThing]]
+- [[*Configuring SyncThing][Configuring SyncThing]]
+
+In reviewing my setup, both [[*Elfeed with Existing Data][Elfeed with Existing Data]] and [[*Denote Files][Denote Files]] need data
+from my old machine.  It makes sense to get SyncThing working, and pull that
+information from my previous computer.
+
+As a side quest, I want to use [[https://localsend.org/][LocalSend]] to get the Action ID of my SyncThing
+instance on my old machine.
+
+*** DONE Installing SyncThing
+
+Following [[https://apt.syncthing.net/][Syncthing docs on installing on Debian/Ubuntu]] we have the following:
+
+#+begin_src shell :dir "/sudo::/home/jfriesen" :cache no :export source :results raw silent
+  sudo mkdir -p /etc/apt/keyrings
+  sudo curl -L -o /etc/apt/keyrings/syncthing-archive-keyring.gpg https://syncthing.net/release-key.gpg
+#+end_src
+
+And I’d rather use stable than candidate, so I need to add the keyring:
+
+#+begin_src shell :dir "/sudo::/home/jfriesen" :cache no :export source :results raw silent
+echo "deb [signed-by=/etc/apt/keyrings/syncthing-archive-keyring.gpg] https://apt.syncthing.net/ syncthing stable" | sudo tee /etc/apt/sources.list.d/syncthing.list
+#+end_src
+
+And with the repository installed, I set about installing SyncThing:
+
+#+begin_src shell :dir "/sudo::/" :cache no :export source :results raw silent
+  sudo apt-get update --assume-yes
+  sudo apt-get install syncthing --assume-yes
+#+end_src
+
+And from that I’ll need to configure my local SyncThing.
+
+*** DONE Auto-Start SyncThing
+
+
+Reading [[https://docs.syncthing.net/users/autostart.html#linux][Starting Syncthing Automatically]], I can add the =syncthring-start.desktop=
+to my auto-start directions:
+
+#+begin_src shell :dir "/home/jfriesen" :cache no :export source :results raw silent
+  cp /usr/share/applications/syncthing-start.desktop ~/.config/autostart/
+#+end_src
+
+If this does not work, I can use =systemctl=.
+
+*** DONE Configuring SyncThing
+
+
+This is beyond the scope of this document; though perhaps best identified in a
+SyncThing runbook.  It involves setting up local directories and connecting to
+other devices in my SyncThing “ring”.
+
+** DONE Elfeed with Existing Data
+
+
+In [[https://takeonrules.com/2025/01/22/on-elfeed-and-backups/][On Elfeed and Backups]], I wrote about using Elfeed for my RSS reader.  I
+restored the previous machine’s backup to my new machine.  And all things
+worked; I had the old data and could fetch new information.
+
+** DONE Denote Files
+
+
+For most all of my writing I use Org-Mode, leveraging Denote for its file naming
+convention as well as utility functions.  Getting those files from my old
+machine is one of the last steps.
+
+I used SyncThing to bring things over.  And with those files I checked if my
+Emacs functions worked.  This is when I found that the <2025-04-30 Wed>
+installed version of =fd= was =v8.3.1=.  Which lead to the install instructions
+above.
+
+For the time being, I’m sync-ing files from my old machine to the new machine.
+At some point, I’ll flip that.
+
+** DONE Publish Blog Post [100%]
+
+This requires setting up my build engine.  Which involves:
+
+- [[*Exchanging SSH Keys][Exchanging SSH Keys]]
+- [[*Installing Hugo][Installing Hugo]]
+- [[*Installing Ruby][Installing Ruby]]
+
+*** DONE Exchanging SSH Keys
+
+This involved logging into my VPS, adding my public key, and then confirming via
+SSH to the host.
+
+And last cloning the bare repository for my blog.  I needed this to know what
+version of Ruby to build.  Being a bare repository, it is only the contents of
+the =.git= directory; that is I can’t readily see the files of the project.
+
+I then cloned the bare repository and checked out my =trunk= branch.[fn:9]
+
+*** DONE Installing Hugo
+
+I’ll need to [[https://gohugo.io/installation/linux/#prebuilt-binaries][either build Hugo from source or install a release version]].  I
+chose the path of “Install Go-Lang then build Hugo”; in part because I write Go
+code these days.
+
+**** DONE Build Go-Lang
+
+
+The following assumes I’ve downloaded the correct Go-lang tar ball.  It also
+installs go-lang as a non-privileged user:
+
+#+begin_src shell  :cache no :export source :results raw silent
+  rm -rf ~/.local/go ; tar -C ~/.local -xzf ~/Downloads/go1.24.2.linux-amd64.tar.gz
+#+end_src
+
+I needed to add go into my =$PATH=.  And set some other Go specific environment
+variables:
+
+#+begin_example
+export GOPROXY=https://proxy.golang.org,direct
+export GOTOOLCHAIN=auto
+export GOROOT=$HOME/.local/go
+export GOPATH=$HOME/go
+#+end_example
+
+The =GOPROXY= variable took some looking around.  Along the way, I mixed up the
+=GOPATH= and =GOROOT= which created numerous problems.  Once I fixed that, it was
+smooth sailing.
+
+**** DONE Install Hugo via Go
+
+
+I then used Go to install Hugo:
+
+#+begin_src shell :cache no :export source :results raw silent
+  CGO_ENABLED=1 go install -tags extended,withdeploy \
+                github.com/gohugoio/hugo@latest
+#+end_src
+
+**** DONE Testing My Site
+
+
+With Hugo built, I wanted to verify that I could run my blog locally.  I ran
+=hugo serve= and encountered the following error:
+
+#+begin_example
+  executing "_shortcodes/marginfigurewithcaption.html" at <$original.Resize>: nil
+  pointer evaluating resource.Resource.Resize
+#+end_example
+
+This was a bit of a head scratcher; as it worked on my Macbook but not on my
+Linux machine.  I had different versions of Hugo, so I synchronized those, and
+still had the error on my Linux machine but not my Macbook.
+
+I eventually found the problem, the src image path was =/images/Droaam-map.png=
+but on the filesystem, the filename was =/images/droaam-map.png=.  This didn’t
+raise an issue on my Macbook likely because I had some setting about files being
+case agnostic.
+
+I updated the reference to use the correct case, and then my site worked.  I
+could visit it on my localhost.
+
+*** DONE Installing Ruby
+
+
+First is following some instructions around Ruby Environment (=rbenv=) manager.
+Looking at package manager options, it appears that [[https://github.com/rbenv/rbenv?tab=readme-ov-file#basic-git-checkout][cloning is the best option]].
+
+The [[https://github.com/rbenv/rbenv?tab=readme-ov-file#basic-git-checkout][Github instructions for building =rbenv= from source]] are a bit confusing.
+Namely, After running the first three steps, I ran =rbenv -h= which listed the
+=rbenv install= command but it did not work.
+
+I needed to install the =ruby-build= plugin (as [[https://github.com/rbenv/rbenv?tab=readme-ov-file#installing-ruby-versions][documented later in the rbenv
+build instructions]]).  I followed the [[https://github.com/rbenv/ruby-build?tab=readme-ov-file#clone-as-rbenv-plugin-using-git][Github instructions to “clone as rbenv
+plugin using git”]].
+
+That did not work.  So, I then followed the instructions to add the =ruby-build=
+plugin
+
+After following both instructions, I could run =rbenv install –list= to see a list
+of Ruby versions to install.
+
+However, I had a missing dependency: =libyaml-dev=; which manifested as a failure
+to build the =Psych= module.  So I installed that:
+
+#+begin_src shell :dir "/sudo::/" :cache no :export source :results raw silent
+  sudo apt update && sudo apt install libyaml-dev --assume-yes
+#+end_src
+
+And gave another go at things.  Which worked.
+
+*** DONE Build my Website
+
+
+Using my bespoke process I set about building my website.  There were a few
+bumps along the way; namely that some of my audit processes used the Silver
+Searcher (e.g., =ag=).  I didn’t want to go about installing =ag= so I updated those
+audit scripts to use Ripgrep (e.g. =rg=).
+
+And things were building!
+
+*** DONE Write a Blog Post
+
+Writing my blog post involves:
+
+- Creating a Denote file, via =M-x org-capture= and selecting “Blog Post.”
+- Writing the posting
+- Running my =M-x jf/export-org-to-tor= command
+- Visiting my blog’s Hugo directory and running my bespoke one shot publish
+  command (e.g. =rake one_shot_publish=).
+
+** DONE Export Org-Mode to PDF
+
+I use Org-Mode as my base line markdown.  And like having the ability to export
+my documents to a PDF format.  That requires LaTeX:
+
+#+begin_src shell :dir "/sudo::/" :cache no :export source :results raw silent
+  sudo apt install --assume-yes texlive-latex-base
+  sudo apt install --assume-yes texlive-latex-recommended
+  sudo apt install --assume-yes texlive-latex-extra
+  sudo apt install --assume-yes texlive-luatex
+  sudo apt install --assume-yes texlive-pictures
+  sudo apt install --assume-yes texlive-bibtex-extra
+  sudo apt install --assume-yes texlive-science
+#+end_src
+
+And to test, I found a small Org-Mode node, ran =M-x org-export-dispatch= and
+narrowed to the sub-tree, chose “Export at LaTeX” then “as PDF and open.”
+
+It generated a PDF and opened that PDF in an Emacs window.  Success!
+
+** TODO Read and Compose Emails in Emacs [50%]
+
+This is a lower priority, but one that I want to eventually want.  As such, I’m
+deferring.  For this to work, I need to:
+
+- [[*Install Proton Bridge][Install Proton Bridge]]
+- [[*Install mbsync][Install mbsync]]
+- [[*Configure mbsync][Configure mbsync]]
+- [[*Read an Email][Read an Email]]
+- [[*Send an Email][Send an Email]]
+
+*** DONE Install Proton Bridge
+
+I visited [[https://proton.me/mail/download#bridge][Download the Proton Mail App for iOS, Android & Desktop]], and
+downloaded the Linux > Debian package.  Then installed the downloaded package.
+
+I launched Proton Bridge, authenticated, and started the configuration process.
+
+*** DONE Install mu4e
+
+I did a quick look to see if =mu4e= was in my package manager (e.g. =apt search mu4e=) and it was!
+
+On to the installation:
+
+#+begin_src shell :dir "/sudo::/home/jfriesen/" :cache no :export source :results raw silent
+  sudo apt install --assume-yes mu4e
+#+end_src
+
+I then needed to reconcile [[https://github.com/jeremyf/dotemacs/blob/b996a6fecf4593e227ae87f232e4ce98602ee874/emacs.d/personal.el#L772][my =mu4e= load-path in Emacs]].  This took a bit of
+sleuthing, in part because I built Emacs from source and =mu4e= from =apt install=.
+So I went digging in =/usr/share/= which is where =apt= installs shared information.
+And I found the file.
+
+I only use =mu4e= on my personal machine; but opted to add a conditional to allow for me to have either a MacOS install location via home brew or apt.
+
+*** DONE Install mbsync
+
+I suppose the first step is to install =mbsync=; which is not in the package repository.  Though =apt search mbsync= turned up =isync=, which provides the =mbsync= command.  I’ll take note and proceed.
+
+#+begin_src shell :dir "/sudo::/home/jfriesen/" :cache no :export source :results raw silent
+  sudo apt install isync --assume-yes
+#+end_src
+
+That installed =mbsync=; so I think we’re good to proceed to configuration.
+
+*** TODO Configure mbsync
+*** TODO Read an Email
+*** TODO Send an Email
+
+** DONE Interact with Mastodon via Emacs
+
+For this to work, I ran =M-x mastodon= and followed the instructions: With the
+authorization URL in the clipboard, visit that URL, login to the Mastodon
+instance, and authorize the application.  Once authorized, copy the code and
+paste it into Emacs’s prompt.
+
+Emacs then took care of storing the token in a PGP encrypted auth-info file.
+
+* TODO Put Stickers on Laptop
+
+My Macbook has two or so layers of stickers.  Each a memory of something I
+cherish.  I don’t think I’ll be able to recover those stickers.  But instead
+will take a photo of what I have and keep it.
+
+We did this very thing while we were sorting through our family keepsakes.  Our
+children had brought home lots of art, and keeping some of the bulky stuff was
+impractical.  So we posed holding the art work and took a photo.
+
+These photos are ones I’d consider printing and themselves keeping.
+
+* TODO Cleanup [0%]
+
+As I’ve been working on this migration, I’ve noted a few adjustments I needed to
+make that are a bit more involved:
+
+- [[*Reconcile dot zsh files][Reconcile dot zsh files]]
+- [[*Ensure my Xmodmap is Running at Login][Ensure my Xmodmap is Running at Login]]
+
+Other adjustments, I’ve made along the way ([[https://github.com/jeremyf/dotzshrc/commit/0d59084d785aa4d16ae4e782d23df8cdd5f221c2][such as a minor tweak to my =$EDITOR=
+command]]).
+
+** TODO Reconcile dot zsh files
+
+During the process of migration, I made changes to my dot zsh files.  These
+changes were:
+
+- Adding a =.zshenv= file, which I copied from my =.zprofile=
+- Commenting out code that was MacOS specific
+
+Ideally, I want to consolidate my =.zprofile=, =.zshrc=, and =.zshenv=.  I also want
+to convert the commented out code into code that conditionally runs based on
+operating system.
+
+** TODO Ensure my Xmodmap is Running at Login
+
+I would love the moment that I login to my computer, that the =Caps Lock= key
+would send =Control=.  However, at present that is not happening.
+
+I work around this because one of my first actions on login is to open Terminal;
+which sets my keybindings.
+
+* Deferred
+
+This section reflects “learnings I had along the way, but chose not to further
+pursue.”
 
 ** On I3
 
@@ -506,7 +1278,7 @@ What follows is my [[https://i3wm.org/][I3]] config:
   # Start XDG autostart .desktop files using dex. See also
   # https://wiki.archlinux.org/index.php/XDG_Autostart
   exec --no-startup-id dex --autostart --environment i3
-  
+
   # https://wiki.archlinux.org/index.php/XDG_Autostart
   exec --no-startup-id dex --autostart --environment i3
 
@@ -768,334 +1540,59 @@ I’m accustomed to a “system tray” in MacOS that includes actionable icons:
 
 I’m unclear how those icons might behave, or how I might assemble that using I3.
 
-* TODO Outstanding Tasks [77%]
 
-In this section I outline and detail the steps I consider for a complete
-migration.
 
-** DONE Hardening
-CLOSED: [2025-04-29 Tue 22:13]
-:LOGBOOK:
-- State "DONE"       from "TODO"       [2025-04-29 Tue 22:13]
-:END:
+* Reflections
 
-Enable automatic security updates:
+Up until I had installed Emacs, everything felt tenuous.  I was using Terminal
+and Nano; and it all felt fragile.  I wanted to take notes and keep track of
+what I was trying.
 
-#+begin_src shell :dir "/sudo::/home/jfriesen" :cache no :export source :results raw silent
-  sudo dpkg-reconfigure -p low unattended-upgrades
-#+end_src
+Once I had Emacs, I could lean into my writing ecosystem and everything started
+falling into place.  I did find that shifting between writing what I was doing
+and getting it done introduced a mental drain.
 
-Disable some services, first run ~sudo systemctl list-unit-files --state=enabled~
-to assess what services are running.
+To address the drain, I adopted a “Make a Checklist” strategy.  I’d quickly
+break down the steps, mark them as todo, and start chipping away at them.  The
+simple act of task breakdown gave a burst of energy, which meant I would
+invariably start on a task.
 
-Below is an example of one of those:
+And having something started, without finishing it, was a good way to ensure I
+had something I could return to.
 
-#+begin_src shell :dir "/sudo::/home/jfriesen" :cache no :export source :results raw silent
-  sudo systemctl disable cups.service
-#+end_src
-** DONE Firewall
-CLOSED: [2025-04-29 Tue 14:59]
-:LOGBOOK:
-- State "DONE"       from "TODO"       [2025-04-29 Tue 14:59]
-:END:
+Were I to do this again, I’d consider installing Emacs via the Pop Shop; it has
+the v30.1 available.  That would’ve helped me get “comfortable” in my computing
+environment.
 
-From [[https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-with-ufw-on-ubuntu][How to Set Up a Firewall with UFW on Ubuntu | DigitalOcean]], I'm going with
-a baseline setup.  Though will look to refine.
+Another set of “rabbit trails” was my often-used Emacs functions that were MacOS
+specific.  I spent time exploring how to introduce conditionals and then do the
+“same thing” in Linux as I did in MacOS.
 
-#+begin_src shell :dir "/sudo::/home/jfriesen" :cache no :export source :results raw silent
-  sudo ufw default deny incoming
-  sudo ufw default allow outgoing
-  sudo ufw enable
-  sudo nmap localhost
-  sudo ufw deny 139
-  sudo ufw deny 161
-  sudo ufw deny 5353
-#+end_src
+One of those was the toggling of dark and light themes.  I was doing this
+migratory work before sunrise, during lunch, immediately after work, or just
+around sunset.  Having control of my display was important.
 
-Where 139 is NETBIOS, 161 is SNMP, mDNS 5353, as per [[https://github.com/iAnonymous3000/popos-hardening-guide][GitHub -
-iAnonymous3000/popos-hardening-guide]].  I’m sure there’s more to do, but for now
-this is adequate.  However, there are refinements.
+As was my ability to “grab” browser links.  This required a reworking of the
+=grab-x-links= package, to reflect having multiple Firefox forks as viable
+browsers (e.g., [[https://mullvad.net][Mullvad Browser]] and [[https://librewolf.net/][LibreWolf]]).
 
-*** Open Snitch
+Most important, as I reflect it is evident that having pushing things to Emacs
+has meant I have a meta-Operating System; one that provides a buffer between me
+and my operating system.  Yet, more important, one that allows me to more easily
+“program” my interaction with my operating system.
 
-The refining I'm thinking of is along the lines of MacOS’s Little Snitch (or
-some alternative).  I didn’t use Little Snitch, favoring Lulu, but figure when
-searching for alternatives, that Little Snitch is more known.
-
-With a very baseline firewall in place, I set about finding a replacement.  The
-first candidate is [[https://github.com/evilsocket/opensnitch][GitHub - evilsocket/opensnitch: OpenSnitch is a GNU/Linux
-interactive application firewall inspired by Little Snitch]].
-
-After downloading the files, I ran the following to install the Open Snitch
-daemon:
-
-#+begin_src shell :dir "/sudo::/home/jfriesen/Downloads/" :cache no :export source :results raw silent
-  sudo apt install --assume-yes ./opensnitch*.deb
-#+end_src
-
-And the Open Snitch GUI:
-
-#+begin_src shell :dir "/sudo::/home/jfriesen/Downloads/" :cache no :export source :results raw silent
-  sudo apt install --assume-yes ./python3-opensnitch-ui*.deb
-#+end_src
-
-Along the way I learned about specifying =/sudo::/path/to/dir/= as the =:dir= option
-for the shell.  This means I can run the command via =sudo= and babel will prompt
-for my password.
-
-Per the documentation, I needed to patch up my pip install with the following:
-
-#+begin_src shell :dir "/sudo::/home/jfriesen" :cache no :export source :results raw silent
-sudo apt install --assume-yes python3-pip
-#+end_src
-
-#+begin_src shell :dir "/home/jfriesen" :cache no :export source :results raw silent
-pip3 install grpcio==1.41.0
-pip3 install protobuf==3.20.0
-#+end_src
-
-I then added Open Snitch to my running services via the following:
-
-#+begin_src shell :dir "/sudo::/home/jfriesen" :cache no :export source :results raw silent
-  sudo systemctl enable --now opensnitch.service
-#+end_src
-
-Rather quickly, Little Snitch started asking me if I wanted to allow or block
-connections.  There were some preliminary “allow forever” decisions that I
-needed to make.
-
-** DONE Clipboard Manager
-CLOSED: [2025-04-30 Wed 15:55]
-:LOGBOOK:
-- State "DONE"       from "TODO"       [2025-04-30 Wed 15:55]
-:END:
-
-On MacOS, I’ve been using Maccy.  And as more and more of my computering moves
-to Emacs, the clipboard manager has become less crucial.  However, having a
-history is very nice.
-
-As part of my research, I stumbled upon the [[https://copyq.readthedocs.io/en/latest/index.html][CopyQ’s documentation]]; a
-cross-platform clipboard manager.  I decided to give this a go in Linux, and if
-it works start using it on MacOS.
-
-From the documentation I ran:
-
-#+begin_src shell :dir "/sudo::/home/jfriesen" :cache no :export source :results raw silent
-sudo apt install software-properties-common
-sudo add-apt-repository ppa:hluk/copyq
-sudo apt update
-sudo apt install copyq
-#+end_src
-
-With that installed, I was curious about how to ensure that CopyQ always
-launched at login.  And there’s a settings in the preferences.
-
-The primary function I wanted was to have a hot key that would provide a list of
-paste options.  I bound =s-M-v= to CopyQ’s “Show the Menu Tray”; this gives me a
-list of the last five copied items with the option to easily search for more.
-
-CopyQ supports different themes; I wanted to keep the CopyQ theme synchronized
-with the OS theme.
-
-The following toggles the CopyQ theme based on the current state of my
-workspace’s color scheme:
-
-#+begin_src emacs-lisp
-  (defun jf/linux:toggle-copyq-theme (&optional color-scheme)
-      "Toggle the copyq theme based on current COLOR-SCHEME."
-      (interactive)
-      (let ((theme
-              (if (eq :dark
-                    (or color-scheme (jf/current-color-scheme-gnome)))
-                "solarized-dark.ini"
-                "solarized-light.ini"))
-             (theme-dir
-               (s-trim (shell-command-to-string "copyq info themes"))))
-        (shell-command
-          (concat "copyq loadTheme " (f-join theme-dir theme)))))
-#+end_src
-
-The above function is a proof of concept that I can then tie into my color
-scheme toggling process (with modifications I’m sure).
-
-** DONE Emacs Everywhere
-CLOSED: [2025-04-29 Tue 08:24]
-:LOGBOOK:
-- State "DONE"       from "TODO"       [2025-04-29 Tue 08:24]
-:END:
-
-I use the [[https://github.com/tecosaur/emacs-everywhere][Emacs Everywhere package]].  On MacOS I rely on [[https://www.hammerspoon.org/][Hammerspoon]] tool for
-launching into Emacs.
-
-In short this package, copies the current input field (e.g. a browser’s
-textarea) into a dedicated Emacs buffer, I then edit the text in Emacs, and when
-done paste the content back into the input field.
-
-I have found this quite useful as I’ve also chosen to set that dedicated Emacs
-buffer to use a focused writing context; akin to Writeroom.
-
-As I’m running Pop OS, I followed the [[https://help.ubuntu.com/stable/ubuntu-help/keyboard-shortcuts-set.html.en][Ubuntu instructions for binding a custom
-shortcut]].
-
-I also needed to ensure that =pandoc= is installed.  With that done, I ran =M-x
-emacs-everywhere-check-health=.  However, I observed a problem that was only
-evident when I read the source code.  Namely things didn’t work.
-
-Why?  Because in an earlier incarnation of keybindings, I had bound the =Insert=
-key to =Hyper_R=; and =emacs-everywhere= used that key code to perform the “paste”
-of the initial text into Emacs.
-
-So I needed to unbind that key.
-
-Further, the [[https://help.ubuntu.com/stable/ubuntu-help/keyboard-shortcuts-set.html.en][Ubuntu instructions for binding a custom shortcut]] did not work.  I
-then tried using =xbindkeys=.  I followed [[l][Make your own keybindings in linux using
-xbindkeys]].
-
-I installed xbindkeys via:
-
-#+begin_src shell :dir "/sudo::/home/jfriesen/Downloads/" :cache no :export source :results raw silent
-  sudo apt-get install --assume-yes xbindkeys
-#+end_src
-
-My hasty initial entry, which was what was recorded in the Pop OS shortcut, was
-as follows:
-
-#+begin_example
-  "emacsclient --eval '(emacs-everywhere)'"
-    Alt + Super + e
-#+end_example
-
-That did not work.  Following further instructions, I used =xbindkeys -k= to
-determine how it interpreted =Alt= + =Super= + =e=.  Which resulted in
-=Alt+Mod2+Mod4 + e=.
-
-I updated my =.xbindkeysrc= to reflect the above.  And things started working.
-
-** DONE Get SyncThing Running
-CLOSED: [2025-04-30 Wed 22:00]
-:LOGBOOK:
-- State "DONE"       from "TODO"       [2025-04-30 Wed 22:00]
-:END:
-
-There are three parts to SyncThing:
-
-- [[*Installing SyncThing][Installing SyncThing]]
-- [[*Auto-Start SyncThing][Auto-Start SyncThing]]
-- [[*Configuring SyncThing][Configuring SyncThing]]
-
-In reviewing my setup, both [[*Elfeed with Existing Data][Elfeed with Existing Data]] and [[*Denote Files][Denote Files]] need data
-from my old machine.  It makes sense to get SyncThing working, and pull that
-information from my previous computer.
-
-As a side quest, I want to use [[https://localsend.org/][LocalSend]] to get the Action ID of my SyncThing
-instance on my old machine.
-
-*** DONE Installing SyncThing
-CLOSED: [2025-04-30 Wed 18:35]
-:LOGBOOK:
-- State "DONE"       from              [2025-04-30 Wed 18:35]
-:END:
-
-Following [[https://apt.syncthing.net/][Syncthing docs on installing on Debian/Ubuntu]] we have the following:
-
-#+begin_src shell :dir "/sudo::/home/jfriesen" :cache no :export source :results raw silent
-  sudo mkdir -p /etc/apt/keyrings
-  sudo curl -L -o /etc/apt/keyrings/syncthing-archive-keyring.gpg https://syncthing.net/release-key.gpg
-#+end_src
-
-And I’d rather use stable than candidate, so I need to add the keyring:
-
-#+begin_src shell :dir "/sudo::/home/jfriesen" :cache no :export source :results raw silent
-echo "deb [signed-by=/etc/apt/keyrings/syncthing-archive-keyring.gpg] https://apt.syncthing.net/ syncthing stable" | sudo tee /etc/apt/sources.list.d/syncthing.list
-#+end_src
-
-And with the repository installed, I set about installing SyncThing:
-
-#+begin_src shell :dir "/sudo::/" :cache no :export source :results raw silent
-  sudo apt-get update --assume-yes
-  sudo apt-get install syncthing --assume-yes
-#+end_src
-
-And from that I’ll need to configure my local SyncThing.
-
-*** DONE Auto-Start SyncThing
-CLOSED: [2025-04-30 Wed 19:09]
-:LOGBOOK:
-- State "DONE"       from "TODO"       [2025-04-30 Wed 19:09]
-:END:
-
-Reading [[https://docs.syncthing.net/users/autostart.html#linux][Starting Syncthing Automatically]], I can add the =syncthring-start.desktop=
-to my auto-start directions:
-
-#+begin_src shell :dir "/home/jfriesen" :cache no :export source :results raw silent
-  cp /usr/share/applications/syncthing-start.desktop ~/.config/autostart/
-#+end_src
-
-If this does not work, I can use =systemctl=.
-
-*** DONE Configuring SyncThing
-CLOSED: [2025-04-30 Wed 21:32]
-:LOGBOOK:
-- State "DONE"       from "TODO"       [2025-04-30 Wed 21:32]
-:END:
-
-This is beyond the scope of this document; though perhaps best identified in a
-SyncThing runbook.  It involves setting up local directories and connecting to
-other devices in my SyncThing “ring”.
-
-** DONE Elfeed with Existing Data
-CLOSED: [2025-04-30 Wed 21:59]
-:LOGBOOK:
-- State "DONE"       from "TODO"       [2025-04-30 Wed 21:59]
-:END:
-
-In [[https://takeonrules.com/2025/01/22/on-elfeed-and-backups/][On Elfeed and Backups]], I wrote about using Elfeed for my RSS reader.  I
-restored the previous machine’s backup to my new machine.  And all things
-worked; I had the old data and could fetch new information.
-
-** DONE Denote Files
-CLOSED: [2025-04-30 Wed 21:36]
-:LOGBOOK:
-- State "DONE"       from "TODO"       [2025-04-30 Wed 21:36]
-:END:
-
-For most all of my writing I use Org-Mode, leveraging Denote for its file naming
-convention as well as utility functions.  Getting those files from my old
-machine is one of the last steps.
-
-I used SyncThing to bring things over.  And with those files I checked if my
-Emacs functions worked.  This is when I found that the <2025-04-30 Wed>
-installed version of =fd= was =v8.3.1=.  Which lead to the install instructions
-above.
-
-For the time being, I’m sync-ing files from my old machine to the new machine.
-At some point, I’ll flip that.
-
-** TODO Publish Blog Post [0%]
-
-This requires setting up my build engine.  Which involves:
-
-- [[*Building Hugo][Building Hugo]]
-- [[*Building Ruby][Building Ruby]]
-- [[*Exchanging SSH Keys][Exchanging SSH Keys]]
-
-*** TODO Building Hugo
-
-I’ll need to [[https://gohugo.io/installation/linux/#prebuilt-binaries][either build Hugo from source or install a release version]].
-
-*** TODO Building Ruby
-
-First is following some instructions around Ruby Environment (=rbenv=) manager.
-Looking at package manager options, it appears that [[https://github.com/rbenv/rbenv?tab=readme-ov-file#basic-git-checkout][cloning is the best option]].
-
-*** TODO Exchanging SSH Keys
-
-** TODO Read and Compose Emails in Emacs
-
-This is a lower priority, but one that I want to eventually want.  As such, I’m
-deferring.
+At present I’m not using [[https://i3wm.org/][I3]]; it’s something I’m considering but I figure use
+what I have and see how that works.
 
 * Footnotes
+[fn:10] A couple of days into this, I can say I’m remapping the memories.  But the
+higher the “stress” moment (e.g., pairing) the deeper ingrained memory takes
+hold.  But I look to this remapping as an exercise of mental nimbleness.
+
+[fn:9] The =trunk= instead of =main= is from the early days of our collective effort of
+renaming all =master= branches to something else.
+
+[fn:8] Someday I hope they release version =v1.0.0=.
 
 [fn:7] My mom has a retinal disease and her research and recommendations from
 experts leads her to incorporate more red filters in her day to day.

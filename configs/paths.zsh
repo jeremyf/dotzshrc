@@ -65,9 +65,21 @@ if [ -d $HOME/bin ]; then
     export PATH="$HOME/bin:$PATH"
 fi
 
+
+if [ -d $HOME/.local/bin ]; then
+    export PATH="$HOME/.local/bin:$PATH"
+fi
+
 export GO111MODULE=on
-# export GOROOT=$HB_PATH/opt/go/libexec/
-export GOPATH=$HOME/go
+if [[ -d $HOME/.local/go ]]; then
+    export GOPROXY=https://proxy.golang.org,direct
+    export GOTOOLCHAIN=auto
+    export GOROOT=$HOME/.local/go
+    export GOPATH=$HOME/go
+else
+    export GOROOT=$HB_PATH/opt/go/libexec/
+    export GOPATH=$HOME/go
+fi
 if [ -d $GOPATH ]; then
     echo "$PATH" | grep -q "$GOPATH" || export PATH="$PATH:$GOPATH/bin"
 fi
