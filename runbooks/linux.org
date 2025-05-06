@@ -68,7 +68,7 @@ alternative.
 
 I am unclear about the interaction of XModmap and =/etc/default/keyboard=; as such
 I removed the changes I made to the keyboard file and proceeded with these
-steps.[fn:3]
+steps.[fn:2]
 
 I found [[https://gist.github.com/yemM/9f232e2483b67965e9a0d55158e02ab2][Xmodmap to get keyboard act as on Mac OS · GitHub]], which altered the
 keyboard layout to similar expectations as MacOS.  However I'm going with a
@@ -188,7 +188,7 @@ launch apps, I’m okay enough with this behavior.
 And as I’ve been working on Linux, to build this document, I opted to switch the
 bindings on my Macbook.  Now I have mapped the key to the left of the space bar
 on my Macbook maps to Option/Alt.  I figure, if I’m going to leave the wall
-garden perhaps I can also leave the muscle memory and rebuild anew.[fn:10]
+garden perhaps I can also leave the muscle memory and rebuild anew.[fn:3]
 
 * Get Emacs Installed
 
@@ -210,7 +210,7 @@ Preliminaries:
 #+end_src
 
 With =git= installed I need a copy of the Emacs repository, and should build from
-a stable ref; as of <2025-04-23 Wed> that is =emacs-30.1=.[fn:6]
+a stable ref; as of <2025-04-23 Wed> that is =emacs-30.1=.[fn:4]
 
 I used [[https://gist.github.com/zoliky/0445b20676bfa85450d7df006066ceb7][Installing Emacs 29.1 from source on Debian 12 · GitHub]] as my framing.
 
@@ -278,7 +278,7 @@ mindset.”
 I don’t like the bright blues of a normal screen.  Instead I prefer to use a
 display setting that softens the colors.  In MacOS this is “Night Shift.”
 
-I choose a much warmer color, knowing that reds are softer on the retina.[fn:7]
+I choose a much warmer color, knowing that reds are softer on the retina.[fn:5]
 
 Both of these settings are similar in how they are toggled.  So I wrote some
 [[*Emacs Commands for Setting Toggling][Emacs Commands for Setting Toggling]].
@@ -669,13 +669,13 @@ left side three items:
 * Window Tiling
 
 I’m curious about tiling window managers.  And seeing how I can introduce some
-friction for changing contexts.[fn:4] I acknowledge that shifting from long-time
+friction for changing contexts.[fn:6] I acknowledge that shifting from long-time
 use of MacOS to Linux is likely already a major disruption, and layering on
 changes to window management may be overwhelming.
 
 But, I figure this is a good time to learn.  I settled on [[https://i3wm.org/][I3]] as my initial
 tiling window manager.  [[https://i3wm.org/][I3]] is well-documented, was simple to install and get
-running.[fn:5]
+running.[fn:7]
 
 On my old Macbook and work laptop (both running MacOS), I installed [[https://github.com/nikitabobko/AeroSpace][AeroSpace]]
 and am practicing that using a [[https://github.com/jeremyf/dotzshrc/blob/main/symlinks/dot.aerospace.toml][custom configuration]].  My hope is to have some
@@ -990,7 +990,7 @@ And last cloning the bare repository for my blog.  I needed this to know what
 version of Ruby to build.  Being a bare repository, it is only the contents of
 the =.git= directory; that is I can’t readily see the files of the project.
 
-I then cloned the bare repository and checked out my =trunk= branch.[fn:9]
+I then cloned the bare repository and checked out my =trunk= branch.[fn:8]
 
 *** DONE Installing Hugo
 
@@ -1585,32 +1585,33 @@ At present I’m not using [[https://i3wm.org/][I3]]; it’s something I’m con
 what I have and see how that works.
 
 * Footnotes
-[fn:10] A couple of days into this, I can say I’m remapping the memories.  But the
-higher the “stress” moment (e.g., pairing) the deeper ingrained memory takes
-hold.  But I look to this remapping as an exercise of mental nimbleness.
-
-[fn:9] The =trunk= instead of =main= is from the early days of our collective effort of
-renaming all =master= branches to something else.
-
-[fn:8] Someday I hope they release version =v1.0.0=.
-
-[fn:7] My mom has a retinal disease and her research and recommendations from
-experts leads her to incorporate more red filters in her day to day.
-
-[fn:6] I had a copy of the Emacs git repository on another machine.  So I used the
-sneaker net (e.g. a thumbdrive) to copy that over to the Linux machine and then
-run =git pull= so I could get up to date source code.
 
 [fn:1] Run =M-x org-babel-tangle= to perform the updates.
 
-[fn:2] A consumer-grade older HP laptop.
-
-[fn:3] An advantage is that the XModmap modifications, as implemented, are on a
+[fn:2] An advantage is that the XModmap modifications, as implemented, are on a
 per-user basis.
 
-[fn:4] I’ve noticed that when I use =Cmd+Tab= to jump between applications I am just
+[fn:3] A couple of days into this, I can say I’m remapping the memories.  But the
+higher the “stress” moment (e.g., pairing) the deeper ingrained memory takes
+hold.  But I look to this remapping as an exercise of mental nimbleness.
+
+[fn:4] I had a copy of the Emacs git repository on another machine.  So I used the
+sneaker net (e.g. a thumbdrive) to copy that over to the Linux machine and then
+run =git pull= so I could get up to date source code.
+
+[fn:5] My mom has a retinal disease and her research and recommendations from
+experts leads her to incorporate more red filters in her day to day.
+
+[fn:6] I’ve noticed that when I use =Cmd+Tab= to jump between applications I am just
 a bit more prone to accept a distraction.  Also that I’m using this as some sort
 of reflex to seek distraction.
 
-[fn:5] [[https://i3wm.org/][I3]] was also the documentation that detailed =update-alternatives=; which
+[fn:7] [[https://i3wm.org/][I3]] was also the documentation that detailed =update-alternatives=; which
 equipped me to further explore.
+
+[fn:8] The =trunk= instead of =main= is from the early days of our collective effort of
+renaming all =master= branches to something else.
+
+[fn:9] A consumer-grade older HP laptop.
+
+[fn:10] Someday I hope they release version =v1.0.0=.
