@@ -1124,7 +1124,7 @@ narrowed to the sub-tree, chose “Export at LaTeX” then “as PDF and open.�
 
 It generated a PDF and opened that PDF in an Emacs window.  Success!
 
-** TODO Read and Compose Emails in Emacs [50%]
+** TODO Read and Compose Emails in Emacs [66%]
 
 This is a lower priority, but one that I want to eventually want.  As such, I’m
 deferring.  For this to work, I need to:
@@ -1169,7 +1169,41 @@ I suppose the first step is to install =mbsync=; which is not in the package rep
 
 That installed =mbsync=; so I think we’re good to proceed to configuration.
 
-*** TODO Configure mbsync
+*** DONE Configure mbsync
+CLOSED: [2025-05-06 Tue 22:07]
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2025-05-06 Tue 22:07]
+:END:
+
+In MacOS, I was using the =security= command and needed an alternative.  This will
+likely mean I need to introduce a shell command that switches based on OS.
+
+#+begin_src shell :dir "/sudo::/" :cache no :export source :results raw silent
+sudo apt install libsecret-tools
+#+end_src
+
+I spent a bit of time looking around for how to then work with these values.
+[[https://askubuntu.com/questions/470384/is-it-possible-to-use-secret-tool-to-lookup-existing-seahorse-passwords][command line - Is it possible to use secret-tool to lookup existing seahorse
+passwords? - Ask Ubuntu]] provided me with the best insight.  I ran the following
+
+I ran the following from the command line:
+
+#+begin_example
+secret-tool store --label="ProtonBridgePassword" server proton-bridge login jeremy@jeremyfriesen.com
+#+end_example
+
+And provided my Proton Bridge password.
+
+Then I set the =PassCmd= in my =~/.mbsync= file to the following:
+
+#+begin_example
+PassCmd "secret-tool lookup server proton-bridge login jeremy@jeremyfriesen.com"
+#+end_example
+
+With my keyring unlocked, this provides the password for synchronization.
+
+I ran =mbsync -a= and all worked.
+
 *** TODO Read an Email
 *** TODO Send an Email
 

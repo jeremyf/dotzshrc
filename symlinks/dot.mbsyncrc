@@ -1,0 +1,33 @@
+IMAPAccount proton
+Host 127.0.0.1
+Port 1143
+User jeremy@jeremyfriesen.com
+PassCmd "secret-tool lookup server proton-bridge login jeremy@jeremyfriesen.com"
+# PassCmd "security find-generic-password -s proton-bridge -a jeremy@jeremyfriesen.com -w"
+# https://shom.dev/posts/20220108_setting-up-protonmail-in-emacs/
+### Were I not using Proton and Bridge I'd want to use this.
+# TLSType IMAPSTORE
+# TLSVersions +1.3
+### This was exported from ProtonBridge
+CertificateFile ~/Maildir/certificates/cert.pem
+
+IMAPStore proton-remote
+Account proton
+
+MaildirStore proton-local
+Subfolders Verbatim
+Path ~/Maildir/
+Inbox ~/Maildir/inbox
+
+### Sync settings
+Channel proton
+Far :proton-remote:
+Near :proton-local:
+# See https://takeonrules.com/2025/04/15/fixing-a-mu4e-and-proton-bridge-foible/
+Patterns * !"All Mail"
+CopyArrivalDate yes
+Expunge Both
+Create Both
+Remove Both
+Sync All
+SyncState *
