@@ -271,3 +271,7 @@
 	helper = !gh auth git-credential
 # [url "git@github.com:"]
 # 	insteadOf = https://github.com/
+[url "https://github.com/emacsmirror/nongnu_elpa.git"]
+	insteadOf = https://git.savannah.gnu.org/git/emacs/nongnu.git
+[url "https://github.com/bzg/org-mode.git"]
+	insteadOf = https://git.savannah.gnu.org/git/emacs/org-mode.git
