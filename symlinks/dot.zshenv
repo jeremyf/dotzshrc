@@ -10,7 +10,8 @@ if [ -d "/Volumes/JOURNAL" ]; then
     echo $HISTFILE
 fi
 
-if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+if [[ "$OSTYPE" == "linux-gnu"* ]]
+then
     SSH_ENV="$HOME/.ssh/agent-environment"
 
     function start_agent {
@@ -29,8 +30,7 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     fi
 fi
 
-# Fig pre block. Keep at the top of this file.(
-[[ -f "$HOME/.fig/shell/zprofile.pre.zsh" ]] && builtin source "$HOME/.fig/shell/zprofile.pre.zsh"
+# TODO: This should probably move into the Mac
 arch_name="$(uname -m)"
 if [ "${arch_name}" = "x86_64" ]; then
     export HB_PATH="/usr/local";
@@ -50,19 +50,24 @@ source $HOME/git/dotzshrc/configs/paths.zsh
 source $HOME/git/dotzshrc/configs/aliases.zsh
 source $HOME/git/dotzshrc/configs/functions.zsh
 
-# appearance=`defaults read -g AppleInterfaceStyle 2>/dev/null`
-# if [ -z "$appearance" ]
-# then
-#     # No value for AppleInterfaceStyle, so the OS has us in light mode,
-#     # proceed accordingly.
-#     sh term-light
-# else
-#     # AppleInterfaceStyle is set, and that means we're now in "Dark"
-#     # mode.
-#     sh term-dark
-# fi
-# 
-# eval "$(rbenv init -)"
-eval "$(~/.rbenv/bin/rbenv init - --no-rehash zsh)"
-# Fig post block. Keep at the bottom of this file.
-[[ -f "$HOME/.fig/shell/zprofile.post.zsh" ]] && builtin source "$HOME/.fig/shell/zprofile.post.zsh"
+if [[ "$OSTYPE" == "darwin" ]]
+then
+    # Hello what is likely Darwin
+    appearance=`defaults read -g AppleInterfaceStyle 2>/dev/null`
+    if [ -z "$appearance" ]
+    then
+        # No value for AppleInterfaceStyle, so the OS has us in light mode,
+        # proceed accordingly.
+        sh $HOME/bin/term-light
+    else
+        # AppleInterfaceStyle is set, and that means we're now in "Dark"
+        # mode.
+        sh $HOME/bin/term-light
+    fi
+fi
+if command -v rbenv &> /dev/null
+then
+  eval "$(rbenv init -)"
+else
+  [[ -d "$HOME/.rbenv/bin" ]] && eval "$(~/.rbenv/bin/rbenv init - --no-rehash zsh)"
+fi
