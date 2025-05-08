@@ -1,11 +1,12 @@
 # Set default values for all the accounts.
 defaults
-# LOGGING: For Macos
+# LOGGING: For Macos (and what I started with)
 # logfile ~/Maildir/msmtp.log
 # LOGGING: For Linux
 logfile ~/.msmtp.log
 # CERT: For Linux
-tls_trust_file /etc/ssl/certs/ca-certificates.crt
+# tls_trust_file /etc/ssl/certs/ca-certificates.crt
+tls_certcheck off
 tls on
 tls_starttls on
 

@@ -1307,7 +1307,8 @@ My final configuration for my =~/.msmtprc= is as follows:
   # LOGGING: For Linux
   logfile ~/.msmtp.log
   # CERT: For Linux
-  tls_trust_file /etc/ssl/certs/ca-certificates.crt
+  # tls_trust_file /etc/ssl/certs/ca-certificates.crt
+  tls_certcheck off
   tls on
   tls_starttls on
 
@@ -1357,7 +1358,10 @@ scrolled to the =proton.crt= and selected it.  I confirmed the selection and the
 output noted that I added 1 certificate.
 
 This solved the problem of the failed verification (and I could send emails, but
-not without logging errors).
+not without logging errors)…Actually, I thought it solved my problem.  But it
+didn’t.  So I added =tls_certcheck off= to just step around this.  I’m already
+using Proton Bridge as an intermediary; so hopefully that is adequate security
+for emails leaving my machine.
 
 Resolving the logging errors lead me down the pathway of learning just a bit
 about the =apparmor= package (from [[https://askubuntu.com/questions/878288/msmtp-cannot-write-to-var-log-msmtp-msmtp-log][server - msmtp cannot write to
