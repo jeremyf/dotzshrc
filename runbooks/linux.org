@@ -1124,7 +1124,20 @@ narrowed to the sub-tree, chose “Export at LaTeX” then “as PDF and open.�
 
 It generated a PDF and opened that PDF in an Emacs window.  Success!
 
-** TODO Read and Compose Emails in Emacs [66%]
+** TODO Debian Backports
+
+I was curious about setting up backports for Debian:
+
+#+begin_src shell :dir "/sudo::/" :cache no :export source :results raw silent
+  sudo curl -fsSLo /usr/share/keyrings/debian-bookworm.asc \
+       https://ftp-master.debian.org/keys/archive-key-12.asc
+#+end_src
+
+#+begin_src shell :dir "/sudo::/" :cache no :export source :results raw silent
+  echo "deb [signed-by=/usr/share/keyrings/debian-bookworm.asc arch=$( dpkg --print-architecture )] http://deb.debian.org/debian bookworm-backports main" | sudo tee /etc/apt/sources.list.d/debian-bookworm.list’
+#+end_src
+
+** TODO Read and Compose Emails in Emacs [83%]
 
 This is a lower priority, but one that I want to eventually want.  As such, I’m
 deferring.  For this to work, I need to:
@@ -1142,26 +1155,11 @@ downloaded the Linux > Debian package.  Then installed the downloaded package.
 
 I launched Proton Bridge, authenticated, and started the configuration process.
 
-*** DONE Install mu4e
-
-I did a quick look to see if =mu4e= was in my package manager (e.g. =apt search mu4e=) and it was!
-
-On to the installation:
-
-#+begin_src shell :dir "/sudo::/home/jfriesen/" :cache no :export source :results raw silent
-  sudo apt install --assume-yes mu4e
-#+end_src
-
-I then needed to reconcile [[https://github.com/jeremyf/dotemacs/blob/b996a6fecf4593e227ae87f232e4ce98602ee874/emacs.d/personal.el#L772][my =mu4e= load-path in Emacs]].  This took a bit of
-sleuthing, in part because I built Emacs from source and =mu4e= from =apt install=.
-So I went digging in =/usr/share/= which is where =apt= installs shared information.
-And I found the file.
-
-I only use =mu4e= on my personal machine; but opted to add a conditional to allow for me to have either a MacOS install location via home brew or apt.
-
 *** DONE Install mbsync
 
-I suppose the first step is to install =mbsync=; which is not in the package repository.  Though =apt search mbsync= turned up =isync=, which provides the =mbsync= command.  I’ll take note and proceed.
+I suppose the first step is to install =mbsync=; which is not in the package
+repository.  Though =apt search mbsync= turned up =isync=, which provides the =mbsync=
+command.  I’ll take note and proceed.
 
 #+begin_src shell :dir "/sudo::/home/jfriesen/" :cache no :export source :results raw silent
   sudo apt install isync --assume-yes
@@ -1203,9 +1201,185 @@ PassCmd "secret-tool lookup server proton-bridge login jeremy@jeremyfriesen.com"
 With my keyring unlocked, this provides the password for synchronization.
 
 I ran =mbsync -a= and all worked.
+*** TODO Install mu4e
 
-*** TODO Read an Email
-*** TODO Send an Email
+I originally set about using the mu4e package (e.g., =apt install mu4e=).  That
+package is at version 1.6.x.  And I was running into problems getting things to
+load.  I’m uncertain if that version works with Emacs version 30.1.
+
+Regardless, I set about following [[https://www.djcbsoftware.nl/code/mu/mu4e/Installation.html][Installation (Mu4e 1.12.8 user manual)]]
+
+Version: mu-1.12.10
+
+curl
+tar -xf ~/Downloads/<version>.tar.xz --directory ~/source
+
+#+begin_src shell :dir "/home/jfriesen" :cache no :export source :results raw silent
+  cd source/mu-1.12.10/ ; ./autogen.sh && make
+#+end_src
+
+#+begin_src shell :dir "/sudo::/home/jfriesen" :cache no :export source :results raw silent
+  cd source/mu-1.12.10; sudo make install
+#+end_src
+
+I then needed to reconcile [[https://github.com/jeremyf/dotemacs/blob/b996a6fecf4593e227ae87f232e4ce98602ee874/emacs.d/personal.el#L772][my =mu4e= load-path in Emacs]].  This took a bit of
+sleuthing, ultimately I settled on =/usr/local/share/emacs/site-lisp/mu4e/=.
+
+I only use =mu4e= on my personal machine; but opted to add a conditional to allow
+for me to have either a MacOS install location via home brew or apt.
+
+I then needed to initialize =mu= via the following:
+
+#+begin_src bash :results scalar replace :exports both :tangle yes
+mu init --my-address jeremy@jeremyfriesen.com
+#+end_src
+
+#+RESULTS:
+#+begin_example
+mu has been created with the following properties:
++-------------------+---------------------------------+
+| property          | value                           |
++-------------------+---------------------------------+
+| maildir           | /home/jfriesen/Maildir          |
++-------------------+---------------------------------+
+| database-path     | /home/jfriesen/.cache/mu/xapian |
++-------------------+---------------------------------+
+| schema-version    | 500                             |
++-------------------+---------------------------------+
+| max-message-size  | 100000000                       |
++-------------------+---------------------------------+
+| batch-size        | 50000                           |
++-------------------+---------------------------------+
+| created           | Wed May  7 20:54:34 2025        |
++-------------------+---------------------------------+
+| personal-address  | jeremy@jeremyfriesen.com        |
++-------------------+---------------------------------+
+| messages in store | 0                               |
++-------------------+---------------------------------+
+| support-ngrams    | no                              |
++-------------------+---------------------------------+
+| last-change       | never                           |
++-------------------+---------------------------------+
+| last-index        | never                           |
++-------------------+---------------------------------+
+Database is empty. You can use 'mu index' to fill it.
+#+end_example
+
+*** DONE Read an Email
+CLOSED: [2025-05-07 Wed 21:10]
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2025-05-07 Wed 21:10]
+:END:
+
+I ran =M-x mu4e= and started indexing my email and reading messages.
+
+There were a few different pathways I took in fiddling with =mu4e=; and I think
+I’d prefer the =apt install= route, but I have something that works.
+
+I read an unread message, updated =mu4e= and checked in another client—the message
+was marked as read!
+
+*** DONE Send an Email
+CLOSED: [2025-05-07 Wed 22:37]
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2025-05-07 Wed 22:37]
+:END:
+
+I need to get =msmtp= installed:
+
+#+begin_src shell :dir "/sudo::/" :cache no :export source :results raw silent
+  sudo apt install msmtp --assume-yes
+#+end_src
+
+The whole process was far more complicated than I would’ve thought.  I had two
+permission problems:
+
+- The Proton Mail Bridge certificate was not trusted
+- The =msmtp= process could not log its output.
+
+My final configuration for my =~/.msmtprc= is as follows:
+
+#+begin_src text :tangle ~/.msmtprc
+  # Set default values for all the accounts.
+  defaults
+  # LOGGING: For Macos (and what I started with)
+  # logfile ~/Maildir/msmtp.log
+  # LOGGING: For Linux
+  logfile ~/.msmtp.log
+  # CERT: For Linux
+  tls_trust_file /etc/ssl/certs/ca-certificates.crt
+  tls on
+  tls_starttls on
+
+  # Account details for foo@bar.tld
+  account proton
+  auth on
+  host 127.0.0.1
+  port 1025
+  protocol smtp
+  from Jeremy Friesen
+  user jeremy@jeremyfriesen.com
+  # Password: for MacOS
+  # passwordeval security find-generic-password -s proton-bridge -a jeremy@jeremyfriesen.com -w
+  # Password: for Linux
+  passwordeval secret-tool lookup server proton-bridge login jeremy@jeremyfriesen.com
+
+  # Default
+  account default : proton
+  #+end_src
+
+First, the certificate error:
+
+#+begin_quote
+  TLS certificate verification failed: The certificate is NOT trusted. The
+  certificate issuer is unknown.
+#+end_quote
+
+I needed to add the ProtonBridge certificate into my ca-certificates.  This meant converting the =pem= to a =crt= file:
+
+#+begin_src shell :dir "~/" :cache no :export source :results raw silent
+  cd ~/Maildir/certificates
+      openssl x509 -outform der -in cert.pem -out proton.crt
+#+end_src
+
+Then I moved the =proton.crt= into a sub-directory of =/usr/share/ca-certificates/=:
+
+#+begin_src shell :dir "/sudo::/" :cache no :export source :results raw silent
+  sudo chown root:root /home/jfriesen/Maildir/certificates/proton.crt
+  sudo mkdir -p /usr/share/ca-certificates/proton/
+
+  sudo mv  /home/jfriesen/Maildir/certificates/proton.crt \
+        /usr/share/ca-certificates/proton/
+#+end_src
+
+I ran =sudo dpkg-reconfigure ca-certificates=, selecting the =ask= prompt.  Then
+scrolled to the =proton.crt= and selected it.  I confirmed the selection and the
+output noted that I added 1 certificate.
+
+This solved the problem of the failed verification (and I could send emails, but
+not without logging errors).
+
+Resolving the logging errors lead me down the pathway of learning just a bit
+about the =apparmor= package (from [[https://askubuntu.com/questions/878288/msmtp-cannot-write-to-var-log-msmtp-msmtp-log][server - msmtp cannot write to
+/var/log/msmtp/msmtp.log - Ask Ubuntu]]).
+
+I ran =cat /etc/apparmor.d/usr.bin.msmtp= and looked for allowed logs:
+
+#+begin_src bash :results scalar replace :exports both :tangle yes
+  cat /etc/apparmor.d/usr.bin.msmtp | rg log
+#+end_src
+
+#+RESULTS:
+:   owner @{HOME}/.msmtp*.log wk,
+:   /var/log/msmtp            wk,
+:   owner @{HOME}/.cache/msmtp/*.log wk,
+:   @{PROC}/@{pid}/loginuid r,
+
+Which led me to change my initial log from =~/Maildir/msmtp.log= to =~/.msmtp.log=.
+I suppose I’ll need to consider log rotation.  Though really =/dev/null= would
+work for me.
+
+I sent an email to myself, and things worked.
 
 ** DONE Interact with Mastodon via Emacs
 

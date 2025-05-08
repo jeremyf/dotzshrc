@@ -5,19 +5,22 @@ User jeremy@jeremyfriesen.com
 PassCmd "secret-tool lookup server proton-bridge login jeremy@jeremyfriesen.com"
 # PassCmd "security find-generic-password -s proton-bridge -a jeremy@jeremyfriesen.com -w"
 # https://shom.dev/posts/20220108_setting-up-protonmail-in-emacs/
-### Were I not using Proton and Bridge I'd want to use this.
+### Were I not using proton and Bridge I'd want to use this.
+AuthMechs LOGIN
+# TLSType STARTTLS
+# TLSVersions +1.3
 # TLSType IMAPSTORE
 # TLSVersions +1.3
-### This was exported from ProtonBridge
+### This was exported from protonBridge
 CertificateFile ~/Maildir/certificates/cert.pem
 
 IMAPStore proton-remote
 Account proton
 
 MaildirStore proton-local
-Subfolders Verbatim
 Path ~/Maildir/
-Inbox ~/Maildir/inbox
+Inbox ~/Maildir/Inbox
+Subfolders Verbatim
 
 ### Sync settings
 Channel proton
@@ -28,6 +31,4 @@ Patterns * !"All Mail"
 CopyArrivalDate yes
 Expunge Both
 Create Both
-Remove Both
-Sync All
 SyncState *
