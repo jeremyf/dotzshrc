@@ -5,7 +5,7 @@ if [ -f "$HOME/.Xmodmap" ]; then
 fi
 
 if [ -d "/Volumes/JOURNAL" ]; then
-    echo "ℹ Profile Using Journal history"
+    echo "Profile Using Journal history"
     HISTFILE="/Volumes/JOURNAL/.zsh_history"
     echo $HISTFILE
 fi
@@ -43,28 +43,9 @@ if [ -f $HB_PATH/bin/brew ]; then
    eval "$($HB_PATH/bin/brew shellenv)"
 fi
 
-ZSH_THEME='powerlevel10k/powerlevel10k'
-
 source $HOME/git/dotzshrc/configs/config.zsh
 source $HOME/git/dotzshrc/configs/paths.zsh
-source $HOME/git/dotzshrc/configs/aliases.zsh
-source $HOME/git/dotzshrc/configs/functions.zsh
 
-if [[ "$OSTYPE" == "darwin" ]]
-then
-    # Hello what is likely Darwin
-    appearance=`defaults read -g AppleInterfaceStyle 2>/dev/null`
-    if [ -z "$appearance" ]
-    then
-        # No value for AppleInterfaceStyle, so the OS has us in light mode,
-        # proceed accordingly.
-        sh $HOME/bin/term-light
-    else
-        # AppleInterfaceStyle is set, and that means we're now in "Dark"
-        # mode.
-        sh $HOME/bin/term-light
-    fi
-fi
 if command -v rbenv &> /dev/null
 then
   eval "$(rbenv init -)"

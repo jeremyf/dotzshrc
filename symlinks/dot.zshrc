@@ -1,16 +1,34 @@
-
-if [[ "$OSTYPE" == "darwin"* ]]; then
-   if [[ -f "$(brew --prefix)/share/zsh/site-functions" ]]; then fpath=("$(brew --prefix)/share/zsh/site-functions" $fpath); fi
+if [[ "$OSTYPE" == "darwin"* ]]
+then
+    if [[ -f "$(brew --prefix)/share/zsh/site-functions" ]]; then fpath=("$(brew --prefix)/share/zsh/site-functions" $fpath); fi
    zmodload zsh/complist
+    # Hello what is likely Darwin
+    appearance=`defaults read -g AppleInterfaceStyle 2>/dev/null`
+    if [ -z "$appearance" ]
+    then
+        # No value for AppleInterfaceStyle, so the OS has us in light mode,
+        # proceed accordingly.
+        sh $HOME/bin/term-light
+    else
+        # AppleInterfaceStyle is set, and that means we're now in "Dark"
+        # mode.
+        sh $HOME/bin/term-light
+    fi
 fi
+
+source $HOME/git/dotzshrc/configs/aliases.zsh
+source $HOME/git/dotzshrc/configs/functions.zsh
 
 autoload -U compinit; compinit
 
+ZSH_THEME='powerlevel10k/powerlevel10k'
 if [ -f $ZSH/oh-my-zsh.sh ]; then
     source $ZSH/oh-my-zsh.sh
 fi
 
-export STARSHIP_CONFIG=~/git/dotzshrc/.config/starship/starship.toml
+if [ -f ~/git/dotzshrc/.config/starship/starship.toml ]; then
+   export STARSHIP_CONFIG=~/git/dotzshrc/.config/starship/starship.toml
+fi
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
