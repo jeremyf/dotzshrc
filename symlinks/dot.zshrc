@@ -56,4 +56,7 @@ then
     source "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
 fi
 
+
 if [ -f "$(brew --prefix)/opt/asdf/libexec/asdf.sh" ]; then source "$(brew --prefix)/opt/asdf/libexec/asdf.sh"; fi
+
+if [ -d /home/linuxbrew ]; then eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"; fi
