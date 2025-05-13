@@ -16,6 +16,7 @@ then
     fi
 fi
 
+source $HOME/git/dotzshrc/configs/config.zsh
 source $HOME/git/dotzshrc/configs/aliases.zsh
 source $HOME/git/dotzshrc/configs/functions.zsh
 

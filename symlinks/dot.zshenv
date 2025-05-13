@@ -43,7 +43,6 @@ if [ -f $HB_PATH/bin/brew ]; then
    eval "$($HB_PATH/bin/brew shellenv)"
 fi
 
-source $HOME/git/dotzshrc/configs/config.zsh
 source $HOME/git/dotzshrc/configs/paths.zsh
 
 if command -v rbenv &> /dev/null

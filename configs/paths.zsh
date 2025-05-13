@@ -84,10 +84,6 @@ if [ -d $GOPATH ]; then
     echo "$PATH" | grep -q "$GOPATH" || export PATH="$PATH:$GOPATH/bin"
 fi
 
-export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
-
-export LYNX_CFG="$HOME/.lynx.cfg"
-
 if [ -d $HOME/.local/emacs/bin ]; then
     export PATH="$HOME/.local/emacs/bin:$PATH"
 fi
