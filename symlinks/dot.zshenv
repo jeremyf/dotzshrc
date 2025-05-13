@@ -1,7 +1,7 @@
 if [ -f "$HOME/.Xmodmap" ]; then
     # I'd like to launch this at login to Linux, but I have yet to find the
     # magic incantation.
-    xmodmap $HOME/.Xmodmap 2> /dev/null
+#    xmodmap $HOME/.Xmodmap 2> /dev/null
 fi
 
 if [ -d "/Volumes/JOURNAL" ]; then
