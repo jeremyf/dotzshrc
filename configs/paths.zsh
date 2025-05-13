@@ -69,7 +69,7 @@ else
     export GOROOT=$HB_PATH/opt/go/libexec/
     export GOPATH=$HOME/go
 fi
-if [ -d $GOPATH ]; then
+if [[ -d $GOPATH ]]; then
     echo "$PATH" | grep -q "$GOPATH" || export PATH="$PATH:$GOPATH/bin"
 fi
 
