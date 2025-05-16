@@ -1,5 +1,15 @@
 if [[ "$OSTYPE" == "darwin"* ]]
 then
+    # Something MacOS was injecting path variables in my interactive shell.
+    # These were at the front of the line.  And creating issues with Homebrew.
+    export PATH="$DARWIN_PATH:$PATH"
+    if [[ -x /opt/homebrew/bin/awk ]]; then
+        export PATH="$(echo "$PATH" | /opt/homebrew/bin/awk 'BEGIN { RS=":"; } { sub(sprintf("%c$", 10), ""); if (A[$0]) {} else { A[$0]=1; printf(((NR==1) ?"" : ":") $0) }}')"
+        echo $PATH
+    else
+        echo "AWK is not located at /opt/homebrew/bin/awk" # for the truly paranoid
+    fi
+
     if [[ -f "$(brew --prefix)/share/zsh/site-functions" ]]; then fpath=("$(brew --prefix)/share/zsh/site-functions" $fpath); fi
    zmodload zsh/complist
     # Hello what is likely Darwin

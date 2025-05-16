@@ -51,3 +51,7 @@ then
 else
   [[ -d "$HOME/.rbenv/bin" ]] && eval "$(~/.rbenv/bin/rbenv init - --no-rehash zsh)"
 fi
+
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    export DARWIN_PATH=$PATH
+fi
