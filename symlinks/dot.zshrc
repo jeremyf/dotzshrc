@@ -5,7 +5,6 @@ then
     export PATH="$DARWIN_PATH:$PATH"
     if [[ -x /opt/homebrew/bin/awk ]]; then
         export PATH="$(echo "$PATH" | /opt/homebrew/bin/awk 'BEGIN { RS=":"; } { sub(sprintf("%c$", 10), ""); if (A[$0]) {} else { A[$0]=1; printf(((NR==1) ?"" : ":") $0) }}')"
-        echo $PATH
     else
         echo "AWK is not located at /opt/homebrew/bin/awk" # for the truly paranoid
     fi
