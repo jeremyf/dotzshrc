@@ -51,10 +51,6 @@ fcrepo4-test-data
 # I'm storing these files in projects as reminders of what to work on.
 *.grep.txt
 
-# If the project already has one, great.  Otherwise assume I've done
-# the lonely work to map folks.
-.mailmap
-
 /Library/
 .yardoc/
 doc/
