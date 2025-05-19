@@ -99,3 +99,10 @@ export DISABLE_SPRING=1
 # Given that I'm using private repositories, I need to account for that in
 # module retrieval.
 export GOPRIVATE=github.com/converge-cloud/*
+
+# $ man less | rg "^\s+-[SXRF]"
+#        -F or --quit-if-one-screen
+#        -R or --RAW-CONTROL-CHARS
+#        -S or --chop-long-lines
+#        -X or --no-init
+export LESS="-SXRF"
