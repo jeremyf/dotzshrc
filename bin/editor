@@ -194,7 +194,7 @@ case "${os_name}" in
         # On Linux macOS, use the standard Emacs process for daemon.
         if [ -z "${daemon_name}" ]; then
             # shellcheck disable=SC2009
-            if ps -ax | grep 'emacs --daemon' | grep -v 'emacs --daemon=' | grep -v grep > /dev/null; then
+            if ps -ax | rg 'emacs --(fg-)?daemon' > /dev/null; then
                 if [ "${start_client}" = "false" ]; then
                     if [ "${start_daemon}" = "true" ]; then
                         echo "ec: Emacs daemon (for default socket name) is already running!"
