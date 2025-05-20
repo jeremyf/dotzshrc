@@ -506,6 +506,127 @@ However, that wasn’t quite enough.  So I wrote up [[https://github.com/jeremyf
 namely to address having multiple applications based on Firefox.  Along the way
 I learned about =xdotool= and =comm=.
 
+** Register Emacs with Linux
+
+*** First We Ensure Emacs Launches
+
+Here is my custom launch control.
+
+#+begin_src text :tangle ~/.config/systemd/user/emacs.service
+[Unit]
+Description=Emacs text editor
+Documentation=info:emacs man:emacs(1) https://gnu.org/software/emacs/
+
+[Service]
+Type=notify
+ExecStart=/home/jfriesen/.local/emacs/bin/emacs --fg-daemon
+TimeoutStartSec=15
+
+# Emacs will exit with status 15 after having received SIGTERM, which
+# is the default "KillSignal" value systemd uses to stop services.
+SuccessExitStatus=15
+
+# The location of the SSH auth socket varies by distribution, and some
+# set it from PAM, so don't override by default.
+# Environment=SSH_AUTH_SOCK=%t/keyring/ssh
+Restart=on-failure
+
+[Install]
+WantedBy=default.target
+#+end_src
+
+With the systemctl specified, now load and enable the service:
+
+#+begin_src bash :results scalar replace :exports both :tangle yes
+  systemctl --user daemon-reload; \
+      systemctl --user enable emacs.service
+#+end_src
+
+**** Troubleshooting the Daemons
+
+Commands for checking on the daemons:
+
+#+begin_src bash :results scalar replace :exports both :tangle yes
+  journalctl --user -xeu emacs.service
+#+end_src
+
+#+begin_src bash :results scalar replace :exports both :tangle yes
+  systemctl --user status emacs.service
+#+end_src
+
+*** Register Emacs Client with Desktop
+
+I want to add Emacs Client as an application.  The following specifies the configuration:
+
+#+begin_src text :tangle ~/.local/share/applications/emacsclient.desktop
+  [Desktop Entry]
+  Name=Emacs (Client)
+  GenericName=Text Editor
+  Comment=Edit text
+  MimeType=text/english;text/plain;text/x-makefile;text/x-c++hdr;text/x-c++src;text/x-chdr;text/x-csrc;text/x-java;text/x-moc;text/x-pascal;text/x-tcl;text/x-tex;application/x-shellscript;text/x-c;text/x-c++;x-scheme-handler/org-protocol;
+  Exec=/home/jfriesen/.local/emacs/bin/emacsclient -r -n %F
+  Icon=/home/jfriesen/git/dotemacs/icons/purple-gnu.icns
+  Type=Application
+  Terminal=false
+  Categories=TextEditor;Utility
+  StartupWMClass=Emacs
+  Keywords=emacsclient;
+  Actions=new-window;new-instance;
+
+  X-Desktop-File-Install-Version=0.26
+
+  [Desktop Action new-window]
+  Name=New Window
+  Exec=/home/jfriesen/.local/emacs/bin/emacsclient -r -n %F
+
+  [Desktop Action new-instance]
+  Name=New Instance
+  Exec=/home/jfriesen/.local/emacs/bin/emacsclient -r -n %F
+#+end_src
+
+And now we load that configuration and have access to Emacs (Client) from my launcher:
+
+#+begin_src shell :dir "/sudo::/home/jfriesen/" :cache no :export source :results raw silent
+  sudo desktop-file-install .local/share/applications/emacsclient.desktop
+#+end_src
+
+*** Register Emacsclient as Email Handler
+
+#+begin_src text :tangle ~/.local/share/applications/emacsclient-mail.desktop
+  [Desktop Entry]
+  Categories=Network;Email;
+  Comment=GNU Emacs is an extensible, customizable text editor - and more
+  Exec=emacsclient -r -n --eval "(message-mailto (pop server-eval-args-left))" %u
+  Icon=/home/jfriesen/git/dotemacs/icons/purple-gnu.icns
+  Name=Emacs (Mail, Client)
+  MimeType=x-scheme-handler/mailto;
+  Terminal=false
+  Type=Application
+  Keywords=emacsclient;
+  Actions=new-window;new-instance;
+
+  [Desktop Action new-window]
+  Name=New Window
+  Exec=emacsclient -c -n --eval "(message-mailto (pop server-eval-args-left))" %u
+
+  [Desktop Action new-instance]
+  Name=New Instance
+  Exec=emacsclient -c -n --eval "(message-mailto (pop server-eval-args-left))" %u
+#+end_src
+
+#+begin_src shell :dir "/sudo::/home/jfriesen/" :cache no :export source :results raw silent
+  sudo desktop-file-install .local/share/applications/emacsclient-mail.desktop
+#+end_src
+
+*** TODO Edit =~/.config/mimeapps.list=
+
+I have entries that I want to ensure are present in the document.
+
+* Mount Drive
+
+[[https://learnubuntu.com/mount-drives/][Mount Drives in Ubuntu Command Line]] and [[https://support.system76.com/articles/extra-drive/][Auto-Mount Second Hard Drive(s) -
+System76 Support]].
+
 * Internet Hygiene
 
 I installed my password manager, so I could quickly sign-in to paid services.  I
@@ -729,10 +850,14 @@ I appreciate that I have the ability to install the window manager package but
 not install it as the active window manager.  And I can install multiple window
 manager packages, but only activate one of them.
 
-* TODO Outstanding Tasks [100%]
+* TODO Outstanding Tasks [92%]
 
 In this section I outline and detail the steps I consider for a complete
 migration.
+
+** TODO Assign Emacs as Text Editor
+
+See [[https://www.taingram.org/blog/emacs-client.html][Emacsclient Setup with Desktop Integration]].
 
 ** DONE Signal
 :LOGBOOK:
