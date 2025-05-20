@@ -1,3 +1,5 @@
+VISUAL="editor -r"
+export VISUAL
 if [ -f "$HOME/.Xmodmap" ]; then
     # I'd like to launch this at login to Linux, but I have yet to find the
     # magic incantation.
