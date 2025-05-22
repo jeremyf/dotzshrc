@@ -163,6 +163,25 @@ I tried using both a symlink and a copy of my personal =~/.Xmodmap= to the =/usr
 
 Until I learn more, I’ll launch Terminal when I first login.
 
+** AutoKey
+
+I got tired of =C-n= opening a new tab in Librewolf and Mullvad Browser.  So I installed [[https://autokey.github.io][AutoKey]] and added two actions:
+
+Move Up:
+
+- HotKey :: ~<ctrl>+p~
+- Script ::  ~keyboard.send_key(Key.UP)~
+- Window Filter :: ~~^Navigator\.(librewolf|Mullvad Browser)$~
+
+Move Down:
+
+- HotKey :: ~<ctrl>+n~
+- Script ::  ~keyboard.send_key(Key.DOWN)~
+- Window Filter :: ~~^Navigator\.(librewolf|Mullvad Browser)$~
+
+That resolve the most egregious/intrusive problems.  (Maybe…the regexp should
+simply select everything except Emacs).
+
 * Coping with Pop OS Keybindings
 
 This was a bit of a side-quest, but one that relates to Emacs.  Namely Pop OS
@@ -783,12 +802,18 @@ this is something that I used Karabiner Elements to enforce/provide.
 
 ** TODO Exploring Conditional Keymappings
 
-One function I miss from [[denote:20230201T203022][Karabiner-Elements]] is the ability to map a key combination for applications that match (or don’t match) a regular expression.
+One function I miss from [[denote:20230201T203022][Karabiner-Elements]] is the ability to map a key
+combination for applications that match (or don’t match) a regular expression.
 
-As mentioned earlier, I would love for =C-n= to send the =Down= key when I’m not in Emacs.  So I explored options by reviewing [[https://alternativeto.net/software/karabiner-elements/?platform=linux][Karabiner Elements Alternatives for Linux: Top 10 Key Mapping Tools]].
+As mentioned earlier, I would love for =C-n= to send the =Down= key when I’m not in
+Emacs.  So I explored options by reviewing [[https://alternativeto.net/software/karabiner-elements/?platform=linux][Karabiner Elements Alternatives for
+Linux: Top 10 Key Mapping Tools]].
 
 Ideally, the key mapper would be cross-platform so I could install on MacOS and
-Linux.  A quick read through the various options and [[https://github.com/joshgoebel/keyszer][joshgoebel/keyszer: a smart, flexible keymapper for X11 (on Github)]] appears to meet my criteria.
+Linux.  A quick read through the various options and [[https://github.com/joshgoebel/keyszer][joshgoebel/keyszer: a
+smart, flexible keymapper for X11 (on Github)]] appears to meet my criteria.
+
+The main pain point I have is that =C-n= in LibreWolf opens a new tab.
 
 * Menu Bar
 
@@ -1452,7 +1477,7 @@ I’d prefer the =apt install= route, but I have something that works.
 I read an unread message, updated =mu4e= and checked in another client—the message
 was marked as read!
 
-*** DONE Send an Email
+*** DONE COMMENT Send an Email
 CLOSED: [2025-05-07 Wed 22:37]
 :LOGBOOK:
 - State "DONE"       from "TODO"       [2025-05-07 Wed 22:37]
@@ -1509,11 +1534,12 @@ First, the certificate error:
   certificate issuer is unknown.
 #+end_quote
 
-I needed to add the ProtonBridge certificate into my ca-certificates.  This meant converting the =pem= to a =crt= file:
+I needed to add the ProtonBridge certificate into my ca-certificates.  This
+meant converting the =pem= to a =crt= file:
 
 #+begin_src shell :dir "~/" :cache no :export source :results raw silent
-  cd ~/Maildir/certificates
-      openssl x509 -outform der -in cert.pem -out proton.crt
+  cd ~/Maildir/certificates openssl x509 \
+     -outform der -in cert.pem -out proton.crt
 #+end_src
 
 Then I moved the =proton.crt= into a sub-directory of =/usr/share/ca-certificates/=:
