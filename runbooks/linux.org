@@ -1321,8 +1321,15 @@ my documents to a PDF format.  That requires LaTeX:
   sudo apt install --assume-yes texlive-luatex
   sudo apt install --assume-yes texlive-pictures
   sudo apt install --assume-yes texlive-bibtex-extra
+  sudo apt install --assume-yes texlive-metapost
+  sudo apt install --assume-yes texlive-publishers
+  sudo apt install --assume-yes texlive-pstricks
   sudo apt install --assume-yes texlive-science
 #+end_src
+
+
+Eventually, I ran =sudo apt install --assume-yes texlive-full=; which I think installs what is a super-set of the above commands.
+
 
 And to test, I found a small Org-Mode node, ran =M-x org-export-dispatch= and
 narrowed to the sub-tree, chose “Export at LaTeX” then “as PDF and open.”
@@ -1651,7 +1658,7 @@ following steps to get it running:
 
 To remove i3 as my window manager of choice I ran:
 
-=sudo update-alternatves --remove x-session-manager /usr/bin/i3=
+=sudo update-alternatives --remove x-session-manager /usr/bin/i3=
 
 *** I3 Config
 
