@@ -96,6 +96,9 @@ I used =xev= command to explore the keybindings.
   !Bind left control as Hyper, this key is so hopelessly far away in travel.
   keycode 37 = Hyper_L
 
+  !Key to left of spacebar
+  keycode 64 = Alt_L
+
   ! Bind key to immediate right of spacebar
   keycode 108 = Alt_R
 

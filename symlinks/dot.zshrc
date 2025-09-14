@@ -1,3 +1,7 @@
+if [[ $TERM = dumb ]]; then
+  unset zle_bracketed_paste
+fi
+
 if [[ "$OSTYPE" == "darwin"* ]]
 then
     # Something MacOS was injecting path variables in my interactive shell.
@@ -25,7 +29,7 @@ then
     fi
 fi
 
-if [[ -f "$(brew --prefix)/share/zsh/site-functions" ]]; then fpath=("$(brew --prefix)/share/zsh/site-functions" $fpath); fi
+#if [[ -f "$(brew --prefix)/share/zsh/site-functions" ]]; then fpath=("$(brew --prefix)/share/zsh/site-functions" $fpath); fi
 zmodload zsh/complist
 
 source $HOME/git/dotzshrc/configs/config.zsh
@@ -70,17 +74,16 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# # The next line updates PATH for the Google Cloud SDK.
+# if [ -d "$(brew --prefix)/share/google-cloud-sdk" ]
+# then
+#    # We set this so that GCloud doesn't collide with Python's venv.
+#    export CLOUDSDK_PYTHON="$(brew --prefix)/bin/python3"
+#    source "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"
+#    source "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
+# fi
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -d "$(brew --prefix)/share/google-cloud-sdk" ]
-then
-    # We set this so that GCloud doesn't collide with Python's venv.
-    export CLOUDSDK_PYTHON="$(brew --prefix)/bin/python3"
-    source "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"
-    source "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
-fi
 
-
-if [ -f "$(brew --prefix)/opt/asdf/libexec/asdf.sh" ]; then source "$(brew --prefix)/opt/asdf/libexec/asdf.sh"; fi
+# if [ -f "$(brew --prefix)/opt/asdf/libexec/asdf.sh" ]; then source "$(brew --prefix)/opt/asdf/libexec/asdf.sh"; fi
 
 if [ -d /home/linuxbrew ]; then eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"; fi

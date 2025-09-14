@@ -1,0 +1,56 @@
+#!/usr/bin/env sh
+
+set -e
+
+journal_dir=/media/jfriesen/Journal
+while getopts 'ph' opt; do
+    case "$opt" in
+    p)
+        echo "Using path $2 to write-backup"
+        journal_dir=$2
+        shift 2
+      ;;
+    h)
+        echo "Usage: $(basename $0) [-p] "
+      ;;
+    ?)
+      echo -e "Invalid command option.\nUsage $(basename $0) [-p] [-h]"
+esac
+done
+
+# TODO: Mount the $journal_dir if it does not exist
+
+exclusion_file=$HOME/.config/rsync/rsync-exclusion.txt
+
+if [ ! -f $exclusion_file ]; then
+    echo "Missing rsync exclusion file $exclusion_file" >&2
+    exit 2
+fi
+
+if [ ! -d $journal_dir ]; then
+    echo "Missing $journal_dir directory" >&2
+    exit 2
+fi
+
+if command -v rsync > /dev/null; then
+    rsync $HOME $journal_dir \
+          --progress --delete-excluded -aiz \
+          --exclude=jfriesen/.cache \
+          --exclude=.git \
+          --exclude=jfriesen/go \
+          --exclude=jfriesen/.brew \
+          --exclude=jfriesen/.emacs.d/straight \
+          --exclude=jfriesen/.bundle \
+          --exclude=jfriesen/.librewolf \
+          --exclude=jfriesen/.mullvad-browser \
+          --exclude=jfriesen/.mozilla \
+          --exclude=jfriesen/.local \
+          --exclude=jfriesen/.rbenv \
+          --exclude=*/tmp \
+          --exclude=*/._tmp \
+          --exclude=*/*.tmp
+    echo "Wrote backup to $journal_dir"
+else
+    echo "Missing rsync command" >&2
+    exit 1
+fi

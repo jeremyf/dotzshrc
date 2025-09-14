@@ -1,3 +1,6 @@
+if [[ $TERM = dumb ]]; then
+  unset zle_bracketed_paste
+fi
 VISUAL="editor -r"
 export VISUAL
 if [ -f "$HOME/.Xmodmap" ]; then

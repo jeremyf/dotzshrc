@@ -1,0 +1,8 @@
+"emacsclient -r --eval '(emacs-everywhere)'"
+  m:0x58 + c:64
+  Alt+Mod2+Mod4 + Alt_L
+  
+"emacsclient -r --eval '(emacs-everywhere)'"
+  m:0x50 + c:133
+  Mod2+Mod4 + Super_L
+  
