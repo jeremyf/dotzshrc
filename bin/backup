@@ -36,7 +36,6 @@ if command -v rsync > /dev/null; then
     rsync $HOME $journal_dir \
           --progress --delete-excluded -aiz \
           --exclude=jfriesen/.cache \
-          --exclude=.git \
           --exclude=jfriesen/go \
           --exclude=jfriesen/.brew \
           --exclude=jfriesen/.emacs.d/straight \
