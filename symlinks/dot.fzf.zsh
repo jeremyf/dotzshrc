@@ -1,29 +1,20 @@
 # Setup fzf
 # ---------
-# if [[ ! "$PATH" == */opt/homebrew/opt/fzf/bin* ]]; then
-#   export PATH="${PATH:+${PATH}:}/opt/homebrew/opt/fzf/bin"
+# if [[ ! "$PATH" == *$(brew --prefix)/opt/fzf/bin* ]]; then
+#   export PATH="${PATH:+${PATH}:}$(brew --prefix)/opt/fzf/bin"
 # fi
 
 # Auto-completion
 # ---------------
-if [ -f "/opt/homebrew/opt/fzf/shell/completion.zsh" ]; then
-    source "/opt/homebrew/opt/fzf/shell/completion.zsh"
+if [ -f "$(brew --prefix)/opt/fzf/shell/completion.zsh" ]; then
+    source "$(brew --prefix)/opt/fzf/shell/completion.zsh"
 fi
 
-# As per /usr/share/doc/fzf/README.Debian
-if [ -f "/usr/share/doc/fzf/examples/completion.zsh" ]; then
-    source "/usr/share/doc/fzf/examples/completion.zsh"
-fi
 
 # Key bindings
 # ------------
-if [ -f "/opt/homebrew/opt/fzf/shell/key-bindings.zsh" ]; then
-    source "/opt/homebrew/opt/fzf/shell/key-bindings.zsh"
-fi
-
-# As per /usr/share/doc/fzf/README.Debian
-if [ -f "/usr/share/doc/fzf/examples/key-bindings.zsh" ]; then
-    source "/usr/share/doc/fzf/examples/key-bindings.zsh"
+if [ -f "$(brew --prefix)/opt/fzf/shell/key-bindings.zsh" ]; then
+    source "$(brew --prefix)/opt/fzf/shell/key-bindings.zsh"
 fi
 
 # See https://github.com/junegunn/fzf#environment-variables
