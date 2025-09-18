@@ -1,3 +1,11 @@
+if [[ -d $HOME/elixir-ls/elixir-ls-v0.28.0 ]]; then
+    export PATH="$HOME/elixir-ls/elixir-ls-v0.28.0:$PATH"
+fi
+
+if [ -d "$(brew --prefix swagger-codegen@2)" ]; then
+    export PATH="$(brew --prefix swagger-codegen@2)/bin:$PATH"
+fi
+
 if [[ "$OSTYPE" == "darwin"* ]]; then
     if [ -d $HOME/.cargo/bin ]; then
 	export PATH="$HOME/.cargo/bin:$PATH"
