@@ -257,7 +257,7 @@
 
 [commit]
 	verbose		= true
-	gpgsign = true
+	gpgsign = false
 [transfer]
 	fsckObjects	= true
 [fetch]
@@ -277,5 +277,7 @@
 	insteadOf = https://git.savannah.gnu.org/git/emacs/nongnu.git
 [url "https://github.com/bzg/org-mode.git"]
 	insteadOf = https://git.savannah.gnu.org/git/emacs/org-mode.git
+[tag]
+	gpgSign = false
 [gpg]
 	format = ssh
