@@ -6,7 +6,6 @@ journal_dir=/media/jfriesen/Backup
 while getopts 'ph' opt; do
     case "$opt" in
     p)
-        echo "Using path $2 to write-backup"
         journal_dir=$2
         shift 2
       ;;
@@ -41,7 +40,8 @@ if command -v rsync > /dev/null; then
           --exclude=*/tmp \
           --exclude=*/._tmp \
           --exclude=*/*.tmp \
-          --exclude=*/*.log \
+          --exclude=*/*.log
+
     echo "Wrote backup to $journal_dir"
 else
     echo "Missing rsync command" >&2
