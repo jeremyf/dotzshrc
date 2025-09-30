@@ -1,7 +1,7 @@
 [user]
         name		= Jeremy Friesen
         email		= github@jeremyfriesen.com
-	signingkey = /Users/jfriesen/.ssh/id_ed25519.pub
+	signingkey = /home/jfriesen/.ssh/id_ed25519.pub
 [github]
         user		= jeremyf
 [url "git@github.com:jeremyf/"]

@@ -1,1 +1,1 @@
-xmodmap ~/.Xmodmap
+/usr/bin/xmodmap /home/jfriesen/.Xmodmap

@@ -7,8 +7,8 @@ PassCmd "secret-tool lookup server proton-bridge login jeremy@jeremyfriesen.com"
 # https://shom.dev/posts/20220108_setting-up-protonmail-in-emacs/
 ### Were I not using proton and Bridge I'd want to use this.
 AuthMechs LOGIN
-# TLSType STARTTLS
-# TLSVersions +1.3
+TLSType STARTTLS
+TLSVersions +1.3
 # TLSType IMAPSTORE
 # TLSVersions +1.3
 ### This was exported from protonBridge
@@ -26,7 +26,7 @@ Subfolders Verbatim
 Channel proton
 Far :proton-remote:
 Near :proton-local:
-# See https://takeonrules.com/2025/04/15/fixing-a-mu4e-and-proton-bridge-foible/
+# See://takeonrules.com/2025/04/15/fixing-a-mu4e-and-proton-bridge-foible/
 Patterns * !"All Mail"
 CopyArrivalDate yes
 Expunge Both

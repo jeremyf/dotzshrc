@@ -72,6 +72,11 @@ if [ -f ~/git/dotzshrc/.config/starship/starship.toml ]; then
     export STARSHIP_CONFIG=~/git/dotzshrc/.config/starship/starship.toml
 fi
 
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    # Do we need to generally add this
+    export LD_LIBRARY_PATH="$(brew --prefix)/lib"
+fi
+
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

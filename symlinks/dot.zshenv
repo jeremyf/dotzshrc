@@ -1,13 +1,8 @@
 if [[ $TERM = dumb ]]; then
-  unset zle_bracketed_paste
+    unset zle_bracketed_paste
 fi
 VISUAL="editor -r"
 export VISUAL
-if [ -f "$HOME/.Xmodmap" ]; then
-    # I'd like to launch this at login to Linux, but I have yet to find the
-    # magic incantation.
-#    xmodmap $HOME/.Xmodmap 2> /dev/null
-fi
 
 if [ -d "/Volumes/JOURNAL" ]; then
     echo "Profile Using Journal history"
@@ -35,26 +30,31 @@ then
     fi
 fi
 
-# TODO: This should probably move into the Mac
-arch_name="$(uname -m)"
-if [ "${arch_name}" = "x86_64" ]; then
-    export HB_PATH="/usr/local";
-elif [ "${arch_name}" = "arm64" ]; then
-    export HB_PATH="/opt/homebrew";
+if [ -d /home/linuxbrew ]; then
+    export HB_PATH="/home/linuxbrew/.linuxbrew";
 else
-    echo "Unknown architecture: ${arch_name}"
+    # TODO: This should probably move into the Mac
+    arch_name="$(uname -m)"
+    if [ "${arch_name}" = "x86_64" ]; then
+        export HB_PATH="/usr/local";
+    elif [ "${arch_name}" = "arm64" ]; then
+        export HB_PATH="/opt/homebrew";
+    else
+        echo "Unknown architecture: ${arch_name}"
+    fi
 fi
+
 if [ -f $HB_PATH/bin/brew ]; then
-   eval "$($HB_PATH/bin/brew shellenv)"
+    eval "$($HB_PATH/bin/brew shellenv)"
 fi
 
 source $HOME/git/dotzshrc/configs/paths.zsh
 
 if command -v rbenv &> /dev/null
 then
-  eval "$(rbenv init -)"
+    eval "$(rbenv init -)"
 else
-  [[ -d "$HOME/.rbenv/bin" ]] && eval "$(~/.rbenv/bin/rbenv init - --no-rehash zsh)"
+    [[ -d "$HOME/.rbenv/bin" ]] && eval "$(~/.rbenv/bin/rbenv init - --no-rehash zsh)"
 fi
 
 if [[ "$OSTYPE" == "darwin"* ]]; then

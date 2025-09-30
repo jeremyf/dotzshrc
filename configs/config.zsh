@@ -61,10 +61,8 @@ plugins=(
     git
     git-extras
     gitfast
-    macos
     python
     starship
-    web-search
 )
 
 ###############################################################################

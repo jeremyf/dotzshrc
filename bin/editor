@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 # SH FILE: ec
 #
 # Purpose   : Launch an Emacs client to an Emacs Daemon - start the deamon if necessary.
