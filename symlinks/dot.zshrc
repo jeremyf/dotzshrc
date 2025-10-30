@@ -1,4 +1,6 @@
-if [ -d /home/linuxbrew ]; then eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"; fi
+# if [ -d /home/linuxbrew ]; then eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"; fi
+
+source $HOME/git/dotzshrc/configs/paths.zsh
 
 if [[ $TERM = dumb ]]; then
   unset zle_bracketed_paste
@@ -70,11 +72,6 @@ fi
 
 if [ -f ~/git/dotzshrc/.config/starship/starship.toml ]; then
     export STARSHIP_CONFIG=~/git/dotzshrc/.config/starship/starship.toml
-fi
-
-if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    # Do we need to generally add this
-    export LD_LIBRARY_PATH="$(brew --prefix)/lib"
 fi
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"

@@ -30,25 +30,12 @@ then
     fi
 fi
 
-if [ -d /home/linuxbrew ]; then
-    export HB_PATH="/home/linuxbrew/.linuxbrew";
-else
-    # TODO: This should probably move into the Mac
-    arch_name="$(uname -m)"
-    if [ "${arch_name}" = "x86_64" ]; then
-        export HB_PATH="/usr/local";
-    elif [ "${arch_name}" = "arm64" ]; then
-        export HB_PATH="/opt/homebrew";
-    else
-        echo "Unknown architecture: ${arch_name}"
-    fi
-fi
 
-if [ -f $HB_PATH/bin/brew ]; then
-    eval "$($HB_PATH/bin/brew shellenv)"
-fi
+# if [ -f $HB_PATH/bin/brew ]; then
+#  eval "$($HB_PATH/bin/brew shellenv)"
+# fi
 
-source $HOME/git/dotzshrc/configs/paths.zsh
+# source $HOME/git/dotzshrc/configs/paths.zsh
 
 if command -v rbenv &> /dev/null
 then

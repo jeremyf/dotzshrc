@@ -6,15 +6,18 @@
 
 # Auto-completion
 # ---------------
-if [ -f "$(brew --prefix)/opt/fzf/shell/completion.zsh" ]; then
-    source "$(brew --prefix)/opt/fzf/shell/completion.zsh"
-fi
-
-
-# Key bindings
-# ------------
-if [ -f "$(brew --prefix)/opt/fzf/shell/key-bindings.zsh" ]; then
-    source "$(brew --prefix)/opt/fzf/shell/key-bindings.zsh"
+if command -v fzf &> /dev/null; then
+    if command brew -v &> /dev/null; then
+        if [ -d "$(brew --prefix)/opt/fzf/shell" ]; then
+            source "$(brew --prefix)/opt/fzf/shell/completion.zsh"
+            source "$(brew --prefix)/opt/fzf/shell/key-bindings.zsh"
+        fi
+    else
+        if [ -d /usr/share/doc/fzf/examples ]; then
+            source "/usr/share/doc/fzf/examples/completion.zsh"
+            source "/usr/share/doc/fzf/examples/key-bindings.zsh"
+        fi
+    fi
 fi
 
 # See https://github.com/junegunn/fzf#environment-variables
