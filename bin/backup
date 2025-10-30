@@ -2,30 +2,40 @@
 
 set -e
 
-journal_dir=/media/jfriesen/Backup
-while getopts 'ph' opt; do
+to_dir=/media/jfriesen/Backup
+from_dir=$HOME
+while getopts 'fht' opt; do
     case "$opt" in
-    p)
-        journal_dir=$2
+    f)
+        from_dir=$2
+        shift 2
+      ;;
+    t)
+        to_dir=$2
         shift 2
       ;;
     h)
-        echo "Usage: $(basename $0) [-p /path/to/backup-media] "
+        echo "Usage: $(basename $0) \\\\\n\t[-t /path/to/backup-media] \\\\\n\t[-f /path/from/which/to/copy]"
         exit 2
-      ;;
+        ;;
     ?)
-    echo "Invalid command option.\nUsage $(basename $0) [-p /path/to/backup-media] [-h]"
+    echo "Invalid command option.\nUsage: $(basename $0) \\\n\t[-t /path/to/backup-media] \\\n\t[-f /path/from/which/to/copy] \\\n\t[-h]"
     exit 2
 esac
 done
 
-if [ ! -d $journal_dir ]; then
-    echo "Missing $journal_dir directory" >&2
+if [ ! -d $to_dir ]; then
+    echo "Missing $to_dir directory" >&2
+    exit 2
+fi
+
+if [ ! -d $from_dir]; then
+    echo "Missing $from_dir directory" >&2
     exit 2
 fi
 
 if command -v rsync > /dev/null; then
-    rsync $HOME $journal_dir \
+    rsync $from_dir $to_dir \
           --progress --delete-excluded -aiz \
           --exclude=jfriesen/.cache \
           --exclude=jfriesen/go \
@@ -42,7 +52,7 @@ if command -v rsync > /dev/null; then
           --exclude=*/*.tmp \
           --exclude=*/*.log
 
-    echo "Wrote backup to $journal_dir"
+    echo "Wrote backup to $to_dir"
 else
     echo "Missing rsync command" >&2
     exit 1
