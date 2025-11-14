@@ -222,7 +222,6 @@
         ######################################################################
 [merge]
         summary		= true
-	conflictStyle = diff3
 [push]
 	default		= current
 [log]

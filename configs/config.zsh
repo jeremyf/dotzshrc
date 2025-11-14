@@ -55,6 +55,10 @@ ulimit -n 65536
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
+if [ -f ~/git/dotzshrc/.config/starship/starship.toml ]; then
+    export STARSHIP_CONFIG=~/git/dotzshrc/.config/starship/starship.toml
+fi
+
 plugins=(
     bgnotify
     copybuffer

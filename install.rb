@@ -34,8 +34,8 @@ end
 $stdout.puts 'Finished installing bin aliases…'
 
 {
-  "emacs" => "/opt/homebrew/opt/emacs-plus@30/bin/emacs",
-  "emacsclient" => "/opt/homebrew/opt/emacs-plus@30/bin/emacsclient"
+  "emacs" => "/opt/homebrew/opt/emacs-plus@31/bin/emacs",
+  "emacsclient" => "/opt/homebrew/opt/emacs-plus@31/bin/emacsclient"
 }.each do |basename, source_filename|
   if File.exist?(source_filename)
     target_name = File.join(home_dirname, 'bin', basename)
