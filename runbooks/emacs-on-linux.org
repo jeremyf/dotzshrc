@@ -1,0 +1,30 @@
+#+TITLE: Emacs on Linux
+
+I’m not entirely certain the correct order.  But perhaps I’ll find a repeatable
+process.
+
+Building from source.  The following is stuff I’ve used:
+
+#+begin_example
+make uninstall; make clean; make distclean
+#+end_example
+
+#+begin_example
+./autogen.sh
+#+end_example
+
+#+begin_example
+export LD_LIBRARY_PATH=/home/linuxbrew/.linuxbrew/lib
+#+end_example
+
+#+begin_example
+./configure --prefix="$HOME/.local/emacs" --with-x --with-gif --with-png --with-jpeg --with-tiff --with-imagemagick --with-mailutils --with-tree-sitter
+#+end_example
+
+#+begin_example
+make bootstrap
+#+end_example
+
+#+begin_example
+LD_LIBRARY_PATH=/home/linuxbrew/.linuxbrew/lib make -j 16
+#+end_example

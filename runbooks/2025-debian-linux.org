@@ -1,0 +1,71 @@
+#+TITLE: 2025 Debian Linux
+
+* Reading the Debian Manual
+
+Found the [[https://www.debian.org/doc/manuals/debian-reference/debian-reference.en.pdf][Debian Reference document]] and started more in-depth learning:
+
+- =etckeeper= package, for tracking =/etc/= directory in Git.
+- =sudo update-alternatives --config editor= to pick a default editor…which is
+  from a list of applications installed via =apt=.  Or defined similar to what
+  I’ve done for the Desktop work.
+
+* Emacs
+
+** Apt Install Dependencies
+
+#+begin_src shell :dir "/sudo::/"
+  sudo apt-get update --assume-yes --quiet
+  sudo apt-get upgrade --assume-yes --quiet
+  sudo apt-get build-dep emacs --quiet --assume-yes
+  sudo apt-get install libtree-sitter-dev libmagickwand-dev --quiet --assume-yes
+#+end_src
+
+** Build from Source
+
+Clone the Emacs repository.
+
+Checkout the desired tag (assuming at least =30.x=)
+
+#+begin_src shell :dir ~/git/emacs
+  make clean
+  ./autogen.h
+#+end_src
+
+#+begin_src shell :dir ~/git/emacs
+  ./configure --prefix="$HOME/.local/emacs" --with-x --with-imagemagick --with-mailutils --with-tree-sitter --with-dbus --with-x-toolkit=lucid
+#+end_src
+
+* Updating Firmware
+
+#+begin_src shell :dir "/sudo::/" :cache no :export source :results raw silent
+sudo system76-firmware-cli schedule --open
+#+end_src
+
+* USB Audit Events
+
+From [[https://itsfoss.gitlab.io/post/show-usb-devices-event-history-using-usbrip-in-linux/][Show USB Devices Event History Using Usbrip In Linux :: IT'S FOSS]]:
+
+Install auditd:
+
+#+begin_src shell :dir "/sudo::/" :cache no :export source :results raw silent
+  sudo apt install auditd audispd-plugins usbrip --assume-yes
+#+end_src
+
+Ensure audit is running:
+
+#+begin_src shell :dir "/sudo::/" :cache no :export source :results raw silent
+  sudo systemctl status auditd
+#+end_src
+
+Write the rules:
+
+#+begin_src text :tangle /sudo::/etc/audit/rules.d/jfriesen.audit.rules
+  # Log USB activity
+  -w /dev/bus/usb -p r -k usb_activity
+#+end_src
+
+Restart the =auditd= to use the new rules:
+
+#+begin_src shell :dir "/sudo::/" :cache no :export source :results raw silent
+sudo systemctl restart auditd
+#+end_src
