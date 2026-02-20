@@ -29,7 +29,7 @@ if [ ! -d $to_dir ]; then
     exit 2
 fi
 
-if [ ! -d $from_dir]; then
+if [ ! -d $from_dir ]; then
     echo "Missing $from_dir directory" >&2
     exit 2
 fi
