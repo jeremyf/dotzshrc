@@ -40,6 +40,11 @@ source $HOME/git/dotzshrc/configs/config.zsh
 source $HOME/git/dotzshrc/configs/aliases.zsh
 source $HOME/git/dotzshrc/configs/functions.zsh
 
+if [[ -f $HOME/git/converge-cloud/aliases.zsh ]]
+then
+  source $HOME/git/converge-cloud/aliases.zsh
+fi
+
 # From https://github.com/akermu/emacs-libvterm?tab=readme-ov-file#shell-side-configuration
 vterm_printf() {
     if [ -n "$TMUX" ] \
@@ -88,4 +93,4 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 # fi
 
 
-# if [ -f "$(brew --prefix)/opt/asdf/libexec/asdf.sh" ]; then source "$(brew --prefix)/opt/asdf/libexec/asdf.sh"; fi
+if [ -f "$(brew --prefix)/opt/asdf/libexec/asdf.sh" ]; then source "$(brew --prefix)/opt/asdf/libexec/asdf.sh"; fi

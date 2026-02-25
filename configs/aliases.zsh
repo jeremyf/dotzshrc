@@ -13,12 +13,9 @@ alias e-reboot='cd ~/git/dotemacs; git stash ; edaemon ; git stash pop ; git edi
 alias rm='rm -i'
 alias cp="cp -nv"
 alias mv="mv -nv"
-alias hugo-d="hugo serve -D --renderToMemory"
 alias bx="bundle exec"
 alias hb="gh browse"
 alias hammerspoon-focus-emacs="hs -c \"hs.application.launchOrFocus('Emacs')\""
-alias magit="$EDITOR --suppress-output --eval \"(magit)\"; hammerspoon-focus-emacs"
-alias v-samvera="rg \"^ +((bulk|hy)rax([_-].*)?|rails|(.*)iiif(.*)|blacklight([_-].*)?) \(\d+\.\d+\.\d+\" Gemfile.lock | sort"
 
 if command -v batcat &> /dev/null; then
     alias bat="batcat"

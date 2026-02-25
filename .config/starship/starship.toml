@@ -4,21 +4,22 @@ command_timeout = 1000
 truncation_length = 8
 truncate_to_repo = false
 truncation_symbol = './'
+format = "[$path]($style)[$read_only]($read_only_style) \n"
 
 [gcloud]
-format = 'on [$symbol$project in $region]($style) '
+format = "\non [$symbol$project in $region]($style) "
 
 [git_branch]
 style = 'bold green'
-symbol = ' '
-truncation_length = 20
+symbol = " "
+truncation_length = 50
 truncation_symbol = '…'
 
 [git_status]
 ahead = '⇡${count}'
 behind = '⇣${count}'
 diverged = '⇕⇡${ahead_count}⇣${behind_count}'
-format = '([$all_status$ahead_behind]($style) )'
+format = "([$all_status$ahead_behind]($style) )\n"
 modified = '${count}󰇂 '
 stashed = '${count}󰼜 '
 untracked = '${count}? '
