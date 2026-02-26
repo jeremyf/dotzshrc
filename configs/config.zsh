@@ -85,12 +85,12 @@ plugins=(
 ###############################################################################
 
 # darwin
-if [ -f "${HB_PATH}/opt/git-extras/share/git-extras/git-extras-completion.zsh" ]; then
-    source $HB_PATH/opt/git-extras/share/git-extras/git-extras-completion.zsh
+if [ -f "$(brew --prefix)/opt/git-extras/share/git-extras/git-extras-completion.zsh" ]; then
+    source $(brew --prefix)/opt/git-extras/share/git-extras/git-extras-completion.zsh
 fi
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && . "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "$(brew --prefix)/opt/nvm/nvm.sh" ] && . "$(brew --prefix)/opt/nvm/nvm.sh"  # This loads nvm
 
 # In my local tests, bat with "ansi" works best for my color schemes
 export BAT_THEME="ansi"

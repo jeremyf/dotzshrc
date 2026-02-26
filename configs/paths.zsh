@@ -10,21 +10,18 @@ fi
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
     if [ -d $HOME/.cargo/bin ]; then
-	export PATH="$HOME/.cargo/bin:$PATH"
+        export PATH="$HOME/.cargo/bin:$PATH"
     fi
 
-    if [ -d $HB_PATH/opt/libxml2/bin ]; then
-        export PATH="$HB_PATH/opt/libxml2/bin:$PATH"
+    if [ -d "$(brew --prefix)/opt/libxml2/bin" ]; then
+        export PATH="$(brew --prefix)/opt/libxml2/bin:$PATH"
         # export LDFLAGS="-L$HB_PATH/opt/libxml2/lib"
         # export CPPFLAGS="-I$HB_PATH/opt/libxml2/include"
     fi
 
-    if [ -d "$HB_PATH/opt/icu4c/bin" ]; then
-        export PATH="$HB_PATH/opt/icu4c/bin:$PATH"
-    fi
-
-    if [ -d "$HB_PATH/opt/icu4c/sbin" ]; then
-        export PATH="$HB_PATH/opt/icu4c/sbin:$PATH"
+    if [ -d "$(brew --prefix icu4c)/bin" ]; then
+        export PATH="$(brew --prefix icu4c)/bin:$PATH"
+        export PATH="$(brew --prefix icu4c)/sbin:$PATH"
     fi
 
     if [ -d "$(brew --prefix graphviz)" ]; then
@@ -36,23 +33,20 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@3)"
 
     # I'm not certain if this is a good idea or not
-    if [ -d $HB_PATH/opt/openssl@3/bin ]; then
+    if [ -d "$(brew --prefix openssl@3)/bin" ]; then
         export PATH="$(brew --prefix openssl@3)/bin:$PATH"
     fi
 
-    if [ -d $HB_PATH/lib/pkgconfig ]; then
-        export PKG_CONFIG_PATH=/opt/local/lib/pkgconfig
-    fi
 
-    if [ -d $HB_PATH/opt/openjdk/bin ]; then
-	export PATH="$(brew --prefix java)/bin:$PATH"
+    if [ -d "$(brew --prefix java)" ]; then
+        export PATH="$(brew --prefix java)/bin:$PATH"
     fi
-    # I saw this behavior in OS X, where $HB_PATH/sbin was not in the path
-    if [ -d $HB_PATH/sbin ]; then
-	echo "$PATH" | grep -q "$HB_PATH/sbin:" || export PATH="$HB_PATH/sbin:$PATH"
+    # I saw this behavior in OS X, where "$(brew --prefix)/sbin" was not in the path
+    if [ -d "$(brew --prefix)/sbin" ]; then
+        echo "$PATH" | grep -q "$(brew --prefix)/sbin:" || export PATH="$(brew --prefix)/sbin:$PATH"
     fi
     if [ -d "$(brew --prefix asdf)/libexec/asdf.sh" ]; then
-	export "$(brew --prefix asdf)/libexec/asdf.sh"
+        export "$(brew --prefix asdf)/libexec/asdf.sh"
     fi
 fi
 
@@ -76,7 +70,7 @@ if [[ -d $HOME/.local/go ]]; then
     export GOROOT=$HOME/.local/go
     export GOPATH=$HOME/go
 else
-    export GOROOT=$HB_PATH/opt/go/libexec/
+    export GOROOT="$(brew --prefix go)/libexec"
     export GOPATH=$HOME/go
 fi
 if [[ -d $GOPATH ]]; then
