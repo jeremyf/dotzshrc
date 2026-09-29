@@ -19,8 +19,20 @@ Dir.glob(symlink_sources).each do |source_filename|
   $stdout.puts "\t#{target_name} ->\n\t\t#{source_filename}"
   FileUtils.ln_sf(source_filename, target_name)
 end
-
 $stdout.puts 'Finished installing zshrc aliases…'
+
+xdg_home = ENV.fetch("XDG_CONFIG_HOME", File.join(home_dirname, ".config"))
+$stdout.puts "Installing XDG_CONFIG_HOME symlinks to #{xdg_home}"
+config_sources = File.expand_path("xdg_config/*", __dir__)
+Dir.glob(config_sources).each do |source_filename|
+  basename = File.basename(source_filename)
+  next if basename == '.'
+  next if basename == '..'
+  target_name = File.join(xdg_home, basename)
+  $stdout.puts "\t#{target_name} ->\n\t\t#{source_filename}"
+  FileUtils.ln_sf(source_filename, target_name)
+end
+$stdout.puts "Finished installing XDG_CONFIG_HOME symlinks"
 
 $stdout.puts 'Installing bin aliases…'
 bin_sources = File.expand_path('bin/*', __dir__)
@@ -33,19 +45,19 @@ Dir.glob(bin_sources).each do |source_filename|
 end
 $stdout.puts 'Finished installing bin aliases…'
 
-{
-  "emacs" => "/opt/homebrew/opt/emacs-plus@31/bin/emacs",
-  "emacsclient" => "/opt/homebrew/opt/emacs-plus@31/bin/emacsclient"
-}.each do |basename, source_filename|
-  if File.exist?(source_filename)
-    target_name = File.join(home_dirname, 'bin', basename)
-    $stdout.puts "\t#{target_name} ->\n\t\t#{source_filename}"
-    FileUtils.ln_sf(source_filename, target_name)
-  end
-end
+# {
+#   "emacs" => "/opt/homebrew/opt/emacs-plus@31/bin/emacs",
+#   "emacsclient" => "/opt/homebrew/opt/emacs-plus@31/bin/emacsclient"
+# }.each do |basename, source_filename|
+#   if File.exist?(source_filename)
+#     target_name = File.join(home_dirname, 'bin', basename)
+#     $stdout.puts "\t#{target_name} ->\n\t\t#{source_filename}"
+#     FileUtils.ln_sf(source_filename, target_name)
+#   end
+# end
 
-$stdout.puts 'Installing emacs.d symlinks…'
-FileUtils.mkdir_p(File.join(home_dirname, '.emacs.d'))
+# $stdout.puts 'Installing emacs.d symlinks…'
+# FileUtils.mkdir_p(File.join(home_dirname, '.emacs.d'))
 
 [
   File.expand_path(File.join(home_dirname, 'git/dotemacs/emacs.d/.*')), # Hidden files
