@@ -2,6 +2,8 @@
 
 if [ -d /opt/homebrew ]; then eval "$(/opt/homebrew/bin/brew shellenv)"; fi
 
+export DO_NOT_TRACK=true
+
 source $HOME/git/dotzshrc/configs/paths.zsh
 
 if [[ $TERM = dumb ]]; then

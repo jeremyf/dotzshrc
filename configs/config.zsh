@@ -49,8 +49,8 @@ COMPLETION_WAITING_DOTS="true"
 #
 # When running selenium tests I got an error about too many open
 # files.  This helped resolve that.
-ulimit -u 2048
-ulimit -n 65536
+# ulimit -u 2048
+# ulimit -n 65536
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder

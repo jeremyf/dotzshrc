@@ -51,7 +51,6 @@ Last, assuming I’m using the Xorg system, I need to get my Xmodmap setup:
   ! | Ctrl | Fn  | Super | Alt | Space | Alt | Menu | Ctrl |
   ! | 37   | n/a | 133   | 64  | 20    | 108 | 135  | 108  |
   keycode 37 = Hyper_L
-  ! keycode 133 = Super_L
   keycode 133 = Super_L
   keycode 64 = Alt_L
   keycode 108 = Alt_R
@@ -66,8 +65,7 @@ Last, assuming I’m using the Xorg system, I need to get my Xmodmap setup:
   add mod2 = Num_Lock
   add mod3 = Hyper_L
   add mod4 = Super_L Super_R
-  ! Treat re-bound insert as mod5 in Terminal
-  ! add mod5 = Hyper_R
+  !add mod5 = Hyper_R
 #+end_src
 
 The following is for my external keyboard.  I’ll likely make more permanent adjustments with hwdb when I next plug this in.
