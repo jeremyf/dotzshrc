@@ -59,6 +59,12 @@ if [ -f ~/git/dotzshrc/.config/starship/starship.toml ]; then
     export STARSHIP_CONFIG=~/git/dotzshrc/.config/starship/starship.toml
 fi
 
+if command -v starship &> /dev/null; then
+    # Note: when I used the ohmyzsh starship plugin it never reported the
+    # exit status correctly.
+    eval "$(starship init zsh)"
+fi
+
 plugins=(
     bgnotify
     copybuffer
@@ -66,7 +72,6 @@ plugins=(
     git-extras
     gitfast
     python
-    starship
 )
 
 ###############################################################################
