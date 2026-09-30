@@ -70,8 +70,10 @@ if [[ -d $HOME/.local/go ]]; then
     export GOROOT=$HOME/.local/go
     export GOPATH=$HOME/go
 else
-    export GOROOT="$(brew --prefix go)/libexec"
-    export GOPATH=$HOME/go
+    if command -v brew &> /dev/null; then
+        export GOROOT="$(brew --prefix go)/libexec"
+        export GOPATH=$HOME/go
+    fi
 fi
 if [[ -d $GOPATH ]]; then
     echo "$PATH" | grep -q "$GOPATH" || export PATH="$PATH:$GOPATH/bin"
