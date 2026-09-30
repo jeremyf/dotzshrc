@@ -12,7 +12,7 @@ if [[ "$OSTYPE" == "darwin"* ]]
 then
     # Something MacOS was injecting path variables in my interactive shell.
     # These were at the front of the line.  And creating issues with Homebrew.
-    export PATH="$DARWIN_PATH:$PATH"
+    export PATH="$PATH:$DARWIN_PATH"
     awkPath="$(brew --prefix)/bin/awk"
     if [[ -x $awkPath ]]; then
         export PATH="$(echo "$PATH" | $awkPath 'BEGIN { RS=":"; } { sub(sprintf("%c$", 10), ""); if (A[$0]) {} else { A[$0]=1; printf(((NR==1) ?"" : ":") $0) }}')"
@@ -77,4 +77,12 @@ fi
 
 if command -v brew &> /dev/null; then
   if [ -f "$(brew --prefix)/opt/asdf/libexec/asdf.sh" ]; then source "$(brew --prefix)/opt/asdf/libexec/asdf.sh"; fi
+fi
+
+# Added by Antigravity CLI installer
+export PATH="/Users/jfriesen/.local/bin:$PATH"
+
+# Automatically activate mise runtime manager
+if command -v mise &> /dev/null; then
+    eval "$(mise activate zsh)"
 fi

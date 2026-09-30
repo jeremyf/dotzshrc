@@ -79,6 +79,16 @@ if [[ -d $GOPATH ]]; then
     echo "$PATH" | grep -q "$GOPATH" || export PATH="$PATH:$GOPATH/bin"
 fi
 
+if command -v brew &> /dev/null; then
+    if [ -d "$(brew --prefix)/share/google-cloud-sdk/bin" ]; then
+        export PATH="$(brew --prefix)/share/google-cloud-sdk/bin:$PATH"
+    fi
+fi
+
 if [ -d $HOME/.local/emacs/bin ]; then
     export PATH="$HOME/.local/emacs/bin:$PATH"
+fi
+
+if [ -f $HOME/.local/zsh-exports ]; then
+    source $HOME/.local/zsh-exports
 fi

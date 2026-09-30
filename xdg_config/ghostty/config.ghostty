@@ -1,3 +1,4 @@
 font-family = "IntoneMono NF"
 cursor-style = block
 shell-integration-features = no-cursor
+theme = light:Atom One Light,dark:Atom One Dark

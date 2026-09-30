@@ -1,6 +1,5 @@
-export EDITOR='emacsclient -a ""'
+export EDITOR='emacsclient -a "" -n'
 export GIT_EDITOR='emacsclient -a ""'
-
 # For those pesky Rails configs that assume a password for
 # development.  Someone added that without parameterization, so I've
 # added parameterization to preserve current behavior but help me out.
