@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
+# export ZSH="$HOME/.oh-my-zsh"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -65,14 +65,14 @@ if command -v starship &> /dev/null; then
     eval "$(starship init zsh)"
 fi
 
-plugins=(
-    bgnotify
-    copybuffer
-    git
-    git-extras
-    gitfast
-    python
-)
+# plugins=(
+#     bgnotify
+#     copybuffer
+#     git
+#     git-extras
+#     gitfast
+#     python
+# )
 
 ###############################################################################
 ##
@@ -90,20 +90,13 @@ plugins=(
 ###############################################################################
 
 # darwin
-if command -v brew &> /dev/null; then
-    if [ -f "$(brew --prefix)/opt/git-extras/share/git-extras/git-extras-completion.zsh" ]; then
-        source $(brew --prefix)/opt/git-extras/share/git-extras/git-extras-completion.zsh
-    fi
 
-    export NVM_DIR="$HOME/.nvm"
-    [ -s "$(brew --prefix)/opt/nvm/nvm.sh" ] && . "$(brew --prefix)/opt/nvm/nvm.sh"  # This loads nvm
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    source /opt/homebrew/opt/git-extras/share/git-extras/git-extras-completion.zsh
 fi
 
 # In my local tests, bat with "ansi" works best for my color schemes
 export BAT_THEME="ansi"
-
-# Spring in Rails just causes endless grief.  Disable it
-export DISABLE_SPRING=1
 
 # Given that I'm using private repositories, I need to account for that in
 # module retrieval.
