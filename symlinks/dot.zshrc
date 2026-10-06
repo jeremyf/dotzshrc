@@ -3,7 +3,7 @@ if [ -d /opt/homebrew ]; then eval "$(/opt/homebrew/bin/brew shellenv)"; fi
 HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
-setopt appendhistor
+setopt appendhistory
 
 export DO_NOT_TRACK=true
 
