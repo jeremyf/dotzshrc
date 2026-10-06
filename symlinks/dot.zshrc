@@ -1,5 +1,10 @@
 if [ -d /opt/homebrew ]; then eval "$(/opt/homebrew/bin/brew shellenv)"; fi
 
+HISTFILE=~/.histfile
+HISTSIZE=1000
+SAVEHIST=1000
+setopt appendhistor
+
 export DO_NOT_TRACK=true
 
 source $HOME/git/dotzshrc/configs/paths.zsh
