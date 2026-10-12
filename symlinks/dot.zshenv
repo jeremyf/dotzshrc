@@ -4,6 +4,8 @@ fi
 VISUAL="editor -r"
 export VISUAL
 
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+
 if [ -d "/Volumes/JOURNAL" ]; then
     echo "Profile Using Journal history"
     HISTFILE="/Volumes/JOURNAL/.zsh_history"

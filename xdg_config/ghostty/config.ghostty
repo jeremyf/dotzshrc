@@ -1,4 +1,5 @@
 font-family = "IntoneMono NF"
 cursor-style = block
-shell-integration-features = no-cursor
+shell-integration-features = ssh-env,ssh-terminfo,no-cursor
+shell-integration = zsh
 theme = light:Atom One Light,dark:Atom One Dark
