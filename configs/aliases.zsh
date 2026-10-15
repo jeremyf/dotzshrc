@@ -1,9 +1,5 @@
-export EDITOR='emacsclient -a "" -n'
-export GIT_EDITOR='emacsclient -a ""'
-# For those pesky Rails configs that assume a password for
-# development.  Someone added that without parameterization, so I've
-# added parameterization to preserve current behavior but help me out.
-export SKIP_MYSQL_PASSWORD_FOR_LOCAL_DEVELOPMENT="true"
+export EDITOR='emacsclient -a "" -c'
+export GIT_EDITOR='emacsclient -a "" -c'
 
 # Prompt for confirmation
 alias e=$EDITOR
@@ -35,3 +31,5 @@ alias lock-gnome="dbus-send --type=method_call --dest=org.gnome.ScreenSaver /org
 if [ -f "$HOME/aliases.zsh" ]; then
   source $HOME/aliases.zsh
 fi
+
+alias gd="git diff"
